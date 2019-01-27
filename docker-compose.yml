@@ -1,0 +1,13 @@
+version: "3.4"
+
+volumes:
+  trueblocksdnpdappnodeeth_data: {}
+
+services:
+  dappnodepackage_trueblocks.public.dappnode.eth:
+    build: ./build
+    image: dappnodepackage_trueblocks.public.dappnode.eth:0.0.1
+    container_name: DAppNodePackage-trueblocks.dnp.dappnode.eth
+    restart: always
+    volumes:
+      - trueblocksdnpdappnodeeth_data:/root/quickBlocks-data

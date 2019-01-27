@@ -1,0 +1,15 @@
+{
+  "name": "dappnodepackage_trueblocks.public.dappnode.eth",
+  "version": "0.0.1",
+  "description": "DAppNodePackage_trueblocks description",
+  "avatar": "",
+  "type": "service",
+  "image": {
+    "path": "",
+    "hash": "",
+    "size": "",
+    "restart": "always"
+  },
+  "author": "TrueBlocks LLC",
+  "license": ""
+}
