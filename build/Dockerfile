@@ -19,7 +19,8 @@ RUN cd /root/quickBlocks-src && \
 	cmake ../src && \
 	make blockScrape getBlock && \
 	mkdir /root/.quickBlocks && \
-	cp ../src/other/install/quickBlocks.toml /root/.quickBlocks
+	cp ../src/other/install/quickBlocks.docker.toml /root/.quickBlocks/quickBlocks.toml && \
+	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml
 
 FROM python:3.7-slim as base
 WORKDIR /root
