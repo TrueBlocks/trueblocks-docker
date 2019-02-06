@@ -10,7 +10,7 @@ RUN apt-get update && \
 	libcurl3-dev
 
 RUN git clone -b 'develop' --single-branch \ 
-	 https://github.com/Great-Hill-Corporation/quickBlocks.git \
+ 	https://github.com/wildmolasses/quickBlocks \
 	/root/quickBlocks-src
 
 RUN cd /root/quickBlocks-src && \
@@ -22,14 +22,17 @@ RUN cd /root/quickBlocks-src && \
 	cp ../src/other/install/quickBlocks.docker.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml
 
-FROM python:3.7-slim as base
+FROM node:slim as base
 WORKDIR /root
-RUN apt-get update && apt-get install -y libcurl3-dev
+
+RUN apt-get update && apt-get install -y libcurl3-dev python
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
-RUN ln -s /usr/local/bin/python /usr/bin/python
+COPY src /root/api
+COPY trueblocks.entrypoint.sh /root
+RUN cd /root/api && npm install && npm install -g forever
 
 RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
 #RUN sed -i "s|localhost|docker.for.mac.localhost|g" /root/.quickBlocks/quickBlocks.toml
 
-ENTRYPOINT ["scraper.docker.py"]
+ENTRYPOINT ["bash", "/root/trueblocks.entrypoint.sh"]

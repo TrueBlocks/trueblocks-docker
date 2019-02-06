@@ -11,3 +11,5 @@ services:
     restart: always
     volumes:
       - trueblocksdnpdappnodeeth_data:/root/.quickBlocks
+    ports:
+      - '8000:8000'
