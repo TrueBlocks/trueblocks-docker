@@ -6,9 +6,12 @@ const port = 8000;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
-app.get('/address', (req, res) => {
-
-    let acctScrape = spawn("acctScrape", ['--list', '0x2e18e2d31f14c78a9d1f8bb687c3e0dd71ad6391']);
+app.get('/address/:address', (req, res) => {
+    
+    if (req.params.address.length != 42)
+        return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
+  
+    let acctScrape = spawn("acctScrape", ['--list', req.params.address]);
 
     acctScrape.stdout.on('data', (chunk) => {
         console.log(`data being written: ${chunk}`)
