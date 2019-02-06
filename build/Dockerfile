@@ -17,7 +17,7 @@ RUN cd /root/quickBlocks-src && \
 	mkdir build && \
 	cd build && \
 	cmake ../src && \
-	make blockScrape getBlock && \
+	make blockScrape getBlock acctScrape && \
 	mkdir /root/.quickBlocks && \
 	cp ../src/other/install/quickBlocks.docker.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml

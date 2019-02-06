@@ -10,9 +10,9 @@ app.get('/address', (req, res) => {
 
     let acctScrape = spawn("acctScrape", ['--list', '0x2e18e2d31f14c78a9d1f8bb687c3e0dd71ad6391']);
 
-    acctScrape.stdout.on('data', (data) => {
-        console.log(`data being written: ${data}`)
-        return res.write(data);
+    acctScrape.stdout.on('data', (chunk) => {
+        console.log(`data being written: ${chunk}`)
+        return res.write(chunk);
     })
     acctScrape.stderr.on('data', (err) => {
         console.log(`error being written: ${err}`);
