@@ -10,4 +10,4 @@ services:
     container_name: DAppNodePackage-trueblocks.dnp.dappnode.eth
     restart: always
     volumes:
-      - trueblocksdnpdappnodeeth_data:/root/quickBlocks-data
+      - trueblocksdnpdappnodeeth_data:/root/.quickBlocks
