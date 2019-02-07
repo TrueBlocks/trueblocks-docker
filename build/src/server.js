@@ -11,7 +11,7 @@ app.get('/address/:address', (req, res) => {
     if (req.params.address.length != 42)
         return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
   
-    let acctScrape = spawn("acctScrape", ['--list', req.params.address]);
+    let acctScrape = spawn("acctScrape", ['--list', '--nocolor', req.params.address]);
 
     acctScrape.stdout.on('data', (chunk) => {
         console.log(`data being written: ${chunk}`)
