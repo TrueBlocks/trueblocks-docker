@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {spawn} = require('child_process');
 const app = express();
-const port = 8000;
+const port = 80;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
