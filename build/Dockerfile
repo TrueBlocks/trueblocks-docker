@@ -44,9 +44,9 @@ COPY src /root/api
 COPY trueblocks.entrypoint.sh /root
 RUN cd /root/api && npm install && npm install -g forever
 
-#RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
-RUN sed -i "s|localhost|docker.for.mac.localhost|g" /root/.quickBlocks/quickBlocks.toml
+RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
+#RUN sed -i "s|localhost|docker.for.mac.localhost|g" /root/.quickBlocks/quickBlocks.toml
 
-RUN touch /root/file.txt
+EXPOSE 80
 
 ENTRYPOINT ["bash", "/root/trueblocks.entrypoint.sh"]

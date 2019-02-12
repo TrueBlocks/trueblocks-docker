@@ -6,8 +6,8 @@
   "type": "service",
   "image": {
     "path": "dappnodepackage_trueblocks.public.dappnode.eth_0.0.1.tar.xz",
-    "hash": "/ipfs/Qmf8RxLcbBzcccjyxNM8pGsm5Ab9LXKRYWMQD5oUk8fqSc",
-    "size": 54438745,
+    "hash": "/ipfs/QmRZW5dB7ixdJ1756u2q1kdg4JJvaZ2revwXgiCvEMvdYG",
+    "size": 65707731,
     "restart": "always",
     "volumes": [
       "trueblocksdnpdappnodeeth_data:/root/.quickBlocks"
