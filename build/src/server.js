@@ -17,10 +17,11 @@ app.get('/address/:address', (req, res) => {
         console.log(`data being written: ${chunk}`)
         return res.write(chunk);
     })
-    acctScrape.stderr.on('data', (err) => {
-        console.log(`error being written: ${err}`);
-        return res.write(err);
-    })
+
+    //acctScrape.stderr.on('data', (err) => {
+    //    console.log(`error being written: ${err}`);
+    //    return res.write(err);
+    //})
 
     acctScrape.on('exit', (code) => {
         console.log(`exiting: ${code}`);

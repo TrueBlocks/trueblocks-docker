@@ -1,13 +1,13 @@
 {
-  "name": "dappnodepackage_trueblocks.public.dappnode.eth",
+  "name": "trueblocks.public.dappnode.eth",
   "version": "0.0.1",
   "description": "DAppNodePackage_trueblocks address index",
   "avatar": "",
   "type": "service",
   "image": {
-    "path": "dappnodepackage_trueblocks.public.dappnode.eth_0.0.1.tar.xz",
-    "hash": "/ipfs/QmRZW5dB7ixdJ1756u2q1kdg4JJvaZ2revwXgiCvEMvdYG",
-    "size": 65707731,
+    "path": "trueblocks.public.dappnode.eth_0.0.1.tar.xz",
+    "hash": "/ipfs/QmRwnFpNS4hW2wbgR33YXPce3tDM6oUekuSMEZG2MNndzb",
+    "size": 65963589,
     "restart": "always",
     "volumes": [
       "trueblocksdnpdappnodeeth_data:/root/.quickBlocks"
@@ -16,6 +16,6 @@
   "author": "TrueBlocks LLC",
   "license": "",
   "homepage": {
-    "userui": "http://my.dappnodepackage_trueblocks.public.dappnode.eth"
+    "userui": "http://my.trueblocks.public.dappnode.eth"
   }
 }
