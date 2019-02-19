@@ -17,7 +17,7 @@ RUN cd /root/quickBlocks-src && \
 	mkdir -v build && \
 	cd build && \
 	cmake ../src && \
-	make blockScrape getBlock acctScrape && \
+	make blockScrape getBlock acctScrape chifra && \
 	mkdir -v /root/.quickBlocks && \
 	cp ../src/other/install/quickBlocks.docker.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml && \
@@ -33,16 +33,12 @@ FROM node:slim as base
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python
+RUN cd /root/api && npm install && npm install -g forever
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
-# CAN WE COPY THIS RECURSIVELY?
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
-#COPY --from=builder /root/.quickBlocks/cache /root/.quickBlocks/cache
-#COPY --from=builder /root/.quickBlocks/cache/addr_index /root/.quickBlocks/cache/addr_index
-#COPY --from=builder /root/.quickBlocks/cache/addr_index/sorted_by_addr /root/.quickBlocks/cache/addr_index/sorted_by_addr
-#COPY --from=builder /root/.quickBlocks/cache/addr_index/sorted_by_addr/* /root/.quickBlocks/cache/addr_index/sorted_by_addr/
 COPY src /root/api
 COPY trueblocks.entrypoint.sh /root
-RUN cd /root/api && npm install && npm install -g forever
+
 
 RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
 #RUN sed -i "s|localhost|docker.for.mac.localhost|g" /root/.quickBlocks/quickBlocks.toml
