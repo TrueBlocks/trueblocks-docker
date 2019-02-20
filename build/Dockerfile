@@ -18,13 +18,9 @@ RUN cd /root/quickBlocks-src && \
 	cd build && \
 	cmake ../src && \
 	make blockScrape getBlock acctScrape chifra && \
-	mkdir -v /root/.quickBlocks && \
+	mkdir -p /root/.quickBlocks/cache/addr_index/sorted_by_addr/ && \
 	cp ../src/other/install/quickBlocks.docker.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml && \
-    echo && \
-	mkdir -v /root/.quickBlocks/cache/ && \
-	mkdir -v /root/.quickBlocks/cache/addr_index/ && \
-	mkdir -v /root/.quickBlocks/cache/addr_index/sorted_by_addr/ && \
     cp ../src/other/build_data/addr_index/sorted_by_addr/* /root/.quickBlocks/cache/addr_index/sorted_by_addr/ && \
     cd /root/.quickBlocks/cache/addr_index/sorted_by_addr/ && \
     gunzip *.gz
@@ -33,15 +29,15 @@ FROM node:slim as base
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python
-RUN cd /root/api && npm install && npm install -g forever
+COPY src /root/api
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
-COPY src /root/api
+RUN cd /root/api && npm install && npm install -g forever && mkdir /root/.quickBlocks/monitors
 COPY trueblocks.entrypoint.sh /root
 
 
-RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
-#RUN sed -i "s|localhost|docker.for.mac.localhost|g" /root/.quickBlocks/quickBlocks.toml
+#RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
+RUN sed -i "s|localhost\:8545|docker.for.mac.localhost\:8545|g" /root/.quickBlocks/quickBlocks.toml
 
 EXPOSE 80
 

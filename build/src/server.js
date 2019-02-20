@@ -11,20 +11,10 @@ app.get('/txIndex', (req, res) => {
     if (req.query.address.length != 42)
         return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
   
-    let acctScrape = spawn("acctScrape", ['--list', '--nocolor', req.params.address]);
+    let acctScrape = spawn("acctScrape", ['--list', '--nocolor', req.query.address]);
 
-    acctScrape.stdout.on('data', (chunk) => {
-        console.log(`data being written: ${chunk}`)
-        return res.write(chunk);
-    })
-
-    //acctScrape.stderr.on('data', (err) => {
-    //    console.log(`error being written: ${err}`);
-    //    return res.write(err);
-    //})
-
-    acctScrape.on('exit', (code) => {
-        console.log(`exiting: ${code}`);
+    acctScrape.stdout.pipe(res).on('exit', (code) => {
+        console.log(`acctScrape exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })
@@ -32,17 +22,15 @@ app.get('/txIndex', (req, res) => {
 
 app.post('/init', (req, res) => {
     
-    if (!req.query.address) return res.send({status: "err", message: "No address provided."});
-    if (req.query.address.length != 42) return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
+    if (!req.query.address)
+        return res.send({status: "err", message: "No address provided."});
+    if (req.query.address.length != 42)
+        return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
 
     let chifra = spawn("chifra", ['init', req.query.address]);
 
-    chifra.stdout.on('data', (chunk) => {
-        return res.write(chunk);
-    });
-
-    chifra.on('exit', (code) => {
-        console.log(`exiting: ${code}`);
+    chifra.stdout.pipe(res).on('exit', (code) => {
+        console.log(`chifra init exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })
