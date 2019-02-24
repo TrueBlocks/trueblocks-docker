@@ -38,7 +38,7 @@ COPY trueblocks.entrypoint.sh /root
 
 
 #RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
-RUN sed -i "s|localhost\:8545|docker.for.mac.localhost\:8545|g" /root/.quickBlocks/quickBlocks.toml
+RUN sed -i "s|localhost\:8545|${RPC_PROVIDER}|g" /root/.quickBlocks/quickBlocks.toml
 
 EXPOSE 80
 

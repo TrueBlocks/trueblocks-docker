@@ -13,3 +13,5 @@ services:
       - trueblocksdnpdappnodeeth_data:/root/.quickBlocks
     ports:
       - 80:80
+    env_file:
+      - trueblocks.public.dappnode.eth.env
