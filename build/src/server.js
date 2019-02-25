@@ -13,7 +13,7 @@ app.get('/txIndex', (req, res) => {
   
     let acctScrape = spawn("acctScrape", ['--list', '--nocolor', req.query.address]);
 
-    acctScrape.stdout.pipe(res).on('exit', (code) => {
+    acctScrape.stdout.pipe(res).on('finish', (code) => {
         console.log(`acctScrape exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
@@ -29,7 +29,7 @@ app.post('/init', (req, res) => {
 
     let chifra = spawn("chifra", ['init', req.query.address]);
 
-    chifra.stdout.pipe(res).on('exit', (code) => {
+    chifra.stdout.pipe(res).on('finish', (code) => {
         console.log(`chifra init exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
