@@ -9,6 +9,7 @@ RUN apt-get update && \
 	nano \
 	libcurl3-dev
 
+ADD https://api.github.com/repos/tjayrush/quickBlocks/git/refs/heads/develop version.json
 RUN git clone -b 'develop' --single-branch \ 
 	https://github.com/tjayrush/quickBlocks \
 	/root/quickBlocks-src
@@ -35,10 +36,6 @@ COPY --from=builder /root/.quickBlocks /root/.quickBlocks
 RUN cd /root/api && npm install && npm install -g forever && mkdir /root/.quickBlocks/monitors
 COPY trueblocks.entrypoint.sh /root
 
-
-#RUN sed -i "s|localhost|my.ethchain.dnp.dappnode.eth|g" /root/.quickBlocks/quickBlocks.toml
-RUN sed -i "s|localhost\:8545|docker.for.mac.localhost\:8545|g" /root/.quickBlocks/quickBlocks.toml
-
 EXPOSE 80
 
-ENTRYPOINT ["bash", "/root/trueblocks.entrypoint.sh"]
+ENTRYPOINT bash /root/trueblocks.entrypoint.sh
