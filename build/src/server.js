@@ -6,12 +6,20 @@ const port = 80;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
-app.get('/txIndex', (req, res) => {
+app.get('/', (req, res) => {
+    return res.send(`Welcome to TrueBlocks!\n
+    Try one of the following:\n
+    \t /list?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658\n
+    \t /export?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658\n`);
+})
+
+app.get('/list', (req, res) => {
     
     if (req.query.address.length != 42)
         return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
   
     let acctScrape = spawn("acctScrape", ['--list', '--nocolor', req.query.address]);
+    // let acctScrape = spawn("chifra", ['list', '--nocolor', req.query.address]);
 
     acctScrape.stdout.pipe(res).on('finish', (code) => {
         console.log(`acctScrape exiting: ${code}`);
@@ -20,23 +28,18 @@ app.get('/txIndex', (req, res) => {
     })
 })
 
-app.post('/init', (req, res) => {
-    
-    if (!req.query.address)
-        return res.send({status: "err", message: "No address provided."});
+app.get('/export', (req, res) => {
     if (req.query.address.length != 42)
-        return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
+    return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
 
-    let chifra = spawn("chifra", ['init', req.query.address]);
-
+    let chifra = spawn("chifra", ['export', '--nocolor', req.query.address]);
+    
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`chifra init exiting: ${code}`);
+        console.log(`chifra exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })
 })
-
-// app.get('/export')
 
 app.listen(port, () => {
     console.log('We are live on ' + port);
