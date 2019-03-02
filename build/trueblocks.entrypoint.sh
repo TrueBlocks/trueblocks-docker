@@ -2,6 +2,7 @@
 
 echo "setting rpc provider to $RPC_PROVIDER"
 sed -i "s|\"http:\/\/.*\"|\"$RPC_PROVIDER\"|" /root/.quickBlocks/quickBlocks.toml
+#sed -i 's/localhost/my.ethchain.dnp.dappnode.eth/' /root/.quickBlocks/quickBlocks.toml
 
 echo "==================== checking install ============================="
 cat /root/.quickBlocks/quickBlocks.toml | grep -v "^$"
