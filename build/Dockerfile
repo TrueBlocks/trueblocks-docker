@@ -18,8 +18,7 @@ RUN cd /root/quickBlocks-src && \
 	mkdir -v build && \
 	cd build && \
 	cmake ../src && \
-	make blockScrape getBlock acctScrape chifra && \
-	mkdir -p /root/.quickBlocks/cache/addr_index/sorted_by_addr/ && \
+	make blockScrape acctScrape chifra cacheMan grabABI ethName && \
 	cp ../src/other/install/quickBlocks.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml
 
