@@ -18,11 +18,11 @@ app.get('/list', (req, res) => {
     if (req.query.address.length != 42)
         return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long."});
   
-    let acctScrape = spawn("acctScrape", ['--list', '--nocolor', req.query.address]);
-    // let acctScrape = spawn("chifra", ['list', '--nocolor', req.query.address]);
+    //let acctScrape = spawn("acctScrape", ['--list', '--nocolor', req.query.address]);
+    let acctScrape = spawn("chifra", ['list', '--nocolor', req.query.address]);
 
     acctScrape.stdout.pipe(res).on('finish', (code) => {
-        console.log(`acctScrape exiting: ${code}`);
+        console.log(`"chifra list" exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })
@@ -35,7 +35,7 @@ app.get('/export', (req, res) => {
     let chifra = spawn("chifra", ['export', '--nocolor', req.query.address]);
     
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`chifra exiting: ${code}`);
+        console.log(`"chifra export" exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })

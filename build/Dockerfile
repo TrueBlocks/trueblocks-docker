@@ -15,10 +15,10 @@ RUN git clone -b 'develop' --single-branch --progress \
 	/root/quickBlocks-src
 
 RUN cd /root/quickBlocks-src && \
-	mkdir -v build && \
+	mkdir -v build /root/.quickBlocks && \
 	cd build && \
 	cmake ../src && \
-	make blockScrape acctScrape chifra cacheMan grabABI ethName && \
+	make blockScrape acctScrape chifra cacheMan grabABI ethName acctExport && \
 	cp ../src/other/install/quickBlocks.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml
 
