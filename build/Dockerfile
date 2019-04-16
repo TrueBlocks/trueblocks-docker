@@ -18,7 +18,7 @@ RUN cd /root/quickBlocks-src && \
 	mkdir -v build /root/.quickBlocks && \
 	cd build && \
 	cmake ../src && \
-	make blockScrape acctScrape chifra cacheMan grabABI ethName acctExport && \
+	make && \
 	cp ../src/other/install/quickBlocks.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml
 
