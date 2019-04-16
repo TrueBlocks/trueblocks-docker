@@ -25,7 +25,7 @@ RUN cd /root/quickBlocks-src && \
 FROM node:slim as base
 WORKDIR /root
 
-RUN apt-get update && apt-get install -y libcurl3-dev python
+RUN apt-get update && apt-get install -y libcurl3-dev python procps
 COPY src /root/api
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
