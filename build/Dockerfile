@@ -18,14 +18,14 @@ RUN cd /root/quickBlocks-src && \
 	mkdir -v build /root/.quickBlocks && \
 	cd build && \
 	cmake ../src && \
-	make blockScrape acctScrape chifra cacheMan grabABI ethName acctExport && \
+	make && \
 	cp ../src/other/install/quickBlocks.toml /root/.quickBlocks/quickBlocks.toml && \
 	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml
 
 FROM node:slim as base
 WORKDIR /root
 
-RUN apt-get update && apt-get install -y libcurl3-dev python
+RUN apt-get update && apt-get install -y libcurl3-dev python procps
 COPY src /root/api
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
