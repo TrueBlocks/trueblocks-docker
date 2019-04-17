@@ -14,29 +14,47 @@ app.get('/', (req, res) => {
 })
 
 app.get('/list', (req, res) => {
+
     if (req.query.address.length != 42)
         return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long.\n"});
 
-    let chifra = spawn("chifra", ['list', '--nocolor', req.query.address]);
+    let chifra = spawn("chifra", ['list', req.query.address, '--nocolor']);
     chifra.stdout.pipe(res).on('finish', (code) => {
         console.log(`"chifra list" exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })
+
 })
 
 app.get('/export', (req, res) => {
+
     if (req.query.address.length != 42)
         return res.send({status: "err", message: "Expecting an Ethereum address 42 characters long.\n"});
 
-    let chifra = spawn("chifra", ['export', '--nocolor', req.query.address]);
+    let chifra = spawn("chifra", ['export', req.query.address, '--nocolor']);
     chifra.stdout.pipe(res).on('finish', (code) => {
         console.log(`"chifra export" exiting: ${code}`);
+        console.log(`child process exited with code ${code}`);
+        return res.end();
+    })
+
+})
+
+app.get('/ls', (req, res) => {
+
+    var longList = ""
+    if (req.query.ll)
+        longList = "-l";
+
+    let chifra = spawn("chifra", ['ls', '--nocolor', longList]);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        console.log(`"chifra ls" exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })
 })
 
 app.listen(port, () => {
-    console.log('We are live on ' + port);
+    console.log('TrueBlocks API initialized on port ' + port);
 });
