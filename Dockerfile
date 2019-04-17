@@ -9,9 +9,9 @@ RUN apt-get update && \
 	nano \
 	libcurl3-dev
 
-ADD https://api.github.com/repos/tjayrush/quickBlocks/git/refs/heads/develop version.json
+ADD https://api.github.com/repos/Great-Hill-Corporation/quickBlocks/git/refs/heads/develop version.json
 RUN git clone -b 'develop' --single-branch --progress \ 
-	https://github.com/tjayrush/quickBlocks \
+	https://github.com/Great-Hill-Corporation/quickBlocks \
 	/root/quickBlocks-src
 
 RUN cd /root/quickBlocks-src && \

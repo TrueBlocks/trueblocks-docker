@@ -5,7 +5,7 @@ volumes:
 
 services:
   trueblocks.public.dappnode.eth:
-    build: ./build
+    build: .
     image: trueblocks.public.dappnode.eth:0.0.1
     container_name: DAppNodePackage-trueblocks.dnp.dappnode.eth
     restart: always
