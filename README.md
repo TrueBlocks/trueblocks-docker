@@ -15,13 +15,13 @@ Trueblocks finds nearly 30% more appearances than naive approaches such as Ether
 
 The system runs on commercial hardware (laptops), and is able to keep up to the chain. This solves the problem posed by web-scale API-based data providers such as EtherScan who threaten to capture Ethereum’s blockchain data to the detriment of the entire community. -->
 
-## High Level User Story
+## High Level Walkthrough
 
-- **You are already running an Parity Ethereum node with `--tracing` enabled:**
-    - Set the `RPC_PROVIDER` variable to your RPC endpoint.
-    - Start the TrueBlocks docker container with `docker-compose up -d`
-    - Wait for TrueBlocks to build its cache. ([Why does this take so long?](#why-does-it-take-so-long-to-build-the-index))
-    - [Query TrueBlocks for a list of transactions on your accounts](#using-the-api)
+- **You are already running an Parity Ethereum node with `--tracing` enabled.** (see [Running A Node](#how-do-you-recommned-I-run-a-node))
+- Set the `RPC_PROVIDER` variable to your RPC endpoint (see ["Before running"](#before-running))
+- Start the TrueBlocks docker container with `docker-compose up -d`
+- Wait for TrueBlocks to build its cache. ([Why does this take so long?](#why-does-it-take-so-long-to-build-the-index))
+- [Query TrueBlocks for a list of transactions on your accounts](#using-the-api)
 
 
 
@@ -88,7 +88,7 @@ Examples:
 | docker    | Install *docker* ([Instructions](https://docs.docker.com/engine/installation)).<br>- The community edition of docker (`docker-ce`) works fine.<br>- On Linux, grant permission to the current user to run docker (`sudo usermod -aG docker $USER`). |
 | docker-compose | Install [docker-compose](https://docs.docker.com/compose/install) |
 
-**Note**: Make sure that you are able to run `git`, `docker ps`, `docker-compose` without issue, and that you can do so without using the `sudo` command. ([trouble shooting]())
+**Note**: Make sure that you are able to run `git`, `docker ps`, `docker-compose` without issue, and that you can do so without using the `sudo` command. (see [Troubleshooting](#troubleshooting))
 
 ## Helpful commands
 
@@ -161,6 +161,8 @@ Finally, TrueBlocks works equally with both tracing and archive nodes. You may s
 ```
 
 (You will definitely want to use a larger hard drive in this case.)
+
+## Troubleshooting
 
 ## Contributing
 
