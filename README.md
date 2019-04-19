@@ -1,4 +1,4 @@
-# TrueBlocks for dAppNode
+# TrueBlocks on Docker
 
 ![Image Logo](https://avatars1.githubusercontent.com/u/19167586?s=200&v=4)
 
@@ -8,6 +8,7 @@
 
 TrueBlocks extracts address appearances from an Ethereum chain and creates a lightweight index, making queries by address a trustless and fast possibility.
 
+trueblocks-docker is a docker image containing an installation of TrueBlocks, and an http API server that delivers Ethereum data by address.
 
 <!-- By visiting every bit of the Ethereum data including blocks, transactions, receipts, logs, traces, trace actions, and trace results for every block, TrueBlocks is able to extract every 'appearance' of an address on the blockchain.
 
