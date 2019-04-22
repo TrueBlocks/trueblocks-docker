@@ -6,7 +6,7 @@
 ![Docker](https://img.shields.io/badge/trueblocks-docker-blue.svg)
 [![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/quickblocks?lang=es)
 
-TrueBlocks extracts address appearances from an Ethereum chain and creates a lightweight index, making queries by address a trustless and fast possibility.
+TrueBlocks extracts address appearances from an Ethereum chain and creates a lightweight index, making queries by address trustless and fast.
 
 trueblocks-docker is a docker image containing an installation of TrueBlocks, and an http API server that delivers Ethereum data by address.
 
@@ -48,7 +48,7 @@ docker-compose build
 
 Before you bring the TrueBlocks docker container up, take the time to configure the following options:
 - what port do you want to run the trueblocks api server on? Set this in docker-compose.yml. Right now, the ports line reads 80:80. If you want to change this from port 80 to, say, 8181, then change this to 8181:80.
-- What is your node's RPC endpoint? For some users, this is http://localhost:8545, but due to Docker's approach to networking, this is probably not the address you want to use (see [What is my RPC endpoint?](#what-is-my-rpc-endpoint)). Whatever the case, set your RPC endpoint in the trueblocks.public.dappnode.eth.env file to `RPC_PROVIDER=http://your-rpc-provider:port`.
+- What is your node's RPC endpoint? Set your RPC endpoint in the **trueblocks.public.dappnode.eth.env** file to `RPC_PROVIDER=http://your-rpc-provider:port`. Note that finding your RPC endpoint can initially be quite difficult (see [What is my RPC endpoint?](#what-is-my-rpc-endpoint)).
 - Now you're ready to run trueblocks!
 
 ## First run
