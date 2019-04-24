@@ -19,11 +19,11 @@ const checkDebug = (req, res) => {
 
 app.get('/', (req, res) => {
     return res.send(
-        `Welcome to TrueBlocks!
-        Try one of the following:
-        \t /list?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658
-        \t /export?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658`
-    );
+`Welcome to TrueBlocks!
+Try one of the following:
+    /list?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658
+    /export?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658
+`);
 })
 
 app.get('/list', (req, res) => {
