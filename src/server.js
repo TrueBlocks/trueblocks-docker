@@ -2,17 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {spawn} = require('child_process');
 const app = express();
-const port = 80;
+const port = !isNaN(process.argv[2]) ? process.argv[2] : 80;
 let debug = false;
 let env = Object.create( process.env );
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
-const checkDebug = (req) => {
+const checkDebug = (req, res) => {
     console.log(req.query.debug)
     if(req.query.debug === undefined)
         return false;
-    env.TEST_MODE = true;
+    env.IS_DOCKER = true;
+    res.write(`RPC_PROVIDER: ${env.RPC_PROVIDER}\n`);
     return true;
 }
 
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/list', (req, res) => {
-    debug = !debug && checkDebug(req);
+    debug = !debug && checkDebug(req,res);
    
     debugMsg = {
         received: debug && res.write("Got your request.\n"),
@@ -47,7 +48,7 @@ app.get('/list', (req, res) => {
 })
 
 app.get('/export', (req, res) => {
-    debug = !debug && checkDebug(req);
+    debug = !debug && checkDebug(req,res);
    
     debugMsg = {
         received: debug && res.write("Got your request.\n"),
@@ -70,7 +71,7 @@ app.get('/export', (req, res) => {
 
 app.get('/ls', (req, res) => {
 
-    debug = !debug && checkDebug(req);
+    debug = !debug && checkDebug(req,res);
    
     debugMsg = {
         received: debug && res.write("Got your request.\n"),
