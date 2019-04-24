@@ -12,7 +12,6 @@ const checkDebug = (req, res) => {
     console.log(req.query.debug)
     if(req.query.debug === undefined)
         return false;
-    env.IS_DOCKER = true;
     //res.write(`env: ${JSON.stringify(env, null, 2)}\n`);
     res.write(`| IS_DOCKER: ${env.IS_DOCKER}\n| RPC_PROVIDER: ${env.RPC_PROVIDER}\n`)
     return true;
