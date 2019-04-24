@@ -4,7 +4,7 @@ const {spawn} = require('child_process');
 const app = express();
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 80;
 let debug = false;
-let env = Object.create( process.env );
+let env = process.env;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
@@ -13,15 +13,18 @@ const checkDebug = (req, res) => {
     if(req.query.debug === undefined)
         return false;
     env.IS_DOCKER = true;
-    res.write(`RPC_PROVIDER: ${env.RPC_PROVIDER}\n`);
+    //res.write(`env: ${JSON.stringify(env, null, 2)}\n`);
+    res.write(`| IS_DOCKER: ${env.IS_DOCKER}\n| RPC_PROVIDER: ${env.RPC_PROVIDER}\n`)
     return true;
 }
 
 app.get('/', (req, res) => {
-    return res.send(`Welcome to TrueBlocks!\n
-    Try one of the following:\n
-    \t /list?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658\n
-    \t /export?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658\n`);
+    return res.send(
+        `Welcome to TrueBlocks!
+        Try one of the following:
+        \t /list?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658
+        \t /export?address=0x5894110995b8c8401bd38262ba0c8ee41d4e4658`
+    );
 })
 
 app.get('/list', (req, res) => {
