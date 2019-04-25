@@ -46,7 +46,6 @@ app.get('/ls', (req, res) => {
     var longList = ""
     if (req.query.ll)
         longList = "-l";
-
     let chifra = spawn("chifra", ['ls', '--nocolor', req.query.address, longList], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
