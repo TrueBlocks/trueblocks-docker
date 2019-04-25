@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,5 +13,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
   }
 }
