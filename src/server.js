@@ -3,19 +3,10 @@ const bodyParser = require('body-parser');
 const {spawn} = require('child_process');
 const app = express();
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 80;
-let debug = false;
 let env = process.env;
+env.API_MODE = true;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-
-const checkDebug = (req, res) => {
-    console.log(req.query.debug)
-    if(req.query.debug === undefined)
-        return false;
-    //res.write(`env: ${JSON.stringify(env, null, 2)}\n`);
-    res.write(`| IS_DOCKER: ${env.IS_DOCKER}\n| RPC_PROVIDER: ${env.RPC_PROVIDER}\n`)
-    return true;
-}
 
 app.get('/', (req, res) => {
     return res.send(
@@ -27,8 +18,6 @@ Try one of the following:
 })
 
 app.get('/list', (req, res) => {
-    debug = !debug && checkDebug(req,res);
-
     if (req.query.address.length != 42)
         return res.send({status: "err", message: 'Expecting an Ethereum address 42 characters long.' });
 
@@ -41,8 +30,6 @@ app.get('/list', (req, res) => {
 })
 
 app.get('/export', (req, res) => {
-    debug = !debug && checkDebug(req,res);
-
     if (req.query.address.length != 42)
         return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
     let chifra = spawn("chifra", ['export', req.query.address, '--nocolor'], {env: env});
@@ -55,15 +42,10 @@ app.get('/export', (req, res) => {
 })
 
 app.get('/ls', (req, res) => {
-    debug = !debug && checkDebug(req,res);
-
     var longList = ""
     if (req.query.ll)
         longList = "-l";
 
-// address is optional don't know how to test
-//    if (req.query.address.length != 42)
-//        return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
     let chifra = spawn("chifra", ['ls', '--nocolor', req.query.address, longList], {env: env});
 
     chifra.stdout.pipe(res).on('finish', (code) => {
