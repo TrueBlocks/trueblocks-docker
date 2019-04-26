@@ -23,6 +23,18 @@ Try one of the following:
 `);
 })
 
+app.get('/export', (req, res) => {
+    if (req.query.address.length != 42)
+        return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
+    let chifra = spawn("chifra", ['export', req.query.address, '--nocolor'], {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        console.log(`"chifra export" exiting: ${code}`);
+        console.log(`child process exited with code ${code}`);
+        return res.end();
+    })
+})
+
 app.get('/list', (req, res) => {
     if (req.query.address.length != 42)
         return res.send({status: "err", message: 'Expecting an Ethereum address 42 characters long.' });
@@ -36,18 +48,6 @@ app.get('/list', (req, res) => {
     })
 })
 
-app.get('/export', (req, res) => {
-    if (req.query.address.length != 42)
-        return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
-    let chifra = spawn("chifra", ['export', req.query.address, '--nocolor'], {env: env});
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`"chifra export" exiting: ${code}`);
-        console.log(`child process exited with code ${code}`);
-        return res.end();
-    })
-})
-
 app.get('/ls', (req, res) => {
     var longList = ""
     if (req.query.ll)
@@ -56,6 +56,18 @@ app.get('/ls', (req, res) => {
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         console.log(`"chifra ls" exiting: ${code}`);
+        console.log(`child process exited with code ${code}`);
+        return res.end();
+    })
+})
+
+app.get('/names', (req, res) => {
+    req.query.search1 = req.query.search1 || '';
+    req.query.search2 = req.query.search2 || '';
+    let chifra = spawn("chifra", ['names', '--nocolor', req.query.search1, req.query.search2], {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        console.log(`"chifra names" exiting: ${code}`);
         console.log(`child process exited with code ${code}`);
         return res.end();
     })
