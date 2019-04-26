@@ -8,6 +8,12 @@ env.API_MODE = true;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.get('/', (req, res) => {
     return res.send(
 `Welcome to TrueBlocks!
