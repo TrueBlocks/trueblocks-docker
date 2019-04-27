@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {spawn} = require('child_process');
 const app = express();
-const port = !isNaN(process.argv[2]) ? process.argv[2] : 80;
+const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
 let env = process.env;
 env.API_MODE = true;
 app.use(bodyParser.json());
@@ -64,7 +64,7 @@ app.get('/ls', (req, res) => {
 app.get('/names', (req, res) => {
     req.query.search1 = req.query.search1 || '';
     req.query.search2 = req.query.search2 || '';
-    let chifra = spawn("chifra", ['names', '--nocolor', req.query.search1, req.query.search2], {env: env});
+    let chifra = spawn("chifra", ['names', '--nocolor', '--verbose:3', req.query.search1, req.query.search2], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         console.log(`"chifra names" exiting: ${code}`);

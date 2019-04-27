@@ -3,7 +3,7 @@
 ![Image Logo](https://avatars1.githubusercontent.com/u/19167586?s=200&v=4)
 
 [![Website trueblocks.io](https://img.shields.io/badge/Website-quickblocks.io-brightgreen.svg)](https://quickblocks.io/)
-![Docker](https://img.shields.io/badge/trueblocks-docker-blue.svg)
+[![Docker](https://img.shields.io/badge/trueblocks-docker-blue.svg)](https://github.com/Great-Hill-Corporation/trueblocks-docker)
 [![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/quickblocks?lang=es)
 
 TrueBlocks extracts address appearances from an Ethereum chain and creates a lightweight index, making queries by address trustless and fast.
@@ -78,7 +78,7 @@ Examples:
 
 - Get all JSON exported for specific address:
     - `curl http://localhost/export?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
-- Get `{blockNumber, txIndex}` appearances for specific address: `curl http://localhost/list?address=address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
+- Get `{blockNumber, txIndex}` appearances for specific address: `curl http://localhost/list?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
 
 
 ### Prerequisites
