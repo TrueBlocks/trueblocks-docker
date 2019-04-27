@@ -73,6 +73,16 @@ app.get('/names', (req, res) => {
     })
 })
 
+app.get('/blocks', (req, res) => {
+    let chifra = spawn("chifra", ['blocks', '--list', '--data', '--verbose:3', '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        console.log(`"chifra blocks" exiting: ${code}`);
+        console.log(`child process exited with code ${code}`);
+        return res.end();
+    })
+})
+
 app.listen(port, () => {
     console.log('TrueBlocks API initialized on port ' + port);
 });
