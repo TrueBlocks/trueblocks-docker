@@ -76,7 +76,7 @@ app.get('/accounts', (req, res) => {
     })
 })
 
-app.get('/blocks', (req, res) => {
+app.get('/blocks/:id', (req, res) => {
     let chifra = spawn("chifra", ['blocks', '--list', '--data', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
