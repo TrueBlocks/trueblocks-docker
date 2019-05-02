@@ -23,7 +23,13 @@ Try one of the following:
 `);
 })
 
-debug = "--verbose:3"
+var debug = "--verbose:3"
+var cnt = 0;
+function reportAndSend(routeName, code, res) {
+    console.log(`"${routeName}" exiting: ${code === undefined ? "OK" : code}`);
+    console.log(`------------- ${++cnt} ---------------------------`)
+    return res.send();
+}
 //debug = ""
 
 app.get('/export', (req, res) => {
@@ -32,9 +38,7 @@ app.get('/export', (req, res) => {
     let chifra = spawn("chifra", ['export', req.query.address, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`"chifra export" exiting: ${code}`);
-        console.log(`child process exited with code ${code}`);
-        return res.end();
+        reportAndSend("export", code, res);
     })
 })
 
@@ -45,9 +49,7 @@ app.get('/list', (req, res) => {
     let chifra = spawn("chifra", ['list', req.query.address, '--useBlooms', debug, '--nocolor'],  {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`"chifra list" exiting: ${code}`);
-        console.log(`child process exited with code ${code}`);
-        return res.end();
+        reportAndSend("list", code, res);
     })
 })
 
@@ -58,9 +60,7 @@ app.get('/ls', (req, res) => {
     let chifra = spawn("chifra", ['ls', req.query.address, longList, debug, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`"chifra ls" exiting: ${code}`);
-        console.log(`child process exited with code ${code}`);
-        return res.end();
+        reportAndSend("ls", code, res);
     })
 })
 
@@ -70,19 +70,62 @@ app.get('/accounts', (req, res) => {
     let chifra = spawn("chifra", ['accounts', req.query.search1, req.query.search2, debug, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`"chifra names" exiting: ${code}`);
-        console.log(`child process exited with code ${code}`);
-        return res.end();
+        reportAndSend("accounts", code, res);
     })
 })
 
 app.get('/blocks/:id', (req, res) => {
-    let chifra = spawn("chifra", ['blocks', '--list', '--data', debug, '--nocolor'], { env: env });
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--blocks', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`"chifra blocks" exiting: ${code}`);
-        console.log(`child process exited with code ${code}`);
-        return res.end();
+        reportAndSend("blocks", code, res);
+    })
+})
+
+app.get('/trans/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--trans', `${id}`, debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("trans", code, res);
+    })
+})
+
+app.get('/logs/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--logs', `${id}`, debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("trans", code, res);
+    })
+})
+
+app.get('/receipts/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--receipts', `${id}`, debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("trans", code, res);
+    })
+})
+
+app.get('/traces/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--traces', `${id}`, debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("trans", code, res);
     })
 })
 
@@ -90,9 +133,7 @@ app.get('/functions', (req, res) => {
     let chifra = spawn("chifra", ['functions', '0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        console.log(`"chifra blocks" exiting: ${code}`);
-        console.log(`child process exited with code ${code}`);
-        return res.end();
+        reportAndSend("functions", code, res);
     })
 })
 
