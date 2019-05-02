@@ -64,10 +64,11 @@ app.get('/ls', (req, res) => {
     })
 })
 
-app.get('/accounts', (req, res) => {
-    req.query.search1 = req.query.search1 || '';
-    req.query.search2 = req.query.search2 || '';
-    let chifra = spawn("chifra", ['accounts', req.query.search1, req.query.search2, debug, '--nocolor'], {env: env});
+app.get('/accounts/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--accounts', `${id}`, debug, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("accounts", code, res);
