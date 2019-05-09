@@ -86,7 +86,7 @@ app.get('/blocks/:id', (req, res) => {
     })
 })
 
-app.get('/trans/:id', (req, res) => {
+app.get('/transactions/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
@@ -104,7 +104,7 @@ app.get('/logs/:id', (req, res) => {
     let chifra = spawn("chifra", ['data', '--logs', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("trans", code, res);
+        reportAndSend("logs", code, res);
     })
 })
 
@@ -115,7 +115,7 @@ app.get('/receipts/:id', (req, res) => {
     let chifra = spawn("chifra", ['data', '--receipts', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("trans", code, res);
+        reportAndSend("receipts", code, res);
     })
 })
 
@@ -126,7 +126,29 @@ app.get('/traces/:id', (req, res) => {
     let chifra = spawn("chifra", ['data', '--traces', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("trans", code, res);
+        reportAndSend("traces", code, res);
+    })
+})
+
+app.get('/slurp/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--slurp', `${id}`, debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("slurp", code, res);
+    })
+})
+
+app.get('/prices/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--prices', `${id}`, debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("slurp", code, res);
     })
 })
 
