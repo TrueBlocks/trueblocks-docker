@@ -23,7 +23,7 @@ Try one of the following:
 `);
 })
 
-var debug = "--verbose:3"
+var debug = "--verbose:6"
 var cnt = 0;
 function reportAndSend(routeName, code, res) {
     console.log(`"${routeName}" exiting: ${code === undefined ? "OK" : code}`);
