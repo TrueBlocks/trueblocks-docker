@@ -5,4 +5,4 @@ sed -i "s|\"http:\/\/.*\"|\"$RPC_PROVIDER\"|" /root/.quickBlocks/quickBlocks.tom
 cat /root/.quickBlocks/quickBlocks.toml
 cd /root/.quickBlocks/monitors
 forever /root/api/server.js 80 &
-chifra scrape --sleep 2
+#chifra scrape --sleep 2
