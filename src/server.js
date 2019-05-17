@@ -141,11 +141,11 @@ app.get('/slurp/:id', (req, res) => {
     })
 })
 
-app.get('/prices/:id', (req, res) => {
+app.get('/quotes/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--prices', `${id}`, debug, '--nocolor'], { env: env });
+    let chifra = spawn("chifra", ['data', '--quotes', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("slurp", code, res);
