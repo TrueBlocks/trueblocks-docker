@@ -104,7 +104,8 @@ app.get('/transactions/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--trans', `${id}`, '-trace', '--articulate', '--fmt', 'txt', debug, '--nocolor'], { env: env });
+    console.log(req.params.id);
+    let chifra = spawn("chifra", ['data', '--trans', `${id}`, '--trace', '--articulate', '--fmt', 'json', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("trans", code, res);
