@@ -57,10 +57,30 @@ app.get('/export', (req, res) => {
     })
 })
 
+app.get('/export2', (req, res) => {
+    if (req.query.address.length != 42)
+        return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
+    let chifra = spawn("chifra", ['export', req.query.address, '--output', '--nocolor'], {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("export", code, res);
+    })
+})
+
 app.get('/list', (req, res) => {
     if (req.query.address.length != 42)
         return res.send({status: "err", message: 'Expecting an Ethereum address 42 characters long.' });
     let chifra = spawn("chifra", ['list', req.query.address, debug, '--nocolor'],  {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("list", code, res);
+    })
+})
+
+app.get('/list2', (req, res) => {
+    if (req.query.address.length != 42)
+        return res.send({status: "err", message: 'Expecting an Ethereum address 42 characters long.' });
+    let chifra = spawn("chifra", ['list', req.query.address, '--output', debug, '--nocolor'],  {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("list", code, res);
