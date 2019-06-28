@@ -28,8 +28,10 @@ Try one of the following:
     /blocks/:id
     /transactions/:id
     /logs/:id
+    /all_logs/:id
     /receipts/:id
     /traces/:id
+    /tracecnt/:id
     /abi/:id
     /state/balance/:id
     /state/code/:id
@@ -63,7 +65,7 @@ app.get('/export', (req, res) => {
 app.get('/export2', (req, res) => {
     if (req.query.address.length != 42)
         return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
-    let chifra = spawn("chifra", ['export', req.query.address, '--output', '--nocolor'], {env: env});
+    let chifra = spawn("chifra", ['export', req.query.address, '--fmt', 'txt', '--to_file', '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("export2", code, res);
@@ -84,7 +86,7 @@ app.get('/list2/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['list', `${id}`, '--output', debug, '--nocolor'],  {env: env});
+    let chifra = spawn("chifra", ['list', `${id}`, '--fmt', 'txt', '--to_file', debug, '--nocolor'],  {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("list2", code, res);
@@ -140,7 +142,18 @@ app.get('/logs/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--logs', `${id}`, '--articulate', '--fmt', 'txt', '--output', debug, '--nocolor'], { env: env });
+    let chifra = spawn("chifra", ['data', '--logs', `${id}`, '--articulate', '--fmt', 'txt', '--to_file', debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("logs", code, res);
+    })
+})
+
+app.get('/all_logs/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--all_logs', `${id}`, '--articulate', '--fmt', 'txt', '--to_file', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("logs", code, res);
@@ -162,10 +175,21 @@ app.get('/traces/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--traces', `${id}`, '--articulate', '--fmt', 'csv', '--output', debug, '--nocolor'], { env: env });
+    let chifra = spawn("chifra", ['data', '--traces', `${id}`, '--articulate', '--fmt', 'csv', '--to_file', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("traces", code, res);
+    })
+})
+
+app.get('/tracecnt/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--traces', `${id}`, '--noHeader', '--countOnly', '--fmt', 'txt', debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("tracecnt", code, res);
     })
 })
 
