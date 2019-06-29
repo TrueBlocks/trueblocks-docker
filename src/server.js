@@ -23,12 +23,12 @@ app.get('/', (req, res) => {
 Try one of the following:
     /list?address=0x8ad69ae99804935d56704162e3f6a6f442d2ed4a
     /export?address=0x8ad69ae99804935d56704162e3f6a6f442d2ed4a
+    /export_logs/:id
     /ls
     /accounts/:id
     /blocks/:id
     /transactions/:id
     /logs/:id
-    /all_logs/:id
     /receipts/:id
     /traces/:id
     /tracecnt/:id
@@ -69,6 +69,17 @@ app.get('/export2', (req, res) => {
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("export2", code, res);
+    })
+})
+
+app.get('/export_logs/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['export', '--logs', `${id}`, '--fmt', 'txt', '--to_file', debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("logs", code, res);
     })
 })
 
@@ -143,17 +154,6 @@ app.get('/logs/:id', (req, res) => {
     if (typeof req.params.id != undefined)
         id = req.params.id;
     let chifra = spawn("chifra", ['data', '--logs', `${id}`, '--articulate', '--fmt', 'txt', '--to_file', debug, '--nocolor'], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("logs", code, res);
-    })
-})
-
-app.get('/all_logs/:id', (req, res) => {
-    var id = "";
-    if (typeof req.params.id != undefined)
-        id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--all_logs', `${id}`, '--articulate', '--fmt', 'txt', '--to_file', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("logs", code, res);
