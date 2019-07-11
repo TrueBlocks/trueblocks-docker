@@ -1,6 +1,11 @@
 FROM python:3.7 as builder
 
 WORKDIR /root
+
+RUN curl https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz --output go1.12.7.linux-amd64.tar.gz && \
+	tar -C /usr/local -xzf go1.12.7.linux-amd64.tar.gz && \
+	ln -s /usr/local/go/bin/* /usr/local/bin/
+
 RUN apt-get update && \
 	apt-get install -y \
 	build-essential \
@@ -9,9 +14,9 @@ RUN apt-get update && \
 	nano \
 	libcurl3-dev
 
-ADD https://api.github.com/repos/Great-Hill-Corporation/quickBlocks/git/refs/heads/develop version.json
+ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
 RUN git clone -b 'develop' --single-branch --progress \ 
-	https://github.com/Great-Hill-Corporation/quickBlocks \
+	https://github.com/Great-Hill-Corporation/trueblocks-core \
 	/root/quickBlocks-src
 
 RUN cd /root/quickBlocks-src && \
