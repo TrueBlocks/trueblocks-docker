@@ -5,6 +5,7 @@ const app = express();
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
 let env = process.env;
 env.API_MODE = true;
+//env.TEST_MODE = true;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 Try one of the following:
     /list?address=0x8ad69ae99804935d56704162e3f6a6f442d2ed4a
     /export?address=0x8ad69ae99804935d56704162e3f6a6f442d2ed4a
+    /export_logs/:id
     /ls
     /accounts/:id
     /blocks/:id
@@ -29,10 +31,13 @@ Try one of the following:
     /logs/:id
     /receipts/:id
     /traces/:id
+    /tracecnt/:id
     /abi/:id
     /state/balance/:id
     /state/code/:id
     /state/nonce/:id
+    /balances/:id
+    /message/:bytes
     /slurp/:id
     /quotes/:id
 `);
@@ -57,6 +62,27 @@ app.get('/export', (req, res) => {
     })
 })
 
+app.get('/export2', (req, res) => {
+    if (req.query.address.length != 42)
+        return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
+    let chifra = spawn("chifra", ['export', req.query.address, '--fmt', 'txt', '--to_file', '--nocolor'], {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("export2", code, res);
+    })
+})
+
+app.get('/export_logs/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['export', '--logs', `${id}`, '--fmt', 'txt', '--to_file', debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("logs", code, res);
+    })
+})
+
 app.get('/list', (req, res) => {
     if (req.query.address.length != 42)
         return res.send({status: "err", message: 'Expecting an Ethereum address 42 characters long.' });
@@ -64,6 +90,17 @@ app.get('/list', (req, res) => {
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("list", code, res);
+    })
+})
+
+app.get('/list2/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['list', `${id}`, '--fmt', 'txt', '--to_file', debug, '--nocolor'],  {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("list2", code, res);
     })
 })
 
@@ -104,10 +141,11 @@ app.get('/transactions/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--trans', `${id}`, '-trace', '--articulate', '--fmt', 'txt', debug, '--nocolor'], { env: env });
+    console.log(req.params.id);
+    let chifra = spawn("chifra", ['data', '--trans', `${id}`, '--trace', '--articulate', '--fmt', 'json', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("trans", code, res);
+        reportAndSend("transactions", code, res);
     })
 })
 
@@ -115,7 +153,7 @@ app.get('/logs/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--logs', `${id}`, '--articulate', '--fmt', 'txt', '--output', debug, '--nocolor'], { env: env });
+    let chifra = spawn("chifra", ['data', '--logs', `${id}`, '--articulate', '--fmt', 'txt', '--to_file', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("logs", code, res);
@@ -137,10 +175,21 @@ app.get('/traces/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--traces', `${id}`, '--articulate', '--fmt', 'txt', '--output', debug, '--nocolor'], { env: env });
+    let chifra = spawn("chifra", ['data', '--traces', `${id}`, '--articulate', '--fmt', 'csv', '--to_file', debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("traces", code, res);
+    })
+})
+
+app.get('/tracecnt/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['data', '--traces', `${id}`, '--noHeader', '--countOnly', '--fmt', 'txt', debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("tracecnt", code, res);
     })
 })
 
@@ -173,7 +222,7 @@ app.get('/state/balance/:id', (req, res) => {
     let chifra = spawn("chifra", ['data', '--balance', '--mode', 'some', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("balance", code, res);
+        reportAndSend("state/balance", code, res);
     })
 })
 
@@ -184,7 +233,7 @@ app.get('/state/code/:id', (req, res) => {
     let chifra = spawn("chifra", ['data', '--code', '--mode', 'some', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("code", code, res);
+        reportAndSend("state/code", code, res);
     })
 })
 
@@ -195,7 +244,30 @@ app.get('/state/nonce/:id', (req, res) => {
     let chifra = spawn("chifra", ['data', '--nonce', '--mode', 'some', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("nonce", code, res);
+        reportAndSend("state/nonce", code, res);
+    })
+})
+
+app.get('/balances/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+    let chifra = spawn("chifra", ['balances', `${id}`, debug, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("balances", code, res);
+    })
+})
+
+app.get('/message/:id', (req, res) => {
+    var id = "";
+    if (typeof req.params.id != undefined)
+        id = req.params.id;
+//    let chifra = spawn("chifra", ['data', '--message', `${id}`, debug, '--nocolor'], { env: env });
+    let chifra = spawn("chifra", ['data', '--message', `${id}`, '--nocolor'], { env: env });
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("message", code, res);
     })
 })
 
@@ -206,7 +278,7 @@ app.get('/quotes/:id', (req, res) => {
     let chifra = spawn("chifra", ['data', '--quotes', `${id}`, debug, '--nocolor'], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("slurp", code, res);
+        reportAndSend("quotes", code, res);
     })
 })
 
