@@ -40,6 +40,7 @@ Try one of the following:
     /message/:bytes
     /slurp/:id
     /quotes/:id
+    /scraper/:mode
 `);
 })
 
@@ -109,6 +110,17 @@ app.get('/ls', (req, res) => {
     if (req.query.ll)
         longList = "-l";
     let chifra = spawn("chifra", ['ls', req.query.address, longList, debug, '--nocolor'], {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend("ls", code, res);
+    })
+})
+
+app.get('/scraper/:mode', (req, res) => {
+    var mode = "";
+    if (typeof req.params.mode != undefined)
+        mode = req.params.mode;
+    let chifra = spawn("chifra", ['scrape', '--mode', `${mode}`, debug, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("ls", code, res);
