@@ -5,12 +5,8 @@ const app = express();
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
 let env = process.env;
 env.API_MODE = true;
-//env.TEST_MODE = true;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-
-//var X = import("0x509fa8d8b2c7962bd9a8c32fb79dbdecf81b312b011be240903ccea3410f22a1.json")
-
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -40,7 +36,7 @@ Try one of the following:
     /message/:bytes
     /slurp/:id
     /quotes/:id
-    /scraper/:mode
+    /scrape/:cmd
 `);
 })
 
@@ -116,11 +112,11 @@ app.get('/ls', (req, res) => {
     })
 })
 
-app.get('/scraper/:mode', (req, res) => {
-    var mode = "";
-    if (typeof req.params.mode != undefined)
-        mode = req.params.mode;
-    let chifra = spawn("chifra", ['scrape', '--mode', `${mode}`, debug, '--nocolor'], {env: env});
+app.get('/scrape/:cmd', (req, res) => {
+    var cmd = ""
+    if (typeof req.params.cmd != undefined)
+        cmd = req.params.cmd;
+    let chifra = spawn("chifra", ['scrape', `${cmd}`, debug, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("ls", code, res);
