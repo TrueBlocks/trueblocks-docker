@@ -10,7 +10,7 @@ const debug = true;
 let jobs = [
   {
     name: "apiary",
-    templateFilepath: "../apiary.apib",
+    templateFilepath: "../apiary.template.apib",
     outputFilepath: "../apiary.generated.apib",
     do: blueprintReplace
   }

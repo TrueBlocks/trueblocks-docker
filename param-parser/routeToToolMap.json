@@ -1,0 +1,7 @@
+{
+    "export": ["acctScrape", "cacheMan"],
+    "ls": ["acctScrape", "cacheMan"],
+    "list": ["acctScrape", "cacheMan"],
+    "account": ["acctExport"],
+    "block": ["getBlock"]
+  }
