@@ -1,4 +1,4 @@
-FROM python:3.7 as builder
+FROM python@sha256:99a39f3907ab81c7800eb7f9bcfa28475d9b081133615c6fa86616a7d14bf2af as builder
 
 WORKDIR /root
 
@@ -26,7 +26,7 @@ RUN cd /root/quickBlocks-src && \
 	cmake ../src && \
 	make
 
-FROM node:slim as base
+FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aab as base
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python procps
