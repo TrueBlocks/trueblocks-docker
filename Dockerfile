@@ -14,8 +14,8 @@ RUN apt-get update && \
 	nano \
 	libcurl3-dev
 
-ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/docker version.json
-RUN git clone -b 'docker' --single-branch --progress \ 
+ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
+RUN git clone -b 'develop' --single-branch --progress \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-core \
 	/root/quickBlocks-src
 
@@ -23,7 +23,7 @@ RUN cd /root/quickBlocks-src && \
 	git reset --hard 0549afc5d4 && \
 	mkdir -v build /root/.quickBlocks && \
 	cd build && \
-	bash ../src/other/install/docker/clean_for_docker.sh && \
+	bash ../src/other/install/develop/clean_for_docker.sh && \
 	cmake ../src && \
 	make
 
