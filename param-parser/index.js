@@ -2,7 +2,7 @@ const fs = require('fs');
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
-
+const groupBy = require('./helpers/groupBy').groupBy;
 const blueprintReplace = require('./replacers/blueprintReplace').blueprintReplace;
 const routeToToolMap = require('./routeToToolMap.json');
 const debug = true;
@@ -24,10 +24,10 @@ stdin.on('data', (chunk) => {
   data += chunk;
 });
 
-stdin.on('end', async () => {
+const parseInput = async (data) => {
   let rx = /.*\/(.*)\/options.cpp.*\(\"(.*)\"\,.*\"(.*)\"\)\,/;
   let lines = data.split("\n");
-  let reglines = lines.map(line => {
+  let parsedLines = lines.map(line => {
       line = rx.exec(line);
       if (line === null)
         return null;
@@ -47,22 +47,14 @@ stdin.on('end', async () => {
   
     if(debug) {
       // console.log(reglines.map(line => line.option));
-      await writeFile("params.txt", reglines.map(line => line.option).join('\n'));
+      await writeFile("params.txt", parsedLines.map(line => line.option).join('\n'));
     }
-    
-  
-    var groupBy = function(xs, key) {
-      return xs.reduce(function(rv, x) {
-        (rv[x[key]] = rv[x[key]] || []).push(x);
-        return rv;
-      }, {});
-    };
-
-    reglines = groupBy(reglines, 'tool')
-
-  // console.log(reglines);
+    return groupBy(parsedLines, 'tool');
+}
+stdin.on('end', async () => {
+  let parsedInput = await parseInput(data);
   try {
-  await jobs[0].do(jobs[0].templateFilepath, jobs[0].outputFilepath, reglines, routeToToolMap);
+    await jobs[0].do(jobs[0].templateFilepath, jobs[0].outputFilepath, parsedInput, routeToToolMap);
   } catch {(e) => {
     console.log(e);
   }}
