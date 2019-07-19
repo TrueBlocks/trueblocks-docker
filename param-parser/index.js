@@ -1,7 +1,7 @@
 const debug = true;
-const templateHandlers = require('./templateHandlers');
+const templateHandlers = require('./components/templateHandlers');
 const routeToToolMap = require('./routeToToolMap.json');
-const parseInput = require('./inputParser').parseInput;
+const parseInput = require('./components/inputParser').parseInput;
 
 let jobs = [
   {
