@@ -5,6 +5,6 @@ It expects the C++ code to be piped to it.
 Example usage:
 
 ```sh
-cd param-parser
+cd template-parser
 find ../../trueblocks-core/. -name "*.cpp" -exec grep -His "COption(" {} \; | node index.js
 ```
