@@ -1,7 +1,15 @@
 {
-    "export": ["acctScrape", "acctExport"],
-    "ls": ["acctScrape", "cacheMan"],
-    "list": ["acctScrape", "cacheMan"],
-    "account": ["acctExport"],
-    "block": ["getBlock"]
-  }
+  "export": ["acctScrape", "acctExport"],
+  "list": ["acctScrape", "cacheMan"],
+  "scrape": ["blockScrape"],
+  "accounts": ["getAccounts"],
+  "blocks": ["getBlock"],
+  "transactions": ["getTrans"],
+  "logs": ["getLogs"],
+  "receipts": ["getReceipts"],
+  "traces": ["getTrace"],
+  "slurp": ["ethSlurp"],
+  "abi": ["grabABI"],
+  "quotes": ["ethQuote"],
+  "state": ["getState"]
+}

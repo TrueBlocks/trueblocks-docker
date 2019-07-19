@@ -102,48 +102,13 @@ A resource that tells trueBlocks that you want to list appearances for `address`
             112698  35
             112789  0
 
-## List monitors [<<GENERATE:URI:ls>>]
-
-A resource that asks TrueBlocks for monitor location and status.
-
-+ Parameters
-
-<<GENERATE:PARAMS:ls>>
-
-### List monitors [GET]
-
-+ Request JSON data
-
-    + Headers
-    
-            Accept: application/json
-        
-+ Response 200 (application/json)
-
-    + Body
-    
-            [
-                {
-                    "addr": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
-                    "symbol": "CK",
-                    "name": "CryptoKitties",
-                    "source": "Etherscan.io",
-                    "description": "The famous first ERC721 token",
-                    "visible": true,
-                    "fn": "./monitors/0x06012c8cf97bead5deae237070f9587f8e7a266d.acct.bin",
-                    "size": 0,
-                    "lb": 169801,
-                    "nrecs": 0
-                }
-            ]
-
-## View account detail [<<GENERATE:URI:account>>]
+## View account detail [<<GENERATE:URI:accounts>>]
 
 I don't really know what this is.
 
 + Parameters
 
-<<GENERATE:PARAMS:account>>
+<<GENERATE:PARAMS:accounts>>
 
 ### Account detail [GET]
 
@@ -175,13 +140,13 @@ I don't really know what this is.
                   }
                 ], "meta": {"pending": 622000,"staging": 622000,"finalized": 539800,"client": 1365929 } }
 
-## View block detail [<<GENERATE:URI:block>>]
+## View block detail [<<GENERATE:URI:blocks>>]
 
 Look at a block.
 
 + Parameters
 
-<<GENERATE:PARAMS:block>>
+<<GENERATE:PARAMS:blocks>>
 
 ### Block detail [GET]
 
