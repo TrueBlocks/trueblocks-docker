@@ -5,33 +5,29 @@ HOST: http://localhost:8080/
 
 The TrueBlocks API is designed to expose data generated from `trueblocks-core` along with a local Ethereum node. Among other things, it facilitates account history queries.
 
-## Export Transaction Records for Address [/export{?maxBlocks}{?pending}{?noBlooms}{?staging}{?start}{?filenames}{?check}{?data}{?sort}{?fix}{?list}{?cacheBals}{?balances}{?import}{?remove}{?truncate}{?maxBlock}{?merge}{?fmt}{?skip}{?start}]
+## Export Transaction Records for Address [/export{?maxBlocks}{?ripe}{?unripe}{?noBlooms}{?staging}{?start}{?address_list}{?fmt}{?articulate}{?logs}{?blocks}{?txs}{?traces}{?ddos}{?maxTraces}{?start}{?end}]
 
 A resource that tells trueblocks that you want to export transactions for `address`. Trueblocks will use its appearance index to ask the node for detailed information about each appearance. The information is then returned in either JSON or CSV.
 
 + Parameters
 
     + maxBlocks:  (optional, <val>) - scan at most --maxBlocks blocks ('all' implies scan to end of chain)
-    + pending:  (optional, boolean) - visit pending but not yet staged or finalized blocks
+    + ripe:  (optional, boolean) - visit ripe (old enough, but not yet staged or finalized) blocks
+    + unripe:  (optional, boolean) - visit unripe (not old enough and not yet staged or finalized) blocks
     + noBlooms:  (optional, boolean) - turn off bloom filters for performance testing
     + staging:  (optional, boolean) - produce results in the staging folder instead of production folder
     + start:  (optional, <num>) - first block to check
-    + filenames:  (optional, boolean) - path(s) of files to check, merge, fix or display (default=display)
-    + check:  (optional, boolean) - check for duplicates and other problems in the cache
-    + data:  (optional, boolean) - in 'list' mode, render results as data (i.e export mode)
-    + sort:  (optional, boolean) - sort the list of transactions and re-write (precludes other modes, other than --dedup)
-    + fix:  (optional, boolean) - remove duplicates from the cache (if any)
-    + list:  (optional, boolean) - list the contents of the cache (the default if no other option)
-    + cacheBals:  (optional, boolean) - cache per block account balances for each account
-    + balances:  (optional, boolean) - export account balances for each account
-    + import:  (optional, boolean) - import transactions if import.txt file exists in current folder
-    + remove:  (optional, boolean) - remove transactions if remove.txt file exists in current folder
-    + truncate:  (optional, <num>) - truncate the cache at block :n (keeps block 'n' and before, implies --fix)
-    + maxBlock:  (optional, <num>) - for testing, max block to visit
-    + merge:  (optional, boolean) - merge two or more caches into a single cache
+    + address_list:  (optional, boolean) - one or more addresses (0x...) to export
     + fmt:  (optional, <fmt>) - export format (one of [json|txt|csv])
-    + skip:  (optional, boolean) - skip value for testing
-    + start:  (optional, <num>) - un-used hidden value - do not remove
+    + articulate:  (optional, boolean) - articulate transactions, traces, logs, and outputs
+    + logs:  (optional, boolean) - export logs instead of transactions
+    + blocks:  (optional, <on/off>) - write blocks to the binary cache ('off' by default)
+    + txs:  (optional, <on/off>) - write transactions to the binary cache ('on' by default)
+    + traces:  (optional, <on/off>) - write traces to the binary cache ('off' by default)
+    + ddos:  (optional, <on/off>) - skip over dDos transactions in export ('on' by default)
+    + maxTraces:  (optional, <num>) - if --ddos:on, the number of traces defining a dDos (default = 250)
+    + start:  (optional, <num>) - first block to export (inclusive)
+    + end:  (optional, <num>) - last block to export (inclusive)
 
 ### Export all records for an address [GET]
 
@@ -89,14 +85,15 @@ A resource that tells trueblocks that you want to export transactions for `addre
                 }
             ]}
 
-## List appearance locations for an address [/list{?maxBlocks}{?pending}{?noBlooms}{?staging}{?start}{?filenames}{?check}{?data}{?sort}{?fix}{?list}{?cacheBals}{?balances}{?import}{?remove}{?truncate}{?maxBlock}{?merge}{?fmt}{?skip}{?start}]
+## List appearance locations for an address [/list{?maxBlocks}{?ripe}{?unripe}{?noBlooms}{?staging}{?start}{?filenames}{?check}{?data}{?sort}{?fix}{?list}{?cacheBals}{?balances}{?import}{?remove}{?truncate}{?maxBlock}{?merge}{?fmt}{?skip}{?start}]
 
 A resource that tells trueBlocks that you want to list appearances for `address`. Trueblocks returns its appearance index, each appearance consisting of `{blockNumber, txId}`. 
 
 + Parameters
 
     + maxBlocks:  (optional, <val>) - scan at most --maxBlocks blocks ('all' implies scan to end of chain)
-    + pending:  (optional, boolean) - visit pending but not yet staged or finalized blocks
+    + ripe:  (optional, boolean) - visit ripe (old enough, but not yet staged or finalized) blocks
+    + unripe:  (optional, boolean) - visit unripe (not old enough and not yet staged or finalized) blocks
     + noBlooms:  (optional, boolean) - turn off bloom filters for performance testing
     + staging:  (optional, boolean) - produce results in the staging folder instead of production folder
     + start:  (optional, <num>) - first block to check
@@ -142,14 +139,15 @@ A resource that tells trueBlocks that you want to list appearances for `address`
             112698  35
             112789  0
 
-## List monitors [/ls{?maxBlocks}{?pending}{?noBlooms}{?staging}{?start}{?filenames}{?check}{?data}{?sort}{?fix}{?list}{?cacheBals}{?balances}{?import}{?remove}{?truncate}{?maxBlock}{?merge}{?fmt}{?skip}{?start}]
+## List monitors [/ls{?maxBlocks}{?ripe}{?unripe}{?noBlooms}{?staging}{?start}{?filenames}{?check}{?data}{?sort}{?fix}{?list}{?cacheBals}{?balances}{?import}{?remove}{?truncate}{?maxBlock}{?merge}{?fmt}{?skip}{?start}]
 
 A resource that asks TrueBlocks for monitor location and status.
 
 + Parameters
 
     + maxBlocks:  (optional, <val>) - scan at most --maxBlocks blocks ('all' implies scan to end of chain)
-    + pending:  (optional, boolean) - visit pending but not yet staged or finalized blocks
+    + ripe:  (optional, boolean) - visit ripe (old enough, but not yet staged or finalized) blocks
+    + unripe:  (optional, boolean) - visit unripe (not old enough and not yet staged or finalized) blocks
     + noBlooms:  (optional, boolean) - turn off bloom filters for performance testing
     + staging:  (optional, boolean) - produce results in the staging folder instead of production folder
     + start:  (optional, <num>) - first block to check
@@ -245,7 +243,7 @@ I don't really know what this is.
                   }
                 ], "meta": {"pending": 622000,"staging": 622000,"finalized": 539800,"client": 1365929 } }
 
-## View block detail [/block{?block_list}{?hash_only}{?check}{?addrs}{?uniq}{?uniqTx}{?number}{?filter}{?traces}{?latest}{?force}{?quiet}]
+## View block detail [/block{?block_list}{?hash_only}{?check}{?addrs}{?uniq}{?uniqTx}{?number}{?filter}{?latest}{?force}{?quiet}{?source}{?fields}{?normalize}]
 
 Look at a block.
 
@@ -259,10 +257,12 @@ Look at a block.
     + uniqTx:  (optional, boolean) - display only uniq addresses found per transaction
     + number:  (optional, boolean) - display address counts (alterntively --addrCnt, --uniqTxCnt, or --uniqCnt)
     + filter:  (optional, <addr>) - useful only for --addrs or --uniq, only display this address in results
-    + traces:  (optional, boolean) - include transaction traces in the export
     + latest:  (optional, boolean) - display the latest blocks at both the node and the cache
     + force:  (optional, boolean) - force a re-write of the block to the cache
     + quiet:  (optional, boolean) - do not print results to screen, used for speed testing and data checking
+    + source:  (optional, [c|r]) - either :c(a)che or :(r)aw, source for data retrival. (shortcuts -c = qblocks, -r = node)
+    + fields:  (optional, [a|m|c|r]) - either :(a)ll, (m)ini, (c)ache or :(r)aw; which fields to include in output (all is default)
+    + normalize:  (optional, boolean) - normalize (remove un-common fields and sort) for comparison with other results (testing)
 
 ### Block detail [GET]
 

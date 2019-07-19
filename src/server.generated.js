@@ -52,18 +52,20 @@ function reportAndSend(routeName, code, res) {
 }
 //debug = ""
 
-app.get('/export', (req, res) => {
-    // if (req.query.address.length != 42)
-    //     return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
-    
-    let opts = {"maxBlocks":{"isRequired":false,"type":"<val>"},"ripe":{"isRequired":false,"type":"boolean"},"unripe":{"isRequired":false,"type":"boolean"},"noBlooms":{"isRequired":false,"type":"boolean"},"staging":{"isRequired":false,"type":"boolean"},"start":{"isRequired":false,"type":"<num>"},"address_list":{"isRequired":false,"type":"<address>"},"fmt":{"isRequired":false,"type":"<fmt>"},"articulate":{"isRequired":false,"type":"boolean"},"logs":{"isRequired":false,"type":"boolean"},"blocks":{"isRequired":false,"type":"<on/off>"},"txs":{"isRequired":false,"type":"<on/off>"},"traces":{"isRequired":false,"type":"<on/off>"},"ddos":{"isRequired":false,"type":"<on/off>"},"maxTraces":{"isRequired":false,"type":"<num>"},"end":{"isRequired":false,"type":"<num>"}};
+const generateCmd = (opts, queryObj) => {
     let cmd = Object.entries(req.query).map(([key, val]) => {
         let cmdString = opts[key].type === "boolean" ? [`--${key}`] : [`--${key}`, val];
         console.log(cmdString);
         return cmdString;
-    }).reduce((acc, val) => acc.concat(val), []);
-    cmd = cmd.join(' ');
+    }).reduce((acc, val) => acc.concat(val), [])
+    .join(' ');
     console.log(`command options passed to tool: ${cmd}`);
+    return cmd;
+}
+
+app.get('/export', (req, res) => {   
+    let opts = {"maxBlocks":{"isRequired":false,"type":"<val>"},"ripe":{"isRequired":false,"type":"boolean"},"unripe":{"isRequired":false,"type":"boolean"},"noBlooms":{"isRequired":false,"type":"boolean"},"staging":{"isRequired":false,"type":"boolean"},"start":{"isRequired":false,"type":"<num>"},"address_list":{"isRequired":false,"type":"boolean"},"fmt":{"isRequired":false,"type":"<fmt>"},"articulate":{"isRequired":false,"type":"boolean"},"logs":{"isRequired":false,"type":"boolean"},"blocks":{"isRequired":false,"type":"<on/off>"},"txs":{"isRequired":false,"type":"<on/off>"},"traces":{"isRequired":false,"type":"<on/off>"},"ddos":{"isRequired":false,"type":"<on/off>"},"maxTraces":{"isRequired":false,"type":"<num>"},"end":{"isRequired":false,"type":"<num>"}};
+    let cmd = generateCmd(opts, req.query);
     let chifra = spawn("chifra", ['export', cmd, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {

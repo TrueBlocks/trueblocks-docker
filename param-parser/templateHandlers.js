@@ -3,8 +3,7 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
-module.exports.apiReplace = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
-  // console.log(data);
+module.exports.apiHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
   let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
     
     console.log(`routeName: ${routeName}, ${routeToToolMap[routeName]}`);
@@ -47,7 +46,7 @@ module.exports.apiReplace = async (templateFilepath, outputFilepath, data, route
   }
 }
 
-module.exports.blueprintReplace = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
+module.exports.docsHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
 
   let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
     
