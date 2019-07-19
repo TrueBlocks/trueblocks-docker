@@ -6,13 +6,13 @@ const routeToToolMap = require('./routeToToolMap.json');
 let jobs = [
   {
     name: "apiary",
-    templateFilepath: "./templates/apiary.template.apib",
+    templateFilepath: "../templates/apiary.template.apib",
     outputFilepath: "./output/apiary.generated.apib",
     do: templateHandlers.docsHandler
   },
   {
     name: "express api",
-    templateFilepath: "./templates/server.template.js",
+    templateFilepath: "../templates/server.template.js",
     outputFilepath: "./output/server.generated.js",
     do: templateHandlers.apiHandler
   }

@@ -32,6 +32,7 @@ FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aa
 WORKDIR /root
 COPY --from=builder /root/trueblocksOptions /root/trueblocksOptions
 COPY template-parser /root/template-parser
+COPY templates /root/templates
 RUN cd /root/template-parser && \
 	npm install && \
 	cat /root/trueblocksOptions | node index.js && \
