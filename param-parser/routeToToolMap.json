@@ -1,5 +1,5 @@
 {
-    "export": ["acctScrape", "cacheMan"],
+    "export": ["acctScrape", "acctExport"],
     "ls": ["acctScrape", "cacheMan"],
     "list": ["acctScrape", "cacheMan"],
     "account": ["acctExport"],

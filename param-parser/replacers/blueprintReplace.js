@@ -3,6 +3,31 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
+module.exports.apiReplace = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
+  let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
+    
+    console.log(`routeName: ${routeName}, ${routeToToolMap[routeName]}`);
+    if(routeToToolMap[routeName] === undefined) 
+      throw(`ERROR: no mapping for ${routeName} in the route to tool map.`);
+    let params = routeToToolMap[routeName]
+      .map(toolName => data[toolName]
+        .filter(param => param.option != '') // no empty parameter names. these aren't parameters, they are tool description.
+        ) 
+      .reduce((acc, val) => acc.concat(val), []); // flatten
+    
+    // format for GENERATE:QUERYPARSER
+    if(type === "QUERYHELPER") {
+      return JSON.stringify(params);
+      // let paramsFormatted = params.map(param => {
+      //   return `{?${param.option}}`
+      // }).join("\n");
+      // return `/${routeName}${paramsFormatted}`;
+    } else if(type === "CMD") {
+      return false
+    }
+  }
+}
+
 module.exports.blueprintReplace = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
 
   let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
