@@ -3,7 +3,7 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 const utils = require('./utils');
-const blueprintReplace = require('./replacers/blueprintReplace').blueprintReplace;
+const replacers = require('./replacers/blueprintReplace');
 const routeToToolMap = require('./routeToToolMap.json');
 const debug = true;
 
@@ -12,7 +12,13 @@ let jobs = [
     name: "apiary",
     templateFilepath: "../apiary.template.apib",
     outputFilepath: "../apiary.generated.apib",
-    do: blueprintReplace
+    do: replacers.blueprintReplace
+  },
+  {
+    name: "express api",
+    templateFilepath: "../src/server.template.js",
+    outputFilepath: "../src/server.generated.js",
+    do: replacers.apiReplace
   }
 ];
 
@@ -53,7 +59,9 @@ stdin.on('data', (chunk) => {
 stdin.on('end', async () => {
   let parsedInput = await parseInput(data);
   try {
-    await jobs[0].do(jobs[0].templateFilepath, jobs[0].outputFilepath, parsedInput, routeToToolMap);
+    await Promise.all(
+      jobs.map(job => job.do(job.templateFilepath, job.outputFilepath, parsedInput, routeToToolMap))
+    )
   } catch {(e) => {
     console.log(e);
   }}

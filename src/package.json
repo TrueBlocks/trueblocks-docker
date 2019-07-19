@@ -2,9 +2,9 @@
   "name": "trueblocks-api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.generated.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon server.generated.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
