@@ -214,7 +214,7 @@ app.get('/message/:id', (req, res) => {
 app.get('/quotes', (req, res) => {
     let opts = <<GENERATE:QUERYHELPER:quotes>>;
     let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['data', cmd], { env: env });
+    let chifra = spawn("chifra", ['quotes', cmd], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("quotes", code, res);
