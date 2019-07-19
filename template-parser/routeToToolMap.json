@@ -6,9 +6,9 @@
   "blocks": ["getBlock"],
   "transactions": ["getTrans"],
   "logs": ["getLogs"],
-  "receipts": ["getReceipts"],
+  "receipts": ["getReceipt"],
   "traces": ["getTrace"],
-  "slurp": ["ethSlurp"],
+  "slurp": ["ethslurp"],
   "abi": ["grabABI"],
   "quotes": ["ethQuote"],
   "state": ["getState"]
