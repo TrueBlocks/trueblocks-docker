@@ -30,7 +30,7 @@ FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aa
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python procps
-COPY src /root/api
+COPY api /root/api
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
 RUN cd /root/api && \
