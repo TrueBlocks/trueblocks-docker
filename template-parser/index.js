@@ -12,8 +12,8 @@ let jobs = [
   },
   {
     name: "express api",
-    templateFilepath: "../src/server.template.js",
-    outputFilepath: "../src/server.generated.js",
+    templateFilepath: "../api/server.template.js",
+    outputFilepath: "../api/server.generated.js",
     do: templateHandlers.apiHandler
   }
 ];

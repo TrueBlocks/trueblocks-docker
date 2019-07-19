@@ -17,7 +17,17 @@ const inputParser = async (data) => {
       let firstChar = param[0].charAt(0);
       let option = param[0] !== undefined ? param[0].replace(/[^\w\s]/gi, '') : '';
       let dataType = param[1];
-      let optionType = firstChar === "~" ? "main" : "optional";
+      let optionType = "";
+      switch(firstChar) {
+        case "~":
+          optionType = "main";
+          break;
+        case "@":
+          optionType = "hidden";
+          break;
+        default:
+          optionType = "optional";
+      }
       return {
         "tool": line[1],
         "option": option,

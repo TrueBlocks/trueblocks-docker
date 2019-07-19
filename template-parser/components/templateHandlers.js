@@ -21,15 +21,10 @@ module.exports.apiHandler = async (templateFilepath, outputFilepath, data, route
           optionType: cur.optionType
         };
         return acc;
-      }, {})
-    
+      }, {});
     // format for GENERATE:QUERYPARSER
     if(type === "QUERYHELPER") {
       return JSON.stringify(params);
-      // let paramsFormatted = params.map(param => {
-      //   return `{?${param.option}}`
-      // }).join("\n");
-      // return `/${routeName}${paramsFormatted}`;
     } else if(type === "CMD") {
       return false
     }
@@ -56,8 +51,10 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data, rout
       throw(`ERROR: no mapping for ${routeName} in the route to tool map.`);
     let params = routeToToolMap[routeName]
       .map(toolName => data[toolName]
-        .filter(param => param.option != '') // no empty parameter names. these aren't parameters, they are tool description.
+        .filter(param => param.option !== '' & // no empty parameter names. these aren't parameters, they are tool description.
+          param.optionType !== "hidden" // don't show hidden options
         ) 
+        )
       .reduce((acc, val) => acc.concat(val), []); // flatten
     
     // format for GENERATE:URI
