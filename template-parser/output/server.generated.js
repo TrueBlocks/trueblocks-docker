@@ -8,8 +8,7 @@ env.API_MODE = true;
 //env.TEST_MODE = true;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-
-//var X = import("0x509fa8d8b2c7962bd9a8c32fb79dbdecf81b312b011be240903ccea3410f22a1.json")
+app.use('/docs', express.static(__dirname + '/docs'));
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
