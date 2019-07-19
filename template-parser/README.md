@@ -1,6 +1,11 @@
-This program parses C++ code and transforms it into plaintext parameter descriptions for the API documentation.
+This program generates api code and documentation.
 
-It expects the C++ code to be piped to it.
+It parses C++ code from trueblocks-core and transforms it into...
+
+- plaintext parameter descriptions for the API documentation.
+- a javascript object that gets used in the API code.
+
+Currently, it expects the C++ code to be piped to it.
 
 Example usage:
 
