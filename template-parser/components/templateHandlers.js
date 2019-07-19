@@ -2,6 +2,7 @@ const fs = require('fs');
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
+const warnings = require('./warnings');
 
 module.exports.apiHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
   let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
@@ -35,6 +36,7 @@ module.exports.apiHandler = async (templateFilepath, outputFilepath, data, route
     template = template.toString();
     let rx = /\<\<GENERATE:(.*):(.*)\>\>/g;      
     let result = template.replace(rx, replacer);
+    result = warnings.jsWarning + result;
     await writeFile(outputFilepath, result);
     console.log(`Generated output written to ${outputFilepath}`);
   } catch (e) {
