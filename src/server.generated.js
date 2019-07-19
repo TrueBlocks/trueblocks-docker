@@ -53,9 +53,16 @@ function reportAndSend(routeName, code, res) {
 //debug = ""
 
 const generateCmd = (opts, queryObj) => {
-    let cmd = Object.entries(req.query).map(([key, val]) => {
-        let cmdString = opts[key].type === "boolean" ? [`--${key}`] : [`--${key}`, val];
-        console.log(cmdString);
+    let cmd = Object.entries(queryObj).map(([key, val]) => {
+        let option = opts[key];
+        let cmdString = [];
+        if(option.optionType === "main") {
+            cmdString.push(val);
+        } else if(option.dataType === "boolean") {
+            cmdString.push(`--${key}`)
+        } else {
+            cmdString.push(`--${key}`, val)
+        }
         return cmdString;
     }).reduce((acc, val) => acc.concat(val), [])
     .join(' ');
@@ -64,7 +71,7 @@ const generateCmd = (opts, queryObj) => {
 }
 
 app.get('/export', (req, res) => {   
-    let opts = {"maxBlocks":{"isRequired":false,"type":"<val>"},"ripe":{"isRequired":false,"type":"boolean"},"unripe":{"isRequired":false,"type":"boolean"},"noBlooms":{"isRequired":false,"type":"boolean"},"staging":{"isRequired":false,"type":"boolean"},"start":{"isRequired":false,"type":"<num>"},"address_list":{"isRequired":false,"type":"boolean"},"fmt":{"isRequired":false,"type":"<fmt>"},"articulate":{"isRequired":false,"type":"boolean"},"logs":{"isRequired":false,"type":"boolean"},"blocks":{"isRequired":false,"type":"<on/off>"},"txs":{"isRequired":false,"type":"<on/off>"},"traces":{"isRequired":false,"type":"<on/off>"},"ddos":{"isRequired":false,"type":"<on/off>"},"maxTraces":{"isRequired":false,"type":"<num>"},"end":{"isRequired":false,"type":"<num>"}};
+    let opts = {"maxBlocks":{"dataType":"<val>","optionType":"optional"},"ripe":{"dataType":"boolean","optionType":"optional"},"unripe":{"dataType":"boolean","optionType":"optional"},"noBlooms":{"dataType":"boolean","optionType":"optional"},"staging":{"dataType":"boolean","optionType":"optional"},"start":{"dataType":"<num>","optionType":"optional"},"address_list":{"dataType":"boolean","optionType":"main"},"fmt":{"dataType":"<fmt>","optionType":"optional"},"articulate":{"dataType":"boolean","optionType":"optional"},"logs":{"dataType":"boolean","optionType":"optional"},"blocks":{"dataType":"<on/off>","optionType":"optional"},"txs":{"dataType":"<on/off>","optionType":"optional"},"traces":{"dataType":"<on/off>","optionType":"optional"},"ddos":{"dataType":"<on/off>","optionType":"optional"},"maxTraces":{"dataType":"<num>","optionType":"optional"},"end":{"dataType":"<num>","optionType":"optional"}};
     let cmd = generateCmd(opts, req.query);
     let chifra = spawn("chifra", ['export', cmd, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);

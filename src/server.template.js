@@ -53,9 +53,16 @@ function reportAndSend(routeName, code, res) {
 //debug = ""
 
 const generateCmd = (opts, queryObj) => {
-    let cmd = Object.entries(req.query).map(([key, val]) => {
-        let cmdString = opts[key].type === "boolean" ? [`--${key}`] : [`--${key}`, val];
-        console.log(cmdString);
+    let cmd = Object.entries(queryObj).map(([key, val]) => {
+        let option = opts[key];
+        let cmdString = [];
+        if(option.optionType === "main") {
+            cmdString.push(val);
+        } else if(option.dataType === "boolean") {
+            cmdString.push(`--${key}`)
+        } else {
+            cmdString.push(`--${key}`, val)
+        }
         return cmdString;
     }).reduce((acc, val) => acc.concat(val), [])
     .join(' ');

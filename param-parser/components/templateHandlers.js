@@ -17,7 +17,8 @@ module.exports.apiHandler = async (templateFilepath, outputFilepath, data, route
       .reduce((acc, cur) => {
         acc[cur.option] = {
           isRequired: cur.isRequired,
-          type: cur.type
+          dataType: cur.dataType,
+          optionType: cur.optionType
         };
         return acc;
       }, {})
@@ -71,7 +72,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data, rout
     else if(type === "PARAMS") {  
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
-        return `    + ${param.option}: ${param.exampleData} (${param.isRequired ? "required" : "optional"}, ${param.type}) - ${param.desc}`
+        return `    + ${param.option}: ${param.exampleData} (${param.isRequired ? "required" : "optional"}, ${param.dataType}) - ${param.desc}`
       }).join("\n");
       return paramsFormatted;
     }
