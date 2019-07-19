@@ -2,7 +2,7 @@ const fs = require('fs');
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
-const groupBy = require('./helpers/groupBy').groupBy;
+const utils = require('./utils');
 const blueprintReplace = require('./replacers/blueprintReplace').blueprintReplace;
 const routeToToolMap = require('./routeToToolMap.json');
 const debug = true;
@@ -16,14 +16,6 @@ let jobs = [
   }
 ];
 
-const stdin = process.openStdin();
-
-let data = "";
-
-stdin.on('data', (chunk) => {
-  data += chunk;
-});
-
 const parseInput = async (data) => {
   let rx = /.*\/(.*)\/options.cpp.*\(\"(.*)\"\,.*\"(.*)\"\)\,/;
   let lines = data.split("\n");
@@ -32,13 +24,11 @@ const parseInput = async (data) => {
       if (line === null)
         return null;
       let param = line[2].split(":");
-      let paramName = param[0];
+      let option = param[0] !== undefined ? param[0].replace(/[^\w\s]/gi, '') : '';
       let paramType = param[1];
-      let rx2 = /[^\w\s]/gi;
-      paramName = paramName !== undefined ? paramName.replace(rx2, '') : '';
       return {
         "tool": line[1],
-        "option": paramName,
+        "option": option,
         "desc": line[3],
         "type": paramType || "boolean",
         "isRequired": false
@@ -49,8 +39,17 @@ const parseInput = async (data) => {
       // console.log(reglines.map(line => line.option));
       await writeFile("params.txt", parsedLines.map(line => line.option).join('\n'));
     }
-    return groupBy(parsedLines, 'tool');
+    return utils.groupBy(parsedLines, 'tool');
 }
+
+const stdin = process.openStdin();
+
+let data = "";
+
+stdin.on('data', (chunk) => {
+  data += chunk;
+});
+
 stdin.on('end', async () => {
   let parsedInput = await parseInput(data);
   try {
@@ -59,4 +58,3 @@ stdin.on('end', async () => {
     console.log(e);
   }}
 });
-
