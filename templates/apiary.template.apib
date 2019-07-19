@@ -5,13 +5,13 @@ HOST: http://localhost:8080/
 
 The TrueBlocks API is designed to expose data generated from `trueblocks-core` along with a local Ethereum node. Among other things, it facilitates account history queries.
 
-## Export Transaction Records for Address [/export{?address}]
+## Export Transaction Records for Address [<<GENERATE:URI:export>>]
 
 A resource that tells trueblocks that you want to export transactions for `address`. Trueblocks will use its appearance index to ask the node for detailed information about each appearance. The information is then returned in either JSON or CSV.
 
 + Parameters
 
-    + address: 0x3b01ebd2419f6d39db6ab4471e6382848716641f (required, string) - The address you want to look up.
+<<GENERATE:PARAMS:export>>
 
 ### Export all records for an address [GET]
 
@@ -69,13 +69,13 @@ A resource that tells trueblocks that you want to export transactions for `addre
                 }
             ]}
 
-## List appearance locations for an address [/list{?address}]
+## List appearance locations for an address [<<GENERATE:URI:list>>]
 
 A resource that tells trueBlocks that you want to list appearances for `address`. Trueblocks returns its appearance index, each appearance consisting of `{blockNumber, txId}`. 
 
 + Parameters
 
-    + address: 0x3b01ebd2419f6d39db6ab4471e6382848716641f (required, string) - The address you want to look up.
+<<GENERATE:PARAMS:list>>
 
 ### List all appearances for an address [GET]
 
@@ -102,9 +102,13 @@ A resource that tells trueBlocks that you want to list appearances for `address`
             112698  35
             112789  0
 
-## List monitors [/ls]
+## List monitors [<<GENERATE:URI:ls>>]
 
 A resource that asks TrueBlocks for monitor location and status.
+
++ Parameters
+
+<<GENERATE:PARAMS:ls>>
 
 ### List monitors [GET]
 
@@ -133,9 +137,13 @@ A resource that asks TrueBlocks for monitor location and status.
                 }
             ]
 
-## View account detail [/accounts/{address}]
+## View account detail [<<GENERATE:URI:account>>]
 
 I don't really know what this is.
+
++ Parameters
+
+<<GENERATE:PARAMS:account>>
 
 ### Account detail [GET]
 
@@ -167,9 +175,13 @@ I don't really know what this is.
                   }
                 ], "meta": {"pending": 622000,"staging": 622000,"finalized": 539800,"client": 1365929 } }
 
-## View block detail [/blocks/{id}]
+## View block detail [<<GENERATE:URI:block>>]
 
 Look at a block.
+
++ Parameters
+
+<<GENERATE:PARAMS:block>>
 
 ### Block detail [GET]
 

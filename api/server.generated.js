@@ -5,8 +5,11 @@ const app = express();
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
 let env = process.env;
 env.API_MODE = true;
+//env.TEST_MODE = true;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
+app.use('/docs', express.static(__dirname + '/docs'));
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -36,7 +39,6 @@ Try one of the following:
     /message/:bytes
     /slurp/:id
     /quotes/:id
-    /scrape/:cmd
 `);
 })
 
@@ -49,10 +51,28 @@ function reportAndSend(routeName, code, res) {
 }
 //debug = ""
 
-app.get('/export', (req, res) => {
-    if (req.query.address.length != 42)
-        return res.send({status: "err", message: `Expecting an Ethereum address 42 characters long.`});
-    let chifra = spawn("chifra", ['export', req.query.address, '--nocolor'], {env: env});
+const generateCmd = (opts, queryObj) => {
+    let cmd = Object.entries(queryObj).map(([key, val]) => {
+        let option = opts[key];
+        let cmdString = [];
+        if(option.optionType === "main") {
+            cmdString.push(val);
+        } else if(option.dataType === "boolean") {
+            cmdString.push(`--${key}`)
+        } else {
+            cmdString.push(`--${key}`, val)
+        }
+        return cmdString;
+    }).reduce((acc, val) => acc.concat(val), [])
+    .join(' ');
+    console.log(`command options passed to tool: ${cmd}`);
+    return cmd;
+}
+
+app.get('/export', (req, res) => {   
+    let opts = {"maxBlocks":{"dataType":"<val>","optionType":"optional"},"ripe":{"dataType":"boolean","optionType":"hidden"},"unripe":{"dataType":"boolean","optionType":"hidden"},"noBlooms":{"dataType":"boolean","optionType":"hidden"},"staging":{"dataType":"boolean","optionType":"hidden"},"start":{"dataType":"<num>","optionType":"hidden"},"address_list":{"dataType":"boolean","optionType":"main"},"fmt":{"dataType":"<fmt>","optionType":"optional"},"articulate":{"dataType":"boolean","optionType":"optional"},"logs":{"dataType":"boolean","optionType":"optional"},"blocks":{"dataType":"<on/off>","optionType":"hidden"},"txs":{"dataType":"<on/off>","optionType":"hidden"},"traces":{"dataType":"<on/off>","optionType":"hidden"},"ddos":{"dataType":"<on/off>","optionType":"hidden"},"maxTraces":{"dataType":"<num>","optionType":"hidden"},"end":{"dataType":"<num>","optionType":"hidden"}};
+    let cmd = generateCmd(opts, req.query);
+    let chifra = spawn("chifra", ['export', cmd, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("export", code, res);
@@ -106,17 +126,6 @@ app.get('/ls', (req, res) => {
     if (req.query.ll)
         longList = "-l";
     let chifra = spawn("chifra", ['ls', req.query.address, longList, debug, '--nocolor'], {env: env});
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("ls", code, res);
-    })
-})
-
-app.get('/scrape/:cmd', (req, res) => {
-    var cmd = ""
-    if (typeof req.params.cmd != undefined)
-        cmd = req.params.cmd;
-    let chifra = spawn("chifra", ['scrape', `${cmd}`, debug, '--nocolor'], {env: env});
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("ls", code, res);

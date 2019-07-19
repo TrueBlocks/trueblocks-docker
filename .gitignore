@@ -1,3 +1,4 @@
 proj.xcodeproj
 .DS_Store
 build_*
+node_modules
