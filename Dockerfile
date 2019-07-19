@@ -20,13 +20,11 @@ RUN git clone -b 'develop' --single-branch --progress \
 	/root/quickBlocks-src
 
 RUN cd /root/quickBlocks-src && \
-	git reset --hard 0549afc5d4 && \
 	mkdir -v build /root/.quickBlocks && \
 	cd build && \
+	bash ../src/other/install/docker/clean_for_docker.sh && \
 	cmake ../src && \
-	make && \
-	cp ../src/other/install/quickBlocks.toml /root/.quickBlocks/quickBlocks.toml && \
-	cp ../src/other/install/blockScrape.docker.toml /root/.quickBlocks/blockScrape.toml
+	make
 
 FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aab as base
 WORKDIR /root

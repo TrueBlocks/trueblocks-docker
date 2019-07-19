@@ -9,6 +9,11 @@ services:
     image: trueblocks.public.dappnode.eth:0.0.1
     container_name: DAppNodePackage-trueblocks.dnp.dappnode.eth
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
     volumes:
       - trueblocksdnpdappnodeeth_data:/root/.quickBlocks
     ports:
