@@ -26,11 +26,24 @@ RUN cd /root/quickBlocks-src && \
 	cmake ../src && \
 	make
 
+RUN find ../../trueblocks-core/. -name "*.cpp" -exec grep -His "COption(" {} \; > /root/trueblocksOptions
+
+FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aab as templateParser
+WORKDIR /root
+COPY --from=builder /root/trueblocksOptions /root/trueblocksOptions
+COPY template-parser /root/template-parser
+RUN cd /root/template-parser && \
+	npm install && \
+	cat /root/trueblocksOptions | node index.js && \
+	node ./node_modules/snowboard/lib/main.js html -o docs.html ../apiary.generated.apib
+
 FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aab as base
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python procps
 COPY api /root/api
+COPY --from=templateParser /root/template-parser/docs.html /root/api/docs.html
+COPY --from=templateParser /root/template-parser/server.generated.js /root/api/server.js
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
 RUN cd /root/api && \
