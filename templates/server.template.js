@@ -181,7 +181,7 @@ app.get('/abi', (req, res) => {
 app.get('/state', (req, res) => {
     let opts = <<GENERATE:QUERYHELPER:state>>;
     let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['data', cmd], { env: env });
+    let chifra = spawn("chifra", ['state', cmd], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("state/nonce", code, res);
@@ -203,7 +203,6 @@ app.get('/message/:id', (req, res) => {
     var id = "";
     if (typeof req.params.id != undefined)
         id = req.params.id;
-//    let chifra = spawn("chifra", ['data', '--message', `${id}`], { env: env });
     let chifra = spawn("chifra", ['data', '--message', `${id}`], { env: env });
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {

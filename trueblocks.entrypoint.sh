@@ -6,5 +6,5 @@ cat /root/.quickBlocks/quickBlocks.toml
 
 export DOCKER_MODE=true
 rm -f /root/.quickBlocks/cache/tmp/*
-chifra scrape &
+chifra scrape --sleep 14 &
 forever /root/api/server.generated.js 80
