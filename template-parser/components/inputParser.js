@@ -3,10 +3,6 @@ const parse = require('csv-parse/lib/sync');
 
 const inputParser = async (data) => {
   let lines = parse(data, {delimiter: ',', columns: true});
-
-  // let parsedLines = lines.map(line => {
-    
-  // });
   let parsedLines = lines.map(item => {
       item.option = item.command;
       item.desc = item.description_core;

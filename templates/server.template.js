@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const {spawn} = require('child_process');
 const app = express();
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
+const apiOptions = require('./apiOptions.generated.json');
 let env = process.env;
 env.API_MODE = true;
 //env.TEST_MODE = true;
@@ -49,13 +50,13 @@ function reportAndSend(routeName, code, res) {
     return res.send();
 }
 
-const generateCmd = (opts, queryObj) => {
+const generateCmd = (queryObj) => {
     let cmd = Object.entries(queryObj).map(([key, val]) => {
-        let option = opts[key];
+        let option = apiOptions[key];
         let cmdString = [];
         if(option.optionType === "main") {
             cmdString.push(val);
-        } else if(option.dataType === "boolean") {
+        } else if(option.dataType === "flag") {
             cmdString.push(`--${key}`)
         } else {
             cmdString.push(`--${key}`, val)
@@ -67,6 +68,19 @@ const generateCmd = (opts, queryObj) => {
     return cmd;
 }
 
+let routes = ["export", "list", "accounts", "blocks", "transactions", "logs", "receipts", "traces", "slurp", "abi", "state", "quotes"]
+
+Object.keys(apiOptions).map((routeName) => {
+    return app.get(`/${routeName}`, (req, res) => {
+        let cmd = generateCmd(req.query);
+        let chifra = spawn("chifra", [routeName, cmd], {env: env});
+        chifra.stderr.pipe(process.stderr);
+        chifra.stdout.pipe(res).on('finish', (code) => {
+            reportAndSend(routeName, code, res);
+        })
+    })
+})
+
 app.get('/export', (req, res) => {   
     let opts = <<GENERATE:QUERYHELPER:export>>;
     let cmd = generateCmd(opts, req.query);
@@ -74,16 +88,6 @@ app.get('/export', (req, res) => {
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("export", code, res);
-    })
-})
-
-app.get('/list', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:list>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['list', cmd],  {env: env});
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("list", code, res);
     })
 })
 
@@ -95,96 +99,6 @@ app.get('/ls', (req, res) => {
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         reportAndSend("ls", code, res);
-    })
-})
-
-app.get('/accounts', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:accounts>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['accounts', cmd], {env: env});
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("accounts", code, res);
-    })
-})
-
-app.get('/blocks', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:blocks>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['blocks', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("blocks", code, res);
-    })
-})
-
-app.get('/transactions', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:transactions>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['trans', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("transactions", code, res);
-    })
-})
-
-app.get('/logs', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:logs>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['logs', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("logs", code, res);
-    })
-})
-
-app.get('/receipts', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:receipts>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['receipts', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("receipts", code, res);
-    })
-})
-
-app.get('/traces', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:traces>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['traces', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("traces", code, res);
-    })
-})
-
-app.get('/slurp', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:slurp>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['slurp', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("slurp", code, res);
-    })
-})
-
-app.get('/abi', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:abi>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['abi', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("abi", code, res);
-    })
-})
-
-app.get('/state', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:state>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['state', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("state/nonce", code, res);
     })
 })
 
@@ -210,15 +124,7 @@ app.get('/message/:id', (req, res) => {
     })
 })
 
-app.get('/quotes', (req, res) => {
-    let opts = <<GENERATE:QUERYHELPER:quotes>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['quotes', cmd], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("quotes", code, res);
-    })
-})
+
 
 app.listen(port, () => {
     console.log('TrueBlocks Data API initialized on port ' + port);
