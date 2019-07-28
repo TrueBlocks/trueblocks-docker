@@ -158,6 +158,7 @@ apps,,acctExport,trc,,<on/off>,,write traces to the binary cache ('off' by defau
 apps,,acctExport,ddos,,<on/off>,,skip over dDos transactions in export ('on' by default),,hidden,TRUE,TRUE,FALSE,FALSE,,
 apps,,acctExport,maxTraces,,<num>,,"if --ddos:on, the number of traces defining a dDos (default = 250)",,hidden,TRUE,TRUE,FALSE,FALSE,,
 apps,,acctExport,noHeader,,,,do not show the header row,,hidden,TRUE,TRUE,FALSE,FALSE,,
+apps,,acctExport,allABIs,,,,load all previously cached abi files,,hidden,TRUE,TRUE,FALSE,FALSE,,
 apps,,acctExport,start,,<num>,,first block to export (inclusive),,hidden,TRUE,TRUE,FALSE,FALSE,,
 apps,,acctExport,end,,<num>,,last block to export (inclusive),,hidden,TRUE,TRUE,FALSE,FALSE,,
 apps,,acctExport,,,,,Export full detail of transactions for one or more Ethereum addresses.,,optional,FALSE,FALSE,FALSE,FALSE,,
