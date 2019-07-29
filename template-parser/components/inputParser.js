@@ -1,4 +1,3 @@
-const utils = require('./utils');
 const parse = require('csv-parse/lib/sync');
 
 const inputParser = async (data) => {
@@ -10,7 +9,7 @@ const inputParser = async (data) => {
       item.optionType = item.option_type;
       return item;
     }).filter(row => row !== null);
-    return utils.groupBy(parsedLines, 'tool');
+    return parsedLines;
 }
 
 module.exports.parseInput = async () => {

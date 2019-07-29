@@ -3,8 +3,10 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 const warnings = require('./warnings');
+const utils = require('./utils');
 
 module.exports.apiHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
+  data = utils.groupBy(data, 'api_route');
   let result = JSON.stringify(data, null, 2);
   try {
     // let template = await readFile(templateFilepath);
@@ -25,6 +27,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data, rout
     console.log(`routeName: ${routeName}, ${routeToToolMap[routeName]}`);
     if(routeToToolMap[routeName] === undefined) 
       throw(`ERROR: no mapping for ${routeName} in the route to tool map.`);
+    data = utils.groupBy(data, 'tool');
     let params = routeToToolMap[routeName]
       .map(toolName => data[toolName]
         .filter(param => param.option !== '' & // no empty parameter names. these aren't parameters, they are tool description.
