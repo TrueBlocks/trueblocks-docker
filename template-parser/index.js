@@ -1,7 +1,17 @@
 const parseInput = require('./components/inputParser').parseInput;
 const templateHandlers = require('./components/templateHandlers');
 const routeToToolMap = require('./routeToToolMap.json');
+const yargs = require('yargs');
 
+const argv = yargs
+    .option('inputFile', {
+        alias: 'i',
+        description: 'Specify input file',
+        type: 'string',
+    })
+    .help()
+    .alias('help', 'h')
+    .argv;
 
 let jobs = [
   {
@@ -19,7 +29,7 @@ let jobs = [
 ];
 
 let main = async () => {
-  let inputData = await parseInput();
+  let inputData = await parseInput(argv.inputFile);
   jobs.map(async job => {
     try{
       job.do(job.templateFilepath, job.outputFilepath, inputData, routeToToolMap)

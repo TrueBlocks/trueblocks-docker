@@ -1,4 +1,8 @@
 const parse = require('csv-parse/lib/sync');
+const fs = require('fs');
+const util = require('util');
+const readFile = util.promisify(fs.readFile);
+const utils = require('./utils');
 
 const inputParser = async (data) => {
   let lines = parse(data, {delimiter: ',', columns: true});
@@ -9,20 +13,21 @@ const inputParser = async (data) => {
       item.optionType = item.option_type;
       return item;
     }).filter(row => row !== null);
-    return parsedLines;
+  
+  data = parsedLines.reduce((acc, cur) => {
+      let routes = cur.api_route.split(",");
+      routes.map((route) => {
+        let obj = cur;
+        obj.api_route = route;
+        acc.push(cur);
+      })
+      return acc;
+    }, [])
+  return utils.groupBy(data, 'api_route');  
 }
 
-module.exports.parseInput = async () => {
-  const stdin = process.openStdin();
-  let data = "";
-  stdin.on('data', (chunk) => {
-    data += chunk;
-  });
-  let end = new Promise((resolve, reject) => {
-    stdin.on('end', async () => {
-      let parsedInput = await inputParser(data);
-      return resolve(parsedInput);
-    })
-  });
-  return await end;
+module.exports.parseInput = async (inputFile) => {
+  // const stdin = process.openStdin();
+  const data = await readFile(inputFile);
+  return await inputParser(data);
 }
