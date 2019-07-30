@@ -5,13 +5,17 @@ const writeFile = util.promisify(fs.writeFile);
 const warnings = require('./warnings');
 const utils = require('./utils');
 
-module.exports.apiHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
-  let result = JSON.stringify(data, null, 2);
+module.exports.apiHandler = async (templateFilepath, outputFilepath, data) => {
+  let newData = {}
+  Object.keys(data).map((routeName) => {
+    newData[routeName] = {}
+    let d = utils.groupBy(data[routeName], "command");
+    Object.keys(d).map(k => {
+      newData[routeName][k] = d[k][0];
+    });
+  })
+  let result = JSON.stringify(newData, null, 2);
   try {
-    // let template = await readFile(templateFilepath);
-    // template = template.toString();
-    // let rx = /\<\<GENERATE:(.*):(.*)\>\>/g;      
-    // let result = template.replace(rx, replacer);
     await writeFile(outputFilepath, result);
     console.log(`Generated output written to ${outputFilepath}`);
   } catch (e) {
@@ -19,15 +23,11 @@ module.exports.apiHandler = async (templateFilepath, outputFilepath, data, route
   }
 }
 
-module.exports.docsHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
+module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
 
   let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
     
     console.log(`routeName: ${routeName}`);
-    // if(routeToToolMap[routeName] === undefined) 
-    //   throw(`ERROR: no mapping for ${routeName} in the route to tool map.`);
-    // data = data.filter(param => param.option !== '' & param.api_visible == "FALSE")
-
 
     let routeData = data[routeName];
     if(routeData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`)

@@ -50,11 +50,13 @@ function reportAndSend(routeName, code, res) {
     return res.send();
 }
 
-const generateCmd = (queryObj) => {
+const generateCmd = (routeName, queryObj) => {
     let cmd = Object.entries(queryObj).map(([key, val]) => {
-        let option = apiOptions[key];
+        console.log(apiOptions[routeName])
+        let option = apiOptions[routeName][key];
+        console.log(option);
         let cmdString = [];
-        if(option.optionType === "main") {
+        if(option.api_required) {
             cmdString.push(val);
         } else if(option.dataType === "flag") {
             cmdString.push(`--${key}`)
@@ -68,16 +70,7 @@ const generateCmd = (queryObj) => {
     return cmd;
 }
 
-Object.keys(apiOptions).map((routeName) => {
-    return app.get(`/${routeName}`, (req, res) => {
-        let cmd = generateCmd(req.query);
-        let chifra = spawn("chifra", [routeName, cmd], {env: env});
-        chifra.stderr.pipe(process.stderr);
-        chifra.stdout.pipe(res).on('finish', (code) => {
-            reportAndSend(routeName, code, res);
-        })
-    })
-})
+
 
 app.get('/ls', (req, res) => {
     var longList = ""
@@ -112,7 +105,16 @@ app.get('/message/:id', (req, res) => {
     })
 })
 
-
+app.get(`/:routeName`, (req, res) => {
+    let routeName = req.params.routeName;
+    console.log(routeName);
+    let cmd = generateCmd(routeName, req.query);
+    let chifra = spawn("chifra", [routeName, cmd], {env: env});
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        reportAndSend(routeName, code, res);
+})
+})
 
 app.listen(port, () => {
     console.log('TrueBlocks Data API initialized on port ' + port);
