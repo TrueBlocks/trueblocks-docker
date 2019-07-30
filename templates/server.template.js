@@ -68,8 +68,6 @@ const generateCmd = (queryObj) => {
     return cmd;
 }
 
-let routes = ["export", "list", "accounts", "blocks", "transactions", "logs", "receipts", "traces", "slurp", "abi", "state", "quotes"]
-
 Object.keys(apiOptions).map((routeName) => {
     return app.get(`/${routeName}`, (req, res) => {
         let cmd = generateCmd(req.query);
@@ -78,16 +76,6 @@ Object.keys(apiOptions).map((routeName) => {
         chifra.stdout.pipe(res).on('finish', (code) => {
             reportAndSend(routeName, code, res);
         })
-    })
-})
-
-app.get('/export', (req, res) => {   
-    let opts = <<GENERATE:QUERYHELPER:export>>;
-    let cmd = generateCmd(opts, req.query);
-    let chifra = spawn("chifra", ['export', cmd], {env: env});
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("export", code, res);
     })
 })
 

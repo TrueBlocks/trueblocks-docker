@@ -33,7 +33,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data, rout
     if(routeData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`)
     let params = routeData
         .filter(param => param.option !== '' & // no empty parameter names. these aren't parameters, they are tool description.
-          param.optionType !== "hidden" // don't show hidden options
+          param.api_visible // don't show hidden options
         )
       .reduce((acc, val) => acc.concat(val), []); // flatten
     
@@ -49,7 +49,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data, rout
     else if(type === "PARAMS") {  
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
-        return `    + ${param.option}: ${param.exampleData} (${param.optionType !== "optional" ? "required" : "optional"}, ${param.dataType}) - ${param.desc}`
+        return `    + ${param.command}: ${param.exampleData} (${param.api_required ? "required" : "optional"}, ${param.option_type}) - ${param.description_core}`
       }).join("\n");
       return paramsFormatted;
     }
