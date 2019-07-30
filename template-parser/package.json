@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "csv-parse": "^4.4.3",
-    "snowboard": "^3.0.0-rc.3"
+    "snowboard": "^3.0.0-rc.3",
+    "yargs": "^13.3.0"
   }
 }

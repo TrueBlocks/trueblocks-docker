@@ -3,59 +3,37 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 const warnings = require('./warnings');
+const utils = require('./utils');
 
-module.exports.apiHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
-  let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
-    
-    console.log(`routeName: ${routeName}, ${routeToToolMap[routeName]}`);
-    if(routeToToolMap[routeName] === undefined) 
-      throw(`ERROR: no mapping for ${routeName} in the route to tool map.`);
-    let params = routeToToolMap[routeName]
-      .map(toolName => data[toolName]
-        .filter(param => param.option != '') // no empty parameter names. these aren't parameters, they are tool description.
-        ) 
-      .reduce((acc, val) => acc.concat(val), []) // flatten
-      .reduce((acc, cur) => {
-        acc[cur.option] = {
-          isRequired: cur.isRequired,
-          dataType: cur.dataType,
-          optionType: cur.optionType
-        };
-        return acc;
-      }, {});
-    // format for GENERATE:QUERYPARSER
-    if(type === "QUERYHELPER") {
-      return JSON.stringify(params);
-    } else if(type === "CMD") {
-      return false
-    }
-  }
-
+module.exports.apiHandler = async (templateFilepath, outputFilepath, data) => {
+  let newData = {}
+  Object.keys(data).map((routeName) => {
+    newData[routeName] = {}
+    let d = utils.groupBy(data[routeName], "command");
+    Object.keys(d).map(k => {
+      newData[routeName][k] = d[k][0];
+    });
+  })
+  let result = JSON.stringify(newData, null, 2);
   try {
-    let template = await readFile(templateFilepath);
-    template = template.toString();
-    let rx = /\<\<GENERATE:(.*):(.*)\>\>/g;      
-    let result = template.replace(rx, replacer);
-    result = warnings.jsWarning + result;
     await writeFile(outputFilepath, result);
     console.log(`Generated output written to ${outputFilepath}`);
   } catch (e) {
-    console.log("e", e);
+    console.log("error", e);
   }
 }
 
-module.exports.docsHandler = async (templateFilepath, outputFilepath, data, routeToToolMap) => {
+module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
 
   let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
     
-    console.log(`routeName: ${routeName}, ${routeToToolMap[routeName]}`);
-    if(routeToToolMap[routeName] === undefined) 
-      throw(`ERROR: no mapping for ${routeName} in the route to tool map.`);
-    let params = routeToToolMap[routeName]
-      .map(toolName => data[toolName]
+    console.log(`routeName: ${routeName}`);
+
+    let routeData = data[routeName];
+    if(routeData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`)
+    let params = routeData
         .filter(param => param.option !== '' & // no empty parameter names. these aren't parameters, they are tool description.
-          param.optionType !== "hidden" // don't show hidden options
-        ) 
+          param.api_visible // don't show hidden options
         )
       .reduce((acc, val) => acc.concat(val), []); // flatten
     
@@ -71,7 +49,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data, rout
     else if(type === "PARAMS") {  
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
-        return `    + ${param.option}: ${param.exampleData} (${param.optionType !== "optional" ? "required" : "optional"}, ${param.dataType}) - ${param.desc}`
+        return `    + ${param.command}: ${param.exampleData} (${param.api_required ? "required" : "optional"}, ${param.option_type}) - ${param.description_core}`
       }).join("\n");
       return paramsFormatted;
     }
@@ -80,7 +58,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data, rout
     try {
       let template = await readFile(templateFilepath);
       template = template.toString();
-      let rx = /\<\<GENERATE:(.*):(.*)\>\>/g;      
+      let rx = /\<\<GENERATE:(.*):(.*)\>\>/g;
       let result = template.replace(rx, replacer);
       await writeFile(outputFilepath, result);
       console.log(`Generated output written to ${outputFilepath}`);
