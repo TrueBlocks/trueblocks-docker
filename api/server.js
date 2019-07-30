@@ -52,11 +52,12 @@ function reportAndSend(routeName, code, res) {
 
 const generateCmd = (routeName, queryObj) => {
     let cmd = Object.entries(queryObj).map(([key, val]) => {
-        console.log(apiOptions[routeName])
         let option = apiOptions[routeName][key];
-        console.log(option);
         let cmdString = [];
-        if(option.api_required) {
+        if(option === undefined) {
+            // do nothing
+        }
+        else if(option.api_required) {
             cmdString.push(val);
         } else if(option.dataType === "flag") {
             cmdString.push(`--${key}`)
@@ -107,7 +108,9 @@ app.get('/message/:id', (req, res) => {
 
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
-    console.log(routeName);
+    if(apiOptions[routeName] === undefined) {
+        return res.send("This route is not available.")
+    }
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env});
     chifra.stderr.pipe(process.stderr);
