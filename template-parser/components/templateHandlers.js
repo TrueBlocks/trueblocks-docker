@@ -7,12 +7,17 @@ const utils = require('./utils');
 
 module.exports.apiHandler = async (templateFilepath, outputFilepath, data) => {
   let newData = {}
+  let globalFlags = utils.groupBy(data.all, "command");
+ 
   Object.keys(data).map((routeName) => {
     newData[routeName] = {}
     let d = utils.groupBy(data[routeName], "command");
     Object.keys(d).map(k => {
       newData[routeName][k] = d[k][0];
     });
+    Object.keys(globalFlags).map(k => {
+      newData[routeName][k] = globalFlags[k][0];
+    })
   })
   let result = JSON.stringify(newData, null, 2);
   try {
@@ -31,16 +36,16 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
 
     let routeData = data[routeName];
     if(routeData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`)
-    let params = routeData
-        .filter(param => param.option !== '' & // no empty parameter names. these aren't parameters, they are tool description.
+    let params = [...routeData, ...data.all]
+        .filter(param => param.command !== '' & // no empty parameter names. these aren't parameters, they are tool description.
           param.api_visible // don't show hidden options
         )
       .reduce((acc, val) => acc.concat(val), []); // flatten
-    
+
     // format for GENERATE:URI
     if(type === "URI") {
       let paramsFormatted = params.map(param => {
-        return `{?${param.option}}`
+        return `{?${param.command}}`
       }).join("");
       return `/${routeName}${paramsFormatted}`;
     }
@@ -49,7 +54,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
     else if(type === "PARAMS") {  
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
-        return `    + ${param.command}: ${param.exampleData} (${param.api_required ? "required" : "optional"}, ${param.option_type}) - ${param.description_core}`
+        return `    + ${param.command}: (${param.api_required ? "required" : "optional"}, ${param.input_type}) - ${param.description_core}`
       }).join("\n");
       return paramsFormatted;
     }
