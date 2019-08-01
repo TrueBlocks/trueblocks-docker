@@ -15,20 +15,10 @@ const inputParser = async (data) => {
       return item;
     }).filter(row => row !== null);
   
-  data = parsedLines.reduce((acc, cur) => {
-      let routes = cur.api_route.split(",");
-      routes.map((route) => {
-        let obj = cur;
-        obj.api_route = route;
-        acc.push(cur);
-      })
-      return acc;
-    }, [])
-  return utils.groupBy(data, 'api_route');  
+  return parsedLines;
 }
 
 module.exports.parseInput = async (inputFile) => {
-  // const stdin = process.openStdin();
   const data = await readFile(inputFile);
   return await inputParser(data);
 }
