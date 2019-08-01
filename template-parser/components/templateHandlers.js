@@ -22,11 +22,11 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
     } 
     
     let paramsFormatted = toolData.map((option) => {
-      return `\tCOption2("${option.command}",\t${option.core_alias !== "" ? `"${option.core_alias}"` : null},\t"${option.input_type}",\t${option.core_required},\t${option.core_visible},\t"${option.description_core}")`
-    }).join(",\n");
+      return `    COption2("${option.command}", ${option.core_alias !== "" ? `"${option.core_alias}"` : `""`}, "${option.input_type}", ${option.core_required}, ${option.core_visible}, "${option.description_core}"),\n`
+    }).join("");
 
     let replacer = (match) => {
-      return `#ifdef NEW_CODE\n${paramsFormatted}\n#else // NEW_CODE`
+      return `#ifdef NEW_CODE\n${paramsFormatted}#else // NEW_CODE`
     }
 
     try {
