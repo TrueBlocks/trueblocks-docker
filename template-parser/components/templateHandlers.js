@@ -2,8 +2,36 @@ const fs = require('fs');
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
-const warnings = require('./warnings');
 const utils = require('./utils');
+
+module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
+  
+  let path = templateFilepath.split('/');
+  let toolName = path[path.length - 2];
+  let toolData = data[toolName];
+  if(toolData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`);
+  
+  let paramsFormatted = toolData.map((option) => {
+    return `COption2("${option.command}",\t${option.core_alias !== "" ? `"${option.core_alias}"` : null},\t"${option.input_type}",\t${option.core_required},\t${option.core_visible},\t"${option.description_core}")`
+  }).concat(['']).join(",\n");
+
+  let replacer = (match) => {
+    return `#ifdef NEW_CODE
+    ${paramsFormatted}
+    #else // NEW_CODE`
+  }
+
+  try {
+    let template = await readFile(templateFilepath);
+    template = template.toString();
+    let rx = /\#ifdef NEW_CODE\n\#else // NEW_CODE/g;
+    let result = template.replace(rx, replacer);
+    await writeFile(outputFilepath, result);
+    console.log(`Generated output written to ${outputFilepath}`);
+  } catch (e) {
+    console.log("e", e);
+  }
+}
 
 module.exports.apiHandler = async (templateFilepath, outputFilepath, data) => {
   let newData = {}

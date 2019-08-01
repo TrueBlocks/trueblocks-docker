@@ -24,6 +24,12 @@ let jobs = [
     templateFilepath: null,
     outputFilepath: "./output/apiOptions.generated.json",
     do: templateHandlers.apiHandler
+  },
+  {
+    name: "generate cpp files",
+    templateFilepath: "../../trueblocks-core/src/tools/getBlock/options.cpp",
+    outputFilepath: "./output/apiOptions.generated.json",
+    do: templateHandlers.cppHandler
   }
 ];
 
