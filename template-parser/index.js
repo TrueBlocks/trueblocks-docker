@@ -27,8 +27,8 @@ let jobs = [
   },
   {
     name: "generate cpp files",
-    templateFilepath: "../../trueblocks-core/src/tools/getBlock/options.cpp",
-    outputFilepath:  "../../trueblocks-core/src/tools/getBlock/options.cpp",
+    templateFilepath: "../../trueblocks-core/",
+    outputFilepath:  "../../trueblocks-core/",
     do: templateHandlers.cppHandler
   }
 ];
