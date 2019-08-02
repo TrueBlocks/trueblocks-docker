@@ -20,9 +20,22 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
       console.log(`no parameters defined for ${toolName} in csv. skipping...`);
       return true;
     } 
-    
+
     let paramsFormatted = toolData.map((option) => {
-      return `    COption2("${option.command}", ${option.core_alias !== "" ? `"${option.core_alias}"` : `""`}, "${option.input_type}", ${option.core_required}, ${option.core_visible}, "${option.description_core}"),\n`
+      let OPTS = [];
+      if(option.core_required) OPTS.push("OPT_REQUIRED");
+      if(!option.core_visible) OPTS.push("OPT_HIDDEN");
+      if(option.input_type === "flag") {
+        option.input_type = "";
+        OPTS.push("OPT_FLAG");
+      }
+      if(OPTS.length === 0) {
+        OPTS = 0
+      } else {
+        OPTS = OPTS.join(" | ")
+      }
+
+      return `    COption2("${option.command}", ${option.core_alias !== "" ? `"${option.core_alias}"` : `""`}, "${option.input_type}", ${OPTS}, "${option.description_core}"),\n`
     }).join("");
 
     let replacer = (match) => {
