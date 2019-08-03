@@ -55,9 +55,8 @@ const generateCmd = (routeName, queryObj) => {
         let option = apiOptions[routeName][key];
         let cmdString = [];
         if(option === undefined) {
-            // do nothing
-        }
-        else if(option.api_required) {
+            console.log("apiOption[" + routeName + "][" + key + "] not found");
+        } else if(option.api_required) {
             cmdString.push(val);
         } else if(option.dataType === "flag") {
             cmdString.push(`--${key}`)
