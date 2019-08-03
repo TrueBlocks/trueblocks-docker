@@ -39,13 +39,13 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
     }).join("");
 
     let replacer = (match) => {
-      return `#ifdef NEW_CODE\n${paramsFormatted}#else // NEW_CODE`
+      return `\/\/ BEG_CODE_OPTIONS\n${paramsFormatted}\/\/ END_CODE_OPTIONS`
     }
 
     try {
       let template = await readFile(filepath);
       template = template.toString();
-      let rx = /\#ifdef NEW_CODE[\s\S]*\#else \/\/ NEW_CODE/g;
+      let rx = /\/\/ BEG_CODE_OPTIONS[\s\S]*\/\/ END_CODE_OPTIONS/g;
       let result = template.replace(rx, replacer);
       await writeFile(filepath, result);
       return console.log(`Generated output written to ${filepath}`);
