@@ -58,7 +58,7 @@ const generateCmd = (routeName, queryObj) => {
             console.log("apiOption[" + routeName + "][" + key + "] not found");
         } else if(option.api_required) {
             cmdString.push(val);
-        } else if(option.dataType === "flag") {
+        } else if(option.option_kind === "switch") {
             cmdString.push(`--${key}`)
         } else {
             cmdString.push(`--${key}`, val)
