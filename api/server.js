@@ -18,29 +18,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    return res.send(
-`Welcome to TrueBlocks!
-Try one of the following:
-    /list?address=0x8ad69ae99804935d56704162e3f6a6f442d2ed4a
-    /export?address=0x8ad69ae99804935d56704162e3f6a6f442d2ed4a
-    /export_logs/:id
-    /ls
-    /accounts/:id
-    /blocks/:id
-    /transactions/:id
-    /logs/:id
-    /receipts/:id
-    /traces/:id
-    /tracecnt/:id
-    /abi/:id
-    /state/balance/:id
-    /state/code/:id
-    /state/nonce/:id
-    /balances/:id
-    /message/:bytes
-    /slurp/:id
-    /quotes/:id
-`);
+    return res.redirect('/docs');
 })
 
 var cnt = 0;
