@@ -9,5 +9,5 @@ Example usage:
 
 ```sh
 cd template-parser
-node index.js -i ./misc/example.csv
+node index.js -i ../../trueblocks-core/src/other/build_assets/option-master-list.csv
 ```
