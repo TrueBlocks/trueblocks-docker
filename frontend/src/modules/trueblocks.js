@@ -1,24 +1,26 @@
-export const GETBLOCK_BEGIN = 'trueblocks/GETBLOCK_REQUESTED'
-export const GETBLOCK_SUCCESS = 'trueblocks/GETBLOCK_SUCCESS'
-export const GETBLOCK_FAILURE = 'trueblocks/GETBLOCK_FAILURE'
+import fakeData from "./fakeData.json";
+export const GETSTATUS_BEGIN = 'trueblocks/GETBLOCK_REQUESTED'
+export const GETSTATUS_SUCCESS = 'trueblocks/GETBLOCK_SUCCESS'
+export const GETSTATUS_FAILURE = 'trueblocks/GETBLOCK_FAILURE'
+
 
 const initialState = {
   data: [],
   isLoading: false,
-  error: null
+  error: null,
 }
 
 export default (state = initialState, action) => {
-  console.log("ok good reducer was called")
+  console.log("reducer was called")
   switch (action.type) {
 
-    case GETBLOCK_BEGIN:
+    case GETSTATUS_BEGIN:
       return {
         ...state,
         isLoading: true
       }
 
-    case GETBLOCK_SUCCESS:
+    case GETSTATUS_SUCCESS:
       console.log("success");
       return {
         ...state,
@@ -26,7 +28,7 @@ export default (state = initialState, action) => {
         data: action.payload
       }
 
-    case GETBLOCK_FAILURE:
+    case GETSTATUS_FAILURE:
         return {
             ...state,
             isLoading: false,
@@ -39,28 +41,64 @@ export default (state = initialState, action) => {
 }
 
 
-export const getBlockAsync = () => {
-    console.log("Fire!!!")
-  return dispatch => {
-    dispatch({
-      type: GETBLOCK_BEGIN
-    })
-
-    return fetch("http://localhost:8080/blocks?block_list=1010102")
-        .then(async res => {
-            console.log("ok...")
-            let json = await res.json();
-            dispatch({
-                type: GETBLOCK_SUCCESS,
-                payload: json
-            })
-            return json
-        })
-        .catch((e) => {
-            dispatch({
-                type: GETBLOCK_FAILURE,
-            })
-        })
-  }
+const fakeGetStatus = () => {
+    return new Promise(resolve => {
+        // Resolve after a timeout so we can see the loading indicator
+        setTimeout(
+            () => {
+            resolve(fakeData)
+            },
+            1000
+        );
+        });
 }
 
+export const getStatus = () => {
+    return dispatch => {
+        dispatch({
+          type: GETSTATUS_BEGIN
+        })
+    
+        return fakeGetStatus()
+            .then(async res => {
+                console.log("ok...")
+                let json = res;
+                // let json = await res.json();
+                dispatch({
+                    type: GETSTATUS_SUCCESS,
+                    payload: json
+                })
+                return json
+            })
+            .catch((e) => {
+                dispatch({
+                    type: GETSTATUS_FAILURE,
+                })
+            })
+      }
+}
+
+// export const getBlockAsync = () => {
+//     console.log("Fire!!!")
+//   return dispatch => {
+//     dispatch({
+//       type: GETBLOCK_BEGIN
+//     })
+
+//     return fetch("http://localhost:8080/blocks?block_list=1010102")
+//         .then(async res => {
+//             console.log("ok...")
+//             let json = await res.json();
+//             dispatch({
+//                 type: GETBLOCK_SUCCESS,
+//                 payload: json
+//             })
+//             return json
+//         })
+//         .catch((e) => {
+//             dispatch({
+//                 type: GETBLOCK_FAILURE,
+//             })
+//         })
+//   }
+// }
