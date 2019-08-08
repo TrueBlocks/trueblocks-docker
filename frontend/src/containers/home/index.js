@@ -10,25 +10,4 @@ const Home = props => (
   </div>
 )
 
-// const mapStateToProps = ({ trueblocks }) => (
-//   {
-//   data: trueblocks.data,
-//   isLoading: trueblocks.isLoading
-// }
-// )
-
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(
-//     {
-//       getStatus,
-//       changePage: () => push('/about-us')
-//     },
-//     dispatch
-//   )
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Home)
-
 export default Home;
