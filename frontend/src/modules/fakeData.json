@@ -6,7 +6,7 @@
     "rpc_provider": "http://localhost:8545",
     "cache_location": "/Volumes/Samsung_T7/testing/",
     "host": "Thomass-iMac.lan (jrush)",
-    "scraping": true,
+    "is_scraping": true,
     "head_of_chain": 8540013,
     "last_finalized": 8530000,
     "disk_space_trueblocks": 1401501501,

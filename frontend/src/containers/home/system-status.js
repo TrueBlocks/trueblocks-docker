@@ -1,19 +1,33 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import {
   getStatus
 } from '../../modules/trueblocks'
+import {withPolling} from "../../modules/withPolling"
 
-class SystemStatus extends React.Component {
+const SystemStatus = (props) => {
+    return (
+        <div>
+            <SystemDetails {...props}/>
+            <button onClick={props.changePage}>
+            Settings
+          </button>
+        </div>
+    )
+}
+
+class SystemDetails extends React.Component {
    componentDidMount = () => {
-    return this.props.getStatus();
+    // return this.props.getStatus();
    }
    render = () => {
-    if(this.props.data.data) {
+    console.log(this.props.systemData.is_scraping)
+    if(this.props.systemData.is_scraping !== undefined) {
         return (<div>
         <h1>System Status</h1>
-        <p>API status: {this.props.data.data.scraping}</p>
+        <p>API status: {`${this.props.systemData.is_scraping}`}</p>
         <p>Scraping: true</p>
         <p>Block Number: 7241000</p>
         <p>Head of chain: 7500000</p>
@@ -21,17 +35,13 @@ class SystemStatus extends React.Component {
         <p>Client version: Trueblocks v0.7</p>
         <p>Disk size: 9GB</p>
     
-        <p>Node status: {this.props.data.length}</p>
+        <p>Node status: {this.props.systemData.is_scraping}</p>
         <p>Scraping: true</p>
         <p>Block Number: 7241000</p>
         <p>Head of chain: 7500000</p>
         <p>Api endpoint: localhost:8080</p>
         <p>Client version: Trueblocks v0.7</p>
         <p>Disk size: 9GB</p>
-          <button onClick={this.props.getStatus} disabled={this.props.isLoading}>
-            Go to about page via redux
-          </button>
-    
       </div>)
     }
     return (<div>Not connected</div>)
@@ -40,7 +50,7 @@ class SystemStatus extends React.Component {
 
 const mapStateToProps = ({ trueblocks }) => (
     {
-        data: trueblocks.data,
+        systemData: trueblocks.systemData,
         isLoading: trueblocks.isLoading
     }
 )
@@ -49,11 +59,12 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getStatus,
+      changePage: () => push('/settings')
     },
     dispatch
   )
 
-export default connect(
+export default withPolling(getStatus)(connect(
   mapStateToProps,
   mapDispatchToProps
-)(SystemStatus)
+)(SystemStatus))

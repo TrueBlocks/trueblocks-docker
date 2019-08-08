@@ -5,7 +5,7 @@ export const GETSTATUS_FAILURE = 'trueblocks/GETBLOCK_FAILURE'
 
 
 const initialState = {
-  data: [],
+  systemData: {},
   isLoading: false,
   error: null,
 }
@@ -25,14 +25,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: action.payload
+        systemData: action.payload
       }
 
     case GETSTATUS_FAILURE:
         return {
             ...state,
             isLoading: false,
-            data: []
+            systemData: {}
         }
 
     default:
@@ -46,7 +46,7 @@ const fakeGetStatus = () => {
         // Resolve after a timeout so we can see the loading indicator
         setTimeout(
             () => {
-            resolve(fakeData)
+                resolve(fakeData)
             },
             1000
         );
@@ -62,8 +62,9 @@ export const getStatus = () => {
         return fakeGetStatus()
             .then(async res => {
                 console.log("ok...")
-                let json = res;
-                // let json = await res.json();
+                let json = res.data[0];
+                console.log(json);
+                json.is_scraping = Math.random() > .5 ? true : false;
                 dispatch({
                     type: GETSTATUS_SUCCESS,
                     payload: json
