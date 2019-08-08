@@ -14,3 +14,15 @@ body {
 button:disabled {
   opacity: 0.5;
 }
+
+.system-details {
+  color: red;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 500px;
+}
+
+.system-details .item {
+  width: 50%;
+}
