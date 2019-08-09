@@ -20,22 +20,25 @@ const SystemStatus = (props) => {
 }
 
 const SystemDetails = (props) => {
-    console.log(props.systemData.is_scraping)
-    if(props.systemData.is_scraping !== undefined) {
-        return (<div className="system-details">
-        <div className="item">API status:</div>
-        <div className="item">{`${props.systemData.is_scraping}`}</div>
+        let syncPct = props.systemData.parityLatestBlock === "" | props.systemData.parityLatestBlock === 0 ? "0%" : Math.floor( 100 * props.systemData.lastConsolidated / props.systemData.parityLatestBlock) + "%";
+        console.log(syncPct);
+        return (<div className={`system-details ${props.systemData.isConnected ? "connected" : "disconnected"}`}>
+        <div className="item">Connection:</div>
+        <div className="item">{props.systemData.isConnected ? "Connected" : "Disconnected"}</div>
         <div className="item">Scraping:</div>
-        <div className="item">true</div>
+        <div className="item">{props.systemData.isScraping ? "On" : "Off"}</div>
         <div className="item">Block Number:</div>
-        <div className="item">7241000</div>
+        <div className="item">{props.systemData.lastConsolidated}</div>
         <div className="item">Head of chain:</div>
-        <div className="item">7500000</div>
+        <div className="item">{props.systemData.parityLatestBlock}</div>
+        <div className="progress-bar green stripes">
+            <span style={{width: syncPct}}></span>
+        </div>
         {/* <p>Api endpoint: localhost:8080</p>
         <p>Client version: Trueblocks v0.7</p>
         <p>Disk size: 9GB</p> */}
     
-        {/* <p>Node status: {props.systemData.is_scraping}</p>
+        {/* <p>Node status: {props.systemData.isScraping}</p>
         <p>Scraping: true</p>
         <p>Block Number: 7241000</p>
         <p>Head of chain: 7500000</p>
@@ -43,8 +46,7 @@ const SystemDetails = (props) => {
         <p>Client version: Trueblocks v0.7</p>
         <p>Disk size: 9GB</p> */}
       </div>)
-    }
-    return (<div>Not connected</div>)
+    
 }
 
 const mapStateToProps = ({ trueblocks }) => (

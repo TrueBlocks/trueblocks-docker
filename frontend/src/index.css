@@ -3,6 +3,10 @@
   src: local('Lato'), url(./fonts/Lato/Lato-Regular.ttf) format('ttf');
 }
 
+html, body {
+  height: 100%;
+}
+
 html {
   font-size: 100%;
 }
@@ -20,6 +24,12 @@ button:disabled {
   opacity: 0.5;
 }
 
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .system-status {
   border: 1px dotted #aaa;
   padding: 5px;
@@ -29,6 +39,12 @@ button:disabled {
 .system-status h1 {
   margin: .5em 0;
   font-size: 1.5em;
+}
+
+.system-status button {
+  margin: 1em auto;
+  display: block;
+  width: 100%;
 }
 
 .system-details {
@@ -42,4 +58,49 @@ button:disabled {
 }
 .system-details .item:nth-child(even) {
   width: 50%;
+}
+
+.progress-bar {
+  background-color: #EEE;
+  height: 25px;
+  padding: 5px;
+  width: 100%;
+  margin: 1em 0;         
+  border-radius: 5px;
+  line-height:0;           
+}
+
+.progress-bar span {
+  display: inline-block;
+  height: 100%;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+  transition: width .4s ease-in-out;    
+}
+
+.blue span {
+  background-color: #34c2e3;   
+}
+
+.orange span {
+    background-color: #fecf23;
+    background-image: linear-gradient(top, #fecf23, #fd9215);  
+}   
+
+.green span {
+    background-color: #a5df41;
+    background-image: linear-gradient(top, #a5df41, #4ca916);  
+}
+
+.stripes span {
+  background-size: 30px 30px;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+                      transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+                      transparent 75%, transparent);            
+  background-repeat: repeat-x;
+  animation: animate-stripes 3s linear infinite;             
+}
+
+@keyframes animate-stripes {
+  0% {background-position: 0 0;} 100% {background-position: 60px 0;}
 }

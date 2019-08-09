@@ -5,7 +5,12 @@ export const GETSTATUS_FAILURE = 'trueblocks/GETBLOCK_FAILURE'
 
 
 const initialState = {
-  systemData: {},
+  systemData: {
+      isConnected: false,
+      isScraping: false,
+      lastConsolidated: "",
+      parityLatestBlock: "",
+  },
   isLoading: false,
   error: null,
 }
@@ -22,6 +27,10 @@ export default (state = initialState, action) => {
 
     case GETSTATUS_SUCCESS:
       console.log("success");
+      action.payload.isConnected = true;
+      // simulate progress
+      action.payload.lastConsolidated = state.systemData.lastConsolidated === "" ? action.payload.lastConsolidated : state.systemData.lastConsolidated + 42;
+      action.payload.parityLatestBlock = state.systemData.parityLatestBlock === "" ? action.payload.parityLatestBlock : state.systemData.parityLatestBlock + 7;
       return {
         ...state,
         isLoading: false,
@@ -54,7 +63,7 @@ const fakeGetStatus = () => {
 }
 
 export const getStatus = () => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch({
           type: GETSTATUS_BEGIN
         })
@@ -64,7 +73,6 @@ export const getStatus = () => {
                 console.log("ok...")
                 let json = res.data[0];
                 console.log(json);
-                json.is_scraping = Math.random() > .5 ? true : false;
                 dispatch({
                     type: GETSTATUS_SUCCESS,
                     payload: json

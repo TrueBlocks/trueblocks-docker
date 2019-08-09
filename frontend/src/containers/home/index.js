@@ -2,7 +2,7 @@ import React from 'react'
 import SystemStatus from './system-status'
 
 const Home = props => (
-  <div>
+  <div className="home">
     <SystemStatus/>
   </div>
 )
