@@ -43,7 +43,7 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
         OPTS = OPTS.join(" | ")
       }
 
-      return `    COption2("${option.command}", "${option.command_short}", "${option.data_type}", ${OPTS}, "${option.description_core}"),\n`
+      return `    COption("${option.command}", "${option.command_short}", "${option.data_type}", ${OPTS}, "${option.description_core}"),\n`
     }).join("");
 
     let replacer = (match) => {
