@@ -44,44 +44,9 @@ const generateCmd = (routeName, queryObj) => {
         return cmdString;
     }).reduce((acc, val) => acc.concat(val), [])
     .join(' ');
-    console.log(`command options passed to tool: ${cmd}`);
+    console.log(`call: chifra ${routeName} ${cmd}`);
     return cmd;
 }
-
-
-
-app.get('/ls', (req, res) => {
-    var longList = ""
-    if (req.query.ll)
-        longList = "-l";
-    let chifra = spawn("chifra", ['ls', req.query.address, longList], {env: env});
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("ls", code, res);
-    })
-})
-
-app.get('/balances/:id', (req, res) => {
-    var id = "";
-    if (typeof req.params.id != undefined)
-        id = req.params.id;
-    let chifra = spawn("chifra", ['balances', `${id}`], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("balances", code, res);
-    })
-})
-
-app.get('/message/:id', (req, res) => {
-    var id = "";
-    if (typeof req.params.id != undefined)
-        id = req.params.id;
-    let chifra = spawn("chifra", ['data', '--message', `${id}`], { env: env });
-    chifra.stderr.pipe(process.stderr);
-    chifra.stdout.pipe(res).on('finish', (code) => {
-        reportAndSend("message", code, res);
-    })
-})
 
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
