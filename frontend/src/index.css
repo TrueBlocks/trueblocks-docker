@@ -18,6 +18,27 @@ body {
     sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  padding:1em;
+}
+
+header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+}
+
+header a {
+  color: #34c2e3;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1em;
+}
+
+header a:hover {
+  color: #289bb5;
 }
 
 button:disabled {

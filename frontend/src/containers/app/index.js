@@ -4,10 +4,12 @@ import Home from '../home'
 import About from '../about'
 import Documentation from '../documentation'
 import Settings from '../settings'
+import logo from '../../img/logo.png'
 
 const App = () => (
   <div>
     <header>
+      <img src={logo} height="75px"/>
       <Link to="/">Home</Link>
       <Link to="/about-us">About</Link>
       <Link to="/docs">Documentation</Link>
