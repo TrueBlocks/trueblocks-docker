@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, NavLink } from 'react-router-dom'
 import Home from '../home'
 import About from '../about'
 import Documentation from '../documentation'
@@ -10,10 +10,11 @@ const App = () => (
   <div>
     <header>
       <img src={logo} height="75px"/>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
-      <Link to="/docs">Documentation</Link>
-      <Link to="/settings">Settings</Link>
+      <NavLink activeClassName="is-active" exact={true} to="/">Home</NavLink>
+      <NavLink activeClassName="is-active" to="/about-us">About</NavLink>
+      <NavLink activeClassName="is-active" to="/process-manager">Process Manager</NavLink>
+      <NavLink activeClassName="is-active" to="/docs">Documentation</NavLink>
+      <NavLink activeClassName="is-active" to="/settings">Settings</NavLink>
     </header>
 
     <main>

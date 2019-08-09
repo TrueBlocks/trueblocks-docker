@@ -30,15 +30,20 @@ header {
 }
 
 header a {
-  color: #34c2e3;
+  color: #03415d;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 1em;
 }
 
 header a:hover {
-  color: #289bb5;
+  /* text-decoration: underline; */
+  color: #3888ad;
+}
+
+header a.is-active {
+  color: #3888ad;
 }
 
 button:disabled {
@@ -47,38 +52,62 @@ button:disabled {
 
 .home {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
 .system-status {
-  border: 1px dotted #aaa;
   padding: 5px;
-  max-width: 300px;
+  max-width: 400px;
 }
 
 .system-status h1 {
   margin: .5em 0;
   font-size: 1.5em;
-}
-
-.system-status button {
-  margin: 1em auto;
-  display: block;
-  width: 100%;
+  background-color: #EEE;
+  padding: 0 .2em;
 }
 
 .system-details {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  padding: 0 .2em;
 }
 
-.system-details .item:nth-child(odd) {
+.system-details .item.disconnected {
+  color: rgb(180, 5, 5);
+}
+
+.system-details .item.connected {
+  color: #97cc3b;
+}
+
+.system-details .item.space-after {
+  padding-bottom: 1em;
+}
+
+/* .system-details .item:nth-child(odd) {
   width: 50%;
 }
 .system-details .item:nth-child(even) {
   width: 50%;
+} */
+
+.system-details .item {
+  width: 50%;
+  border-bottom: 1px solid #EEE;
+}
+
+.system-details .item.grouping {
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: .8em;
+}
+
+.system-status button {
+  margin: 1em auto;
+  display: block;
 }
 
 .progress-bar {
@@ -119,7 +148,7 @@ button:disabled {
                       transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
                       transparent 75%, transparent);            
   background-repeat: repeat-x;
-  animation: animate-stripes 3s linear infinite;             
+  animation: animate-stripes 10s linear infinite;             
 }
 
 @keyframes animate-stripes {

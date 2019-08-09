@@ -21,16 +21,27 @@ const SystemStatus = (props) => {
 
 const SystemDetails = (props) => {
         let syncPct = props.systemData.parityLatestBlock === "" | props.systemData.parityLatestBlock === 0 ? "0%" : Math.floor( 100 * props.systemData.lastConsolidated / props.systemData.parityLatestBlock) + "%";
-        console.log(syncPct);
         return (<div className={`system-details ${props.systemData.isConnected ? "connected" : "disconnected"}`}>
-        <div className="item">Connection:</div>
-        <div className="item">{props.systemData.isConnected ? "Connected" : "Disconnected"}</div>
-        <div className="item">Scraping:</div>
-        <div className="item">{props.systemData.isScraping ? "On" : "Off"}</div>
+        <div className="item grouping">Connection</div>
+        <div className="item">TrueBlocks daemon:</div>
+        <div className={`item ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div>
+        <div className="item">Ethereum Node:</div>
+        <div className={`item space-after ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div>
+        <div className="item grouping">Scraper</div>
+        <div className="item">Status:</div>
+        <div className="item">{props.systemData.isScraping ? "Scraping" : "Paused"}</div>
         <div className="item">Block Number:</div>
-        <div className="item">{props.systemData.lastConsolidated}</div>
-        <div className="item">Head of chain:</div>
+        <div className="item space-after">{props.systemData.lastConsolidated}</div>
+        <div className="item grouping">Ethereum Node</div>
+        <div className="item">Current block:</div>
         <div className="item">{props.systemData.parityLatestBlock}</div>
+        <div className="item">Highest block:</div>
+        <div className="item space-after">{props.systemData.parityLatestBlock}</div>
+        <div className="item grouping">System Version</div>
+        <div className="item">TrueBlocks:</div>
+        <div className="item">{props.systemData.trueblocks_version}</div>
+        <div className="item">Ethereum:</div>
+        <div className="item">{props.systemData.client_version}</div>
         <div className="progress-bar green stripes">
             <span style={{width: syncPct}}></span>
         </div>
