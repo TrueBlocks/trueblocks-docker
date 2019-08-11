@@ -1,11 +1,27 @@
 FORMAT: 1A
 HOST: http://localhost:8080/
 
-# TrueBlocks API Blueprint
+# TrueBlocks API
 
-The TrueBlocks API is designed to expose data generated from `trueblocks-core` along with a local Ethereum node. Among other things, it facilitates account history queries.
+`TrueBlocks` provides easy access to Ethereum **blocks**, **transactions**, **receipts**, **logs**, **trace data**, **abis**, and **prices** directly from your own Ethereum node. An Ethereum RPC endpoint, which may be either remote or local (preferred), is required.
 
-## Export Transaction Records for Address [<<GENERATE:URI:export>>]
+`TrueBlocks` is different from other solutions, however, in two ways: (1) the primary focus of `TrueBlocks` is delivering complete, fully-detailed, audit-quality historical lists of transactions for individual or groups of Ethereum addresses; and (2) `TrueBlocks` is decentralized from first principals.
+
+Any data available from the node is delivered to you directly, without the intervention of a third party. Other data, such as prices and abi definitions, is provided from immutable data stores with an optional mechanism to participate in community-wide sharing of that data.
+
+#### Installation
+
+Instructions for installing the package are here.
+
+#### Design Documents
+
+Discussion of design choices is here.
+
+#### Example Usage
+
+Examples of using the API are here.
+
+## Exporting Account Data [<<GENERATE:URI:export>>]
 
 A resource that tells trueblocks that you want to export transactions for `address`. Trueblocks will use its appearance index to ask the node for detailed information about each appearance. The information is then returned in either JSON or CSV.
 
@@ -13,7 +29,7 @@ A resource that tells trueblocks that you want to export transactions for `addre
 
 <<GENERATE:PARAMS:export>>
 
-### Export all records for an address [GET]
+### /export [GET]
 
 + Request Plain Text Export
 
@@ -69,7 +85,7 @@ A resource that tells trueblocks that you want to export transactions for `addre
                 }
             ]}
 
-## List appearance locations for an address [<<GENERATE:URI:list>>]
+## Listing Transactions per Address [<<GENERATE:URI:list>>]
 
 A resource that tells trueBlocks that you want to list appearances for `address`. Trueblocks returns its appearance index, each appearance consisting of `{blockNumber, txId}`. 
 
@@ -77,7 +93,7 @@ A resource that tells trueBlocks that you want to list appearances for `address`
 
 <<GENERATE:PARAMS:list>>
 
-### List all appearances for an address [GET]
+### /list [GET]
 
 + Request Plain Text Export
 
@@ -486,3 +502,8 @@ Look at quotes.
                     "age": "21263796"
                 }
             ]
+
+
+### Conclusion
+
++ Final Words
