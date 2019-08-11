@@ -2,12 +2,12 @@
   "name": "trueblocks.public.dappnode.eth",
   "version": "0.0.1",
   "description": "DAppNodePackage_trueblocks address index",
-  "avatar": "/ipfs/QmfVZ7fMQAbSauikRuMEWGKZ1LnLizvD92DwqCfz459TDu",
+  "avatar": "/ipfs/QmSkvLe9EvmvrSKepJvWCktmieMgaF9ricmaWdB7KMRT2n",
   "type": "service",
   "image": {
     "path": "trueblocks.public.dappnode.eth_0.0.1.tar.xz",
-    "hash": "/ipfs/QmfXztFxtjwCr2GyihrGGz4B17N2hb3zy1hEEkVKP49tKY",
-    "size": 92644733,
+    "hash": "/ipfs/QmdGrsZg24fAta2EdjxjJxYAMVMuZEkW8hwMbeSfsvDvUP",
+    "size": 92429787,
     "restart": "always",
     "volumes": [
       "trueblocksdnpdappnodeeth_data:/root/.quickBlocks"
