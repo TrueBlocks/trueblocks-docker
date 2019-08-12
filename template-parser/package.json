@@ -8,10 +8,13 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "<9.0.0"
+  },
   "dependencies": {
+    "aglio": "^2.3.0",
     "csv-parse": "^4.4.3",
     "glob": "^7.1.4",
-    "snowboard": "^3.0.0-rc.3",
     "yargs": "^13.3.0"
   }
 }
