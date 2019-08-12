@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aglio": "^2.3.0",
     "csv-parse": "^4.4.3",
     "glob": "^7.1.4",
     "snowboard": "^3.0.0-rc.3",
