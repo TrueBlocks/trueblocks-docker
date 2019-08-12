@@ -9,5 +9,7 @@ Example usage:
 
 ```sh
 cd template-parser
-node index.js -i ../../trueblocks-core/src/other/build_assets/option-master-list.csv
+bash run.sh
 ```
+
+Note: The docs html is generated via the [aglio renderer](https://github.com/danielgtaylor/aglio) which requires node v8.x and under. Therefore, a node version manager like [nvm](https://github.com/nvm-sh/nvm) is recommended. 
