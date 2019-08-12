@@ -117,7 +117,8 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
     else if(type === "PARAMS") {  
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
-        return `    + ${param.command}: (${param.api_required ? "required" : "optional"}, ${param.data_type}) - ${param.description_core}`
+
+        return `    + \`${param.command}\`: (${param.api_required ? "required" : "optional"}, ${param.data_type}) - ${param.description_core}`
       }).join("\n");
       return paramsFormatted;
     }
