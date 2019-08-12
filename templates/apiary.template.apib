@@ -21,7 +21,9 @@ Discussion of design choices is here.
 
 Examples of using the API are here.
 
-## Exporting Account Data [<<GENERATE:URI:export>>]
+# Group Accounts
+
+## Export [<<GENERATE:URI:export>>]
 
 A resource that tells trueblocks that you want to export transactions for `address`. Trueblocks will use its appearance index to ask the node for detailed information about each appearance. The information is then returned in either JSON or CSV.
 
@@ -85,7 +87,7 @@ A resource that tells trueblocks that you want to export transactions for `addre
                 }
             ]}
 
-## Listing Transactions per Address [<<GENERATE:URI:list>>]
+## List [<<GENERATE:URI:list>>]
 
 A resource that tells trueBlocks that you want to list appearances for `address`. Trueblocks returns its appearance index, each appearance consisting of `{blockNumber, txId}`. 
 
@@ -118,7 +120,45 @@ A resource that tells trueBlocks that you want to list appearances for `address`
             112698  35
             112789  0
 
-## View account detail [<<GENERATE:URI:accounts>>]
+## Slurp [<<GENERATE:URI:slurp>>]
+
+Slurp against etherscan.
+
++ Parameters
+
+<<GENERATE:PARAMS:slurp>>
+
+### Slurp [GET]
+
++ Request JSON data
+    
+    + Headers
+    
+            Accept: application/json
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "gasLimit": 3141592,
+                    "gasUsed": 0,
+                    "hash": "0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d",
+                    "blockNumber": 101010,
+                    "parentHash": "0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b",
+                    "miner": "0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd",
+                    "difficulty": 3871451743585,
+                    "price": 0,
+                    "finalized": 1,
+                    "timestamp": 1439815989,
+                    "transactions": [],
+                    "date": "2015-08-17 12:53:09 UTC",
+                    "age": "21263796"
+                }
+            ]
+
+## Accounts [<<GENERATE:URI:accounts>>]
 
 I don't really know what this is.
 
@@ -126,7 +166,7 @@ I don't really know what this is.
 
 <<GENERATE:PARAMS:accounts>>
 
-### Account detail [GET]
+### Accounts [GET]
 
 + Request JSON data
 
@@ -155,6 +195,87 @@ I don't really know what this is.
                     "ether": 0.000000000000000000
                   }
                 ], "meta": {"pending": 622000,"staging": 622000,"finalized": 539800,"client": 1365929 } }
+
+
+## ABI [<<GENERATE:URI:abi>>]
+
+Get abi.
+
++ Parameters
+
+<<GENERATE:PARAMS:abi>>
+
+### Abi detail [GET]
+
++ Request JSON data
+    
+    + Headers
+    
+            Accept: application/json
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "gasLimit": 3141592,
+                    "gasUsed": 0,
+                    "hash": "0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d",
+                    "blockNumber": 101010,
+                    "parentHash": "0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b",
+                    "miner": "0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd",
+                    "difficulty": 3871451743585,
+                    "price": 0,
+                    "finalized": 1,
+                    "timestamp": 1439815989,
+                    "transactions": [],
+                    "date": "2015-08-17 12:53:09 UTC",
+                    "age": "21263796"
+                }
+            ]
+
+# Group State
+
+## View State detail [<<GENERATE:URI:state>>]
+
+Look at state.
+
++ Parameters
+
+<<GENERATE:PARAMS:state>>
+
+### State detail [GET]
+
++ Request JSON data
+    
+    + Headers
+    
+            Accept: application/json
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "gasLimit": 3141592,
+                    "gasUsed": 0,
+                    "hash": "0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d",
+                    "blockNumber": 101010,
+                    "parentHash": "0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b",
+                    "miner": "0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd",
+                    "difficulty": 3871451743585,
+                    "price": 0,
+                    "finalized": 1,
+                    "timestamp": 1439815989,
+                    "transactions": [],
+                    "date": "2015-08-17 12:53:09 UTC",
+                    "age": "21263796"
+                }
+            ]
+
+# Group Data
 
 ## View block detail [<<GENERATE:URI:blocks>>]
 
@@ -232,16 +353,15 @@ Look at transactions.
                 }
             ]
 
+## View receipts detail [<<GENERATE:URI:receipts>>]
 
-## View logs detail [<<GENERATE:URI:logs>>]
-
-Look at logs.
+Look at receipts.
 
 + Parameters
 
-<<GENERATE:PARAMS:logs>>
+<<GENERATE:PARAMS:receipts>>
 
-### Logs detail [GET]
+### Receipts detail [GET]
 
 + Request JSON data
     
@@ -271,16 +391,15 @@ Look at logs.
                 }
             ]
 
+## View logs detail [<<GENERATE:URI:logs>>]
 
-## View receipts detail [<<GENERATE:URI:receipts>>]
-
-Look at receipts.
+Look at logs.
 
 + Parameters
 
-<<GENERATE:PARAMS:receipts>>
+<<GENERATE:PARAMS:logs>>
 
-### Receipts detail [GET]
+### Logs detail [GET]
 
 + Request JSON data
     
@@ -348,122 +467,7 @@ Look at traces.
                 }
             ]
 
-
-## EthSlurp some stuff [<<GENERATE:URI:slurp>>]
-
-Slurp against etherscan.
-
-+ Parameters
-
-<<GENERATE:PARAMS:slurp>>
-
-### Slurp something [GET]
-
-+ Request JSON data
-    
-    + Headers
-    
-            Accept: application/json
-            
-+ Response 200 (application/json)
-
-    + Body
-    
-            [
-                {
-                    "gasLimit": 3141592,
-                    "gasUsed": 0,
-                    "hash": "0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d",
-                    "blockNumber": 101010,
-                    "parentHash": "0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b",
-                    "miner": "0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd",
-                    "difficulty": 3871451743585,
-                    "price": 0,
-                    "finalized": 1,
-                    "timestamp": 1439815989,
-                    "transactions": [],
-                    "date": "2015-08-17 12:53:09 UTC",
-                    "age": "21263796"
-                }
-            ]
-
-## View abi detail [<<GENERATE:URI:abi>>]
-
-Get abi.
-
-+ Parameters
-
-<<GENERATE:PARAMS:abi>>
-
-### Abi detail [GET]
-
-+ Request JSON data
-    
-    + Headers
-    
-            Accept: application/json
-            
-+ Response 200 (application/json)
-
-    + Body
-    
-            [
-                {
-                    "gasLimit": 3141592,
-                    "gasUsed": 0,
-                    "hash": "0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d",
-                    "blockNumber": 101010,
-                    "parentHash": "0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b",
-                    "miner": "0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd",
-                    "difficulty": 3871451743585,
-                    "price": 0,
-                    "finalized": 1,
-                    "timestamp": 1439815989,
-                    "transactions": [],
-                    "date": "2015-08-17 12:53:09 UTC",
-                    "age": "21263796"
-                }
-            ]
-
-
-## View State detail [<<GENERATE:URI:state>>]
-
-Look at state.
-
-+ Parameters
-
-<<GENERATE:PARAMS:state>>
-
-### State detail [GET]
-
-+ Request JSON data
-    
-    + Headers
-    
-            Accept: application/json
-            
-+ Response 200 (application/json)
-
-    + Body
-    
-            [
-                {
-                    "gasLimit": 3141592,
-                    "gasUsed": 0,
-                    "hash": "0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d",
-                    "blockNumber": 101010,
-                    "parentHash": "0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b",
-                    "miner": "0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd",
-                    "difficulty": 3871451743585,
-                    "price": 0,
-                    "finalized": 1,
-                    "timestamp": 1439815989,
-                    "transactions": [],
-                    "date": "2015-08-17 12:53:09 UTC",
-                    "age": "21263796"
-                }
-            ]
-
+# Group Other
 
 ## View quotes detail [<<GENERATE:URI:quotes>>]
 
@@ -503,6 +507,7 @@ Look at quotes.
                 }
             ]
 
+# Group Admin
 
 ### Conclusion
 
