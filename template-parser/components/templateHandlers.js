@@ -30,7 +30,7 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
       }
       if(!option.core_visible) OPTS.push("OPT_HIDDEN");
       if(option.option_kind === "switch") {
-        option.data_type = "";
+        // option.data_type = "";
         OPTS.push("OPT_SWITCH");
       } else if(option.option_kind === "flag") {
         OPTS.push("OPT_FLAG");
@@ -43,7 +43,9 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
         OPTS = OPTS.join(" | ")
       }
 
-      return `    COption("${option.command}", "${option.command_short}", "${option.data_type}", ${OPTS}, "${option.description_core}"),\n`
+      let dataType = option.option_kind === "switch" ? "" : option.data_type;
+
+      return `    COption("${option.command}", "${option.command_short}", "${dataType}", ${OPTS}, "${option.description_core}"),\n`
     }).join("");
 
     let replacer = (match) => {
