@@ -27,7 +27,7 @@ const SystemDetails = (props) => {
         <div className={`item ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div>
         <div className="item">Ethereum Node:</div>
         <div className={`item space-after ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div> */}
-        <div className={`item grouping ${props.systemData.isConnected ? "connected" : "disconnected"}`}>Ethereum Node - </div>
+        <div className={`item grouping ${props.systemData.isConnected ? "connected" : "disconnected"}`}>Ethereum Node</div>
         <div className="item">Current block:</div>
         <div className="item">{props.systemData.parityLatestBlock}</div>
         <div className="item">Highest block:</div>

@@ -74,19 +74,19 @@ button:disabled {
   padding: 0 .2em;
 }
 
-.system-details .item.disconnected {
+.system-details .item.grouping.disconnected {
   color: rgb(180, 5, 5);
 }
 
-.system-details .item.connected {
+.system-details .item.grouping.connected {
   color: #97cc3b;
 
 }
 
-.system-details .item.connected:after {
+.system-details .item.grouping.connected:before {
   color: #97cc3b;
   content: "\2022";
-  font-size: 2em;
+  font-size: 1.5em;
   line-height:0em;
   vertical-align: middle;
 }
