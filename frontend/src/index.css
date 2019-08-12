@@ -30,7 +30,7 @@ header {
 }
 
 header a {
-  color: #03415d;
+  color: #4a2aff;
   text-decoration: none;
   font-weight: 700;
   font-size: 1em;
@@ -38,12 +38,12 @@ header a {
 }
 
 header a:hover {
-  /* text-decoration: underline; */
-  color: #3888ad;
+  text-decoration: underline;
 }
 
 header a.is-active {
-  color: #3888ad;
+  /* color: #3888ad; */
+  text-decoration: underline;
 }
 
 button:disabled {
@@ -80,10 +80,23 @@ button:disabled {
 
 .system-details .item.connected {
   color: #97cc3b;
+
+}
+
+.system-details .item.connected:after {
+  color: #97cc3b;
+  content: "\2022";
+  font-size: 2em;
+  line-height:0em;
+  vertical-align: middle;
+}
+
+.system-details .item.small {
+  font-size: .8em;
 }
 
 .system-details .item.space-after {
-  padding-bottom: 1em;
+  /* padding-bottom: 1em; */
 }
 
 /* .system-details .item:nth-child(odd) {
@@ -96,6 +109,7 @@ button:disabled {
 .system-details .item {
   width: 50%;
   border-bottom: 1px solid #EEE;
+  padding-left: 1em;
 }
 
 .system-details .item.grouping {
@@ -103,6 +117,9 @@ button:disabled {
   font-weight: 700;
   text-transform: uppercase;
   font-size: .8em;
+  color: #03415d;
+  margin-top:1em;
+  padding-left: 0;
 }
 
 .system-status button {
