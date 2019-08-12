@@ -74,6 +74,16 @@ button:disabled {
   padding: 0 .2em;
 }
 
+.system-details .item.grouping {
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: .8em;
+  color: #03415d;
+  margin-top:1em;
+  padding-left: 0;
+}
+
 .system-details .item.grouping.disconnected {
   color: rgb(180, 5, 5);
 }
@@ -81,14 +91,6 @@ button:disabled {
 .system-details .item.grouping.connected {
   color: #97cc3b;
 
-}
-
-.system-details .item.grouping.connected:before {
-  color: #97cc3b;
-  content: "\2022";
-  font-size: 1.5em;
-  line-height:0em;
-  vertical-align: middle;
 }
 
 .system-details .item.small {
@@ -110,16 +112,6 @@ button:disabled {
   width: 50%;
   border-bottom: 1px solid #EEE;
   padding-left: 1em;
-}
-
-.system-details .item.grouping {
-  width: 100%;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: .8em;
-  color: #03415d;
-  margin-top:1em;
-  padding-left: 0;
 }
 
 .system-status button {
