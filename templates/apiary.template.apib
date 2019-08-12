@@ -128,7 +128,7 @@ Slurp against etherscan.
 
 <<GENERATE:PARAMS:slurp>>
 
-### Slurp [GET]
+### /slurp [GET]
 
 + Request JSON data
     
@@ -166,7 +166,7 @@ I don't really know what this is.
 
 <<GENERATE:PARAMS:accounts>>
 
-### Accounts [GET]
+### /accounts [GET]
 
 + Request JSON data
 
@@ -205,7 +205,7 @@ Get abi.
 
 <<GENERATE:PARAMS:abi>>
 
-### Abi detail [GET]
+### /abi [GET]
 
 + Request JSON data
     
@@ -245,7 +245,7 @@ Look at state.
 
 <<GENERATE:PARAMS:state>>
 
-### State detail [GET]
+### /state [GET]
 
 + Request JSON data
     
@@ -285,7 +285,7 @@ Look at a block.
 
 <<GENERATE:PARAMS:blocks>>
 
-### Block detail [GET]
+### /blocks [GET]
 
 + Request JSON data
     
@@ -323,7 +323,7 @@ Look at transactions.
 
 <<GENERATE:PARAMS:transactions>>
 
-### Transaction detail [GET]
+### /transactions [GET]
 
 + Request JSON data
     
@@ -361,7 +361,7 @@ Look at receipts.
 
 <<GENERATE:PARAMS:receipts>>
 
-### Receipts detail [GET]
+### /receipts [GET]
 
 + Request JSON data
     
@@ -399,7 +399,7 @@ Look at logs.
 
 <<GENERATE:PARAMS:logs>>
 
-### Logs detail [GET]
+### /logs [GET]
 
 + Request JSON data
     
@@ -437,7 +437,7 @@ Look at traces.
 
 <<GENERATE:PARAMS:traces>>
 
-### Trace detail [GET]
+### /traces [GET]
 
 + Request JSON data
     
@@ -477,7 +477,7 @@ Look at quotes.
 
 <<GENERATE:PARAMS:blocks>>
 
-### Quotes detail [GET]
+### /quotes [GET]
 
 + Request JSON data
     
@@ -509,6 +509,40 @@ Look at quotes.
 
 # Group Admin
 
-# Conclusion
+## View status detail [<<GENERATE:URI:status>>]
 
-+ Final Words
+Look at status. Great status.
+
++ Parameters
+
+<<GENERATE:PARAMS:status>>
+
+### /status [GET]
+
++ Request JSON data
+    
+    + Headers
+    
+            Accept: application/json
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "gasLimit": 3141592,
+                    "gasUsed": 0,
+                    "hash": "0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d",
+                    "blockNumber": 101010,
+                    "parentHash": "0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b",
+                    "miner": "0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd",
+                    "difficulty": 3871451743585,
+                    "price": 0,
+                    "finalized": 1,
+                    "timestamp": 1439815989,
+                    "transactions": [],
+                    "date": "2015-08-17 12:53:09 UTC",
+                    "age": "21263796"
+                }
+            ]
