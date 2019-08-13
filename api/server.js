@@ -55,10 +55,9 @@ const removeFromProcessList = (pid) => {
 }
 
 app.get(`/ps`, (req, res) => {
-    if(req.query.kill !== undefined) {
-        console.log("killing ", req.query.kill)
-
-    }
+    // if(req.query.kill !== undefined) {
+    //     console.log("killing ", req.query.kill)
+    // }
     res.send(processList)
 })
 
