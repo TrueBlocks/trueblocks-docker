@@ -21,8 +21,10 @@ app.get('/', (req, res) => {
     return res.redirect('/docs');
 })
 
-var cnt = 0;
-function reportAndSend(routeName, code, res) {
+let processList = []
+let cnt = 0
+
+const reportAndSend = (routeName, code, res) => {
     console.log(`"${routeName}" exiting: ${code === undefined ? "OK" : code}`);
     console.log(`------------- ${++cnt} ---------------------------`);
     return res.send();
@@ -48,6 +50,20 @@ const generateCmd = (routeName, queryObj) => {
     return cmd;
 }
 
+const removeFromProcessList = (pid) => {
+    processList = processList.filter(process => process.pid !== pid);
+}
+
+app.get(`/ps`, (req, res) => {
+    // if(req.query.kill !== undefined) {
+    //     console.log("killing ", req.query.kill)
+    // } else {
+    //     console.log(processList)
+    // }
+
+    res.send(processList)
+})
+
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
     if(apiOptions[routeName] === undefined) {
@@ -55,10 +71,18 @@ app.get(`/:routeName`, (req, res) => {
     }
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env});
+    req.on('close', (err) => {
+        chifra.kill();
+        removeFromProcessList(chifra.pid);
+        return false;
+    });
+    processList.push({pid: chifra.pid, cmd: `chifra ${routeName} ${cmd}`});
+    console.log(processList);
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
+        removeFromProcessList(chifra.pid);
         reportAndSend(routeName, code, res);
-})
+    })
 })
 
 app.listen(port, () => {
