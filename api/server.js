@@ -55,12 +55,10 @@ const removeFromProcessList = (pid) => {
 }
 
 app.get(`/ps`, (req, res) => {
-    // if(req.query.kill !== undefined) {
-    //     console.log("killing ", req.query.kill)
-    // } else {
-    //     console.log(processList)
-    // }
+    if(req.query.kill !== undefined) {
+        console.log("killing ", req.query.kill)
 
+    }
     res.send(processList)
 })
 
@@ -72,7 +70,7 @@ app.get(`/:routeName`, (req, res) => {
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env});
     req.on('close', (err) => {
-        chifra.kill();
+        chifra.kill('SIGINT');
         removeFromProcessList(chifra.pid);
         return false;
     });
