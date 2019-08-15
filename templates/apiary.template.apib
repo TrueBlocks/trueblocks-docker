@@ -56,8 +56,9 @@ A resource that tells trueblocks that you want to export transactions for `addre
 
     + Body
     
-            {status: "ok",
-            data: [
+            {
+              "status": "ok",
+              "data": [
                 {
                   "hash": "0x184ff1f00c1c5da9c62774e4e2bf0925de39046e056c13edf31f0bb9ce4d9b38",
                   "blockHash": "0xda4c0d8c4df359aeb0dbcdc98767da4f31f95c3a9eb705a96933bd5322c8007f",
@@ -65,7 +66,7 @@ A resource that tells trueblocks that you want to export transactions for `addre
                   "transactionIndex": 6,
                   "timestamp": 1439629343,
                   "from": "0xe6a7a1d47ff21b6321162aea7c6cb457d5476bca",
-                  "to": "[0;36m0x3b01ebd2419f6d39db6ab4471e6382848716641f[0m",
+                  "to": "0x3b01ebd2419f6d39db6ab4471e6382848716641f",
                   "value": 83372067757175030000,
                   "gas": 22000,
                   "gasPrice": 55815739021,
@@ -85,7 +86,8 @@ A resource that tells trueblocks that you want to export transactions for `addre
                   "age": "21450442",
                   "ether": 83.372067757175030000
                 }
-            ]}
+              ]
+            }
 
 ## List [<<GENERATE:URI:list>>]
 

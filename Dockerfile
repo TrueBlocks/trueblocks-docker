@@ -15,7 +15,7 @@ RUN apt-get update && \
 	libcurl3-dev
 
 ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
-RUN git clone -b 'develop' --single-branch --progress \ 
+RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-core \
 	/root/quickBlocks-src
 
@@ -26,7 +26,7 @@ RUN cd /root/quickBlocks-src && \
 	cmake ../src && \
 	make
 
-FROM node:8.16-alpine as templateParser
+FROM node:8 as templateParser
 WORKDIR /root
 COPY template-parser /root/template-parser
 COPY templates /root/templates
