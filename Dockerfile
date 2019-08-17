@@ -31,6 +31,7 @@ WORKDIR /root
 COPY template-parser /root/template-parser
 COPY templates /root/templates
 COPY --from=builder /root/quickBlocks-src/src/other/build_assets/option-master-list.csv /root/template-parser/option-master-list.csv
+RUN sed -i "s|HOST\: .*|HOST\: http\:\/\/my\.trueblocks\.public\.dappnode\.eth|" /root/templates/apiary.template.apib
 RUN cd /root/template-parser && \
 	npm install && \
 	node index.js -i option-master-list.csv && \
