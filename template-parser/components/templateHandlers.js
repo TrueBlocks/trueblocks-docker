@@ -23,7 +23,7 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
 
     let paramsFormatted = toolData.map((option) => {
       let OPTS = [];
-      if(option.core_required) {
+      if(option.is_required) {
         OPTS.push("OPT_REQUIRED");
       } else {
         // OPTS.push("OPT_OPTIONAL");
@@ -118,7 +118,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
 
-        return `    + \`${param.command}\`: (${param.api_required ? "required" : "optional"}, ${param.data_type}) - ${param.description_core}`
+        return `    + \`${param.command}\`: (${param.is_required ? "required" : "optional"}, ${param.data_type}) - ${param.description_core}`
       }).join("\n");
       return paramsFormatted;
     }
