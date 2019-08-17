@@ -1,0 +1,27 @@
+{
+    "type": "status",
+    "data": [{
+    "client_version": "Parity-Ethereum//v2.3.4-beta-0e95db11d-20190220/x86_64-macos/rustc1.32.0",
+    "trueblocks_version": "GHC-TrueBlocks//0.5.8-alpha-d0f43c27-20190728",
+    "rpc_provider": "http://localhost:8545",
+    "cache_location": "/Volumes/Samsung_T7/testing/",
+    "host": "Thomass-iMac.lan (jrush)",
+    "isScraping": true,
+    "parityLatestBlock": 8540013,
+    "lastConsolidated": 8530000,
+    "disk_space_trueblocks": 1401501501,
+    "disk_space_node": 2511053015,
+    "monitors": [
+        {"name": "Jay's address",
+         "address": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+         "filepath": "/Users/etc",
+         "freshened_at": 8100000},
+        {"name": "monitor 2",
+          "address": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+          "filepath": "/Users/etc",
+          "freshened_at": 8100000
+          }
+        ]
+    }],
+    "meta": {"unripe": 1123000,"ripe": 1123000,"staging": 1123000,"finalized": 1089624,"client": 1419252 }
+    }
