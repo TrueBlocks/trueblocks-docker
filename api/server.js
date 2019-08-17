@@ -35,7 +35,8 @@ const generateCmd = (routeName, queryObj) => {
         let option = apiOptions[routeName][key];
         let cmdString = [];
         if(option === undefined) {
-            console.log("apiOption[" + routeName + "][" + key + "] not found");
+            console.log("\x1b[41m", "apiOption[" + routeName + "][" + key + "] not found");
+            cmdString.push(`--${key}`, val);
         } else if(option.option_kind === "positional") {
             cmdString.push(val);
         } else if(option.option_kind === "switch") {
