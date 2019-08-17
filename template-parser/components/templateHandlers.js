@@ -57,7 +57,8 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
       template = template.toString();
       let rx = /\/\/ BEG_CODE_OPTIONS[\s\S]*\/\/ END_CODE_OPTIONS/g;
       let result = template.replace(rx, replacer);
-      await writeFile(filepath, result);
+      if (result != template)
+          await writeFile(filepath, result);
       return console.log(`Generated output written to ${filepath}`);
     } catch (e) {
       return console.log("e", e);
