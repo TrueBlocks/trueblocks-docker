@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import {
   getStatus
-} from '../../modules/trueblocks'
+} from '../../modules/systemStatus'
+import ChainStatus from "./chain-status"
 import {withPolling} from "../../modules/withPolling"
 
 const SystemStatus = (props) => {
@@ -20,21 +21,22 @@ const SystemStatus = (props) => {
 }
 
 const SystemDetails = (props) => {
-        let syncPct = props.systemData.parityLatestBlock === "" | props.systemData.parityLatestBlock === 0 ? "0%" : Math.floor( 100 * props.systemData.lastConsolidated / props.systemData.parityLatestBlock) + "%";
-        return (<div className={`system-details`}>
+        // let syncPct = props.systemData.parityLatestBlock === "" | props.systemData.parityLatestBlock === 0 ? "0%" : Math.floor( 100 * props.systemData.lastConsolidated / props.systemData.parityLatestBlock) + "%";
+        return (<div>
+          <div className={`system-details`}>
         {/* <div className="item grouping">Connection</div>
         <div className="item">TrueBlocks daemon:</div>
         <div className={`item ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div>
         <div className="item">Ethereum Node:</div>
         <div className={`item space-after ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div> */}
-        <div className={`item grouping ${props.systemData.isConnected ? "connected" : "disconnected"}`}>Ethereum Node</div>
+        <div className={`item grouping ${props.isConnected ? "connected" : "disconnected"}`}>Ethereum Node</div>
         <div className="item">Current block:</div>
-        <div className="item">{props.systemData.parityLatestBlock}</div>
+        <div className="item">{props.chainStatus.finalized}</div>
         <div className="item">Highest block:</div>
         <div className="item space-after">{props.systemData.parityLatestBlock}</div>
         <div className="item grouping">Scraper</div>
         <div className="item">Status:</div>
-        <div className="item">{props.systemData.isScraping ? "Scraping" : "Paused"}</div>
+        <div className="item">{props.systemData.is_scraping ? "Scraping" : "Paused"}</div>
         <div className="item">Block Number:</div>
         <div className="item space-after">{props.systemData.lastConsolidated}</div>
         <div className="item grouping">System Version</div>
@@ -42,17 +44,18 @@ const SystemDetails = (props) => {
         <div className="item small">{props.systemData.trueblocks_version}</div>
         <div className="item">Ethereum:</div>
         <div className="item small">{props.systemData.client_version}</div>
-        {/* <div className="progress-bar green stripes">
-            <span style={{width: syncPct}}></span>
-        </div> */}
+      </div>
+
+      <ChainStatus/>
       </div>)
     
 }
 
-const mapStateToProps = ({ trueblocks }) => (
+const mapStateToProps = ({ systemStatus, chainStatus }) => (
     {
-        systemData: trueblocks.systemData,
-        isLoading: trueblocks.isLoading
+        systemData: systemStatus.systemData,
+        isLoading: systemStatus.isLoading,
+        chainStatus: chainStatus.chainStatus
     }
 )
 
@@ -65,7 +68,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-export default withPolling(getStatus)(connect(
+export default withPolling(getStatus, 10000)(connect(
   mapStateToProps,
   mapDispatchToProps
 )(SystemStatus))

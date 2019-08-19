@@ -67,7 +67,10 @@ app.get(`/:routeName`, (req, res) => {
     if(apiOptions[routeName] === undefined) {
         return res.send("This route is not available.")
     }
+
     let cmd = generateCmd(routeName, req.query);
+    if(routeName === "transactions")
+        routeName = "trans";   
     let chifra = spawn("chifra", [routeName, cmd], {env: env});
     req.on('close', (err) => {
         chifra.kill('SIGINT');

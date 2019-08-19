@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux'
-import trueblocks from './trueblocks'
+import systemStatus from './systemStatus'
+import chainStatus from './chainStatus'
+import settingsManager from './settingsManager'
 
 export default combineReducers({
-  trueblocks,
+  systemStatus,
+  chainStatus,
+  settingsManager
 })
