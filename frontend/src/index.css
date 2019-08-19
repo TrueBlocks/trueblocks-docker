@@ -58,14 +58,14 @@ button:disabled {
 
 .system-status {
   padding: 5px;
-  max-width: 400px;
+  width: 30%;
 }
 
 .system-status h1, .monitor-status h1 {
-  margin: .5em 0;
-  font-size: 1.5em;
+  margin: 1.2em 0;
+  font-size: 1.1em;
   background-color: #EEE;
-  padding: 0 .2em;
+  padding: .5em .5em;
 }
 
 .system-details {
@@ -85,11 +85,11 @@ button:disabled {
   padding-left: 0;
 }
 
-.system-details .item.grouping.disconnected {
+.system-details .disconnected {
   color: rgb(180, 5, 5);
 }
 
-.system-details .item.grouping.connected {
+.system-details .connected {
   color: #97cc3b;
 
 }

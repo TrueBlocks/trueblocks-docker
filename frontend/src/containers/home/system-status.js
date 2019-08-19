@@ -11,7 +11,7 @@ import {withPolling} from "../../modules/withPolling"
 const SystemStatus = (props) => {
     return (
         <div className="system-status">
-            <h1>Status</h1>
+            <h1>System Status</h1>
             <SystemDetails {...props}/>
             <button onClick={props.changePage}>
             Settings
@@ -29,16 +29,22 @@ const SystemDetails = (props) => {
         <div className={`item ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div>
         <div className="item">Ethereum Node:</div>
         <div className={`item space-after ${props.systemData.isConnected ? "connected" : "disconnected"}`}>{props.systemData.isConnected ? "Connected" : "Disconnected"}</div> */}
-        <div className={`item grouping ${props.isConnected ? "connected" : "disconnected"}`}>Ethereum Node</div>
+        <div className={`item grouping`}>Ethereum Node</div>
+        <div className="item">Connection:</div>
+        <div className={`item ${props.isConnected ? "connected" : "disconnected"}`}>{props.isConnected ? "Connected" : "Disconnected"}</div> 
         <div className="item">Current block:</div>
-        <div className="item">{props.chainStatus.finalized}</div>
-        <div className="item">Highest block:</div>
-        <div className="item space-after">{props.systemData.parityLatestBlock}</div>
-        <div className="item grouping">Scraper</div>
+        <div className="item">{props.chainStatus.client}</div>
+        <div className="item">RPC Provider:</div>
+        <div className="item">{props.systemData.rpc_provider}</div>
+        <div className="item grouping">TrueBlocks Index</div>
         <div className="item">Status:</div>
-        <div className="item">{props.systemData.is_scraping ? "Scraping" : "Paused"}</div>
-        <div className="item">Block Number:</div>
-        <div className="item space-after">{props.systemData.lastConsolidated}</div>
+        <div className={`item space-after ${props.isConnected ? "connected" : "disconnected"}`}>{props.isConnected ? "Scraping" : "Not Scraping"}</div> 
+        <div className="item">Final & Consolidated:</div>
+        <div className="item">{props.chainStatus.finalized}</div>
+        <div className="item">Final:</div>
+        <div className="item">{props.chainStatus.ripe}</div>        
+        <div className="item">API Provider:</div>
+        <div className="item space-after">{props.apiProvider}</div>
         <div className="item grouping">System Version</div>
         <div className="item">TrueBlocks:</div>
         <div className="item small">{props.systemData.trueblocks_version}</div>
@@ -51,11 +57,13 @@ const SystemDetails = (props) => {
     
 }
 
-const mapStateToProps = ({ systemStatus, chainStatus }) => (
+const mapStateToProps = ({ systemStatus, chainStatus, settingsManager }) => (
     {
+        isConnected: systemStatus.isConnected,
         systemData: systemStatus.systemData,
         isLoading: systemStatus.isLoading,
-        chainStatus: chainStatus.chainStatus
+        chainStatus: chainStatus.chainStatus,
+        apiProvider: settingsManager.apiProvider
     }
 )
 
