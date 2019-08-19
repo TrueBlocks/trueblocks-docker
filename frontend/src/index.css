@@ -52,16 +52,25 @@ button:disabled {
 
 .home {
   display: flex;
-  align-items: center;
+  align-items: start;
   flex-flow: row wrap;
+
 }
 
 .system-status {
-  padding: 5px;
   width: 30%;
 }
 
-.system-status h1, .monitor-status h1 {
+.system-progress {
+  width: 70%;
+}
+
+.system-status, .system-progress {
+  padding: 5px;
+}
+
+
+.system-status h1, .monitor-status h1, .system-progress h1 {
   margin: 1.2em 0;
   font-size: 1.1em;
   background-color: #EEE;
