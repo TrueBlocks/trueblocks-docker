@@ -1,8 +1,9 @@
+import config from '../config.json'
 export const CHANGESETTINGS_SUCCESS = 'settingsManager/CHANGESETTINGS_SUCCESS'
 export const CHANGESETTINGS_FAILURE = 'settingsManager/CHANGESETTINGS_FAILURE'
 
 const initialState = {
-  apiProvider: "http://localhost:8080"
+  apiProvider: config.apiProvider
 }
 
 export default (state = initialState, action) => {
