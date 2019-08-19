@@ -52,19 +52,29 @@ button:disabled {
 
 .home {
   display: flex;
-  align-items: center;
+  align-items: start;
+  flex-flow: row wrap;
+
 }
 
 .system-status {
-  padding: 5px;
-  max-width: 400px;
+  width: 30%;
 }
 
-.system-status h1 {
-  margin: .5em 0;
-  font-size: 1.5em;
+.system-progress {
+  width: 70%;
+}
+
+.system-status, .system-progress {
+  padding: 5px;
+}
+
+
+.system-status h1, .monitor-status h1, .system-progress h1 {
+  margin: 1.2em 0;
+  font-size: 1.1em;
   background-color: #EEE;
-  padding: 0 .2em;
+  padding: .5em .5em;
 }
 
 .system-details {
@@ -84,11 +94,11 @@ button:disabled {
   padding-left: 0;
 }
 
-.system-details .item.grouping.disconnected {
+.system-details .disconnected {
   color: rgb(180, 5, 5);
 }
 
-.system-details .item.grouping.connected {
+.system-details .connected {
   color: #97cc3b;
 
 }
@@ -97,18 +107,7 @@ button:disabled {
   font-size: .8em;
 }
 
-.system-details .item.space-after {
-  /* padding-bottom: 1em; */
-}
-
-/* .system-details .item:nth-child(odd) {
-  width: 50%;
-}
-.system-details .item:nth-child(even) {
-  width: 50%;
-} */
-
-.system-details .item {
+.system-details .item, .monitor-details.item {
   width: 50%;
   border-bottom: 1px solid #EEE;
   padding-left: 1em;
@@ -118,6 +117,66 @@ button:disabled {
   margin: 1em auto;
   display: block;
 }
+
+.monitor-status {
+  width: 100%;
+}
+
+.monitor-details {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.monitor-details .detail-container {
+  border: 1px dotted #ddd;
+  width: 25%;
+  padding: .5em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.monitor-details .detail-container .no {
+  width: 20%;
+  background-color: #eee;
+  text-align: center;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.trash {
+  width: 100%;
+  opacity: .3;
+  cursor: pointer;
+}
+
+.trash:hover {
+  opacity: .6;
+}
+
+.monitor-details .detail-container .detail {
+  width: 80%;
+  padding: .5em;
+}
+
+.monitor-details .name {
+  font-weight: 700;
+}
+
+.monitor-details .address {
+  font-size: .7em;
+}
+
+.monitor-details li {
+  list-style-type: none;
+  font-size: .8em;
+}
+
 
 .progress-bar {
   background-color: #EEE;
