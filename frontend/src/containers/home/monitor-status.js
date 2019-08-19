@@ -3,11 +3,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {getMonitorStatus} from '../../modules/monitorStatus'
 import {withPolling} from "../../modules/withPolling"
+import trash from "../../img/trash-alt.svg"
 
 const MonitorStatus = (props) => {
     return (
         <div className="monitor-status">
-            <h1>Status</h1>
+            <h1>Monitor Details</h1>
             <MonitorDetails {...props}/>
         </div>
     )
@@ -16,11 +17,20 @@ const MonitorStatus = (props) => {
 const MonitorDetails = (props) => {
          return (<div>
           <div className={`monitor-details`}>
-            {props.monitorStatus.items.map(item => (
-                <div>
-                    <li>Address = {item.address}</li>
+            {props.monitorStatus.items.map((item, index) => (
+                <div className="detail-container">
+                    <div className="no">
+                        <div>{index}</div>
+                        <div className="trash"><img src={trash} width="10px"/></div>
+                        </div>
+                    <div className="detail">
+                    {item.name ?
+                    <li className="name">{item.name}</li> : null
+                    }
+                    <li className="address">{item.address}</li>
                     <li>nRecords = {item.nRecords}</li>
                     <li>Size (Bytes) = {item.sizeInBytes}</li>
+                    </div>
                 </div>
             ))}
       </div>
