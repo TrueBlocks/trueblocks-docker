@@ -17,7 +17,7 @@ const MonitorStatus = (props) => {
 const MonitorDetails = (props) => {
          return (<div>
           <div className={`monitor-details`}>
-            {props.monitorStatus.items.map((item, index) => (
+            {props.monitorStatus !== undefined && props.monitorStatus.items !== undefined && props.monitorStatus.items.map((item, index) => (
                 <div className="detail-container">
                     <div className="no">
                         <div>{index}</div>

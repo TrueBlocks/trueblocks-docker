@@ -10,7 +10,7 @@ env.API_MODE = true;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use('/docs', express.static(__dirname + '/docs'));
-
+app.use('/', express.static(__dirname + '/build'));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
