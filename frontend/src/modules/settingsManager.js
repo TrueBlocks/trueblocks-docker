@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
 }
 
 export const changeApiProvider = (newVal) => {
+    console.log("hey", newVal)
     return (dispatch) => {
         dispatch({
             type: CHANGESETTINGS_SUCCESS,
