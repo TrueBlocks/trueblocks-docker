@@ -202,12 +202,12 @@ button:disabled {
 
 .orange span {
     background-color: #fecf23;
-    background-image: linear-gradient(top, #fecf23, #fd9215);  
+    background-image: linear-gradient(to bottom, #fecf23, #fd9215);  
 }   
 
 .green span {
     background-color: #a5df41;
-    background-image: linear-gradient(top, #a5df41, #4ca916);  
+    background-image: linear-gradient(to bottom, #a5df41, #4ca916);  
 }
 
 .stripes span {
