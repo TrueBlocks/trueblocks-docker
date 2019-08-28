@@ -21,7 +21,7 @@ const MonitorDetails = (props) => {
                 <div className="detail-container">
                     <div className="no">
                         <div>{index}</div>
-                        <div className="trash"><img src={trash} width="10px"/></div>
+                        <div className="trash"><img alt={trash} src={trash} width="10px"/></div>
                         </div>
                     <div className="detail">
                     {item.name ?

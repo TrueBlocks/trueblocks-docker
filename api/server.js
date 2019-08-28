@@ -69,8 +69,6 @@ app.get(`/:routeName`, (req, res) => {
     }
 
     let cmd = generateCmd(routeName, req.query);
-    if(routeName === "transactions")
-        routeName = "trans";   
     let chifra = spawn("chifra", [routeName, cmd], {env: env});
     req.on('close', (err) => {
         chifra.kill('SIGINT');
