@@ -52,7 +52,7 @@ button:disabled {
 
 .home {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   flex-flow: row wrap;
 
 }

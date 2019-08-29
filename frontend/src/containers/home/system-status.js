@@ -39,10 +39,12 @@ const SystemDetails = (props) => {
         <div className="item grouping">TrueBlocks Index</div>
         <div className="item">Status:</div>
         <div className={`item space-after ${props.isConnected ? "connected" : "disconnected"}`}>{props.isConnected ? "Scraping" : "Not Scraping"}</div> 
-        <div className="item">Final & Consolidated:</div>
+        <div className="item">Finalized:</div>
         <div className="item">{props.chainStatus.finalized}</div>
-        <div className="item">Final:</div>
-        <div className="item">{props.chainStatus.ripe}</div>        
+        <div className="item">Staged:</div>
+        <div className="item">{props.chainStatus.staging}</div>
+        <div className="item">Unripe:</div>
+        <div className="item">{props.chainStatus.unripe}</div>
         <div className="item">API Provider:</div>
         <div className="item space-after">{props.apiProvider}</div>
         <div className="item grouping">System Version</div>
@@ -54,7 +56,6 @@ const SystemDetails = (props) => {
 
       <ChainStatus/>
       </div>)
-    
 }
 
 const mapStateToProps = ({ systemStatus, chainStatus, settingsManager }) => (
