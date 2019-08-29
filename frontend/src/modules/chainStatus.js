@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
 }
 
 const getData = (endpoint) => {
-  return fetch(`${endpoint}/transactions?trans_list=0.0`)
+  return fetch(`${endpoint}/status?mode_list=monitors`)
 }
 
 export const getChainStatus = () => {

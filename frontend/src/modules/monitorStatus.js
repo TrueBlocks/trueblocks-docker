@@ -55,7 +55,7 @@ export const getMonitorStatus = () => {
             .then(async res => {
                 console.log("ok...")
                 let json = await res.json();
-                json = json[0].caches[0];
+                json = json.data[0][0].caches[0];
                 console.log(json);
                 dispatch({
                     type: GETSTATUS_SUCCESS,
