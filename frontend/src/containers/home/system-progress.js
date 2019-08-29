@@ -9,7 +9,7 @@ const SystemProgress = (props) => {
             <h1>Index Progress</h1>
             <div>
             Size: {props.systemData.caches !== undefined && 
-                (props.systemData.caches[0].sizeInBytes * 1e-9).toFixed(2)} GB
+                (props.systemData.caches[0].sizeInBytes * 1e-9).toFixed(5)} GB
             
                 </div>
             {props.chainStatus.finalized !== undefined &&
