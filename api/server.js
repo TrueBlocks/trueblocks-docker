@@ -69,9 +69,10 @@ app.get(`/:routeName`, (req, res) => {
     }
 
     let cmd = generateCmd(routeName, req.query);
-    let chifra = spawn("chifra", [routeName, cmd], {env: env});
+    let chifra = spawn("chifra", [routeName, cmd], {env: env, detached: true});
     req.on('close', (err) => {
-        chifra.kill('SIGINT');
+        console.log(`killing ${-chifra.pid}...`)
+        process.kill(-chifra.pid, 'SIGINT')
         removeFromProcessList(chifra.pid);
         return false;
     });
