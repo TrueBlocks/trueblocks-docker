@@ -13,7 +13,6 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log("reducer was called")
   switch (action.type) {
 
     case GETSTATUS_BEGIN:
@@ -43,19 +42,6 @@ export default (state = initialState, action) => {
   }
 }
 
-
-// const getFakeData = () => {
-//     return new Promise(resolve => {
-//         // Resolve after a timeout so we can see the loading indicator
-//         setTimeout(
-//             () => {
-//                 resolve(fakeData)
-//             },
-//             1000
-//         );
-//         });
-// }
-
 const getData = (endpoint) => {
   return fetch(`${endpoint}/status`)
 }
@@ -69,7 +55,6 @@ export const getStatus = () => {
         console.log(state.settingsManager.apiProvider);
         return getData(state.settingsManager.apiProvider)
             .then(async res => {
-                console.log("ok...")
                 let json = await res.json();
                 json = json.data[0][0];
                 console.log(json);

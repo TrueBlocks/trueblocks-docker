@@ -7,7 +7,6 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log("reducer was called")
   switch (action.type) {
 
     case CHANGESETTINGS_SUCCESS:

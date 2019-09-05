@@ -1,8 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {getMonitorStatus} from '../../modules/monitorStatus'
-import {withPolling} from "../../modules/withPolling"
+import { getMonitorStatus } from '../../modules/monitorStatus'
+import { monitorRemove } from '../../modules/monitorRemove'
+import { withPolling } from '../../modules/withPolling'
 import trash from "../../img/trash-alt.svg"
 
 const MonitorStatus = (props) => {
@@ -14,33 +15,40 @@ const MonitorStatus = (props) => {
     )
 }
 
+const MonitorDetail = (props) => {
+  const handleClick = () => props.rm(props.address)
+  return (
+    <div className="detail-container">
+    <div className="no">
+        <div>{props.index}</div>
+        <div className="trash"><img alt={trash} src={trash} width="10px" onClick={handleClick}/></div>
+        </div>
+    <div className="detail">
+    {props.name ? <li className="name">{props.name}</li> : null}
+    <li className="address">{props.address}</li>
+    <li>nRecords = {props.nRecords}</li>
+    <li>Size (Bytes) = {props.sizeInBytes}</li>
+    </div>
+  </div>
+  )
+}
+
 const MonitorDetails = (props) => {
-         return (<div>
-          <div className={`monitor-details`}>
-            {props.monitorStatus !== undefined && props.monitorStatus.items !== undefined && props.monitorStatus.items.map((item, index) => (
-                <div className="detail-container">
-                    <div className="no">
-                        <div>{index}</div>
-                        <div className="trash"><img alt={trash} src={trash} width="10px"/></div>
-                        </div>
-                    <div className="detail">
-                    {item.name ?
-                    <li className="name">{item.name}</li> : null
-                    }
-                    <li className="address">{item.address}</li>
-                    <li>nRecords = {item.nRecords}</li>
-                    <li>Size (Bytes) = {item.sizeInBytes}</li>
-                    </div>
-                </div>
-            ))}
+  const ready = props.monitorStatus !== undefined && props.monitorStatus.items !== undefined 
+    return (
+      <div className={`monitor-details`}>
+        {ready && props.monitorStatus.items.map((item, index) => (
+          <MonitorDetail index={index} {...item} rm={props.rm} key={`a${item.address}`}/>
+        ))}
       </div>
-      </div>)
+    )
     
 }
 
-const mapStateToProps = ({ monitorStatus }) => (
+const mapStateToProps = ({ monitorStatus, monitorRemove }) => (
     {
         monitorStatus: monitorStatus.monitorStatus,
+        monitorRemove: monitorRemove.error
     }
 )
 
@@ -48,7 +56,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getMonitorStatus,
-    //   changePage: () => push('/settings')
+      rm: (address) => monitorRemove(address)
     },
     dispatch
   )
@@ -57,4 +65,3 @@ const mapDispatchToProps = dispatch =>
     mapStateToProps,
     mapDispatchToProps
   )(MonitorStatus))
-  

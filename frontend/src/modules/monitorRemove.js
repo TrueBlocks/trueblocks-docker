@@ -1,9 +1,8 @@
-export const GETSTATUS_BEGIN = 'chainStatus/GETSTATUS_BEGIN'
-export const GETSTATUS_SUCCESS = 'chainStatus/GETSTATUS_SUCCESS'
-export const GETSTATUS_FAILURE = 'chainStatus/GETSTATUS_FAILURE'
+export const GETSTATUS_BEGIN = 'monitorRemove/GETSTATUS_BEGIN'
+export const GETSTATUS_SUCCESS = 'monitorRemove/GETSTATUS_SUCCESS'
+export const GETSTATUS_FAILURE = 'monitorRemove/GETSTATUS_FAILURE'
 
 const initialState = {
-  chainStatus: {},
   isConnected: false,
   isLoading: false,
   error: null,
@@ -24,14 +23,14 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         isConnected: true,
-        chainStatus: action.payload
+        // monitorStatus: action.payload
       }
 
     case GETSTATUS_FAILURE:
         return {
             ...state,
             isLoading: false,
-            chainStatus: {}
+            error: "Could not remove monitor"
         }
 
     default:
@@ -39,29 +38,28 @@ export default (state = initialState, action) => {
   }
 }
 
-const getData = (endpoint) => {
-  return fetch(`${endpoint}/status?mode_list=monitors`)
+const getData = (endpoint, address) => {
+  console.log("ok")
+  return fetch(`${endpoint}/rm?address=${address}&yes`)
 }
 
-export const getChainStatus = () => {
+export const monitorRemove = (address) => {
+  console.log("ok...1")
     return (dispatch, getState) => {
+      console.log("ok...2")
         dispatch({
           type: GETSTATUS_BEGIN
         })
-    
         let state = getState();
-        console.log(state.settingsManager.apiProvider);
-        return getData(state.settingsManager.apiProvider)
+        return getData(state.settingsManager.apiProvider, address)
             .then(async res => {
-                console.log("ok...")
                 let json = await res.json();
-                json = json.meta;
                 console.log(json);
-                dispatch({
+                
+                return dispatch({
                     type: GETSTATUS_SUCCESS,
                     payload: json
                 })
-                return json
             })
             .catch((e) => {
                 dispatch({
