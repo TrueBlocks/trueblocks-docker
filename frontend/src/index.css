@@ -149,10 +149,19 @@ button:disabled {
   justify-content: center;
 }
 
+.monitor-details .detail-container.disabled {
+  opacity: .5;
+  cursor: not-allowed !important;
+}
+
 .trash {
   width: 100%;
   opacity: .3;
   cursor: pointer;
+}
+
+.disabled .trash {
+  visibility: hidden;
 }
 
 .trash:hover {

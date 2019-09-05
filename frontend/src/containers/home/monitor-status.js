@@ -15,22 +15,38 @@ const MonitorStatus = (props) => {
     )
 }
 
-const MonitorDetail = (props) => {
-  const handleClick = () => props.rm(props.address)
-  return (
-    <div className="detail-container">
-    <div className="no">
-        <div>{props.index}</div>
-        <div className="trash"><img alt={trash} src={trash} width="10px" onClick={handleClick}/></div>
-        </div>
-    <div className="detail">
-    {props.name ? <li className="name">{props.name}</li> : null}
-    <li className="address">{props.address}</li>
-    <li>nRecords = {props.nRecords}</li>
-    <li>Size (Bytes) = {props.sizeInBytes}</li>
+class MonitorDetail extends React.Component {
+  
+  constructor(props) {
+    super(props)
+    this.state = {
+      deleted: false
+    }
+  }
+
+  handleClick = (el) => {
+    if(!this.state.deleted) {
+      this.props.rm(this.props.address)
+      this.setState({deleted: true})
+    }
+  }
+
+  render () {
+    return (
+      <div className={`detail-container ${this.state.deleted ? 'disabled' : ''}`}>
+      <div className="no">
+          <div>{this.props.index}</div>
+          <div className="trash" onClick={this.handleClick}><img alt={trash} src={trash} width="10px"/></div>
+          </div>
+      <div className="detail">
+      {this.props.name ? <li className="name">{this.props.name}</li> : null}
+      <li className="address">{this.props.address}</li>
+      <li>nRecords = {this.props.nRecords}</li>
+      <li>Size (Bytes) = {this.props.sizeInBytes}</li>
+      </div>
     </div>
-  </div>
-  )
+    )
+  }
 }
 
 const MonitorDetails = (props) => {
