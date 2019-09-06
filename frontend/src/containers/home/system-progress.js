@@ -1,7 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import {withPolling} from "../../modules/withPolling"
-
 
 const SystemProgress = (props) => {
     return (
@@ -20,11 +18,11 @@ const SystemProgress = (props) => {
 }
 
 const SystemProgressChart = (props) => {
-    let client = props.chainStatus.client;
-    let clientHead = props.chainStatus.client + 100;
-    let ripe = props.chainStatus.ripe;
-    let unripe = props.chainStatus.unripe;
-    let finalized = props.chainStatus.finalized;
+    const client = props.chainStatus.client;
+    const clientHead = props.chainStatus.client + 100;
+    const ripe = props.chainStatus.ripe;
+    const unripe = props.chainStatus.unripe;
+    const finalized = props.chainStatus.finalized;
 
     console.log(client, clientHead, ripe, unripe, finalized)
 
@@ -36,16 +34,13 @@ const SystemProgressChart = (props) => {
 
     let order = ["finalized", "ripe", "unripe", "unsynced"]
 
-    console.log(bars);
-    console.log(props.chainStatus);
     return (
         <div>
             <div className="progress-bar stripes">
-            {/* <span className="red" style={{width: syncPct}}></span> */}
-            {order.map(item => 
-                <span style={{width: bars[item].pct + '%', backgroundColor: bars[item].color}}></span>
-            )}
-        </div>
+                {order.map(item => 
+                    <span style={{width: bars[item].pct + '%', backgroundColor: bars[item].color}}></span>
+                )}
+            </div>
         </div>
     )
 }

@@ -3,15 +3,43 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getMonitorStatus } from '../../modules/monitorStatus'
 import { monitorRemove } from '../../modules/monitorRemove'
+import { monitorAdd } from '../../modules/monitorAdd'
 import { withPolling } from '../../modules/withPolling'
 import trash from "../../img/trash-alt.svg"
 
 const MonitorStatus = (props) => {
+  return (
+    <div className="monitor-status">
+      <h1>Monitor Details</h1>
+      <MonitorDetails {...props}/>
+    </div>
+  )
+}
+
+const MonitorDetails = (props) => {
+  
+  let addressEl
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(addressEl.value);
+    props.add(addressEl.value)
+  }
+
+  const ready = props.monitorStatus !== undefined && props.monitorStatus.items !== undefined 
     return (
-        <div className="monitor-status">
-            <h1>Monitor Details</h1>
-            <MonitorDetails {...props}/>
+      <div className={`monitor-details`}>
+        <div className="detail-container">
+          
+          <form onSubmit={onSubmit}>
+            <input placeholder="0x000000000000000000000000000000000000000000" ref = {el => addressEl = el}></input>
+            <button>＋ Add Monitor</button>
+          </form>
         </div>
+        {ready && props.monitorStatus.items.map((item, index) => (
+          <MonitorDetail index={index} {...item} rm={props.rm} key={`a${item.address}`}/>
+        ))}
+      </div>
     )
 }
 
@@ -49,18 +77,6 @@ class MonitorDetail extends React.Component {
   }
 }
 
-const MonitorDetails = (props) => {
-  const ready = props.monitorStatus !== undefined && props.monitorStatus.items !== undefined 
-    return (
-      <div className={`monitor-details`}>
-        {ready && props.monitorStatus.items.map((item, index) => (
-          <MonitorDetail index={index} {...item} rm={props.rm} key={`a${item.address}`}/>
-        ))}
-      </div>
-    )
-    
-}
-
 const mapStateToProps = ({ monitorStatus, monitorRemove }) => (
     {
         monitorStatus: monitorStatus.monitorStatus,
@@ -72,7 +88,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getMonitorStatus,
-      rm: (address) => monitorRemove(address)
+      rm: (address) => monitorRemove(address),
+      add: (address) => monitorAdd(address)
     },
     dispatch
   )

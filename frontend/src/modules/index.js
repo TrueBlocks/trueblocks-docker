@@ -3,6 +3,7 @@ import systemStatus from './systemStatus'
 import monitorStatus from './monitorStatus'
 import indexData from './indexData'
 import settingsManager from './settingsManager'
+import monitorAdd from './monitorRemove'
 import monitorRemove from './monitorRemove'
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   monitorStatus,
   indexData,
   settingsManager,
+  monitorAdd,
   monitorRemove
 })
