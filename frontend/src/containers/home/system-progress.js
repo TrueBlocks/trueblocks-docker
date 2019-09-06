@@ -50,10 +50,10 @@ const SystemProgressChart = (props) => {
     )
 }
 
-const mapStateToProps = ({ indexData, chainStatus, systemStatus }) => (
+const mapStateToProps = ({ indexData, systemStatus }) => (
     {
         systemData: systemStatus.systemData,
-        chainStatus: chainStatus.chainStatus,
+        chainStatus: systemStatus.chainStatus,
         indexData: indexData.data,
         isLoading: indexData.isLoading
     }

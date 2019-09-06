@@ -38,12 +38,11 @@ header a {
 }
 
 header a:hover {
-  text-decoration: underline;
+  color: #761cc6;
 }
 
 header a.is-active {
-  /* color: #3888ad; */
-  text-decoration: underline;
+  color: #761cc6;
 }
 
 button:disabled {

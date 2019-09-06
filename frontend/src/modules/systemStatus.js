@@ -5,8 +5,7 @@ export const GETSTATUS_FAILURE = 'trueblocks/GETSTATUS_FAILURE'
 
 const initialState = {
   systemData: {},
-  chainData: {},
-  endpoint: "http://localhost:8080",
+  chainStatus: {},
   isConnected: false,
   isLoading: false,
   error: null,
@@ -27,7 +26,8 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         isConnected: true,
-        systemData: action.payload
+        systemData: action.payload.data,
+        chainStatus: action.payload.meta
       }
 
     case GETSTATUS_FAILURE:
@@ -55,12 +55,12 @@ export const getStatus = () => {
         console.log(state.settingsManager.apiProvider);
         return getData(state.settingsManager.apiProvider)
             .then(async res => {
-                let json = await res.json();
-                json = json.data[0][0];
-                console.log(json);
+                const json = await res.json()
+                const data = json.data[0][0]
+                const meta = json.meta
                 dispatch({
                     type: GETSTATUS_SUCCESS,
-                    payload: json
+                    payload: {data, meta}
                 })
                 return json
             })

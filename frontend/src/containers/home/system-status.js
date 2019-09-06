@@ -5,7 +5,6 @@ import { push } from 'connected-react-router'
 import {
   getStatus
 } from '../../modules/systemStatus'
-import ChainStatus from "./chain-status"
 import {withPolling} from "../../modules/withPolling"
 
 const SystemStatus = (props) => {
@@ -53,8 +52,6 @@ const SystemDetails = (props) => {
         <div className="item">Ethereum:</div>
         <div className="item small">{props.systemData.client_version}</div>
       </div>
-
-      <ChainStatus/>
       </div>)
 }
 
@@ -63,7 +60,7 @@ const mapStateToProps = ({ systemStatus, chainStatus, settingsManager }) => (
         isConnected: systemStatus.isConnected,
         systemData: systemStatus.systemData,
         isLoading: systemStatus.isLoading,
-        chainStatus: chainStatus.chainStatus,
+        chainStatus: systemStatus.chainStatus,
         apiProvider: settingsManager.apiProvider
     }
 )
