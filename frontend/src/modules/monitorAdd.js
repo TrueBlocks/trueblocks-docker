@@ -40,13 +40,11 @@ export default (state = initialState, action) => {
 
 const getData = (endpoint, address) => {
   console.log("ok")
-  return fetch(`${endpoint}/list?address_list=${address}`)
+  return fetch(`${endpoint}/list?addr_list=${address}`)
 }
 
 export const monitorAdd = (address) => {
-  console.log("ok...1")
     return (dispatch, getState) => {
-      console.log("ok...2")
         dispatch({
           type: GETSTATUS_BEGIN
         })
