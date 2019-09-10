@@ -23,19 +23,21 @@ module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
 
     let paramsFormatted = toolData.map((option) => {
       let OPTS = [];
-      if(option.is_required) {
+      if (option.is_required) {
         OPTS.push("OPT_REQUIRED");
       } else {
         // OPTS.push("OPT_OPTIONAL");
       }
-      if(!option.core_visible) OPTS.push("OPT_HIDDEN");
-      if(option.option_kind === "switch") {
+      if (!option.core_visible) OPTS.push("OPT_HIDDEN");
+      if (option.option_kind === "switch") {
         // option.data_type = "";
         OPTS.push("OPT_SWITCH");
-      } else if(option.option_kind === "flag") {
+      } else if (option.option_kind === "flag") {
         OPTS.push("OPT_FLAG");
-      } else if(option.option_kind === "positional") {
+      } else if (option.option_kind === "positional") {
         OPTS.push("OPT_POSITIONAL")
+      } else {
+        OPTS.push("OPT_DESCRIPTION")
       }
       if(OPTS.length === 0) {
         OPTS = 0
@@ -99,7 +101,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
     console.log(`routeName: ${routeName}`);
 
     let routeData = data[routeName];
-    if(routeData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`)
+    if (routeData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`)
     let params = [...routeData, ...data.all]
         .filter(param => param.command !== '' & // no empty parameter names. these aren't parameters, they are tool description.
           param.docs_visible // don't show hidden options
@@ -107,7 +109,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
       .reduce((acc, val) => acc.concat(val), []); // flatten
 
     // format for GENERATE:URI
-    if(type === "URI") {
+    if (type === "URI") {
       let paramsFormatted = params.map(param => {
         return `{?${param.command}}`
       }).join("");
@@ -115,7 +117,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
     }
 
     // format for GENERATE:PARAMS
-    else if(type === "PARAMS") {  
+    else if (type === "PARAMS") {  
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
 
@@ -136,4 +138,3 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
       console.log("e", e);
     }
   }
-
