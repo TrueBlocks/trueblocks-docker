@@ -4,16 +4,17 @@ import { connect } from 'react-redux'
 import {
   getSettings
 } from '../../modules/settingsManager'
+import settingsLayout from './settingsLayout.json'
 
 const SettingInput = ({ label, value, description, type }) => {
-    return (
-      <div>
-        <label>{label}</label>
-        <input value={value} />
-        <span className="description">{description}</span>
-        <span className="data-type">{type}</span>
-      </div>
-    )
+  return (
+    <div>
+      <label>{label}</label>
+      <input value={value} />
+      <span className="description">{description}</span>
+      <span className="data-type">{type}</span>
+    </div>
+  )
 }
 
 class Settings extends React.Component {
@@ -30,11 +31,11 @@ class Settings extends React.Component {
       const wrangledJson = this.props.settings.files.map((file, fileI) => {
         return file.groups.map((group, groupI) => {
           return group.keys.map((key, keyI) => {
-            return {label: key.name, description: key.tip, value: key.value, type: key.type, loc: [fileI, groupI, keyI]}
+            return { label: key.name, description: key.tip, value: key.value, type: key.type, loc: [fileI, groupI, keyI] }
           })
         })
       }).flat(10)
-      this.setState({settings: wrangledJson})
+      this.setState({ settings: wrangledJson })
     })
   }
 
@@ -62,31 +63,6 @@ class Settings extends React.Component {
       )
     }
 
-    const settingLayout = [
-      {heading: "Providers", elements: [
-        "rpcProvider",
-        "apiProvider",
-        "balanceProvider"
-      ]},
-      {heading: "Paths", elements: [
-        "configPath",
-        "cachePath",
-        "indexPath"
-      ]},
-      {heading: "Scrape", elements: [
-        "nBlocks",
-        "nAddrProcs",
-        "nBlockProcs"
-      ]},
-      {heading: "Export", elements: [
-        "remote",
-        "writeTxs",
-        "writeTraces"
-      ]},
-      {heading: "Other", elements: [
-        "api_key"
-      ]}
-    ]
     let container
     if (this.props.settings.files === undefined) {
       container = <span>I hate you</span>
@@ -94,22 +70,19 @@ class Settings extends React.Component {
       container = <span>IT IS LOADING MY DUDE</span>
     } else if (this.state.settings.length) {
       container = <div>
-      {/* {makeInput({ label: "test", value: "test", description: "desc", type: "type" })} */}
         {
-          settingLayout.map(category => 
+          settingsLayout.map(category =>
             <div>
               <h3>{category.heading}</h3>
-            {category.elements.map(settingName => {
-              console.log(settingName)
-              console.log(this.state.settings)
-              const el = this.state.settings.find(obj => obj.label === settingName)   
-              console.log(el)             
-                  return (<div>
-                    <SettingInput {...el}/>
+              {category.elements.map(settingName => {
+                const el = this.state.settings.find(obj => obj.label === settingName)
+                return (
+                  <div>
+                    <SettingInput {...el} />
                   </div>
-                  )
-            })
-            }
+                )
+              })
+              }
             </div>
           )
         }

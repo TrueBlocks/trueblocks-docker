@@ -1,0 +1,40 @@
+[
+    {
+        "heading": "Providers",
+        "elements": [
+            "rpcProvider",
+            "apiProvider",
+            "balanceProvider"
+        ]
+    },
+    {
+        "heading": "Paths",
+        "elements": [
+            "configPath",
+            "cachePath",
+            "indexPath"
+        ]
+    },
+    {
+        "heading": "Scrape",
+        "elements": [
+            "nBlocks",
+            "nAddrProcs",
+            "nBlockProcs"
+        ]
+    },
+    {
+        "heading": "Export",
+        "elements": [
+            "remote",
+            "writeTxs",
+            "writeTraces"
+        ]
+    },
+    {
+        "heading": "Other",
+        "elements": [
+            "api_key"
+        ]
+    }
+]
