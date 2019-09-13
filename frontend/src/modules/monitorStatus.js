@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
 }
 
 const getData = (endpoint) => {
-  return fetch(`${endpoint}/status?mode_list=monitors&details`)
+  return fetch(`${endpoint}/status?mode_list=monitors&details&ether`)
 }
 
 export const getMonitorStatus = () => {
