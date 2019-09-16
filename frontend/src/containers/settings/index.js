@@ -1,18 +1,17 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-  getSettings
-} from '../../modules/settingsManager'
-import settingsLayout from './settingsLayout.json'
+import { getSettings } from '../../modules/settingsManager'
+import { setSettings } from '../../modules/setSettings'
+import settingsGroupings from './settingsGroupings.json'
 
-const SettingInput = ({ label, value, description, type, loc, ref }) => {
+const SettingInput = ({ label, value, description, type, loc, onChange }) => {
   return (
     <div className="setting-row">
       <label>{label}</label>
       <div className="input">
-        { type === "bool" && <input type="checkbox" value="" defaultChecked={value} name={label}/> }
-        { type !== "bool" && <input defaultValue={value} name={label}/>  }
+        { type === "bool" && <input type="checkbox" value="" defaultChecked={value} name={label} onChange={onChange}/> }
+        { type !== "bool" && <input defaultValue={value} name={label} onChange={onChange}/>  }
       </div>
       <span className="description">{description}</span>
       <span className="data-type">{type}</span>
@@ -26,61 +25,63 @@ class Settings extends React.Component {
     this.state = {
       settings: []
     }
+
+    this.settingNames = settingsGroupings.map(cat => cat.elements).flat(10)
   }
 
   componentDidMount = () => {
-    this.props.getSettings().then((data) => {
+    this.props.getSettings().then(() => {
       console.log(this.props.settings)
       let wrangledJson = []
       this.props.settings.files.map((file, fileI) => {
-        return file.groups.map((group, groupI) => {
-          return group.keys.map((key, keyI) => {
+        file.groups.map((group, groupI) => {
+          group.keys.map((key, keyI) => {
             wrangledJson[key.name] = { label: key.name, description: key.tip, value: key.value, type: key.type, loc: [fileI, groupI, keyI] }
+            this.setState({[key.name]: key.value})
           })
         })
       }).flat(10)
-      this.setState({ settings: wrangledJson })
+      this.setState({settings: wrangledJson})
     })
-  }
-
-  handleInputChange = (e) => {
-    // const target = e.target;
-    // const value = target.type === 'checkbox' ? target.checked : target.value;
-    // const name = target.name;
     
-    // const settingToUpdate = this.state.settings.find(obj => obj.label === name)
-    // console.log(settingToUpdate)
-    // this.setState({
-    //   settings[name]: value
-    // });
   }
 
   submit = (e) => {
     e.preventDefault();
     console.log("submit")
-    console.log(e.target)
 
-    // get proper structure of settings
-    // this.props.settings
-    // replace values from our helper structure into the proper structure
-    // this.state.settings.map(())
-    // send to api
+    let settingsUpdate = this.props.settings
+    this.settingNames.map(name => {
+      const obj = this.state.settings[name]
+      const newVal = this.state[name]
+      if(newVal !== undefined)
+        settingsUpdate.files[obj.loc[0]].groups[obj.loc[1]].keys[obj.loc[2]].value = newVal
+    })
+
+    this.props.sendToApi(JSON.stringify(settingsUpdate))
+  }
+
+  onChange = (e) => {
+    console.log(e.target.name)
+    console.log(e.target.value)
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   render() {
     const isLoading = this.props.isLoading
     let container
     if (this.props.settings.files === undefined) {
-      container = <span>I hate you</span>
+      container = <span>Preparing settings display...</span>
     } else if (isLoading) {
-      container = <span>IT IS LOADING MY DUDE</span>
+      container = <span>Querying settings...</span>
     } else if (this.state.settings !== []) {
       console.log(this.state.settings)
-      let formInput = React.createRef();
       container = <div>
         <form onSubmit={this.submit}>
         {
-          settingsLayout.map(category =>
+          settingsGroupings.map(category =>
             <div className="setting-container">
               <div className="setting-group">
               <h3>{category.heading}</h3>
@@ -88,7 +89,7 @@ class Settings extends React.Component {
                 const el = this.state.settings[settingName]
                 return (
                   <div>
-                    <SettingInput {...el} formInput={formInput} />
+                    <SettingInput {...el} value={this.state[settingName]} onChange={this.onChange}/>
                   </div>
                 )
               })
@@ -122,7 +123,8 @@ const mapStateToProps = ({ settingsManager }) => (
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getSettings
+      getSettings,
+      sendToApi: (json) => setSettings(json)
     },
     dispatch
   )

@@ -26,7 +26,6 @@
     {
         "heading": "Export",
         "elements": [
-            "remote",
             "writeTxs",
             "writeTraces"
         ]
