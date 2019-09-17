@@ -68,6 +68,7 @@ class MonitorDetail extends React.Component {
           </div>
       <div className="detail">
       {this.props.name ? <li className="name">{this.props.name}</li> : null}
+      {this.props.group ? <li>{this.props.subgroup ? this.props.group + "/" + this.props.subgroup : this.props.group}</li> : null}
       <li className="address">{this.props.address}</li>
       <li>Ether balance = {this.props.curEther}</li>
       <li>nRecords = {this.props.nRecords}</li>
