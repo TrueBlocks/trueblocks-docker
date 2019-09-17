@@ -50,12 +50,10 @@ class Settings extends React.Component {
     e.preventDefault();
     console.log("submit")
 
-    let settingsUpdate = this.props.settings
-    this.settingNames.map(name => {
-      const obj = this.state.settings[name]
-      const newVal = this.state[name]
-      if(newVal !== undefined)
-        settingsUpdate.files[obj.loc[0]].groups[obj.loc[1]].keys[obj.loc[2]].value = newVal
+    let settingsUpdate = {}
+    this.settingNames.map(setting => {
+      if(this.state[setting] !== undefined)
+        settingsUpdate[setting] = this.state[setting]
     })
 
     this.props.sendToApi(JSON.stringify(settingsUpdate))
