@@ -25,7 +25,7 @@ let processList = []
 let cnt = 0
 
 const reportAndSend = (routeName, code, res) => {
-    console.log(`"${routeName}" exiting: ${code === undefined ? "OK" : code}`);
+    console.log(~~(Date.now() / 1000) + " ~ \x1b[32m\x1b[1m<INFO>\x1b[0m  : " + `API exiting route: ${routeName} with ${code === undefined ? "OK" : code}`);
     console.log(`------------- ${++cnt} ---------------------------`);
     return res.send();
 }
@@ -47,7 +47,7 @@ const generateCmd = (routeName, queryObj) => {
         return cmdString;
     }).reduce((acc, val) => acc.concat(val), [])
     .join(' ');
-    console.log(`call: chifra ${routeName} ${cmd}`);
+    console.log(~~(Date.now() / 1000) + " ~ \x1b[32m\x1b[1m<INFO>\x1b[0m  : " + `API calling: chifra ${routeName} ${cmd}`);
     return cmd;
 }
 
@@ -71,17 +71,17 @@ app.get(`/:routeName`, (req, res) => {
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env, detached: true});
     req.on('close', (err) => {
-        console.log(`killing ${-chifra.pid}...`)
-	try {
+//        console.log(`killing ${-chifra.pid}...`)
+        try {
             process.kill(-chifra.pid, 'SIGINT')
-	} catch (e) {
-	    console.log(`error killing process: ${e}`)
-	}
+        } catch (e) {
+//            //console.log("completed"); //`error killing process: ${e}`)
+        }
         removeFromProcessList(chifra.pid);
         return false;
     });
     processList.push({pid: chifra.pid, cmd: `chifra ${routeName} ${cmd}`});
-    console.log(processList);
+//    console.log(processList);
     chifra.stderr.pipe(process.stderr);
     chifra.stdout.pipe(res).on('finish', (code) => {
         removeFromProcessList(chifra.pid);
