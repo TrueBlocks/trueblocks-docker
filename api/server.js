@@ -94,7 +94,7 @@ app.put(`/config`, (req, res) => {
     console.log(req.query)
     if(req.query.set !== undefined) {
         console.log(`setting env CONFIG_SET to...\n${JSON.stringify(req.body)}`)
-        env.CONFIG_SET = req.body
+        env.CONFIG_SET = JSON.stringify(req.body)
     }
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env, detached: true});
