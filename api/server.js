@@ -12,8 +12,9 @@ app.use(bodyParser.text());
 app.use('/docs', express.static(__dirname + '/docs'));
 app.use('/', express.static(__dirname + '/build'));
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
 });
 
@@ -67,7 +68,34 @@ app.get(`/:routeName`, (req, res) => {
     if(apiOptions[routeName] === undefined) {
         return res.send("This route is not available.")
     }
+    let cmd = generateCmd(routeName, req.query);
+    let chifra = spawn("chifra", [routeName, cmd], {env: env, detached: true});
+    req.on('close', (err) => {
+        console.log(`killing ${-chifra.pid}...`)
+	try {
+            process.kill(-chifra.pid, 'SIGINT')
+	} catch (e) {
+	    console.log(`error killing process: ${e}`)
+	}
+        removeFromProcessList(chifra.pid);
+        return false;
+    });
+    processList.push({pid: chifra.pid, cmd: `chifra ${routeName} ${cmd}`});
+    console.log(processList);
+    chifra.stderr.pipe(process.stderr);
+    chifra.stdout.pipe(res).on('finish', (code) => {
+        removeFromProcessList(chifra.pid);
+        reportAndSend(routeName, code, res);
+    })
+})
 
+app.put(`/config`, (req, res) => {
+    const routeName = 'config';
+    console.log(req.query)
+    if(req.query.set !== undefined) {
+        console.log(`setting env CONFIG_SET to...\n${JSON.stringify(req.body)}`)
+        env.CONFIG_SET = req.body
+    }
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env, detached: true});
     req.on('close', (err) => {

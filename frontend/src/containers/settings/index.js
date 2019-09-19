@@ -3,17 +3,16 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getSettings } from '../../modules/settingsManager'
 import { setSettings } from '../../modules/setSettings'
-import settingsGroupings from './settingsGroupings.json'
 
-const SettingInput = ({ label, value, description, type, loc, onChange }) => {
+const SettingInput = ({ name, value, type, tip, onChange }) => {
   return (
     <div className="setting-row">
-      <label>{label}</label>
+      <label>{name}</label>
       <div className="input">
-        { type === "bool" && <input type="checkbox" value="" defaultChecked={value} name={label} onChange={onChange}/> }
-        { type !== "bool" && <input defaultValue={value} name={label} onChange={onChange}/>  }
+        { type === 'bool' && <input type="checkbox" value="" defaultChecked={value} name={name} onChange={onChange}/> }
+        { type !== 'bool' && <input defaultValue={value} name={name} onChange={onChange}/>  }
       </div>
-      <span className="description">{description}</span>
+      <span className="description">{tip}</span>
       <span className="data-type">{type}</span>
     </div>
   )
@@ -25,46 +24,43 @@ class Settings extends React.Component {
     this.state = {
       settings: []
     }
-
-    this.settingNames = settingsGroupings.map(cat => cat.elements).flat(10)
   }
 
   componentDidMount = () => {
     this.props.getSettings().then(() => {
-      console.log(this.props.settings)
-      let wrangledJson = []
-      this.props.settings.files.map((file, fileI) => {
-        file.groups.map((group, groupI) => {
-          group.keys.map((key, keyI) => {
-            wrangledJson[key.name] = { label: key.name, description: key.tip, value: key.value, type: key.type, loc: [fileI, groupI, keyI] }
-            this.setState({[key.name]: key.value})
-          })
-        })
-      }).flat(10)
-      this.setState({settings: wrangledJson})
+      // console.log(this.props.settings)
+      // let wrangledJson = []
+      // this.props.settings.files.map((file, fileI) => {
+      //   file.groups.map((group, groupI) => {
+      //     group.keys.map((key, keyI) => {
+      //       if(wrangledJson[group.section] === undefined)
+      //         wrangledJson[group.section] = []
+      //       wrangledJson[group.section][key.name] = {
+      //         label: key.name,
+      //         description: key.tip,
+      //         value: key.value,
+      //         type: key.type,
+      //         groupName: group.name,
+      //         section: group.section
+      //       }
+      //       this.setState({[key.name]: key.value})
+      //     })
+      //   })
+      // }).flat(10)
+      this.setState({settings: this.props.settings.files})
     })
-    
   }
 
   submit = (e) => {
     e.preventDefault();
     console.log("submit")
-
-    let settingsUpdate = {}
-    this.settingNames.map(setting => {
-      if(this.state[setting] !== undefined)
-        settingsUpdate[setting] = this.state[setting]
-    })
-
-    this.props.sendToApi(JSON.stringify(settingsUpdate))
+    this.props.sendToApi(JSON.stringify(this.state.settings))
   }
 
-  onChange = (e) => {
-    console.log(e.target.name)
-    console.log(e.target.value)
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+  onChange = (loc, e) => {
+    let settings = [...this.state.settings]
+    settings[loc[0]].groups[loc[1]].keys[loc[2]].value = e.target.value
+    this.setState({settings: settings})
   }
 
   render() {
@@ -79,22 +75,25 @@ class Settings extends React.Component {
       container = <div>
         <form onSubmit={this.submit}>
         {
-          settingsGroupings.map(category =>
+          this.state.settings.map((file, fileI) =>
+            file.groups.map((category, categoryI) => 
             <div className="setting-container">
               <div className="setting-group">
-              <h3>{category.heading}</h3>
-              {category.elements.map(settingName => {
-                const el = this.state.settings[settingName]
+              <h3>{category.section}</h3>
+              {category.keys.map((settingName, keyI) => {
+                const el = this.state.settings[fileI].groups[categoryI].keys[keyI]
+                const loc = [fileI, categoryI, keyI]
                 return (
                   <div>
-                    <SettingInput {...el} value={this.state[settingName]} onChange={this.onChange}/>
+                    <SettingInput {...el} onChange={(e) => this.onChange(loc, e)}/>
                   </div>
                 )
               })
               }
+              
               </div>
             </div>
-          )
+          ))
         }
         <button type="submit">Submit</button>
         </form>
