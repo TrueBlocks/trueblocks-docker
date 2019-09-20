@@ -1,34 +1,30 @@
-import config from '../config.json'
-export const GETSETTINGS_BEGIN = 'trueblocks/GETSETTINGS_BEGIN'
-export const GETSETTINGS_SUCCESS = 'trueblocks/GETSETTINGS_SUCCESS'
-export const GETSETTINGS_FAILURE = 'trueblocks/GETSETTINGS_FAILURE'
+export const SETSETTINGS_BEGIN = 'trueblocks/SETSETTINGS_BEGIN'
+export const SETSETTINGS_SUCCESS = 'trueblocks/SETSETTINGS_SUCCESS'
+export const SETSETTINGS_FAILURE = 'trueblocks/SETSETTINGS_FAILURE'
 
 const initialState = {
-  systemSettings: {},
-  isConnected: false,
+  res: {},
   isLoading: false,
   error: null,
-  apiProvider: config.apiProvider
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case GETSETTINGS_BEGIN:
+    case SETSETTINGS_BEGIN:
       return {
         ...state,
         isLoading: true
       }
 
-    case GETSETTINGS_SUCCESS:
+    case SETSETTINGS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        isConnected: true,
-        systemSettings: action.payload
+        res: action.payload
       }
 
-    case GETSETTINGS_FAILURE:
+    case SETSETTINGS_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -39,31 +35,35 @@ export default (state = initialState, action) => {
   }
 }
 
-const getData = (endpoint) => {
-  return fetch(`${endpoint}/config?get`)
-}
-
-export const getSettings = () => {
+export const setSettings = (jsonAsString) => {
   return (dispatch, getState) => {
     console.log("ok something")
     dispatch({
-      type: GETSETTINGS_BEGIN
+      type: SETSETTINGS_BEGIN
     })
     let state = getState();
-    return getData(state.settingsManager.apiProvider)
+    let url = `${state.settingsManager.apiProvider}/config?set`
+    console.log(`config settings hitting ${url} with ${jsonAsString}`)
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonAsString
+    })
       .then(async res => {
         const json = await res.json()
         const data = json.data[0]
         console.log(data)
         dispatch({
-          type: GETSETTINGS_SUCCESS,
+          type: SETSETTINGS_SUCCESS,
           payload: data
         })
         return data
       })
       .catch((e) => {
         dispatch({
-          type: GETSETTINGS_FAILURE,
+          type: SETSETTINGS_FAILURE,
         })
       })
   }
