@@ -1,46 +1,127 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-  changeApiProvider
-} from '../../modules/settingsManager'
+import { getSettings } from '../../modules/settingsManager'
+import { setSettings } from '../../modules/setSettings'
 
-
-
-const Settings = (props) => {
-
-  let apiProvider
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(apiProvider.value);
-    props.change(apiProvider.value)
-  }
-  
-    return (
-        <div>
-          <h1>Settings</h1>
-          API Provider: {props.apiProvider}
-          
-          <form onSubmit = {onSubmit}>
-            <input placeholder="http://"
-              ref = {el => apiProvider = el}/>
-            <button>Change</button>
-            </form>
-          </div>
-    )
+const SettingInput = ({ name, value, type, tip, onChange }) => {
+  return (
+    <div className="setting-row">
+      <label>{name}</label>
+      <div className="input">
+        { type === 'bool' && <input type="checkbox" value="" defaultChecked={value} name={name} onChange={onChange}/> }
+        { type !== 'bool' && <input defaultValue={value} name={name} onChange={onChange}/>  }
+      </div>
+      <span className="description">{tip}</span>
+      <span className="data-type">{type}</span>
+    </div>
+  )
 }
 
-const mapStateToProps = ({  settingsManager }) => (
-    {
-        apiProvider: settingsManager.apiProvider
+class Settings extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      settings: []
     }
+  }
+
+  componentDidMount = () => {
+    this.props.getSettings().then(() => {
+      // console.log(this.props.settings)
+      // let wrangledJson = []
+      // this.props.settings.files.map((file, fileI) => {
+      //   file.groups.map((group, groupI) => {
+      //     group.keys.map((key, keyI) => {
+      //       if(wrangledJson[group.section] === undefined)
+      //         wrangledJson[group.section] = []
+      //       wrangledJson[group.section][key.name] = {
+      //         label: key.name,
+      //         description: key.tip,
+      //         value: key.value,
+      //         type: key.type,
+      //         groupName: group.name,
+      //         section: group.section
+      //       }
+      //       this.setState({[key.name]: key.value})
+      //     })
+      //   })
+      // }).flat(10)
+      this.setState({settings: this.props.settings.files})
+    })
+  }
+
+  submit = (e) => {
+    e.preventDefault();
+    console.log("submit")
+    this.props.sendToApi(JSON.stringify(this.state.settings))
+  }
+
+  onChange = (loc, e) => {
+    let settings = [...this.state.settings]
+    settings[loc[0]].groups[loc[1]].keys[loc[2]].value = e.target.value
+    this.setState({settings: settings})
+  }
+
+  render() {
+    const isLoading = this.props.isLoading
+    let container
+    if (this.props.settings.files === undefined) {
+      container = <span>Preparing settings display...</span>
+    } else if (isLoading) {
+      container = <span>Querying settings...</span>
+    } else if (this.state.settings !== []) {
+      console.log(this.state.settings)
+      container = <div>
+        <form onSubmit={this.submit}>
+        {
+          this.state.settings.map((file, fileI) =>
+            file.groups.map((category, categoryI) => 
+            <div className="setting-container">
+              <div className="setting-group">
+              <h3>{category.section}</h3>
+              {category.keys.map((settingName, keyI) => {
+                const el = this.state.settings[fileI].groups[categoryI].keys[keyI]
+                const loc = [fileI, categoryI, keyI]
+                return (
+                  <div>
+                    <SettingInput {...el} onChange={(e) => this.onChange(loc, e)}/>
+                  </div>
+                )
+              })
+              }
+              
+              </div>
+            </div>
+          ))
+        }
+        <button type="submit">Submit</button>
+        </form>
+      </div>
+    }
+
+    return (
+      <div>
+        {container}
+      </div>
+    )
+  }
+}
+
+
+
+const mapStateToProps = ({ settingsManager }) => (
+  {
+    settings: settingsManager.systemSettings,
+    isLoading: settingsManager.isLoading
+  }
 )
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      change: (val) => changeApiProvider(val)
+      getSettings,
+      sendToApi: (json) => setSettings(json)
     },
     dispatch
   )

@@ -230,3 +230,41 @@ button:disabled {
 @keyframes animate-stripes {
   0% {background-position: 0 0;} 100% {background-position: 60px 0;}
 }
+
+.setting-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0 .2em;
+}
+
+.setting-group {
+  width: 100%;
+}
+
+.setting-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: .1em;
+}
+
+.setting-row label {
+  width: 15%;
+}
+
+.setting-row .input {
+  width: 30%;
+}
+
+.setting-row .input input {
+  width: 90%;
+}
+
+.setting-row .description {
+  width: 40%;
+}
+
+.setting-row .data-type {
+  width: 15%;
+}
