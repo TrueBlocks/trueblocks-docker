@@ -9,7 +9,7 @@ const SettingInput = ({ name, value, type, tip, onChange }) => {
     <div className="setting-row">
       <label>{name}</label>
       <div className="input">
-        { type === 'bool' && <input type="checkbox" value="" defaultChecked={value} name={name} onChange={onChange}/> }
+        { type === 'bool' && <input type="checkbox" value={value} checked={value} name={name} onChange={onChange}/> }
         { type !== 'bool' && <input defaultValue={value} name={name} onChange={onChange}/>  }
       </div>
       <span className="description">{tip}</span>
@@ -28,25 +28,6 @@ class Settings extends React.Component {
 
   componentDidMount = () => {
     this.props.getSettings().then(() => {
-      // console.log(this.props.settings)
-      // let wrangledJson = []
-      // this.props.settings.files.map((file, fileI) => {
-      //   file.groups.map((group, groupI) => {
-      //     group.keys.map((key, keyI) => {
-      //       if(wrangledJson[group.section] === undefined)
-      //         wrangledJson[group.section] = []
-      //       wrangledJson[group.section][key.name] = {
-      //         label: key.name,
-      //         description: key.tip,
-      //         value: key.value,
-      //         type: key.type,
-      //         groupName: group.name,
-      //         section: group.section
-      //       }
-      //       this.setState({[key.name]: key.value})
-      //     })
-      //   })
-      // }).flat(10)
       this.setState({settings: this.props.settings.files})
     })
   }
@@ -59,47 +40,46 @@ class Settings extends React.Component {
 
   onChange = (loc, e) => {
     let settings = [...this.state.settings]
-    settings[loc[0]].groups[loc[1]].keys[loc[2]].value = e.target.value
+    let newVal = e.target.type === "checkbox" ? e.target.checked : e.target.value
+    settings[loc[0]].groups[loc[1]].keys[loc[2]].value = newVal
     this.setState({settings: settings})
   }
 
   render() {
-    const isLoading = this.props.isLoading
     let container
     if (this.props.settings.files === undefined) {
       container = <span>Preparing settings display...</span>
-    } else if (isLoading) {
+    } else if (this.props.isLoading) {
       container = <span>Querying settings...</span>
     } else if (this.state.settings !== []) {
-      console.log(this.state.settings)
-      container = <div>
-        <form onSubmit={this.submit}>
-        {
-          this.state.settings.map((file, fileI) =>
-            file.groups.map((category, categoryI) => 
-            <div className="setting-container">
-              <div className="setting-group">
-              <h3>{category.section}</h3>
-              {category.keys.map((settingName, keyI) => {
-                const el = this.state.settings[fileI].groups[categoryI].keys[keyI]
-                const loc = [fileI, categoryI, keyI]
-                return (
-                  <div>
-                    <SettingInput {...el} onChange={(e) => this.onChange(loc, e)}/>
-                  </div>
-                )
-              })
-              }
-              
+      container = (
+        <div>
+          <form onSubmit={this.submit}>
+          {
+            this.state.settings.map((file, fileI) =>
+              file.groups.map((category, categoryI) => 
+              <div className="setting-container" key={category.section}>
+                <div className="setting-group">
+                <h3>{category.section}</h3>
+                {category.keys.map((settingKey, keyI) => {
+                  const el = this.state.settings[fileI].groups[categoryI].keys[keyI]
+                  const loc = [fileI, categoryI, keyI]
+                  return (
+                    <div key={settingKey.name}>
+                      <SettingInput {...el} onChange={(e) => this.onChange(loc, e)}/>
+                    </div>
+                  )
+                })
+                }              
+                </div>
               </div>
-            </div>
-          ))
-        }
-        <button type="submit">Submit</button>
-        </form>
-      </div>
+            ))
+          }
+          <button type="submit">Submit</button>
+          </form>
+        </div>
+      )
     }
-
     return (
       <div>
         {container}
@@ -107,8 +87,6 @@ class Settings extends React.Component {
     )
   }
 }
-
-
 
 const mapStateToProps = ({ settingsManager }) => (
   {

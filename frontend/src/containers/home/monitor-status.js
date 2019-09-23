@@ -16,63 +16,64 @@ const MonitorStatus = (props) => {
   )
 }
 
+
 const MonitorDetails = (props) => {
-  
-  let addressEl
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(addressEl.value);
-    props.add(addressEl.value)
-  }
-
   const ready = props.monitorStatus !== undefined && props.monitorStatus.items !== undefined 
     return (
       <div className={`monitor-details`}>
-        <div className="detail-container">
-          
-          <form onSubmit={onSubmit}>
-            <input placeholder="0x000000000000000000000000000000000000000000" ref = {el => addressEl = el}></input>
-            <button>＋ Add Monitor</button>
-          </form>
-        </div>
+        <MonitorAdd {...props}/>
         {ready && props.monitorStatus.items.map((item, index) => (
-          <MonitorDetail index={index} {...item} rm={props.rm} key={`a${item.address}`}/>
+          <MonitorDetail index={index} {...item} rmMonitor={props.rmMonitor} key={`a${item.address}`}/>
         ))}
       </div>
     )
 }
 
+const MonitorAdd = (props) => {
+  let inputAddress
+  const onSubmit = (e) => {
+    e.preventDefault();
+    props.addMonitor(inputAddress.value)
+  }
+  return (
+    <div className="detail-container">        
+      <form onSubmit={onSubmit}>
+        <input placeholder="0x000000000000000000000000000000000000000000" ref = {el => inputAddress = el}></input>
+        <button>＋ Add Monitor</button>
+      </form>
+    </div>
+  )
+}
+
 class MonitorDetail extends React.Component {
-  
   constructor(props) {
     super(props)
     this.state = {
-      deleted: false
+      wasDeleted: false
     }
   }
 
   handleClick = (el) => {
-    if(!this.state.deleted) {
-      this.props.rm(this.props.address)
-      this.setState({deleted: true})
+    if(!this.state.wasDeleted) {
+      this.props.rmMonitor(this.props.address)
+      this.setState({wasDeleted: true})
     }
   }
 
   render () {
     return (
-      <div className={`detail-container ${this.state.deleted ? 'disabled' : ''}`}>
+      <div className={`detail-container ${this.state.wasDeleted ? 'disabled' : ''}`}>
       <div className="no">
           <div>{this.props.index}</div>
           <div className="trash" onClick={this.handleClick}><img alt={trash} src={trash} width="10px"/></div>
           </div>
       <div className="detail">
-      {this.props.name ? <li className="name">{this.props.name}</li> : null}
-      {this.props.group ? <li>{this.props.subgroup ? this.props.group + "/" + this.props.subgroup : this.props.group}</li> : null}
-      <li className="address">{this.props.address}</li>
-      <li>Ether balance = {this.props.curEther}</li>
-      <li>nRecords = {this.props.nRecords}</li>
-      <li>Size (Bytes) = {this.props.sizeInBytes}</li>
+        {this.props.name ? <li className="name">{this.props.name}</li> : null}
+        {this.props.group ? <li>{this.props.subgroup ? this.props.group + "/" + this.props.subgroup : this.props.group}</li> : null}
+        <li className="address">{this.props.address}</li>
+        <li>Ether balance = {this.props.curEther}</li>
+        <li>nRecords = {this.props.nRecords}</li>
+        <li>Size (Bytes) = {this.props.sizeInBytes}</li>
       </div>
     </div>
     )
@@ -90,8 +91,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getMonitorStatus,
-      rm: (address) => monitorRemove(address),
-      add: (address) => monitorAdd(address)
+      rmMonitor: (address) => monitorRemove(address),
+      addMonitor: (address) => monitorAdd(address)
     },
     dispatch
   )
