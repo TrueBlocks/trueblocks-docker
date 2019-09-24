@@ -5,12 +5,17 @@ import { getMonitorStatus } from '../../modules/monitorStatus'
 import { monitorRemove } from '../../modules/monitorRemove'
 import { monitorAdd } from '../../modules/monitorAdd'
 import { withPolling } from '../../modules/withPolling'
+import { humanFileSize } from '../../helpers/filesize'
 import trash from "../../img/trash-alt.svg"
 
 const MonitorStatus = (props) => {
   return (
     <div className="monitor-status">
       <h1>Monitor Details</h1>
+      <p>
+        Monitors are per-address index caches.
+        They enable fast appearance history access.
+        They can be added and deleted.</p>
       <MonitorDetails {...props}/>
     </div>
   )
@@ -49,7 +54,8 @@ class MonitorDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      wasDeleted: false
+      wasDeleted: false,
+      isExpanded: false
     }
   }
 
@@ -60,14 +66,22 @@ class MonitorDetail extends React.Component {
     }
   }
 
+  toggle = () => {
+    this.setState({isExpanded: !this.state.isExpanded})
+  }
+
   render () {
+    const displayName = this.props.name ? this.props.name : this.props.address
+    const monitorSize = humanFileSize(this.props.sizeInBytes)
     return (
       <div className={`detail-container ${this.state.wasDeleted ? 'disabled' : ''}`}>
-      <div className="no">
-          <div>{this.props.index}</div>
-          <div className="trash" onClick={this.handleClick}><img alt={trash} src={trash} width="10px"/></div>
+      <div className='row-detail' onClick={this.toggle}>
+          <div className='index'>{this.props.index}</div>
+          <div className='display-name'>{displayName}</div>
+          <div className='size'>{monitorSize}</div>
+          <div className='trash' onClick={this.handleClick}><img alt={trash} src={trash} width="10px"/></div>
           </div>
-      <div className="detail">
+      <div className={`detail ${!this.state.isExpanded ? 'hidden' : ''}`}>
         {this.props.name ? <li className="name">{this.props.name}</li> : null}
         {this.props.group ? <li>{this.props.subgroup ? this.props.group + "/" + this.props.subgroup : this.props.group}</li> : null}
         <li className="address">{this.props.address}</li>
