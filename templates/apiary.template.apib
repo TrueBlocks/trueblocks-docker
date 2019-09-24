@@ -23,6 +23,39 @@ Examples of using the API are here.
 
 # Group Accounts
 
+## List [<<GENERATE:URI:list>>]
+
+A resource that tells trueBlocks that you want to list appearances for `address`. Trueblocks returns its appearance index, each appearance consisting of `{blockNumber, txId}`. 
+
++ Parameters
+
+<<GENERATE:PARAMS:list>>
+
+### /list [GET]
+
++ Request Plain Text Export
+
+    + Headers
+    
+            Accept: text/plain
+            
++ Response 200 (text/plain)
+    
+    + Body
+    
+            89796   6
+            89880   3
+            94675   17
+            94754   3
+            99979   10
+            101279  0
+            105338  18
+            105439  2
+            110350  40
+            110457  1
+            112698  35
+            112789  0
+
 ## Export [<<GENERATE:URI:export>>]
 
 A resource that tells trueblocks that you want to export transactions for `address`. Trueblocks will use its appearance index to ask the node for detailed information about each appearance. The information is then returned in either JSON or CSV.
@@ -88,39 +121,6 @@ A resource that tells trueblocks that you want to export transactions for `addre
                 }
               ]
             }
-
-## List [<<GENERATE:URI:list>>]
-
-A resource that tells trueBlocks that you want to list appearances for `address`. Trueblocks returns its appearance index, each appearance consisting of `{blockNumber, txId}`. 
-
-+ Parameters
-
-<<GENERATE:PARAMS:list>>
-
-### /list [GET]
-
-+ Request Plain Text Export
-
-    + Headers
-    
-            Accept: text/plain
-            
-+ Response 200 (text/plain)
-    
-    + Body
-    
-            89796   6
-            89880   3
-            94675   17
-            94754   3
-            99979   10
-            101279  0
-            105338  18
-            105439  2
-            110350  40
-            110457  1
-            112698  35
-            112789  0
 
 ## Slurp [<<GENERATE:URI:slurp>>]
 
