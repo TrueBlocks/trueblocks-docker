@@ -40,9 +40,9 @@ const SystemProgressChart = (props) => {
                     <div className='x-axis grid'>{row * 1e6}</div>
                     {[...Array(cols).keys()].map((col, colI) => {
                         let classes = []
-                        if(finalized >= row*1e6 + col*1e5) {
+                        if(finalized >= row*1e6 + (col+1)*1e5) {
                             classes.push('finalized')
-                        } else if(finalized >= row*1e6 + (col-1)*1e5) {
+                        } else if(finalized >= row*1e6 + col*1e5) {
                             classes.push('in-progress')
                         } else {
                             classes.push('inactive')
