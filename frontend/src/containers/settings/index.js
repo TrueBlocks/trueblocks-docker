@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getSettings } from '../../modules/settingsManager'
+import { getSettings } from '../../modules/getSettings'
 import { setSettings } from '../../modules/setSettings'
 
 const SettingInput = ({ name, value, type, tip, onChange }) => {
@@ -88,10 +88,10 @@ class Settings extends React.Component {
   }
 }
 
-const mapStateToProps = ({ settingsManager }) => (
+const mapStateToProps = ({ getSettings }) => (
   {
-    settings: settingsManager.systemSettings,
-    isLoading: settingsManager.isLoading
+    settings: getSettings.systemSettings,
+    isLoading: getSettings.isLoading
   }
 )
 

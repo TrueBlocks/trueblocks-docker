@@ -44,7 +44,7 @@ export const monitorRemove = (address) => {
           type: GETSTATUS_BEGIN
         })
         let state = getState();
-        return getData(state.settingsManager.apiProvider, address)
+        return getData(state.getSettings.apiProvider, address)
             .then(async res => {
                 let json = await res.json();                
                 return dispatch({

@@ -49,7 +49,7 @@ export const getIndexData = () => {
         })
     
         let state = getState();
-        return getData(state.settingsManager.apiProvider)
+        return getData(state.getSettings.apiProvider)
             .then(async res => {
                 let json = await res.json();
                 json = json.data[0][0].caches[0];

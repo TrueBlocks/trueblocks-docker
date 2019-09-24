@@ -17,7 +17,6 @@ export default (state = initialState, action) => {
       }
 
     case GETSTATUS_SUCCESS:
-      console.log("success");
       return {
         ...state,
         isLoading: false,
@@ -45,7 +44,7 @@ export const monitorAdd = (address) => {
           type: GETSTATUS_BEGIN
         })
         let state = getState();
-        return getData(state.settingsManager.apiProvider, address)
+        return getData(state.getSettings.apiProvider.apiProvider, address)
             .then(async res => {
                 let json = await res.json();
                 return dispatch({

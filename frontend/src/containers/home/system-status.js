@@ -47,13 +47,13 @@ const SystemDetails = (props) => {
         )
 }
 
-const mapStateToProps = ({ systemStatus, chainStatus, settingsManager }) => (
+const mapStateToProps = ({ systemStatus, chainStatus, getSettings }) => (
     {
         isConnected: systemStatus.isConnected,
         systemData: systemStatus.systemData,
         isLoading: systemStatus.isLoading,
         chainStatus: systemStatus.chainStatus,
-        apiProvider: settingsManager.apiProvider
+        apiProvider: getSettings.apiProvider
     }
 )
 

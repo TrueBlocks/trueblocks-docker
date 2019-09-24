@@ -41,7 +41,7 @@ export const setSettings = (jsonAsString) => {
       type: SETSETTINGS_BEGIN
     })
     let state = getState();
-    let url = `${state.settingsManager.apiProvider}/config?set`
+    let url = `${state.getSettings.apiProvider}/config?set`
     return fetch(url, {
       method: 'PUT',
       headers: {

@@ -51,7 +51,7 @@ export const getStatus = () => {
           type: GETSTATUS_BEGIN
         })
         let state = getState();
-        return getData(state.settingsManager.apiProvider)
+        return getData(state.getSettings.apiProvider)
             .then(async res => {
                 const json = await res.json()
                 const data = json.data[0][0]
