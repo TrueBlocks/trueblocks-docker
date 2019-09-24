@@ -124,6 +124,9 @@ h1 {
 
 .system-progress .chart-container .grid .filling.finalized {
   background-color: #cef3ce;
+  color: #72aa74;
+  font-weight: 300;
+  font-size: .7em;
 }
 
 .system-progress .chart-container .grid .filling.inactive {
@@ -353,44 +356,4 @@ button:disabled {
 
 .setting-row .data-type {
   width: 15%;
-}
-
-
-.checkmark {
-  display:inline-block;
-  width: 22px;
-  height:22px;
-  -ms-transform: rotate(45deg); /* IE 9 */
-  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-  transform: rotate(45deg);
-  line-height: 22px;
-  opacity: .5;
-}
-
-.checkmark_circle {
-  position: absolute;
-  width:22px;
-  height:22px;
-  background-color: green;
-  border-radius:11px;
-  left:0;
-  top:0;
-}
-
-.checkmark_stem {
-  position: absolute;
-  width:3px;
-  height:9px;
-  background-color:#fff;
-  left:11px;
-  top:6px;
-}
-
-.checkmark_kick {
-  position: absolute;
-  width:3px;
-  height:3px;
-  background-color:#fff;
-  left:8px;
-  top:12px;
 }

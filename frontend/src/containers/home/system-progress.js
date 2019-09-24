@@ -58,7 +58,7 @@ const SystemProgressChart = (props) => {
                             indexClass = 'inactive'
                         }
                         return (
-                        <div className='grid'><div className={`filling ${indexClass}`}>{indexClass === 'finalized' && <Checkmark/>}</div></div>
+                        <div className='grid'><div className={`filling ${indexClass}`}>{indexClass === 'finalized' && '✔'}</div></div>
                         )
                     })}
                     </React.Fragment>
