@@ -16,7 +16,6 @@ const SystemProgress = (props) => {
                         Number of index files: {props.systemData.caches[0].nFiles}
                     </div>
                         <SystemProgressChart {...props} />
-                    }
                 </div>
             )
             break;
@@ -28,16 +27,6 @@ const SystemProgress = (props) => {
             <h1>Index Progress</h1>
             {container}
         </div>
-    )
-}
-
-const Checkmark = () => {
-    return (
-        <span className="checkmark">
-            <div className="checkmark_circle"></div>
-            <div className="checkmark_stem"></div>
-            <div className="checkmark_kick"></div>
-        </span>
     )
 }
 
