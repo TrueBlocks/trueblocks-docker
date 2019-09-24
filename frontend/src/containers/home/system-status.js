@@ -28,7 +28,7 @@ const SystemDetails = (props) => {
               <div className="item">{props.systemData.rpc_provider}</div>
               <div className="item grouping">TrueBlocks Index</div>
               <div className="item">Status:</div>
-              <div className={`item space-after ${props.isConnected ? "connected" : "disconnected"}`}>{props.isConnected ? "Scraping" : "Not Scraping"}</div> 
+              <div className={`item space-after ${props.systemData.is_scraping ? "connected" : "disconnected"}`}>{props.systemData.is_scraping ? "Scraping" : "Not Scraping"}</div> 
               <div className="item">Finalized:</div>
               <div className="item">{props.chainStatus.finalized}</div>
               <div className="item">Staged:</div>

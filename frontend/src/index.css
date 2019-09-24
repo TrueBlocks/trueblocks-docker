@@ -156,7 +156,12 @@ main {
   flex-flow: row wrap;
   justify-content: space-evenly;
   width: 100%;
+  cursor: pointer;
 }
+
+/* .monitor-details .detail-container .row-detail:hover {
+  background-color: #EEE;
+} */
 
 .monitor-details .detail-container.disabled {
   opacity: .5;
