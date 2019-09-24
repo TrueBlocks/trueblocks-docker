@@ -4,7 +4,6 @@ export const GETSTATUS_FAILURE = 'monitorStatus/GETSTATUS_FAILURE'
 
 const initialState = {
   monitorStatus: {items: []},
-  isConnected: false,
   isLoading: false,
   error: null,
 }
@@ -19,11 +18,9 @@ export default (state = initialState, action) => {
       }
 
     case GETSTATUS_SUCCESS:
-      console.log("success");
       return {
         ...state,
         isLoading: false,
-        isConnected: true,
         monitorStatus: action.payload
       }
 
@@ -50,12 +47,10 @@ export const getMonitorStatus = () => {
         })
     
         let state = getState();
-        return getData(state.settingsManager.apiProvider)
+        return getData(state.getSettings.apiProvider)
             .then(async res => {
-                console.log("ok...")
                 let json = await res.json();
                 json = json.data[0][0].caches[0];
-                console.log(json);
                 dispatch({
                     type: GETSTATUS_SUCCESS,
                     payload: json

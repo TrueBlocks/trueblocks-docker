@@ -9,10 +9,10 @@ import logo from '../../img/logo.png'
 const App = () => (
   <div>
     <header>
-      <img alt={logo} src={logo} height="100px"/>
-      <NavLink activeClassName="is-active" exact={true} to="/">Home</NavLink> - 
-      <NavLink activeClassName="is-active" to="/settings">Settings</NavLink> - 
-      <NavLink activeClassName="is-active" to="/docs">Documentation</NavLink> - 
+      {/* <img alt={logo} src={logo} height="100px"/> */}
+      <NavLink activeClassName="is-active" exact={true} to="/">Home</NavLink>
+      <NavLink activeClassName="is-active" to="/settings">Settings</NavLink>
+      <NavLink activeClassName="is-active" to="/docs">Documentation</NavLink>
       <NavLink activeClassName="is-active" to="/about-us">About</NavLink>
     </header>
 

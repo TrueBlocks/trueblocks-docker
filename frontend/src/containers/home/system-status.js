@@ -8,7 +8,7 @@ import { withPolling } from "../../modules/withPolling"
 const SystemStatus = (props) => {
     return (
       <div className="system-status">
-        <h1>System Status</h1>
+        <h1>Connection</h1>
         <SystemDetails {...props}/>
         <button onClick={props.changePage}>Settings</button>
       </div>
@@ -28,7 +28,7 @@ const SystemDetails = (props) => {
               <div className="item">{props.systemData.rpc_provider}</div>
               <div className="item grouping">TrueBlocks Index</div>
               <div className="item">Status:</div>
-              <div className={`item space-after ${props.isConnected ? "connected" : "disconnected"}`}>{props.isConnected ? "Scraping" : "Not Scraping"}</div> 
+              <div className={`item space-after ${props.systemData.is_scraping ? "connected" : "disconnected"}`}>{props.systemData.is_scraping ? "Scraping" : "Not Scraping"}</div> 
               <div className="item">Finalized:</div>
               <div className="item">{props.chainStatus.finalized}</div>
               <div className="item">Staged:</div>
@@ -47,13 +47,13 @@ const SystemDetails = (props) => {
         )
 }
 
-const mapStateToProps = ({ systemStatus, chainStatus, settingsManager }) => (
+const mapStateToProps = ({ systemStatus, chainStatus, getSettings }) => (
     {
         isConnected: systemStatus.isConnected,
         systemData: systemStatus.systemData,
         isLoading: systemStatus.isLoading,
         chainStatus: systemStatus.chainStatus,
-        apiProvider: settingsManager.apiProvider
+        apiProvider: getSettings.apiProvider
     }
 )
 

@@ -1,6 +1,13 @@
 @font-face {
   font-family: 'Lato';
   src: local('Lato'), url(./fonts/Lato/Lato-Regular.ttf) format('ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Thin'), url(./fonts/Lato/Lato-Thin.ttf) format('ttf');
+  font-weight: 300;
 }
 
 html, body {
@@ -18,35 +25,67 @@ body {
     sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  padding:1em;
 }
 
 header {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  flex-flow: row nowrap;
+  justify-content: space-around;
   align-items: center;
-  width: 500px;
+  width: 100%;
+  background-color: #8d9cab;
 }
 
 header a {
-  color: #004a9a;
+  color: #ffffff;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1.1em;
+  font-weight: 300;
+  font-size: 1.0em;
   line-height: 1em;
+  background-color: #a7b7c2;
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  padding: 1em;
+  margin: 10px 5px;
+  /* box-shadow: 5px 5px 0 #f0efef; */
 }
 
 header a:hover {
-  color: #761cc6;
+  background-color: #e2e5f0;
+  color: #6f8296;
 }
 
 header a.is-active {
-  color: #761cc6;
+  color: #42505f;
+  font-weight: 700;
+  background-color: #e2e5f0;
 }
 
-button:disabled {
-  opacity: 0.5;
+
+main {
+  margin: 5px;
+}
+
+h1 {
+  margin: 1.2em 0;
+  font-size: 1.6em;
+  font-weight: 300;
+  color: #333;
+  border-bottom: 1px solid #333;
+}
+
+.system-status h1 {
+  color: #4c7c9c;
+}
+
+.system-progress h1 {
+  color: #cdada7;
+}
+
+.monitor-status h1 {
+  color: #ff9238;
 }
 
 .home {
@@ -64,16 +103,55 @@ button:disabled {
   width: 70%;
 }
 
-.system-status, .system-progress {
-  padding: 5px;
+.system-progress .chart-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  justify-items: center;
 }
 
+.system-progress .chart-container .grid {
+  width: 9%;
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
 
-.system-status h1, .monitor-status h1, .system-progress h1 {
-  margin: 1.2em 0;
-  font-size: 1.1em;
-  background-color: #EEE;
-  padding: .5em .5em;
+.grid.x-axis, .grid.y-axis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid.y-axis {
+  height: 50px;
+}
+
+.system-progress .chart-container .grid .filling {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.system-progress .chart-container .grid .filling.finalized {
+  background-color: #daeeda;
+  color: #72aa74;
+  font-weight: 300;
+  font-size: .7em;
+}
+
+.system-progress .chart-container .grid .filling.inactive {
+  background-color: #fff;
+}
+
+.system-progress .chart-container .grid .filling.in-progress {
+  background: repeating-linear-gradient(-45deg, #daeeda, #daeeda 5px, white 5px, white 10px);
+  /* background-size: 50px; */
+  background-repeat: repeat;
+}
+
+.system-status, .system-progress {
+  padding: 5px;
 }
 
 .system-details {
@@ -124,12 +202,11 @@ button:disabled {
 .monitor-details {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
 }
 
 .monitor-details .detail-container {
   border: 1px dotted #ddd;
-  width: 25%;
+  width: 100%;
   padding: .5em;
   display: flex;
   flex-flow: row wrap;
@@ -137,26 +214,46 @@ button:disabled {
   align-items: center;
 }
 
-.monitor-details .detail-container .no {
-  width: 20%;
-  background-color: #eee;
-  text-align: center;
-  height: 100%;
-  align-items: center;
+.monitor-details .detail-container .row-detail {
+  font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-evenly;
+  width: 100%;
+  cursor: pointer;
 }
+
+/* .monitor-details .detail-container .row-detail:hover {
+  background-color: #EEE;
+} */
 
 .monitor-details .detail-container.disabled {
   opacity: .5;
   cursor: not-allowed !important;
 }
 
+.hidden {
+  display: none;
+}
+
+.index {
+  width: 10%;
+}
+
+.display-name {
+  width: 60%;
+}
+
+.size {
+  width: 20%;
+}
+
 .trash {
-  width: 100%;
-  opacity: .3;
+  opacity: .6;
+  width: 10%;
   cursor: pointer;
+  text-align: right;
+  padding-right: 1em;
 }
 
 .disabled .trash {
@@ -164,7 +261,7 @@ button:disabled {
 }
 
 .trash:hover {
-  opacity: .6;
+  opacity: 1;
 }
 
 .monitor-details .detail-container .detail {
@@ -185,6 +282,9 @@ button:disabled {
   font-size: .8em;
 }
 
+button:disabled {
+  opacity: 0.5;
+}
 
 .progress-bar {
   background-color: #EEE;

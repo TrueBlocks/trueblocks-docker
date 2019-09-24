@@ -37,13 +37,11 @@ export default (state = initialState, action) => {
 
 export const setSettings = (jsonAsString) => {
   return (dispatch, getState) => {
-    console.log("ok something")
     dispatch({
       type: SETSETTINGS_BEGIN
     })
     let state = getState();
-    let url = `${state.settingsManager.apiProvider}/config?set`
-    console.log(`config settings hitting ${url} with ${jsonAsString}`)
+    let url = `${state.getSettings.apiProvider}/config?set`
     return fetch(url, {
       method: 'PUT',
       headers: {
@@ -54,7 +52,6 @@ export const setSettings = (jsonAsString) => {
       .then(async res => {
         const json = await res.json()
         const data = json.data[0]
-        console.log(data)
         dispatch({
           type: SETSETTINGS_SUCCESS,
           payload: data

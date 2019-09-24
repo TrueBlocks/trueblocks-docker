@@ -5,7 +5,6 @@ export const GETSETTINGS_FAILURE = 'trueblocks/GETSETTINGS_FAILURE'
 
 const initialState = {
   systemSettings: {},
-  isConnected: false,
   isLoading: false,
   error: null,
   apiProvider: config.apiProvider
@@ -24,7 +23,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isConnected: true,
         systemSettings: action.payload
       }
 
@@ -45,16 +43,14 @@ const getData = (endpoint) => {
 
 export const getSettings = () => {
   return (dispatch, getState) => {
-    console.log("ok something")
     dispatch({
       type: GETSETTINGS_BEGIN
     })
     let state = getState();
-    return getData(state.settingsManager.apiProvider)
+    return getData(state.getSettings.apiProvider)
       .then(async res => {
         const json = await res.json()
         const data = json.data[0]
-        console.log(data)
         dispatch({
           type: GETSETTINGS_SUCCESS,
           payload: data
