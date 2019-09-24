@@ -21,7 +21,6 @@ export default (state = initialState, action) => {
       }
 
     case GETSTATUS_SUCCESS:
-      console.log("success");
       return {
         ...state,
         isLoading: false,
@@ -52,7 +51,6 @@ export const getStatus = () => {
           type: GETSTATUS_BEGIN
         })
         let state = getState();
-        console.log(state.settingsManager.apiProvider);
         return getData(state.settingsManager.apiProvider)
             .then(async res => {
                 const json = await res.json()

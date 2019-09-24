@@ -19,7 +19,6 @@ export default (state = initialState, action) => {
       }
 
     case GETSTATUS_SUCCESS:
-      console.log("success");
       return {
         ...state,
         isLoading: false,
@@ -50,13 +49,10 @@ export const getIndexData = () => {
         })
     
         let state = getState();
-        console.log(state.settingsManager.apiProvider);
         return getData(state.settingsManager.apiProvider)
             .then(async res => {
-                console.log("ok...")
                 let json = await res.json();
                 json = json.data[0][0].caches[0];
-                console.log(json);
                 dispatch({
                     type: GETSTATUS_SUCCESS,
                     payload: json

@@ -3,7 +3,6 @@ export const GETSTATUS_SUCCESS = 'monitorAdd/GETSTATUS_SUCCESS'
 export const GETSTATUS_FAILURE = 'monitorAdd/GETSTATUS_FAILURE'
 
 const initialState = {
-  isConnected: false,
   isLoading: false,
   error: null,
 }
@@ -22,8 +21,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isConnected: true,
-        // monitorStatus: action.payload
       }
 
     case GETSTATUS_FAILURE:
@@ -39,7 +36,6 @@ export default (state = initialState, action) => {
 }
 
 const getData = (endpoint, address) => {
-  console.log("ok")
   return fetch(`${endpoint}/list?addr_list=${address}`)
 }
 
@@ -52,8 +48,6 @@ export const monitorAdd = (address) => {
         return getData(state.settingsManager.apiProvider, address)
             .then(async res => {
                 let json = await res.json();
-                console.log(json);
-                
                 return dispatch({
                     type: GETSTATUS_SUCCESS,
                     payload: json
