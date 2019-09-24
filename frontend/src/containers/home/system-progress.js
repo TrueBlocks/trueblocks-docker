@@ -20,8 +20,7 @@ const SystemProgress = (props) => {
 
 const SystemProgressChart = (props) => {
 
-    const client = props.chainStatus.client;
-    const clientHead = props.chainStatus.client + 100;
+    const clientHead = props.chainStatus.client;
     const ripe = props.chainStatus.ripe;
     const unripe = props.chainStatus.unripe;
     const finalized = props.chainStatus.finalized;
@@ -40,8 +39,16 @@ const SystemProgressChart = (props) => {
                     <React.Fragment>
                     <div className='x-axis grid'>{row * 1e6}</div>
                     {[...Array(cols).keys()].map((col, colI) => {
+                        let classes = []
+                        if(finalized >= row*1e6 + col*1e5) {
+                            classes.push('finalized')
+                        } else if(finalized >= row*1e6 + (col-1)*1e5) {
+                            classes.push('in-progress')
+                        } else {
+                            classes.push('inactive')
+                        }
                         return (
-                            <div className='grid'><div className='filling'></div></div>
+                            <div className='grid'><div className={`filling ${classes.join(' ')}`}></div></div>
                         )
                     })}
                     </React.Fragment>
