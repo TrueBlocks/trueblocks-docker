@@ -8,7 +8,7 @@ import { withPolling } from "../../modules/withPolling"
 const SystemStatus = (props) => {
     return (
       <div className="system-status">
-        <h1>System Status</h1>
+        <h1>Connection</h1>
         <SystemDetails {...props}/>
         <button onClick={props.changePage}>Settings</button>
       </div>

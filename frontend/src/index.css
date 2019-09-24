@@ -1,6 +1,13 @@
 @font-face {
   font-family: 'Lato';
   src: local('Lato'), url(./fonts/Lato/Lato-Regular.ttf) format('ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Thin'), url(./fonts/Lato/Lato-Thin.ttf) format('ttf');
+  font-weight: 300;
 }
 
 html, body {
@@ -32,7 +39,7 @@ header {
 header a {
   color: rgb(70, 70, 70);
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 300;
   font-size: 1.0em;
   line-height: 1em;
   background-color: #dcdcdd;
@@ -55,13 +62,17 @@ header a.is-active {
   background-color: #e2e5f0;
 }
 
-button:disabled {
-  opacity: 0.5;
-}
 
 main {
   margin: 5px;
-  border: 1px solid #EEE;
+}
+
+h1 {
+  margin: 1.2em 0;
+  font-size: 1.6em;
+  font-weight: 300;
+  color: #333;
+  border-bottom: 1px solid #333;
 }
 
 .home {
@@ -79,16 +90,26 @@ main {
   width: 70%;
 }
 
-.system-status, .system-progress {
-  padding: 5px;
+.system-progress .chart-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  justify-items: center;
 }
 
+.system-progress .chart-container .grid {
+  width: 9%;
+}
 
-.system-status h1, .monitor-status h1, .system-progress h1 {
-  margin: 1.2em 0;
-  font-size: 1.1em;
-  background-color: #EEE;
-  padding: .5em .5em;
+.system-progress .chart-container .grid .filling {
+  background-color: #AEA;
+  width: 95%;
+  height: 50px;
+  margin: 3px;
+}
+
+.system-status, .system-progress {
+  padding: 5px;
 }
 
 .system-details {
@@ -218,6 +239,9 @@ main {
   font-size: .8em;
 }
 
+button:disabled {
+  opacity: 0.5;
+}
 
 .progress-bar {
   background-color: #EEE;
