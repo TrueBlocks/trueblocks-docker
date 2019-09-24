@@ -18,6 +18,16 @@ const SystemProgress = (props) => {
     )
 }
 
+const Checkmark = () => {
+    return (
+        <span className="checkmark">
+            <div className="checkmark_circle"></div>
+            <div className="checkmark_stem"></div>
+            <div className="checkmark_kick"></div>
+        </span>
+    )
+}
+
 const SystemProgressChart = (props) => {
 
     const clientHead = props.chainStatus.client;
@@ -39,16 +49,16 @@ const SystemProgressChart = (props) => {
                     <React.Fragment>
                     <div className='x-axis grid'>{row * 1e6}</div>
                     {[...Array(cols).keys()].map((col, colI) => {
-                        let classes = []
+                        let indexClass
                         if(finalized >= row*1e6 + (col+1)*1e5) {
-                            classes.push('finalized')
+                            indexClass = 'finalized'
                         } else if(finalized >= row*1e6 + col*1e5) {
-                            classes.push('in-progress')
+                            indexClass = 'in-progress'
                         } else {
-                            classes.push('inactive')
+                            indexClass = 'inactive'
                         }
                         return (
-                            <div className='grid'><div className={`filling ${classes.join(' ')}`}></div></div>
+                        <div className='grid'><div className={`filling ${indexClass}`}>{indexClass === 'finalized' && <Checkmark/>}</div></div>
                         )
                     })}
                     </React.Fragment>
