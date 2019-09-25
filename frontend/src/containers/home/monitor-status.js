@@ -57,37 +57,37 @@ const MonitorAdd = (props) => {
     </div>
   )
 }
-    
+
 class MonitorDetail extends React.Component {
-        constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props)
     this.state = {
-        wasDeleted: false,
+      wasDeleted: false,
       isExpanded: false
     }
   }
 
-  handleClick = (el) => {
-    if(!this.state.wasDeleted) {
-        this.props.rmMonitor(this.props.address)
-      this.setState({wasDeleted: true})
+  handleDel = (el) => {
+    if (!this.state.wasDeleted) {
+      this.props.rmMonitor(this.props.address)
+      this.setState({ wasDeleted: true })
     }
   }
 
   toggle = () => {
-        this.setState({ isExpanded: !this.state.isExpanded })
-      }
+    this.setState({ isExpanded: !this.state.isExpanded })
+  }
 
-      render () {
+  render() {
     const displayName = this.props.name ? this.props.name : this.props.address
-      const monitorSize = humanFileSize(this.props.sizeInBytes)
-      return (
+    const monitorSize = humanFileSize(this.props.sizeInBytes)
+    return (
       <div className={`detail-container ${this.state.wasDeleted ? 'disabled' : ''}`}>
         <div className='row-detail' onClick={this.toggle}>
           <div className='index'>{this.props.index}</div>
           <div className='display-name'>{displayName}</div>
           <div className='size'>{monitorSize}</div>
-          <div className='trash' onClick={this.handleClick}><img alt={trash} src={trash} width="10px" /></div>
+          <div className='trash' onClick={this.handleDel}><img alt={trash} src={trash} width="10px" /></div>
         </div>
         <div className={`detail ${!this.state.isExpanded ? 'hidden' : ''}`}>
           {this.props.name ? <li className="name">{this.props.name}</li> : null}
@@ -98,28 +98,28 @@ class MonitorDetail extends React.Component {
           <li>Size (Bytes) = {this.props.sizeInBytes}</li>
         </div>
       </div>
-      )
-    }
+    )
   }
-  
-const mapStateToProps = ({monitorStatus, monitorRemove}) => (
-    {
-        monitorStatus: monitorStatus.monitorStatus,
-      monitorRemove: monitorRemove.error
+}
+
+const mapStateToProps = ({ monitorStatus, monitorRemove }) => (
+  {
+    monitorStatus: monitorStatus.monitorStatus,
+    monitorRemove: monitorRemove.error
   }
 )
 
 const mapDispatchToProps = dispatch =>
-bindActionCreators(
+  bindActionCreators(
     {
-        getMonitorStatus,
-        rmMonitor: (address) => monitorRemove(address),
+      getMonitorStatus,
+      rmMonitor: (address) => monitorRemove(address),
       addMonitor: (address) => monitorAdd(address)
     },
     dispatch
   )
 
-  export default withPolling(getMonitorStatus, 20000)(connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MonitorStatus))
+export default withPolling(getMonitorStatus, 20000)(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MonitorStatus))

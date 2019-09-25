@@ -103,6 +103,19 @@ h1 {
   width: 70%;
 }
 
+.fun-facts {
+  display: flex;
+}
+
+.fun-facts div {
+  width: 50%;
+  height: 50px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .system-progress .chart-container {
   display: flex;
   flex-flow: row wrap;
@@ -120,6 +133,8 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #999;
+  font-weight:300;
 }
 
 .grid.y-axis {
@@ -148,6 +163,13 @@ h1 {
   background: repeating-linear-gradient(-45deg, #daeeda, #daeeda 5px, white 5px, white 10px);
   /* background-size: 50px; */
   background-repeat: repeat;
+}
+
+.system-progress .chart-container .grid .filling.finalized:hover,
+.system-progress .chart-container .grid .filling.in-progress:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+  color: #b9c7b9;
 }
 
 .system-status, .system-progress {
@@ -284,51 +306,6 @@ h1 {
 
 button:disabled {
   opacity: 0.5;
-}
-
-.progress-bar {
-  background-color: #EEE;
-  height: 25px;
-  padding: 5px;
-  width: 100%;
-  margin: 1em 0;         
-  border-radius: 5px;
-  line-height:0;           
-}
-
-.progress-bar span {
-  display: inline-block;
-  height: 100%;
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
-  transition: width .4s ease-in-out;    
-}
-
-.blue span {
-  background-color: #34c2e3;   
-}
-
-.orange span {
-    background-color: #fecf23;
-    background-image: linear-gradient(to bottom, #fecf23, #fd9215);  
-}   
-
-.green span {
-    background-color: #a5df41;
-    background-image: linear-gradient(to bottom, #a5df41, #4ca916);  
-}
-
-.stripes span {
-  background-size: 30px 30px;
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
-                      transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-                      transparent 75%, transparent);            
-  background-repeat: repeat-x;
-  animation: animate-stripes 10s linear infinite;             
-}
-
-@keyframes animate-stripes {
-  0% {background-position: 0 0;} 100% {background-position: 60px 0;}
 }
 
 .setting-container {
