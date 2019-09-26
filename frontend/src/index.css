@@ -138,11 +138,11 @@ h1 {
 }
 
 .grid.y-axis {
-  height: 50px;
+  height: 25px;
 }
 
 .system-progress .chart-container .grid .filling {
-  height: 50px;
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
