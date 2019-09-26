@@ -94,7 +94,7 @@ class MonitorDetail extends React.Component {
           {this.props.group ? <li>{this.props.subgroup ? this.props.group + "/" + this.props.subgroup : this.props.group}</li> : null}
           <li className="address">{this.props.address}</li>
           {/* 18.446744073709553 ether is -1 as an uint?  */}
-          {this.props.curEther != "18.446744073709553" ? <li >{this.props.curEther}</li> : null}
+          {this.props.curEther != "n/a" ? <li >Ether balance: {this.props.curEther}</li> : null}
           <li>nRecords = {this.props.nRecords}</li>
           <li>Size (Bytes) = {this.props.sizeInBytes}</li>
         </div>
