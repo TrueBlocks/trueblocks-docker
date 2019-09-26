@@ -54,7 +54,7 @@ export const getStatus = () => {
         return getData(state.getSettings.apiProvider)
             .then(async res => {
                 const json = await res.json()
-                const data = json.data[0][0]
+                const data = json.data[0]
                 const meta = json.meta
                 dispatch({
                     type: GETSTATUS_SUCCESS,

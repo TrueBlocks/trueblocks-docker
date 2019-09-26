@@ -32,10 +32,10 @@ const SystemProgress = (props) => {
 
 const SystemProgressChart = (props) => {
 
-    const clientHead = props.chainStatus.client;
     const ripe = props.chainStatus.ripe;
     const unripe = props.chainStatus.unripe;
     const finalized = props.chainStatus.finalized;
+    const clientHead = (props.chainStatus.client == "n/a" ? unripe : props.chainStatus.client);
 
     const rows = Math.ceil(clientHead / 1e6)
     const cols = 10
