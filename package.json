@@ -1,0 +1,11 @@
+{
+  "name": "trueblocks-docker",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/wildmolasses/trueblocks-docker.git",
+  "author": "wildmolasses <changes@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "cd frontend && yarn build && rm -r ../api/build && cp -rv build ../api/build && cd ../api && yarn start"
+  }
+}
