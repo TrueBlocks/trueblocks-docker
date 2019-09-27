@@ -7,6 +7,8 @@ const apiOptions = require('./apiOptions.generated.json');
 let env = process.env;
 env.API_MODE = true;
 //env.TEST_MODE = true;
+//env.NO_COLOR = true
+//console.log("Running in test mode");
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use('/docs', express.static(__dirname + '/docs'));
