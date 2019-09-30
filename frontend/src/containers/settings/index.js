@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getSettings } from '../../modules/getSettings'
 import { setSettings } from '../../modules/setSettings'
-// import { loading } from '../loading'
+import Loading from '../common/loading'
 
 class Settings extends React.Component {
   constructor(props) {
@@ -34,9 +34,9 @@ class Settings extends React.Component {
   render() {
     let container
     if (this.props.settings.files === undefined) {
-      container = <span>Preparing settings display...</span>
+      container = <Loading status="loading" message="Preparing settings display..."/>
     } else if (this.props.isLoading) {
-      container = <span>Querying settings...</span>
+      container = <Loading status="loading" message="Querying settings..."/>
     } else if (this.state.settings !== []) {
       container = (
         <div>
