@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getSettings } from '../../modules/getSettings'
 import { setSettings } from '../../modules/setSettings'
-// import { loading } from '../loading'
+// import { Loading } from '../loading'
 
 class Settings extends React.Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class Settings extends React.Component {
 
   submit = (e) => {
     e.preventDefault();
+    console.log("submit")
     this.props.sendToApi(JSON.stringify(this.state.settings))
   }
 

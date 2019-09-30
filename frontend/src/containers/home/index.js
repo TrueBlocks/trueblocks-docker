@@ -1,11 +1,11 @@
 import React from 'react'
-import SystemStatus from './system-status'
+import ConnectionStatus from './connection-status'
 import IndexProgress from './index-progress'
 
 
 const Home = props => (
   <div className="home">
-    <SystemStatus/>
+    <ConnectionStatus/>
     <IndexProgress/>
   </div>
 )
