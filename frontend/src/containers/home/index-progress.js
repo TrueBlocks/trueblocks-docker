@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { humanFileSize } from '../../helpers/filesize'
 import { getIndexData } from '../../modules/getIndexData'
+import Loading from '../common/loading'
 
 const IndexProgress = (props) => {
     const ready = props.systemData.caches !== undefined && props.chainStatus.finalized !== undefined
@@ -26,7 +27,7 @@ const IndexProgress = (props) => {
             )
             break;
         default:
-            readyContainer = <div>Loading...</div>
+            readyContainer = <Loading status="Loading" message="Loading..."/>
     }
     return (
         <div className="system-progress">

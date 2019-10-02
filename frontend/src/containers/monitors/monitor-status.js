@@ -6,6 +6,7 @@ import { monitorRemove } from '../../modules/monitorRemove'
 import { monitorAdd } from '../../modules/monitorAdd'
 import { withPolling } from '../../modules/withPolling'
 import { humanFileSize } from '../../helpers/filesize'
+import Loading from '../common/loading'
 import trash from "../../img/trash-alt.svg"
 
 const MonitorStatus = (props) => {
@@ -23,13 +24,27 @@ const MonitorStatus = (props) => {
 
 
 const MonitorDetails = (props) => {
-  const ready = props.monitorStatus !== undefined && props.monitorStatus.items !== undefined
+  console.log(props.monitorData)
+  console.log(props.monitorData.items)
+  const ready = props.monitorData.items !== undefined
+  let container
+  switch(ready) {
+    case true:
+      container = (
+        <div className={`monitor-details`}>
+        <MonitorAdd {...props} />
+        {props.monitorData.items.map((item, index) => (
+          <MonitorDetail index={index} {...item} rmMonitor={props.rmMonitor} key={`a${item.address}`} />
+        ))}
+        </div>
+      )
+      break;
+    default:
+      container = (<Loading status="loading" message="Loading..."/>)
+  }
   return (
-    <div className={`monitor-details`}>
-      <MonitorAdd {...props} />
-      {ready && props.monitorStatus.items.map((item, index) => (
-        <MonitorDetail index={index} {...item} rmMonitor={props.rmMonitor} key={`a${item.address}`} />
-      ))}
+    <div>
+      {container}
     </div>
   )
 }
@@ -104,7 +119,8 @@ class MonitorDetail extends React.Component {
 
 const mapStateToProps = ({ monitorStatus, monitorRemove }) => (
   {
-    monitorStatus: monitorStatus.monitorStatus,
+    monitorData: monitorStatus.monitorStatus,
+    monitorDataFetch: {isLoading: monitorStatus.isLoading, error: monitorStatus.error},
     monitorRemove: monitorRemove.error
   }
 )
