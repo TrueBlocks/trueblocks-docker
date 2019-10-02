@@ -69,7 +69,7 @@ app.get(`/ps`, (req, res) => {
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
     if(apiOptions[routeName] === undefined) {
-        return res.send("This route is not available.")
+        return res.send('{ "error": "This route is not available." }')
     }
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env, detached: true});
