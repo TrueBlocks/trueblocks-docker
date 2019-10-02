@@ -1,14 +1,12 @@
 import React from 'react'
-import SystemStatus from './system-status'
-import MonitorStatus from './monitor-status'
-import SystemProgress from './system-progress'
+import ConnectionStatus from './connection-status'
+import IndexProgress from './index-progress'
 
 
 const Home = props => (
   <div className="home">
-    <SystemStatus/>
-    <SystemProgress/>
-    <MonitorStatus/>
+    <ConnectionStatus/>
+    <IndexProgress/>
   </div>
 )
 

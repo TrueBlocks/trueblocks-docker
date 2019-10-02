@@ -3,20 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getSettings } from '../../modules/getSettings'
 import { setSettings } from '../../modules/setSettings'
-
-const SettingInput = ({ name, value, type, tip, onChange }) => {
-  return (
-    <div className="setting-row">
-      <label>{name}</label>
-      <div className="input">
-        { type === 'bool' && <input type="checkbox" value={value} checked={value} name={name} onChange={onChange}/> }
-        { type !== 'bool' && <input defaultValue={value} name={name} onChange={onChange}/>  }
-      </div>
-      <span className="description">{tip}</span>
-      <span className="data-type">{type}</span>
-    </div>
-  )
-}
+import Loading from '../common/loading'
 
 class Settings extends React.Component {
   constructor(props) {
@@ -34,7 +21,6 @@ class Settings extends React.Component {
 
   submit = (e) => {
     e.preventDefault();
-    console.log("submit")
     this.props.sendToApi(JSON.stringify(this.state.settings))
   }
 
@@ -48,9 +34,9 @@ class Settings extends React.Component {
   render() {
     let container
     if (this.props.settings.files === undefined) {
-      container = <span>Preparing settings display...</span>
+      container = <Loading status="loading" message="Preparing settings display..."/>
     } else if (this.props.isLoading) {
-      container = <span>Querying settings...</span>
+      container = <Loading status="loading" message="Querying settings..."/>
     } else if (this.state.settings !== []) {
       container = (
         <div>
@@ -86,6 +72,20 @@ class Settings extends React.Component {
       </div>
     )
   }
+}
+
+const SettingInput = ({ name, value, type, tip, onChange }) => {
+  return (
+    <div className="setting-row">
+      <label>{name}</label>
+      <div className="input">
+        { type === 'bool' && <input type="checkbox" value={value} checked={value} name={name} onChange={onChange}/> }
+        { type !== 'bool' && <input defaultValue={value} name={name} onChange={onChange}/>  }
+      </div>
+      <span className="description">{tip}</span>
+      <span className="data-type">{type}</span>
+    </div>
+  )
 }
 
 const mapStateToProps = ({ getSettings }) => (

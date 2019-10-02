@@ -4,7 +4,6 @@ export const GETSTATUS_FAILURE = 'indexData/GETSTATUS_FAILURE'
 
 const initialState = {
   indexData: {},
-  isConnected: false,
   isLoading: false,
   error: null,
 }
@@ -22,7 +21,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isConnected: true,
         indexData: action.payload
       }
 
