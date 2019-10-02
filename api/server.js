@@ -66,6 +66,11 @@ app.get(`/ps`, (req, res) => {
     res.send(processList)
 })
 
+app.get(`/log-message`, (req, res) => {
+    console.log(JSON.stringify(req.query));
+    res.send("")
+})
+
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
     if(apiOptions[routeName] === undefined) {
