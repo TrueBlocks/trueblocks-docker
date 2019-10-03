@@ -26,14 +26,17 @@ export default (state = initialState, action) => {
         isLoading: false,
         isConnected: true,
         systemData: action.payload.data,
-        chainStatus: action.payload.meta
+        chainStatus: action.payload.meta,
       }
 
     case GETSTATUS_FAILURE:
         return {
             ...state,
             isLoading: false,
-            systemData: {}
+            isConnected: false,
+            error: `Connection error: ${action.e}`,
+            systemData: {},
+            chainStatus: {},
         }
 
     default:
@@ -65,6 +68,7 @@ export const getStatus = () => {
             .catch((e) => {
                 dispatch({
                     type: GETSTATUS_FAILURE,
+                    e
                 })
             })
       }

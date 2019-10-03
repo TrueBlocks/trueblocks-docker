@@ -28,7 +28,8 @@ export default (state = initialState, action) => {
         return {
             ...state,
             isLoading: false,
-            indexData: {}
+            indexData: {},
+            error: action.e
         }
 
     default:
@@ -60,6 +61,7 @@ export const getIndexData = () => {
             .catch((e) => {
                 dispatch({
                     type: GETSTATUS_FAILURE,
+                    e
                 })
             })
       }

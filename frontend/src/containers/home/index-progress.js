@@ -6,10 +6,21 @@ import { getIndexData } from '../../modules/getIndexData'
 import Loading from '../common/loading'
 
 const IndexProgress = (props) => {
-    const ready = props.systemData.caches !== undefined && props.chainStatus.finalized !== undefined
+    
+    let status
+    if (props.isLoading) {
+        status = "loading"
+    } else if (props.error) {
+        status = "error"
+    } else if (props.systemData.caches === undefined || props.chainStatus.finalized !== undefined) {
+        status = "initializing"
+    } else {
+        status = "ready"
+    }
+
     let readyContainer
-    switch (ready) {
-        case true:
+    switch (status) {
+        case "ready":
             const size = humanFileSize(props.systemData.caches[0].sizeInBytes)
             const nFiles = props.systemData.caches[0].nFiles
             readyContainer = (
@@ -26,8 +37,14 @@ const IndexProgress = (props) => {
                 </div>
             )
             break;
+        case "initializing":
+            readyContainer = <Loading status="Initializing" message="Initializing..." />
+            break;
+        case "error":
+            readyContainer = <Loading status="Error" message={props.error} />
+            break;
         default:
-            readyContainer = <Loading status="Loading" message="Loading..."/>
+            readyContainer = <Loading status="Loading" message="Loading..." />
     }
     return (
         <div className="system-progress">
@@ -98,27 +115,27 @@ const ZoomOnIndex = (props) => {
     const hasData = props.indexData.items !== undefined
     let readyContainer
     console.log(hasData)
-    switch(hasData) {
+    switch (hasData) {
         case true:
-            const data = props.indexData.items.filter(item => 
+            const data = props.indexData.items.filter(item =>
                 item.path.startsWith('finalized') &
                 item.firstAppearance >= props.start &
                 item.firstAppearance < props.start + props.n
-                )
+            )
             console.log(data)
             readyContainer = (
                 <div>
-                    {data.map((item) => 
+                    {data.map((item) =>
                         <div>
-                        {item.firstAppearance}
-                        -
+                            {item.firstAppearance}
+                            -
                         {item.nAddresses}
-                        -
+                            -
                         {humanFileSize(item.sizeInBytes)}
                         </div>
                     )}
                 </div>
-                )
+            )
             break;
         default:
             props.getIndexData()
@@ -134,17 +151,19 @@ const mapStateToProps = ({ systemStatus, getIndexData }) => (
     {
         systemData: systemStatus.systemData,
         chainStatus: systemStatus.chainStatus,
+        isLoading: systemStatus.isLoading,
+        error: systemStatus.error,
         indexData: getIndexData.indexData
     }
 )
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      getIndexData
-    },
-    dispatch
-  )
+    bindActionCreators(
+        {
+            getIndexData
+        },
+        dispatch
+    )
 
 export default connect(
     mapStateToProps,
