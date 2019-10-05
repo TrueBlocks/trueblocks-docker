@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
         return {
             ...state,
             isLoading: false,
+            error: action.e,
             monitorStatus: {}
         }
 
@@ -60,6 +61,7 @@ export const getMonitorStatus = () => {
             .catch((e) => {
                 dispatch({
                     type: GETSTATUS_FAILURE,
+                    e
                 })
             })
       }

@@ -30,6 +30,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        error: action.e
       }
 
     default:
@@ -60,6 +61,7 @@ export const getSettings = () => {
       .catch((e) => {
         dispatch({
           type: GETSETTINGS_FAILURE,
+          e
         })
       })
   }

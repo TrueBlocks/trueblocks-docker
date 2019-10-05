@@ -10,20 +10,21 @@ const IndexProgress = (props) => {
     let status
     if (props.isLoading) {
         status = "loading"
-    } else if (props.error) {
+    }
+    if (props.error) {
         status = "error"
-    } else if (props.systemData.caches === undefined || props.chainStatus.finalized !== undefined) {
+    } else if (props.systemData.caches === undefined && props.chainStatus.finalized === undefined) {
         status = "initializing"
     } else {
         status = "ready"
     }
 
-    let readyContainer
+    let container
     switch (status) {
         case "ready":
             const size = humanFileSize(props.systemData.caches[0].sizeInBytes)
             const nFiles = props.systemData.caches[0].nFiles
-            readyContainer = (
+            container = (
                 <div>
                     <SystemProgressChart {...props} />
                     <div className='fun-facts'>
@@ -38,13 +39,13 @@ const IndexProgress = (props) => {
             )
             break;
         case "initializing":
-            readyContainer = <Loading status="Initializing" message="Initializing..." />
+            container = <Loading status="Initializing" message="Initializing..." />
             break;
         case "error":
-            readyContainer = <Loading status="Error" message={props.error} />
+            container = <Loading status="Error" message={props.error} />
             break;
         default:
-            readyContainer = <Loading status="Loading" message="Loading..." />
+            container = <Loading status="Loading" message="Loading..." />
     }
     return (
         <div className="system-progress">
@@ -54,7 +55,7 @@ const IndexProgress = (props) => {
                 These files are roughly the same size.
                 You can set some options about this in the Settings tab.
             </p>
-            {readyContainer}
+            {container}
         </div>
     )
 }

@@ -21,8 +21,8 @@ const ConnectionDetails = (props) => {
             <div className={`system-details`}>
               <div className={`item grouping`}>Ethereum Node</div>
               <div className="item">Connection:</div>
-              <div className={`item ${props.isConnected ? "connected" : "disconnected"}`}>
-                {props.isConnected ? "Connected" : "Disconnected"}
+              <div className={`item ${Number.isInteger(props.chainStatus.client) ? "connected" : "disconnected"}`}>
+                {Number.isInteger(props.chainStatus.client) ? "Connected" : "Disconnected"}
               </div> 
               <div className="item">Current block:</div>
               <div className="item">{props.chainStatus.client}</div>

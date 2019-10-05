@@ -24,24 +24,40 @@ const MonitorStatus = (props) => {
 
 
 const MonitorDetails = (props) => {
-  console.log(props.monitorData)
-  console.log(props.monitorData.items)
-  const ready = props.monitorData.items !== undefined
+  let status
+  if (props.isLoading) {
+    status = "loading"
+  }
+  if (props.error) {
+    status = "error"
+  } else if (props.monitorData.items === undefined) {
+    status = "initializing"
+  } else {
+    status = "ready"
+  }
+
   let container
-  switch(ready) {
-    case true:
+  switch (status) {
+    case "ready":
       container = (
         <div className={`monitor-details`}>
         <MonitorAdd {...props} />
         {props.monitorData.items.map((item, index) => (
           <MonitorDetail index={index} {...item} rmMonitor={props.rmMonitor} key={`a${item.address}`} />
         ))}
-        </div>
+      </div>
       )
       break;
+    case "initializing":
+      container = <Loading status="Initializing" message="Initializing..." />
+      break;
+    case "error":
+      container = <Loading status="Error" message={`${props.error}`} />
+      break;
     default:
-      container = (<Loading status="loading" message="Loading..."/>)
+      container = <Loading status="Loading" message="Loading..." />
   }
+
   return (
     <div>
       {container}
@@ -120,7 +136,8 @@ class MonitorDetail extends React.Component {
 const mapStateToProps = ({ monitorStatus, monitorRemove }) => (
   {
     monitorData: monitorStatus.monitorStatus,
-    monitorDataFetch: {isLoading: monitorStatus.isLoading, error: monitorStatus.error},
+    error: monitorStatus.error,
+    monitorDataFetch: { isLoading: monitorStatus.isLoading, error: monitorStatus.error },
     monitorRemove: monitorRemove.error
   }
 )

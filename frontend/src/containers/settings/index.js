@@ -32,14 +32,24 @@ class Settings extends React.Component {
   }
 
   render() {
+    let props = this.props
+    let status
+    if (props.isLoading) {
+      status = "loading"
+    }
+    if (props.error) {
+      status = "error"
+    } else if (this.props.settings.files === undefined || this.state.settings === []) {
+      status = "initializing"
+    } else {
+      status = "ready"
+    }
+  
     let container
-    if (this.props.settings.files === undefined) {
-      container = <Loading status="loading" message="Preparing settings display..."/>
-    } else if (this.props.isLoading) {
-      container = <Loading status="loading" message="Querying settings..."/>
-    } else if (this.state.settings !== []) {
-      container = (
-        <div>
+    switch (status) {
+      case "ready":
+        container = (
+          <div>
           <form onSubmit={this.submit}>
           {
             this.state.settings.map((file, fileI) =>
@@ -64,7 +74,16 @@ class Settings extends React.Component {
           <button type="submit">Submit</button>
           </form>
         </div>
-      )
+        )
+        break;
+      case "initializing":
+        container = <Loading status="Initializing" message="Initializing..." />
+        break;
+      case "error":
+        container = <Loading status="Error" message={`${props.error}`} />
+        break;
+      default:
+        container = <Loading status="loading" message="Preparing settings display..."/>
     }
     return (
       <div>
@@ -91,7 +110,8 @@ const SettingInput = ({ name, value, type, tip, onChange }) => {
 const mapStateToProps = ({ getSettings }) => (
   {
     settings: getSettings.systemSettings,
-    isLoading: getSettings.isLoading
+    isLoading: getSettings.isLoading,
+    error: getSettings.error
   }
 )
 
