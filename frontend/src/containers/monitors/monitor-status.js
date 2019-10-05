@@ -49,13 +49,13 @@ const MonitorDetails = (props) => {
       )
       break;
     case "initializing":
-      container = <Loading status="Initializing" message="Initializing..." />
+      container = <Loading status={status} message="Initializing..." />
       break;
     case "error":
-      container = <Loading status="Error" message={`${props.error}`} />
+      container = <Loading status={status} message={`${props.error}`} />
       break;
     default:
-      container = <Loading status="Loading" message="Loading..." />
+      container = <Loading status={status} message="Loading..." />
   }
 
   return (

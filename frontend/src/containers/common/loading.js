@@ -3,10 +3,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 const Loading = (props) => {
+    const symbol = props.status === "error" ? "✖" : "..."
     return (
-        <div>
-            <div>{props.status}</div>          
-            <div>{props.message}</div>
+        <div className={`loading ${props.status}`}>
+            <div className="container">
+                <div className="symbol">{symbol}</div>
+                <div>{props.status}</div>          
+                <div>{props.message}</div>
+            </div>
         </div>
     )
 }

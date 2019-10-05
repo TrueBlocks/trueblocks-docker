@@ -77,13 +77,13 @@ class Settings extends React.Component {
         )
         break;
       case "initializing":
-        container = <Loading status="Initializing" message="Initializing..." />
+        container = <Loading status={status} message="Initializing..." />
         break;
       case "error":
-        container = <Loading status="Error" message={`${props.error}`} />
+        container = <Loading status={status} message={`${props.error}`} />
         break;
       default:
-        container = <Loading status="loading" message="Preparing settings display..."/>
+        container = <Loading status={status} message="Preparing settings display..."/>
     }
     return (
       <div>
