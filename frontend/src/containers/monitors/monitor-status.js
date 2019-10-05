@@ -59,7 +59,7 @@ const MonitorDetails = (props) => {
   }
 
   return (
-    <div>
+    <div className="container">
       {container}
     </div>
   )

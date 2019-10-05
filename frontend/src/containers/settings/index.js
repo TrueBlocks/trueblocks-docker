@@ -49,7 +49,7 @@ class Settings extends React.Component {
     switch (status) {
       case "ready":
         container = (
-          <div>
+          <div className="full-width">
           <form onSubmit={this.submit}>
           {
             this.state.settings.map((file, fileI) =>
@@ -86,7 +86,7 @@ class Settings extends React.Component {
         container = <Loading status={status} message="Preparing settings display..."/>
     }
     return (
-      <div>
+      <div className="container">
         {container}
       </div>
     )

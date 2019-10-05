@@ -3,7 +3,7 @@ export const GETSTATUS_SUCCESS = 'monitorStatus/GETSTATUS_SUCCESS'
 export const GETSTATUS_FAILURE = 'monitorStatus/GETSTATUS_FAILURE'
 
 const initialState = {
-  monitorStatus: {items: []},
+  monitorStatus: {},
   isLoading: false,
   error: null,
 }

@@ -82,10 +82,22 @@ header a.is-active {
 
 .loading.error .symbol {
   color: #b40505;
+  margin-right: 1em;
+}
+
+.loading .message {
+  color: #9f9f9f;
 }
 
 main {
   margin: 5px;
+}
+
+main .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  widtH: 100%;
 }
 
 h1 {
@@ -364,4 +376,44 @@ button:disabled {
 
 .setting-row .data-type {
   width: 15%;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid rgb(74, 74, 74);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(72, 72, 72) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.full-width {
+  width: 100%;
 }
