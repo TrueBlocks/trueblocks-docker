@@ -6,6 +6,6 @@
   "author": "wildmolasses <changes@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cd frontend && yarn build && rm -r ../api/build && cp -rv build ../api/build && cd ../api && yarn start"
+    "start": "cd frontend && yarn build && rm -r ../api/build && cp -rv build ../api/build && cd ../api && yarn start"
   }
 }

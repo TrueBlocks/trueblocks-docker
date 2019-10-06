@@ -3,7 +3,6 @@ import { Route, NavLink } from 'react-router-dom'
 import Home from '../home'
 import Monitors from '../monitors'
 import About from '../about'
-import Documentation from '../documentation'
 import Settings from '../settings'
 import logo from '../../img/logo.png'
 
@@ -14,7 +13,7 @@ const App = () => (
       <NavLink activeClassName="is-active" exact={true} to="/">Home</NavLink>
       <NavLink activeClassName="is-active" to="/monitors">Monitors</NavLink>
       <NavLink activeClassName="is-active" to="/settings">Settings</NavLink>
-      <NavLink activeClassName="is-active" to="/docs">Documentation</NavLink>
+      <a href="/docs/" target="_blank">Documentation</a>
       <NavLink activeClassName="is-active" to="/about-us">About</NavLink>
     </header>
 
@@ -22,7 +21,6 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/monitors" component={Monitors} />
       <Route exact path="/about-us" component={About} />
-      <Route exact path="/docs" component={Documentation} />
       <Route exact path="/settings" component={Settings} />
     </main>
   </div>
