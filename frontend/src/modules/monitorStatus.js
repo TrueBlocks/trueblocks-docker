@@ -21,6 +21,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        error: null,
         monitorStatus: action.payload
       }
 

@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
     case GETSTATUS_BEGIN:
       return {
         ...state,
+        error: null,
         isLoading: true
       }
 
@@ -25,6 +26,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         isConnected: true,
+        error: null,
         systemData: action.payload.data,
         chainStatus: action.payload.meta,
       }

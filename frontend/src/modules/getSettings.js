@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        error: null,
         systemSettings: action.payload
       }
 

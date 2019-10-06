@@ -41,7 +41,7 @@ const MonitorDetails = (props) => {
     case "ready":
       container = (
         <div className={`monitor-details`}>
-        <MonitorAdd {...props} />
+        
         {props.monitorData.items.map((item, index) => (
           <MonitorDetail index={index} {...item} rmMonitor={props.rmMonitor} key={`a${item.address}`} />
         ))}
@@ -59,7 +59,8 @@ const MonitorDetails = (props) => {
   }
 
   return (
-    <div className="container">
+    <div>
+      <MonitorAdd {...props} />
       {container}
     </div>
   )
@@ -72,19 +73,11 @@ const MonitorAdd = (props) => {
     props.addMonitor(inputAddress.value)
   }
   return (
-    <div className="detail-container">
-      <div className="row-detail">
-        <div className="index">
-        </div>
-        <div className="display-name">
+    <div className="monitor-add">
           <form onSubmit={onSubmit}>
             <input placeholder="0x000000000000000000000000000000000000000000" ref={el => inputAddress = el}></input>
             <button>＋ Add Monitor</button>
           </form>
-        </div>
-        <div className="size"></div>
-        <div className="trash"></div>
-      </div>
     </div>
   )
 }

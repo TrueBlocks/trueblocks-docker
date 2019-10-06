@@ -82,7 +82,7 @@ header a.is-active {
 
 .loading.error .symbol {
   color: #b40505;
-  margin-right: 1em;
+  /* margin-right: 1em; */
 }
 
 .loading .message {
@@ -90,7 +90,7 @@ header a.is-active {
 }
 
 main {
-  margin: 5px;
+  margin: 0 35px;
 }
 
 main .container {
@@ -290,6 +290,14 @@ h1 {
 
 .monitor-status {
   width: 100%;
+}
+
+.monitor-add {
+  margin: 3em 0;
+}
+
+.monitor-add input {
+  width: 30em;
 }
 
 .monitor-details {
