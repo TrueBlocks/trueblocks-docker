@@ -6,7 +6,7 @@ import { getIndexData } from '../../modules/getIndexData'
 import Loading from '../common/loading'
 import * as d3 from 'd3'
 
-const IndexProgress = (props) => {
+const IndexProgress = React.memo((props) => {
 
     let status
     if (props.isLoading) {
@@ -59,7 +59,7 @@ const IndexProgress = (props) => {
             {container}
         </div>
     )
-}
+})
 
 class SystemProgressChart extends React.Component {
 
@@ -158,7 +158,9 @@ class PartitionChart extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {}
+        this.state = {
+            chart: {}
+        }
         this.myRef = React.createRef();
     }
 
@@ -177,41 +179,113 @@ class PartitionChart extends React.Component {
             .range([chart.margin.left, chart.width - chart.margin.right])
             .padding(0.1)
 
-            chart.y = d3.scaleLinear()
+        chart.y = d3.scaleLinear()
             .domain([0, d3.max(data, d => d.y)]).nice()
             .range([chart.height - chart.margin.bottom, chart.margin.top])
 
-            chart.xAxis = g => g
+        chart.xAxis = g => g
             .attr("transform", `translate(0,${chart.height - chart.margin.bottom})`)
             .call(d3.axisBottom(chart.x).tickSizeOuter(0))
+            .call(g => g.select(".domain").remove())
 
-            chart.yAxis = g => g
+        chart.yAxis = g => g
             .attr("transform", `translate(${chart.margin.left},0)`)
             .call(d3.axisLeft(chart.y))
             .call(g => g.select(".domain").remove())
-
 
         chart.svg = d3.select(el)
             .append("svg")
             .attr("viewBox", [0, 0, chart.width, chart.height]);
 
             chart.svg.append("g")
-            .attr("fill", "steelblue")
-            .selectAll("rect")
-            .data(data)
-            .join("rect")
-            .attr("x", d => chart.x(d.x))
-            .attr("y", d => chart.y(d.y))
-            .attr("height", d => chart.y(0) - chart.y(d.y))
-            .attr("width", chart.x.bandwidth());
-
-            chart.svg.append("g")
+            .attr("class", "x axis")
             .call(chart.xAxis);
 
-            chart.svg.append("g")
+        chart.svg.append("g")
+            .attr("class", "y axis")
             .call(chart.yAxis);
 
+        this.setState({ chart })
+    }
+
+    update = (el, data, chart) => {
+        console.log("update")
+
+        chart.x = d3.scaleBand()
+            .domain(data.map(d => d.x))
+            .range([chart.margin.left, chart.width - chart.margin.right])
+            .padding(0.1)
+
+        chart.y = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d.y)]).nice()
+            .range([chart.height - chart.margin.bottom, chart.margin.top])
+
+        // chart.xAxis = g => g
+        //     .attr("transform", `translate(0,${chart.height - chart.margin.bottom})`)
+        //     .call(d3.axisBottom(chart.x).tickSizeOuter(0))
+        //     .call(g => g.select(".domain").remove())
+
+        // chart.yAxis = g => g
+        //     .attr("transform", `translate(${chart.margin.left},0)`)
+        //     .call(d3.axisLeft(chart.y))
+        //     .call(g => g.select(".domain").remove())
+
+        let bars = chart.svg.selectAll(".bar")
+            .data(data)
+
+        bars
+        .enter()
+            .append('rect')
+            .attr('class', 'bar')
+            .attr("fill", "steelblue")
+            .attr('width', chart.x.bandwidth())
+            .attr('height', 0)
+            .attr('x', d => chart.x(d.x))
+            .attr('y', chart.height)
+            .join(bars)
+            .transition()
+            .duration(750)
+            .attr("height", d => chart.y(0) - chart.y(d.y))
+            .attr("width", chart.x.bandwidth())
+            .attr("x", d => chart.x(d.x))
+            .attr("y", d => chart.y(d.y))
+
+        bars.exit()
+            .transition()
+            .duration(750)
+            .attr('height', 0)
+            .attr('y', chart.height)
+            .remove()
+
+        // transition x axis
+        chart.svg.selectAll(".x.axis")
+            .transition()
+            .duration(750)
+            .call(d3.axisBottom(chart.x).ticks(3));
+
+        // transition y axis
+        chart.svg.selectAll(".y.axis")
+            .transition()
+            .duration(750)
+            .call(d3.axisLeft(chart.y).ticks(3));
+
         this.setState({chart})
+
+        // chart.svg.append("g")
+        // .attr("fill", "steelblue")
+        // .selectAll("rect")
+        // .data(data)
+        // .join("rect")
+        // .attr("x", d => chart.x(d.x))
+        // .attr("y", d => chart.y(d.y))
+        // .attr("height", d => chart.y(0) - chart.y(d.y))
+        // .attr("width", chart.x.bandwidth());
+
+        // chart.svg.append("g")
+        //     .call(chart.xAxis);
+
+        // chart.svg.append("g")
+        //     .call(chart.yAxis);
     }
 
     transform = (data) => data.map(item => {
@@ -222,6 +296,16 @@ class PartitionChart extends React.Component {
     componentDidMount = () => {
         let el = this.myRef.current
         this.props.data.length > 0 && this.chart(el, this.transform(this.props.data))
+    }
+
+    componentDidUpdate = (prevProps) => {
+        let el = this.myRef.current
+        this.state.chart.el !== undefined && this.update(el, this.transform(this.props.data), this.state.chart)
+        // this.state.chart.el === undefined && this.props.data.length > 0 && this.chart(el, this.transform(this.props.data))
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+        return this.props.data[0].firstAppearance !== nextProps.data[0].firstAppearance
     }
 
     render() {
