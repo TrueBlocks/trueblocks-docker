@@ -4,9 +4,8 @@ import { bindActionCreators } from 'redux'
 import { humanFileSize } from '../../helpers/filesize'
 import { getIndexData } from '../../modules/getIndexData'
 import Loading from '../common/loading'
-import * as d3 from 'd3'
 
-const IndexProgress = React.memo((props) => {
+const IndexProgress = (props) => {
 
     let status
     if (props.isLoading) {
@@ -59,7 +58,7 @@ const IndexProgress = React.memo((props) => {
             {container}
         </div>
     )
-})
+}
 
 class SystemProgressChart extends React.Component {
 
@@ -119,16 +118,17 @@ class SystemProgressChart extends React.Component {
     render() {
         return (
             <div>
-                <ZoomOnIndex {...this.props} start={this.state.zoomStart} n={1e5} />
                 {this.chart}
+                <ZoomOnIndex {...this.props} start={this.state.zoomStart} n={1e5} />
             </div>
         )
     }
 }
 
 const ZoomOnIndex = (props) => {
-    const hasData = props.indexData.items !== undefined
+    const hasData = props.indexData.items !== undefined && props.start !== undefined
     let readyContainer
+
     switch (hasData) {
         case true:
             const data = props.indexData.items.filter(item =>
@@ -138,14 +138,14 @@ const ZoomOnIndex = (props) => {
             )
             readyContainer = (
                 <div>
-                    <PartitionChart data={data} />
+                    <IndexTable data={data} range={{start: props.start, end: props.start + props.n}} />
                 </div>
             )
             break;
         default:
             if (!props.loadingIndex)
                 props.getIndexData()
-            readyContainer = <div></div>
+            readyContainer = props.start && <Loading status="loading" message="Waiting for index data..." />
     }
 
     return (
@@ -153,168 +153,26 @@ const ZoomOnIndex = (props) => {
     )
 }
 
-class PartitionChart extends React.Component {
+const IndexTable = (props) => {
+    const count = props.data.length
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            chart: {}
-        }
-        this.myRef = React.createRef();
-    }
-
-    chart = (el, data) => {
-        console.log(data)
-        let chart = {
-            el,
-            margin: { top: 20, right: 0, bottom: 30, left: 40 }
-        }
-
-        chart.height = 300
-        chart.width = 500
-
-        chart.x = d3.scaleBand()
-            .domain(data.map(d => d.x))
-            .range([chart.margin.left, chart.width - chart.margin.right])
-            .padding(0.1)
-
-        chart.y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.y)]).nice()
-            .range([chart.height - chart.margin.bottom, chart.margin.top])
-
-        chart.xAxis = g => g
-            .attr("transform", `translate(0,${chart.height - chart.margin.bottom})`)
-            .call(d3.axisBottom(chart.x).tickSizeOuter(0))
-            .call(g => g.select(".domain").remove())
-
-        chart.yAxis = g => g
-            .attr("transform", `translate(${chart.margin.left},0)`)
-            .call(d3.axisLeft(chart.y))
-            .call(g => g.select(".domain").remove())
-
-        chart.svg = d3.select(el)
-            .append("svg")
-            .attr("viewBox", [0, 0, chart.width, chart.height]);
-
-            chart.svg.append("g")
-            .attr("class", "x axis")
-            .call(chart.xAxis);
-
-        chart.svg.append("g")
-            .attr("class", "y axis")
-            .call(chart.yAxis);
-
-        this.setState({ chart })
-    }
-
-    update = (el, data, chart) => {
-        console.log("update")
-
-        chart.x = d3.scaleBand()
-            .domain(data.map(d => d.x))
-            .range([chart.margin.left, chart.width - chart.margin.right])
-            .padding(0.1)
-
-        chart.y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.y)]).nice()
-            .range([chart.height - chart.margin.bottom, chart.margin.top])
-
-        // chart.xAxis = g => g
-        //     .attr("transform", `translate(0,${chart.height - chart.margin.bottom})`)
-        //     .call(d3.axisBottom(chart.x).tickSizeOuter(0))
-        //     .call(g => g.select(".domain").remove())
-
-        // chart.yAxis = g => g
-        //     .attr("transform", `translate(${chart.margin.left},0)`)
-        //     .call(d3.axisLeft(chart.y))
-        //     .call(g => g.select(".domain").remove())
-
-        let bars = chart.svg.selectAll(".bar")
-            .data(data)
-
-        bars
-        .enter()
-            .append('rect')
-            .attr('class', 'bar')
-            .attr("fill", "steelblue")
-            .attr('width', chart.x.bandwidth())
-            .attr('height', 0)
-            .attr('x', d => chart.x(d.x))
-            .attr('y', chart.height)
-            .join(bars)
-            .transition()
-            .duration(750)
-            .attr("height", d => chart.y(0) - chart.y(d.y))
-            .attr("width", chart.x.bandwidth())
-            .attr("x", d => chart.x(d.x))
-            .attr("y", d => chart.y(d.y))
-
-        bars.exit()
-            .transition()
-            .duration(750)
-            .attr('height', 0)
-            .attr('y', chart.height)
-            .remove()
-
-        // transition x axis
-        chart.svg.selectAll(".x.axis")
-            .transition()
-            .duration(750)
-            .call(d3.axisBottom(chart.x).ticks(3));
-
-        // transition y axis
-        chart.svg.selectAll(".y.axis")
-            .transition()
-            .duration(750)
-            .call(d3.axisLeft(chart.y).ticks(3));
-
-        this.setState({chart})
-
-        // chart.svg.append("g")
-        // .attr("fill", "steelblue")
-        // .selectAll("rect")
-        // .data(data)
-        // .join("rect")
-        // .attr("x", d => chart.x(d.x))
-        // .attr("y", d => chart.y(d.y))
-        // .attr("height", d => chart.y(0) - chart.y(d.y))
-        // .attr("width", chart.x.bandwidth());
-
-        // chart.svg.append("g")
-        //     .call(chart.xAxis);
-
-        // chart.svg.append("g")
-        //     .call(chart.yAxis);
-    }
-
-    transform = (data) => data.map(item => {
-        return { x: item.firstAppearance, y: item.nAddresses }
-    }
-    )
-
-    componentDidMount = () => {
-        let el = this.myRef.current
-        this.props.data.length > 0 && this.chart(el, this.transform(this.props.data))
-    }
-
-    componentDidUpdate = (prevProps) => {
-        let el = this.myRef.current
-        this.state.chart.el !== undefined && this.update(el, this.transform(this.props.data), this.state.chart)
-        // this.state.chart.el === undefined && this.props.data.length > 0 && this.chart(el, this.transform(this.props.data))
-    }
-
-    shouldComponentUpdate = (nextProps, nextState) => {
-        return this.props.data[0].firstAppearance !== nextProps.data[0].firstAppearance
-    }
-
-    render() {
-        return (
-            <div ref={this.myRef}>
+    return (
+        <div>
+            <h3>Block range {props.range.start}-{props.range.end}:</h3>
+            <div>{count} index files</div>
+            <div className="index-container">
+            {props.data.map(item =>
+                <div className="index-node" key={`x${item.firstAppearance}`}>
+                <div>block start:</div> <div>{item.firstAppearance}</div>
+                <div>n appearances:</div> <div>{item.nAddresses}</div>
+                <div>size:</div> <div>{humanFileSize(item.sizeInBytes)}</div>
+                </div>
+            )}
             </div>
-        )
-    }
+        </div>
+    )
 }
+
 
 const mapStateToProps = ({ systemStatus, getIndexData }) => (
     {
