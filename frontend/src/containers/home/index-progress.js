@@ -125,6 +125,8 @@ class SystemProgressChart extends React.Component {
     }
 }
 
+// Without this, the !props.loadingIndex test below is always true until one clicks on the page after relaod
+var been_here = false;
 const ZoomOnIndex = (props) => {
     const hasData = props.indexData.items !== undefined && props.start !== undefined
     let readyContainer
@@ -143,8 +145,10 @@ const ZoomOnIndex = (props) => {
             )
             break;
         default:
-            if (!props.loadingIndex)
+            if (!been_here && !props.loadingIndex) {
+                been_here = true;
                 props.getIndexData()
+            }
             readyContainer = props.start && <Loading status="loading" message="Waiting for index data..." />
     }
 
