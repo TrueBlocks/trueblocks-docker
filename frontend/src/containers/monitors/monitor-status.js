@@ -6,6 +6,7 @@ import { monitorRemove } from '../../modules/monitorRemove'
 import { monitorAdd } from '../../modules/monitorAdd'
 import { withPolling } from '../../modules/withPolling'
 import { humanFileSize } from '../../helpers/filesize'
+import { fmtDouble } from '../../helpers/number_fmt'
 import Loading from '../common/loading'
 import trash from "../../img/trash-alt.svg"
 
@@ -105,11 +106,15 @@ class MonitorDetail extends React.Component {
   render() {
     const displayName = this.props.name ? this.props.name : this.props.address
     const monitorSize = humanFileSize(this.props.sizeInBytes)
+    const ethBal = fmtDouble(this.props.curEther, 18)
     return (
       <div className={`detail-container ${this.state.wasDeleted ? 'disabled' : ''}`}>
         <div className='row-detail' onClick={this.toggle}>
           <div className='index'>{this.props.index}</div>
+          <div className='display-group'>{this.props.group}</div>
           <div className='display-name'>{displayName}</div>
+          <div className='balance'>{ethBal} ether</div>
+          <div className='count'>{this.props.nRecords} appearances</div>
           <div className='size'>{monitorSize}</div>
           <div className='trash' onClick={this.handleDel}><img alt={trash} src={trash} width="10px" /></div>
         </div>
