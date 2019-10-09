@@ -163,9 +163,12 @@ const IndexTable = (props) => {
             <div className="index-container">
             {props.data.map(item =>
                 <div className="index-node" key={`x${item.firstAppearance}`}>
-                <div>block start:</div> <div>{item.firstAppearance}</div>
-                <div>n appearances:</div> <div>{item.nAddresses}</div>
-                <div>size:</div> <div>{humanFileSize(item.sizeInBytes)}</div>
+                <div>hash:</div> <div>{item.hash}</div>
+                <div>first block:</div> <div>{item.firstAppearance}</div>
+                <div>nBlocks:</div> <div>{item.latestAppearance - item.firstAppearance}</div>
+                <div>nAddresses:</div> <div>{item.nAddresses}</div>
+                <div>nAppearances:</div> <div>{item.nAppearances}</div>
+                <div>file size:</div> <div>{humanFileSize(item.sizeInBytes)}</div>
                 </div>
             )}
             </div>
