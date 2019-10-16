@@ -97,7 +97,7 @@ main .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  widtH: 100%;
+  width: 100%;
 }
 
 h1 {

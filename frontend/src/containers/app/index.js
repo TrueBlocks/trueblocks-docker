@@ -4,7 +4,7 @@ import Home from '../home'
 import Monitors from '../monitors'
 import About from '../about'
 import Settings from '../settings'
-import logo from '../../img/logo.png'
+//import logo from '../../img/logo.png'
 
 const App = () => (
   <div>
