@@ -6,7 +6,7 @@ import { monitorRemove } from '../../modules/monitorRemove'
 import { monitorAdd } from '../../modules/monitorAdd'
 import { withPolling } from '../../modules/withPolling'
 import { humanFileSize } from '../../helpers/filesize'
-import { fmtDouble } from '../../helpers/number_fmt'
+import { fmtDouble, fmtInteger } from '../../helpers/number_fmt'
 import Loading from '../common/loading'
 import trash from "../../img/trash-alt.svg"
 
@@ -104,27 +104,37 @@ class MonitorDetail extends React.Component {
   }
 
   render() {
-    const displayName = this.props.name ? this.props.name : this.props.address
-    const monitorSize = humanFileSize(this.props.sizeInBytes)
+    const displayName = (this.props.group ? (this.props.group + ": ") : "") + (this.props.name ? this.props.name : this.props.address)
     const ethBal = fmtDouble(this.props.curEther, 18)
+    const f = fmtInteger(this.props.firstAppearance)
+    const l = fmtInteger(this.props.latestAppearance)
+    const d = fmtInteger(this.props.latestAppearance - this.props.firstAppearance)
+    const n = fmtInteger(this.props.nRecords)
+    const b = fmtInteger((Math.floor((this.props.latestAppearance - this.props.firstAppearance) / this.props.nRecords) * 100) / 100)
+    const m = fmtInteger(this.props.sizeInBytes)
     return (
       <div className={`detail-container ${this.state.wasDeleted ? 'disabled' : ''}`}>
         <div className='row-detail' onClick={this.toggle}>
           <div className='index'>{this.props.index}</div>
-          <div className='display-group'>{this.props.group}</div>
           <div className='display-name'>{displayName}</div>
+          <div className='range'>{f} / {l} / {d} / {n} / {b} / {m}</div>
           <div className='balance'>{ethBal} ether</div>
-          <div className='count'>{this.props.nRecords} appearances</div>
-          <div className='size'>{monitorSize}</div>
           <div className='trash' onClick={this.handleDel}><img alt={trash} src={trash} width="10px" /></div>
         </div>
-        <div className={`detail ${!this.state.isExpanded ? 'hidden' : ''}`}>
+        <div className={`detail-left ${!this.state.isExpanded ? 'hidden' : ''}`}>
           {this.props.name ? <li className="name">{this.props.name}</li> : null}
           {this.props.group ? <li>{this.props.subgroup ? this.props.group + "/" + this.props.subgroup : this.props.group}</li> : null}
           <li className="address">{this.props.address}</li>
           {this.props.curEther != "n/a" ? <li >Ether balance = {this.props.curEther}</li> : null}
-          <li>nRecords = {this.props.nRecords}</li>
-          <li>Size (Bytes) = {this.props.sizeInBytes}</li>
+          <li>firstAppearance = {f}</li>
+          <li>latestAppearance = {l}</li>
+          <li>diff = {d}</li>
+          <li>interval = {b}</li>
+          <li>nRecords = {n}</li>
+          <li>fileSize= {m}</li>
+        </div>
+        <div className={`detail-right ${!this.state.isExpanded ? 'hidden' : ''}`}>
+          This is where I want the charts
         </div>
       </div>
     )
