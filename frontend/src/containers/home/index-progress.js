@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { humanFileSize } from '../../helpers/filesize'
+import { fmtInteger } from '../../helpers/number_fmt'
 import { getIndexData } from '../../modules/getIndexData'
 import Loading from '../common/loading'
 
@@ -167,12 +168,12 @@ const IndexTable = (props) => {
             <div className="index-container">
             {props.data.map(item =>
                 <div className="index-node" key={`x${item.firstAppearance}`}>
-                <div>hash:</div> <div>{item.hash}</div>
-                <div>first block:</div> <div>{item.firstAppearance}</div>
-                <div>nBlocks:</div> <div>{item.latestAppearance - item.firstAppearance + 1}</div>
-                <div>nAddresses:</div> <div>{item.nAddresses}</div>
-                <div>nAppearances:</div> <div>{item.nAppearances}</div>
-                <div>file size:</div> <div>{humanFileSize(item.sizeInBytes)}</div>
+                <div>hash:</div> <div className="inright">{item.hash}</div>
+                <div>first block:</div> <div className="inright">{fmtInteger(item.firstAppearance)}</div>
+                <div>nBlocks:</div> <div className="inright">{fmtInteger(item.latestAppearance - item.firstAppearance + 1)}</div>
+                <div>nAddresses:</div> <div className="inright">{fmtInteger(item.nAddresses)}</div>
+                <div>nAppearances:</div> <div className="inright">{fmtInteger(item.nAppearances)}</div>
+                <div>file size:</div> <div className="inright">{humanFileSize(item.sizeInBytes)}</div>
                 </div>
             )}
             </div>

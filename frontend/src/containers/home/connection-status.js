@@ -10,7 +10,7 @@ const ConnectionStatus = (props) => {
       <div className="system-status">
         <h1>Connection</h1>
         <ConnectionDetails {...props}/>
-        <button onClick={props.changePage}>Settings</button>
+        <button onClick={props.changePage}>Configure</button>
       </div>
     )
 }
@@ -20,34 +20,32 @@ const ConnectionDetails = (props) => {
           <div>
             <div className={`system-details`}>
               <div className={`item grouping`}>Ethereum Node</div>
-              <div className="item">Connection:</div>
-              <div className={`item ${Number.isInteger(props.chainStatus.client) ? "connected" : "disconnected"}`}>
+              <div className="item-left">Connection:</div>
+              <div className={`item-right ${Number.isInteger(props.chainStatus.client) ? "connected" : "disconnected"}`}>
                 {Number.isInteger(props.chainStatus.client) ? "Connected" : "Disconnected"}
               </div> 
-              <div className="item">Current block:</div>
-              <div className="item">{props.chainStatus.client}</div>
-              <div className="item">RPC Provider:</div>
-              <div className="item">{props.systemData.rpc_provider}</div>
+              <div className="item-left">Last block:</div>
+              <div className="item-right">{props.chainStatus.client}</div>
+              <div className="item-left">RPC Provider:</div>
+              <div className="item-right">{props.systemData.rpc_provider}</div>
               
-              <div className="item grouping">TrueBlocks Index</div>
-              <div className="item">Status:</div>
-              <div className={`item space-after ${props.systemData.is_scraping ? "connected" : "disconnected"}`}>
+              <div className="item grouping">TrueBlocks</div>
+              <div className="item-left">Status:</div>
+              <div className={`item-right space-after ${props.systemData.is_scraping ? "connected" : "disconnected"}`}>
                 {props.systemData.is_scraping ? "Scraping" : "Not Scraping"}
               </div> 
-              <div className="item">Finalized:</div>
-              <div className="item">{props.chainStatus.finalized}</div>
-              <div className="item">Staged:</div>
-              <div className="item">{props.chainStatus.staging}</div>
-              <div className="item">Unripe:</div>
-              <div className="item">{props.chainStatus.unripe}</div>
-              <div className="item">API Provider:</div>
-              <div className="item space-after">{props.apiProvider}</div>
+              <div className="item-left">Finalized:</div>
+              <div className="item-right">{props.chainStatus.finalized}</div>
+              <div className="item-left">Staged:</div>
+              <div className="item-right">{props.chainStatus.staging}</div>
+              <div className="item-left">Unripe:</div>
+              <div className="item-right">{props.chainStatus.unripe}</div>
+              <div className="item-left">API Provider:</div>
+              <div className="item-right space-after">{props.apiProvider}</div>
               
-              <div className="item grouping">System Version</div>
-              <div className="item">TrueBlocks:</div>
-              <div className="item small">{props.systemData.trueblocks_version}</div>
-              <div className="item">Ethereum:</div>
-              <div className="item small">{props.systemData.client_version}</div>
+              <div className="item grouping">Software Versions</div>
+              <div className="item-both-small">- {props.systemData.client_version}</div>
+              <div className="item-both-small">- {props.systemData.trueblocks_version}</div>
             </div>
           </div>
         )
