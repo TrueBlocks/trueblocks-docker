@@ -169,7 +169,7 @@ const IndexTable = (props) => {
                 <div className="index-node" key={`x${item.firstAppearance}`}>
                 <div>hash:</div> <div>{item.hash}</div>
                 <div>first block:</div> <div>{item.firstAppearance}</div>
-                <div>nBlocks:</div> <div>{item.latestAppearance - item.firstAppearance}</div>
+                <div>nBlocks:</div> <div>{item.latestAppearance - item.firstAppearance + 1}</div>
                 <div>nAddresses:</div> <div>{item.nAddresses}</div>
                 <div>nAppearances:</div> <div>{item.nAppearances}</div>
                 <div>file size:</div> <div>{humanFileSize(item.sizeInBytes)}</div>
