@@ -5,7 +5,7 @@ import { getMonitorStatus } from '../../modules/monitorStatus'
 import { monitorRemove } from '../../modules/monitorRemove'
 import { monitorAdd } from '../../modules/monitorAdd'
 import { withPolling } from '../../modules/withPolling'
-import { humanFileSize } from '../../helpers/filesize'
+//import { humanFileSize } from '../../helpers/filesize'
 import { fmtDouble, fmtInteger } from '../../helpers/number_fmt'
 import Loading from '../common/loading'
 import trash from "../../img/trash-alt.svg"
@@ -125,7 +125,7 @@ class MonitorDetail extends React.Component {
           {this.props.name ? <li className="name">{this.props.name}</li> : null}
           {this.props.group ? <li>{this.props.subgroup ? this.props.group + "/" + this.props.subgroup : this.props.group}</li> : null}
           <li className="address">{this.props.address}</li>
-          {this.props.curEther != "n/a" ? <li >Ether balance = {this.props.curEther}</li> : null}
+          {this.props.curEther !== "n/a" ? <li >Ether balance = {this.props.curEther}</li> : null}
           <li>firstAppearance = {f}</li>
           <li>latestAppearance = {l}</li>
           <li>diff = {d}</li>

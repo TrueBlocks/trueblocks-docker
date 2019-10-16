@@ -73,7 +73,7 @@ class SystemProgressChart extends React.Component {
     // const ripe = props.chainStatus.ripe;
     unripe = this.props.chainStatus.unripe;
     finalized = this.props.chainStatus.finalized;
-    clientHead = (this.props.chainStatus.client == "n/a" ? this.unripe : this.props.chainStatus.client);
+    clientHead = (this.props.chainStatus.client === "n/a" ? this.unripe : this.props.chainStatus.client);
 
     rows = Math.ceil(this.clientHead / 1e6)
     cols = 10

@@ -1,6 +1,6 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+//import { bindActionCreators } from 'redux'
+//import { connect } from 'react-redux'
 
 const Loading = (props) => {
     const symbol = props.status === "error" ? "✖" : <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
