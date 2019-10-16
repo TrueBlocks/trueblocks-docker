@@ -128,11 +128,11 @@ h1 {
 }
 
 .system-status {
-  width: 30%;
+  width: 25%;
 }
 
 .system-progress {
-  width: 70%;
+  width: 75%;
 }
 
 .system-progress h3{
@@ -182,10 +182,21 @@ h1 {
   justify-content: left;
 }
 
-.index-node {
-  width: 24%;
+.bloom-node {
+  width: 98%;
   font-size: .8em;
-  margin: .5%;
+  margin: .1%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
+  border: 1px dashed black;
+}
+
+.index-node {
+  width: 19.5%;
+  font-size: .8em;
+  margin: .2%;
   display: flex;
   flex-wrap: wrap;
   background-color: rgb(245, 245, 245);
@@ -199,6 +210,10 @@ h1 {
 
 .index-node div {
   width: 50%;
+}
+
+.inright {
+  text-align: right;
 }
 
 .index-node .size {
@@ -274,12 +289,21 @@ h1 {
 
 }
 
-.system-details .item.small {
+.system-details .item-both-small {
+  width: 100%;
+  border-bottom: 1px solid #EEE;
+  padding-left: 1em;
   font-size: .8em;
 }
 
-.system-details .item, .monitor-details.item {
-  width: 50%;
+.system-details .item-left, .monitor-details.item {
+  width: 35%;
+  border-bottom: 1px solid #EEE;
+  padding-left: 1em;
+}
+
+.system-details .item-right, .monitor-details.item {
+  width: 65%;
   border-bottom: 1px solid #EEE;
   padding-left: 1em;
 }
