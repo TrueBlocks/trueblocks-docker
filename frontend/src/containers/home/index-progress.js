@@ -160,7 +160,6 @@ const ZoomOnIndex = (props) => {
 
 const IndexTable = (props) => {
     const count = props.data.length
-
     return (
         <div>
             <h3>Block range {props.range.start}-{props.range.end}:</h3>
@@ -168,7 +167,7 @@ const IndexTable = (props) => {
             <div className="index-container">
             {props.data.map(item =>
                 <div className="index-node" key={`x${item.firstAppearance}`}>
-                <div>hash:</div> <div className="inright">{item.hash}</div>
+                <div>ipfs hash:</div> <div className="inright">{item.hash}</div>
                 <div>first block:</div> <div className="inright">{fmtInteger(item.firstAppearance)}</div>
                 <div>nBlocks:</div> <div className="inright">{fmtInteger(item.latestAppearance - item.firstAppearance + 1)}</div>
                 <div>nAddresses:</div> <div className="inright">{fmtInteger(item.nAddresses)}</div>

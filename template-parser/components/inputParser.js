@@ -5,14 +5,14 @@ const readFile = util.promisify(fs.readFile);
 const utils = require('./utils');
 
 const inputParser = async (data) => {
-  let lines = parse(data, {delimiter: ',', columns: true});
+  let lines = parse(data, { delimiter: ',', columns: true });
   let parsedLines = lines.map(item => {
-      item.is_required = item.is_required === "TRUE" ? true : false;
-      item.docs_visible = item.docs_visible === "TRUE" ? true : false;
-      item.core_visible = item.core_visible === "TRUE" ? true : false;
-      return item;
-    }).filter(row => row !== null);
-  
+    item.is_required = item.is_required === "TRUE" ? true : false;
+    item.docs_visible = item.docs_visible === "TRUE" ? true : false;
+    item.core_visible = item.core_visible === "TRUE" ? true : false;
+    return item;
+  }).filter(row => row !== null);
+
   return parsedLines;
 }
 

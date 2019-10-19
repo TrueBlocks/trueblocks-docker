@@ -14,10 +14,7 @@ const MonitorStatus = (props) => {
   return (
     <div className="monitor-status">
       <h1>Monitors</h1>
-      <p>
-        Monitors are per-address index caches.
-        They enable fast appearance history access.
-        They can be added and deleted without affecting the finalized index.</p>
+      <p>Monitors are per-address index caches that enable fast reteival of appearance histories for any account.</p>
       <MonitorDetails {...props} />
     </div>
   )

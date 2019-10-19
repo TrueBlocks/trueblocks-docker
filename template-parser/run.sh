@@ -5,3 +5,4 @@ node index.js -i ../../trueblocks-core/src/other/build_assets/option-master-list
 node ./node_modules/aglio/bin/aglio.js -o ./output/docs.html -i ./output/apiary.generated.apib
 cp -f ./output/docs.html ../api/docs/index.html
 cp -f ./output/apiOptions.generated.json ../api/apiOptions.generated.json
+cp -fR ../api/docs ../frontend/public

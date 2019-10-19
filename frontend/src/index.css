@@ -48,7 +48,8 @@ header a {
   display: block;
   text-align: center;
   padding: 1em;
-  margin: 10px 5px;
+  margin: 10px 3px;
+  border: 1px dashed grey;
   /* box-shadow: 5px 5px 0 #f0efef; */
 }
 
@@ -61,6 +62,11 @@ header a.is-active {
   color: #42505f;
   font-weight: 700;
   background-color: #e2e5f0;
+}
+
+.logo {
+  width: 40px;
+  padding: 4px;
 }
 
 .loading {
@@ -190,7 +196,7 @@ h1 {
   flex-wrap: wrap;
   background-color: rgb(245, 245, 245);
   padding: 10px;
-  border: 1px dashed black;
+  border: 1px dashed grey;
 }
 
 .index-node {
@@ -201,7 +207,7 @@ h1 {
   flex-wrap: wrap;
   background-color: rgb(245, 245, 245);
   padding: 10px;
-  border: 1px dashed black;
+  border: 1px dashed grey;
 }
 
 .index-node :nth-child(odd) {
@@ -331,13 +337,13 @@ h1 {
 }
 
 .monitor-details .detail-container {
-  border: 1px dotted #ddd;
   width: 100%;
   padding: .5em;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  border: 1px dashed grey;
 }
 
 .monitor-details .detail-container .row-detail {
@@ -364,29 +370,29 @@ h1 {
 
 .index {
   width: 3%;
-  border: 1px grey dashed;
+  border: 1px dashed grey;
 }
 
 .display-name {
   width: 27%;
-  border: 1px grey dashed;
+  border: 1px dashed grey;
 }
 
 .range {
   width: 48%;
   text-align: right;
-  border: 1px grey dashed;
+  border: 1px dashed grey;
 }
 
 .balance {
   width: 20%;
   text-align: right;
-  border: 1px grey dashed;
+  border: 1px dashed grey;
 }
 
 .trash {
   width: 2%;
-  border: 1px grey dashed;
+  border: 1px dashed grey;
   opacity: .6;
   cursor: pointer;
   text-align: right;
@@ -404,15 +410,13 @@ h1 {
 .monitor-details .detail-container .detail-left {
   width: 20%;
   padding: .5em;
-  border: 1px grey dashed;
-  background-color: green;
+  border: 1px dashed grey;
 }
 
 .monitor-details .detail-container .detail-right {
-  vertical-align: top;
   width: 60%;
   padding: .5em;
-  border: 1px grey dashed;
+  border: 1px dashed grey;
 }
 
 .monitor-details .name {
@@ -436,11 +440,12 @@ button:disabled {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  padding: 0 .2em;
+  /* border: 1px solid grey; */
 }
 
 .setting-group {
   width: 100%;
+  padding: 5px;
 }
 
 .setting-row {
@@ -450,24 +455,34 @@ button:disabled {
   margin: .1em;
 }
 
+.setting-row side {
+  width: 2%;
+  /* border: 1px dashed grey; */
+}
+
 .setting-row label {
-  width: 15%;
+  width: 13%;
+  /* border: 1px dashed grey; */
 }
 
 .setting-row .input {
   width: 30%;
+  /* border: 1px dashed grey; */
 }
 
 .setting-row .input input {
   width: 90%;
+  /* border: 1px dashed grey; */
 }
 
 .setting-row .description {
   width: 40%;
+  /* border: 1px dashed grey; */
 }
 
 .setting-row .data-type {
   width: 15%;
+  /* border: 1px dashed grey; */
 }
 
 .lds-ring {

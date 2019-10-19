@@ -3,14 +3,14 @@ const templateHandlers = require('./components/templateHandlers');
 const yargs = require('yargs');
 
 const argv = yargs
-    .option('inputFile', {
-        alias: 'i',
-        description: 'Specify input file',
-        type: 'string',
-    })
-    .help()
-    .alias('help', 'h')
-    .argv;
+  .option('inputFile', {
+    alias: 'i',
+    description: 'Specify input file',
+    type: 'string',
+  })
+  .help()
+  .alias('help', 'h')
+  .argv;
 
 let jobs = [
   {
@@ -25,20 +25,14 @@ let jobs = [
     outputFilepath: "./output/apiOptions.generated.json",
     do: templateHandlers.apiHandler
   },
-  {
-    name: "generate cpp files",
-    templateFilepath: "../../trueblocks-core/",
-    outputFilepath:  null,
-    do: templateHandlers.cppHandler
-  }
 ];
 
 let main = async () => {
   let inputData = await parseInput(argv.inputFile);
   jobs.map(async job => {
-    try{
+    try {
       job.do(job.templateFilepath, job.outputFilepath, inputData)
-    } catch(e) {
+    } catch (e) {
       console.log(e)
     }
   })

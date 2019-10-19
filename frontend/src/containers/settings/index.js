@@ -50,13 +50,14 @@ class Settings extends React.Component {
       case "ready":
         container = (
           <div className="full-width">
+            <h1>Configure</h1>
           <form onSubmit={this.submit}>
           {
             this.state.settings.map((file, fileI) =>
               file.groups.map((category, categoryI) => 
               <div className="setting-container" key={category.section}>
                 <div className="setting-group">
-                <h3>{category.section}</h3>
+                <h4>{category.section}</h4>
                 {category.keys.map((settingKey, keyI) => {
                   const el = this.state.settings[fileI].groups[categoryI].keys[keyI]
                   const loc = [fileI, categoryI, keyI]
@@ -96,6 +97,7 @@ class Settings extends React.Component {
 const SettingInput = ({ name, value, type, tip, onChange }) => {
   return (
     <div className="setting-row">
+      <div className="side"></div>
       <label>{name}</label>
       <div className="input">
         { type === 'bool' && <input type="checkbox" value={value} checked={value} name={name} onChange={onChange}/> }

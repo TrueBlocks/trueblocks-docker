@@ -6,73 +6,11 @@ const writeFile = util.promisify(fs.writeFile);
 const utils = require('./utils');
 const dataShapers = require('./dataShapers');
 
-module.exports.cppHandler = async (templateFilepath, outputFilepath, data) => {
-  data = dataShapers.byTool(data);
-
-  // let files = [];
-  let files = glob.sync(templateFilepath + '**/options.cpp', {})
-
-  return await Promise.all(files.map(async filepath => {
-    let path = filepath.split('/');
-    let toolName = path[path.length - 2];
-    let toolData = data[toolName];
-    if(toolData === undefined) {
-      console.log(`no parameters defined for ${toolName} in csv. skipping...`);
-      return true;
-    } 
-
-    let paramsFormatted = toolData.map((option) => {
-      let OPTS = [];
-      if (option.is_required) {
-        OPTS.push("OPT_REQUIRED");
-      } else {
-        // OPTS.push("OPT_OPTIONAL");
-      }
-      if (!option.core_visible) OPTS.push("OPT_HIDDEN");
-      if (option.option_kind === "switch") {
-        // option.data_type = "";
-        OPTS.push("OPT_SWITCH");
-      } else if (option.option_kind === "flag") {
-        OPTS.push("OPT_FLAG");
-      } else if (option.option_kind === "positional") {
-        OPTS.push("OPT_POSITIONAL")
-      } else {
-        OPTS.push("OPT_DESCRIPTION")
-      }
-      if(OPTS.length === 0) {
-        OPTS = 0
-      } else {
-        OPTS = OPTS.join(" | ")
-      }
-
-      let dataType = option.option_kind === "switch" ? "" : option.data_type;
-
-      return `    COption("${option.command}", "${option.command_short}", "${dataType}", ${OPTS}, "${option.description_core}"),\n`
-    }).join("");
-
-    let replacer = (match) => {
-      return `\/\/ BEG_CODE_OPTIONS\n${paramsFormatted}\/\/ END_CODE_OPTIONS`
-    }
-
-    try {
-      let template = await readFile(filepath);
-      template = template.toString();
-      let rx = /\/\/ BEG_CODE_OPTIONS[\s\S]*\/\/ END_CODE_OPTIONS/g;
-      let result = template.replace(rx, replacer);
-      if (result != template)
-          await writeFile(filepath, result);
-      return console.log(`Generated output written to ${filepath}`);
-    } catch (e) {
-      return console.log("e", e);
-    }
-    }));
-}
-
 module.exports.apiHandler = async (templateFilepath, outputFilepath, data) => {
   data = dataShapers.byRoute(data);
   let newData = {}
   let globalFlags = utils.groupBy(data.all, "command");
- 
+
   Object.keys(data).map((routeName) => {
     newData[routeName] = {}
     let d = utils.groupBy(data[routeName], "command");
@@ -97,15 +35,15 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
   data = dataShapers.byRoute(data);
 
   let replacer = (match, type, routeName) => {  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
-    
+
     console.log(`routeName: ${routeName}`);
 
     let routeData = data[routeName];
-    if (routeData === undefined) throw(`ERROR: no parameters defined for ${routeName} in csv.`)
+    if (routeData === undefined) throw (`ERROR: no parameters defined for ${routeName} in csv.`)
     let params = [...routeData, ...data.all]
-        .filter(param => param.command !== '' & // no empty parameter names. these aren't parameters, they are tool description.
-          param.docs_visible // don't show hidden options
-        )
+      .filter(param => param.command !== '' & // no empty parameter names. these aren't parameters, they are tool description.
+        param.docs_visible // don't show hidden options
+      )
       .reduce((acc, val) => acc.concat(val), []); // flatten
 
     // format for GENERATE:URI
@@ -117,7 +55,7 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
     }
 
     // format for GENERATE:PARAMS
-    else if (type === "PARAMS") {  
+    else if (type === "PARAMS") {
       let paramsFormatted = params.map(param => {
         param.exampleData = '';
 
@@ -127,14 +65,14 @@ module.exports.docsHandler = async (templateFilepath, outputFilepath, data) => {
     }
   }
 
-    try {
-      let template = await readFile(templateFilepath);
-      template = template.toString();
-      let rx = /\<\<GENERATE:(.*):(.*)\>\>/g;
-      let result = template.replace(rx, replacer);
-      await writeFile(outputFilepath, result);
-      console.log(`Generated output written to ${outputFilepath}`);
-    } catch (e) {
-      console.log("e", e);
-    }
+  try {
+    let template = await readFile(templateFilepath);
+    template = template.toString();
+    let rx = /\<\<GENERATE:(.*):(.*)\>\>/g;
+    let result = template.replace(rx, replacer);
+    await writeFile(outputFilepath, result);
+    console.log(`Generated output written to ${outputFilepath}`);
+  } catch (e) {
+    console.log("e", e);
   }
+}
