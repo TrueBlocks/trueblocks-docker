@@ -11,7 +11,7 @@
       "is_required": true,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "positional",
       "data_type": "list<addr>",
       "description": "one or more Ethereum addresses"
@@ -27,7 +27,7 @@
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "produce results in the staging folder instead of production folder"
@@ -43,7 +43,7 @@
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "visit unripe (not old enough and not yet staged or finalized) blocks"
@@ -59,7 +59,7 @@
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "yes",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "we are being called in daemon mode which causes us to print results differently"
@@ -70,7 +70,7 @@
       "api_route": "list",
       "tool": "acctScrape",
       "command": "no_header",
-      "hotkey": "o",
+      "hotkey": "n",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -86,15 +86,15 @@
       "api_route": "list",
       "tool": "acctScrape",
       "command": "start",
-      "hotkey": "",
+      "hotkey": "S",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "flag",
       "data_type": "<blknum>",
-      "description": "first block to scan for appearances (inclusive)"
+      "description": "first block to process(inclusive)"
     },
     "end": {
       "num": "10300",
@@ -102,15 +102,15 @@
       "api_route": "list",
       "tool": "acctScrape",
       "command": "end",
-      "hotkey": "",
+      "hotkey": "E",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "flag",
       "data_type": "<blknum>",
-      "description": "end block to scan for appearances (inclusive)"
+      "description": "last block to process (inclusive)"
     },
     "": {
       "num": "10350",
@@ -123,7 +123,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "description",
       "data_type": "",
       "description": "Index transactions for a given Ethereum address (or series of addresses)."
@@ -224,12 +224,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -240,12 +240,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -381,7 +381,7 @@
       "is_required": true,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "positional",
       "data_type": "list<addr>",
       "description": "one or more addresses (0x...) to export"
@@ -440,7 +440,7 @@
       "api_route": "export",
       "tool": "acctExport",
       "command": "balances",
-      "hotkey": "c",
+      "hotkey": "b",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -472,7 +472,7 @@
       "api_route": "export",
       "tool": "acctExport",
       "command": "count_only",
-      "hotkey": "o",
+      "hotkey": "c",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -482,53 +482,53 @@
       "data_type": "<boolean>",
       "description": "display only the count of the number of data items requested"
     },
-    "blocks": {
+    "write_blocks": {
       "num": "10750",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "blocks",
-      "hotkey": "b",
+      "command": "write_blocks",
+      "hotkey": "w",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[on|off*]",
-      "description": "write blocks to the binary cache ('off' by default)"
+      "generate": "yes",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "turn on writing blocks to the binary cache ('off' by default)"
     },
-    "writeTxs": {
+    "nowrite_txs": {
       "num": "10800",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "writeTxs",
-      "hotkey": "s",
+      "command": "nowrite_txs",
+      "hotkey": "o",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[on*|off]",
-      "description": "write transactions to the binary cache ('on' by default)"
+      "generate": "yes",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "turn off writing transactions to the binary cache ('on' by default)"
     },
-    "writeTraces": {
+    "nowrite_traces": {
       "num": "10850",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "writeTraces",
+      "command": "nowrite_traces",
       "hotkey": "r",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[on*|off]",
-      "description": "write traces to the binary cache ('on' by default)"
+      "generate": "yes",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "turn off writing traces to the binary cache ('on' by default)"
     },
     "ddos": {
       "num": "10900",
@@ -546,12 +546,12 @@
       "data_type": "enum[on*|off]",
       "description": "skip over dDos transactions in export ('on' by default)"
     },
-    "maxTraces": {
+    "max_traces": {
       "num": "10950",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "maxTraces",
+      "command": "max_traces",
       "hotkey": "m",
       "def_val": "",
       "is_required": false,
@@ -578,12 +578,12 @@
       "data_type": "<boolean>",
       "description": "do not show the header row"
     },
-    "allABIs": {
+    "all_abis": {
       "num": "11050",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "allABIs",
+      "command": "all_abis",
       "hotkey": "A",
       "def_val": "",
       "is_required": false,
@@ -594,18 +594,18 @@
       "data_type": "<boolean>",
       "description": "load all previously cached abi files"
     },
-    "grabABIs": {
+    "grab_abis": {
       "num": "11100",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "grabABIs",
+      "command": "grab_abis",
       "hotkey": "g",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "yes",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "using each trace's 'to' address&#44; grab the abi for that address (improves articulation)"
@@ -632,7 +632,7 @@
       "api_route": "export",
       "tool": "acctExport",
       "command": "deltas",
-      "hotkey": "e",
+      "hotkey": "D",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -643,52 +643,36 @@
       "description": "for --balances option only&#44; export only changes in balances"
     },
     "start": {
-      "num": "11250",
+      "num": "10250",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
       "command": "start",
-      "hotkey": "",
+      "hotkey": "S",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "flag",
       "data_type": "<blknum>",
-      "description": "first block to export (inclusive)"
+      "description": "first block to process(inclusive)"
     },
     "end": {
-      "num": "11300",
+      "num": "10300",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
       "command": "end",
-      "hotkey": "",
+      "hotkey": "E",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "flag",
       "data_type": "<blknum>",
-      "description": "last block to export (inclusive)"
-    },
-    "fmt": {
-      "num": "11350",
-      "group": "apps",
-      "api_route": "export",
-      "tool": "acctExport",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
+      "description": "last block to process (inclusive)"
     },
     "": {
       "num": "11400",
@@ -802,12 +786,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -818,12 +802,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -948,12 +932,12 @@
     }
   },
   "scrape": {
-    "nBlocks": {
+    "n_blocks": {
       "num": "11450",
       "group": "apps",
       "api_route": "scrape",
       "tool": "blockScrape",
-      "command": "nBlocks",
+      "command": "n_blocks",
       "hotkey": "n",
       "def_val": "",
       "is_required": false,
@@ -964,13 +948,13 @@
       "data_type": "<blknum>",
       "description": "maximum number of blocks to process (defaults to 5000)"
     },
-    "nBlockProcs": {
+    "n_block_procs": {
       "num": "11500",
       "group": "apps",
       "api_route": "scrape",
       "tool": "blockScrape",
-      "command": "nBlockProcs",
-      "hotkey": "b",
+      "command": "n_block_procs",
+      "hotkey": "p",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -980,12 +964,12 @@
       "data_type": "<uint>",
       "description": "number of block channels for blaze"
     },
-    "nAddrProcs": {
+    "n_addr_procs": {
       "num": "11550",
       "group": "apps",
       "api_route": "scrape",
       "tool": "blockScrape",
-      "command": "nAddrProcs",
+      "command": "n_addr_procs",
       "hotkey": "a",
       "def_val": "",
       "is_required": false,
@@ -1108,12 +1092,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -1124,12 +1108,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -1265,7 +1249,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "positional",
       "data_type": "list<enum[index|monitors|names|abis|blocks|transactions|traces|slurps|prices|some*|all]>",
       "description": "which data to retrieve"
@@ -1297,90 +1281,74 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "yes",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "display results in Linux ls -l format (assumes --detail)"
     },
-    "start": {
-      "num": "11800",
-      "group": "apps",
-      "api_route": "status",
-      "tool": "cacheStatus",
-      "command": "start",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "starting block for data retreival (inclusive)"
-    },
-    "end": {
-      "num": "11850",
-      "group": "apps",
-      "api_route": "status",
-      "tool": "cacheStatus",
-      "command": "end",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "ending block for data retreival (inclusive)"
-    },
-    "config-get": {
+    "get_config": {
       "num": "11900",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
-      "command": "config-get",
+      "command": "get_config",
       "hotkey": "g",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "returns JSON data of the editable configuration file items"
     },
-    "config-set": {
+    "set_config": {
       "num": "11950",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
-      "command": "config-set",
+      "command": "set_config",
       "hotkey": "s",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "accepts JSON in an env variable and writes it to configuration files"
     },
-    "fmt": {
-      "num": "12000",
+    "start": {
+      "num": "10250",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
-      "command": "fmt",
-      "hotkey": "x",
+      "command": "start",
+      "hotkey": "S",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "yes",
       "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
+      "data_type": "<blknum>",
+      "description": "first block to process(inclusive)"
+    },
+    "end": {
+      "num": "10300",
+      "group": "apps",
+      "api_route": "status",
+      "tool": "cacheStatus",
+      "command": "end",
+      "hotkey": "E",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "yes",
+      "option_kind": "flag",
+      "data_type": "<blknum>",
+      "description": "last block to process (inclusive)"
     },
     "": {
       "num": "12050",
@@ -1393,7 +1361,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "description",
       "data_type": "",
       "description": "Report on status of one or more TrueBlocks caches."
@@ -1494,12 +1462,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -1510,12 +1478,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -1651,7 +1619,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "positional",
       "data_type": "list<addr>",
       "description": "show or edit one or more addresses' config file"
@@ -1667,7 +1635,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "flag",
       "data_type": "enum[show|edit]",
       "description": "whether to show or edit the config"
@@ -1683,7 +1651,7 @@
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "no",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "retrieve current configuration values"
@@ -1699,7 +1667,7 @@
       "is_required": false,
       "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "no",
       "option_kind": "flag",
       "data_type": "<string>",
       "description": "set new configuration values"
@@ -1800,12 +1768,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -1816,12 +1784,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -1957,7 +1925,7 @@
       "is_required": true,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "positional",
       "data_type": "list<addr>",
       "description": "remove one or more monitors"
@@ -1973,7 +1941,7 @@
       "is_required": true,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "must be present for remove to occur"
@@ -2074,12 +2042,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -2090,12 +2058,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -2231,7 +2199,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "positional",
       "data_type": "<string>",
       "description": "convert the given bytes into an ascii string"
@@ -2247,7 +2215,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "positional",
       "data_type": "<string>",
       "description": "convert the given string into bytes"
@@ -2348,12 +2316,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -2364,12 +2332,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -2505,7 +2473,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "flag",
       "data_type": "<string>",
       "description": "leech the address index from IPFS"
@@ -2606,12 +2574,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -2622,12 +2590,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -2763,7 +2731,7 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "",
+      "generate": "no",
       "option_kind": "flag",
       "data_type": "<string>",
       "description": "seed the address index to IPFS"
@@ -2864,12 +2832,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -2880,12 +2848,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -3023,8 +2991,8 @@
       "docs_visible": true,
       "generate": "",
       "option_kind": "positional",
-      "data_type": "<string>",
-      "description": "which command to run&#44; one of enum[list|export|slurp|accounts|abi|state|data|blocks|transactions|receipts|logs|traces|quotes|scrape|status|config|rm|message|leech|seed]"
+      "data_type": "list<enum[list|export|slurp|accounts|abi|state|data|blocks|transactions|receipts|logs|traces|quotes|scrape|status|config|rm|message|leech|seed]>",
+      "description": "which command to run"
     },
     "sleep": {
       "num": "12650",
@@ -3032,7 +3000,7 @@
       "api_route": "",
       "tool": "chifra",
       "command": "sleep",
-      "hotkey": "",
+      "hotkey": "s",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -3192,7 +3160,7 @@
       "api_route": "",
       "tool": "cacheMan",
       "command": "truncate",
-      "hotkey": "t",
+      "hotkey": "u",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -3201,22 +3169,6 @@
       "option_kind": "flag",
       "data_type": "<blknum>",
       "description": "truncate the cache at block :n (keeps block 'n' and before&#44; implies --fix)"
-    },
-    "maxBlock": {
-      "num": "13200",
-      "group": "apps",
-      "api_route": "",
-      "tool": "cacheMan",
-      "command": "maxBlock",
-      "hotkey": "k",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "for testing&#44; max block to visit"
     },
     "merge": {
       "num": "13250",
@@ -3240,7 +3192,7 @@
       "api_route": "",
       "tool": "cacheMan",
       "command": "skip",
-      "hotkey": "p",
+      "hotkey": "k",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -3250,45 +3202,13 @@
       "data_type": "<boolean>",
       "description": "skip value for testing"
     },
-    "start": {
-      "num": "13350",
-      "group": "apps",
-      "api_route": "",
-      "tool": "cacheMan",
-      "command": "start",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "un-used hidden value - do not remove"
-    },
-    "end": {
-      "num": "13400",
-      "group": "apps",
-      "api_route": "",
-      "tool": "cacheMan",
-      "command": "end",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "un-used hidden value - do not remove"
-    },
     "no_header": {
       "num": "13450",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
       "command": "no_header",
-      "hotkey": "o",
+      "hotkey": "n",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -3298,28 +3218,44 @@
       "data_type": "<boolean>",
       "description": "do not show header row of data"
     },
-    "fmt": {
-      "num": "13500",
+    "start": {
+      "num": "10250",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
-      "command": "fmt",
-      "hotkey": "x",
+      "command": "start",
+      "hotkey": "S",
       "def_val": "",
       "is_required": false,
-      "core_visible": true,
+      "core_visible": false,
       "docs_visible": false,
-      "generate": "",
+      "generate": "yes",
       "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
+      "data_type": "<blknum>",
+      "description": "first block to process(inclusive)"
     },
-    "className": {
+    "end": {
+      "num": "10300",
+      "group": "apps",
+      "api_route": "",
+      "tool": "cacheMan",
+      "command": "end",
+      "hotkey": "E",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "yes",
+      "option_kind": "flag",
+      "data_type": "<blknum>",
+      "description": "last block to process (inclusive)"
+    },
+    "class_list": {
       "num": "13600",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
-      "command": "className",
+      "command": "class_list",
       "hotkey": "",
       "def_val": "",
       "is_required": true,
@@ -3329,22 +3265,6 @@
       "option_kind": "positional",
       "data_type": "list(<string>)",
       "description": "one or more class definition files to process"
-    },
-    "namespce": {
-      "num": "13650",
-      "group": "dev_tools",
-      "api_route": "",
-      "tool": "makeClass",
-      "command": "namespce",
-      "hotkey": "n",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": false,
-      "generate": "yes",
-      "option_kind": "flag",
-      "data_type": "<string>",
-      "description": "surround the code with a namespace"
     },
     "run": {
       "num": "13700",
@@ -3360,7 +3280,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "run the class maker on associated <className(s)>"
+      "description": "run the class maker on associated <class_name(s)>"
     },
     "edit": {
       "num": "13800",
@@ -3376,7 +3296,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "edit <className(s)> definition file in local folder"
+      "description": "edit <class_name(s)> definition file in local folder"
     },
     "all": {
       "num": "13850",
@@ -3392,30 +3312,14 @@
       "generate": "yes",
       "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "edit&#44; list&#44; or run all class definitions found in the local folder"
+      "description": "list&#44; or run all class definitions found in the local folder"
     },
-    "options": {
-      "num": "13900",
-      "group": "dev_tools",
-      "api_route": "",
-      "tool": "makeClass",
-      "command": "options",
-      "hotkey": "p",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "export options code (check data&#44; generate code) and quit"
-    },
-    "javascript": {
+    "js": {
       "num": "13950",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
-      "command": "javascript",
+      "command": "js",
       "hotkey": "j",
       "def_val": "",
       "is_required": false,
@@ -3425,6 +3329,38 @@
       "option_kind": "flag",
       "data_type": "<string>",
       "description": "export javaScript code and quit"
+    },
+    "options": {
+      "num": "13900",
+      "group": "dev_tools",
+      "api_route": "",
+      "tool": "makeClass",
+      "command": "options",
+      "hotkey": "o",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "export options code (check data&#44; generate code) and quit"
+    },
+    "nspace": {
+      "num": "13650",
+      "group": "dev_tools",
+      "api_route": "",
+      "tool": "makeClass",
+      "command": "nspace",
+      "hotkey": "n",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "yes",
+      "option_kind": "flag",
+      "data_type": "<string>",
+      "description": "surround the code with a namespace"
     },
     "filter": {
       "num": "14000",
@@ -3440,7 +3376,7 @@
       "generate": "yes",
       "option_kind": "flag",
       "data_type": "<string>",
-      "description": "process only files with :filter in their names"
+      "description": "process only files whose filename or contents contain 'filter'"
     },
     "mode": {
       "num": "14100",
@@ -3490,6 +3426,22 @@
       "data_type": "<boolean>",
       "description": "do not quit testing on first error"
     },
+    "report": {
+      "num": "14250",
+      "group": "dev_tools",
+      "api_route": "",
+      "tool": "testRunner",
+      "command": "report",
+      "hotkey": "r",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "yes",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "display performance report to screen"
+    },
     "parse": {
       "num": "19250",
       "group": "tools",
@@ -3512,7 +3464,7 @@
       "api_route": "",
       "tool": "templates",
       "command": "logs",
-      "hotkey": "g",
+      "hotkey": "l",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -3650,22 +3602,6 @@
       "data_type": "<boolean>",
       "description": "if a balance does not reconcile&#44; export a message to a file"
     },
-    "kBlock": {
-      "num": "19800",
-      "group": "tools",
-      "api_route": "",
-      "tool": "templates",
-      "command": "kBlock",
-      "hotkey": "k",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "start processing at block :k"
-    },
     "offset": {
       "num": "19850",
       "group": "tools",
@@ -3778,12 +3714,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -3794,12 +3730,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -3962,31 +3898,15 @@
       "api_route": "quotes",
       "tool": "ethQuote",
       "command": "pair",
-      "hotkey": "r",
+      "hotkey": "a",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
       "generate": "local",
       "option_kind": "flag",
-      "data_type": "<pair>",
+      "data_type": "<string>",
       "description": "Which price pair to freshen or list (see Poloniex)"
-    },
-    "fmt": {
-      "num": "14500",
-      "group": "tools",
-      "api_route": "quotes",
-      "tool": "ethQuote",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
     },
     "": {
       "num": "14550",
@@ -4100,12 +4020,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -4116,12 +4036,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -4326,22 +4246,6 @@
       "data_type": "<boolean>",
       "description": "Run silently (only freshen the data&#44; do not display it)"
     },
-    "fmt": {
-      "num": "14850",
-      "group": "tools",
-      "api_route": "slurp",
-      "tool": "ethslurp",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|html|api]",
-      "description": "pretty print"
-    },
     "": {
       "num": "14900",
       "group": "tools",
@@ -4454,12 +4358,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -4470,12 +4374,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -4632,12 +4536,12 @@
       "data_type": "<boolean>",
       "description": "expand search to include all fields (default searches name&#44; address&#44; and symbol only)"
     },
-    "matchCase": {
+    "match_case": {
       "num": "15050",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
-      "command": "matchCase",
+      "command": "match_case",
       "hotkey": "m",
       "def_val": "",
       "is_required": false,
@@ -4743,22 +4647,6 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "display only addresses in the results (useful for scripting)"
-    },
-    "fmt": {
-      "num": "15400",
-      "group": "tools",
-      "api_route": "accounts",
-      "tool": "getAccounts",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
     },
     "": {
       "num": "15450",
@@ -4872,12 +4760,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -4888,12 +4776,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -5034,12 +4922,12 @@
       "data_type": "list<blknum>",
       "description": "a space-separated list of one or more blocks to retrieve"
     },
-    "hash_only": {
+    "hashes_only": {
       "num": "15550",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
-      "command": "hash_only",
+      "command": "hashes_only",
       "hotkey": "s",
       "def_val": "",
       "is_required": false,
@@ -5104,7 +4992,7 @@
       "api_route": "blocks",
       "tool": "getBlock",
       "command": "uniq_tx",
-      "hotkey": "q",
+      "hotkey": "n",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -5120,7 +5008,7 @@
       "api_route": "blocks",
       "tool": "getBlock",
       "command": "count_only",
-      "hotkey": "n",
+      "hotkey": "o",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -5136,7 +5024,7 @@
       "api_route": "blocks",
       "tool": "getBlock",
       "command": "filter",
-      "hotkey": "i",
+      "hotkey": "f",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -5168,7 +5056,7 @@
       "api_route": "blocks",
       "tool": "getBlock",
       "command": "force",
-      "hotkey": "o",
+      "hotkey": "e",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -5184,7 +5072,7 @@
       "api_route": "blocks",
       "tool": "getBlock",
       "command": "quiet",
-      "hotkey": "t",
+      "hotkey": "q",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -5200,7 +5088,7 @@
       "api_route": "blocks",
       "tool": "getBlock",
       "command": "cache",
-      "hotkey": "e",
+      "hotkey": "C",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -5216,7 +5104,7 @@
       "api_route": "blocks",
       "tool": "getBlock",
       "command": "normalize",
-      "hotkey": "z",
+      "hotkey": "m",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -5338,12 +5226,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -5354,12 +5242,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -5538,7 +5426,7 @@
       "api_route": "blooms",
       "tool": "getBloom",
       "command": "receipt_only",
-      "hotkey": "c",
+      "hotkey": "r",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -5618,7 +5506,7 @@
       "api_route": "blooms",
       "tool": "getBloom",
       "command": "bitcount",
-      "hotkey": "n",
+      "hotkey": "t",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -5634,7 +5522,7 @@
       "api_route": "blooms",
       "tool": "getBloom",
       "command": "force",
-      "hotkey": "o",
+      "hotkey": "f",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -5756,12 +5644,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -5772,12 +5660,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -5934,22 +5822,6 @@
       "data_type": "<boolean>",
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
-    "fmt": {
-      "num": "16850",
-      "group": "tools",
-      "api_route": "logs",
-      "tool": "getLogs",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
-    },
     "": {
       "num": "16900",
       "group": "tools",
@@ -6062,12 +5934,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -6078,12 +5950,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -6256,22 +6128,6 @@
       "data_type": "<boolean>",
       "description": "display the receipt's logs"
     },
-    "fmt": {
-      "num": "17100",
-      "group": "tools",
-      "api_route": "receipts",
-      "tool": "getReceipt",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
-    },
     "": {
       "num": "17150",
       "group": "tools",
@@ -6384,12 +6240,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -6400,12 +6256,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -6578,22 +6434,6 @@
       "data_type": "enum[none|some*|all|balance|nonce|code|storage|deployed|accttype]",
       "description": "control which state to export"
     },
-    "no_zero": {
-      "num": "17350",
-      "group": "tools",
-      "api_route": "state",
-      "tool": "getState",
-      "command": "no_zero",
-      "hotkey": "n",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "suppress the display of zero balance accounts"
-    },
     "changes": {
       "num": "17400",
       "group": "tools",
@@ -6610,6 +6450,38 @@
       "data_type": "<boolean>",
       "description": "only report a balance when it changes from one block to the next"
     },
+    "no_zero": {
+      "num": "17350",
+      "group": "tools",
+      "api_route": "state",
+      "tool": "getState",
+      "command": "no_zero",
+      "hotkey": "n",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "yes",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "suppress the display of zero balance accounts"
+    },
+    "no_history": {
+      "num": "17500",
+      "group": "tools",
+      "api_route": "state",
+      "tool": "getState",
+      "command": "no_history",
+      "hotkey": "s",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "for testing only&#44; hide the server's historical state"
+    },
     "no_header": {
       "num": "17450",
       "group": "tools",
@@ -6625,38 +6497,6 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "hide the header in txt and csv mode"
-    },
-    "no_history": {
-      "num": "17500",
-      "group": "tools",
-      "api_route": "state",
-      "tool": "getState",
-      "command": "no_history",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "for testing only&#44; hide the server's historical state"
-    },
-    "fmt": {
-      "num": "17550",
-      "group": "tools",
-      "api_route": "state",
-      "tool": "getState",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
     },
     "": {
       "num": "17600",
@@ -6770,12 +6610,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -6786,12 +6626,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -6948,6 +6788,22 @@
       "data_type": "list<blknum>",
       "description": "an optional list of one or more blocks at which to report balances&#44; defaults to 'latest'"
     },
+    "info": {
+      "num": "17850",
+      "group": "tools",
+      "api_route": "tokens",
+      "tool": "getTokenInfo",
+      "command": "info",
+      "hotkey": "i",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "",
+      "option_kind": "flag",
+      "data_type": "enum[name|decimals|totalSupply|version|symbol|all]",
+      "description": "retreive information about the token"
+    },
     "by_acct": {
       "num": "17750",
       "group": "tools",
@@ -6979,22 +6835,6 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "suppress the display of zero balance accounts"
-    },
-    "info": {
-      "num": "17850",
-      "group": "tools",
-      "api_route": "tokens",
-      "tool": "getTokenInfo",
-      "command": "info",
-      "hotkey": "i",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[name|decimals|totalSupply|version|symbol|all]",
-      "description": "retreive information about the token"
     },
     "": {
       "num": "17900",
@@ -7108,12 +6948,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -7124,12 +6964,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -7302,22 +7142,6 @@
       "data_type": "<boolean>",
       "description": "show the number of traces for the transaction only (fast)"
     },
-    "no_header": {
-      "num": "18100",
-      "group": "tools",
-      "api_route": "traces",
-      "tool": "getTrace",
-      "command": "no_header",
-      "hotkey": "n",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "do not show the header row"
-    },
     "skip_ddos": {
       "num": "18150",
       "group": "tools",
@@ -7334,21 +7158,21 @@
       "data_type": "enum[on*|off]",
       "description": "skip over dDos transactions during export ('on' by default)"
     },
-    "fmt": {
-      "num": "18200",
+    "no_header": {
+      "num": "18100",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
-      "command": "fmt",
-      "hotkey": "x",
+      "command": "no_header",
+      "hotkey": "n",
       "def_val": "",
       "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "do not show the header row"
     },
     "": {
       "num": "18250",
@@ -7462,12 +7286,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -7478,12 +7302,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -7672,22 +7496,6 @@
       "data_type": "<boolean>",
       "description": "force the results into the tx cache"
     },
-    "fmt": {
-      "num": "18500",
-      "group": "tools",
-      "api_route": "transactions",
-      "tool": "getTrans",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
-    },
     "": {
       "num": "18550",
       "group": "tools",
@@ -7800,12 +7608,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -7816,12 +7624,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -8064,7 +7872,7 @@
       "api_route": "abi",
       "tool": "grabABI",
       "command": "sol",
-      "hotkey": "l",
+      "hotkey": "s",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -8096,7 +7904,7 @@
       "api_route": "abi",
       "tool": "grabABI",
       "command": "silent",
-      "hotkey": "s",
+      "hotkey": "i",
       "def_val": "",
       "is_required": false,
       "core_visible": false,
@@ -8250,12 +8058,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -8266,12 +8074,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -8444,22 +8252,6 @@
       "data_type": "<boolean>",
       "description": "export all the named blocks"
     },
-    "fmt": {
-      "num": "20100",
-      "group": "tools",
-      "api_route": "when",
-      "tool": "whenBlock",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
-    },
     "": {
       "num": "20150",
       "group": "tools",
@@ -8572,12 +8364,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -8588,12 +8380,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -8734,22 +8526,6 @@
       "data_type": "list<blknum>",
       "description": "a space-separated list of one or more blocks to search for"
     },
-    "fmt": {
-      "num": "20250",
-      "group": "tools",
-      "api_route": "where",
-      "tool": "whereBlock",
-      "command": "fmt",
-      "hotkey": "x",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "enum[none|json*|txt|csv|api]",
-      "description": "export format"
-    },
     "": {
       "num": "20300",
       "group": "tools",
@@ -8862,12 +8638,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -8878,12 +8654,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
@@ -9104,12 +8880,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from the node with minimal processing"
     },
-    "veryRaw": {
+    "very_raw": {
       "num": "20650",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "veryRaw",
+      "command": "very_raw",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
@@ -9120,12 +8896,12 @@
       "data_type": "<boolean>",
       "description": "report JSON data from node with zero processing"
     },
-    "fmt1": {
+    "fmt": {
       "num": "20700",
       "group": "all",
       "api_route": "all",
       "tool": "all",
-      "command": "fmt1",
+      "command": "fmt",
       "hotkey": "x",
       "def_val": "",
       "is_required": false,
