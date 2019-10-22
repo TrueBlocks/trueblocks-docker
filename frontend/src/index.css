@@ -69,6 +69,14 @@ header a.is-active {
   padding: 4px;
 }
 
+.traffic_light {
+  vertical-align: top;
+  height: 23px;
+  width: 37px;
+  padding: 4px;
+  padding-top: 6px;
+}
+
 .loading {
   display: flex;
   flex-direction: column;
@@ -220,6 +228,19 @@ h1 {
 
 .inright {
   text-align: right;
+  color: gray;
+}
+
+.inright_red {
+  text-align: right;
+  color: red;
+  font-weight: 900;
+}
+
+.inright_blue {
+  text-align: right;
+  color: blue;
+  font-weight: 900;
 }
 
 .index-node .size {
