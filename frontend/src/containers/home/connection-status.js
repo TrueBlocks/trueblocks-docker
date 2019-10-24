@@ -35,17 +35,17 @@ const ConnectionDetails = (props) => {
               <div className="item-left">Connection:</div>
               <div className={`item-right ${Number.isInteger(props.chainStatus.client) ? "connected" : "disconnected"}`}>
                 {Number.isInteger(props.chainStatus.client) ? "Connected" : "Disconnected"}
-              </div> 
+              </div>
               <div className="item-left">Last block:</div>
               <div className="item-right">{fmtInteger(client)}</div>
               <div className="item-left">RPC Provider:</div>
               <div className="item-right">{props.systemData.rpc_provider}</div>
-              
+
               <div className="item grouping">TrueBlocks</div>
               <div className="item-left">Status:</div>
               <div className={`item-right space-after ${props.systemData.is_scraping ? "connected" : "disconnected"}`}>
                 {props.systemData.is_scraping ? "Scraping" : "Not Scraping"}
-              </div> 
+              </div>
               <div className="item-left"><img className="traffic_light" alt={green_light} src={green_light} />Finalized:</div>
               <div className="item-right">{fmtInteger(finalized)} <small>(<i>{final_behind}</i>)</small></div>
               <div className="item-left">
@@ -55,7 +55,7 @@ const ConnectionDetails = (props) => {
               <div className="item-right">{fmtInteger(unripe)} <small>(<i>{props.chainStatus.client - props.chainStatus.unripe}</i>)</small></div>
               <div className="item-left">API Provider:</div>
               <div className="item-right space-after">{props.apiProvider}</div>
-              
+
               <div className="item grouping">Software Versions</div>
               <div className="item-both-small">- {props.systemData.client_version}</div>
               <div className="item-both-small">- {props.systemData.trueblocks_version}</div>

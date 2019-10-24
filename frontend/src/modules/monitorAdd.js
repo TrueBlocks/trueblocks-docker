@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
 }
 
 const getData = (endpoint, address) => {
-  return fetch(`${endpoint}/list?addr_list=${address}`)
+  return fetch(`${endpoint}/list?addresses=${address}`)
 }
 
 export const monitorAdd = (address) => {

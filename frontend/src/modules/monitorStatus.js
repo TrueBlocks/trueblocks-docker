@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
 }
 
 const getData = (endpoint) => {
-  return fetch(`${endpoint}/status?mode_list=monitors&details&ether`)
+  return fetch(`${endpoint}/status?modes=monitors&details&ether`)
 }
 
 export const getMonitorStatus = () => {
@@ -47,7 +47,7 @@ export const getMonitorStatus = () => {
         dispatch({
           type: GETSTATUS_BEGIN
         })
-    
+
         let state = getState();
         return getData(state.getSettings.apiProvider)
             .then(async res => {

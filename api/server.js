@@ -74,7 +74,11 @@ app.get(`/log-message`, (req, res) => {
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
     if(apiOptions[routeName] === undefined) {
-        return res.send('{ "error": "This route is not available." }')
+        var msg = '{ "error": "Route ';
+        msg += routeName;
+        msg += 'is not available." }';
+        console.log(msg);
+        return res.send(msg);
     }
     let cmd = generateCmd(routeName, req.query);
     let chifra = spawn("chifra", [routeName, cmd], {env: env, detached: true});

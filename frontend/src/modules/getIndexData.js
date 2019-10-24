@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
 }
 
 const getData = (endpoint) => {
-  return fetch(`${endpoint}/status?mode_list=index&details`)
+  return fetch(`${endpoint}/status?modes=index&details`)
 }
 
 export const getIndexData = () => {
