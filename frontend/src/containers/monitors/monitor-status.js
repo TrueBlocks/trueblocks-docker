@@ -127,8 +127,8 @@ class MonitorDetail extends React.Component {
           <li>latestAppearance = {l}</li>
           <li>diff = {d}</li>
           <li>interval = {b}</li>
-          <li>nRecords = {n}</li>
-          <li>fileSize= {m}</li>
+          <li><div className="val_green">nRecords = {n}</div></li>
+          <li><div className="val_blue">fileSize = {m} bytes</div></li>
         </div>
         <div className={`detail-right ${!this.state.isExpanded ? 'hidden' : ''}`}>
           This is where I want the charts
