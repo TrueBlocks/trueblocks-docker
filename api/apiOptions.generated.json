@@ -22,7 +22,7 @@
       "api_route": "list",
       "tool": "acctScrape",
       "command": "finalized",
-      "hotkey": "s",
+      "hotkey": "f",
       "def_val": "true",
       "is_required": false,
       "core_visible": false,
@@ -129,7 +129,7 @@
       "description": "Index transactions for a given Ethereum address (or series of addresses)."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -145,7 +145,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -161,7 +161,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -177,7 +177,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -193,7 +193,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -209,7 +209,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -225,7 +225,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -241,7 +241,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -257,7 +257,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -273,7 +273,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -289,7 +289,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -305,7 +305,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -321,7 +321,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -337,7 +337,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -353,7 +353,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -386,13 +386,13 @@
       "data_type": "list<addr>",
       "description": "one or more addresses (0x...) to export"
     },
-    "articulate": {
-      "num": "10220",
+    "appearances": {
+      "num": "10300",
       "group": "apps",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "articulate",
-      "hotkey": "a",
+      "command": "appearances",
+      "hotkey": "p",
       "def_val": "",
       "is_required": false,
       "core_visible": true,
@@ -400,7 +400,7 @@
       "generate": "yes",
       "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "articulate transactions&#44; traces&#44; logs&#44; and outputs"
+      "description": "export a list of appearances"
     },
     "logs": {
       "num": "10240",
@@ -450,22 +450,6 @@
       "data_type": "<boolean>",
       "description": "export balance history instead of transaction list"
     },
-    "appearances": {
-      "num": "10300",
-      "group": "apps",
-      "api_route": "export",
-      "tool": "acctExport",
-      "command": "appearances",
-      "hotkey": "p",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "export a list of appearances"
-    },
     "count_only": {
       "num": "10320",
       "group": "apps",
@@ -481,6 +465,22 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "display only the count of the number of data items requested"
+    },
+    "articulate": {
+      "num": "10220",
+      "group": "apps",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "articulate",
+      "hotkey": "a",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "yes",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "articulate transactions&#44; traces&#44; logs&#44; and outputs"
     },
     "write_blocks": {
       "num": "10340",
@@ -675,7 +675,7 @@
       "description": "Export full detail of transactions for one or more Ethereum addresses."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -691,7 +691,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -707,7 +707,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -723,7 +723,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -739,7 +739,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -755,7 +755,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -771,7 +771,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -787,7 +787,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -803,7 +803,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -819,7 +819,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -835,7 +835,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -851,7 +851,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -867,7 +867,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -883,7 +883,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -899,7 +899,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -981,7 +981,7 @@
       "description": "Decentralized blockchain scraper and block cache."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -997,7 +997,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1013,7 +1013,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1029,7 +1029,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1045,7 +1045,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1061,7 +1061,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1077,7 +1077,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1093,7 +1093,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1109,7 +1109,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1125,7 +1125,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1141,7 +1141,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1157,7 +1157,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1173,7 +1173,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1189,7 +1189,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1205,7 +1205,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1270,8 +1270,24 @@
       "data_type": "<boolean>",
       "description": "display results in Linux ls -l format (assumes --detail)"
     },
-    "get_config": {
+    "report": {
       "num": "10760",
+      "group": "apps",
+      "api_route": "status",
+      "tool": "cacheStatus",
+      "command": "report",
+      "hotkey": "r",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "show a summary of the current status of the blockchain and TrueBlocks scrapers"
+    },
+    "get_config": {
+      "num": "10780",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
@@ -1287,7 +1303,7 @@
       "description": "returns JSON data of the editable configuration file items"
     },
     "set_config": {
-      "num": "10780",
+      "num": "10800",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
@@ -1303,7 +1319,7 @@
       "description": "accepts JSON in an env variable and writes it to configuration files"
     },
     "start": {
-      "num": "10800",
+      "num": "10820",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
@@ -1319,7 +1335,7 @@
       "description": "first block to process (inclusive)"
     },
     "end": {
-      "num": "10820",
+      "num": "10840",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
@@ -1335,7 +1351,7 @@
       "description": "last block to process (inclusive)"
     },
     "": {
-      "num": "10840",
+      "num": "10860",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
@@ -1351,7 +1367,7 @@
       "description": "Report on status of one or more TrueBlocks caches."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1367,7 +1383,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1383,7 +1399,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1399,7 +1415,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1415,7 +1431,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1431,7 +1447,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1447,7 +1463,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1463,7 +1479,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1479,7 +1495,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1495,7 +1511,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1511,7 +1527,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1527,7 +1543,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1543,7 +1559,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1559,7 +1575,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1575,7 +1591,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1593,7 +1609,7 @@
   },
   "config": {
     "addrs": {
-      "num": "10880",
+      "num": "10900",
       "group": "apps",
       "api_route": "config",
       "tool": "",
@@ -1609,7 +1625,7 @@
       "description": "show or edit one or more addresses' config file"
     },
     "mode": {
-      "num": "10900",
+      "num": "10920",
       "group": "apps",
       "api_route": "config",
       "tool": "",
@@ -1625,7 +1641,7 @@
       "description": "whether to show or edit the config"
     },
     "get": {
-      "num": "10920",
+      "num": "10940",
       "group": "apps",
       "api_route": "config",
       "tool": "",
@@ -1641,7 +1657,7 @@
       "description": "retrieve current configuration values"
     },
     "set": {
-      "num": "10940",
+      "num": "10960",
       "group": "apps",
       "api_route": "config",
       "tool": "",
@@ -1657,7 +1673,7 @@
       "description": "set new configuration values"
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1673,7 +1689,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1689,7 +1705,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1705,7 +1721,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1721,7 +1737,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1737,7 +1753,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1753,7 +1769,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1769,7 +1785,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1785,7 +1801,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1801,7 +1817,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1817,7 +1833,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1833,7 +1849,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1849,7 +1865,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1865,7 +1881,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1881,7 +1897,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1899,7 +1915,7 @@
   },
   "rm": {
     "addrs": {
-      "num": "10980",
+      "num": "11000",
       "group": "apps",
       "api_route": "rm",
       "tool": "",
@@ -1915,14 +1931,14 @@
       "description": "remove one or more monitors"
     },
     "yes": {
-      "num": "11000",
+      "num": "11020",
       "group": "apps",
       "api_route": "rm",
       "tool": "",
       "command": "yes",
       "hotkey": "",
       "def_val": "",
-      "is_required": true,
+      "is_required": false,
       "core_visible": true,
       "docs_visible": true,
       "generate": "na",
@@ -1931,7 +1947,7 @@
       "description": "must be present for remove to occur"
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1947,7 +1963,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1963,7 +1979,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1979,7 +1995,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -1995,7 +2011,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2011,7 +2027,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2027,7 +2043,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2043,7 +2059,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2059,7 +2075,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2075,7 +2091,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2091,7 +2107,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2107,7 +2123,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2123,7 +2139,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2139,7 +2155,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2155,7 +2171,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2173,7 +2189,7 @@
   },
   "message": {
     "bytes": {
-      "num": "11040",
+      "num": "11060",
       "group": "apps",
       "api_route": "message",
       "tool": "",
@@ -2189,7 +2205,7 @@
       "description": "convert the given bytes into an ascii string"
     },
     "chars": {
-      "num": "11060",
+      "num": "11080",
       "group": "apps",
       "api_route": "message",
       "tool": "",
@@ -2205,7 +2221,7 @@
       "description": "convert the given string into bytes"
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2221,7 +2237,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2237,7 +2253,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2253,7 +2269,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2269,7 +2285,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2285,7 +2301,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2301,7 +2317,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2317,7 +2333,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2333,7 +2349,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2349,7 +2365,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2365,7 +2381,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2381,7 +2397,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2397,7 +2413,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2413,7 +2429,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2429,7 +2445,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2447,7 +2463,7 @@
   },
   "leech": {
     "": {
-      "num": "11100",
+      "num": "11120",
       "group": "apps",
       "api_route": "leech",
       "tool": "",
@@ -2463,7 +2479,7 @@
       "description": "leech the address index from IPFS"
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2479,7 +2495,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2495,7 +2511,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2511,7 +2527,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2527,7 +2543,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2543,7 +2559,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2559,7 +2575,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2575,7 +2591,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2591,7 +2607,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2607,7 +2623,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2623,7 +2639,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2639,7 +2655,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2655,7 +2671,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2671,7 +2687,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2687,7 +2703,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2705,7 +2721,7 @@
   },
   "seed": {
     "": {
-      "num": "11140",
+      "num": "11160",
       "group": "apps",
       "api_route": "seed",
       "tool": "",
@@ -2721,7 +2737,7 @@
       "description": "seed the address index to IPFS"
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2737,7 +2753,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2753,7 +2769,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2769,7 +2785,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2785,7 +2801,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2801,7 +2817,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2817,7 +2833,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2833,7 +2849,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2849,7 +2865,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2865,7 +2881,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2881,7 +2897,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2897,7 +2913,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2913,7 +2929,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2929,7 +2945,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2945,7 +2961,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -2963,7 +2979,7 @@
   },
   "": {
     "command": {
-      "num": "11180",
+      "num": "11200",
       "group": "apps",
       "api_route": "",
       "tool": "chifra",
@@ -2979,7 +2995,7 @@
       "description": "which command to run"
     },
     "sleep": {
-      "num": "11200",
+      "num": "11220",
       "group": "apps",
       "api_route": "",
       "tool": "chifra",
@@ -2995,7 +3011,7 @@
       "description": "for the 'scrape' and 'daemon' commands&#44; the number of seconds chifra should sleep between runs (default [{DEF}])"
     },
     "set": {
-      "num": "11220",
+      "num": "11240",
       "group": "apps",
       "api_route": "",
       "tool": "chifra",
@@ -3011,7 +3027,7 @@
       "description": "for status config only&#44; indicates that this is config --sef"
     },
     "tool_help": {
-      "num": "11240",
+      "num": "11260",
       "group": "apps",
       "api_route": "",
       "tool": "chifra",
@@ -3026,8 +3042,40 @@
       "data_type": "<boolean>",
       "description": "call into the underlying tool's help screen"
     },
+    "start": {
+      "num": "11280",
+      "group": "apps",
+      "api_route": "",
+      "tool": "chifra",
+      "command": "start",
+      "hotkey": "S",
+      "def_val": "0",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "flag",
+      "data_type": "<blknum>",
+      "description": "first block to process (inclusive)"
+    },
+    "end": {
+      "num": "11300",
+      "group": "apps",
+      "api_route": "",
+      "tool": "chifra",
+      "command": "end",
+      "hotkey": "E",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "flag",
+      "data_type": "<blknum>",
+      "description": "last block to process (inclusive)"
+    },
     "": {
-      "num": "11260",
+      "num": "11320",
       "group": "apps",
       "api_route": "",
       "tool": "chifra",
@@ -3043,7 +3091,7 @@
       "description": "Create a TrueBlocks monitor configuration."
     },
     "filenames": {
-      "num": "11300",
+      "num": "11360",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3059,7 +3107,7 @@
       "description": "path(s) of files to check&#44; merge&#44; fix or display (default=display)"
     },
     "check": {
-      "num": "11320",
+      "num": "11380",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3075,7 +3123,7 @@
       "description": "check for duplicates and other problems in the cache"
     },
     "data": {
-      "num": "11340",
+      "num": "11400",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3091,7 +3139,7 @@
       "description": "in 'list' mode&#44; render results as data (i.e export mode)"
     },
     "sort": {
-      "num": "11360",
+      "num": "11420",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3107,7 +3155,7 @@
       "description": "sort the list of transactions and re-write (precludes other modes&#44; other than --dedup)"
     },
     "fix": {
-      "num": "11380",
+      "num": "11440",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3123,7 +3171,7 @@
       "description": "remove duplicates from the cache (if any)"
     },
     "list": {
-      "num": "11400",
+      "num": "11460",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3139,7 +3187,7 @@
       "description": "list the contents of the cache (the default if no other option)"
     },
     "import": {
-      "num": "11420",
+      "num": "11480",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3155,7 +3203,7 @@
       "description": "import transactions if import.txt file exists in current folder"
     },
     "remove": {
-      "num": "11440",
+      "num": "11500",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3171,7 +3219,7 @@
       "description": "remove transactions if remove.txt file exists in current folder"
     },
     "truncate": {
-      "num": "11460",
+      "num": "11520",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3187,7 +3235,7 @@
       "description": "truncate the cache at block :n (keeps block 'n' and before&#44; implies --fix)"
     },
     "merge": {
-      "num": "11480",
+      "num": "11540",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3203,7 +3251,7 @@
       "description": "merge two or more caches into a single cache"
     },
     "skip": {
-      "num": "11500",
+      "num": "11560",
       "group": "apps",
       "api_route": "",
       "tool": "cacheMan",
@@ -3218,40 +3266,8 @@
       "data_type": "<uint32>",
       "description": "skip value for testing"
     },
-    "start": {
-      "num": "11520",
-      "group": "apps",
-      "api_route": "",
-      "tool": "cacheMan",
-      "command": "start",
-      "hotkey": "S",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "yes",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "first block to process (inclusive)"
-    },
-    "end": {
-      "num": "11540",
-      "group": "apps",
-      "api_route": "",
-      "tool": "cacheMan",
-      "command": "end",
-      "hotkey": "E",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "yes",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "description": "last block to process (inclusive)"
-    },
     "classes": {
-      "num": "11600",
+      "num": "11660",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3267,7 +3283,7 @@
       "description": "one or more class definition files to process"
     },
     "run": {
-      "num": "11640",
+      "num": "11700",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3283,7 +3299,7 @@
       "description": "run the class maker on associated <class_name(s)>"
     },
     "edit": {
-      "num": "11660",
+      "num": "11720",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3299,7 +3315,7 @@
       "description": "edit <class_name(s)> definition file in local folder"
     },
     "all": {
-      "num": "11680",
+      "num": "11740",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3315,7 +3331,7 @@
       "description": "list&#44; or run all class definitions found in the local folder"
     },
     "js": {
-      "num": "11700",
+      "num": "11760",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3331,7 +3347,7 @@
       "description": "export javaScript code and quit"
     },
     "options": {
-      "num": "11720",
+      "num": "11780",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3347,7 +3363,7 @@
       "description": "export options code (check data&#44; generate code) and quit"
     },
     "nspace": {
-      "num": "11740",
+      "num": "11800",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3363,7 +3379,7 @@
       "description": "surround the code with a namespace"
     },
     "filter": {
-      "num": "11760",
+      "num": "11820",
       "group": "dev_tools",
       "api_route": "",
       "tool": "makeClass",
@@ -3379,7 +3395,7 @@
       "description": "process only files whose filename or contents contain 'filter'"
     },
     "mode": {
-      "num": "11820",
+      "num": "11880",
       "group": "dev_tools",
       "api_route": "",
       "tool": "testRunner",
@@ -3395,7 +3411,7 @@
       "description": "determine which set of tests to run"
     },
     "clean": {
-      "num": "11860",
+      "num": "11920",
       "group": "dev_tools",
       "api_route": "",
       "tool": "testRunner",
@@ -3411,7 +3427,7 @@
       "description": "clean working folder before running tests"
     },
     "no_quit": {
-      "num": "11880",
+      "num": "11940",
       "group": "dev_tools",
       "api_route": "",
       "tool": "testRunner",
@@ -3427,7 +3443,7 @@
       "description": "do not quit testing on first error"
     },
     "report": {
-      "num": "11900",
+      "num": "11960",
       "group": "dev_tools",
       "api_route": "",
       "tool": "testRunner",
@@ -3443,7 +3459,7 @@
       "description": "display performance report to screen"
     },
     "parse": {
-      "num": "14160",
+      "num": "14080",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3459,7 +3475,7 @@
       "description": "display parsed input data"
     },
     "logs": {
-      "num": "14180",
+      "num": "14100",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3475,7 +3491,7 @@
       "description": "display smart contract lo(g)s or events"
     },
     "trace": {
-      "num": "14200",
+      "num": "14120",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3491,7 +3507,7 @@
       "description": "display smart contract internal traces"
     },
     "accounting": {
-      "num": "14220",
+      "num": "14140",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3507,7 +3523,7 @@
       "description": "display credits and debits per account and reconcile at each block"
     },
     "no_check": {
-      "num": "14240",
+      "num": "14160",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3523,7 +3539,7 @@
       "description": "do not do balance check at each block"
     },
     "debug": {
-      "num": "14260",
+      "num": "14180",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3539,7 +3555,7 @@
       "description": "enter debug mode (pause after each transaction)"
     },
     "single": {
-      "num": "14280",
+      "num": "14200",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3555,7 +3571,7 @@
       "description": "if debugging is enable&#44; single step through transactions"
     },
     "export": {
-      "num": "14300",
+      "num": "14220",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3571,7 +3587,7 @@
       "description": "export the transactions to export file"
     },
     "json": {
-      "num": "14320",
+      "num": "14240",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3587,7 +3603,7 @@
       "description": "ignore export format and export as json"
     },
     "balances": {
-      "num": "14340",
+      "num": "14260",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3603,7 +3619,7 @@
       "description": "if a balance does not reconcile&#44; export a message to a file"
     },
     "offset": {
-      "num": "14380",
+      "num": "14300",
       "group": "tools",
       "api_route": "",
       "tool": "templates",
@@ -3619,7 +3635,7 @@
       "description": "offset to kBlock"
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3635,7 +3651,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3651,7 +3667,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3667,7 +3683,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3683,7 +3699,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3699,7 +3715,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3715,7 +3731,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3731,7 +3747,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3747,7 +3763,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3763,7 +3779,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3779,7 +3795,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3795,7 +3811,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3811,7 +3827,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3827,7 +3843,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3843,7 +3859,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3861,7 +3877,7 @@
   },
   "quotes": {
     "freshen": {
-      "num": "11960",
+      "num": "12020",
       "group": "tools",
       "api_route": "quotes",
       "tool": "ethQuote",
@@ -3877,7 +3893,7 @@
       "description": "Freshen price database (append new data)"
     },
     "period": {
-      "num": "11980",
+      "num": "12040",
       "group": "tools",
       "api_route": "quotes",
       "tool": "ethQuote",
@@ -3893,7 +3909,7 @@
       "description": "display prices in this increment"
     },
     "pair": {
-      "num": "12000",
+      "num": "12060",
       "group": "tools",
       "api_route": "quotes",
       "tool": "ethQuote",
@@ -3909,7 +3925,7 @@
       "description": "which price pair to freshen or list (see Poloniex)"
     },
     "": {
-      "num": "12020",
+      "num": "12080",
       "group": "tools",
       "api_route": "quotes",
       "tool": "ethQuote",
@@ -3925,7 +3941,7 @@
       "description": "Freshen and/or display Ethereum price data."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3941,7 +3957,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3957,7 +3973,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3973,7 +3989,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -3989,7 +4005,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4005,7 +4021,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4021,7 +4037,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4037,7 +4053,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4053,7 +4069,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4069,7 +4085,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4085,7 +4101,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4101,7 +4117,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4117,7 +4133,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4133,7 +4149,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4149,7 +4165,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4167,7 +4183,7 @@
   },
   "slurp": {
     "addrs": {
-      "num": "12060",
+      "num": "12120",
       "group": "tools",
       "api_route": "slurp",
       "tool": "ethslurp",
@@ -4183,7 +4199,7 @@
       "description": "one or more addresses to slurp from Etherscan"
     },
     "blocks": {
-      "num": "12080",
+      "num": "12140",
       "group": "tools",
       "api_route": "slurp",
       "tool": "ethslurp",
@@ -4199,7 +4215,7 @@
       "description": "an optional range of blocks to slurp"
     },
     "type": {
-      "num": "12100",
+      "num": "12160",
       "group": "tools",
       "api_route": "slurp",
       "tool": "ethslurp",
@@ -4209,45 +4225,13 @@
       "is_required": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "yes",
-      "option_kind": "flag",
-      "data_type": "enum[ext*|int|token|miner|all]",
-      "description": "type of transactions to request"
-    },
-    "block_range": {
-      "num": "12120",
-      "group": "tools",
-      "api_route": "slurp",
-      "tool": "ethslurp",
-      "command": "block_range",
-      "hotkey": "b",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
       "generate": "",
       "option_kind": "flag",
-      "data_type": "<range>",
-      "description": "export records in block range (:0[:max])"
-    },
-    "silent": {
-      "num": "12140",
-      "group": "tools",
-      "api_route": "slurp",
-      "tool": "ethslurp",
-      "command": "silent",
-      "hotkey": "s",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "Run silently (only freshen the data&#44; do not display it)"
+      "data_type": "list<enum[ext*|int|token|miner|all]>",
+      "description": "one or more of which type of transaction to request"
     },
     "": {
-      "num": "12160",
+      "num": "12220",
       "group": "tools",
       "api_route": "slurp",
       "tool": "ethslurp",
@@ -4263,7 +4247,7 @@
       "description": "Fetches data from EtherScan for an arbitrary address."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4279,7 +4263,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4295,7 +4279,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4311,7 +4295,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4327,7 +4311,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4343,7 +4327,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4359,7 +4343,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4375,7 +4359,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4391,7 +4375,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4407,7 +4391,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4423,7 +4407,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4439,7 +4423,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4455,7 +4439,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4471,7 +4455,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4487,7 +4471,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4505,7 +4489,7 @@
   },
   "accounts": {
     "terms": {
-      "num": "12200",
+      "num": "12260",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4521,7 +4505,7 @@
       "description": "a space separated list of one or more search terms"
     },
     "expand": {
-      "num": "12220",
+      "num": "12280",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4537,7 +4521,7 @@
       "description": "expand search to include all fields (default searches name&#44; address&#44; and symbol only)"
     },
     "match_case": {
-      "num": "12240",
+      "num": "12300",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4553,7 +4537,7 @@
       "description": "do case-sensitive search"
     },
     "owned": {
-      "num": "12260",
+      "num": "12320",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4569,7 +4553,7 @@
       "description": "include personal accounts in the search"
     },
     "custom": {
-      "num": "12280",
+      "num": "12340",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4585,7 +4569,7 @@
       "description": "include your custom named accounts"
     },
     "prefund": {
-      "num": "12300",
+      "num": "12360",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4601,7 +4585,7 @@
       "description": "include prefund accounts"
     },
     "named": {
-      "num": "12320",
+      "num": "12380",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4617,7 +4601,7 @@
       "description": "include well know token and airdrop addresses in the search"
     },
     "other": {
-      "num": "12340",
+      "num": "12400",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4633,7 +4617,7 @@
       "description": "export other addresses if found"
     },
     "addr": {
-      "num": "12360",
+      "num": "12420",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4649,7 +4633,7 @@
       "description": "display only addresses in the results (useful for scripting)"
     },
     "add": {
-      "num": "12380",
+      "num": "12440",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4665,7 +4649,7 @@
       "description": "add a new record to the name database (format: grp+subgrp+addr+name+sym+src+desc)"
     },
     "": {
-      "num": "12400",
+      "num": "12460",
       "group": "tools",
       "api_route": "accounts",
       "tool": "getAccounts",
@@ -4681,7 +4665,7 @@
       "description": "Query addresses and/or names of well known accounts."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4697,7 +4681,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4713,7 +4697,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4729,7 +4713,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4745,7 +4729,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4761,7 +4745,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4777,7 +4761,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4793,7 +4777,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4809,7 +4793,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4825,7 +4809,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4841,7 +4825,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4857,7 +4841,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4873,7 +4857,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4889,7 +4873,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4905,7 +4889,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -4923,7 +4907,7 @@
   },
   "blocks": {
     "blocks": {
-      "num": "12440",
+      "num": "12500",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
@@ -4939,7 +4923,7 @@
       "description": "a space-separated list of one or more blocks to retrieve"
     },
     "hashes_only": {
-      "num": "12460",
+      "num": "12520",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
@@ -4954,24 +4938,8 @@
       "data_type": "<boolean>",
       "description": "display only transaction hashes&#44; default is to display full transaction detail"
     },
-    "check": {
-      "num": "12480",
-      "group": "tools",
-      "api_route": "blocks",
-      "tool": "getBlock",
-      "command": "check",
-      "hotkey": "c",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "compare results between qblocks and Ethereum node&#44; report differences&#44; if any"
-    },
     "addrs": {
-      "num": "12500",
+      "num": "12540",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
@@ -4987,7 +4955,7 @@
       "description": "display all addresses included in the block"
     },
     "uniq": {
-      "num": "12520",
+      "num": "12560",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
@@ -5003,7 +4971,7 @@
       "description": "display only uniq addresses found per block"
     },
     "uniq_tx": {
-      "num": "12540",
+      "num": "12580",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
@@ -5019,7 +4987,7 @@
       "description": "display only uniq addresses found per transaction"
     },
     "count_only": {
-      "num": "12560",
+      "num": "12600",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
@@ -5033,38 +5001,6 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "display counts of appearances (for --addrs&#44; --uniq&#44; or --uniq_tx only)"
-    },
-    "filter": {
-      "num": "12580",
-      "group": "tools",
-      "api_route": "blocks",
-      "tool": "getBlock",
-      "command": "filter",
-      "hotkey": "f",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "",
-      "option_kind": "flag",
-      "data_type": "<addr>",
-      "description": "useful only for --addrs or --uniq&#44; only display this address in results"
-    },
-    "report": {
-      "num": "12600",
-      "group": "tools",
-      "api_route": "blocks",
-      "tool": "getBlock",
-      "command": "report",
-      "hotkey": "r",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "display the latest blocks at both the node and the cache"
     },
     "force": {
       "num": "12620",
@@ -5082,56 +5018,8 @@
       "data_type": "<boolean>",
       "description": "force a re-write of the block to the cache"
     },
-    "quiet": {
-      "num": "12640",
-      "group": "tools",
-      "api_route": "blocks",
-      "tool": "getBlock",
-      "command": "quiet",
-      "hotkey": "q",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "do not print results to screen&#44; used for speed testing and data checking"
-    },
-    "cache": {
-      "num": "12660",
-      "group": "tools",
-      "api_route": "blocks",
-      "tool": "getBlock",
-      "command": "cache",
-      "hotkey": "C",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "use the cache for data retrieval"
-    },
-    "normalize": {
-      "num": "12680",
-      "group": "tools",
-      "api_route": "blocks",
-      "tool": "getBlock",
-      "command": "normalize",
-      "hotkey": "m",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "normalize (remove un-common fields and sort) for comparison with other results (testing)"
-    },
     "": {
-      "num": "12700",
+      "num": "12640",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
@@ -5147,7 +5035,7 @@
       "description": "Returns block(s) from local cache or directly from a running node."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5163,7 +5051,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5179,7 +5067,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5195,7 +5083,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5211,7 +5099,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5227,7 +5115,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5243,7 +5131,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5259,7 +5147,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5275,7 +5163,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5291,7 +5179,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5307,7 +5195,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5323,7 +5211,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5339,7 +5227,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5355,7 +5243,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5371,7 +5259,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5389,7 +5277,7 @@
   },
   "blooms": {
     "blocks": {
-      "num": "12740",
+      "num": "12680",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5405,7 +5293,7 @@
       "description": "a space-separated list of one or more blocks for which to retrieve blooms"
     },
     "eab": {
-      "num": "12760",
+      "num": "12700",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5421,7 +5309,7 @@
       "description": "pull the enhanced adaptive blooms from QBlocks cache"
     },
     "block_only": {
-      "num": "12780",
+      "num": "12720",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5437,7 +5325,7 @@
       "description": "show only the block-level bloom (--raw only)"
     },
     "receipt_only": {
-      "num": "12800",
+      "num": "12740",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5453,7 +5341,7 @@
       "description": "show only the receipt-level blooms (--raw only)"
     },
     "bits": {
-      "num": "12820",
+      "num": "12760",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5469,7 +5357,7 @@
       "description": "display blooms as bits instead of hex"
     },
     "bars": {
-      "num": "12840",
+      "num": "12780",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5485,7 +5373,7 @@
       "description": "display blooms as bar chart instead of hex"
     },
     "bitbars": {
-      "num": "12860",
+      "num": "12800",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5501,7 +5389,7 @@
       "description": "display nBits as a bar chart"
     },
     "pctbars": {
-      "num": "12880",
+      "num": "12820",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5517,7 +5405,7 @@
       "description": "display nBits as a percentage of bloom space"
     },
     "bitcount": {
-      "num": "12900",
+      "num": "12840",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5533,7 +5421,7 @@
       "description": "display the number of bits lit per bloom"
     },
     "force": {
-      "num": "12920",
+      "num": "12860",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5549,7 +5437,7 @@
       "description": "force a re-write of the bloom to the cache"
     },
     "": {
-      "num": "12940",
+      "num": "12880",
       "group": "tools",
       "api_route": "blooms",
       "tool": "getBloom",
@@ -5565,7 +5453,7 @@
       "description": "Returns bloom filter(s) from running node (the default) or as EAB from QBlocks."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5581,7 +5469,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5597,7 +5485,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5613,7 +5501,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5629,7 +5517,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5645,7 +5533,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5661,7 +5549,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5677,7 +5565,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5693,7 +5581,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5709,7 +5597,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5725,7 +5613,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5741,7 +5629,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5757,7 +5645,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5773,7 +5661,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5789,7 +5677,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5807,7 +5695,7 @@
   },
   "logs": {
     "transactions": {
-      "num": "12980",
+      "num": "12920",
       "group": "tools",
       "api_route": "logs",
       "tool": "getLogs",
@@ -5823,7 +5711,7 @@
       "description": "a space-separated list of one or more transaction identifiers (tx_hash&#44; bn.txID&#44; blk_hash.txID)"
     },
     "articulate": {
-      "num": "13000",
+      "num": "12940",
       "group": "tools",
       "api_route": "logs",
       "tool": "getLogs",
@@ -5839,7 +5727,7 @@
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "": {
-      "num": "13020",
+      "num": "12960",
       "group": "tools",
       "api_route": "logs",
       "tool": "getLogs",
@@ -5855,7 +5743,7 @@
       "description": "Retrieve a transaction's logs from the local cache or a running node."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5871,7 +5759,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5887,7 +5775,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5903,7 +5791,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5919,7 +5807,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5935,7 +5823,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5951,7 +5839,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5967,7 +5855,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5983,7 +5871,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -5999,7 +5887,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6015,7 +5903,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6031,7 +5919,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6047,7 +5935,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6063,7 +5951,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6079,7 +5967,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6097,7 +5985,7 @@
   },
   "receipts": {
     "transactions": {
-      "num": "13060",
+      "num": "13000",
       "group": "tools",
       "api_route": "receipts",
       "tool": "getReceipt",
@@ -6113,7 +6001,7 @@
       "description": "a space-separated list of one or more transaction identifiers (tx_hash&#44; bn.txID&#44; blk_hash.txID)"
     },
     "articulate": {
-      "num": "13080",
+      "num": "13020",
       "group": "tools",
       "api_route": "receipts",
       "tool": "getReceipt",
@@ -6129,7 +6017,7 @@
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "logs": {
-      "num": "13100",
+      "num": "13040",
       "group": "tools",
       "api_route": "receipts",
       "tool": "getReceipt",
@@ -6145,7 +6033,7 @@
       "description": "display the receipt's logs"
     },
     "": {
-      "num": "13120",
+      "num": "13060",
       "group": "tools",
       "api_route": "receipts",
       "tool": "getReceipt",
@@ -6161,7 +6049,7 @@
       "description": "Retrieve a transaction's receipt from the local cache or a running node."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6177,7 +6065,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6193,7 +6081,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6209,7 +6097,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6225,7 +6113,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6241,7 +6129,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6257,7 +6145,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6273,7 +6161,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6289,7 +6177,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6305,7 +6193,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6321,7 +6209,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6337,7 +6225,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6353,7 +6241,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6369,7 +6257,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6385,7 +6273,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6403,7 +6291,7 @@
   },
   "state": {
     "addrs": {
-      "num": "13160",
+      "num": "13100",
       "group": "tools",
       "api_route": "state",
       "tool": "getState",
@@ -6419,7 +6307,7 @@
       "description": "one or more addresses (0x...) from which to retrieve balances"
     },
     "blocks": {
-      "num": "13180",
+      "num": "13120",
       "group": "tools",
       "api_route": "state",
       "tool": "getState",
@@ -6435,7 +6323,7 @@
       "description": "an optional list of one or more blocks at which to report balances&#44; defaults to 'latest'"
     },
     "mode": {
-      "num": "13200",
+      "num": "13140",
       "group": "tools",
       "api_route": "state",
       "tool": "getState",
@@ -6451,7 +6339,7 @@
       "description": "control which state to export"
     },
     "changes": {
-      "num": "13220",
+      "num": "13160",
       "group": "tools",
       "api_route": "state",
       "tool": "getState",
@@ -6467,7 +6355,7 @@
       "description": "only report a balance when it changes from one block to the next"
     },
     "no_zero": {
-      "num": "13240",
+      "num": "13180",
       "group": "tools",
       "api_route": "state",
       "tool": "getState",
@@ -6483,7 +6371,7 @@
       "description": "suppress the display of zero balance accounts"
     },
     "no_history": {
-      "num": "13260",
+      "num": "13200",
       "group": "tools",
       "api_route": "state",
       "tool": "getState",
@@ -6499,7 +6387,7 @@
       "description": "for testing only&#44; hide the server's historical state"
     },
     "": {
-      "num": "13280",
+      "num": "13220",
       "group": "tools",
       "api_route": "state",
       "tool": "getState",
@@ -6515,7 +6403,7 @@
       "description": "Retrieve the balance (in wei) for one or more addresses at the given block(s)."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6531,7 +6419,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6547,7 +6435,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6563,7 +6451,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6579,7 +6467,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6595,7 +6483,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6611,7 +6499,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6627,7 +6515,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6643,7 +6531,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6659,7 +6547,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6675,7 +6563,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6691,7 +6579,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6707,7 +6595,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6723,7 +6611,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6739,7 +6627,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6757,7 +6645,7 @@
   },
   "tokens": {
     "addrs": {
-      "num": "13320",
+      "num": "13260",
       "group": "tools",
       "api_route": "tokens",
       "tool": "getTokenInfo",
@@ -6773,7 +6661,7 @@
       "description": "two or more addresses (0x...)&#44; the first is an ERC20 token&#44; balances for the rest are reported"
     },
     "blocks": {
-      "num": "13340",
+      "num": "13280",
       "group": "tools",
       "api_route": "tokens",
       "tool": "getTokenInfo",
@@ -6789,7 +6677,7 @@
       "description": "an optional list of one or more blocks at which to report balances&#44; defaults to 'latest'"
     },
     "info": {
-      "num": "13360",
+      "num": "13300",
       "group": "tools",
       "api_route": "tokens",
       "tool": "getTokenInfo",
@@ -6805,7 +6693,7 @@
       "description": "retreive information about the token"
     },
     "by_acct": {
-      "num": "13380",
+      "num": "13320",
       "group": "tools",
       "api_route": "tokens",
       "tool": "getTokenInfo",
@@ -6821,7 +6709,7 @@
       "description": "consider each address an ERC20 token except the last&#44; whose balance is reported for each token"
     },
     "no_zero": {
-      "num": "13400",
+      "num": "13340",
       "group": "tools",
       "api_route": "tokens",
       "tool": "getTokenInfo",
@@ -6837,7 +6725,7 @@
       "description": "suppress the display of zero balance accounts"
     },
     "": {
-      "num": "13420",
+      "num": "13360",
       "group": "tools",
       "api_route": "tokens",
       "tool": "getTokenInfo",
@@ -6853,7 +6741,7 @@
       "description": "Retrieve the token balance(s) for one or more addresses at the given (or latest) block(s)."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6869,7 +6757,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6885,7 +6773,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6901,7 +6789,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6917,7 +6805,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6933,7 +6821,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6949,7 +6837,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6965,7 +6853,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6981,7 +6869,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -6997,7 +6885,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7013,7 +6901,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7029,7 +6917,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7045,7 +6933,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7061,7 +6949,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7077,7 +6965,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7095,7 +6983,7 @@
   },
   "traces": {
     "transactions": {
-      "num": "13460",
+      "num": "13400",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
@@ -7111,7 +6999,7 @@
       "description": "a space-separated list of one or more transaction identifiers (tx_hash&#44; bn.txID&#44; blk_hash.txID)"
     },
     "articulate": {
-      "num": "13480",
+      "num": "13420",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
@@ -7127,7 +7015,7 @@
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "count_only": {
-      "num": "13500",
+      "num": "13440",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
@@ -7143,7 +7031,7 @@
       "description": "show the number of traces for the transaction only (fast)"
     },
     "skip_ddos": {
-      "num": "13520",
+      "num": "13460",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
@@ -7159,7 +7047,7 @@
       "description": "toggle skipping over 2018 ddos transactions during export ([{DEF}] by default)"
     },
     "max_traces": {
-      "num": "13540",
+      "num": "13480",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
@@ -7175,7 +7063,7 @@
       "description": "if --skip_ddos is on&#44; this many traces defines what a ddos transaction is (default = [{DEF}])"
     },
     "": {
-      "num": "13560",
+      "num": "13500",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
@@ -7191,7 +7079,7 @@
       "description": "Retrieve a transaction's traces from the local cache or a running node."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7207,7 +7095,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7223,7 +7111,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7239,7 +7127,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7255,7 +7143,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7271,7 +7159,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7287,7 +7175,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7303,7 +7191,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7319,7 +7207,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7335,7 +7223,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7351,7 +7239,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7367,7 +7255,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7383,7 +7271,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7399,7 +7287,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7415,7 +7303,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7433,7 +7321,7 @@
   },
   "transactions": {
     "transactions": {
-      "num": "13600",
+      "num": "13540",
       "group": "tools",
       "api_route": "transactions",
       "tool": "getTrans",
@@ -7449,7 +7337,7 @@
       "description": "a space-separated list of one or more transaction identifiers (tx_hash&#44; bn.txID&#44; blk_hash.txID)"
     },
     "articulate": {
-      "num": "13620",
+      "num": "13560",
       "group": "tools",
       "api_route": "transactions",
       "tool": "getTrans",
@@ -7465,7 +7353,7 @@
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "trace": {
-      "num": "13640",
+      "num": "13580",
       "group": "tools",
       "api_route": "transactions",
       "tool": "getTrans",
@@ -7481,7 +7369,7 @@
       "description": "display the transaction's trace"
     },
     "force": {
-      "num": "13660",
+      "num": "13600",
       "group": "tools",
       "api_route": "transactions",
       "tool": "getTrans",
@@ -7497,7 +7385,7 @@
       "description": "force the results into the tx cache"
     },
     "": {
-      "num": "13680",
+      "num": "13620",
       "group": "tools",
       "api_route": "transactions",
       "tool": "getTrans",
@@ -7513,7 +7401,7 @@
       "description": "Retrieve an Ethereum transaction from the local cache or a running node."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7529,7 +7417,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7545,7 +7433,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7561,7 +7449,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7577,7 +7465,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7593,7 +7481,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7609,7 +7497,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7625,7 +7513,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7641,7 +7529,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7657,7 +7545,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7673,7 +7561,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7689,7 +7577,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7705,7 +7593,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7721,7 +7609,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7737,7 +7625,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7755,7 +7643,7 @@
   },
   "abi": {
     "addrs": {
-      "num": "13720",
+      "num": "13660",
       "group": "tools",
       "api_route": "abi",
       "tool": "grabABI",
@@ -7771,7 +7659,7 @@
       "description": "list of one or more smart contracts whose ABI to grab from EtherScan"
     },
     "canonical": {
-      "num": "13740",
+      "num": "13680",
       "group": "tools",
       "api_route": "abi",
       "tool": "grabABI",
@@ -7787,7 +7675,7 @@
       "description": "convert all types to their canonical represenation and remove all spaces from display"
     },
     "generate": {
-      "num": "13760",
+      "num": "13700",
       "group": "tools",
       "api_route": "abi",
       "tool": "grabABI",
@@ -7802,24 +7690,8 @@
       "data_type": "<boolean>",
       "description": "generate C++ code into the current folder for all functions and events found in the ABI"
     },
-    "encode": {
-      "num": "13780",
-      "group": "tools",
-      "api_route": "abi",
-      "tool": "grabABI",
-      "command": "encode",
-      "hotkey": "e",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "generate the encodings for the functions / events in the ABI"
-    },
     "noconst": {
-      "num": "13820",
+      "num": "13740",
       "group": "tools",
       "api_route": "abi",
       "tool": "grabABI",
@@ -7835,7 +7707,7 @@
       "description": "generate encodings for non-constant functions and events only (always true when generating)"
     },
     "sol": {
-      "num": "13840",
+      "num": "13760",
       "group": "tools",
       "api_route": "abi",
       "tool": "grabABI",
@@ -7850,56 +7722,8 @@
       "data_type": "<path>",
       "description": "create the ABI file from a .sol file in the local directory"
     },
-    "open": {
-      "num": "13860",
-      "group": "tools",
-      "api_route": "abi",
-      "tool": "grabABI",
-      "command": "open",
-      "hotkey": "o",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "open the ABI file for editing&#44; download if not already present"
-    },
-    "silent": {
-      "num": "13880",
-      "group": "tools",
-      "api_route": "abi",
-      "tool": "grabABI",
-      "command": "silent",
-      "hotkey": "i",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "if ABI cannot be acquired&#44; fail silently (useful for scripting)"
-    },
-    "no_decorate": {
-      "num": "13900",
-      "group": "tools",
-      "api_route": "abi",
-      "tool": "grabABI",
-      "command": "no_decorate",
-      "hotkey": "r",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "do not decorate duplicate names"
-    },
     "known": {
-      "num": "13920",
+      "num": "13840",
       "group": "tools",
       "api_route": "abi",
       "tool": "grabABI",
@@ -7914,24 +7738,8 @@
       "data_type": "<boolean>",
       "description": "load common 'known' ABIs from cache"
     },
-    "data": {
-      "num": "13940",
-      "group": "tools",
-      "api_route": "abi",
-      "tool": "grabABI",
-      "command": "data",
-      "hotkey": "d",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "yes",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "export the display as data"
-    },
     "": {
-      "num": "13960",
+      "num": "13880",
       "group": "tools",
       "api_route": "abi",
       "tool": "grabABI",
@@ -7947,7 +7755,7 @@
       "description": "Fetches the ABI for a smart contract. Optionally generates C++ source code representing that ABI."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7963,7 +7771,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7979,7 +7787,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -7995,7 +7803,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8011,7 +7819,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8027,7 +7835,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8043,7 +7851,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8059,7 +7867,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8075,7 +7883,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8091,7 +7899,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8107,7 +7915,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8123,7 +7931,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8139,7 +7947,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8155,7 +7963,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8171,7 +7979,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8189,7 +7997,7 @@
   },
   "when": {
     "blocks": {
-      "num": "14000",
+      "num": "13920",
       "group": "tools",
       "api_route": "when",
       "tool": "whenBlock",
@@ -8205,7 +8013,7 @@
       "description": "one or more block numbers (or a 'special' block)&#44; or"
     },
     "dates": {
-      "num": "14020",
+      "num": "13940",
       "group": "tools",
       "api_route": "when",
       "tool": "whenBlock",
@@ -8221,7 +8029,7 @@
       "description": "one or more dates formatted as YYYY-MM-DD[THH[:MM[:SS]]]"
     },
     "list": {
-      "num": "14040",
+      "num": "13960",
       "group": "tools",
       "api_route": "when",
       "tool": "whenBlock",
@@ -8237,7 +8045,7 @@
       "description": "export all the named blocks"
     },
     "": {
-      "num": "14060",
+      "num": "13980",
       "group": "tools",
       "api_route": "when",
       "tool": "whenBlock",
@@ -8253,7 +8061,7 @@
       "description": "Finds the nearest block prior to a date&#44; or the nearest date prior to a block.\\n    Alternatively&#44; search for one of special 'named' blocks."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8269,7 +8077,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8285,7 +8093,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8301,7 +8109,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8317,7 +8125,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8333,7 +8141,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8349,7 +8157,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8365,7 +8173,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8381,7 +8189,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8397,7 +8205,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8413,7 +8221,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8429,7 +8237,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8445,7 +8253,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8461,7 +8269,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8477,7 +8285,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8495,7 +8303,7 @@
   },
   "where": {
     "blocks": {
-      "num": "14100",
+      "num": "14020",
       "group": "tools",
       "api_route": "where",
       "tool": "whereBlock",
@@ -8511,7 +8319,7 @@
       "description": "a space-separated list of one or more blocks to search for"
     },
     "": {
-      "num": "14120",
+      "num": "14040",
       "group": "tools",
       "api_route": "where",
       "tool": "whereBlock",
@@ -8527,7 +8335,7 @@
       "description": "Reports if a block was found in the cache&#44; at a local&#44; or at a remote node."
     },
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8543,7 +8351,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8559,7 +8367,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8575,7 +8383,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8591,7 +8399,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8607,7 +8415,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8623,7 +8431,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8639,7 +8447,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8655,7 +8463,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8671,7 +8479,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8687,7 +8495,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8703,7 +8511,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8719,7 +8527,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8735,7 +8543,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8751,7 +8559,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8769,7 +8577,7 @@
   },
   "all": {
     "version": {
-      "num": "14480",
+      "num": "14400",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8785,7 +8593,7 @@
       "description": "display the current version of the tool"
     },
     "nocolor": {
-      "num": "14500",
+      "num": "14420",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8801,7 +8609,7 @@
       "description": "turn off colored display"
     },
     "wei": {
-      "num": "14520",
+      "num": "14440",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8817,7 +8625,7 @@
       "description": "specify value in wei (the default)"
     },
     "ether": {
-      "num": "14540",
+      "num": "14460",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8833,7 +8641,7 @@
       "description": "specify value in ether"
     },
     "dollars": {
-      "num": "14560",
+      "num": "14480",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8849,7 +8657,7 @@
       "description": "specify value in US dollars"
     },
     "raw": {
-      "num": "14580",
+      "num": "14500",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8865,7 +8673,7 @@
       "description": "report JSON data from the node with minimal processing"
     },
     "very_raw": {
-      "num": "14600",
+      "num": "14520",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8881,7 +8689,7 @@
       "description": "report JSON data from node with zero processing"
     },
     "fmt": {
-      "num": "14620",
+      "num": "14540",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8897,7 +8705,7 @@
       "description": "export format (where appropriate)"
     },
     "api_mode": {
-      "num": "14640",
+      "num": "14560",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8913,7 +8721,7 @@
       "description": "simulate api_mode for testing"
     },
     "to_file": {
-      "num": "14660",
+      "num": "14580",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8929,7 +8737,7 @@
       "description": "write the results to a temporary file and return the filename"
     },
     "output": {
-      "num": "14680",
+      "num": "14600",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8945,7 +8753,7 @@
       "description": "write the results to file 'fn' and return the filename"
     },
     "file": {
-      "num": "14700",
+      "num": "14620",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8961,7 +8769,7 @@
       "description": "specify multiple sets of command line options in a file."
     },
     "noop": {
-      "num": "14720",
+      "num": "14640",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8977,7 +8785,7 @@
       "description": "non operation (for testing for example)"
     },
     "help": {
-      "num": "14740",
+      "num": "14660",
       "group": "all",
       "api_route": "all",
       "tool": "all",
@@ -8993,7 +8801,7 @@
       "description": "get help on this command"
     },
     "parity": {
-      "num": "14760",
+      "num": "14680",
       "group": "all",
       "api_route": "all",
       "tool": "all",
