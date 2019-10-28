@@ -2991,7 +2991,7 @@
       "docs_visible": true,
       "generate": "",
       "option_kind": "positional",
-      "data_type": "list<enum[list|export|slurp|accounts|abi|state|tokens|data|blocks|transactions|receipts|logs|traces|quotes|scrape|status|config|rm|message|leech|seed]>",
+      "data_type": "list<enum[list|export|slurp|names|abi|state|tokens|data|blocks|transactions|receipts|logs|traces|quotes|scrape|status|config|rm|message|leech|seed]>",
       "description": "which command to run"
     },
     "sleep": {
@@ -4228,7 +4228,7 @@
       "generate": "",
       "option_kind": "flag",
       "data_type": "list<enum[ext*|int|token|miner|all]>",
-      "description": "one or more of which type of transaction to request"
+      "description": "which types of transaction to request"
     },
     "": {
       "num": "12220",
@@ -4487,11 +4487,11 @@
       "description": "mimic parity's output"
     }
   },
-  "accounts": {
+  "names": {
     "terms": {
       "num": "12260",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "terms",
       "hotkey": "",
@@ -4507,7 +4507,7 @@
     "expand": {
       "num": "12280",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "expand",
       "hotkey": "e",
@@ -4523,7 +4523,7 @@
     "match_case": {
       "num": "12300",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "match_case",
       "hotkey": "m",
@@ -4539,7 +4539,7 @@
     "owned": {
       "num": "12320",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "owned",
       "hotkey": "o",
@@ -4555,7 +4555,7 @@
     "custom": {
       "num": "12340",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "custom",
       "hotkey": "c",
@@ -4571,7 +4571,7 @@
     "prefund": {
       "num": "12360",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "prefund",
       "hotkey": "p",
@@ -4587,7 +4587,7 @@
     "named": {
       "num": "12380",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "named",
       "hotkey": "n",
@@ -4603,7 +4603,7 @@
     "other": {
       "num": "12400",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "other",
       "hotkey": "t",
@@ -4619,7 +4619,7 @@
     "addr": {
       "num": "12420",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "addr",
       "hotkey": "a",
@@ -4635,7 +4635,7 @@
     "add": {
       "num": "12440",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "add",
       "hotkey": "d",
@@ -4651,7 +4651,7 @@
     "": {
       "num": "12460",
       "group": "tools",
-      "api_route": "accounts",
+      "api_route": "names",
       "tool": "getAccounts",
       "command": "",
       "hotkey": "",

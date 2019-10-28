@@ -1,0 +1,1047 @@
+openapi: 3.0.0
+info:
+  description: >-
+    **TrueBlocks** enhances your locally-running or remote Ethereum node by providing easy access and local caching to the **blocks**, **transactions**, **receipts**, 
+**logs**, **traces**, **abis**, **names**, **transaction histories*, and **prices**. An Ethereum RPC endpoint, such as Infura, QuickNodes, or (our preference) your own 
+node, is required.
+
+
+    The primary focus of **TrueBlocks** is delivering complete, fully-detailed, audit-quality historical lists of transactions for individual or groups of Ethereum 
+addresses in a 100% decentralized manner. It is decentralized from first principals making it possible to run locally, while permitting (if desired) running the code 
+on a cloud server.
+
+    If you run the code locally, any data available from the node is presented to your application directly, without the intervention of any third party (including 
+us!). Some portions of the data, such as USD prices and abi definitions, are provided from immutable data stores with an optional mechanism to participate in 
+community-wide sharing of that data.
+
+    ## Installation / Tutorials / Examples
+
+    Instructions for installing the package, examples of its usage, and tutorials are available here.
+  title: TrueBlocks API
+  version: "0.6.2-alpha"
+servers:
+  - url: 'http://localhost:8080/'
+paths:
+  /list:
+    get:
+      parameters:
+        - description: one or more Ethereum addresses
+          in: query
+          name: addrs
+          required: true
+          schema:
+            type: string
+        - description: export format
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            text/json:
+              examples:
+                response:
+                  value:
+                    $ref: "#/components/schemas/tx_list"
+            text/plain:
+              examples:
+                response:
+                  value: |
+                    89796   6
+                    89880   3
+                    94675   17
+                    94754   3
+                    99979   10
+                    101279  0
+                    105338  18
+                    105439  2
+                    110350  40
+                    110457  1
+                    112698  35
+                    112789  0
+          description: OK
+          headers: {}
+      tags:
+        - Accounts
+      description: ''
+      summary: /list
+  /export:
+    get:
+      parameters:
+        - description: one or more addresses (0x...) to export
+          in: query
+          name: addrs
+          required: true
+          schema:
+            type: string
+        - description: export a list of appearances
+          in: query
+          name: appearances
+          required: false
+          schema:
+            type: string
+        - description: export logs instead of transaction list
+          in: query
+          name: logs
+          required: false
+          schema:
+            type: string
+        - description: export traces instead of transaction list
+          in: query
+          name: traces
+          required: false
+          schema:
+            type: string
+        - description: export balance history instead of transaction list
+          in: query
+          name: balances
+          required: false
+          schema:
+            type: string
+        - description: display only the count of the number of data items requested
+          in: query
+          name: count_only
+          required: false
+          schema:
+            type: string
+        - description: 'articulate transactions&#44; traces&#44; logs&#44; and outputs'
+          in: query
+          name: articulate
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. text/plain
+          example: text/plain
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - age: '21450442'
+                        blockHash: >-
+                          0xda4c0d8c4df359aeb0dbcdc98767da4f31f95c3a9eb705a96933bd5322c8007f
+                        blockNumber: 89796
+                        date: '2015-08-15 09:02:23 UTC'
+                        datesh: '2015-08-15'
+                        ether: 83.37206775717503
+                        from: '0xe6a7a1d47ff21b6321162aea7c6cb457d5476bca'
+                        gas: 22000
+                        gasCost: 1172130519441000
+                        gasPrice: 55815739021
+                        gasUsed: 21000
+                        hash: >-
+                          0x184ff1f00c1c5da9c62774e4e2bf0925de39046e056c13edf31f0bb9ce4d9b38
+                        isError: 0
+                        receipt:
+                          contractAddress: '0x0'
+                          gasUsed: 21000
+                          logs: []
+                          status: null
+                        time: '9:02:23 UTC'
+                        timestamp: 1439629343
+                        to: '0x3b01ebd2419f6d39db6ab4471e6382848716641f'
+                        traces: []
+                        transactionIndex: 6
+                        value: 83372067757175030000
+                    status: ok
+          description: OK
+          headers: {}
+      tags:
+        - Accounts
+      description: ''
+      summary: /export
+  /slurp:
+    get:
+      parameters:
+        - description: one or more addresses to slurp from Etherscan
+          in: query
+          name: addrs
+          required: true
+          schema:
+            type: string
+        - description: an optional range of blocks to slurp
+          in: query
+          name: blocks
+          required: false
+          schema:
+            type: string
+        - description: which types of transaction to request
+          in: query
+          name: type
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Accounts
+      description: ''
+      summary: /slurp
+  /abi:
+    get:
+      parameters:
+        - description: list of one or more smart contracts whose ABI to grab from EtherScan
+          in: query
+          name: addrs
+          required: true
+          schema:
+            type: string
+        - description: >-
+            convert all types to their canonical represenation and remove all
+            spaces from display
+          in: query
+          name: canonical
+          required: false
+          schema:
+            type: string
+        - description: >-
+            generate C++ code into the current folder for all functions and
+            events found in the ABI
+          in: query
+          name: generate
+          required: false
+          schema:
+            type: string
+        - description: >-
+            generate encodings for non-constant functions and events only
+            (always true when generating)
+          in: query
+          name: noconst
+          required: false
+          schema:
+            type: string
+        - description: create the ABI file from a .sol file in the local directory
+          in: query
+          name: sol
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Accounts
+      description: ''
+      summary: /abi
+  /blocks:
+    get:
+      parameters:
+        - description: a space-separated list of one or more blocks to retrieve
+          in: query
+          name: blocks
+          required: true
+          schema:
+            type: string
+        - description: >-
+            display only transaction hashes&#44; default is to display full
+            transaction detail
+          in: query
+          name: hashes_only
+          required: false
+          schema:
+            type: string
+        - description: display all addresses included in the block
+          in: query
+          name: addrs
+          required: false
+          schema:
+            type: string
+        - description: display only uniq addresses found per block
+          in: query
+          name: uniq
+          required: false
+          schema:
+            type: string
+        - description: display only uniq addresses found per transaction
+          in: query
+          name: uniq_tx
+          required: false
+          schema:
+            type: string
+        - description: >-
+            display counts of appearances (for --addrs&#44; --uniq&#44; or
+            --uniq_tx only)
+          in: query
+          name: count_only
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Data
+      description: ''
+      summary: /blocks
+  /logs:
+    get:
+      parameters:
+        - description: >-
+            a space-separated list of one or more transaction identifiers
+            (tx_hash&#44; bn.txID&#44; blk_hash.txID)
+          in: query
+          name: transactions
+          required: true
+          schema:
+            type: string
+        - description: articulate the transactions if an ABI is found for the 'to' address
+          in: query
+          name: articulate
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Data
+      description: ''
+      summary: /logs
+  /names:
+    get:
+      parameters:
+        - description: a space separated list of one or more search terms
+          in: query
+          name: terms
+          required: true
+          schema:
+            type: string
+        - description: >-
+            expand search to include all fields (default searches name&#44;
+            address&#44; and symbol only)
+          in: query
+          name: expand
+          required: false
+          schema:
+            type: string
+        - description: do case-sensitive search
+          in: query
+          name: match_case
+          required: false
+          schema:
+            type: string
+        - description: include personal accounts in the search
+          in: query
+          name: owned
+          required: false
+          schema:
+            type: string
+        - description: include your custom named accounts
+          in: query
+          name: custom
+          required: false
+          schema:
+            type: string
+        - description: include prefund accounts
+          in: query
+          name: prefund
+          required: false
+          schema:
+            type: string
+        - description: include well know token and airdrop addresses in the search
+          in: query
+          name: named
+          required: false
+          schema:
+            type: string
+        - description: display only addresses in the results (useful for scripting)
+          in: query
+          name: addr
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - accttype: EOA
+                        address: '0x06012c8cf97bead5deae237070f9587f8e7a266d'
+                        balance: 0
+                        blockNumber: 1365929
+                        cname: EthState
+                        code: 0x
+                        deleted: 0
+                        deployed: 0
+                        ether: 0
+                        nonce: 0
+                        schema: 5005
+                        showing: 1
+                        storage: ''
+                    meta:
+                      client: 1365929
+                      finalized: 539800
+                      pending: 622000
+                      staging: 622000
+                    type: CEthState
+          description: OK
+          headers: {}
+      tags:
+        - Accounts
+      description: ''
+      summary: /names
+  /quotes:
+    get:
+      parameters:
+        - description: Freshen price database (append new data)
+          in: query
+          name: freshen
+          required: false
+          schema:
+            type: string
+        - description: display prices in this increment
+          in: query
+          name: period
+          required: false
+          schema:
+            type: string
+        - description: which price pair to freshen or list (see Poloniex)
+          in: query
+          name: pair
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Other
+      description: ''
+      summary: /quotes
+  /receipts:
+    get:
+      parameters:
+        - description: >-
+            a space-separated list of one or more transaction identifiers
+            (tx_hash&#44; bn.txID&#44; blk_hash.txID)
+          in: query
+          name: transactions
+          required: true
+          schema:
+            type: string
+        - description: articulate the transactions if an ABI is found for the 'to' address
+          in: query
+          name: articulate
+          required: false
+          schema:
+            type: string
+        - description: display the receipt's logs
+          in: query
+          name: logs
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Data
+      description: ''
+      summary: /receipts
+  /state:
+    get:
+      parameters:
+        - description: one or more addresses (0x...) from which to retrieve balances
+          in: query
+          name: addrs
+          required: true
+          schema:
+            type: string
+        - description: >-
+            an optional list of one or more blocks at which to report
+            balances&#44; defaults to 'latest'
+          in: query
+          name: blocks
+          required: false
+          schema:
+            type: string
+        - description: control which state to export
+          in: query
+          name: mode
+          required: false
+          schema:
+            type: string
+        - description: only report a balance when it changes from one block to the next
+          in: query
+          name: changes
+          required: false
+          schema:
+            type: string
+        - description: suppress the display of zero balance accounts
+          in: query
+          name: no_zero
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - State
+      description: ''
+      summary: /state
+  /status:
+    get:
+      parameters:
+        - description: which data to retrieve
+          in: query
+          name: modes
+          required: false
+          schema:
+            type: string
+        - description: >-
+            include details about items found in monitors&#44; slurps&#44;
+            abis&#44; or price caches
+          in: query
+          name: details
+          required: false
+          schema:
+            type: string
+        - description: display results in Linux ls -l format (assumes --detail)
+          in: query
+          name: list
+          required: false
+          schema:
+            type: string
+        - description: >-
+            show a summary of the current status of the blockchain and
+            TrueBlocks scrapers
+          in: query
+          name: report
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Admin
+      description: ''
+      summary: /status
+  /traces:
+    get:
+      parameters:
+        - description: >-
+            a space-separated list of one or more transaction identifiers
+            (tx_hash&#44; bn.txID&#44; blk_hash.txID)
+          in: query
+          name: transactions
+          required: true
+          schema:
+            type: string
+        - description: articulate the transactions if an ABI is found for the 'to' address
+          in: query
+          name: articulate
+          required: false
+          schema:
+            type: string
+        - description: show the number of traces for the transaction only (fast)
+          in: query
+          name: count_only
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Data
+      description: ''
+      summary: /traces
+  /transactions:
+    get:
+      parameters:
+        - description: >-
+            a space-separated list of one or more transaction identifiers
+            (tx_hash&#44; bn.txID&#44; blk_hash.txID)
+          in: query
+          name: transactions
+          required: true
+          schema:
+            type: string
+        - description: articulate the transactions if an ABI is found for the 'to' address
+          in: query
+          name: articulate
+          required: false
+          schema:
+            type: string
+        - description: display the transaction's trace
+          in: query
+          name: trace
+          required: false
+          schema:
+            type: string
+        - description: export format (where appropriate)
+          in: query
+          name: fmt
+          required: false
+          schema:
+            type: string
+        - description: get help on this command
+          in: query
+          name: help
+          required: false
+          schema:
+            type: string
+        - description: e.g. application/json
+          example: application/json
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - age: '21263796'
+                      blockNumber: 101010
+                      date: '2015-08-17 12:53:09 UTC'
+                      difficulty: 3871451743585
+                      finalized: 1
+                      gasLimit: 3141592
+                      gasUsed: 0
+                      hash: >-
+                        0x3e5c2f13bc01a0a32c7eda3560ec3ede19c9d2f6c0fda8436999eee2914e862d
+                      miner: '0xc603ab5ef41fc61aa8b76beddb09e3cfcbb174bd'
+                      parentHash: >-
+                        0x8290679004240a002dcf274bf56310c2654b5137c643e5c20ff647ebda61033b
+                      price: 0
+                      timestamp: 1439815989
+                      transactions: []
+          description: OK
+          headers: {}
+      tags:
+        - Data
+      description: ''
+      summary: /transactions
+components:
+  schemas:
+    tx_list: {}
+    ABI: {}
+    Export: {}
+    List: {}
+    Slurp: {}
+    View_State_detail: {}
+    View_block_detail: {}
+    View_logs_detail: {}
+    View_quotes_detail: {}
+    View_receipts_detail: {}
+    View_status_detail: {}
+    View_traces_detail: {}
+    View_transactions_detail: {}
+    names: {}
+tags:
+  - name: Accounts
+  - name: State
+  - name: Data
+  - name: Other
+  - name: Admin
