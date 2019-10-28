@@ -25,9 +25,9 @@ const ConnectionDetails = (props) => {
         const staging = props.chainStatus.staging
         const unripe = props.chainStatus.unripe
         var final_behind = (props.chainStatus.client - props.chainStatus.finalized).toString()
-        final_behind += " blocks, about " + (Math.floor((props.chainStatus.client - props.chainStatus.finalized) * 100/ (60/14)) / 100).toString() + " minutes"
+        final_behind += " blocks behind, " + (Math.floor((props.chainStatus.client - props.chainStatus.finalized) * 100/ (60/14)) / 100).toString() + " minutes"
         var staging_behind = (props.chainStatus.client - props.chainStatus.staging).toString()
-        staging_behind += " blocks, about " + (Math.floor((props.chainStatus.client - props.chainStatus.staging) * 100 / (60 / 14)) / 100).toString() + " minutes"
+        staging_behind += " blocks behind, " + (Math.floor((props.chainStatus.client - props.chainStatus.staging) * 100 / (60 / 14)) / 100).toString() + " minutes"
         return (
           <div>
             <div className={`system-details`}>
@@ -47,12 +47,12 @@ const ConnectionDetails = (props) => {
                 {props.systemData.is_scraping ? "Scraping" : "Not Scraping"}
               </div>
               <div className="item-left"><img className="traffic_light" alt={green_light} src={green_light} />Finalized:</div>
-              <div className="item-right">{fmtInteger(finalized)} <small>(<i>{final_behind}</i>)</small></div>
+              <div className="item-right">{fmtInteger(finalized)} <small><br />(<i>{final_behind}</i>)</small></div>
               <div className="item-left">
                 <img className="traffic_light" alt={yellow_light} src={yellow_light} />Staged:</div>
-              <div className="item-right">{fmtInteger(staging)} <small>(<i>{staging_behind}</i>)</small></div>
+              <div className="item-right">{fmtInteger(staging)} <small><br />(<i>{staging_behind}</i>)</small></div>
               <div className="item-left"><img className="traffic_light" alt={red_light} src={red_light} />Unripe:</div>
-              <div className="item-right">{fmtInteger(unripe)} <small>(<i>{props.chainStatus.client - props.chainStatus.unripe}</i>)</small></div>
+              <div className="item-right">{fmtInteger(unripe)} <small><br />(<i>{props.chainStatus.client - props.chainStatus.unripe}</i>)</small></div>
               <div className="item-left">API Provider:</div>
               <div className="item-right space-after">{props.apiProvider}</div>
 
