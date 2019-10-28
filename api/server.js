@@ -76,7 +76,7 @@ app.get(`/:routeName`, (req, res) => {
     if(apiOptions[routeName] === undefined) {
         var msg = '{ "error": "Route ';
         msg += routeName;
-        msg += 'is not available." }';
+        msg += ' is not available." }';
         console.log(msg);
         return res.send(msg);
     }
