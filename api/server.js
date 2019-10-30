@@ -29,7 +29,7 @@ let processList = []
 let cnt = 0
 
 const reportAndSend = (routeName, code, res) => {
-    console.log(~~(Date.now() / 1000) + " ~ \x1b[32m\x1b[1m<INFO>\x1b[0m  : " + `API exiting route: ${routeName} with ${code === undefined ? "OK" : code}`);
+    console.log(~~(Date.now() / 1000) + " ~ \x1b[32m\x1b[1m<INFO>\x1b[0m  : " + `Exiting route \'${routeName}\' with ${code === undefined ? "OK" : code}`);
     console.log(`------------- ${++cnt} ---------------------------`);
     return res.send();
 }
@@ -51,7 +51,7 @@ const generateCmd = (routeName, queryObj) => {
         return cmdString;
     }).reduce((acc, val) => acc.concat(val), [])
     .join(' ');
-    console.log(~~(Date.now() / 1000) + " ~ \x1b[32m\x1b[1m<INFO>\x1b[0m  : " + `API calling: chifra ${routeName} ${cmd}`);
+    console.log(~~(Date.now() / 1000) + " ~ \x1b[32m\x1b[1m<INFO>\x1b[0m  : " + `API calling \'chifra ${routeName} ${cmd}\'`);
     return cmd;
 }
 
