@@ -87,12 +87,12 @@ class SystemProgressChart extends React.Component {
         <div className='chart-container'>
             <div className='y-axis grid'></div>
             {[...Array(this.cols).keys()].map((col, colI) => {
-                return <div className='y-axis grid' key={`x${col}`}>{col * 1e5}</div>
+                return <div className='y-axis grid' key={`x${col}`}>{fmtInteger(col * 1e5)}</div>
             })}
             {[...Array(this.rows).keys()].map((row, rowI) => {
                 return (
                     <React.Fragment key={`x${row}`}>
-                        <div className='x-axis grid'>{row * 1e6}</div>
+                        <div className='x-axis grid'>{fmtInteger(row * 1e6)}</div>
                         {[...Array(this.cols).keys()].map((col, colI) => {
                             let indexClass
                             if (this.finalized >= row * 1e6 + (col + 1) * 1e5) {

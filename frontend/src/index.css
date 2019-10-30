@@ -178,7 +178,7 @@ h1 {
   border-bottom: 1px solid #aaa;
 }
 
-.grid.x-axis, .grid.y-axis {
+.grid.x-axis {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,6 +187,11 @@ h1 {
 }
 
 .grid.y-axis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-weight:300;
   height: 25px;
 }
 
