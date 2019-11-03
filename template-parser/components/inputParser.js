@@ -8,6 +8,7 @@ const inputParser = async (data) => {
   let lines = parse(data, { delimiter: ',', columns: true, skip_lines_with_error: true });
   let parsedLines = lines.map(item => {
     item.is_required = item.is_required === "TRUE" ? true : false;
+    item.customizeable = item.customizeable === "TRUE" ? true : false;
     item.docs_visible = item.docs_visible === "TRUE" ? true : false;
     item.core_visible = item.core_visible === "TRUE" ? true : false;
     return item;
