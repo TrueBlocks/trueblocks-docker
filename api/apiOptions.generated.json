@@ -3690,6 +3690,23 @@
       "data_type": "<boolean>",
       "description": "do not quit testing on first error"
     },
+    "no_post": {
+      "num": "11940",
+      "group": "dev_tools",
+      "api_route": "",
+      "tool": "testRunner",
+      "command": "no_post",
+      "hotkey": "o",
+      "def_val": "",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "do not complete the post processing step"
+    },
     "report": {
       "num": "11960",
       "group": "dev_tools",
@@ -8340,22 +8357,22 @@
     }
   },
   "when": {
-    "dates": {
+    "block_list": {
       "num": "13940",
       "group": "tools",
       "api_route": "when",
       "tool": "whenBlock",
-      "command": "dates",
+      "command": "block_list",
       "hotkey": "",
       "def_val": "",
       "is_required": false,
       "customizeable": false,
       "core_visible": true,
       "docs_visible": false,
-      "generate": "header",
+      "generate": "local",
       "option_kind": "positional",
       "data_type": "list<string>",
-      "description": "one or more block numbers&#44; block hashes&#44; or a 'special' block&#44; or\\n    one or more dates formatted as YYYY-MM-DD[THH[:MM[:SS]]]"
+      "description": "one or more dates&#44; block numbers&#44; hashes&#44; or special named blocks (see notes)"
     },
     "list": {
       "num": "13960",
