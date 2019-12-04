@@ -1,10 +1,10 @@
-import React from 'react'
-import MonitorStatus from './monitor-status'
+import React from 'react';
+import MonitorStatus from './monitor-status';
 
-const Monitors = props => (
+const Monitors = (props) => (
   <div className="monitors">
-    <MonitorStatus/>
+    <MonitorStatus props={props} />
   </div>
-)
+);
 
 export default Monitors;

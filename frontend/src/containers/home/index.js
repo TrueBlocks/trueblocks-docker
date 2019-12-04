@@ -1,12 +1,12 @@
-import React from 'react'
-import ConnectionStatus from './connection-status'
-import IndexProgress from './index-progress'
+import React from 'react';
+import ConnectionStatus from './connection-status';
+import IndexProgress from './index-progress';
 
-const Home = props => (
+const Home = (props) => (
   <div className="home">
-    <ConnectionStatus/>
-    <IndexProgress/>
+    <ConnectionStatus props={props} />
+    <IndexProgress props={props} />
   </div>
-)
+);
 
 export default Home;

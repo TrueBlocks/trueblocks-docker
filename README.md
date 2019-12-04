@@ -4,7 +4,9 @@
 
 [![Website trueblocks.io](https://img.shields.io/badge/Website-quickblocks.io-brightgreen.svg)](https://quickblocks.io/)
 [![Docker](https://img.shields.io/badge/trueblocks-docker-blue.svg)](https://github.com/Great-Hill-Corporation/trueblocks-docker)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/quickblocks?lang=es)
+
 
 TrueBlocks extracts address appearances from an Ethereum chain and creates a lightweight index, making queries by address trustless and fast.
 

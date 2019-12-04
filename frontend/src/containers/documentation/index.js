@@ -1,9 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const Documentation = props => (
-  <div className="docs">
-      hey
-  </div>
-)
+const Documentation = (props) => <div className="docs">{props}</div>;
 
 export default Documentation;

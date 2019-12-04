@@ -1,13 +1,11 @@
 //----------------------------------------------------------------
-const GETSTATUS_BEGIN = 'trueblocks/GETSTATUS_BEGIN';
-const GETSTATUS_SUCCESS = 'trueblocks/GETSTATUS_SUCCESS';
-const GETSTATUS_FAILURE = 'trueblocks/GETSTATUS_FAILURE';
+const GETSTATUS_BEGIN = 'monitorStatus/GETSTATUS_BEGIN';
+const GETSTATUS_SUCCESS = 'monitorStatus/GETSTATUS_SUCCESS';
+const GETSTATUS_FAILURE = 'monitorStatus/GETSTATUS_FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
-  systemData: {},
-  chainStatus: {},
-  isConnected: false,
+  monitorStatus: {},
   isLoading: false,
   error: null
 };
@@ -18,7 +16,6 @@ export default (state = initialState, action) => {
     case GETSTATUS_BEGIN:
       return {
         ...state,
-        error: null,
         isLoading: true
       };
 
@@ -26,20 +23,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isConnected: true,
         error: null,
-        systemData: action.payload.data,
-        chainStatus: action.payload.meta
+        monitorStatus: action.payload
       };
 
     case GETSTATUS_FAILURE:
       return {
         ...state,
         isLoading: false,
-        isConnected: false,
-        error: `Connection error: ${action.e}`,
-        systemData: {},
-        chainStatus: {}
+        error: action.e,
+        monitorStatus: {}
       };
 
     default:
@@ -49,24 +42,24 @@ export default (state = initialState, action) => {
 
 //----------------------------------------------------------------
 const getData = (endpoint) => {
-  return fetch(`${endpoint}/status?modes=all`);
+  return fetch(`${endpoint}/status?modes=monitors&details&ether`);
 };
 
 //----------------------------------------------------------------
-export const getStatus = () => {
+export const getMonitorStatus = () => {
   return (dispatch, getState) => {
     dispatch({
       type: GETSTATUS_BEGIN
     });
+
     let state = getState();
     return getData(state.getSettings.apiProvider)
       .then(async (res) => {
-        const json = await res.json();
-        const data = json.data[0];
-        const meta = json.meta;
+        let json = await res.json();
+        json = json.data[0].caches[0];
         dispatch({
           type: GETSTATUS_SUCCESS,
-          payload: { data, meta }
+          payload: json
         });
         return json;
       })
