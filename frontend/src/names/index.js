@@ -1,19 +1,19 @@
 import React from 'react';
 import ConnectionComponent from '../components';
 
-const Explorer = (props) => (
+const Names = (props) => (
   <div className="page">
     <ConnectionComponent props={props} />
     <div className="right-panel">
       <h1>
-        Explorer
+        Names
         <div className="description-note">
-          This is the TrueBlocks Explorer. This is the TrueBlocks Explorer.This is the TrueBlocks Explorer. This is the
-          TrueBlocks Explorer. This is the TrueBlocks Explorer. This is the TrueBlocks Explorer.
+          The TrueBlocks names component allows one to name Ethereum addresses, function signatures and smart contract
+          event signatures.
         </div>
       </h1>
       <div className="inner-panel">
-        <h4 className="inner-panel">Explorer Group 1</h4>
+        <h4 className="inner-panel">Names Group 1</h4>
         <ul>
           <li>Item 1</li>
           <li>Item 2</li>
@@ -29,4 +29,4 @@ const Explorer = (props) => (
   </div>
 );
 
-export default Explorer;
+export default Names;

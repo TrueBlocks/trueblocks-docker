@@ -1,10 +1,10 @@
 import React from 'react';
-import ConnectionComponent from '../common/connection-status';
+import ConnectionComponent from '../components';
 
 const Support = (props) => (
   <div className="page">
     <ConnectionComponent props={props} />
-    <div className="inner-panel">
+    <div className="right-panel">
       <h1>
         Support Options
         <div className="description-note">
@@ -12,8 +12,8 @@ const Support = (props) => (
           support plans. Choose your poison.
         </div>
       </h1>
-      <div>
-        <h4>Free Support</h4>
+      <div className="inner-panel">
+        <h4 className="inner-panel">Free Support</h4>
         <ul>
           <li>Email support: &lt;support@trueblocks.io&gt;</li>
           <li>Online forums: &lt;https://discord.gg/zGh6PdN&gt;</li>

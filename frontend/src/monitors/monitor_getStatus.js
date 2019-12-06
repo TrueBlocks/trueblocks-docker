@@ -1,14 +1,14 @@
 //----------------------------------------------------------------
+const initialState = {
+  isLoading: false,
+  error: null,
+  monitorStatus: {}
+};
+
+//----------------------------------------------------------------
 const MONITOR_STATUS_BEGIN = 'monitorStatus/BEGIN';
 const MONITOR_STATUS_SUCCESS = 'monitorStatus/SUCCESS';
 const MONITOR_STATUS_FAILURE = 'monitorStatus/FAILURE';
-
-//----------------------------------------------------------------
-const initialState = {
-  monitorStatus: {},
-  isLoading: false,
-  error: null
-};
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {

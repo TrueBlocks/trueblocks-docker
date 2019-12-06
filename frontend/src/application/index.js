@@ -4,6 +4,7 @@ import logo from '../img/logo.png';
 
 import Home from '../home';
 import Monitors from '../monitors';
+import Names from '../names';
 import Explorer from '../explorer';
 import Scraper from '../scraper';
 import Settings from '../settings';
@@ -19,6 +20,9 @@ const App = () => (
       </NavLink>
       <NavLink activeClassName="is-active" to="/monitors">
         Monitors
+      </NavLink>
+      <NavLink activeClassName="is-active" to="/names">
+        Names
       </NavLink>
       <NavLink activeClassName="is-active" to="/explorer">
         Explorer
@@ -41,6 +45,7 @@ const App = () => (
     <main>
       <Route exact path="/" component={Home} />
       <Route exact path="/monitors" component={Monitors} />
+      <Route exact path="/names" component={Names} />
       <Route exact path="/explorer" component={Explorer} />
       <Route exact path="/scraper" component={Scraper} />
       <Route exact path="/settings" component={Settings} />

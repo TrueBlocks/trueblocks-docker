@@ -1,11 +1,11 @@
 import React from 'react';
-import ConnectionComponent from '../common/connection-status';
+import ConnectionComponent from '../components';
 import IndexProgress from './addrIndex_progress';
 
 const Home = (props) => (
   <div className="page">
     <ConnectionComponent props={props} />
-    <div className="inner-panel">
+    <div className="right-panel">
       <IndexProgress props={props} />
     </div>
   </div>

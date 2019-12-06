@@ -1,20 +1,20 @@
 import React from 'react';
-import ConnectionComponent from '../common/connection-status';
+import ConnectionComponent from '../components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getMonitorStatus } from './monitorStatus';
-import { monitorRemove } from './monitorRemove';
-import { monitorAdd } from './monitorAdd';
-import { withPolling } from '../common/withPolling';
-import { fmtDouble, fmtInteger } from '../common/number_fmt';
-import Loading from '../common/loading';
+import { getMonitorStatus } from './monitor_getStatus';
+import { reducer_MonitorRemove } from './monitor_remove';
+import { reducer_MonitorAdd } from './monitor_add';
+import { withPolling } from '../components/withPolling';
+import { fmtDouble, fmtInteger } from '../utils/number_fmt';
+import Loading from '../components/loading';
 import trash from '../img/trash-alt.svg';
 
 const MonitorStatus = (props) => {
   return (
     <div className="page">
       <ConnectionComponent props={props} />
-      <div className="inner-panel">
+      <div className="right-panel">
         <h1>
           Monitors
           <div className="description-note">
@@ -150,22 +150,22 @@ class MonitorDetail extends React.Component {
   }
 }
 
-const mapStateToProps = ({ monitorStatus, monitorRemove }) => ({
-  monitorData: monitorStatus.monitorStatus,
-  error: monitorStatus.error,
+const mapStateToProps = ({ reducer_Monitors, reducer_MonitorRemove }) => ({
+  monitorData: reducer_Monitors.monitorStatus,
+  error: reducer_Monitors.error,
   monitorDataFetch: {
-    isLoading: monitorStatus.isLoading,
-    error: monitorStatus.error
+    isLoading: reducer_Monitors.isLoading,
+    error: reducer_Monitors.error
   },
-  monitorRemove: monitorRemove.error
+  monitorRemove: reducer_MonitorRemove.error
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getMonitorStatus,
-      rmMonitor: (address) => monitorRemove(address),
-      addMonitor: (address) => monitorAdd(address)
+      rmMonitor: (address) => reducer_MonitorRemove(address),
+      addMonitor: (address) => reducer_MonitorAdd(address)
     },
     dispatch
   );

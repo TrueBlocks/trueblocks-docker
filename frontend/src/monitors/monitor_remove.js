@@ -1,13 +1,13 @@
 //----------------------------------------------------------------
-const MONITOR_REMOVE_BEGIN = 'monitorRemove/BEGIN';
-const MONITOR_REMOVE_SUCCESS = 'monitorRemove/SUCCESS';
-const MONITOR_REMOVE_FAILURE = 'monitorRemove/FAILURE';
-
-//----------------------------------------------------------------
 const initialState = {
   isLoading: false,
   error: null
 };
+
+//----------------------------------------------------------------
+const MONITOR_REMOVE_BEGIN = 'monitorRemove/BEGIN';
+const MONITOR_REMOVE_SUCCESS = 'monitorRemove/SUCCESS';
+const MONITOR_REMOVE_FAILURE = 'monitorRemove/FAILURE';
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
@@ -43,7 +43,7 @@ const getData = (endpoint, address) => {
 };
 
 //----------------------------------------------------------------
-export const monitorRemove = (address) => {
+export const reducer_MonitorRemove = (address) => {
   return (dispatch, getState) => {
     dispatch({
       type: MONITOR_REMOVE_BEGIN

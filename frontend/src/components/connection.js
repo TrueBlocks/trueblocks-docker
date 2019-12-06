@@ -3,36 +3,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { getStatus } from '../home/getSystemStatus';
-import { withPolling } from '../common/withPolling';
-import { fmtInteger } from '../common/number_fmt';
+import { withPolling } from '../components/withPolling';
+import { fmtInteger } from '../utils/number_fmt';
 import green_light from '../img/green.png';
 import yellow_light from '../img/yellow.png';
 import red_light from '../img/red.png';
+import './connection.css';
 
 const ConnectionComponent = (props) => {
   return (
-    <div className="connect-panel">
+    <div className="left-panel">
       <h1>Connection</h1>
       <ConnectionDetails {...props} />
-      <button onClick={props.changePage}>Settings</button>
     </div>
   );
-};
-
-const SmallRow = (props) => {
-  if (props.bold) {
-    return (
-      <div className="item-both-small">
-        <div className="item-both-small-bold">{props.text1}</div> {props.text2}
-      </div>
-    );
-  } else {
-    return (
-      <div className="item-both-small">
-        {props.text1} {props.text2}
-      </div>
-    );
-  }
 };
 
 const ConnectionDetails = (props) => {
@@ -91,7 +75,7 @@ const ConnectionDetails = (props) => {
 
         <div className="item grouping">TrueBlocks</div>
         <div className="item-left">Status:</div>
-        <div className={`item-right space-after ${props.systemData.is_scraping ? 'connected' : 'disconnected'}`}>
+        <div className={`item-right ${props.systemData.is_scraping ? 'connected' : 'disconnected'}`}>
           {props.systemData.is_scraping ? 'Scraping' : 'Not Scraping'}
         </div>
         <div className="item-left">
@@ -146,6 +130,22 @@ const ConnectionDetails = (props) => {
       </div>
     </div>
   );
+};
+
+const SmallRow = (props) => {
+  if (props.bold) {
+    return (
+      <div className="item-both-small">
+        <div className="item-both-small-bold">{props.text1}</div> {props.text2}
+      </div>
+    );
+  } else {
+    return (
+      <div className="item-both-small">
+        {props.text1} {props.text2}
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = ({ systemStatus, chainStatus, getSettings }) => ({

@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reducer_AddressIndex } from './addrIndex_getData';
-import { humanFileSize } from '../common/filesize';
-import { fmtDouble, fmtInteger } from '../common/number_fmt';
-import Loading from '../common/loading';
+import { humanFileSize } from '../utils/filesize';
+import { fmtDouble, fmtInteger } from '../utils/number_fmt';
+import Loading from '../components/loading';
 
 const IndexProgress = (props) => {
   let status;
@@ -23,7 +23,8 @@ const IndexProgress = (props) => {
   switch (status) {
     case 'ready':
       container = (
-        <div>
+        <div className="inner-panel">
+          <h4 className="inner-panel">Summary:</h4>
           <SystemProgressChart {...props} />
         </div>
       );
@@ -276,10 +277,10 @@ const ZoomOnIndex = (props) => {
 const IndexTable = (props) => {
   const count = props.data.length;
   return (
-    <div>
-      <h3>
-        Block range {props.range.start}-{props.range.end}:
-      </h3>
+    <div nameClass="inner-panel">
+      <h4 nameClass="inner-panel">
+        Details: block range {props.range.start}-{props.range.end}:
+      </h4>
       <div>{count} index files</div>
       <div className="index-container">
         {props.data.map((item) => (

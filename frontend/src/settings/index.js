@@ -1,11 +1,11 @@
 //--------------------------------------------------------------------------------
 import React from 'react';
-import ConnectionComponent from '../common/connection-status';
+import ConnectionComponent from '../components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getSettings } from './getSettings';
 import { setSettings } from './setSettings';
-import Loading from '../common/loading';
+import Loading from '../components/loading';
 
 //--------------------------------------------------------------------------------
 class Settings extends React.Component {
@@ -43,7 +43,7 @@ class Settings extends React.Component {
       return (
         <div className="page">
           <ConnectionComponent props={this.props} />
-          <div className="inner-panel">
+          <div className="right-panel">
             <h1>
               Settings
               <div className="description-note">

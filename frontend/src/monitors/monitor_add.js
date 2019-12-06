@@ -1,5 +1,5 @@
 //----------------------------------------------------------------
-const defMonitorState = {
+const initialState = {
   isLoading: false,
   error: null
 };
@@ -10,7 +10,7 @@ const MONITOR_ADD_SUCCESS = 'monitorAdd/SUCCESS';
 const MONITOR_ADD_FAILURE = 'monitorAdd/FAILURE';
 
 //----------------------------------------------------------------
-export default function monitorAddReducer(state = defMonitorState, action) {
+export default function monitorAddReducer(state = initialState, action) {
   console.log(action.type, state);
   switch (action.type) {
     case MONITOR_ADD_BEGIN:
@@ -43,7 +43,7 @@ const getMonitorData = (endpoint, address) => {
 };
 
 //----------------------------------------------------------------
-export const monitorAdd = (address) => {
+export const reducer_MonitorAdd = (address) => {
   return (dispatch, getState) => {
     dispatch({
       type: MONITOR_ADD_BEGIN
