@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getMonitorStatus } from './monitor_getStatus';
 import { reducer_MonitorRemove } from './monitor_remove';
 import { reducer_MonitorAdd } from './monitor_add';
-import { withPolling } from '../components/withPolling';
+import { polling } from '../components/polling';
 import { fmtDouble, fmtInteger } from '../utils/number_fmt';
 import Loading from '../components/loading';
 import trash from '../img/trash-alt.svg';
@@ -170,7 +170,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default withPolling(getMonitorStatus, 20000)(
+export default polling(getMonitorStatus, 20000)(
   connect(
     mapStateToProps,
     mapDispatchToProps

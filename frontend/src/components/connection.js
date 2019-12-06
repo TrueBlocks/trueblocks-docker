@@ -1,15 +1,21 @@
 import React from 'react';
+import { push } from 'connected-react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
-import { getStatus } from '../home/getSystemStatus';
-import { withPolling } from '../components/withPolling';
+
+import { polling } from './polling';
 import { fmtInteger } from '../utils/number_fmt';
-import green_light from '../img/green.png';
-import yellow_light from '../img/yellow.png';
-import red_light from '../img/red.png';
+
+import green_light from '../img/connection-green-light.png';
+import yellow_light from '../img/connection-yellow-light.png';
+import red_light from '../img/connection-red-light.png';
+import { getConnectionStatus } from './connection_reducer';
 import './connection.css';
 
+/**
+ * ConnectionComponent - show the status of the connection to both the node and TrueBlocks
+ * @param  props Some data
+ */
 const ConnectionComponent = (props) => {
   return (
     <div className="left-panel">
@@ -148,24 +154,24 @@ const SmallRow = (props) => {
   }
 };
 
-const mapStateToProps = ({ systemStatus, chainStatus, getSettings }) => ({
-  isConnected: systemStatus.isConnected,
-  systemData: systemStatus.systemData,
-  isLoading: systemStatus.isLoading,
-  chainStatus: systemStatus.chainStatus,
+const mapStateToProps = ({ reducer_SystemStatus, chainStatus, getSettings }) => ({
+  isConnected: reducer_SystemStatus.isConnected,
+  systemData: reducer_SystemStatus.systemData,
+  isLoading: reducer_SystemStatus.isLoading,
+  chainStatus: reducer_SystemStatus.chainStatus,
   apiProvider: getSettings.apiProvider
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getStatus,
+      getConnectionStatus,
       changePage: () => push('/settings')
     },
     dispatch
   );
 
-export default withPolling(getStatus, 10000)(
+export default polling(getConnectionStatus, 10000)(
   connect(
     mapStateToProps,
     mapDispatchToProps

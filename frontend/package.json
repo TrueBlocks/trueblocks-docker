@@ -8,6 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "document": "documentation build src/components/*.js -f html -o docs/components ; open docs/components/index.html",
     "precommit": "pretty-quick --staged",
     "backup": "tar --exclude \"./.git\" --exclude \"./build\" --exclude \"./node_modules\" -cvf ../../trueblocks-backups/frontend.tar  . ; gzip ../../trueblocks-backups/*.tar && open ../../trueblocks-backups"
   },

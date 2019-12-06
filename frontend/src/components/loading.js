@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Loading - displays during data loading
+ */
 const Loading = (props) => {
   const symbol =
     props.status === 'error' ? (

@@ -300,11 +300,11 @@ const IndexTable = (props) => {
   );
 };
 
-const mapStateToProps = ({ systemStatus, reducer_AddressIndex }) => ({
-  systemData: systemStatus.systemData,
-  chainStatus: systemStatus.chainStatus,
-  isLoading: systemStatus.isLoading,
-  error: systemStatus.error,
+const mapStateToProps = ({ reducer_SystemStatus, reducer_AddressIndex }) => ({
+  systemData: reducer_SystemStatus.systemData,
+  chainStatus: reducer_SystemStatus.chainStatus,
+  isLoading: reducer_SystemStatus.isLoading,
+  error: reducer_SystemStatus.error,
   indexData: reducer_AddressIndex.indexData,
   loadingIndex: reducer_AddressIndex.isLoading
 });
