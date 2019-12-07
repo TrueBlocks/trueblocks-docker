@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------
-import reducer_SystemStatus from './components/connection_reducer';
-import reducer_AddressIndex from './home/addrIndex_getData';
-import reducer_Monitors from './monitors/monitor_getStatus';
-import reducer_MonitorRemove from './monitors/monitor_remove';
-import reducer_MonitorAdd from './monitors/monitor_add';
-import getSettings from './settings/getSettings';
+import reducer_SystemStatus from './z_components/connection_reducer';
+import AddressIndex_reducer from './a_address-index-page/address-index-getdata';
+import reducer_Monitors from './a_monitors-page/monitors-getdata';
+import reducer_MonitorRemove from './a_monitors-page/monitors-remove';
+import reducer_MonitorAdd from './a_monitors-page/monitors-add';
+import getSettings from './a_settings-page/settings-get';
 
 //------------------------------------------------------------------------
 import { combineReducers } from 'redux';
@@ -13,6 +13,6 @@ export default combineReducers({
   reducer_Monitors,
   reducer_MonitorRemove,
   reducer_MonitorAdd,
-  reducer_AddressIndex,
+  AddressIndex_reducer,
   getSettings
 });
