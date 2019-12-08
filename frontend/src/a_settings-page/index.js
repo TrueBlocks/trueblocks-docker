@@ -13,32 +13,32 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      settings: []
+      configSettings: []
     };
   }
 
   componentDidMount = () => {
     this.props.getSettings().then(() => {
-      this.setState({ settings: this.props.settings.files });
+      this.setState({ configSettings: this.props.configSettings.files });
     });
   };
 
   submit = (e) => {
     e.preventDefault();
-    this.props.sendToApi(JSON.stringify(this.state.settings));
+    this.props.sendToApi(JSON.stringify(this.state.configSettings));
   };
 
   onChange = (loc, e) => {
-    let settings = [...this.state.settings];
+    let settings = [...this.state.configSettings];
     let newVal = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     settings[loc[0]].groups[loc[1]].keys[loc[2]].value = newVal;
-    this.setState({ settings: settings });
+    this.setState({ configSettings: settings });
   };
 
   render() {
     if (this.props.error) {
       return <Loading status="error" message={`${this.props.error}`} />;
-    } else if (this.props.settings.files === undefined || this.state.settings === []) {
+    } else if (this.props.configSettings.files === undefined || this.state.configSettings === []) {
       return <Loading status="loading" message="Initializing..." />;
     } else {
       return (
@@ -51,12 +51,12 @@ class Settings extends React.Component {
             </h1>
             <form onSubmit={this.submit}>
               <div className="setting-container">
-                {this.state.settings.map((file, fileI) =>
+                {this.state.configSettings.map((file, fileI) =>
                   file.groups.map((category, categoryI) => (
                     <div className="setting-group" key={category.section}>
                       <h4>{category.section}</h4>
                       {category.keys.map((settingKey, keyI) => {
-                        const el = this.state.settings[fileI].groups[categoryI].keys[keyI];
+                        const el = this.state.configSettings[fileI].groups[categoryI].keys[keyI];
                         const loc = [fileI, categoryI, keyI];
                         return (
                           <div key={settingKey.name}>
@@ -95,7 +95,7 @@ const SettingInput = ({ name, value, type, tip, onChange }) => {
 
 //--------------------------------------------------------------------------------
 const mapStateToProps = ({ getSettings }) => ({
-  settings: getSettings.systemSettings,
+  configSettings: getSettings.configSettings,
   isLoading: getSettings.isLoading,
   error: getSettings.error
 });

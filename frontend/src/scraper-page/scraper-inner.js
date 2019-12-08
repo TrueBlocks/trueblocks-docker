@@ -14,7 +14,7 @@ const ScraperInner = (props) => {
 
   if (props.error) {
     status = 'error';
-  } else if (props.systemData.caches === undefined && props.chainStatus.finalized === undefined) {
+  } else if (props.systemData.caches === undefined) {
     status = 'initializing';
   } else {
     status = 'ready';
@@ -65,7 +65,6 @@ const ScraperInner = (props) => {
 
 const mapStateToProps = ({ reducer_SystemStatus, Scraper_reducer }) => ({
   systemData: reducer_SystemStatus.systemData,
-  chainStatus: reducer_SystemStatus.chainStatus,
   isLoading: reducer_SystemStatus.isLoading,
   error: reducer_SystemStatus.error
   // indexData: Scraper_reducer.indexData,

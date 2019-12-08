@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Names_reducer } from './names-getdata';
+import { reducer_Names } from './names-getdata';
 
 import Loading from '../z_components/loading';
 import PageNotes from '../z_components/page-notes';
@@ -14,7 +14,7 @@ const NamesInner = (props) => {
 
   if (props.error) {
     status = 'error';
-  } else if (props.systemData.caches === undefined && props.chainStatus.finalized === undefined) {
+  } else if (props.systemData.caches === undefined) {
     status = 'initializing';
   } else {
     status = 'ready';
@@ -30,11 +30,6 @@ const NamesInner = (props) => {
             <li>Item 1</li>
             <li>Item 2</li>
             <li>Item 3</li>
-          </ul>
-          <h4>Group 2</h4>
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
           </ul>
         </div>
       );
@@ -64,19 +59,18 @@ const NamesInner = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_SystemStatus, Names_reducer }) => ({
-  systemData: reducer_SystemStatus.systemData,
-  chainStatus: reducer_SystemStatus.chainStatus,
-  isLoading: reducer_SystemStatus.isLoading,
-  error: reducer_SystemStatus.error
-  // indexData: Names_reducer.indexData,
-  // loadingIndex: Names_reducer.isLoading
+const mapStateToProps = ({ reducer_SystemStatus, reducer_Names }) => ({
+  systemData: reducer_SystemStatus.systemData
+  //  isLoading: reducer_SystemStatus.isLoading,
+  //  error: reducer_SystemStatus.error
+  // indexData: reducer_Names.indexData,
+  // loadingIndex: reducer_Names.isLoading
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      Names_reducer
+      reducer_Names
     },
     dispatch
   );

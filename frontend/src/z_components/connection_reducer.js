@@ -1,9 +1,9 @@
 import queryAPI from '../z_utils/queryAPI';
 
 //----------------------------------------------------------------
-const GETSTATUS_BEGIN = 'connection/GETSTATUS_BEGIN';
-const GETSTATUS_SUCCESS = 'connection/GETSTATUS_SUCCESS';
-const GETSTATUS_FAILURE = 'connection/GETSTATUS_FAILURE';
+const BEGIN = 'connectn/BEGIN';
+const SUCCESS = 'connectn/SUCCESS';
+const FAILURE = 'connectn/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -16,16 +16,17 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('connection', state, action);
+  console.log('=============================================');
+  console.log('connectn', action, state);
   switch (action.type) {
-    case GETSTATUS_BEGIN:
+    case BEGIN:
       return {
         ...state,
         error: null,
         isLoading: true
       };
 
-    case GETSTATUS_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -35,7 +36,7 @@ export default (state = initialState, action) => {
         chainStatus: action.payload.meta
       };
 
-    case GETSTATUS_FAILURE:
+    case FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -51,10 +52,10 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const getConnectionStatus = () => {
+export const refreshStatusPanel = () => {
   return (dispatch, getState) => {
     dispatch({
-      type: GETSTATUS_BEGIN
+      type: BEGIN
     });
 
     return queryAPI(getState().getSettings.apiProvider, 'status', 'modes=all')
@@ -63,14 +64,14 @@ export const getConnectionStatus = () => {
         const data = json.data[0];
         const meta = json.meta;
         dispatch({
-          type: GETSTATUS_SUCCESS,
+          type: SUCCESS,
           payload: { data, meta }
         });
         return json;
       })
       .catch((e) => {
         dispatch({
-          type: GETSTATUS_FAILURE,
+          type: FAILURE,
           e
         });
       });

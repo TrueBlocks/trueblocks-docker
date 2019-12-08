@@ -163,27 +163,6 @@ h1 {
   /* debug-css */
 }
 
-.left-panel {
-  width: 20%;
-  padding: 5px;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  /* background-color: lightgray; */
-  /* border: 2px inset darkgray; */
-  /* border: 4px solid brown; */
-  /* debug-css */
-}
-.left-panel h1 {
-  color: #4c7c9c;
-  /* border: 4px solid green; */
-  /* debug-css */
-}
-.left-panel button {
-  margin: 1em auto;
-  display: block;
-}
-
 .fun-facts {
   display: flex;
   /* border: 1px dashed #333; */

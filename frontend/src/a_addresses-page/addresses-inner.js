@@ -7,8 +7,8 @@ import PageNotes from '../z_components/page-notes';
 import { humanFileSize } from '../z_utils/filesize';
 import { fmtDouble, fmtInteger } from '../z_utils/number_fmt';
 
-import { AddressIndex_reducer } from './address-index-getdata';
-import './address-index.css';
+import { AddressIndex_reducer } from './addresses-getdata';
+import './addresses.css';
 
 const AddressIndexInner = (props) => {
   let status;
@@ -18,7 +18,7 @@ const AddressIndexInner = (props) => {
 
   if (props.error) {
     status = 'error';
-  } else if (props.systemData.caches === undefined && props.chainStatus.finalized === undefined) {
+  } else if (props.systemData.caches === undefined) {
     status = 'initializing';
   } else {
     status = 'ready';
@@ -68,10 +68,7 @@ class SystemProgressChart extends React.Component {
     };
   }
 
-  unripe = this.props.chainStatus.unripe;
-  finalized = this.props.chainStatus.finalized;
-  clientHead = this.props.chainStatus.client === 'n/a' ? this.unripe : this.props.chainStatus.client;
-
+  clientHead = this.props.client === 'n/a' ? this.props.unripe : this.props.client;
   rows = Math.ceil(this.clientHead / 1e6);
   cols = 10;
 
@@ -95,9 +92,9 @@ class SystemProgressChart extends React.Component {
             <div className="x-axis grid">{fmtInteger(row * 1e6)}</div>
             {[...Array(this.cols).keys()].map((col, colI) => {
               let indexClass;
-              if (this.finalized >= row * 1e6 + (col + 1) * 1e5) {
+              if (this.props.finalized >= row * 1e6 + (col + 1) * 1e5) {
                 indexClass = 'finalized';
-              } else if (this.finalized >= row * 1e6 + col * 1e5) {
+              } else if (this.props.finalized >= row * 1e6 + col * 1e5) {
                 indexClass = 'in-progress';
               } else {
                 indexClass = 'inactive';
@@ -308,7 +305,9 @@ const IndexTable = (props) => {
 
 const mapStateToProps = ({ reducer_SystemStatus, AddressIndex_reducer }) => ({
   systemData: reducer_SystemStatus.systemData,
-  chainStatus: reducer_SystemStatus.chainStatus,
+  unripe: reducer_SystemStatus.chainStatus.unripe,
+  finalized: reducer_SystemStatus.chainStatus.finalized,
+  client: reducer_SystemStatus.chainStatus.client,
   isLoading: reducer_SystemStatus.isLoading,
   error: reducer_SystemStatus.error,
   indexData: AddressIndex_reducer.indexData,

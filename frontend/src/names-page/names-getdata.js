@@ -1,40 +1,40 @@
 import queryAPI from '../z_utils/queryAPI';
 
 //----------------------------------------------------------------
-const NAMES_BEGIN = 'names/NAMES_BEGIN';
-const NAMES_SUCCESS = 'names/NAMES_SUCCESS';
-const NAMES_FAILURE = 'names/NAMES_FAILURE';
+const BEGIN = 'names___/BEGIN';
+const SUCCESS = 'names___/SUCCESS';
+const FAILURE = 'names___/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
-  indexData: {},
+  //  indexData: {},
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('names', state, action);
+  console.log('names___', action, state);
   switch (action.type) {
-    case NAMES_BEGIN:
+    case BEGIN:
       return {
         ...state,
         isLoading: true
       };
 
-    case NAMES_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: null,
-        indexData: action.payload
+        error: null
+        //        indexData: action.payload
       };
 
-    case NAMES_FAILURE:
+    case FAILURE:
       return {
         ...state,
         isLoading: false,
-        indexData: {},
+        //        indexData: {},
         error: action.e
       };
 
@@ -44,24 +44,24 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const Names_reducer = () => {
+export const reducer_Names = () => {
   return (dispatch, getState) => {
     dispatch({
-      type: NAMES_BEGIN
+      type: BEGIN
     });
 
     return queryAPI(getState().getSettings.apiProvider, 'ping', '')
       .then(async (res) => {
         let json = await res.json();
         dispatch({
-          type: NAMES_SUCCESS,
+          type: SUCCESS,
           payload: json
         });
         return json;
       })
       .catch((e) => {
         dispatch({
-          type: NAMES_FAILURE,
+          type: FAILURE,
           e
         });
       });

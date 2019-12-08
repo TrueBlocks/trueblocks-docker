@@ -7,27 +7,27 @@ const initialState = {
 };
 
 //----------------------------------------------------------------
-const MONITOR_REMOVE_BEGIN = 'monitorRemove/BEGIN';
-const MONITOR_REMOVE_SUCCESS = 'monitorRemove/SUCCESS';
-const MONITOR_REMOVE_FAILURE = 'monitorRemove/FAILURE';
+const BEGIN = 'monitRem/BEGIN';
+const SUCCESS = 'monitRem/SUCCESS';
+const FAILURE = 'monitRem/FAILURE';
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('monitors-remove', state, action);
+  console.log('monitRem', action, state);
   switch (action.type) {
-    case MONITOR_REMOVE_BEGIN:
+    case BEGIN:
       return {
         ...state,
         isLoading: true
       };
 
-    case MONITOR_REMOVE_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         isLoading: false
       };
 
-    case MONITOR_REMOVE_FAILURE:
+    case FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -43,20 +43,20 @@ export default (state = initialState, action) => {
 export const reducer_MonitorRemove = (address) => {
   return (dispatch, getState) => {
     dispatch({
-      type: MONITOR_REMOVE_BEGIN
+      type: BEGIN
     });
 
     return queryAPI(getState().getSettings.apiProvider, 'rm', 'address=' + address + '&yes')
       .then(async (res) => {
         let json = await res.json();
         return dispatch({
-          type: MONITOR_REMOVE_SUCCESS,
+          type: SUCCESS,
           payload: json
         });
       })
       .catch((e) => {
         dispatch({
-          type: MONITOR_REMOVE_FAILURE
+          type: FAILURE
         });
       });
   };

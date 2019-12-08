@@ -2,37 +2,37 @@ import config from '../config.json';
 import queryAPI from '../z_utils/queryAPI';
 
 //----------------------------------------------------------------
-const GETSETTINGS_BEGIN = 'getSettings/GETSETTINGS_BEGIN';
-const GETSETTINGS_SUCCESS = 'getSettings/GETSETTINGS_SUCCESS';
-const GETSETTINGS_FAILURE = 'getSettings/GETSETTINGS_FAILURE';
+const BEGIN = 'getSetti/BEGIN';
+const SUCCESS = 'getSetti/SUCCESS';
+const FAILURE = 'getSetti/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
-  systemSettings: {},
+  configSettings: {},
+  apiProvider: config.apiProvider,
   isLoading: false,
-  error: null,
-  apiProvider: config.apiProvider
+  error: null
 };
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('settings-get', state, action);
+  console.log('getSetti', action, state);
   switch (action.type) {
-    case GETSETTINGS_BEGIN:
+    case BEGIN:
       return {
         ...state,
         isLoading: true
       };
 
-    case GETSETTINGS_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         isLoading: false,
         error: null,
-        systemSettings: action.payload
+        configSettings: action.payload
       };
 
-    case GETSETTINGS_FAILURE:
+    case FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
 export const getSettings = () => {
   return (dispatch, getState) => {
     dispatch({
-      type: GETSETTINGS_BEGIN
+      type: BEGIN
     });
 
     return queryAPI(getState().getSettings.apiProvider, 'config', 'get')
@@ -56,14 +56,14 @@ export const getSettings = () => {
         const json = await res.json();
         const data = json.data[0];
         dispatch({
-          type: GETSETTINGS_SUCCESS,
+          type: SUCCESS,
           payload: data
         });
         return data;
       })
       .catch((e) => {
         dispatch({
-          type: GETSETTINGS_FAILURE,
+          type: FAILURE,
           e
         });
       });

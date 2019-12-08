@@ -2,14 +2,14 @@ import React from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import logo from '../z_img/logo.png';
 
-import AddressIndexPage from '../a_address-index-page';
+import AddressIndexPage from '../a_addresses-page';
 import Monitors from '../a_monitors-page';
 import Names from '../names-page';
 import Explorer from '../explorer-page';
 import Scraper from '../scraper-page';
 import Settings from '../a_settings-page';
 import About from '../z_about-page';
-import Support from '../z_support-page';
+import SupportPage from '../z_support-page';
 
 const App = () => (
   <div>
@@ -49,7 +49,7 @@ const App = () => (
       <Route exact path="/explorer" component={Explorer} />
       <Route exact path="/scraper" component={Scraper} />
       <Route exact path="/settings" component={Settings} />
-      <Route exact path="/support" component={Support} />
+      <Route exact path="/support" component={SupportPage} />
       <Route exact path="/about" component={About} />
     </main>
 

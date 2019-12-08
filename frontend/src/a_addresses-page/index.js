@@ -1,6 +1,6 @@
 import React from 'react';
 import ConnectionComponent from '../z_components';
-import AddressIndexInner from './address-index-inner';
+import AddressIndexInner from './addresses-inner';
 
 const AddressIndexPage = (props) => (
   <div className="page">

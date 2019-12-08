@@ -2,27 +2,27 @@ import queryAPI from '../z_utils/queryAPI';
 
 //----------------------------------------------------------------
 const initialState = {
+  monitorStatus: {},
   isLoading: false,
-  error: null,
-  monitorStatus: {}
+  error: null
 };
 
 //----------------------------------------------------------------
-const MONITOR_STATUS_BEGIN = 'monitorStatus/BEGIN';
-const MONITOR_STATUS_SUCCESS = 'monitorStatus/SUCCESS';
-const MONITOR_STATUS_FAILURE = 'monitorStatus/FAILURE';
+const BEGIN = 'moniStat/BEGIN';
+const SUCCESS = 'moniStat/SUCCESS';
+const FAILURE = 'moniStat/FAILURE';
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('monitors', state, action);
+  console.log('moniStat', action, state);
   switch (action.type) {
-    case MONITOR_STATUS_BEGIN:
+    case BEGIN:
       return {
         ...state,
         isLoading: true
       };
 
-    case MONITOR_STATUS_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
         monitorStatus: action.payload
       };
 
-    case MONITOR_STATUS_FAILURE:
+    case FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
 export const getMonitorStatus = () => {
   return (dispatch, getState) => {
     dispatch({
-      type: MONITOR_STATUS_BEGIN
+      type: BEGIN
     });
 
     return queryAPI(getState().getSettings.apiProvider, 'status', 'modes=monitors&details&ether')
@@ -55,14 +55,14 @@ export const getMonitorStatus = () => {
         let json = await res.json();
         json = json.data[0].caches[0];
         dispatch({
-          type: MONITOR_STATUS_SUCCESS,
+          type: SUCCESS,
           payload: json
         });
         return json;
       })
       .catch((e) => {
         dispatch({
-          type: MONITOR_STATUS_FAILURE,
+          type: FAILURE,
           e
         });
       });

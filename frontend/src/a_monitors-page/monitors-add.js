@@ -5,27 +5,27 @@ const initialState = {
 };
 
 //----------------------------------------------------------------
-const MONITOR_ADD_BEGIN = 'monitorAdd/BEGIN';
-const MONITOR_ADD_SUCCESS = 'monitorAdd/SUCCESS';
-const MONITOR_ADD_FAILURE = 'monitorAdd/FAILURE';
+const BEGIN = 'monitAdd/BEGIN';
+const SUCCESS = 'monitAdd/SUCCESS';
+const FAILURE = 'monitAdd/FAILURE';
 
 //----------------------------------------------------------------
 export default function monitorAddReducer(state = initialState, action) {
-  console.log("monitors-add", state, action);
+  console.log('monitAdd', action, state);
   switch (action.type) {
-    case MONITOR_ADD_BEGIN:
+    case BEGIN:
       return {
         ...state,
         isLoading: true
       };
 
-    case MONITOR_ADD_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         isLoading: false
       };
 
-    case MONITOR_ADD_FAILURE:
+    case FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -46,20 +46,20 @@ const getMonitorData = (endpoint, address) => {
 export const reducer_MonitorAdd = (address) => {
   return (dispatch, getState) => {
     dispatch({
-      type: MONITOR_ADD_BEGIN
+      type: BEGIN
     });
 
     return getMonitorData(getState().getSettings.apiProvider, address)
       .then(async (res) => {
         let json = await res.json();
         return dispatch({
-          type: MONITOR_ADD_SUCCESS,
+          type: SUCCESS,
           payload: json
         });
       })
       .catch((e) => {
         dispatch({
-          type: MONITOR_ADD_FAILURE
+          type: FAILURE
         });
       });
   };

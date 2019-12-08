@@ -1,7 +1,7 @@
 //----------------------------------------------------------------
-const SETSETTINGS_BEGIN = 'setSettings/SETSETTINGS_BEGIN';
-const SETSETTINGS_SUCCESS = 'setSettings/SETSETTINGS_SUCCESS';
-const SETSETTINGS_FAILURE = 'setSettings/SETSETTINGS_FAILURE';
+const BEGIN = 'setSetti/BEGIN';
+const SUCCESS = 'setSetti/SUCCESS';
+const FAILURE = 'setSetti/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -12,22 +12,22 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log("settings-set", state, action);
+  console.log('setSetti', action, state);
   switch (action.type) {
-    case SETSETTINGS_BEGIN:
+    case BEGIN:
       return {
         ...state,
         isLoading: true
       };
 
-    case SETSETTINGS_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         isLoading: false,
         res: action.payload
       };
 
-    case SETSETTINGS_FAILURE:
+    case FAILURE:
       return {
         ...state,
         isLoading: false
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
 export const setSettings = (jsonAsString) => {
   return (dispatch, getState) => {
     dispatch({
-      type: SETSETTINGS_BEGIN
+      type: BEGIN
     });
 
     let url = `${getState().getSettings.apiProvider}/config?set`;
@@ -57,14 +57,14 @@ export const setSettings = (jsonAsString) => {
         const json = await res.json();
         const data = json.data[0];
         dispatch({
-          type: SETSETTINGS_SUCCESS,
+          type: SUCCESS,
           payload: data
         });
         return data;
       })
       .catch((e) => {
         dispatch({
-          type: SETSETTINGS_FAILURE
+          type: FAILURE
         });
       });
   };
