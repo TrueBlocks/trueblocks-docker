@@ -7,7 +7,6 @@ const FAILURE = 'scraper_/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
-  indexData: {},
   isLoading: false,
   error: null
 };
@@ -26,15 +25,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: null,
-        indexData: action.payload
+        error: null
       };
 
     case FAILURE:
       return {
         ...state,
         isLoading: false,
-        indexData: {},
         error: action.e
       };
 

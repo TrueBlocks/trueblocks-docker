@@ -7,14 +7,13 @@ const FAILURE = 'names___/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
-  //  indexData: {},
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('names___', action, state);
+  //console.log('names___', action, state);
   switch (action.type) {
     case BEGIN:
       return {
@@ -27,14 +26,12 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null
-        //        indexData: action.payload
       };
 
     case FAILURE:
       return {
         ...state,
         isLoading: false,
-        //        indexData: {},
         error: action.e
       };
 

@@ -1,0 +1,104 @@
+/*-----------------------------------------------------------------------------*/
+.monitor-table {
+  display: flex;
+  flex-flow: row wrap;
+  border: 1px dashed brown;
+  padding: 1px;
+}
+
+/*-----------------------------------------------------------------------------*/
+.monitor-add input {
+  margin: 0.1em;
+  width: 40em;
+  background-color: lightyellow;
+  padding: 0px;
+}
+
+/*-----------------------------------------------------------------------------*/
+.data-table {
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  position: relative;
+  border: 1px solid #eee;
+}
+
+.dt-cell-left {
+  padding: 4px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid lightgrey;
+}
+
+.dt-row {
+  cursor: pointer;
+}
+
+.dt-row:hover {
+  opacity: 1;
+  background-color: lavender;
+  cursor: pointer;
+}
+
+.dt-cell-right {
+  padding: 4px 10px 4px 4px;
+  text-align: right;
+  vertical-align: top;
+  border: 1px solid lightgrey;
+}
+
+.dt-cell-center {
+  opacity: 0.5;
+  padding: 4px;
+  text-align: center;
+  vertical-align: top;
+  border: 1px solid lightgrey;
+}
+
+.dt-icon-tray {
+  white-space: nowrap;
+}
+
+.dt-header {
+  padding: 4px;
+  text-align: center;
+  vertical-align: top;
+  background-color: goldenrod;
+  border: 1px solid lightgoldenrodyellow;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  bottom: 100%;
+  left: 75%;
+  margin-left: -95px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: ' ';
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 75%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black;
+}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Explorer_reducer } from './explorer-getdata';
+import { dispatcher_Explorer } from './explorer-getdata';
+import { polling } from '../z_components/polling';
 
 import Loading from '../z_components/loading';
 import PageNotes from '../z_components/page-notes';
@@ -14,12 +15,13 @@ const ExplorerInner = (props) => {
 
   if (props.error) {
     status = 'error';
-  } else if (props.systemData.caches === undefined) {
+  } else if (!props.isConnected) {
     status = 'initializing';
   } else {
     status = 'ready';
   }
 
+  console.log('PROPS BLOCK', props.blocks);
   let container;
   switch (status) {
     case 'ready':
@@ -63,23 +65,24 @@ const ExplorerInner = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_SystemStatus, Explorer_reducer }) => ({
-  systemData: reducer_SystemStatus.systemData,
-  isLoading: reducer_SystemStatus.isLoading,
-  error: reducer_SystemStatus.error
-  // indexData: Explorer_reducer.indexData,
-  // loadingIndex: Explorer_reducer.isLoading
+const mapStateToProps = ({ reducer_Connection, reducer_Explorer }) => ({
+  blocks: reducer_Explorer.blocks,
+  isConnected: reducer_Connection.isConnected,
+  isLoading: reducer_Connection.isLoading,
+  error: reducer_Connection.error
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      Explorer_reducer
+      dispatcher_Explorer
     },
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExplorerInner);
+export default polling(dispatcher_Explorer, 10000)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ExplorerInner)
+);

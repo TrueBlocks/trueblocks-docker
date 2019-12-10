@@ -65,3 +65,11 @@
   font-weight: 600;
   color: #03415d;
 }
+
+.status-details .traffic-light {
+  vertical-align: top;
+  height: 23px;
+  width: 37px;
+  padding: 4px;
+  padding-top: 6px;
+}

@@ -1,18 +1,16 @@
 //------------------------------------------------------------------------
-import reducer_SystemStatus from './z_components/connection_reducer';
-import AddressIndex_reducer from './a_addresses-page/addresses-getdata';
+import reducer_Connection from './z_components/connection-getdata';
+import reducer_AddressIndex from './a_addresses-page/addresses-getdata';
 import reducer_Monitors from './a_monitors-page/monitors-getdata';
-import reducer_MonitorRemove from './a_monitors-page/monitors-remove';
-import reducer_MonitorAdd from './a_monitors-page/monitors-add';
+import reducer_Explorer from './explorer-page/explorer-getdata';
 import getSettings from './a_settings-page/settings-get';
 
 //------------------------------------------------------------------------
 import { combineReducers } from 'redux';
 export default combineReducers({
-  reducer_SystemStatus,
+  reducer_Connection,
   reducer_Monitors,
-  reducer_MonitorRemove,
-  reducer_MonitorAdd,
-  AddressIndex_reducer,
+  reducer_AddressIndex,
+  reducer_Explorer,
   getSettings
 });

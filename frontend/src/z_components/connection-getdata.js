@@ -8,16 +8,18 @@ const FAILURE = 'connectn/FAILURE';
 //----------------------------------------------------------------
 const initialState = {
   systemData: {},
-  chainStatus: {},
+  unripe: -1,
+  staging: -1,
+  finalized: -1,
+  client: -1,
   isConnected: false,
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
-export default (state = initialState, action) => {
-  console.log('=============================================');
-  console.log('connectn', action, state);
+export default function reducer_Connection(state = initialState, action) {
+  //console.log('connectn', action, state);
   switch (action.type) {
     case BEGIN:
       return {
@@ -33,7 +35,10 @@ export default (state = initialState, action) => {
         isConnected: true,
         error: null,
         systemData: action.payload.data,
-        chainStatus: action.payload.meta
+        unripe: action.payload.meta.unripe,
+        staging: action.payload.meta.staging,
+        finalized: action.payload.meta.finalized,
+        client: action.payload.meta.client
       };
 
     case FAILURE:
@@ -43,16 +48,19 @@ export default (state = initialState, action) => {
         isConnected: false,
         error: `Connection error: ${action.e}`,
         systemData: {},
-        chainStatus: {}
+        unripe: -1,
+        staging: -1,
+        finalized: -1,
+        client: -1
       };
 
     default:
       return state;
   }
-};
+}
 
 //----------------------------------------------------------------
-export const refreshStatusPanel = () => {
+export const dispatcher_Connection = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN

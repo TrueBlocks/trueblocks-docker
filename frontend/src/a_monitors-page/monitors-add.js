@@ -1,3 +1,5 @@
+import React from 'react';
+
 //----------------------------------------------------------------
 const initialState = {
   isLoading: false,
@@ -10,7 +12,7 @@ const SUCCESS = 'monitAdd/SUCCESS';
 const FAILURE = 'monitAdd/FAILURE';
 
 //----------------------------------------------------------------
-export default function monitorAddReducer(state = initialState, action) {
+export default function reducer_MonitorAdd(state = initialState, action) {
   console.log('monitAdd', action, state);
   switch (action.type) {
     case BEGIN:
@@ -43,7 +45,7 @@ const getMonitorData = (endpoint, address) => {
 };
 
 //----------------------------------------------------------------
-export const reducer_MonitorAdd = (address) => {
+export const dispatcher_MonitorAdd = (address) => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
@@ -63,4 +65,23 @@ export const reducer_MonitorAdd = (address) => {
         });
       });
   };
+};
+
+//---------------------------------------------------------------------
+export const AddNewMonitor = (props) => {
+  let inputAddress;
+
+  const onSubmit = (el) => {
+    el.preventDefault();
+    props.addMonitor(inputAddress.value);
+  };
+
+  return (
+    <div className="monitor-add">
+      <form onSubmit={onSubmit}>
+        <input placeholder="0x0000...0000" ref={(user_input) => (inputAddress = user_input)}></input>
+        <button>Add Monitor</button>
+      </form>
+    </div>
+  );
 };

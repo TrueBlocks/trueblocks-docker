@@ -14,7 +14,7 @@ const NamesInner = (props) => {
 
   if (props.error) {
     status = 'error';
-  } else if (props.systemData.caches === undefined) {
+  } else if (!props.isConnected) {
     status = 'initializing';
   } else {
     status = 'ready';
@@ -25,11 +25,20 @@ const NamesInner = (props) => {
     case 'ready':
       container = (
         <div className="inner-panel">
-          <h4 className="inner-panel">Names Group 1</h4>
+          <h4 className="inner-panel">Named Addresses</h4>
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
+            <li>Named Address 1</li>
+            <li>Named Address 2</li>
+          </ul>
+          <h4 className="inner-panel">Named Functions / Events</h4>
+          <ul>
+            <li>Named Function 1</li>
+            <li>Named Event 2</li>
+          </ul>
+          <h4 className="inner-panel">Named Blocks</h4>
+          <ul>
+            <li>Named Block 1</li>
+            <li>Named Block 2</li>
           </ul>
         </div>
       );
@@ -59,12 +68,10 @@ const NamesInner = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_SystemStatus, reducer_Names }) => ({
-  systemData: reducer_SystemStatus.systemData
-  //  isLoading: reducer_SystemStatus.isLoading,
-  //  error: reducer_SystemStatus.error
-  // indexData: reducer_Names.indexData,
-  // loadingIndex: reducer_Names.isLoading
+const mapStateToProps = ({ reducer_Connection, reducer_Names }) => ({
+  isConnected: reducer_Connection.isConnected,
+  isLoading: reducer_Connection.isLoading,
+  error: reducer_Connection.error
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const reducer_MonitorRemove = (address) => {
+export const dispatcher_MonitorRemove = (address) => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN

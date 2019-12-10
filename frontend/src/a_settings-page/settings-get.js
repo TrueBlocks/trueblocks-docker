@@ -16,7 +16,7 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('getSetti', action, state);
+  //console.log('getSetti', action, state);
   switch (action.type) {
     case BEGIN:
       return {

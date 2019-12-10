@@ -22,22 +22,22 @@ export default (state = initialState, action) => {
 
     case SUCCESS:
       ret = { ...state, isLoading: false, error: null, indexData: action.payload };
-      console.log('addrindx', 'okay', ret.indexData);
+      //console.log('addrindx', 'okay', ret.indexData);
       return ret;
 
     case FAILURE:
       ret = { ...state, isLoading: false, error: action.e, indexData: {} };
-      console.log('addrindex', 'fail', ret.indexData);
+      //console.log('addrindex', 'fail', ret.indexData);
       return ret;
 
     default:
-      console.log('addrindex', 'defl', state, action);
+      //console.log('addrindex', 'defl', state, action);
       return state;
   }
 };
 
 //----------------------------------------------------------------
-export const AddressIndex_reducer = () => {
+export const dispatcher_AddressIndex = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN

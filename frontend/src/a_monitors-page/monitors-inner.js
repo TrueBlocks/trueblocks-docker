@@ -1,158 +1,294 @@
 //---------------------------------------------------------------------
 import React from 'react';
-import ConnectionComponent from '../z_components';
+import { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getMonitorStatus } from './monitors-getdata';
-import { reducer_MonitorRemove } from './monitors-remove';
-import { reducer_MonitorAdd } from './monitors-add';
+
+import Loading from '../z_components/loading';
+import PageNotes from '../z_components/page-notes';
 import { polling } from '../z_components/polling';
 import { fmtDouble, fmtInteger } from '../z_utils/number_fmt';
-import Loading from '../z_components/loading';
-import trash from '../z_img/trash-alt.svg';
-import PageNotes from '../z_components/page-notes';
 
+import { getMonitorStatus } from './monitors-getdata';
+import { dispatcher_MonitorRemove } from './monitors-remove';
+import { dispatcher_MonitorAdd, AddNewMonitor } from './monitors-add';
+
+import delete_icon from '../z_img/delete-24px.svg';
+import refresh_icon from '../z_img/refresh-24px.svg';
+import explore_icon from '../z_img/explore-24px.svg';
+import './monitors.css';
+
+const headings = ['Index', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 //---------------------------------------------------------------------
-const MonitorDetails = (props) => {
-  let status;
-  if (props.isLoading) {
-    status = 'loading';
-  }
-  if (props.error) {
-    status = 'error';
-  } else if (props.monitorData.items === undefined) {
-    status = 'initializing';
-  } else {
-    status = 'ready';
-  }
-
-  let container;
-  switch (status) {
-    case 'ready':
-      container = (
-        <div className={`monitor-details`}>
-          {props.monitorData.items.map((item, index) => (
-            <MonitorDetail index={index} {...item} rmMonitor={props.rmMonitor} key={`a${item.address}`} />
-          ))}
-        </div>
-      );
-      break;
-    case 'initializing':
-      container = <Loading status={status} message="Initializing..." />;
-      break;
-    case 'error':
-      return (
-        <div>
-          <Loading status={status} message={`${props.error}`} />
-        </div>
-      );
-    default:
-      container = <Loading status={status} message="Loading..." />;
-  }
-
-  return (
-    <div>
-      {container}
-      <MonitorAdd {...props} />
-    </div>
-  );
-};
-
-//---------------------------------------------------------------------
-const MonitorAdd = (props) => {
-  let inputAddress;
-  const onSubmit = (e) => {
-    e.preventDefault();
-    props.addMonitor(inputAddress.value);
-  };
-  return (
-    <div className="monitor-add">
-      <form onSubmit={onSubmit}>
-        <input placeholder="0x0000...0000" ref={(el) => (inputAddress = el)}></input>
-        <button>＋ Add Monitor</button>
-      </form>
-    </div>
-  );
-};
-
-//---------------------------------------------------------------------
-class MonitorDetail extends React.Component {
+class MonitorsInner extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      wasDeleted: false,
-      isExpanded: false
-    };
+    this.innerEar = this.innerEar.bind(this);
   }
 
-  handleDel = (el) => {
-    if (!this.state.wasDeleted) {
-      this.props.rmMonitor(this.props.address);
-      this.setState({ wasDeleted: true });
+  innerEar(cmd, address) {
+    console.log('%cinnerEar - ' + cmd + ' address: ' + address, 'color:orange');
+    this.setState({ state: this.state });
+    if (cmd === 'remove') {
+      console.log('%c  innerEar - calling remove', 'color:orange');
+      this.props.removeDispatch(address);
     }
+  }
+
+  getContainer = (props) => {
+    var container;
+    if (this.props.error) {
+      // Error case...
+      container = (
+        <Fragment>
+          <Loading status="error" message={`${this.props.error}`} />
+        </Fragment>
+      );
+    } else if (!this.props.isConnected || this.props.monitorData.items === undefined) {
+      // Loading case...
+      container = (
+        <Fragment>
+          <Loading status="initializing" message="Initializing..." />
+        </Fragment>
+      );
+    } else {
+      // Display case...
+      container = (
+        <Fragment>
+          <div className="monitor-table">
+            <AddNewMonitor {...this.props} />
+            <MonitorTable headings={headings} rows={this.props.monitorData.items} innerEar={this.innerEar} />
+          </div>
+        </Fragment>
+      );
+    }
+    return container;
   };
 
-  toggle = () => {
-    this.setState({ isExpanded: !this.state.isExpanded });
-  };
-
-  render() {
-    const displayName =
-      (this.props.group ? this.props.group + ': ' : '') + (this.props.name ? this.props.name : this.props.address);
-    const ethBal = fmtDouble(this.props.curEther, 18);
-    const f = fmtInteger(this.props.firstAppearance);
-    const l = fmtInteger(this.props.latestAppearance);
-    const d = fmtInteger(this.props.latestAppearance - this.props.firstAppearance);
-    const n = fmtInteger(this.props.nRecords);
-    const b = fmtInteger(
-      (Math.floor((this.props.latestAppearance - this.props.firstAppearance) / this.props.nRecords) * 100) / 100
-    );
-    const m = fmtInteger(this.props.sizeInBytes);
+  render = () => {
+    this.getContainer = this.getContainer.bind(this);
+    const theMarkup = this.getContainer(this.props);
     return (
-      <div className={`detail-container ${this.state.wasDeleted ? 'disabled' : ''}`}>
-        <div className="row-detail" onClick={this.toggle}>
-          <div className="index">{this.props.index}</div>
-          <div className="display-name">{displayName}</div>
-          <div className="range">
-            {f} / {l} / {d} / {n} / {b} / {m}
-          </div>
-          <div className="balance">{ethBal} ether</div>
-          <div className="trash" onClick={this.handleDel}>
-            <img alt={trash} src={trash} width="10px" />
-          </div>
+      <div className="right-panel">
+        <h1>
+          Address Monitors
+          <PageNotes text="Monitors are per-address index caches that enable fast reteival of appearance histories for any account." />
+        </h1>
+        <div className="inner-panel">
+          <h4 className="inner-panel">Current Monitors</h4>
+          {theMarkup}
         </div>
-        <div className={`detail-left ${!this.state.isExpanded ? 'hidden' : ''}`}>
-          {this.props.name ? <li className="name">{this.props.name}</li> : null}
-          {this.props.group ? (
-            <li>{this.props.subgroup ? this.props.group + '/' + this.props.subgroup : this.props.group}</li>
-          ) : null}
-          <li className="address">{this.props.address}</li>
-          {this.props.curEther !== 'n/a' ? <li>Ether balance = {this.props.curEther}</li> : null}
-          <li>firstAppearance = {f}</li>
-          <li>latestAppearance = {l}</li>
-          <li>diff = {d}</li>
-          <li>interval = {b}</li>
-          <li className="val_green">nRecords = {n}</li>
-          <li className="val_blue">fileSize = {m} bytes</li>
-        </div>
-        <div className={`detail-right ${!this.state.isExpanded ? 'hidden' : ''}`}>This is where I want the charts</div>
       </div>
     );
-  }
+  };
 }
 
 //---------------------------------------------------------------------
-const mapStateToProps = ({ reducer_SystemStatus, reducer_Monitors, reducer_MonitorRemove }) => ({
-  systemData: reducer_SystemStatus.systemData,
-  isLoading: reducer_SystemStatus.isLoading,
-  //  error: reducer_SystemStatus.error,
+export class MonitorTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.tableEar = this.tableEar.bind(this);
+  }
+
+  tableEar(cmd, address) {
+    console.log('%ctableEar - ' + cmd + ' address: ' + address, 'color:blue');
+    this.props.innerEar(cmd, address);
+  }
+
+  render = () => {
+    const { headings, rows } = this.props;
+    return (
+      <div className="data-table">
+        <table className="data-table">
+          <TableHeader headings={headings} />
+          <TableBody rows={rows} tableEar={this.tableEar} />
+        </table>
+      </div>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class TableBody extends React.Component {
+  constructor(props) {
+    super(props);
+    this.bodyEar = this.bodyEar.bind(this);
+  }
+
+  bodyEar(cmd, address) {
+    console.log('%cbodyEar - ' + cmd + ' address: ' + address, 'color:green');
+    this.setState({ state: this.state });
+    this.props.tableEar(cmd, address);
+  }
+
+  renderRow = (_row, rowIndex) => {
+    return <BodyRow key={rowIndex} row={_row} rowIndex={rowIndex} bodyEar={this.bodyEar} />;
+  };
+
+  render = () => {
+    return <tbody>{this.props.rows.map(this.renderRow.bind(this))}</tbody>;
+  };
+}
+
+//---------------------------------------------------------------------
+export class BodyRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDeleted: false,
+      isExpanded: false
+    };
+    this.rowEar = this.rowEar.bind(this);
+  }
+
+  rowEar(cmd, address) {
+    console.log('%crowEar - ' + cmd + ' address: ' + address, 'color:magenta');
+    console.log('%crowEar - state: ', 'color:magenta', this.state);
+    if (cmd === 'remove') {
+      console.log('%c  rowEar - calling remove', 'color:magenta');
+      this.setState({ isDeleted: true, isExpanded: false });
+    } else if (cmd === 'expand') {
+      console.log('%c  rowEar - toggling', 'color:magenta');
+      this.setState({ isExpanded: !this.state.isExpanded });
+    }
+    console.log('%crowEar - new state: ', 'color:magenta', this.state);
+    this.props.bodyEar(cmd, address);
+  }
+
+  render = () => {
+    if (this.state.isDeleted) {
+      return <Fragment key={`${this.props.rowIndex}`}></Fragment>;
+    }
+
+    const displayName =
+      (this.props.row.group ? this.props.row.group + ': ' : '') +
+      (this.props.row.name ? this.props.row.name : this.props.row.address) +
+      (this.state.isExpanded ? ' expanded' : ' not-expanded');
+    return (
+      <tr key={this.props.rowIndex} className="dt-row">
+        <BodyCell key={`${this.props.rowIndex}-0`} content={this.props.rowIndex} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-1`} content={displayName} is_text rowEar={this.rowEar} />
+        <BodyCell
+          key={`${this.props.rowIndex}-2`}
+          content={fmtInteger(this.props.row.firstAppearance)}
+          rowEar={this.rowEar}
+        />
+        <BodyCell
+          key={`${this.props.rowIndex}-3`}
+          content={fmtInteger(this.props.row.latestAppearance)}
+          rowEar={this.rowEar}
+        />
+        <BodyCell
+          key={`${this.props.rowIndex}-4`}
+          content={fmtInteger(this.props.row.latestAppearance - this.props.row.firstAppearance)}
+          rowEar={this.rowEar}
+        />
+        <BodyCell key={`${this.props.rowIndex}-5`} content={fmtInteger(this.props.row.nRecords)} rowEar={this.rowEar} />
+        <BodyCell
+          key={`${this.props.rowIndex}-6`}
+          content={fmtInteger(
+            (Math.floor((this.props.row.latestAppearance - this.props.row.firstAppearance) / this.props.row.nRecords) *
+              100) /
+              100
+          )}
+          rowEar={this.rowEar}
+        />
+        <BodyCell
+          key={`${this.props.rowIndex}-7`}
+          content={fmtInteger(this.props.row.sizeInBytes)}
+          rowEar={this.rowEar}
+        />
+        <BodyCell
+          key={`${this.props.rowIndex}-8`}
+          content={fmtDouble(this.props.row.curEther, 18)}
+          rowEar={this.rowEar}
+        />
+        <BodyCell2 key={`${this.props.rowIndex}-9`} address={this.props.row.address} rowEar={this.rowEar} />
+      </tr>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class BodyCell extends React.Component {
+  expandClicked = (el) => {
+    this.props.rowEar('expand', this.props.address);
+  };
+
+  render = () => {
+    return (
+      <td className={this.props.is_text ? 'dt-cell-left' : 'dt-cell-right'} onClick={this.expandClicked}>
+        {this.props.content}
+      </td>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class BodyCell2 extends React.Component {
+  refreshClicked = () => {
+    this.props.rowEar('refresh', this.props.address);
+  };
+
+  exploreClicked = () => {
+    this.props.rowEar('explore', this.props.address);
+  };
+
+  deleteClicked = () => {
+    this.props.rowEar('remove', this.props.address);
+  };
+
+  onPing = () => {
+    this.props.rowEar('ping', this.props.address);
+  };
+
+  render = () => {
+    return (
+      <td className="dt-cell-center">
+        <img
+          onMouseOver={this.onPing}
+          alt={refresh_icon}
+          src={refresh_icon}
+          width="20px"
+          onClick={this.refreshClicked}
+        />
+        &nbsp;
+        <img alt={explore_icon} src={explore_icon} width="20px" onClick={this.exploreClicked} />
+        &nbsp;
+        <img alt={delete_icon} src={delete_icon} width="20px" onClick={this.deleteClicked} />
+      </td>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class TableHeader extends React.Component {
+  renderHeader = (_cell, cellIndex) => {
+    return (
+      <th key={`header-${cellIndex}`} className="dt-header">
+        {this.props.headings[cellIndex]}
+      </th>
+    );
+  };
+  render = () => {
+    return (
+      <thead>
+        <tr key="header-0">{this.props.headings.map(this.renderHeader.bind(this))}</tr>
+      </thead>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+const mapStateToProps = ({ reducer_Connection, reducer_Monitors }) => ({
+  isConnected: reducer_Connection.isConnected,
+  isLoading: reducer_Connection.isLoading,
   monitorData: reducer_Monitors.monitorStatus,
   error: reducer_Monitors.error,
   monitorDataFetch: {
     isLoading: reducer_Monitors.isLoading,
     error: reducer_Monitors.error
-  },
-  monitorRemove: reducer_MonitorRemove.error
+  }
 });
 
 //---------------------------------------------------------------------
@@ -160,15 +296,15 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getMonitorStatus,
-      rmMonitor: (address) => reducer_MonitorRemove(address),
-      addMonitor: (address) => reducer_MonitorAdd(address)
+      removeDispatch: (address) => dispatcher_MonitorRemove(address),
+      addMonitor: (address) => dispatcher_MonitorAdd(address)
     },
     dispatch
   );
 
-export default polling(getMonitorStatus, 20000)(
+export default polling(getMonitorStatus, 50000)(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(MonitorDetails)
+  )(MonitorsInner)
 );

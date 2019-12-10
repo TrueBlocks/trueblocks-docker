@@ -7,7 +7,7 @@ import PageNotes from '../z_components/page-notes';
 import { humanFileSize } from '../z_utils/filesize';
 import { fmtDouble, fmtInteger } from '../z_utils/number_fmt';
 
-import { AddressIndex_reducer } from './addresses-getdata';
+import { dispatcher_AddressIndex } from './addresses-getdata';
 import './addresses.css';
 
 const AddressIndexInner = (props) => {
@@ -18,7 +18,7 @@ const AddressIndexInner = (props) => {
 
   if (props.error) {
     status = 'error';
-  } else if (props.systemData.caches === undefined) {
+  } else if (props.caches === undefined || props.client === -1) {
     status = 'initializing';
   } else {
     status = 'ready';
@@ -28,8 +28,8 @@ const AddressIndexInner = (props) => {
   switch (status) {
     case 'ready':
       container = (
-        <div className="right-panel">
-          <h4 className="inner-panel">Summary:</h4>
+        <div className="inner-panel">
+          <h4 className="inner-panel">Summary</h4>
           <SystemProgressChart {...props} />
         </div>
       );
@@ -113,15 +113,15 @@ class SystemProgressChart extends React.Component {
     </div>
   );
   render() {
-    const cache0 = this.props.systemData.caches[0];
-    const cache1 = this.props.systemData.caches[1];
-    const cache2 = this.props.systemData.caches[2];
-    const cache3 = this.props.systemData.caches[3];
-    const cache4 = this.props.systemData.caches[4];
-    const cache5 = this.props.systemData.caches[5];
-    const cache6 = this.props.systemData.caches[6];
-    const cache7 = this.props.systemData.caches[7];
-    const cache8 = this.props.systemData.caches[8];
+    const cache0 = this.props.caches[0];
+    const cache1 = this.props.caches[1];
+    const cache2 = this.props.caches[2];
+    const cache3 = this.props.caches[3];
+    const cache4 = this.props.caches[4];
+    const cache5 = this.props.caches[5];
+    const cache6 = this.props.caches[6];
+    const cache7 = this.props.caches[7];
+    const cache8 = this.props.caches[8];
 
     const t0 = cache0.type;
     const t1 = cache1.type;
@@ -133,15 +133,15 @@ class SystemProgressChart extends React.Component {
     const t7 = cache7.type;
     const t8 = cache8.type;
 
-    const p0 = cache0.path.replace(this.props.systemData.index_path, '$INDEX/');
-    const p1 = cache1.path.replace(this.props.systemData.cache_path, '$CACHE/');
-    const p2 = cache2.path.replace(this.props.systemData.cache_path, '$CACHE/');
-    const p3 = cache3.path.replace(this.props.systemData.cache_path, '$CACHE/');
-    const p4 = cache4.path.replace(this.props.systemData.cache_path, '$CACHE/');
-    const p5 = cache5.path.replace(this.props.systemData.cache_path, '$CACHE/');
-    const p6 = cache6.path.replace(this.props.systemData.cache_path, '$CACHE/');
-    const p7 = cache7.path.replace(this.props.systemData.cache_path, '$CACHE/');
-    const p8 = cache8.path.replace(this.props.systemData.cache_path, '$CACHE/');
+    const p0 = cache0.path.replace(this.props.index_path, '$INDEX/');
+    const p1 = cache1.path.replace(this.props.cache_path, '$CACHE/');
+    const p2 = cache2.path.replace(this.props.cache_path, '$CACHE/');
+    const p3 = cache3.path.replace(this.props.cache_path, '$CACHE/');
+    const p4 = cache4.path.replace(this.props.cache_path, '$CACHE/');
+    const p5 = cache5.path.replace(this.props.cache_path, '$CACHE/');
+    const p6 = cache6.path.replace(this.props.cache_path, '$CACHE/');
+    const p7 = cache7.path.replace(this.props.cache_path, '$CACHE/');
+    const p8 = cache8.path.replace(this.props.cache_path, '$CACHE/');
 
     const s0 = fmtInteger(cache0.sizeInBytes);
     const s1 = fmtInteger(cache1.sizeInBytes);
@@ -270,7 +270,7 @@ const ZoomOnIndex = (props) => {
     default:
       if (!been_here && !props.loadingIndex) {
         been_here = true;
-        props.AddressIndex_reducer();
+        props.dispatcher_AddressIndex();
       }
       readyContainer = props.start && <Loading status="loading" message="Waiting for index data..." />;
   }
@@ -303,21 +303,25 @@ const IndexTable = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_SystemStatus, AddressIndex_reducer }) => ({
-  systemData: reducer_SystemStatus.systemData,
-  unripe: reducer_SystemStatus.chainStatus.unripe,
-  finalized: reducer_SystemStatus.chainStatus.finalized,
-  client: reducer_SystemStatus.chainStatus.client,
-  isLoading: reducer_SystemStatus.isLoading,
-  error: reducer_SystemStatus.error,
-  indexData: AddressIndex_reducer.indexData,
-  loadingIndex: AddressIndex_reducer.isLoading
+const mapStateToProps = ({ reducer_Connection, reducer_AddressIndex }) => ({
+  caches: reducer_Connection.systemData.caches,
+  index_path: reducer_Connection.index_path,
+  cache_path: reducer_Connection.cache_path,
+  isConnected: reducer_Connection.isConnected,
+  unripe: reducer_Connection.unripe,
+  staging: reducer_Connection.staging,
+  finalized: reducer_Connection.finalized,
+  client: reducer_Connection.client,
+  isLoading: reducer_Connection.isLoading,
+  error: reducer_Connection.error,
+  indexData: reducer_AddressIndex.indexData,
+  loadingIndex: reducer_AddressIndex.isLoading
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      AddressIndex_reducer
+      dispatcher_AddressIndex
     },
     dispatch
   );

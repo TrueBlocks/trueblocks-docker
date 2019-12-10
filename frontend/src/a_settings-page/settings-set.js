@@ -12,7 +12,7 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('setSetti', action, state);
+  //console.log('setSetti', action, state);
   switch (action.type) {
     case BEGIN:
       return {

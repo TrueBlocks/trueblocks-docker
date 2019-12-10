@@ -14,7 +14,7 @@ const ScraperInner = (props) => {
 
   if (props.error) {
     status = 'error';
-  } else if (props.systemData.caches === undefined) {
+  } else if (!props.isConnected) {
     status = 'initializing';
   } else {
     status = 'ready';
@@ -63,12 +63,10 @@ const ScraperInner = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_SystemStatus, Scraper_reducer }) => ({
-  systemData: reducer_SystemStatus.systemData,
-  isLoading: reducer_SystemStatus.isLoading,
-  error: reducer_SystemStatus.error
-  // indexData: Scraper_reducer.indexData,
-  // loadingIndex: Scraper_reducer.isLoading
+const mapStateToProps = ({ reducer_Connection, Scraper_reducer }) => ({
+  isConnected: reducer_Connection.isConnected,
+  isLoading: reducer_Connection.isLoading,
+  error: reducer_Connection.error
 });
 
 const mapDispatchToProps = (dispatch) =>

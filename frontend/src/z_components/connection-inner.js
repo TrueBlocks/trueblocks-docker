@@ -1,51 +1,59 @@
 import React from 'react';
 import { Fragment } from 'react';
-import { push } from 'connected-react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { polling } from './polling';
-import { fmtInteger } from '../z_utils/number_fmt';
+import { fmtDouble, fmtInteger } from '../z_utils/number_fmt';
 
 import green_light from '../z_img/connection-green-light.png';
 import yellow_light from '../z_img/connection-yellow-light.png';
 import red_light from '../z_img/connection-red-light.png';
-import { refreshStatusPanel } from './connection_reducer';
-// import './connection-debug.css';
+import { dispatcher_Connection } from './connection-getdata';
 import './connection.css';
 
-const ConnectionDetails = (props) => {
-  const client = props.chainStatus.client;
-  const finalized = props.chainStatus.finalized;
-  const staging = props.chainStatus.staging;
-  const unripe = props.chainStatus.unripe;
+//---------------------------------------------------------------------
+const ConnectionInner = (props) => {
+  const client = props.client;
+  const finalized = props.finalized;
+  const staging = props.staging;
 
   var final_behind = '';
-  if (props.chainStatus.client > 0) {
+  if (client > 0) {
     final_behind = '(';
-    final_behind += (props.chainStatus.client - props.chainStatus.finalized).toString();
-    final_behind +=
-      ' behind, ' +
-      (Math.floor(((props.chainStatus.client - props.chainStatus.finalized) * 100) / (60 / 14)) / 100).toString() +
-      ' minutes';
+    final_behind += (client - finalized).toString();
+    var mins = (Math.floor(((client - finalized) * 100) / (60 / 14)) / 100).toString();
+    var x = mins + ' minutes';
+    if (mins > 120) {
+      x = fmtDouble(mins / 60, 1) + ' hours';
+    }
+    if (mins > 60 * 24) {
+      x = fmtDouble(mins / (60 * 24), 1) + ' days';
+    }
+    final_behind += ' behind, ' + x;
     final_behind += ')';
   }
 
   var staging_behind = '';
-  if (props.chainStatus.client > 0) {
-    staging_behind = '(' + (props.chainStatus.client - props.chainStatus.staging).toString();
-    staging_behind +=
-      ' behind, ' +
-      (Math.floor(((props.chainStatus.client - props.chainStatus.staging) * 100) / (60 / 14)) / 100).toString() +
-      ' minutes';
+  if (client > 0) {
+    staging_behind = '(' + (client - staging).toString();
+    mins = (Math.floor(((client - staging) * 100) / (60 / 14)) / 100).toString();
+    x = mins + ' minutes';
+    if (mins > 120) {
+      x = fmtDouble(mins / 60, 1) + ' hours';
+    }
+    if (mins > 60 * 24) {
+      x = fmtDouble(mins / (60 * 24), 1) + ' days';
+    }
+    staging_behind += ' behind, ' + x;
     staging_behind += ')';
   }
 
   var unripe_behind = '';
-  if (props.chainStatus.client > 0) {
+  if (client > 0) {
     unripe_behind = '(';
-    if (props.chainStatus.client - props.chainStatus.unripe > 0) {
-      unripe_behind += (props.chainStatus.client - props.chainStatus.unripe).toString();
+    if (client - props.unripe > 0) {
+      unripe_behind += (client - props.unripe).toString();
       unripe_behind += ' behind';
     } else {
       unripe_behind += 'caught up';
@@ -54,14 +62,14 @@ const ConnectionDetails = (props) => {
   }
 
   var status1 = (
-    <div className={`${Number.isInteger(props.chainStatus.client) ? 'connected' : 'disconnected'}`}>
-      {Number.isInteger(props.chainStatus.client) ? 'Connected' : 'Not Connected'}
+    <div className={`${Number.isInteger(client) ? 'connected' : 'disconnected'}`}>
+      {Number.isInteger(client) ? 'Connected' : 'Not Connected'}
     </div>
   );
 
   var status2 = (
-    <div className={`${props.systemData.is_scraping ? 'connected' : 'disconnected'}`}>
-      {props.systemData.is_scraping ? 'Scraping' : 'Not scraping'}
+    <div className={`${props.is_scraping ? 'connected' : 'disconnected'}`}>
+      {props.is_scraping ? 'Scraping' : 'Not scraping'}
     </div>
   );
 
@@ -73,7 +81,7 @@ const ConnectionDetails = (props) => {
         <HeaderRow text="Ethereum Node" />
         <RegularRow head="Status" text={status1} />
         <RegularRow head="Latest" text={fmtInteger(client)} />
-        <div className="separator" />
+        <Separator />
         {/*---------------------------------------------------------------------------------
          */}
         <HeaderRow text="TrueBlocks" />
@@ -109,7 +117,7 @@ const ConnectionDetails = (props) => {
           Unripe
         </div>
         <div className="right">
-          {fmtInteger(unripe)}{' '}
+          {fmtInteger(props.unripe)}{' '}
           <small>
             <i>
               <br />
@@ -117,25 +125,27 @@ const ConnectionDetails = (props) => {
             </i>
           </small>
         </div>
-        <div className="separator" />
+        <Separator />
         {/*---------------------------------------------------------------------------------
          */}
         <HeaderRow text="Options" />
-        <DoubleWide head="rpcProvider:" text={props.systemData.rpc_provider} bold />
-        <DoubleWide head="apiProvider:" text={props.systemData.api_provider} bold />
-        <DoubleWide head="cachePath:" text={props.systemData.cache_path} bold />
-        <DoubleWide head="indexPath:" text={props.systemData.index_path} bold />
-        <div className="separator" />
+        <DoubleWide head="rpcProvider:" text={props.rpc_provider} bold />
+        <DoubleWide head="balanceProvider:" text={props.balance_provider} bold />
+        <DoubleWide head="apiProvider:" text={props.api_provider} bold />
+        <DoubleWide head="cachePath:" text={props.cache_path} bold />
+        <DoubleWide head="indexPath:" text={props.index_path} bold />
+        <Separator />
         {/*---------------------------------------------------------------------------------
          */}
         <HeaderRow text="Software Versions" />
-        <DoubleWide head="-" text={props.systemData.client_version} />
-        <DoubleWide head="-" text={props.systemData.trueblocks_version} />
+        <DoubleWide head="-" text={props.client_version} />
+        <DoubleWide head="-" text={props.trueblocks_version} />
       </div>
     </div>
   );
 };
 
+//---------------------------------------------------------------------
 const HeaderRow = (props) => {
   return (
     <Fragment>
@@ -144,6 +154,7 @@ const HeaderRow = (props) => {
   );
 };
 
+//---------------------------------------------------------------------
 const RegularRow = (props) => {
   return (
     <Fragment>
@@ -153,6 +164,7 @@ const RegularRow = (props) => {
   );
 };
 
+//---------------------------------------------------------------------
 const DoubleWide = (props) => {
   if (props.bold) {
     return (
@@ -169,26 +181,42 @@ const DoubleWide = (props) => {
   }
 };
 
-const mapStateToProps = ({ reducer_SystemStatus, chainStatus /*, getSettings*/ }) => ({
-  isConnected: reducer_SystemStatus.isConnected,
-  systemData: reducer_SystemStatus.systemData,
-  isLoading: reducer_SystemStatus.isLoading,
-  chainStatus: reducer_SystemStatus.chainStatus
-  //apiProvider: getSettings.apiProvider
+//---------------------------------------------------------------------
+const Separator = (props) => {
+  return <div className="separator" />;
+};
+
+//---------------------------------------------------------------------
+const mapStateToProps = ({ reducer_Connection }) => ({
+  isConnected: reducer_Connection.isConnected,
+  is_scraping: reducer_Connection.systemData.is_scraping,
+  rpc_provider: reducer_Connection.systemData.rpc_provider,
+  balance_provider: reducer_Connection.systemData.balance_provider,
+  api_provider: reducer_Connection.systemData.api_provider,
+  cache_path: reducer_Connection.systemData.cache_path,
+  index_path: reducer_Connection.systemData.index_path,
+  client_version: reducer_Connection.systemData.client_version,
+  trueblocks_version: reducer_Connection.systemData.trueblocks_version,
+  isLoading: reducer_Connection.isLoading,
+  unripe: reducer_Connection.unripe,
+  staging: reducer_Connection.staging,
+  finalized: reducer_Connection.finalized,
+  client: reducer_Connection.client
 });
 
+//---------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      refreshStatusPanel,
-      changePage: () => push('/a_settings-page')
+      dispatcher_Connection
     },
     dispatch
   );
 
-export default polling(refreshStatusPanel, 10000)(
+//---------------------------------------------------------------------
+export default polling(dispatcher_Connection, 50000)(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(ConnectionDetails)
+  )(ConnectionInner)
 );

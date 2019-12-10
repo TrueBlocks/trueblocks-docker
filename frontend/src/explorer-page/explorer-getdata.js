@@ -7,19 +7,20 @@ const FAILURE = 'explorer/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
-  indexData: {},
+  blocks: {},
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('explorer', action, state);
+  //console.log('explorer', action, state);
   switch (action.type) {
     case BEGIN:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        blocks: {}
       };
 
     case SUCCESS:
@@ -27,15 +28,15 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        indexData: action.payload
+        blocks: action.payload
       };
 
     case FAILURE:
       return {
         ...state,
         isLoading: false,
-        indexData: {},
-        error: action.e
+        error: action.e,
+        blocks: {}
       };
 
     default:
@@ -44,13 +45,15 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const Explorer_reducer = () => {
+export const dispatcher_Explorer = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().getSettings.apiProvider, 'ping', '')
+    console.log('SHIT:', getState());
+    console.log('SHIT:', getState().reducerExplorer);
+    return queryAPI(getState().reducer_Connection.apiProvider, 'blocks', 'blocks=latest')
       .then(async (res) => {
         let json = await res.json();
         dispatch({
