@@ -38,7 +38,7 @@
 
 .right-panel .chart-container .grid .filling.finalized:hover,
 .right-panel .chart-container .grid .filling.in-progress:hover {
-  background-color: #f2f2f2;
+  background-color: lavender;
   cursor: zoom-in;
   color: #b9c7b9;
 }

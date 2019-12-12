@@ -6,10 +6,14 @@
 }
 
 .name-container .grid2 {
-  width: 7%;
+  width: 10%;
   height: 25px;
   display: flex;
   border-right: 1px solid #aaa;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #03415d;
 }
 
 .grid2.x-axis2 {
@@ -26,16 +30,32 @@
   border-left: 0px;
 }
 
-.grid2.y-axis2 {
+.grid2.x-axis3 {
+  width: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: black;
+  font-weight: 600;
+  background-color: #e2e5f0;
+  border-bottom: 1px solid #aaa;
+  border-top: 0px;
+  border-right: 1px solid #aaa;
+  border-left: 0px;
+}
+
+.grid2.y-axis2 {
+  /* display: flex; */
+  text-align: right;
+  align-items: right;
+  justify-content: right;
   height: 25px;
   color: black;
   font-weight: 600;
   /* background-color: #e2e5f0; */
-  background-color: #e2e5f0;
-  border: 1px solid #aaa;
+  /* background-color: #e2e5f0; */
+  /* border: 1px solid #aaa; */
+  border-bottom: 1px solid #aaa;
 }
 
 .grid2.x-blank {
@@ -47,20 +67,58 @@
   border-bottom: 1px solid #aaa;
 }
 
+.grid2.x-blank:hover {
+  opacity: 1;
+  background-color: lavender;
+  cursor: pointer;
+}
+
 .grid2.blank1 {
-  width: 2% !important;
+  width: 0% !important;
   display: flex;
   border: 0px !important;
 }
 
 .grid2.blank2 {
-  width: 46%;
+  width: 45%;
   display: flex;
   border: 0px !important;
 }
 
 .grid2.blank3 {
-  width: 31%;
+  width: 30%;
   display: flex;
   border: 0px !important;
 }
+
+.wrapper {
+  display: grid;
+  /* grid-gap: 10px; */
+  /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
+  grid-template-columns: 1.4fr 2fr 2fr 2fr 2fr 4fr;
+  background-color: #fff;
+  color: #444;
+}
+
+.box {
+  /* background-color: #444; */
+  /* color: #fff; */
+  /* border-radius: 5px; */
+  /* padding: 20px; */
+  /* font-size: 150%; */
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+/* .m {
+  grid-column: auto / span 2;
+}
+
+.g {
+  grid-column: auto / span 2;
+  grid-row: auto / span 2;
+}
+
+.k {
+  grid-column: auto / span 3;
+} */
