@@ -1,0 +1,11 @@
+/*-----------------------------------------------------------------------------*/
+.page-notes {
+  display: inline-flex;
+  float: right;
+  text-align: right;
+  width: 50%;
+  color: black;
+  font-size: 9pt;
+  background-color: white;
+  border: 1px solid #ddd;
+}
