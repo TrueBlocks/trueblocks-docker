@@ -32,7 +32,7 @@ const AddressIndexInner = (props) => {
     case 'ready':
       container = (
         <div className="inner-panel">
-          <h4 className="inner-panel">Summary</h4>
+          <h4>Summary</h4>
           <SystemProgressChart {...props} />
         </div>
       );
@@ -49,10 +49,12 @@ const AddressIndexInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <InnerHeader title='Address Index' notes="The Address Index is the heart of TrueBlocks. It saves &lt;appearances&gt; of 
+        <InnerHeader
+          title="Address Index"
+          notes="The Address Index is the heart of TrueBlocks. It saves &lt;appearances&gt; of 
           each address anywhere in the blockchain. Storing only a tiny amount of data per appearance (&lt;blockNumber, 
           transactionId&gt;) allows TrueBlocks to operate on commercial-grade hardware."
-          />
+        />
         {container}
       </div>
     </div>
@@ -179,7 +181,7 @@ class SystemProgressChart extends React.Component {
         {this.chart}
         <p> </p>
         <div className="inner-panel">
-          <h4 className="inner-panel">Caches</h4>
+          <h4>Caches</h4>
           <p> </p>
           <div className="fun-facts">
             <div>
@@ -272,7 +274,7 @@ const ZoomOnIndex = (props) => {
       );
       readyContainer = (
         <div>
-          <IndexTable data={filteredData} range={{ start: props.start, end: props.start + props.n }} />
+          <DetailTable data={filteredData} range={{ start: props.start, end: props.start + props.n }} />
         </div>
       );
       break;
@@ -288,7 +290,7 @@ const ZoomOnIndex = (props) => {
 };
 
 //----------------------------------------------------------------------
-const IndexTable = (props) => {
+const DetailTable = (props) => {
   const count = props.data.length;
   const subtit =
     'Details: ' +
@@ -299,7 +301,7 @@ const IndexTable = (props) => {
     props.range.end;
   return (
     <div className="inner-panel">
-      <h4 className="inner-panel">{subtit}</h4>
+      <h4>{subtit}</h4>
       <div className="index-container">
         {props.data.map((item) => (
           <div className="index-node" key={`x${item.firstAppearance}`}>

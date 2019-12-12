@@ -27,12 +27,12 @@ const ExplorerInner = (props) => {
     case 'ready':
       container = (
         <div className="inner-panel">
-          <h4 className="inner-panel">Explorer Group 1</h4>
+          <h4>Explorer Group 1</h4>
           <ul>
             <li>Item 1 1</li>
             <li>Item 1 2</li>
           </ul>
-          <h4 className="inner-panel">Explorer Group 2</h4>
+          <h4>Explorer Group 2</h4>
           <ul>
             <li>Item 2 1</li>
             <li>Item 2 2</li>
@@ -52,7 +52,9 @@ const ExplorerInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <InnerHeader title='Address Explorer' notes="The Address Explorer allows one to view the details of every transactions for
+        <InnerHeader
+          title="Address Explorer"
+          notes="The Address Explorer allows one to view the details of every transactions for
           each previously monitored address. Because TrueBlocks runs on a local machine not a server, this means that you are
           restricted to exploring only addresses that you've previously monitored."
         />

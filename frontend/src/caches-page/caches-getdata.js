@@ -1,9 +1,9 @@
 import queryAPI from '../z_utils/queryAPI';
 
 //----------------------------------------------------------------
-const BEGIN = 'scraper_/BEGIN';
-const SUCCESS = 'scraper_/SUCCESS';
-const FAILURE = 'scraper_/FAILURE';
+const BEGIN = 'caches_/BEGIN';
+const SUCCESS = 'caches_/SUCCESS';
+const FAILURE = 'caches_/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('scraper_', action, state);
+  console.log('caches_', action, state);
   switch (action.type) {
     case BEGIN:
       return {
@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const Scraper_reducer = () => {
+export const Caches_reducer = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN

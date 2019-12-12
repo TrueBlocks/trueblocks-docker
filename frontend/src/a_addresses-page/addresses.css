@@ -4,7 +4,6 @@
   flex-flow: row wrap;
   justify-content: center;
   justify-items: center;
-  border-left: 0px solid white !important;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -34,7 +33,6 @@
 
 .right-panel .chart-container .grid .filling.in-progress {
   background: repeating-linear-gradient(-45deg, #daeeda, #daeeda 5px, white 5px, white 10px);
-  /* background-size: 50px; */
   background-repeat: repeat;
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Scraper_reducer } from './scraper-getdata';
+import { Caches_reducer } from './caches-getdata';
 
 import Loading from '../z_components/loading';
 import InnerHeader from '../z_components/inner-header';
 
-const ScraperInner = (props) => {
+const CachesInner = (props) => {
   let status;
   if (props.isLoading) {
     status = 'loading';
@@ -25,12 +25,12 @@ const ScraperInner = (props) => {
     case 'ready':
       container = (
         <div className="inner-panel">
-          <h4 className="inner-panel">Scraper Group 1</h4>
+          <h4>Caches Group 1</h4>
           <ul>
             <li>Item 1 1</li>
             <li>Item 1 2</li>
           </ul>
-          <h4 className="inner-panel">Scraper Group 2</h4>
+          <h4>Caches Group 2</h4>
           <ul>
             <li>Item 2 1</li>
             <li>Item 2 2</li>
@@ -50,9 +50,10 @@ const ScraperInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <InnerHeader title='Address Scraper' notes="The Address Scraper scans mainnet from its origin, visiting each block. Within
-          each block, it visits each transaction and within each transaction, it visits each receipt, each log, and each trace
-          extracting &lt;address appearances&gt; and building the Address Index."
+        <InnerHeader
+          title="Caches"
+          notes="TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your 
+          hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
         />
         {container}
       </div>
@@ -60,7 +61,7 @@ const ScraperInner = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_Connection, Scraper_reducer }) => ({
+const mapStateToProps = ({ reducer_Connection, Caches_reducer }) => ({
   isConnected: reducer_Connection.isConnected,
   isLoading: reducer_Connection.isLoading,
   error: reducer_Connection.error
@@ -69,7 +70,7 @@ const mapStateToProps = ({ reducer_Connection, Scraper_reducer }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      Scraper_reducer
+      Caches_reducer
     },
     dispatch
   );
@@ -77,4 +78,4 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ScraperInner);
+)(CachesInner);

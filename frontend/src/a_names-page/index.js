@@ -1,11 +1,13 @@
+//---------------------------------------------------------------------
 import React from 'react';
 import ConnectionComponent from '../z_components';
-import NamesInner from './names-inner';
+import NamesInner2 from './names2';
 
+//---------------------------------------------------------------------
 const Names = (props) => (
   <div className="page">
     <ConnectionComponent props={props} />
-    <NamesInner props={props} />
+    <NamesInner2 props={props} />
   </div>
 );
 

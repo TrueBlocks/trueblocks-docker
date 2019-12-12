@@ -72,11 +72,12 @@ class MonitorsInner extends React.Component {
     return (
       <div className="right-panel">
         <InnerHeader
-          title='Address Monitors'
-          notes='Monitors are per-address index caches that enable fast reteival of transaction histories for any account.
-          Note that the transactions/logs/receipts/traces are not downloaded until you explore an address.' />
+          title="Address Monitors"
+          notes="Monitors are per-address index caches that enable fast reteival of transaction histories for any account.
+          Note that the transactions/logs/receipts/traces are not downloaded until you explore an address."
+        />
         <div className="inner-panel">
-          <h4 className="inner-panel">Current Monitors</h4>
+          <h4>Current Monitors</h4>
           {theMarkup}
         </div>
       </div>

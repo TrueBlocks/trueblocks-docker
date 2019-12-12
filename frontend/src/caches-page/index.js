@@ -1,12 +1,12 @@
 import React from 'react';
 import ConnectionComponent from '../z_components';
-import ScraperInner from './scraper-inner';
+import CachesInner from './caches-inner';
 
-const Scraper = (props) => (
+const Caches = (props) => (
   <div className="page">
     <ConnectionComponent props={props} />
-    <ScraperInner props={props} />
+    <CachesInner props={props} />
   </div>
 );
 
-export default Scraper;
+export default Caches;

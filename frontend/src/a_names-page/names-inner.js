@@ -27,7 +27,7 @@ const NamesInner = (props) => {
     case 'ready':
       container = (
         <div className="inner-panel">
-          <h4 className="inner-panel">Customized Names (private)</h4>
+          <h4>Customized Names (private)</h4>
           <ul>
             <li>
               {props.names.data[0].group},{props.names.data[0].subgroup},{props.names.data[0].name},
@@ -61,22 +61,22 @@ const NamesInner = (props) => {
             </li>
             <li>Named Address 2</li>
           </ul>
-          <h4 className="inner-panel">Named Addresses (shared)</h4>
+          <h4>Named Addresses (shared)</h4>
           <ul>
             <li>Named Function 1</li>
             <li>Named Event 2</li>
           </ul>
-          <h4 className="inner-panel">Pre-fund Addresses (shared)</h4>
+          <h4>Pre-fund Addresses (shared)</h4>
           <ul>
             <li>Named Function 1</li>
             <li>Named Event 2</li>
           </ul>
-          <h4 className="inner-panel">Named Functions / Events</h4>
+          <h4>Named Functions / Events</h4>
           <ul>
             <li>Named Function 1</li>
             <li>Named Event 2</li>
           </ul>
-          <h4 className="inner-panel">Named Blocks</h4>
+          <h4>Named Blocks</h4>
           <ul>
             <li>Named Block 1</li>
             <li>Named Block 2</li>
@@ -96,10 +96,12 @@ const NamesInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <InnerHeader title='Named Objects' notes="The Names component of TrueBlocks allows one to name various objects include
+        <InnerHeader
+          title="Named Objects"
+          notes="The Names component of TrueBlocks allows one to name various objects include
           any address (even if not previously monitored), any Solidity function or event signatures, and other relevant data.
           These names may be shared anonomously with the TrueBlocks community."
-          />
+        />
         {container}
       </div>
     </div>

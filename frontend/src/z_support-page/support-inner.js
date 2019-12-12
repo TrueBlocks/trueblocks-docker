@@ -5,11 +5,13 @@ const SupportInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <InnerHeader title='Support Options' notes="We provide various support options ranging from online email/forum discussions to
+        <InnerHeader
+          title="Support Options"
+          notes="We provide various support options ranging from online email/forum discussions to
           full enterprise-level support plans to suit your needs. We've got you covered."
-          />
+        />
         <div className="inner-panel">
-          <h4 className="inner-panel">Free Support</h4>
+          <h4>Free Support</h4>
           <ul>
             <li>Email support: &lt;support@trueblocks.io&gt;</li>
             <li>Online forums: &lt;https://discord.gg/zGh6PdN&gt;</li>

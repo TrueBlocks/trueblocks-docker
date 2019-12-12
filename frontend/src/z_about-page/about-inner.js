@@ -5,11 +5,13 @@ const AboutInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <InnerHeader title='About TrueBlocks' notes="Learn about the TrubBlocks project, our organization, our philosopy
+        <InnerHeader
+          title="About TrueBlocks"
+          notes="Learn about the TrubBlocks project, our organization, our philosopy
           towards decentralization, and our team."
         />
         <div className="inner-panel">
-          <h4 className="inner-panel">QuickBlocks</h4>
+          <h4>QuickBlocks</h4>
           The fastest, fully-decentralized way to access data from any Ethereum address or smart contract. Providing
           open source software libraries and tools for developers and accounting / auditing / monitoring solutions for
           the rest of us.

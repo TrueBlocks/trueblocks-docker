@@ -7,6 +7,7 @@ function fmtInteger_inner(num) {
 }
 
 module.exports.fmtInteger = (num) => {
+  if (num === -1) return '';
   return fmtInteger_inner(num);
 };
 

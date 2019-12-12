@@ -2,9 +2,6 @@ import React from 'react';
 import error_icon from '../z_img/error-icon.png';
 import './loading.css';
 
-/**
- * Loading - displays during data loading
- */
 const Loading = (props) => {
   if (props.status === 'error') {
     var isFail = props.message && props.message.indexOf('Failed to fetch') !== -1;
