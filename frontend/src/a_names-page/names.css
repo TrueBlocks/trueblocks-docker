@@ -95,7 +95,7 @@
   display: grid;
   /* grid-gap: 10px; */
   /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
-  grid-template-columns: 1.4fr 2fr 2fr 2fr 2fr 4fr;
+  grid-template-columns: 1.33fr 2fr 2fr 2fr 2fr 4fr;
   background-color: #fff;
   color: #444;
 }
@@ -108,8 +108,22 @@
   /* font-size: 150%; */
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+  padding: 1px 4px;
 }
 
+.h:hover,
+.i:hover,
+.j:hover,
+.k:hover {
+  /* border: 1px solid darkolivegreen; */
+  opacity: 1;
+  background-color: lavender;
+  cursor: pointer;
+}
+.a,
+.g {
+  text-align: right;
+}
 /* .m {
   grid-column: auto / span 2;
 }
