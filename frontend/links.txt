@@ -1,1 +1,2 @@
 https://codeburst.io/theming-react-components-e0be23465946
+https://getstream.io/blog/takeaways-on-building-a-react-based-app-with-electron/
