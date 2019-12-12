@@ -1,14 +1,13 @@
 import React from 'react';
-import PageNotes from '../z_components/page-notes';
+import InnerHeader from '../z_components/inner-header';
 
 const AboutInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <h1>
-          About TrueBlocks
-          <PageNotes text="Learn about the TrubBlocks project, our organization, our philosopy towards decentralization, and our team." />
-        </h1>
+        <InnerHeader title='About TrueBlocks' notes="Learn about the TrubBlocks project, our organization, our philosopy
+          towards decentralization, and our team."
+        />
         <div className="inner-panel">
           <h4 className="inner-panel">QuickBlocks</h4>
           The fastest, fully-decentralized way to access data from any Ethereum address or smart contract. Providing

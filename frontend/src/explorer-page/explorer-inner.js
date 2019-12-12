@@ -5,7 +5,7 @@ import { dispatcher_Explorer } from './explorer-getdata';
 import { polling } from '../z_components/polling';
 
 import Loading from '../z_components/loading';
-import PageNotes from '../z_components/page-notes';
+import InnerHeader from '../z_components/inner-header';
 
 const ExplorerInner = (props) => {
   let status;
@@ -52,13 +52,10 @@ const ExplorerInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <h1>
-          Address Explorer
-          <PageNotes
-            text="The Address Explorer allows one to view the details of every transactions for each previously monitored address. Because 
-            TrueBlocks runs on a local machine not a server, this means that you are restricted to exploring only addresses that you've previously monitored."
-          />
-        </h1>
+        <InnerHeader title='Address Explorer' notes="The Address Explorer allows one to view the details of every transactions for
+          each previously monitored address. Because TrueBlocks runs on a local machine not a server, this means that you are
+          restricted to exploring only addresses that you've previously monitored."
+        />
         {container}
       </div>
     </div>
@@ -80,7 +77,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default polling(dispatcher_Explorer, 10000)(
+export default polling(dispatcher_Explorer, 20000)(
   connect(
     mapStateToProps,
     mapDispatchToProps

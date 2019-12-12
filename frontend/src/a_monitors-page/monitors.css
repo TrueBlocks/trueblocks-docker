@@ -2,7 +2,7 @@
 .monitor-table {
   display: flex;
   flex-flow: row wrap;
-  border: 1px dashed brown;
+  /* border: 1px dashed brown; */
   padding: 1px;
 }
 
@@ -62,43 +62,6 @@
   padding: 4px;
   text-align: center;
   vertical-align: top;
-  background-color: goldenrod;
-  border: 1px solid lightgoldenrodyellow;
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-  width: 120px;
-  bottom: 100%;
-  left: 75%;
-  margin-left: -95px; /* Use half of the width (120/2 = 60), to center the tooltip */
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
-.tooltip .tooltiptext::after {
-  content: ' ';
-  position: absolute;
-  top: 100%; /* At the bottom of the tooltip */
-  left: 75%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: black;
+  background-color: #e2e5f0;
+  border: 1px solid lightgray;
 }

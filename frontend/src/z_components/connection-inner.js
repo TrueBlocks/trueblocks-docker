@@ -214,7 +214,7 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 //---------------------------------------------------------------------
-export default polling(dispatcher_Connection, 50000)(
+export default polling(dispatcher_Connection, 10000)(
   connect(
     mapStateToProps,
     mapDispatchToProps

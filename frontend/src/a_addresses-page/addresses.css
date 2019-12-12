@@ -5,6 +5,7 @@
   justify-content: center;
   justify-items: center;
   border-left: 0px solid white !important;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .right-panel .chart-container .grid {
@@ -42,4 +43,74 @@
   background-color: #f2f2f2;
   cursor: zoom-in;
   color: #b9c7b9;
+}
+
+.grid.x-axis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-weight: 600;
+  background-color: #e2e5f0;
+  border-left: 1px solid #aaa;
+}
+
+.grid.y-axis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  color: black;
+  font-weight: 600;
+  background-color: #e2e5f0;
+  border-top: 1px solid #aaa;
+}
+
+.index-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.inright {
+  text-align: right;
+  color: gray;
+}
+
+.inright_red {
+  text-align: right;
+  color: red;
+  font-weight: 900;
+}
+
+.inright_blue {
+  text-align: right;
+  color: blue;
+  font-weight: 900;
+}
+
+.fun-facts {
+  display: flex;
+  /* border: 1px dashed #333; */
+}
+
+.fun-facts div {
+  width: 100%;
+  font-size: smaller;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  margin-left: 4px;
+}
+
+.fact {
+  position: absolute;
+}
+
+.fact div {
+  background-color: whitesmoke;
+}
+
+.fact-top {
+  font-weight: 700;
 }

@@ -117,72 +117,6 @@ h1 {
   /* debug-css */
 }
 
-.fun-facts {
-  display: flex;
-  /* border: 1px dashed #333; */
-}
-
-.fun-facts div {
-  width: 100%;
-  font-size: smaller;
-  align-items: center;
-  justify-content: center;
-  font-style: italic;
-  /* background-color: #eee; */
-}
-
-.fact {
-  position: absolute;
-}
-
-.fact div {
-  background-color: whitesmoke;
-}
-
-.fact-top {
-  font-weight: 700;
-}
-
-.grid.x-axis {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999;
-  font-weight: 300;
-}
-
-.grid.y-axis {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999;
-  font-weight: 300;
-  height: 25px;
-}
-
-.index-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-}
-
-.inright {
-  text-align: right;
-  color: gray;
-}
-
-.inright_red {
-  text-align: right;
-  color: red;
-  font-weight: 900;
-}
-
-.inright_blue {
-  text-align: right;
-  color: blue;
-  font-weight: 900;
-}
-
 /*-----------------------------------------------------------------------------*/
 .inner-panel {
   padding: 0px;
@@ -302,17 +236,4 @@ h1 {
 
 .index-node .first {
   background-color: #eee;
-}
-
-/*-----------------------------------------------------------------------------*/
-.page-notes {
-  display: inline-flex;
-  float: right;
-  text-align: right;
-  width: 50%;
-  color: black;
-  font-size: 9pt;
-  background-color: white;
-  /* border: 4px dashed lightgray; */
-  /* debug-css */
 }

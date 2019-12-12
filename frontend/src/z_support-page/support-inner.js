@@ -1,17 +1,13 @@
 import React from 'react';
-import PageNotes from '../z_components/page-notes';
+import InnerHeader from '../z_components/inner-header';
 
 const SupportInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <h1>
-          Support Options
-          <PageNotes
-            text="We provide various support options ranging from online email/forum discussions to full enterprise-level support plans
-          to suit your needs. We've got you covered."
+        <InnerHeader title='Support Options' notes="We provide various support options ranging from online email/forum discussions to
+          full enterprise-level support plans to suit your needs. We've got you covered."
           />
-        </h1>
         <div className="inner-panel">
           <h4 className="inner-panel">Free Support</h4>
           <ul>

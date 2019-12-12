@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { getSettings } from './settings-get';
 import { setSettings } from './settings-set';
 import Loading from '../z_components/loading';
-import PageNotes from '../z_components/page-notes';
+import InnerHeader from '../z_components/inner-header';
 
 //--------------------------------------------------------------------------------
 class Settings extends React.Component {
@@ -45,10 +45,9 @@ class Settings extends React.Component {
         <div className="page">
           <ConnectionComponent props={this.props} />
           <div className="right-panel">
-            <h1>
-              Settings
-              <PageNotes text="Monitors are per-address index caches that enable fast reteival of appearance histories for any account." />
-            </h1>
+            <InnerHeader title='Settings' notes="Monitors are per-address index caches that enable fast
+              retreival of appearance histories for any account."
+            />
             <form onSubmit={this.submit}>
               <div className="setting-container">
                 {this.state.configSettings.map((file, fileI) =>

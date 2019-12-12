@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Scraper_reducer } from './scraper-getdata';
 
 import Loading from '../z_components/loading';
-import PageNotes from '../z_components/page-notes';
+import InnerHeader from '../z_components/inner-header';
 
 const ScraperInner = (props) => {
   let status;
@@ -50,13 +50,10 @@ const ScraperInner = (props) => {
   return (
     <div className="right-panel">
       <div>
-        <h1>
-          Address Scraper
-          <PageNotes
-            text="The Address Scraper scans mainnet from its origin, visiting each block. Within each block, it visits each transaction
-            and within each transaction, it visits each receipt, each log, and each trace extracting &lt;address appearances&gt; and building the Address Index."
-          />
-        </h1>
+        <InnerHeader title='Address Scraper' notes="The Address Scraper scans mainnet from its origin, visiting each block. Within
+          each block, it visits each transaction and within each transaction, it visits each receipt, each log, and each trace
+          extracting &lt;address appearances&gt; and building the Address Index."
+        />
         {container}
       </div>
     </div>

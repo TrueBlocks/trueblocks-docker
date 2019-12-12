@@ -66,7 +66,7 @@ export const dispatcher_Connection = () => {
       type: BEGIN
     });
 
-    return queryAPI(getState().getSettings.apiProvider, 'status', 'modes=all')
+    return queryAPI(getState().getSettings.apiProvider, 'status', 'modes=some')
       .then(async (res) => {
         const json = await res.json();
         const data = json.data[0];

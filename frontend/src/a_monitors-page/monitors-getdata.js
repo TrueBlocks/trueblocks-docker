@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const getMonitorStatus = () => {
+export const dispatcher_Monitor = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN

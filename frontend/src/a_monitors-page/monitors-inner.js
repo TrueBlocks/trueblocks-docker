@@ -3,13 +3,14 @@ import React from 'react';
 import { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import Loading from '../z_components/loading';
-import PageNotes from '../z_components/page-notes';
+import InnerHeader from '../z_components/inner-header';
 import { polling } from '../z_components/polling';
 import { fmtDouble, fmtInteger } from '../z_utils/number_fmt';
 
-import { getMonitorStatus } from './monitors-getdata';
+import { dispatcher_Monitor } from './monitors-getdata';
 import { dispatcher_MonitorRemove } from './monitors-remove';
 import { dispatcher_MonitorAdd, AddNewMonitor } from './monitors-add';
 
@@ -70,10 +71,10 @@ class MonitorsInner extends React.Component {
     const theMarkup = this.getContainer(this.props);
     return (
       <div className="right-panel">
-        <h1>
-          Address Monitors
-          <PageNotes text="Monitors are per-address index caches that enable fast reteival of appearance histories for any account." />
-        </h1>
+        <InnerHeader
+          title='Address Monitors'
+          notes='Monitors are per-address index caches that enable fast reteival of transaction histories for any account.
+          Note that the transactions/logs/receipts/traces are not downloaded until you explore an address.' />
         <div className="inner-panel">
           <h4 className="inner-panel">Current Monitors</h4>
           {theMarkup}
@@ -160,64 +161,80 @@ export class BodyRow extends React.Component {
       return <Fragment key={`${this.props.rowIndex}`}></Fragment>;
     }
 
-    const displayName =
-      (this.props.row.group ? this.props.row.group + ': ' : '') +
-      (this.props.row.name ? this.props.row.name : this.props.row.address) +
-      (this.state.isExpanded ? ' expanded' : ' not-expanded');
+    const i = this.props.rowIndex;
+    const g = this.props.row.group;
+    const s = this.props.row.subgroup;
+    const a = this.props.row.address;
+    const n = this.props.row.name;
+    const d = (g ? g + ': ' : '') + (n ? n : a) + (this.state.isExpanded ? '(expanded)' : '');
+
+    const f = fmtInteger(this.props.row.firstAppearance);
+    const l = fmtInteger(this.props.row.latestAppearance);
+    const r = fmtInteger(this.props.row.latestAppearance - this.props.row.firstAppearance);
+    const c = fmtInteger(this.props.row.nRecords);
+    const z = fmtInteger(this.props.row.sizeInBytes);
+    const e = fmtDouble(this.props.row.curEther, 18);
+    const q = this.props.row.nRecords
+      ? fmtInteger(
+          (Math.floor((this.props.row.latestAppearance - this.props.row.firstAppearance) / this.props.row.nRecords) *
+            100) /
+            100
+        )
+      : 0;
+
+    // if (this.state.isExpanded) {
+    //   return (
+    //     <tr key={this.props.rowIndex} className="dt-row">
+    //       <BodyCell1 key={`${this.props.rowIndex}-0`} content={i} rowEar={this.rowEar} />
+    //       <BodyCell1 key={`${this.props.rowIndex}-1`} content={`${g}: ${n} ${z}`} rowEar={this.rowEar} is_text />
+    //       <BodyChart key={`${this.props.rowIndex}-2`} content={e} rowEar={this.rowEar} is_text />
+    //     </tr>
+    //   );
+    // }
+
     return (
       <tr key={this.props.rowIndex} className="dt-row">
-        <BodyCell key={`${this.props.rowIndex}-0`} content={this.props.rowIndex} rowEar={this.rowEar} />
-        <BodyCell key={`${this.props.rowIndex}-1`} content={displayName} is_text rowEar={this.rowEar} />
-        <BodyCell
-          key={`${this.props.rowIndex}-2`}
-          content={fmtInteger(this.props.row.firstAppearance)}
-          rowEar={this.rowEar}
-        />
-        <BodyCell
-          key={`${this.props.rowIndex}-3`}
-          content={fmtInteger(this.props.row.latestAppearance)}
-          rowEar={this.rowEar}
-        />
-        <BodyCell
-          key={`${this.props.rowIndex}-4`}
-          content={fmtInteger(this.props.row.latestAppearance - this.props.row.firstAppearance)}
-          rowEar={this.rowEar}
-        />
-        <BodyCell key={`${this.props.rowIndex}-5`} content={fmtInteger(this.props.row.nRecords)} rowEar={this.rowEar} />
-        <BodyCell
-          key={`${this.props.rowIndex}-6`}
-          content={fmtInteger(
-            (Math.floor((this.props.row.latestAppearance - this.props.row.firstAppearance) / this.props.row.nRecords) *
-              100) /
-              100
-          )}
-          rowEar={this.rowEar}
-        />
-        <BodyCell
-          key={`${this.props.rowIndex}-7`}
-          content={fmtInteger(this.props.row.sizeInBytes)}
-          rowEar={this.rowEar}
-        />
-        <BodyCell
-          key={`${this.props.rowIndex}-8`}
-          content={fmtDouble(this.props.row.curEther, 18)}
-          rowEar={this.rowEar}
-        />
-        <BodyCell2 key={`${this.props.rowIndex}-9`} address={this.props.row.address} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-0`} content={i} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-1`} content={d} rowEar={this.rowEar} is_text />
+        <BodyCell1 key={`${this.props.rowIndex}-2`} content={f} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-3`} content={l} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-4`} content={r} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-5`} content={c} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-6`} content={q} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-7`} content={z} rowEar={this.rowEar} />
+        <BodyCell1 key={`${this.props.rowIndex}-8`} content={e} rowEar={this.rowEar} />
+        <BodyCell2 key={`${this.props.rowIndex}-9`} address={a} rowEar={this.rowEar} />
       </tr>
     );
   };
 }
 
 //---------------------------------------------------------------------
-export class BodyCell extends React.Component {
+export class BodyCell1 extends React.Component {
   expandClicked = (el) => {
+    //window.location.assign('/explorer');
     this.props.rowEar('expand', this.props.address);
   };
 
   render = () => {
     return (
       <td className={this.props.is_text ? 'dt-cell-left' : 'dt-cell-right'} onClick={this.expandClicked}>
+        {this.props.content}
+      </td>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class BodyChart extends React.Component {
+  expandClicked = (el) => {
+    window.location.assign('/explorer');
+    //      this.props.rowEar('expand', this.props.address);
+  };
+
+  render = () => {
+    return (
+      <td colSpan="8" className={this.props.is_text ? 'dt-cell-left' : 'dt-cell-right'} onClick={this.props.changePage}>
         {this.props.content}
       </td>
     );
@@ -295,14 +312,15 @@ const mapStateToProps = ({ reducer_Connection, reducer_Monitors }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getMonitorStatus,
+      dispatcher_Monitor,
       removeDispatch: (address) => dispatcher_MonitorRemove(address),
-      addMonitor: (address) => dispatcher_MonitorAdd(address)
+      addMonitor: (address) => dispatcher_MonitorAdd(address),
+      changePage: (address) => push('/explorer?address=' + address)
     },
     dispatch
   );
 
-export default polling(getMonitorStatus, 50000)(
+export default polling(dispatcher_Monitor, 20000)(
   connect(
     mapStateToProps,
     mapDispatchToProps
