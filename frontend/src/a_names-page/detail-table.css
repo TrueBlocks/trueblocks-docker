@@ -1,0 +1,14 @@
+.detail_table {
+  font-size: 0.9em;
+  background-color: #fff;
+  color: #444;
+  font-family: 'Courier New', Courier, monospace;
+  border: 1px solid black;
+}
+
+.detail_table_item {
+  text-align: left;
+  border-right: 1px solid #aaa;
+  /* border: 1px dashed blue; */
+  padding: 1px;
+}
