@@ -1,4 +1,5 @@
 import React from 'react';
+import queryAPI from '../z_utils/queryAPI';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -13,7 +14,7 @@ const FAILURE = 'monitAdd/FAILURE';
 
 //----------------------------------------------------------------
 export default function reducer_MonitorAdd(state = initialState, action) {
-  console.log('monitAdd', action, state);
+  //console.log('monitAdd', action, state);
   switch (action.type) {
     case BEGIN:
       return {
@@ -51,7 +52,7 @@ export const dispatcher_MonitorAdd = (address) => {
       type: BEGIN
     });
 
-    return getMonitorData(getState().getSettings.apiProvider, address)
+    return queryAPI(getState().getSettings.apiProvider, 'list', 'addrs=' + address)
       .then(async (res) => {
         let json = await res.json();
         return dispatch({

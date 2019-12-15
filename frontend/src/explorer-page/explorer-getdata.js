@@ -51,8 +51,6 @@ export const dispatcher_Explorer = () => {
       type: BEGIN
     });
 
-    console.log('SHIT:', getState());
-    console.log('SHIT:', getState().reducerExplorer);
     return queryAPI(getState().reducer_Connection.apiProvider, 'blocks', 'blocks=latest')
       .then(async (res) => {
         let json = await res.json();

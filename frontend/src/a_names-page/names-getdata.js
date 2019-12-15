@@ -14,30 +14,25 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  //console.log('names___', action, state);
+  var ret;
   switch (action.type) {
     case BEGIN:
-      return {
-        ...state,
-        isLoading: true
-      };
+      ret = { ...state, isLoading: true };
+      //console.log('names___', 'star', ret.names);
+      return ret;
 
     case SUCCESS:
-      return {
-        ...state,
-        names: action.payload,
-        isLoading: false,
-        error: null
-      };
+      ret = { ...state, names: action.payload, isLoading: false, error: null };
+      //console.log('names___', 'okay', ret.names);
+      return ret;
 
     case FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.e
-      };
+      ret = { ...state, isLoading: false, error: action.e };
+      //console.log('names___', 'fail', ret.names);
+      return ret;
 
     default:
+      //console.log('names___', 'defl', state, action);
       return state;
   }
 };

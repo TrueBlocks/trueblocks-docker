@@ -1,113 +1,219 @@
+/*-----------------------------------------------------------------------------*/
 import React from 'react';
+import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { polling } from '../z_components/polling';
 import { dispatcher_Names } from './names-getdata';
-
 import Loading from '../z_components/loading';
 import InnerHeader from '../z_components/inner-header';
+import Popup from '../z_components/popup';
+import './detail-table.css';
+import './names.css';
+import './names-detail.css';
+import { your_names } from './detail-data-your-names.js';
+import { tokens } from './detail-data-tokens.js';
+import { shared } from './detail-data-shared.js';
+import { summary } from './summary-data.js';
+import { DetailTable } from './detail-table';
+import { SummaryTable } from './summary-table';
+import delete_icon from '../z_img/delete-24px.svg';
+import edit_icon from '../z_img/edit-24px.svg';
+import monitor_icon from '../z_img/monitor-24px.svg';
+import share_icon from '../z_img/share-24px.svg';
+import { dispatcher_MonitorAdd } from '../a_monitors-page/monitors-add';
 
-const NamesInner = (props) => {
-  let status;
-  if (props.isLoading) {
-    status = 'loading';
+const name_fields = ['group/sub', 'address', 'name', 'symbol', 'logo', 'description', 'flags'];
+var id = '';
+
+/*-----------------------------------------------------------------------------*/
+class NamesInner extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPopup: false,
+      current: '',
+      data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names
+    };
+    this.innerEar = this.innerEar.bind(this);
   }
 
-  if (props.error) {
-    status = 'error';
-  } else if (!props.isConnected || !props.names.data) {
-    status = 'initializing';
-  } else {
+  innerEar(cmd, value) {
+    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
+    this.setState({ state: this.state });
+    if (cmd === 'change_type') {
+      id = value;
+      console.log('ID: ', id);
+      this.setState({
+        data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names,
+        showPopup: false,
+        current: {}
+      });
+      //      this.setState(this.state);
+    } else if (cmd === 'expand') {
+      if (value === this.state.current) {
+        this.setState({
+          data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names,
+          showPopup: false,
+          current: {}
+        });
+      } else {
+        this.setState({
+          data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names,
+          showPopup: true,
+          current: value
+        });
+      }
+    } else if (cmd === 'monitor_item') {
+      this.props.addMonitor(value);
+      window.location.assign('/monitors');
+    }
+  }
+
+  // findItem(value) {
+  //   const found = this.state.data.filter((item) => {
+  //     return item.address === value;
+  //   });
+  //   return found[0];
+  // }
+
+  closePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
+
+  render = () => {
+    let status;
+    if (this.props.error) {
+      status = 'error';
+    } else if (!this.props.isConnected || !this.props.names) {
+      status = 'initializing';
+    } else {
+      status = 'ready';
+    }
     status = 'ready';
-  }
 
-  let container;
-  switch (status) {
-    case 'ready':
-      container = (
-        <div className="inner-panel">
-          <h4>Customized Names (private)</h4>
-          <ul>
-            <li>
-              {props.names.data[0].group},{props.names.data[0].subgroup},{props.names.data[0].name},
-              {props.names.data[0].address},{props.names.data[0].symbol},{props.names.data[0].description},
-              {props.names.data[0].source},{props.names.data[0].logo},{props.names.data[0].is_contract},
-              {props.names.data[0].is_private},{props.names.data[0].is_shared}
-            </li>
-            <li>
-              {props.names.data[1].group},{props.names.data[1].subgroup},{props.names.data[1].name},
-              {props.names.data[1].address},{props.names.data[1].symbol},{props.names.data[1].description},
-              {props.names.data[1].source},{props.names.data[1].logo},{props.names.data[1].is_contract},
-              {props.names.data[1].is_private},{props.names.data[1].is_shared}
-            </li>
-            <li>
-              {props.names.data[2].group},{props.names.data[2].subgroup},{props.names.data[2].name},
-              {props.names.data[2].address},{props.names.data[2].symbol},{props.names.data[2].description},
-              {props.names.data[2].source},{props.names.data[2].logo},{props.names.data[2].is_contract},
-              {props.names.data[2].is_private},{props.names.data[2].is_shared}
-            </li>
-            <li>
-              {props.names.data[3].group},{props.names.data[3].subgroup},{props.names.data[3].name},
-              {props.names.data[3].address},{props.names.data[3].symbol},{props.names.data[3].description},
-              {props.names.data[3].source},{props.names.data[3].logo},{props.names.data[3].is_contract},
-              {props.names.data[3].is_private},{props.names.data[3].is_shared}
-            </li>
-            <li>
-              {props.names.data[4].group},{props.names.data[4].subgroup},{props.names.data[4].name},
-              {props.names.data[4].address},{props.names.data[4].symbol},{props.names.data[4].description},
-              {props.names.data[4].source},{props.names.data[4].logo},{props.names.data[4].is_contract},
-              {props.names.data[4].is_private},{props.names.data[4].is_shared}
-            </li>
-            <li>Named Address 2</li>
-          </ul>
-          <h4>Named Addresses (shared)</h4>
-          <ul>
-            <li>Named Function 1</li>
-            <li>Named Event 2</li>
-          </ul>
-          <h4>Pre-fund Addresses (shared)</h4>
-          <ul>
-            <li>Named Function 1</li>
-            <li>Named Event 2</li>
-          </ul>
-          <h4>Named Functions / Events</h4>
-          <ul>
-            <li>Named Function 1</li>
-            <li>Named Event 2</li>
-          </ul>
-          <h4>Named Blocks</h4>
-          <ul>
-            <li>Named Block 1</li>
-            <li>Named Block 2</li>
-          </ul>
-        </div>
-      );
-      break;
-    case 'initializing':
-      container = <Loading status={status} message="Initializing..." />;
-      break;
-    case 'error':
-      container = <Loading status={status} message={props.error} />;
-      break;
-    default:
-      container = <Loading status={status} message="Loading..." />;
-  }
-  return (
-    <div className="right-panel">
-      <div>
+    let container;
+    switch (status) {
+      case 'ready':
+        container = (
+          <div className="inner-panel">
+            <SummaryTable data={summary} title="Summary" innerEar={this.innerEar} />
+            <DetailTable
+              type="names"
+              title={'Detail of ' + id}
+              fields={name_fields}
+              data={this.state.data}
+              innerEar={this.innerEar}
+            />
+          </div>
+        );
+        break;
+      case 'error':
+        container = <Loading status={status} message={this.props.error} />;
+        break;
+      case 'initializing':
+      default:
+        container = <Loading status={status} message="Initializing..." />;
+        break;
+    }
+
+    return (
+      <div className="right-panel">
         <InnerHeader
           title="Named Objects"
           notes="The Names component of TrueBlocks allows one to name various objects include
           any address (even if not previously monitored), any Solidity function or event signatures, and other relevant data.
           These names may be shared anonomously with the TrueBlocks community."
         />
+        {this.state.showPopup ? (
+          <NamePopup closePopup={this.closePopup.bind(this)} item={this.state.current} ear={this.innerEar} />
+        ) : null}
         {container}
       </div>
-    </div>
-  );
-};
+    );
+  };
+}
 
+/*-----------------------------------------------------------------------------*/
+class NamePopup3Row extends Popup {
+  addMonitorClicked = () => {
+    this.props.ear('monitor_item', this.props.value);
+  };
+
+  shareClicked = () => {
+    this.props.ear('share_item', this.props.value);
+  };
+
+  deleteClicked = () => {
+    this.props.ear('delete_item', this.props.value);
+  };
+
+  editClicked = () => {
+    this.props.ear('edit_item', this.props.value);
+  };
+
+  render = () => {
+    return (
+      <div className="np_rt3">
+        <div className="np_rt3_c1">{this.props.prompt}</div>
+        <div className="np_rt3_c2">{this.props.value}</div>
+        <div className="np_rt3_c3">
+          <img
+            title="Add monitor"
+            alt={monitor_icon}
+            src={monitor_icon}
+            width="20px"
+            onClick={this.addMonitorClicked}
+          />
+          &nbsp;
+          <img title="Share item" alt={share_icon} src={share_icon} width="20px" onClick={this.shareClicked} />
+          &nbsp;
+          <img title="Delete item" alt={delete_icon} src={delete_icon} width="20px" onClick={this.deleteClicked} />
+          &nbsp;
+          <img title="Edit item" alt={edit_icon} src={edit_icon} width="20px" onClick={this.editClicked} />
+        </div>
+      </div>
+    );
+  };
+}
+
+/*-----------------------------------------------------------------------------*/
+class NamePopup2Row extends Popup {
+  render = () => {
+    return (
+      <div className="np_rt2">
+        <div className="np_rt2_c1">{this.props.prompt}</div>
+        <div className="np_rt2_c2">{this.props.value}</div>
+      </div>
+    );
+  };
+}
+
+/*-----------------------------------------------------------------------------*/
+class NamePopup extends Popup {
+  render = () => {
+    return (
+      <div className="popup">
+        <NamePopup3Row prompt="Address:" value={this.props.item.address} ear={this.props.ear} />
+        <NamePopup2Row prompt="Group:" value={this.props.item.group} />
+        <NamePopup2Row prompt="Subgroup:" value={this.props.item.subgroup} />
+        <NamePopup2Row prompt="Name:" value={this.props.item.name} />
+        <NamePopup2Row prompt="Symbol:" value={this.props.item.symbol} />
+        <NamePopup2Row prompt="Description:" value={this.props.item.description} />
+        <NamePopup2Row prompt="Source:" value={this.props.item.source} />
+        <NamePopup2Row prompt="Logo:" value={this.props.item.logo} />
+        <NamePopup2Row prompt="isContract:" value={this.props.item.is_contract} />
+        <NamePopup2Row prompt="isPrivate:" value={this.props.item.is_private} />
+        <NamePopup2Row prompt="isShared:" value={this.props.item.is_shared} />
+      </div>
+    );
+  };
+}
+
+/*-----------------------------------------------------------------------------*/
 const mapStateToProps = ({ reducer_Connection, reducer_Names }) => ({
   names: reducer_Names.names,
   isConnected: reducer_Connection.isConnected,
@@ -115,14 +221,17 @@ const mapStateToProps = ({ reducer_Connection, reducer_Names }) => ({
   error: reducer_Connection.error
 });
 
+/*-----------------------------------------------------------------------------*/
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      dispatcher_Names
+      dispatcher_Names,
+      addMonitor: (address) => dispatcher_MonitorAdd(address)
     },
     dispatch
   );
 
+/*-----------------------------------------------------------------------------*/
 export default polling(dispatcher_Names, 20000)(
   connect(
     mapStateToProps,

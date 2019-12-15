@@ -13,7 +13,7 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('caches_', action, state);
+  //console.log('caches_', action, state);
   switch (action.type) {
     case BEGIN:
       return {

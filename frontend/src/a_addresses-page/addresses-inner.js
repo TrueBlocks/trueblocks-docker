@@ -15,10 +15,6 @@ import './addresses.css';
 //----------------------------------------------------------------------
 const AddressIndexInner = (props) => {
   let status;
-  if (props.isLoading) {
-    status = 'loading';
-  }
-
   if (props.error) {
     status = 'error';
   } else if (props.caches === undefined || props.client === -1) {
@@ -32,26 +28,25 @@ const AddressIndexInner = (props) => {
     case 'ready':
       container = (
         <div className="inner-panel">
-          <h4>Summary</h4>
+          <h4>Address Index</h4>
           <SystemProgressChart {...props} />
         </div>
       );
       break;
-    case 'initializing':
-      container = <Loading status={status} message="Initializing..." />;
-      break;
     case 'error':
       container = <Loading status={status} message={props.error} />;
       break;
+    case 'initializing':
     default:
-      container = <Loading status={status} message="Loading..." />;
+      container = <Loading status={status} message="Initializing..." />;
+      break;
   }
   return (
     <div className="right-panel">
       <div>
         <InnerHeader
-          title="Address Index"
-          notes="The Address Index is the heart of TrueBlocks. It saves &lt;appearances&gt; of 
+          title="Dashboard"
+          notes="The Dashboard is the heart of TrueBlocks. It saves &lt;appearances&gt; of 
           each address anywhere in the blockchain. Storing only a tiny amount of data per appearance (&lt;blockNumber, 
           transactionId&gt;) allows TrueBlocks to operate on commercial-grade hardware."
         />
@@ -65,7 +60,6 @@ const AddressIndexInner = (props) => {
 class SystemProgressChart extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       zoomStart: undefined
     };
@@ -274,7 +268,7 @@ const ZoomOnIndex = (props) => {
       );
       readyContainer = (
         <div>
-          <DetailTable data={filteredData} range={{ start: props.start, end: props.start + props.n }} />
+          <IndexDetail data={filteredData} range={{ start: props.start, end: props.start + props.n }} />
         </div>
       );
       break;
@@ -290,7 +284,7 @@ const ZoomOnIndex = (props) => {
 };
 
 //----------------------------------------------------------------------
-const DetailTable = (props) => {
+const IndexDetail = (props) => {
   const count = props.data.length;
   const subtit =
     'Details: ' +

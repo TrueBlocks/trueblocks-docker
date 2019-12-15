@@ -3,6 +3,7 @@ import { Route, NavLink } from 'react-router-dom';
 import logo from './z_img/logo.png';
 
 import AddressIndex from './a_addresses-page';
+import Indexes from './index-page';
 import Monitors from './a_monitors-page';
 import Names from './a_names-page';
 import Explorer from './explorer-page';
@@ -18,17 +19,20 @@ const App = () => (
       <NavLink activeClassName="is-active" exact={true} to="/">
         Home
       </NavLink>
+      <NavLink activeClassName="is-active" to="/index">
+        Indexes
+      </NavLink>
       <NavLink activeClassName="is-active" to="/monitors">
         Monitors
       </NavLink>
       <NavLink activeClassName="is-active" to="/names">
         Names
       </NavLink>
-      <NavLink activeClassName="is-active" to="/explorer">
-        Explorer
-      </NavLink>
       <NavLink activeClassName="is-active" to="/caches">
         Caches
+      </NavLink>
+      <NavLink activeClassName="is-active" to="/explorer">
+        Explorer
       </NavLink>
       <NavLink activeClassName="is-active" to="/settings">
         Settings
@@ -44,10 +48,11 @@ const App = () => (
 
     <main>
       <Route exact path="/" component={AddressIndex} />
+      <Route exact path="/index" component={Indexes} />
       <Route exact path="/monitors" component={Monitors} />
       <Route exact path="/names" component={Names} />
-      <Route exact path="/explorer" component={Explorer} />
       <Route exact path="/caches" component={Caches} />
+      <Route exact path="/explorer" component={Explorer} />
       <Route exact path="/settings" component={Settings} />
       <Route exact path="/support" component={Support} />
       <Route exact path="/about" component={About} />

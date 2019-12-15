@@ -14,7 +14,7 @@ const FAILURE = 'moniStat/FAILURE';
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('moniStat', action, state);
+  //console.log('moniStat', action, state);
   switch (action.type) {
     case BEGIN:
       return {

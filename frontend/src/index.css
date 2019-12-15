@@ -61,6 +61,7 @@ header a {
 /*-----------------------------------------------------------------------------*/
 header a:hover {
   background-color: #e2e5f0;
+  /* background-color: moccasin; */
   color: #6f8296;
 }
 

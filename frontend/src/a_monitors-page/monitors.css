@@ -9,7 +9,7 @@
 .monitor-add input {
   margin: 0.1em;
   width: 40em;
-  background-color: lightyellow;
+  background-color: moccasin;
   padding: 0px;
 }
 
@@ -34,8 +34,16 @@
 
 .dt-row:hover {
   opacity: 1;
-  background-color: lavender;
+  /* background-color: lavender; */
+  background-color: moccasin;
   cursor: pointer;
+}
+
+.dt-row-deleted {
+  opacity: 0.3;
+  cursor: none;
+  text-decoration-line: line-through;
+  font-style: italic;
 }
 
 .dt-cell-right {

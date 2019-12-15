@@ -21,7 +21,6 @@ const ExplorerInner = (props) => {
     status = 'ready';
   }
 
-  console.log('PROPS BLOCK', props.blocks);
   let container;
   switch (status) {
     case 'ready':

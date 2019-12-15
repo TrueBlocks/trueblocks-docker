@@ -5,21 +5,18 @@ import './loading.css';
 const Loading = (props) => {
   if (props.status === 'error') {
     var isFail = props.message && props.message.indexOf('Failed to fetch') !== -1;
+    var msg1 = props.message;
     var msg2;
-    if (isFail) msg2 = props.message + '. Is the API running?';
+    if (isFail) msg2 = 'Is the API running?';
 
     return (
       <div className="error-msg">
         <img className="error-icon" alt={error_icon} src={error_icon} />
         There is a problem with the connection.
-        <p>
-          Please see{' '}
-          <a href="http://localhost:3000/docs/#header-installation" rel="noopener noreferrer" target="_blank">
-            these instructions
-          </a>{' '}
-          for installation information.
-        </p>
-        <img className="error-icon" alt={error_icon} src={error_icon} /> {msg2}
+        <p>{msg1}</p>
+        <h3>{msg2}</h3>
+        <br />
+        <img className="error-icon" alt={error_icon} src={error_icon} />
       </div>
     );
   }

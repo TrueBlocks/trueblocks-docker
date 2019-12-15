@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------
 import React from 'react';
-import { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -36,39 +35,40 @@ class MonitorsInner extends React.Component {
     }
   }
 
-  getContainer = (props) => {
-    var container;
+  render = () => {
+    let status;
     if (this.props.error) {
-      // Error case...
-      container = (
-        <Fragment>
-          <Loading status="error" message={`${this.props.error}`} />
-        </Fragment>
-      );
-    } else if (!this.props.isConnected || this.props.monitorData.items === undefined) {
-      // Loading case...
-      container = (
-        <Fragment>
-          <Loading status="initializing" message="Initializing..." />
-        </Fragment>
-      );
+      status = 'error';
+    } else if (!this.props.isConnected || !this.props.monitorData.items) {
+      status = 'initializing';
     } else {
-      // Display case...
-      container = (
-        <Fragment>
+      status = 'ready';
+    }
+
+    let container;
+    switch (status) {
+      case 'ready':
+        container = (
           <div className="monitor-table">
             <AddNewMonitor {...this.props} />
-            <MonitorTable headings={headings} rows={this.props.monitorData.items} innerEar={this.innerEar} />
+            <div className="data-table">
+              <table className="data-table">
+                <HeaderRow headings={headings} innerEar={this.innerEar} />
+                <TableBody rows={this.props.monitorData.items} innerEar={this.innerEar} />
+              </table>
+            </div>
           </div>
-        </Fragment>
-      );
+        );
+        break;
+      case 'error':
+        container = <Loading status={status} message={this.state ? this.state.error : 'Is the API running?'} />;
+        break;
+      case 'initializing':
+      default:
+        container = <Loading status={status} message="Initializing..." />;
+        break;
     }
-    return container;
-  };
 
-  render = () => {
-    this.getContainer = this.getContainer.bind(this);
-    const theMarkup = this.getContainer(this.props);
     return (
       <div className="right-panel">
         <InnerHeader
@@ -78,7 +78,7 @@ class MonitorsInner extends React.Component {
         />
         <div className="inner-panel">
           <h4>Current Monitors</h4>
-          {theMarkup}
+          {container}
         </div>
       </div>
     );
@@ -86,26 +86,41 @@ class MonitorsInner extends React.Component {
 }
 
 //---------------------------------------------------------------------
-export class MonitorTable extends React.Component {
+export class HeaderRow extends React.Component {
   constructor(props) {
     super(props);
-    this.tableEar = this.tableEar.bind(this);
+    this.headerEar = this.headerEar.bind(this);
   }
 
-  tableEar(cmd, address) {
-    console.log('%ctableEar - ' + cmd + ' address: ' + address, 'color:blue');
-    this.props.innerEar(cmd, address);
+  headerEar(cmd, field) {
+    console.log('%cheaderEar - ' + cmd + ' field: ' + field, 'color:green');
+    this.props.innerEar('sort', field);
   }
 
   render = () => {
-    const { headings, rows } = this.props;
     return (
-      <div className="data-table">
-        <table className="data-table">
-          <TableHeader headings={headings} />
-          <TableBody rows={rows} tableEar={this.tableEar} />
-        </table>
-      </div>
+      <thead>
+        <tr key="header-0">
+          {this.props.headings.map((field, cellIndex) => {
+            return <HeaderCell key={`header-${cellIndex}`} headerEar={this.headerEar} content={field} />;
+          })}
+        </tr>
+      </thead>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class HeaderCell extends React.Component {
+  sortClicked = (el) => {
+    this.props.headerEar('sort', this.props.content);
+  };
+
+  render = () => {
+    return (
+      <th key={this.key} className={'dt-header'} onClick={this.sortClicked}>
+        {this.props.content}
+      </th>
     );
   };
 }
@@ -120,15 +135,17 @@ export class TableBody extends React.Component {
   bodyEar(cmd, address) {
     console.log('%cbodyEar - ' + cmd + ' address: ' + address, 'color:green');
     this.setState({ state: this.state });
-    this.props.tableEar(cmd, address);
+    this.props.innerEar(cmd, address);
   }
 
-  renderRow = (_row, rowIndex) => {
-    return <BodyRow key={rowIndex} row={_row} rowIndex={rowIndex} bodyEar={this.bodyEar} />;
-  };
-
   render = () => {
-    return <tbody>{this.props.rows.map(this.renderRow.bind(this))}</tbody>;
+    return (
+      <tbody>
+        {this.props.rows.map((_row, rowIndex) => {
+          return <BodyRow key={_row.address} row={_row} rowIndex={rowIndex} bodyEar={this.bodyEar} />;
+        })}
+      </tbody>
+    );
   };
 }
 
@@ -158,13 +175,9 @@ export class BodyRow extends React.Component {
   }
 
   render = () => {
-    if (this.state.isDeleted) {
-      return <Fragment key={`${this.props.rowIndex}`}></Fragment>;
-    }
-
     const i = this.props.rowIndex;
     const g = this.props.row.group;
-    const s = this.props.row.subgroup;
+    //    const s = this.props.row.subgroup;
     const a = this.props.row.address;
     const n = this.props.row.name;
     const d = (g ? g + ': ' : '') + (n ? n : a) + (this.state.isExpanded ? '(expanded)' : '');
@@ -183,37 +196,26 @@ export class BodyRow extends React.Component {
         )
       : 0;
 
-    // if (this.state.isExpanded) {
-    //   return (
-    //     <tr key={this.props.rowIndex} className="dt-row">
-    //       <BodyCell1 key={`${this.props.rowIndex}-0`} content={i} rowEar={this.rowEar} />
-    //       <BodyCell1 key={`${this.props.rowIndex}-1`} content={`${g}: ${n} ${z}`} rowEar={this.rowEar} is_text />
-    //       <BodyChart key={`${this.props.rowIndex}-2`} content={e} rowEar={this.rowEar} is_text />
-    //     </tr>
-    //   );
-    // }
-
     return (
-      <tr key={this.props.rowIndex} className="dt-row">
-        <BodyCell1 key={`${this.props.rowIndex}-0`} content={i} rowEar={this.rowEar} />
-        <BodyCell1 key={`${this.props.rowIndex}-1`} content={d} rowEar={this.rowEar} is_text />
-        <BodyCell1 key={`${this.props.rowIndex}-2`} content={f} rowEar={this.rowEar} />
-        <BodyCell1 key={`${this.props.rowIndex}-3`} content={l} rowEar={this.rowEar} />
-        <BodyCell1 key={`${this.props.rowIndex}-4`} content={r} rowEar={this.rowEar} />
-        <BodyCell1 key={`${this.props.rowIndex}-5`} content={c} rowEar={this.rowEar} />
-        <BodyCell1 key={`${this.props.rowIndex}-6`} content={q} rowEar={this.rowEar} />
-        <BodyCell1 key={`${this.props.rowIndex}-7`} content={z} rowEar={this.rowEar} />
-        <BodyCell1 key={`${this.props.rowIndex}-8`} content={e} rowEar={this.rowEar} />
-        <BodyCell2 key={`${this.props.rowIndex}-9`} address={a} rowEar={this.rowEar} />
+      <tr key={this.props.rowIndex} className={this.state.isDeleted ? 'dt-row-deleted' : 'dt-row'}>
+        <BodyCell key={`${this.props.rowIndex}-0`} content={i} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-1`} content={d} rowEar={this.rowEar} is_text />
+        <BodyCell key={`${this.props.rowIndex}-2`} content={f} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-3`} content={l} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-4`} content={r} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-5`} content={c} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-6`} content={q} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-7`} content={z} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-8`} content={e} rowEar={this.rowEar} />
+        <IconCell key={`${this.props.rowIndex}-9`} address={a} rowEar={this.rowEar} />
       </tr>
     );
   };
 }
 
 //---------------------------------------------------------------------
-export class BodyCell1 extends React.Component {
-  expandClicked = (el) => {
-    //window.location.assign('/explorer');
+export class BodyCell extends React.Component {
+  expandClicked = () => {
     this.props.rowEar('expand', this.props.address);
   };
 
@@ -227,23 +229,7 @@ export class BodyCell1 extends React.Component {
 }
 
 //---------------------------------------------------------------------
-export class BodyChart extends React.Component {
-  expandClicked = (el) => {
-    window.location.assign('/explorer');
-    //      this.props.rowEar('expand', this.props.address);
-  };
-
-  render = () => {
-    return (
-      <td colSpan="8" className={this.props.is_text ? 'dt-cell-left' : 'dt-cell-right'} onClick={this.props.changePage}>
-        {this.props.content}
-      </td>
-    );
-  };
-}
-
-//---------------------------------------------------------------------
-export class BodyCell2 extends React.Component {
+export class IconCell extends React.Component {
   refreshClicked = () => {
     this.props.rowEar('refresh', this.props.address);
   };
@@ -254,6 +240,7 @@ export class BodyCell2 extends React.Component {
 
   deleteClicked = () => {
     this.props.rowEar('remove', this.props.address);
+    this.setState(this.state);
   };
 
   onPing = () => {
@@ -264,6 +251,7 @@ export class BodyCell2 extends React.Component {
     return (
       <td className="dt-cell-center">
         <img
+          title="refresh"
           onMouseOver={this.onPing}
           alt={refresh_icon}
           src={refresh_icon}
@@ -271,28 +259,10 @@ export class BodyCell2 extends React.Component {
           onClick={this.refreshClicked}
         />
         &nbsp;
-        <img alt={explore_icon} src={explore_icon} width="20px" onClick={this.exploreClicked} />
+        <img title="explore" alt={explore_icon} src={explore_icon} width="20px" onClick={this.exploreClicked} />
         &nbsp;
-        <img alt={delete_icon} src={delete_icon} width="20px" onClick={this.deleteClicked} />
+        <img title="delete" alt={delete_icon} src={delete_icon} width="20px" onClick={this.deleteClicked} />
       </td>
-    );
-  };
-}
-
-//---------------------------------------------------------------------
-export class TableHeader extends React.Component {
-  renderHeader = (_cell, cellIndex) => {
-    return (
-      <th key={`header-${cellIndex}`} className="dt-header">
-        {this.props.headings[cellIndex]}
-      </th>
-    );
-  };
-  render = () => {
-    return (
-      <thead>
-        <tr key="header-0">{this.props.headings.map(this.renderHeader.bind(this))}</tr>
-      </thead>
     );
   };
 }

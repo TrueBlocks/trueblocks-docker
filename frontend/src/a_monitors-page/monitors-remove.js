@@ -13,7 +13,7 @@ const FAILURE = 'monitRem/FAILURE';
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  console.log('monitRem', action, state);
+  //console.log('monitRem', action, state);
   switch (action.type) {
     case BEGIN:
       return {
