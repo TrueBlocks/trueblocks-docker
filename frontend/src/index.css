@@ -238,3 +238,30 @@ h1 {
 .index-node .first {
   background-color: #eee;
 }
+
+.material-icons.md-20 {
+  font-size: 20px;
+  padding-right: 3px;
+  opacity: 54%;
+}
+
+.material-icons.md-20:hover {
+  opacity: 100%;
+}
+
+.identicon {
+  border-radius: 30%;
+  border: 1px grey solid;
+  opacity: 75%;
+}
+
+.identicon-deleted {
+  border-radius: 30%;
+  border: 1px grey solid;
+  opacity: 75%;
+  visibility: hidden;
+}
+
+.identicon:hover {
+  opacity: 100%;
+}

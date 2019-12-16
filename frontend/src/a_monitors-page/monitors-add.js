@@ -41,18 +41,13 @@ export default function reducer_MonitorAdd(state = initialState, action) {
 }
 
 //----------------------------------------------------------------
-const getMonitorData = (endpoint, address) => {
-  return fetch(`${endpoint}/list?addrs=${address}`);
-};
-
-//----------------------------------------------------------------
 export const dispatcher_MonitorAdd = (address) => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().getSettings.apiProvider, 'list', 'addrs=' + address)
+    return queryAPI(getState().getSettings.apiProvider, 'list', 'verbose=10&addrs=' + address)
       .then(async (res) => {
         let json = await res.json();
         return dispatch({

@@ -87,8 +87,9 @@ const ConnectionInner = (props) => {
         <HeaderRow text="TrueBlocks" />
         <RegularRow head="Status" text={status2} />
         <div className="left">
+          Final:
+          <br />
           <img className="traffic-light" alt={green_light} src={green_light} />
-          Final
         </div>
         <div className="right">
           {fmtInteger(finalized)}{' '}
@@ -100,8 +101,9 @@ const ConnectionInner = (props) => {
           </small>
         </div>
         <div className="left">
+          Staged:
+          <br />
           <img className="traffic-light" alt={yellow_light} src={yellow_light} />
-          Staged
         </div>
         <div className="right">
           {fmtInteger(staging)}{' '}
@@ -113,8 +115,9 @@ const ConnectionInner = (props) => {
           </small>
         </div>
         <div className="left">
+          Unripe:
+          <br />
           <img className="traffic-light" alt={red_light} src={red_light} />
-          Unripe
         </div>
         <div className="right">
           {fmtInteger(props.unripe)}{' '}
@@ -129,11 +132,11 @@ const ConnectionInner = (props) => {
         {/*---------------------------------------------------------------------------------
          */}
         <HeaderRow text="Options" />
-        <DoubleWide head="rpcProvider:" text={props.rpc_provider} bold />
-        <DoubleWide head="balanceProvider:" text={props.balance_provider} bold />
-        <DoubleWide head="apiProvider:" text={props.api_provider} bold />
-        <DoubleWide head="cachePath:" text={props.cache_path} bold />
-        <DoubleWide head="indexPath:" text={props.index_path} bold />
+        <DoubleWide head="rpc:" text={props.rpc_provider} bold />
+        <DoubleWide head="bals:" text={props.balance_provider} bold />
+        <DoubleWide head="api:" text={props.api_provider} bold />
+        <DoubleWide head="cache:" text={props.cache_path} bold />
+        <DoubleWide head="index:" text={props.index_path} bold />
         <Separator />
         {/*---------------------------------------------------------------------------------
          */}

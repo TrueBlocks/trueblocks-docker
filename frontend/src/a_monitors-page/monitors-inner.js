@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------
 import React from 'react';
+import { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -7,31 +8,38 @@ import { push } from 'connected-react-router';
 import Loading from '../z_components/loading';
 import InnerHeader from '../z_components/inner-header';
 import { polling } from '../z_components/polling';
+import Identicon from '../z_components/blockies';
 import { fmtDouble, fmtInteger } from '../z_utils/number_fmt';
+import Icon from '../z_components/icon';
 
 import { dispatcher_Monitor } from './monitors-getdata';
 import { dispatcher_MonitorRemove } from './monitors-remove';
 import { dispatcher_MonitorAdd, AddNewMonitor } from './monitors-add';
 
-import delete_icon from '../z_img/delete-24px.svg';
-import refresh_icon from '../z_img/refresh-24px.svg';
-import explore_icon from '../z_img/explore-24px.svg';
 import './monitors.css';
+import { poll_timeout } from '../config.js';
 
-const headings = ['Index', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
+const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 //---------------------------------------------------------------------
 class MonitorsInner extends React.Component {
   constructor(props) {
     super(props);
     this.innerEar = this.innerEar.bind(this);
+    this.state = {
+      counter: 0
+    };
   }
 
   innerEar(cmd, address) {
     console.log('%cinnerEar - ' + cmd + ' address: ' + address, 'color:orange');
     this.setState({ state: this.state });
     if (cmd === 'remove') {
-      console.log('%c  innerEar - calling remove', 'color:orange');
-      this.props.removeDispatch(address);
+      var counter = this.state.counter + 1;
+      this.setState({ counter: counter });
+      this.props.removeDispatch(address, true);
+      this.props.monitorDispatch();
+    } else if (cmd === 'delete' || cmd === 'undo') {
+      this.props.removeDispatch(address, false);
     }
   }
 
@@ -154,8 +162,9 @@ export class BodyRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDeleted: false,
-      isExpanded: false
+      isShowing: true,
+      isExpanded: false,
+      isDeleted: false
     };
     this.rowEar = this.rowEar.bind(this);
   }
@@ -164,10 +173,14 @@ export class BodyRow extends React.Component {
     console.log('%crowEar - ' + cmd + ' address: ' + address, 'color:magenta');
     console.log('%crowEar - state: ', 'color:magenta', this.state);
     if (cmd === 'remove') {
-      console.log('%c  rowEar - calling remove', 'color:magenta');
+      this.setState({ isShowing: false, isExpanded: false });
+    } else if (cmd === 'delete') {
       this.setState({ isDeleted: true, isExpanded: false });
+      this.props.row.deleted = true;
+    } else if (cmd === 'undo') {
+      this.setState({ isDeleted: false, isExpanded: false });
+      this.props.row.deleted = false;
     } else if (cmd === 'expand') {
-      console.log('%c  rowEar - toggling', 'color:magenta');
       this.setState({ isExpanded: !this.state.isExpanded });
     }
     console.log('%crowEar - new state: ', 'color:magenta', this.state);
@@ -196,9 +209,17 @@ export class BodyRow extends React.Component {
         )
       : 0;
 
+    if (!this.state.isShowing) {
+      return <Fragment></Fragment>;
+    }
+
+    var deleted = this.props.row.deleted || this.state.isDeleted;
     return (
-      <tr key={this.props.rowIndex} className={this.state.isDeleted ? 'dt-row-deleted' : 'dt-row'}>
-        <BodyCell key={`${this.props.rowIndex}-0`} content={i} rowEar={this.rowEar} />
+      <tr
+        key={this.props.row.address}
+        className={this.props.row.deleted || this.state.isDeleted ? 'dt-row-deleted' : 'dt-row'}
+      >
+        <BodyCell key={`${this.props.rowIndex}-0`} content={''} rowEar={this.rowEar} address={a} deleted={deleted} />
         <BodyCell key={`${this.props.rowIndex}-1`} content={d} rowEar={this.rowEar} is_text />
         <BodyCell key={`${this.props.rowIndex}-2`} content={f} rowEar={this.rowEar} />
         <BodyCell key={`${this.props.rowIndex}-3`} content={l} rowEar={this.rowEar} />
@@ -207,7 +228,7 @@ export class BodyRow extends React.Component {
         <BodyCell key={`${this.props.rowIndex}-6`} content={q} rowEar={this.rowEar} />
         <BodyCell key={`${this.props.rowIndex}-7`} content={z} rowEar={this.rowEar} />
         <BodyCell key={`${this.props.rowIndex}-8`} content={e} rowEar={this.rowEar} />
-        <IconCell key={`${this.props.rowIndex}-9`} address={a} rowEar={this.rowEar} />
+        <IconCell key={`${this.props.rowIndex}-9`} address={a} rowEar={this.rowEar} deleted={deleted} />
       </tr>
     );
   };
@@ -220,6 +241,16 @@ export class BodyCell extends React.Component {
   };
 
   render = () => {
+    var addr = this.props.address || '';
+    if (addr !== '') {
+      return (
+        <td className="dt-cell-center" onClick={this.expandClicked}>
+          {addr.substr(0, 5)}...{addr.substr(addr.length - 4, addr.length)}{' '}
+          <Identicon seed={addr} size="8" scale="3" deleted={this.props.deleted} />
+        </td>
+      );
+    }
+
     return (
       <td className={this.props.is_text ? 'dt-cell-left' : 'dt-cell-right'} onClick={this.expandClicked}>
         {this.props.content}
@@ -238,30 +269,36 @@ export class IconCell extends React.Component {
     this.props.rowEar('explore', this.props.address);
   };
 
-  deleteClicked = () => {
+  removeClicked = () => {
     this.props.rowEar('remove', this.props.address);
     this.setState(this.state);
   };
 
-  onPing = () => {
-    this.props.rowEar('ping', this.props.address);
+  deleteClicked = () => {
+    this.props.rowEar('delete', this.props.address);
+    this.setState(this.state);
+  };
+
+  undoClicked = () => {
+    this.props.rowEar('undo', this.props.address);
+    this.setState(this.state);
   };
 
   render = () => {
+    if (this.props.deleted) {
+      return (
+        <td className="dt-cell-center">
+          <Icon icon="delete_forever" onClick={this.removeClicked} />
+          <Icon icon="undo" onClick={this.undoClicked} />
+        </td>
+      );
+    }
+
     return (
       <td className="dt-cell-center">
-        <img
-          title="refresh"
-          onMouseOver={this.onPing}
-          alt={refresh_icon}
-          src={refresh_icon}
-          width="20px"
-          onClick={this.refreshClicked}
-        />
-        &nbsp;
-        <img title="explore" alt={explore_icon} src={explore_icon} width="20px" onClick={this.exploreClicked} />
-        &nbsp;
-        <img title="delete" alt={delete_icon} src={delete_icon} width="20px" onClick={this.deleteClicked} />
+        <Icon icon="refresh" onClick={this.refreshClicked} />
+        <Icon icon="list_alt" title="explore" onClick={this.exploreClicked} />
+        <Icon icon="delete_outline" title="delete" onClick={this.deleteClicked} />
       </td>
     );
   };
@@ -283,15 +320,15 @@ const mapStateToProps = ({ reducer_Connection, reducer_Monitors }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      dispatcher_Monitor,
-      removeDispatch: (address) => dispatcher_MonitorRemove(address),
+      monitorDispatch: () => dispatcher_Monitor(),
+      removeDispatch: (address, remove) => dispatcher_MonitorRemove(address, remove),
       addMonitor: (address) => dispatcher_MonitorAdd(address),
       changePage: (address) => push('/explorer?address=' + address)
     },
     dispatch
   );
 
-export default polling(dispatcher_Monitor, 20000)(
+export default polling(dispatcher_Monitor, poll_timeout)(
   connect(
     mapStateToProps,
     mapDispatchToProps

@@ -40,13 +40,13 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const dispatcher_MonitorRemove = (address) => {
+export const dispatcher_MonitorRemove = (address, remove) => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().getSettings.apiProvider, 'rm', 'address=' + address + '&yes')
+    return queryAPI(getState().getSettings.apiProvider, 'rm', 'address=' + address + (remove ? '&yes' : ''))
       .then(async (res) => {
         let json = await res.json();
         return dispatch({

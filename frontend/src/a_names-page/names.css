@@ -1,11 +1,18 @@
 /*-----------------------------------------------------------------------------*/
 .wrapper {
   display: grid;
-  grid-template-columns: 1.33fr 2fr 2fr 2fr 2fr 4fr;
+  grid-template-columns: 1.33fr 2fr 2fr 2fr 2fr 2fr 2fr;
   background-color: #fff;
   color: #444;
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.8em;
+}
+
+.names.box.sep {
+  border: 0px;
+  grid-column: auto / span 8;
+  height: 15px;
+  /* background-color: maroon; */
 }
 
 .names.box {
@@ -32,6 +39,12 @@
   text-align: right;
 }
 
+.names.box.frontpad {
+  margin-left: 15px;
+  border-bottom: 0px;
+  /* background-color: maroon; */
+}
+
 .names.box.col-item {
   text-align: center;
 }
@@ -41,19 +54,6 @@
   cursor: pointer;
 }
 
-.names.box.frontpad {
-  margin-left: 15px;
-  border-bottom: 0px;
-  /* background-color: maroon; */
-}
-
 .names.box.endpad {
   border: 0px;
-}
-
-.names.box.sep {
-  border: 0px;
-  grid-column: auto / span 6;
-  height: 15px;
-  /* background-color: maroon; */
 }

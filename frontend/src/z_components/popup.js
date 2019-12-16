@@ -1,7 +1,7 @@
 import React from 'react';
 import './popup.css';
 
-class Popup extends React.Component {
+export class Popup extends React.Component {
   render() {
     return (
       <div className="popup">
@@ -13,4 +13,3 @@ class Popup extends React.Component {
     );
   }
 }
-export default Popup;

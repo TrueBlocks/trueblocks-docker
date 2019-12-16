@@ -5,24 +5,25 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { polling } from '../z_components/polling';
+import { poll_timeout } from '../config.js';
 import { dispatcher_Names } from './names-getdata';
+import { dispatcher_MonitorAdd } from '../a_monitors-page/monitors-add';
+
 import Loading from '../z_components/loading';
 import InnerHeader from '../z_components/inner-header';
-import Popup from '../z_components/popup';
-import './detail-table.css';
-import './names.css';
-import './names-detail.css';
+import { Popup } from '../z_components/popup';
+import { DetailTable } from './detail-table';
+import { SummaryTable } from './summary-table';
+import Icon from '../z_components/icon';
+
 import { your_names } from './detail-data-your-names.js';
 import { tokens } from './detail-data-tokens.js';
 import { shared } from './detail-data-shared.js';
 import { summary } from './summary-data.js';
-import { DetailTable } from './detail-table';
-import { SummaryTable } from './summary-table';
-import delete_icon from '../z_img/delete-24px.svg';
-import edit_icon from '../z_img/edit-24px.svg';
-import monitor_icon from '../z_img/monitor-24px.svg';
-import share_icon from '../z_img/share-24px.svg';
-import { dispatcher_MonitorAdd } from '../a_monitors-page/monitors-add';
+
+import './names.css';
+import './detail-table.css';
+import './detail-table-names.css';
 
 const name_fields = ['group/sub', 'address', 'name', 'symbol', 'logo', 'description', 'flags'];
 var id = '';
@@ -34,7 +35,7 @@ class NamesInner extends React.Component {
     this.state = {
       showPopup: false,
       current: '',
-      data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names
+      data: id === '' ? null : id === 'Known Contracts' ? tokens : id === 'Community' ? shared : your_names
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -46,7 +47,7 @@ class NamesInner extends React.Component {
       id = value;
       console.log('ID: ', id);
       this.setState({
-        data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names,
+        data: id === '' ? null : id === 'Known Contracts' ? tokens : id === 'Community' ? shared : your_names,
         showPopup: false,
         current: {}
       });
@@ -54,29 +55,21 @@ class NamesInner extends React.Component {
     } else if (cmd === 'expand') {
       if (value === this.state.current) {
         this.setState({
-          data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names,
+          data: id === '' ? null : id === 'Known Contracts' ? tokens : id === 'Community' ? shared : your_names,
           showPopup: false,
           current: {}
         });
       } else {
         this.setState({
-          data: id === '' ? null : id === 'Tokens' ? tokens : id === 'Shared' ? shared : your_names,
+          data: id === '' ? null : id === 'Known Contracts' ? tokens : id === 'Community' ? shared : your_names,
           showPopup: true,
           current: value
         });
       }
-    } else if (cmd === 'monitor_item') {
+    } else if (cmd === 'monitor') {
       this.props.addMonitor(value);
-      window.location.assign('/monitors');
     }
   }
-
-  // findItem(value) {
-  //   const found = this.state.data.filter((item) => {
-  //     return item.address === value;
-  //   });
-  //   return found[0];
-  // }
 
   closePopup() {
     this.setState({
@@ -140,19 +133,23 @@ class NamesInner extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class NamePopup3Row extends Popup {
   addMonitorClicked = () => {
-    this.props.ear('monitor_item', this.props.value);
+    this.props.ear('monitor', this.props.value);
+  };
+
+  exploreClicked = () => {
+    this.props.ear('explore', this.props.value);
   };
 
   shareClicked = () => {
-    this.props.ear('share_item', this.props.value);
+    this.props.ear('share', this.props.value);
   };
 
   deleteClicked = () => {
-    this.props.ear('delete_item', this.props.value);
+    this.props.ear('delete', this.props.value);
   };
 
   editClicked = () => {
-    this.props.ear('edit_item', this.props.value);
+    this.props.ear('edit', this.props.value);
   };
 
   render = () => {
@@ -161,19 +158,11 @@ class NamePopup3Row extends Popup {
         <div className="np_rt3_c1">{this.props.prompt}</div>
         <div className="np_rt3_c2">{this.props.value}</div>
         <div className="np_rt3_c3">
-          <img
-            title="Add monitor"
-            alt={monitor_icon}
-            src={monitor_icon}
-            width="20px"
-            onClick={this.addMonitorClicked}
-          />
-          &nbsp;
-          <img title="Share item" alt={share_icon} src={share_icon} width="20px" onClick={this.shareClicked} />
-          &nbsp;
-          <img title="Delete item" alt={delete_icon} src={delete_icon} width="20px" onClick={this.deleteClicked} />
-          &nbsp;
-          <img title="Edit item" alt={edit_icon} src={edit_icon} width="20px" onClick={this.editClicked} />
+          <Icon icon="library_add" title="add monitor" onClick={this.addMonitorClicked} />
+          <Icon icon="list_alt" title="explore" onClick={this.exploreClicked} />
+          <Icon icon="share" onClick={this.shareClicked} />
+          <Icon icon="delete" onClick={this.deleteClicked} />
+          <Icon icon="edit" onClick={this.editClicked} />
         </div>
       </div>
     );
@@ -232,7 +221,7 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 /*-----------------------------------------------------------------------------*/
-export default polling(dispatcher_Names, 20000)(
+export default polling(dispatcher_Names, poll_timeout)(
   connect(
     mapStateToProps,
     mapDispatchToProps

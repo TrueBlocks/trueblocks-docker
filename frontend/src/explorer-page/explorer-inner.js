@@ -6,6 +6,7 @@ import { polling } from '../z_components/polling';
 
 import Loading from '../z_components/loading';
 import InnerHeader from '../z_components/inner-header';
+import { poll_timeout } from '../config.js';
 
 const ExplorerInner = (props) => {
   let status;
@@ -78,7 +79,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default polling(dispatcher_Explorer, 20000)(
+export default polling(dispatcher_Explorer, poll_timeout)(
   connect(
     mapStateToProps,
     mapDispatchToProps
