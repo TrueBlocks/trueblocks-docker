@@ -1,12 +1,12 @@
 import React from 'react';
 import Connection from '../components';
-import ExplorerInner from './explorer-inner';
+import AboutInner from './about-inner';
 
-const Explorer = (props) => (
+const About = (props) => (
   <div className="page">
     <Connection props={props} />
-    <ExplorerInner props={props} />
+    <AboutInner props={props} />
   </div>
 );
 
-export default Explorer;
+export default About;

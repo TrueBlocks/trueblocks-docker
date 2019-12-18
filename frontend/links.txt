@@ -6,3 +6,7 @@ https://getstream.io/blog/takeaways-on-building-a-react-based-app-with-electron/
 How to serve via ENS and IPS
 
 https://medium.com/the-ethereum-name-service/how-to-host-your-dapp-with-ipfs-ens-and-access-it-via-ethdns-c96046059d87
+
+
+
+https://coinmetrics.substack.com/p/coin-metrics-state-of-the-network-37f

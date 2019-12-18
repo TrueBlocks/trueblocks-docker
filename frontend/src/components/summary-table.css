@@ -1,0 +1,89 @@
+/*-----------------------------------------------------------------------------*/
+.wrapper {
+  display: grid;
+  grid-template-columns: 1.33fr 2fr 2fr 2fr 2fr 2fr 2fr;
+  background-color: #fff;
+  color: #444;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8em;
+}
+
+.summary-table.box {
+  font-weight: 600;
+  /* text-transform: uppercase; */
+  align-items: center;
+  justify-content: center;
+
+  height: 25px;
+  padding: 1px 4px;
+
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+
+.summary-table.box.header {
+  border-top: 1px solid #aaa;
+  text-align: center;
+}
+
+.summary-table.box.header.pink {
+  background-color: #fadbd8;
+}
+
+.summary-table.box.header.purple {
+  background-color: #e8daef;
+}
+
+.summary-table.box.header.blue {
+  background-color: #d6eaf8;
+}
+
+.summary-table.box.header.green {
+  background-color: #d0ece7;
+}
+
+.summary-table.box.header.orange {
+  background-color: #edbb99;
+}
+
+.summary-table.box.header.tan {
+  background-color: #bbebbb;
+}
+
+.summary-table.box.row-head {
+  margin-left: 15px;
+  text-align: right;
+}
+
+.summary-table.box.frontpad {
+  color: white;
+  margin-left: 15px;
+  border-bottom: 0px;
+  text-align: center;
+  /* background-color: maroon; */
+}
+
+.summary-table.box.frontpad:hover {
+  color: black;
+  /* background-color: maroon; */
+}
+
+.summary-table.box.col-item {
+  text-align: center;
+}
+
+.summary-table.box.col-item:hover {
+  background-color: moccasin;
+  cursor: pointer;
+}
+
+.summary-table.box.endpad {
+  border: 0px !important;
+}
+
+.summary-table.box.sep {
+  border: 0px;
+  grid-column: auto / span 8;
+  height: 10px;
+  /* background-color: maroon; */
+}

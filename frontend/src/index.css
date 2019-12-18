@@ -1,13 +1,13 @@
 /*-----------------------------------------------------------------------------*/
 @font-face {
   font-family: 'Lato';
-  src: local('Lato'), url(./z_fonts/Lato/Lato-Regular.ttf) format('ttf');
+  src: local('Lato'), url(./fonts/Lato/Lato-Regular.ttf) format('ttf');
   font-weight: normal;
 }
 
 @font-face {
   font-family: 'Lato';
-  src: local('Lato-Thin'), url(./z_fonts/Lato/Lato-Thin.ttf) format('ttf');
+  src: local('Lato-Thin'), url(./fonts/Lato/Lato-Thin.ttf) format('ttf');
   font-weight: 300;
 }
 
@@ -213,30 +213,6 @@ h1 {
 .setting-row .data-type {
   width: 5%;
   /* border: 1px dashed grey; */
-}
-
-/*-----------------------------------------------------------------------------*/
-.index-node {
-  width: 19.5%;
-  font-size: 0.8em;
-  margin: 0.2%;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: rgb(245, 245, 245);
-  padding: 10px;
-  border: 1px dashed purple;
-}
-
-.index-node :nth-child(odd) {
-  font-weight: bold;
-}
-
-.index-node div {
-  width: 50%;
-}
-
-.index-node .first {
-  background-color: #eee;
 }
 
 .material-icons.md-20 {

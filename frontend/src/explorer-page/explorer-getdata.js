@@ -1,9 +1,9 @@
-import queryAPI from '../z_utils/queryAPI';
+import { queryAPI } from '../utils';
 
 //----------------------------------------------------------------
-const BEGIN = 'explorer/BEGIN';
-const SUCCESS = 'explorer/SUCCESS';
-const FAILURE = 'explorer/FAILURE';
+const BEGIN = 'explo/BEGIN';
+const SUCCESS = 'explo/SUCCESS';
+const FAILURE = 'explo/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -14,7 +14,6 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
-  //console.log('explorer', action, state);
   switch (action.type) {
     case BEGIN:
       return {

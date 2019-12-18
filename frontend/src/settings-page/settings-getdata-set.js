@@ -1,12 +1,11 @@
-import { queryAPI } from '../utils';
-
 //----------------------------------------------------------------
-const BEGIN = 'cache/BEGIN';
-const SUCCESS = 'cache/SUCCESS';
-const FAILURE = 'cache/FAILURE';
+const BEGIN = 'setSetti/BEGIN';
+const SUCCESS = 'setSetti/SUCCESS';
+const FAILURE = 'setSetti/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
+  res: {},
   isLoading: false,
   error: null
 };
@@ -24,14 +23,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: null
+        res: action.payload
       };
 
     case FAILURE:
       return {
         ...state,
-        isLoading: false,
-        error: action.e
+        isLoading: false
       };
 
     default:
@@ -40,25 +38,32 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const dispatcher_Caches = () => {
+export const dispatcher_setSettings = (jsonAsString) => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'ping', '')
+    let url = `${getState().reducer_Settings.apiProvider}/config?set`;
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonAsString
+    })
       .then(async (res) => {
-        let json = await res.json();
+        const json = await res.json();
+        const data = json.data[0];
         dispatch({
           type: SUCCESS,
-          payload: json
+          payload: data
         });
-        return json;
+        return data;
       })
       .catch((e) => {
         dispatch({
-          type: FAILURE,
-          e
+          type: FAILURE
         });
       });
   };

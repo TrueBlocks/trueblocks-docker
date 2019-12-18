@@ -1,12 +1,16 @@
+//---------------------------------------------------------------------
 import React from 'react';
-import ConnectionComponent from '../z_components';
-import AddressIndexInner from './addresses-inner';
+import Connection from '../components';
+import AddressesInner from './addresses-inner';
 
-const AddressIndex = (props) => (
-  <div className="page">
-    <ConnectionComponent props={props} />
-    <AddressIndexInner props={props} />
-  </div>
-);
+//---------------------------------------------------------------------
+const Addresses = (props) => {
+  return (
+    <div className="page">
+      <Connection props={props} />
+      <AddressesInner {...props} />
+    </div>
+  );
+};
 
-export default AddressIndex;
+export default Addresses;

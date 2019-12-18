@@ -1,23 +1,29 @@
 import { queryAPI } from '../utils';
 
 //----------------------------------------------------------------
-const BEGIN = 'monit/BEGIN';
-const SUCCESS = 'monit/SUCCESS';
-const FAILURE = 'monit/FAILURE';
+const BEGIN = 'conne/BEGIN';
+const SUCCESS = 'conne/SUCCESS';
+const FAILURE = 'conne/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
-  monitorStatus: {},
+  systemData: {},
+  unripe: -1,
+  staging: -1,
+  finalized: -1,
+  client: -1,
+  isConnected: false,
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
-export default (state = initialState, action) => {
+export default function reducer_Connection(state = initialState, action) {
   switch (action.type) {
     case BEGIN:
       return {
         ...state,
+        error: null,
         isLoading: true
       };
 
@@ -25,37 +31,48 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isConnected: true,
         error: null,
-        monitorStatus: action.payload
+        systemData: action.payload.data,
+        unripe: action.payload.meta.unripe,
+        staging: action.payload.meta.staging,
+        finalized: action.payload.meta.finalized,
+        client: action.payload.meta.client
       };
 
     case FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.e,
-        monitorStatus: {}
+        isConnected: false,
+        error: `Connection error: ${action.e}`,
+        systemData: {},
+        unripe: -1,
+        staging: -1,
+        finalized: -1,
+        client: -1
       };
 
     default:
       return state;
   }
-};
+}
 
 //----------------------------------------------------------------
-export const dispatcher_Addresses = () => {
+export const dispatcher_Connection = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'status', 'modes=monitors&details&ether')
+    return queryAPI(getState().reducer_Settings.apiProvider, 'status', 'modes=some')
       .then(async (res) => {
-        let json = await res.json();
-        json = json.data[0].caches[0];
+        const json = await res.json();
+        const data = json.data[0];
+        const meta = json.meta;
         dispatch({
           type: SUCCESS,
-          payload: json
+          payload: { data, meta }
         });
         return json;
       })

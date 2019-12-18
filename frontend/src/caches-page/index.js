@@ -1,10 +1,10 @@
 import React from 'react';
-import ConnectionComponent from '../z_components';
+import Connection from '../components';
 import CachesInner from './caches-inner';
 
 const Caches = (props) => (
   <div className="page">
-    <ConnectionComponent props={props} />
+    <Connection props={props} />
     <CachesInner props={props} />
   </div>
 );

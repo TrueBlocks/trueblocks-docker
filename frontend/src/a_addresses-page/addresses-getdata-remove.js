@@ -1,18 +1,19 @@
 import { queryAPI } from '../utils';
 
 //----------------------------------------------------------------
-const BEGIN = 'cache/BEGIN';
-const SUCCESS = 'cache/SUCCESS';
-const FAILURE = 'cache/FAILURE';
-
-//----------------------------------------------------------------
 const initialState = {
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
+const BEGIN = 'monitRem/BEGIN';
+const SUCCESS = 'monitRem/SUCCESS';
+const FAILURE = 'monitRem/FAILURE';
+
+//----------------------------------------------------------------
 export default (state = initialState, action) => {
+  //console.log('monitRem', action, state);
   switch (action.type) {
     case BEGIN:
       return {
@@ -23,15 +24,14 @@ export default (state = initialState, action) => {
     case SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        error: null
+        isLoading: false
       };
 
     case FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.e
+        error: 'Could not remove monitor'
       };
 
     default:
@@ -40,25 +40,23 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const dispatcher_Caches = () => {
+export const dispatcher_MonitorRemove = (address, remove) => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'ping', '')
+    return queryAPI(getState().reducer_Settings.apiProvider, 'rm', 'address=' + address + (remove ? '&yes' : ''))
       .then(async (res) => {
         let json = await res.json();
-        dispatch({
+        return dispatch({
           type: SUCCESS,
           payload: json
         });
-        return json;
       })
       .catch((e) => {
         dispatch({
-          type: FAILURE,
-          e
+          type: FAILURE
         });
       });
   };

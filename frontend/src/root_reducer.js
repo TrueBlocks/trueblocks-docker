@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------
-import reducer_Connection from './z_components/connection-getdata';
-import reducer_AddressIndex from './a_addresses-page/addresses-getdata';
-import reducer_Monitors from './a_monitors-page/monitors-getdata';
-import reducer_Names from './a_names-page/names-getdata';
+import reducer_Connection from './components/connection-getdata';
+import reducer_Dashboard from './a_dashboard-page/dashboard-getdata';
+import reducer_Addresses from './a_addresses-page/addresses-getdata';
+import reducer_Indicies from './a_indicies-page/indicies-getdata';
 import reducer_Explorer from './explorer-page/explorer-getdata';
-import getSettings from './a_settings-page/settings-get';
+import reducer_Settings from './settings-page/settings-getdata-get';
 
 //------------------------------------------------------------------------
 import { combineReducers } from 'redux';
 export default combineReducers({
   reducer_Connection,
-  reducer_Monitors,
-  reducer_Names,
-  reducer_AddressIndex,
+  reducer_Dashboard,
+  reducer_Addresses,
+  reducer_Indicies,
   reducer_Explorer,
-  getSettings
+  reducer_Settings
 });

@@ -1,12 +1,12 @@
 import React from 'react';
 import Connection from '../components';
-import ExplorerInner from './explorer-inner';
+import IndiciesInner from './indicies-inner';
 
-const Explorer = (props) => (
+const Indicies = (props) => (
   <div className="page">
     <Connection props={props} />
-    <ExplorerInner props={props} />
+    <IndiciesInner props={props} />
   </div>
 );
 
-export default Explorer;
+export default Indicies;

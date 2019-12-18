@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Explorer } from './explorer-getdata';
-import { polling } from '../z_components/polling';
+import { polling } from '../components/polling';
 
-import Loading from '../z_components/loading';
-import InnerHeader from '../z_components/inner-header';
+import Loading from '../components/loading';
+import InnerHeader from '../components/inner-header';
 import { poll_timeout } from '../config.js';
 
 const ExplorerInner = (props) => {
@@ -53,8 +53,8 @@ const ExplorerInner = (props) => {
     <div className="right-panel">
       <div>
         <InnerHeader
-          title="Address Explorer"
-          notes="The Address Explorer allows one to view the details of every transactions for
+          title="Explorer"
+          notes="The Explorer allows one to view the details of every transactions for
           each previously monitored address. Because TrueBlocks runs on a local machine not a server, this means that you are
           restricted to exploring only addresses that you've previously monitored."
         />

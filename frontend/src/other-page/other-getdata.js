@@ -1,9 +1,9 @@
 import { queryAPI } from '../utils';
 
 //----------------------------------------------------------------
-const BEGIN = 'cache/BEGIN';
-const SUCCESS = 'cache/SUCCESS';
-const FAILURE = 'cache/FAILURE';
+const BEGIN = 'other/BEGIN';
+const SUCCESS = 'other/SUCCESS';
+const FAILURE = 'other/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const dispatcher_Caches = () => {
+export const dispatcher_Other = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN

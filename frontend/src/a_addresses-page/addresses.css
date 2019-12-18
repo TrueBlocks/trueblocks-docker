@@ -1,120 +1,73 @@
 /*-----------------------------------------------------------------------------*/
-.right-panel .chart-container {
+.address-table {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  justify-items: center;
+  padding: 1px;
+}
+
+/*-----------------------------------------------------------------------------*/
+.address-add input {
+  margin: 0.1em;
+  width: 40em;
+  background-color: moccasin;
+  padding: 0px;
+}
+
+/*-----------------------------------------------------------------------------*/
+.data-table {
   font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  position: relative;
+  /* border: 1px solid #aaa; */
 }
 
-.right-panel .chart-container .grid {
-  width: 9%;
-  border-right: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
+.dt-cell-left {
+  padding: 4px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #aaa;
 }
 
-.right-panel .chart-container .grid .filling {
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.dt-row {
+  cursor: pointer;
 }
 
-.right-panel .chart-container .grid .filling.finalized {
-  background-color: #fff;
-  color: #72aa74;
-  font-weight: 300;
-  font-size: 0.7em;
-}
-
-.right-panel .chart-container .grid .filling.inactive {
-  background-color: #fff;
-}
-
-.right-panel .chart-container .grid .filling.in-progress {
-  background: repeating-linear-gradient(-45deg, #daeeda, #daeeda 5px, white 5px, white 10px);
-  background-repeat: repeat;
-}
-
-.right-panel .chart-container .grid .filling.in-progress:hover {
-  background: repeating-linear-gradient(-45deg, moccasin, moccasin 5px, white 5px, white 10px);
-  background-repeat: repeat;
-}
-
-.right-panel .chart-container .grid .filling.finalized:hover,
-.right-panel .chart-container .grid .filling.in-progress:hover {
+.dt-row:hover {
+  opacity: 1;
   /* background-color: lavender; */
   background-color: moccasin;
-  cursor: zoom-in;
-  color: #b9c7b9;
+  cursor: pointer;
 }
 
-.grid.x-axis {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  font-weight: 600;
-  background-color: #e2e5f0;
-  border-left: 1px solid #aaa;
-}
-
-.grid.y-axis {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 25px;
-  color: black;
-  font-weight: 600;
-  background-color: #e2e5f0;
-  border-top: 1px solid #aaa;
-}
-
-.index-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-}
-
-.inright {
-  text-align: right;
-  color: gray;
-}
-
-.inright_red {
-  text-align: right;
-  color: red;
-  font-weight: 900;
-}
-
-.inright_blue {
-  text-align: right;
-  color: blue;
-  font-weight: 900;
-}
-
-.fun-facts {
-  display: flex;
-  /* border: 1px dashed #333; */
-}
-
-.fun-facts div {
-  width: 100%;
-  font-size: smaller;
-  align-items: center;
-  justify-content: center;
+.dt-row-deleted {
+  opacity: 0.5;
+  text-decoration-line: line-through;
   font-style: italic;
-  margin-left: 4px;
+  height: 1px;
 }
 
-.fact {
-  position: absolute;
+.dt-cell-right {
+  padding: 4px 10px 4px 4px;
+  text-align: right;
+  vertical-align: top;
+  border: 1px solid #aaa;
 }
 
-.fact div {
-  background-color: whitesmoke;
+.dt-cell-center {
+  padding: 4px;
+  text-align: center;
+  vertical-align: top;
+  border: 1px solid #aaa;
 }
 
-.fact-top {
-  font-weight: 700;
+.dt-icon-tray {
+  white-space: nowrap;
+}
+
+.dt-header {
+  padding: 4px;
+  text-align: center;
+  vertical-align: top;
+  background-color: #e2e5f0;
+  border: 1px solid #aaa;
 }

@@ -1,38 +1,32 @@
 import { queryAPI } from '../utils';
 
 //----------------------------------------------------------------
-const BEGIN = 'cache/BEGIN';
-const SUCCESS = 'cache/SUCCESS';
-const FAILURE = 'cache/FAILURE';
+const BEGIN = 'dashb/BEGIN';
+const SUCCESS = 'dashb/SUCCESS';
+const FAILURE = 'dashb/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
+  names: [],
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
 export default (state = initialState, action) => {
+  var ret;
   switch (action.type) {
     case BEGIN:
-      return {
-        ...state,
-        isLoading: true
-      };
+      ret = { ...state, isLoading: true };
+      return ret;
 
     case SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null
-      };
+      ret = { ...state, names: action.payload, isLoading: false, error: null };
+      return ret;
 
     case FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.e
-      };
+      ret = { ...state, isLoading: false, error: action.e };
+      return ret;
 
     default:
       return state;
@@ -40,13 +34,13 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const dispatcher_Caches = () => {
+export const dispatcher_Dashboard = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'ping', '')
+    return queryAPI(getState().reducer_Settings.apiProvider, 'names', 'custom&expand')
       .then(async (res) => {
         let json = await res.json();
         dispatch({

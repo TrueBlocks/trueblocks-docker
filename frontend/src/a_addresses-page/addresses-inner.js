@@ -1,346 +1,467 @@
-//----------------------------------------------------------------------
+//---------------------------------------------------------------------
 import React from 'react';
 import { Fragment } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
-import Loading from '../z_components/loading';
-import InnerHeader from '../z_components/inner-header';
-import { humanFileSize } from '../z_utils/filesize';
-import { fmtDouble, fmtInteger } from '../z_utils/number_fmt';
+import Loading from '../components/loading';
+import InnerHeader from '../components/inner-header';
+import { polling } from '../components/polling';
+import Identicon from '../components/blockies';
+import { fmtDouble, fmtInteger } from '../utils';
+import Icon from '../components/icon';
+import { Popup } from '../components/popup';
+import { SummaryTable } from '../components/summary-table';
+import { summary_addresses_data } from '../fake_data/summary-data';
+import { dispatcher_Addresses } from './addresses-getdata';
+import { dispatcher_MonitorRemove } from './addresses-getdata-remove';
+import { dispatcher_AddressAdd, AddNewAddress } from './addresses-getdata-add';
+import { DetailTable } from '../components/detail-table';
+import '../components/detail-table.css';
 
-import { dispatcher_AddressIndex } from './addresses-getdata';
 import './addresses.css';
+import '../a_dashboard-page/dashboard.css';
+import { poll_timeout } from '../config.js';
 
-//----------------------------------------------------------------------
-const AddressIndexInner = (props) => {
-  let status;
-  if (props.error) {
-    status = 'error';
-  } else if (props.caches === undefined || props.client === -1) {
-    status = 'initializing';
-  } else {
-    status = 'ready';
-  }
+import { your_names } from '../fake_data/detail-data-your-names.js';
+import { tokens } from '../fake_data/detail-data-tokens.js';
+import { shared } from '../fake_data/detail-data-shared.js';
 
-  let container;
-  switch (status) {
-    case 'ready':
-      container = (
-        <div className="inner-panel">
-          <h4>Address Index</h4>
-          <SystemProgressChart {...props} />
-        </div>
-      );
-      break;
-    case 'error':
-      container = <Loading status={status} message={props.error} />;
-      break;
-    case 'initializing':
-    default:
-      container = <Loading status={status} message="Initializing..." />;
-      break;
-  }
-  return (
-    <div className="right-panel">
-      <div>
-        <InnerHeader
-          title="Dashboard"
-          notes="The Dashboard is the heart of TrueBlocks. It saves &lt;appearances&gt; of 
-          each address anywhere in the blockchain. Storing only a tiny amount of data per appearance (&lt;blockNumber, 
-          transactionId&gt;) allows TrueBlocks to operate on commercial-grade hardware."
-        />
-        {container}
-      </div>
-    </div>
-  );
-};
-
-//----------------------------------------------------------------------
-class SystemProgressChart extends React.Component {
+const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
+const name_fields = ['group/sub', 'address', 'name', 'symbol', 'logo', 'description', 'flags'];
+var id = 'addresses/monitors';
+//---------------------------------------------------------------------
+class AddressesInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      zoomStart: undefined
+      showPopup: false,
+      current: '',
+      data: your_names,
+      which: 'addresses/custom'
     };
+    this.innerEar = this.innerEar.bind(this);
   }
 
-  clientHead = this.props.client === 'n/a' ? this.props.unripe : this.props.client;
-  rows = Math.ceil(this.clientHead / 1e6);
-  cols = 10;
+  innerEar(cmd, value) {
+    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
+    if (cmd === 'change_page' && value === '/') {
+      this.setState(this.state);
+      window.open('/' + value.replace('/', '?sub='), '_self');
+      return;
+    }
 
-  zoom = (zoomStart) => {
-    this.setState({ ...this.state, zoomStart });
-  };
+    var data = your_names;
+    switch (value) {
+      case 'addresses/known':
+        console.log('SHIT');
+        data = tokens;
+        break;
+      case 'addresses/community':
+        data = shared;
+        break;
+      default:
+        data = your_names;
+        break;
+    }
 
-  chart = (
-    <div className="chart-container">
-      <div className="grid"></div>
-      {[...Array(this.cols).keys()].map((col, colI) => {
-        return (
-          <div className="y-axis grid" key={`x${col}`}>
-            {fmtInteger(col * 1e5)}
-          </div>
-        );
-      })}
-      {[...Array(this.rows).keys()].map((row, rowI) => {
-        return (
-          <Fragment key={`x${row}`}>
-            <div className="x-axis grid">{fmtInteger(row * 1e6)}</div>
-            {[...Array(this.cols).keys()].map((col, colI) => {
-              let indexClass;
-              if (this.props.finalized >= row * 1e6 + (col + 1) * 1e5) {
-                indexClass = 'finalized';
-              } else if (this.props.finalized >= row * 1e6 + col * 1e5) {
-                indexClass = 'in-progress';
-              } else {
-                indexClass = 'inactive';
-              }
-              return (
-                <div className="grid" key={`x${row}${col}`}>
-                  <div className={`filling ${indexClass}`} onClick={() => this.zoom(row * 1e6 + col * 1e5)}>
-                    {indexClass === 'finalized' && '✔'}
-                  </div>
-                </div>
-              );
-            })}
+    if (cmd === 'change_page') {
+      id = value;
+      this.setState({
+        data: data,
+        showPopup: false,
+        current: {},
+        which: value
+      });
+    } else if (cmd === 'remove') {
+      this.props.removeDispatch(value, true);
+      this.props.monitorDispatch();
+    } else if (cmd === 'delete' || cmd === 'undo') {
+      this.props.removeDispatch(value, false);
+    } else if (cmd === 'expand') {
+      if (value === this.state.current) {
+        this.setState({
+          data: data,
+          showPopup: false,
+          current: {},
+          which: value
+        });
+      } else {
+        this.setState({
+          data: data,
+          showPopup: true,
+          current: value,
+          which: value
+        });
+      }
+    }
+  }
+
+  closePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
+
+  render = () => {
+    let status;
+    if (this.props.error) {
+      status = 'error';
+    } else if (!this.props.isConnected || !this.props.monitorData.items) {
+      status = 'initializing';
+    } else {
+      status = 'ready';
+    }
+
+    let container, container2;
+    switch (status) {
+      case 'ready':
+        container = (
+          <Fragment>
+            <SummaryTable data={summary_addresses_data} no_labels innerEar={this.innerEar} />
+            <DetailTable
+              css_pre="dashboard"
+              title={'Detail of ' + JSON.stringify(id)}
+              fields={name_fields}
+              data={this.state.data}
+              innerEar={this.innerEar}
+            />
           </Fragment>
         );
-      })}
-    </div>
-  );
-  render() {
-    const cache0 = this.props.caches[0];
-    const cache1 = this.props.caches[1];
-    const cache2 = this.props.caches[2];
-    const cache3 = this.props.caches[3];
-    const cache4 = this.props.caches[4];
-    // const cache5 = this.props.caches[5];
-    // const cache6 = this.props.caches[6];
-    // const cache7 = this.props.caches[7];
-    // const cache8 = this.props.caches[8];
-
-    const t0 = cache0.type;
-    const t1 = cache1.type;
-    const t2 = cache2.type;
-    const t3 = cache3.type;
-    const t4 = cache4.type;
-    // const t5 = cache5.type;
-    // const t6 = cache6.type;
-    // const t7 = cache7.type;
-    // const t8 = cache8.type;
-
-    const p0 = cache0.path.replace(this.props.index_path, '$indexPath/');
-    const p1 = cache1.path.replace(this.props.cache_path, '$cachePath/');
-    const p2 = cache2.path.replace(this.props.cache_path, '$cachePath/');
-    const p3 = cache3.path.replace(this.props.cache_path, '$cachePath/');
-    const p4 = cache4.path.replace(this.props.cache_path, '$cachePath/');
-    // const p5 = cache5.path.replace(this.props.cache_path, '$cachePath/');
-    // const p6 = cache6.path.replace(this.props.cache_path, '$cachePath/');
-    // const p7 = cache7.path.replace(this.props.cache_path, '$cachePath/');
-    // const p8 = cache8.path.replace(this.props.cache_path, '$cachePath/');
-
-    const s0 = fmtInteger(cache0.sizeInBytes);
-    const s1 = fmtInteger(cache1.sizeInBytes);
-    const s2 = fmtInteger(cache2.sizeInBytes);
-    const s3 = fmtInteger(cache3.sizeInBytes);
-    const s4 = fmtInteger(cache4.sizeInBytes);
-    // const s5 = fmtInteger(cache5.sizeInBytes);
-    // const s6 = fmtInteger(cache6.sizeInBytes);
-    // const s7 = fmtInteger(cache7.sizeInBytes);
-    // const s8 = fmtInteger(cache8.sizeInBytes);
-
-    const c0 = fmtInteger(cache0.nFiles);
-    const c1 = fmtInteger(cache1.nFiles);
-    const c2 = fmtInteger(cache2.nFiles);
-    const c3 = fmtInteger(cache3.nFiles);
-    const c4 = fmtInteger(cache4.nFiles);
-    // const c5 = fmtInteger(cache5.nFiles);
-    // const c6 = fmtInteger(cache6.nFiles);
-    // const c7 = fmtInteger(cache7.nFiles);
-    // const c8 = fmtInteger(cache8.nFiles);
-
-    const a0 = fmtDouble(cache0.sizeInBytes / cache0.nFiles, 1);
-    const a1 = fmtDouble(cache1.sizeInBytes / cache1.nFiles, 1);
-    const a2 = fmtDouble(cache2.sizeInBytes / cache2.nFiles, 1);
-    const a3 = fmtDouble(cache3.sizeInBytes / cache3.nFiles, 1);
-    const a4 = fmtDouble(cache4.sizeInBytes / cache4.nFiles, 1);
-    // const a5 = fmtDouble(cache5.sizeInBytes / cache5.nFiles, 1);
-    // const a6 = fmtDouble(cache6.sizeInBytes / cache6.nFiles, 1);
-    // const a7 = fmtDouble(cache7.sizeInBytes / cache7.nFiles, 1);
-    // const a8 = fmtDouble(cache8.sizeInBytes / cache8.nFiles, 1);
+        container2 = (
+          <Fragment>
+            <SummaryTable data={summary_addresses_data} no_labels innerEar={this.innerEar} />
+            <AddNewAddress {...this.props} />
+            <div className="data-table">
+              <table className="data-table">
+                <HeaderRow headings={headings} innerEar={this.innerEar} />
+                <TableBody rows={this.props.monitorData.items} innerEar={this.innerEar} />
+              </table>
+            </div>
+          </Fragment>
+        );
+        break;
+      case 'error':
+        container = <Loading status={status} message={this.state ? this.state.error : 'Is the API running?'} />;
+        break;
+      case 'initializing':
+      default:
+        container = <Loading status={status} message="Initializing..." />;
+        break;
+    }
 
     return (
-      <div>
-        {this.chart}
-        <p> </p>
+      <div className="right-panel">
+        <InnerHeader
+          title="Addresses"
+          notes="Monitors are per-address index caches that enable fast reteival of transaction histories for any account.
+          Note that the transactions/logs/receipts/traces are not downloaded until you explore an address."
+        />
         <div className="inner-panel">
-          <h4>Caches</h4>
-          <p> </p>
-          <div className="fun-facts">
-            <div>
-              <div className="fact-top">{t0}:</div>
-              <div>{p0}</div>
-              <div>
-                {s0} / {c0} / {a0}
-              </div>
-            </div>
-            <div>
-              <div className="fact-top">{t1}:</div>
-              <div>{p1}</div>
-              <div>
-                {s1} / {c1} / {a1}
-              </div>
-            </div>
-            <div>
-              <div className="fact-top">{t2}:</div>
-              <div>{p2}</div>
-              <div>
-                {s2} / {c2} / {a2}
-              </div>
-            </div>
-            <div>
-              <div className="fact-top">{t3}:</div>
-              <div>{p3}</div>
-              <div>
-                {s3} / {c3} / {a3}
-              </div>
-            </div>
-            <div>
-              <div className="fact-top">{t4}:</div>
-              <div>{p4}</div>
-              <div>
-                {s4} / {c4} / {a4}
-              </div>
-            </div>
-            {/*
-          <div>
-            <div className="fact-top">{t5}:</div>
-            <div>{p5}</div>
-            <div>
-              {s5} / {c5} / {a5}
-            </div>
-          </div>
-          <div>
-            <div className="fact-top">{t6}:</div>
-            <div>{p6}</div>
-            <div>
-              {s6} / {c6} / {a6}
-            </div>
-          </div>
-          <div>
-            <div className="fact-top">{t7}:</div>
-            <div>{p7}</div>
-            <div>
-              {s7} / {c7} / {a7}
-            </div>
-          </div>
-          <div>
-            <div className="fact-top">{t8}:</div>
-            <div>{p8}</div>
-            <div>
-              {s8} / {c8} / {a8}
-            </div>
-          </div>
-*/}
-          </div>
+          {this.state.which == 'addresses/monitors' ? container2 : container}
+          {this.state.showPopup ? (
+            <NamePopup closePopup={this.closePopup.bind(this)} item={this.state.current} ear={this.innerEar} />
+          ) : null}
         </div>
-        <p> </p>
-        <ZoomOnIndex {...this.props} start={this.state.zoomStart} n={1e5} />
       </div>
     );
-  }
+  };
 }
 
-//----------------------------------------------------------------------
-// Without this, the !props.loadingIndex test below is always true until one clicks on the page after relaod
-var been_here = false;
-const ZoomOnIndex = (props) => {
-  let readyContainer;
-  const hasData = props.indexData.items !== undefined && props.start !== undefined;
-  switch (hasData) {
-    case true:
-      const filteredData = props.indexData.items.filter(
-        (item) =>
-          item.path.startsWith('finalized') &
-          (item.firstAppearance >= props.start) &
-          (item.firstAppearance < props.start + props.n)
-      );
-      readyContainer = (
-        <div>
-          <IndexDetail data={filteredData} range={{ start: props.start, end: props.start + props.n }} />
+/*-----------------------------------------------------------------------------*/
+class NamePopup3Row extends Popup {
+  addMonitorClicked = () => {
+    this.props.ear('monitor', this.props.value);
+  };
+
+  exploreClicked = () => {
+    this.props.ear('explore', this.props.value);
+  };
+
+  shareClicked = () => {
+    this.props.ear('share', this.props.value);
+  };
+
+  deleteClicked = () => {
+    this.props.ear('delete', this.props.value);
+  };
+
+  editClicked = () => {
+    this.props.ear('edit', this.props.value);
+  };
+
+  render = () => {
+    return (
+      <div className="np_rt3">
+        <div className="np_rt3_c1">{this.props.prompt}</div>
+        <div className="np_rt3_c2">{this.props.value}</div>
+        <div className="np_rt3_c3">
+          <Icon icon="library_add" title="add monitor" onClick={this.addMonitorClicked} />
+          <Icon icon="list_alt" title="explore" onClick={this.exploreClicked} />
+          <Icon icon="share" onClick={this.shareClicked} />
+          <Icon icon="delete" onClick={this.deleteClicked} />
+          <Icon icon="edit" onClick={this.editClicked} />
         </div>
-      );
-      break;
-    default:
-      if (!been_here && !props.loadingIndex) {
-        been_here = true;
-        props.dispatcher_AddressIndex();
-      }
-      readyContainer = props.start && <Loading status="loading" message="Waiting for index data..." />;
+      </div>
+    );
+  };
+}
+
+/*-----------------------------------------------------------------------------*/
+class NamePopup2Row extends Popup {
+  render = () => {
+    return (
+      <div className="np_rt2">
+        <div className="np_rt2_c1">{this.props.prompt}</div>
+        <div className="np_rt2_c2">{this.props.value}</div>
+      </div>
+    );
+  };
+}
+
+/*-----------------------------------------------------------------------------*/
+class NamePopup extends Popup {
+  render = () => {
+    return (
+      <div className="popup">
+        <NamePopup3Row prompt="Address:" value={this.props.item.address} ear={this.props.ear} />
+        <NamePopup2Row prompt="Group:" value={this.props.item.group} />
+        <NamePopup2Row prompt="Subgroup:" value={this.props.item.subgroup} />
+        <NamePopup2Row prompt="Name:" value={this.props.item.name} />
+        <NamePopup2Row prompt="Symbol:" value={this.props.item.symbol} />
+        <NamePopup2Row prompt="Description:" value={this.props.item.description} />
+        <NamePopup2Row prompt="Source:" value={this.props.item.source} />
+        <NamePopup2Row prompt="Logo:" value={this.props.item.logo} />
+        <NamePopup2Row prompt="isContract:" value={this.props.item.is_contract} />
+        <NamePopup2Row prompt="isPrivate:" value={this.props.item.is_private} />
+        <NamePopup2Row prompt="isShared:" value={this.props.item.is_shared} />
+      </div>
+    );
+  };
+}
+//---------------------------------------------------------------------
+export class HeaderRow extends React.Component {
+  render = () => {
+    return (
+      <thead>
+        <tr key="header-0">
+          {this.props.headings.map((field, cellIndex) => {
+            return <HeaderCell {...this.props} key={`header-${cellIndex}`} content={field} />;
+          })}
+        </tr>
+      </thead>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class HeaderCell extends React.Component {
+  sortClicked = (el) => {
+    this.props.innerEar('sort', this.props.content);
+  };
+
+  render = () => {
+    return (
+      <th key={this.key} className={'dt-header'} onClick={this.sortClicked}>
+        {this.props.content}
+      </th>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class TableBody extends React.Component {
+  render = () => {
+    return (
+      <tbody>
+        {this.props.rows.map((_row, rowIndex) => {
+          return <BodyRow {...this.props} key={_row.address} row={_row} rowIndex={rowIndex} />;
+        })}
+      </tbody>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class BodyRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isShowing: true,
+      isExpanded: false,
+      isDeleted: false
+    };
+    this.rowEar = this.rowEar.bind(this);
   }
 
-  return <div>{readyContainer}</div>;
-};
+  rowEar(cmd, address) {
+    console.log('%crowEar - ' + cmd + ' address: ' + address, 'color:magenta');
+    if (cmd === 'remove') {
+      this.setState({ isShowing: false, isExpanded: false });
+    } else if (cmd === 'delete') {
+      this.setState({ isDeleted: true, isExpanded: false });
+      this.props.row.deleted = true;
+    } else if (cmd === 'undo') {
+      this.setState({ isDeleted: false, isExpanded: false });
+      this.props.row.deleted = false;
+    } else if (cmd === 'expand') {
+      this.setState({ isExpanded: !this.state.isExpanded });
+    }
+    this.props.innerEar(cmd, address); // pass it to the parent in case they're interested
+  }
 
-//----------------------------------------------------------------------
-const IndexDetail = (props) => {
-  const count = props.data.length;
-  const subtit =
-    'Details: ' +
-    (count ? count : 'No') +
-    ' finalized chunks in block range ' +
-    props.range.start +
-    '-' +
-    props.range.end;
-  return (
-    <div className="inner-panel">
-      <h4>{subtit}</h4>
-      <div className="index-container">
-        {props.data.map((item) => (
-          <div className="index-node" key={`x${item.firstAppearance}`}>
-            <div>ipfs hash:</div> <div className="inright_blue">{item.hash}</div>
-            <div>first block:</div> <div className="inright">{fmtInteger(item.firstAppearance)}</div>
-            <div>latest block:</div> <div className="inright">{fmtInteger(item.latestAppearance)}</div>
-            <div>nBlocks:</div>{' '}
-            <div className="inright">{fmtInteger(item.latestAppearance - item.firstAppearance + 1)}</div>
-            <div>nAddresses:</div> <div className="inright">{fmtInteger(item.nAddresses)}</div>
-            <div>nAppearances:</div> <div className="inright_red">{fmtInteger(item.nAppearances)}</div>
-            <div>file size:</div> <div className="inright">{humanFileSize(item.sizeInBytes)}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+  render = () => {
+    const g = this.props.row.group;
+    //    const s = this.props.row.subgroup;
+    const a = this.props.row.address;
+    const n = this.props.row.name;
+    const d = (g ? g + ': ' : '') + (n ? n : a) + (this.state.isExpanded ? '(expanded)' : '');
 
-//----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_AddressIndex }) => ({
-  caches: reducer_Connection.systemData.caches,
-  index_path: reducer_Connection.systemData.index_path,
-  cache_path: reducer_Connection.systemData.cache_path,
+    const x = '';
+    const f = fmtInteger(this.props.row.firstAppearance);
+    const l = fmtInteger(this.props.row.latestAppearance);
+    const r = fmtInteger(this.props.row.latestAppearance - this.props.row.firstAppearance);
+    const c = fmtInteger(this.props.row.nRecords);
+    const z = fmtInteger(this.props.row.sizeInBytes);
+    const e = fmtDouble(this.props.row.curEther, 18);
+    const q = this.props.row.nRecords
+      ? fmtInteger(
+          (Math.floor((this.props.row.latestAppearance - this.props.row.firstAppearance) / this.props.row.nRecords) *
+            100) /
+            100
+        )
+      : 0;
+
+    if (!this.state.isShowing) {
+      return <Fragment></Fragment>;
+    }
+
+    var deleted = this.props.row.deleted || this.state.isDeleted;
+    return (
+      <tr
+        key={this.props.row.address}
+        className={this.props.row.deleted || this.state.isDeleted ? 'dt-row-deleted' : 'dt-row'}
+      >
+        <BodyCell key={`${this.props.rowIndex}-0`} content={x} rowEar={this.rowEar} address={a} deleted={deleted} />
+        <BodyCell key={`${this.props.rowIndex}-1`} content={d} rowEar={this.rowEar} is_text />
+        <BodyCell key={`${this.props.rowIndex}-2`} content={f} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-3`} content={l} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-4`} content={r} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-5`} content={c} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-6`} content={q} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-7`} content={z} rowEar={this.rowEar} />
+        <BodyCell key={`${this.props.rowIndex}-8`} content={e} rowEar={this.rowEar} />
+        <IconCell key={`${this.props.rowIndex}-9`} address={a} rowEar={this.rowEar} deleted={deleted} />
+      </tr>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class BodyCell extends React.Component {
+  expandClicked = () => {
+    this.props.rowEar('expand', this.props.address);
+  };
+
+  render = () => {
+    var addr = this.props.address || '';
+    if (addr !== '') {
+      return (
+        <td className="dt-cell-center" onClick={this.expandClicked}>
+          {addr.substr(0, 5)}...{addr.substr(addr.length - 4, addr.length)}{' '}
+          <Identicon seed={addr} deleted={this.props.deleted} />
+        </td>
+      );
+    }
+
+    return (
+      <td className={this.props.is_text ? 'dt-cell-left' : 'dt-cell-right'} onClick={this.expandClicked}>
+        {this.props.content}
+      </td>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+export class IconCell extends React.Component {
+  refreshClicked = () => {
+    this.props.rowEar('refresh', this.props.address);
+  };
+
+  exploreClicked = () => {
+    const url = '/explorer/' + this.props.address;
+    window.open(url, '_self');
+  };
+
+  removeClicked = () => {
+    this.props.rowEar('remove', this.props.address);
+    this.setState(this.state);
+  };
+
+  deleteClicked = () => {
+    this.props.rowEar('delete', this.props.address);
+    this.setState(this.state);
+  };
+
+  undoClicked = () => {
+    this.props.rowEar('undo', this.props.address);
+    this.setState(this.state);
+  };
+
+  launchClicked = () => {
+    const url = 'https://etherscan.io/address/' + this.props.address;
+    window.open(url, '_blank');
+  };
+
+  render = () => {
+    if (this.props.deleted) {
+      return (
+        <td className="dt-cell-center">
+          <Icon icon="launch" onClick={this.launchClicked} />
+          <Icon icon="delete_forever" onClick={this.removeClicked} />
+          <Icon icon="undo" onClick={this.undoClicked} />
+        </td>
+      );
+    }
+
+    return (
+      <td className="dt-cell-center">
+        <Icon icon="launch" onClick={this.launchClicked} />
+        <Icon icon="list_alt" title="explore" onClick={this.exploreClicked} />
+        <Icon icon="refresh" onClick={this.refreshClicked} />
+        <Icon icon="delete_outline" title="delete" onClick={this.deleteClicked} />
+      </td>
+    );
+  };
+}
+
+//---------------------------------------------------------------------
+const mapStateToProps = ({ reducer_Connection, reducer_Addresses }) => ({
   isConnected: reducer_Connection.isConnected,
-  unripe: reducer_Connection.unripe,
-  staging: reducer_Connection.staging,
-  finalized: reducer_Connection.finalized,
-  client: reducer_Connection.client,
   isLoading: reducer_Connection.isLoading,
-  error: reducer_Connection.error,
-  indexData: reducer_AddressIndex.indexData,
-  loadingIndex: reducer_AddressIndex.isLoading
+  monitorData: reducer_Addresses.monitorStatus,
+  error: reducer_Addresses.error,
+  monitorDataFetch: {
+    isLoading: reducer_Addresses.isLoading,
+    error: reducer_Addresses.error
+  }
 });
 
-//----------------------------------------------------------------------
+//---------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      dispatcher_AddressIndex
+      monitorDispatch: () => dispatcher_Addresses(),
+      removeDispatch: (address, remove) => dispatcher_MonitorRemove(address, remove),
+      addMonitor: (address) => dispatcher_AddressAdd(address)
     },
     dispatch
   );
 
-//----------------------------------------------------------------------
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddressIndexInner);
+export default polling(dispatcher_Addresses, poll_timeout)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddressesInner)
+);

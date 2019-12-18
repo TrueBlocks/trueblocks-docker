@@ -1,12 +1,13 @@
 import { queryAPI } from '../utils';
 
 //----------------------------------------------------------------
-const BEGIN = 'cache/BEGIN';
-const SUCCESS = 'cache/SUCCESS';
-const FAILURE = 'cache/FAILURE';
+const BEGIN = 'indic/BEGIN';
+const SUCCESS = 'indic/SUCCESS';
+const FAILURE = 'indic/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
+  indexData: {},
   isLoading: false,
   error: null
 };
@@ -24,14 +25,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: null
+        error: null,
+        indexData: action.payload
       };
 
     case FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.e
+        error: action.e,
+        indexData: {}
       };
 
     default:
@@ -40,15 +43,16 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const dispatcher_Caches = () => {
+export const dispatcher_Indicies = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'ping', '')
+    return queryAPI(getState().reducer_Settings.apiProvider, 'status', 'modes=index&details')
       .then(async (res) => {
         let json = await res.json();
+        json = json.data[0].caches[0];
         dispatch({
           type: SUCCESS,
           payload: json

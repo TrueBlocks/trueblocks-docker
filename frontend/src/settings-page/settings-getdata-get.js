@@ -1,12 +1,15 @@
+import config from '../config.json';
 import { queryAPI } from '../utils';
 
 //----------------------------------------------------------------
-const BEGIN = 'cache/BEGIN';
-const SUCCESS = 'cache/SUCCESS';
-const FAILURE = 'cache/FAILURE';
+const BEGIN = 'getSetti/BEGIN';
+const SUCCESS = 'getSetti/SUCCESS';
+const FAILURE = 'getSetti/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
+  configSettings: {},
+  apiProvider: config.apiProvider,
   isLoading: false,
   error: null
 };
@@ -24,7 +27,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: null
+        error: null,
+        configSettings: action.payload
       };
 
     case FAILURE:
@@ -40,20 +44,21 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------
-export const dispatcher_Caches = () => {
+export const dispatcher_getSettings = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'ping', '')
+    return queryAPI(getState().reducer_Settings.apiProvider, 'config', 'get')
       .then(async (res) => {
-        let json = await res.json();
+        const json = await res.json();
+        const data = json.data[0];
         dispatch({
           type: SUCCESS,
-          payload: json
+          payload: data
         });
-        return json;
+        return data;
       })
       .catch((e) => {
         dispatch({

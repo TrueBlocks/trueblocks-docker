@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dispatcher_Caches } from './caches-getdata';
+import { dispatcher_Other } from './other-getdata';
 
 import Loading from '../components/loading';
 import InnerHeader from '../components/inner-header';
 import { SummaryTable } from '../components/summary-table';
-import { summary_caches_data } from '../fake_data/summary-data';
+import { summary_other_data } from '../fake_data/summary-data';
 
-const CachesInner = (props) => {
+const OtherInner = (props) => {
   let status;
   if (props.isLoading) {
     status = 'loading';
@@ -35,13 +35,13 @@ const CachesInner = (props) => {
     case 'ready':
       container = (
         <div className="inner-panel">
-          <SummaryTable data={summary_caches_data} no_labels innerEar={innerEar} />
-          <h4>Caches Group 1</h4>
+          <SummaryTable data={summary_other_data} no_labels innerEar={innerEar} />
+          <h4>Other Group 1</h4>
           <ul>
             <li>Item 1 1</li>
             <li>Item 1 2</li>
           </ul>
-          <h4>Caches Group 2</h4>
+          <h4>Other Group 2</h4>
           <ul>
             <li>Item 2 1</li>
             <li>Item 2 2</li>
@@ -62,8 +62,8 @@ const CachesInner = (props) => {
     <div className="right-panel">
       <div>
         <InnerHeader
-          title="Caches"
-          notes="TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your 
+          title="Other"
+          notes="TrueBlocks Other greatly speed up access to the Ethereum data; however, they take up a lot of space on your 
           hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
         />
         {container}
@@ -72,7 +72,7 @@ const CachesInner = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_Connection, reducer_Caches }) => ({
+const mapStateToProps = ({ reducer_Connection, reducer_Other }) => ({
   isConnected: reducer_Connection.isConnected,
   isLoading: reducer_Connection.isLoading,
   error: reducer_Connection.error
@@ -81,7 +81,7 @@ const mapStateToProps = ({ reducer_Connection, reducer_Caches }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      dispatcher_Caches
+      dispatcher_Other
     },
     dispatch
   );
@@ -89,4 +89,4 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CachesInner);
+)(OtherInner);
