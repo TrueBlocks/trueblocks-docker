@@ -72,6 +72,16 @@
   text-align: center;
 }
 
+.summary-table.box.col-item.selected {
+  text-align: center;
+  background-color: lightpink;
+}
+
+.summary-table.box.col-item.selected:hover {
+  text-align: center;
+  background-color: lightpink;
+}
+
 .summary-table.box.col-item:hover {
   background-color: moccasin;
   cursor: pointer;

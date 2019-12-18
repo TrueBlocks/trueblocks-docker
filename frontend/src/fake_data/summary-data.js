@@ -16,7 +16,7 @@ export const summary_addresses_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_signature_data = [
+export const summary_signatures_data = [
   {
     page: 'Signatures',
     items: [
@@ -83,6 +83,23 @@ export const summary_other_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
+export const summary_explorer_data = [
+  {
+    page: 'Explorer',
+    items: [
+      { header: 'Explor', value: 0, route_to: 'explore' },
+      { header: 'e-001' },
+      { header: 'e-002' },
+      { header: 'e-003' },
+      { header: 'e-004' },
+      { header: 'e-005' }
+    ],
+    endnote: '',
+    color: 'purple'
+  }
+];
+
+/*-----------------------------------------------------------------------------*/
 export const summary_settings_data = [
   {
     page: 'Settings',
@@ -96,6 +113,40 @@ export const summary_settings_data = [
     ],
     endnote: '',
     color: 'orange'
+  }
+];
+
+/*-----------------------------------------------------------------------------*/
+export const summary_support_data = [
+  {
+    page: 'Signatures',
+    items: [
+      { header: 'Free Support', value: 0, route_to: 'support/free' },
+      { header: 'For Pay', value: 0, route_to: 'support/pay' },
+      { header: 'Whatever', value: 0, route_to: 'support/whatever' },
+      { header: 'e-001' },
+      { header: 'e-002' },
+      { header: 'e-003' }
+    ],
+    endnote: '',
+    color: 'purple'
+  }
+];
+
+/*-----------------------------------------------------------------------------*/
+export const summary_about_data = [
+  {
+    page: 'Signatures',
+    items: [
+      { header: 'About', value: 0, route_to: 'about/about' },
+      { header: 'Philosophy', value: 0, route_to: 'about/philosophy' },
+      { header: 'Team', value: 0, route_to: 'about/team' },
+      { header: 'e-001' },
+      { header: 'e-002' },
+      { header: 'e-003' }
+    ],
+    endnote: '',
+    color: 'purple'
   }
 ];
 

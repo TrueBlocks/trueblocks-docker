@@ -85,7 +85,11 @@ class ItemCol extends React.Component {
 
   render = () => {
     var empty = this.props.item.header.substr(0, 2) === 'e-';
-    var cn = empty ? 'summary-table box endpad ' : 'summary-table box col-item ' + this.props.color;
+    var cn = empty
+      ? 'summary-table box endpad '
+      : this.props.item.route_to === this.props.active
+      ? 'summary-table box col-item selected'
+      : 'summary-table box col-item ';
     var value = empty ? '' : utils.fmtInteger(this.props.item.value);
     return (
       <div key={this.props.type} className={cn} onClick={this.itemClicked}>
