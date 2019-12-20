@@ -19,6 +19,17 @@ const initialState = {
 
 //----------------------------------------------------------------
 export default function reducer_Connection(state = initialState, action) {
+  if (action.payload && action.payload.errors) {
+    var errMsg = action.payload.errors[0].replace('|', '\n');
+    if (errMsg.indexOf("Couldn't connect to server") !== -1) {
+      errMsg += ' Is your Ethereum node running?';
+    }
+    action = {
+      err: errMsg,
+      type: FAILURE
+    };
+  }
+
   switch (action.type) {
     case BEGIN:
       return {
@@ -45,7 +56,7 @@ export default function reducer_Connection(state = initialState, action) {
         ...state,
         isLoading: false,
         isConnected: false,
-        error: `Connection error: ${action.e}`,
+        error: action.err + ' ', // don't remove, converts to string
         systemData: {},
         unripe: -1,
         staging: -1,
@@ -68,18 +79,19 @@ export const dispatcher_Connection = () => {
     return Utils.queryAPI_get('status', 'modes=some')
       .then(async (res) => {
         const json = await res.json();
-        const data = json.data[0];
+        const data = json.data ? json.data[0] : {};
         const meta = json.meta;
+        const errors = json.errors;
         dispatch({
           type: SUCCESS,
-          payload: { data, meta }
+          payload: { data, meta, errors }
         });
         return json;
       })
-      .catch((e) => {
+      .catch((err) => {
         dispatch({
           type: FAILURE,
-          e
+          err
         });
       });
   };

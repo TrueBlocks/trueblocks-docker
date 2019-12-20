@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
+//----------------------------------------------------------------------
 export default class Icon extends Component {
   render() {
     var title = this.props.title || this.props.icon;
@@ -10,3 +12,10 @@ export default class Icon extends Component {
     );
   }
 }
+
+//----------------------------------------------------------------------
+Icon.propTypes = {
+  title: PropTypes.string,
+  icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
+};

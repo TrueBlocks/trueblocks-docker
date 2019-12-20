@@ -1,21 +1,31 @@
 import React from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Icon from './icon';
 import './loading.css';
 
 //----------------------------------------------------------------------
 export default class Loading extends React.Component {
+  noop = () => {};
   render = () => {
     if (this.props.status === 'error') {
-      var msg1 = this.props.message;
-      if (msg1 && msg1.indexOf('fetch') !== -1) msg1 += ' Is the API running?';
+      var msg;
+      if (!this.props.message) {
+        msg = 'There has been some sort of unspecified error';
+      } else if (typeof this.props.message === 'object') {
+        msg = JSON.stringify(this.props.message);
+      } else {
+        msg = this.props.message;
+        if (this.props.message.indexOf('fetch') !== -1) {
+          msg = this.props.message + ' ==> Is the TrueBlocks API running?';
+        }
+      }
+
       return (
         <div className="error-msg">
-          <Icon icon="error" />
-          There is a problem with the connection.
-          <h3>{msg1}</h3>
+          <Icon icon="error" onClick={this.noop} />
+          <h3>{msg}</h3>
           <br />
-          <Icon icon="error" />
+          <Icon icon="error" onClick={this.noop} />
         </div>
       );
     }
@@ -44,6 +54,6 @@ export default class Loading extends React.Component {
 
 //----------------------------------------------------------------------
 Loading.propTypes = {
-  status: Proptypes.string,
-  message: Proptypes.string
+  status: PropTypes.string,
+  message: PropTypes.string
 };

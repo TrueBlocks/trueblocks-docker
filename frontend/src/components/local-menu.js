@@ -95,6 +95,14 @@ class ItemCol extends React.Component {
         : this.props.item.route_to === this.props.active
         ? 'summary-table box col-item selected'
         : 'summary-table box col-item ') + (this._reactInternalFiber.index === 0 ? ' lborder' : '');
+    if (empty) {
+      return (
+        <div key={this.props.type} className={cn}>
+          <Fragment></Fragment>
+        </div>
+      );
+    }
+
     var value = empty ? '' : utils.fmtInteger(this.props.item.value);
     return (
       <div key={this.props.type} className={cn} onClick={this.itemClicked}>

@@ -13,7 +13,7 @@ import './caches.css';
 import { DetailTable } from '../../components/detail-table';
 import { summary_caches_data } from '../../fake_data/summary-data';
 import { txs } from '../../fake_data/detail-data-txs.js';
-import NamePopup from '../../components/name-popup';
+import DetailPopup from '../../components/detail-popup';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -22,14 +22,21 @@ class CachesInner extends React.Component {
     super(props);
     this.state = {
       // EXISTING_CODE
+      showPopup: false,
+      current: '',
+      data: txs,
       // EXISTING_CODE
-      subpage: 'caches/txs',
-      data: txs
+      subpage: 'caches/txs'
     };
     this.innerEar = this.innerEar.bind(this);
   }
 
   // EXISTING_CODE
+  closePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
   // EXISTING_CODE
 
   innerEar = (cmd, value) => {
@@ -41,6 +48,9 @@ class CachesInner extends React.Component {
     if (cmd === 'change_subpage') {
       this.setState({
         // EXISTING_CODE
+        data: txs,
+        showPopup: false,
+        current: {},
         // EXISTING_CODE
         subpage: value
       });
@@ -48,24 +58,35 @@ class CachesInner extends React.Component {
       window.open('/' + value.replace('/', '?sub='), '_self');
     }
     // EXISTING_CODE
+    if (cmd === 'expand') {
+      if (value === this.state.current) {
+        this.setState({
+          data: txs,
+          showPopup: false,
+          current: {},
+          subpage: value
+        });
+      } else {
+        this.setState({
+          data: txs,
+          showPopup: true,
+          current: value,
+          subpage: value
+        });
+      }
+    }
     // EXISTING_CODE
   };
 
   // EXISTING_CODE
-  closePopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    });
-  }
   // EXISTING_CODE
 
   getInner = () => {
-    const name_fields = ['folder', 'name', 'appearances', 'transactions', 'ratio', 'size', 'size/appearance'];
     if (this.state.showPopup) {
       return (
         <Fragment>
-          <DetailTable css_pre="dashboard" fields={name_fields} data={this.state.data} innerEar={this.innerEar} />
-          {<NamePopup closePopup={this.closePopup.bind(this)} item={this.state.current} ear={this.innerEar} />}
+          <DetailTable css_pre="caches" data={this.state.data} innerEar={this.innerEar} />
+          <DetailPopup closePopup={this.closePopup.bind(this)} item={this.state.current} ear={this.innerEar} />
         </Fragment>
       );
     }
@@ -73,7 +94,7 @@ class CachesInner extends React.Component {
     return (
       // EXISTING_CODE
       <Fragment>
-        <DetailTable css_pre="dashboard" fields={name_fields} data={this.state.data} innerEar={this.innerEar} />
+        <DetailTable css_pre="caches" data={this.state.data} innerEar={this.innerEar} />
       </Fragment>
       // EXISTING_CODE
     );

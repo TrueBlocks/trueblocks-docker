@@ -152,6 +152,7 @@ export default class Identicon extends Component {
   }
 }
 
+//----------------------------------------------------------------------
 Identicon.propTypes = {
   seed: PropTypes.string.isRequired,
   size: PropTypes.number,

@@ -1,57 +1,45 @@
 /*-----------------------------------------------------------------------------*/
 export const txs = [
   {
-    folder: 'abcd',
-    name: 'abcd',
+    folder: '$CACHE/txs',
+    name: 'Name 1',
     appearances: 900,
     transactions: 20,
-    ratio: 12.3,
-    size: 212112,
-    sizeRation: 1.222
+    size: 212112
   },
   {
-    folder: 'abcd',
-    name: 'abcd',
+    folder: '$CACHE/txs',
+    name: 'Name 2',
     appearances: 900,
     transactions: 20,
-    ratio: 12.3,
-    size: 212112,
-    sizeRation: 1.222
+    size: 212112
   },
   {
-    folder: 'abcd',
-    name: 'abcd',
+    folder: '$CACHE/txs',
+    name: 'Name 3',
     appearances: 900,
     transactions: 20,
-    ratio: 12.3,
-    size: 212112,
-    sizeRation: 1.222
+    size: 212112
   },
   {
-    folder: 'abcd',
-    name: 'abcd',
+    folder: '$CACHE/txs',
+    name: 'Name 4',
     appearances: 900,
     transactions: 20,
-    ratio: 12.3,
-    size: 212112,
-    sizeRation: 1.222
+    size: 212112
   },
   {
-    folder: 'abcd',
-    name: 'abcd',
+    folder: '$CACHE/txs',
+    name: 'Name 5',
     appearances: 900,
     transactions: 20,
-    ratio: 12.3,
-    size: 212112,
-    sizeRation: 1.222
+    size: 212112
   },
   {
-    folder: 'abcd',
-    name: 'abcd',
+    folder: '$CACHE/txs',
+    name: 'Name 6',
     appearances: 900,
     transactions: 20,
-    ratio: 12.3,
-    size: 212112,
-    sizeRation: 1.222
+    size: 212112
   }
 ];
