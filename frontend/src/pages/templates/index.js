@@ -1,14 +1,10 @@
 import React from 'react';
-import Connection from '../../components';
+import Page from '../../components/page';
 import [{PROPER}]Inner from './[{LONG}]-inner';
 
 //----------------------------------------------------------------------
-const [{PROPER}] = (props) => (
-  <div className="page">
-    <Connection props={props} />
-    <[{PROPER}]Inner props={props} />
-  </div>
-);
-
-//----------------------------------------------------------------------
-export default [{PROPER}];
+export default class [{PROPER}] extends Page {
+  render = () => {
+    return <Page inner={<[{PROPER}]Inner />} />;
+  };
+}

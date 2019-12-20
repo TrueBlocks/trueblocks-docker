@@ -1,3 +1,5 @@
+const Utils = require('../../utils');
+
 //----------------------------------------------------------------
 const BEGIN = 'setSetti/BEGIN';
 const SUCCESS = 'setSetti/SUCCESS';
@@ -44,14 +46,7 @@ export const dispatcher_setSettings = (jsonAsString) => {
       type: BEGIN
     });
 
-    let url = `${getState().reducer_Settings.apiProvider}/config?set`;
-    return fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: jsonAsString
-    })
+    return Utils.queryAPI_put('config', 'set', jsonAsString)
       .then(async (res) => {
         const json = await res.json();
         const data = json.data[0];

@@ -1,16 +1,10 @@
-//---------------------------------------------------------------------
 import React from 'react';
-import Connection from '../../components';
+import Page from '../../components/page';
 import AddressesInner from './addresses-inner';
 
-//---------------------------------------------------------------------
-const Addresses = (props) => {
-  return (
-    <div className="page">
-      <Connection props={props} />
-      <AddressesInner {...props} />
-    </div>
-  );
-};
-
-export default Addresses;
+//----------------------------------------------------------------------
+export default class Addresses extends Page {
+  render = () => {
+    return <Page inner={<AddressesInner />} />;
+  };
+}

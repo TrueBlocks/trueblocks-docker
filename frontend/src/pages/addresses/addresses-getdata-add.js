@@ -1,5 +1,5 @@
 import React from 'react';
-const utils = require('../../utils');
+const Utils = require('../../utils');
 
 //----------------------------------------------------------------
 const initialState = {
@@ -46,8 +46,7 @@ export const dispatcher_AddressAdd = (address) => {
       type: BEGIN
     });
 
-    return utils
-      .queryAPI(getState().reducer_Settings.apiProvider, 'list', 'verbose=10&addrs=' + address)
+    return Utils.queryAPI_get('list', 'verbose=10&addrs=' + address)
       .then(async (res) => {
         let json = await res.json();
         return dispatch({

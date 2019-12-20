@@ -27,14 +27,6 @@
   border: 1px black solid;
 }
 
-.error-icon {
-  vertical-align: middle;
-  height: 35px;
-  width: 37px;
-  padding: 4px;
-  padding-top: 6px;
-}
-
 /*-----------------------------------------------------------------------------*/
 .lds-ring {
   display: inline-block;

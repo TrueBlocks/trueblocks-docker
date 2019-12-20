@@ -40,11 +40,28 @@ let humanFileSize = function(bytes, si) {
   return bytes.toFixed(1) + ' ' + units[u];
 };
 
+// TODO(tjayush): this needs to be configurable
+const apiProvider = 'http://localhost:8080/';
 //----------------------------------------------------------------
-let queryAPI = function(endpoint, cmd, params) {
-  if (cmd === 'ping') return {};
-  console.log('API call', endpoint, ' ', cmd, ' ', params);
-  return fetch(`${endpoint}/` + cmd + '?' + params);
+let queryAPI_get = function(cmd, params) {
+  console.log('GET: ', apiProvider, cmd, '?', params);
+  if (cmd === 'ping') return { json: {} };
+  const url = apiProvider + cmd + '?' + params;
+  return fetch(url);
+};
+
+//----------------------------------------------------------------
+let queryAPI_put = function(cmd, params, body) {
+  console.log('PUT: ', apiProvider, cmd, '?', params);
+  if (cmd === 'ping') return { json: {} };
+  const url = apiProvider + cmd + '?' + params;
+  return fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: body
+  });
 };
 
 //----------------------------------------------------------------
@@ -57,6 +74,7 @@ module.exports = {
   humanFileSize,
   fmtInteger,
   fmtDouble,
-  queryAPI,
+  queryAPI_get,
+  queryAPI_put,
   to_key
 };

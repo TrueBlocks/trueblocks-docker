@@ -4,7 +4,7 @@ import logo from './img/logo.png';
 
 import Dashboard from './pages/dashboard';
 import Addresses from './pages/addresses';
-import Explorer from './pages/explorer';
+import Explore from './pages/explore';
 import Indcies from './pages/indicies';
 import Signatures from './pages/signatures';
 import Caches from './pages/caches';
@@ -23,8 +23,8 @@ const App = () => (
       <NavLink activeClassName="is-active" to="/addresses">
         Addresses
       </NavLink>
-      <NavLink activeClassName="is-active" to="/explorer">
-        Explorer
+      <NavLink activeClassName="is-active" to="/explore">
+        Explore
       </NavLink>
       <NavLink activeClassName="is-active" to="/indicies">
         Indcies
@@ -52,7 +52,7 @@ const App = () => (
     <main>
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/addresses" component={Addresses} />
-      <Route exact path="/explorer" component={Explorer} />
+      <Route exact path="/explore" component={Explore} />
       <Route exact path="/indicies" component={Indcies} />
       <Route exact path="/signatures" component={Signatures} />
       <Route exact path="/caches" component={Caches} />

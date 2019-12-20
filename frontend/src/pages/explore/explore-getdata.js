@@ -1,4 +1,4 @@
-import { queryAPI } from '../../utils';
+const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
 const BEGIN = 'explore/BEGIN';
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: action.e,
+        error: action.err,
         blocks: {}
       };
 
@@ -45,25 +45,25 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------------
-export const dispatcher_Explorer = () => {
+export const dispatcher_Explore = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'blocks', 'blocks=latest')
-      .then(async (res) => {
-        let json = await res.json();
+    return Utils.queryAPI_get('blocks', 'blocks=latest')
+      .then(async (result) => {
+        let json = await result.json();
         dispatch({
           type: SUCCESS,
           payload: json
         });
         return json;
       })
-      .catch((e) => {
+      .catch((err) => {
         dispatch({
           type: FAILURE,
-          e
+          err
         });
       });
   };

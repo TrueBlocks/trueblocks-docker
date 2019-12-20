@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------*/
 .wrapper {
   display: grid;
-  grid-template-columns: 1.33fr 2fr 2fr 2fr 2fr 2fr 2fr;
+  grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr 2fr;
   background-color: #fff;
   color: #444;
   font-family: 'Courier New', Courier, monospace;
@@ -83,7 +83,7 @@
 }
 
 .summary-table.box.col-item:hover {
-  background-color: moccasin;
+  background-color: antiquewhite;
   cursor: pointer;
 }
 

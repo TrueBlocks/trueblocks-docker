@@ -1,0 +1,8 @@
+[settings]
+class = CSettings
+fields = subpage: 'settings/config'
+state = configSettings: {}
+query_url = config
+query_opts = get
+query_extract = .data[0]
+page_notes = Monitors are per-address index caches that enable fast retreival of appearance histories for any account.

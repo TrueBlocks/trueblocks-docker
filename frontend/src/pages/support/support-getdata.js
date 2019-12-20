@@ -1,4 +1,4 @@
-import { queryAPI } from '../../utils';
+const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
 const BEGIN = 'support/BEGIN';
@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: action.e
+        error: action.err
       };
 
     default:
@@ -47,19 +47,19 @@ export const dispatcher_Support = () => {
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'ping', '')
-      .then(async (res) => {
-        let json = await res.json();
+    return Utils.queryAPI_get('ping', '')
+      .then(async (result) => {
+        let json = await result.json();
         dispatch({
           type: SUCCESS,
           payload: json
         });
         return json;
       })
-      .catch((e) => {
+      .catch((err) => {
         dispatch({
           type: FAILURE,
-          e
+          err
         });
       });
   };

@@ -8,7 +8,8 @@ export const summary_addresses_data = [
       { header: 'Known Contracts', value: 991, route_to: 'addresses/known' },
       { header: 'Prefunds', value: 8894, route_to: 'addresses/prefunds' },
       { header: 'Community', value: 916, route_to: 'addresses/community' },
-      { header: 'e-010' }
+      { header: 'e-011' },
+      { header: 'e-012' }
     ],
     endnote: '',
     color: 'pink'
@@ -16,16 +17,17 @@ export const summary_addresses_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_signatures_data = [
+export const summary_explore_data = [
   {
-    page: 'Signatures',
+    page: 'Explore',
     items: [
-      { header: 'From Monitors', value: 406, route_to: 'signatures/monitors' },
-      { header: 'Known Signatures', value: 1559, route_to: 'signatures/known' },
-      { header: 'Generated', value: 1212121, route_to: 'signatures/generated' },
-      { header: 'ABIs', value: 0, route_to: 'signatures/abis' },
-      { header: 'e-021' },
-      { header: 'e-022' }
+      { header: 'Accounts', value: 0, route_to: 'explore/accounts' },
+      { header: 'Blocks', value: 0, route_to: 'explore/blocks' },
+      { header: 'Transactions', value: 0, route_to: 'explore/txs' },
+      { header: 'Receipts', value: 0, route_to: 'explore/receipts' },
+      { header: 'Logs', value: 0, route_to: 'explore/logs' },
+      { header: 'Traces', value: 0, route_to: 'explore/traces' },
+      { header: 'e-006' }
     ],
     endnote: '',
     color: 'purple'
@@ -42,10 +44,29 @@ export const summary_indicies_data = [
       { header: 'Columns', value: 3981, route_to: 'indicies/columns' },
       { header: 'Shared', value: 3981, route_to: 'indicies/shared' },
       { header: 'e-031' },
-      { header: 'e-032' }
+      { header: 'e-032' },
+      { header: 'e-033' }
     ],
     endnote: '',
     color: 'blue'
+  }
+];
+
+/*-----------------------------------------------------------------------------*/
+export const summary_signatures_data = [
+  {
+    page: 'Signatures',
+    items: [
+      { header: 'From Monitors', value: 406, route_to: 'signatures/monitors' },
+      { header: 'Known Signatures', value: 1559, route_to: 'signatures/known' },
+      { header: 'Generated', value: 1212121, route_to: 'signatures/generated' },
+      { header: 'ABIs', value: 0, route_to: 'signatures/abis' },
+      { header: 'e-021' },
+      { header: 'e-022' },
+      { header: 'e-023' }
+    ],
+    endnote: '',
+    color: 'purple'
   }
 ];
 
@@ -57,15 +78,17 @@ export const summary_caches_data = [
       { header: 'Transactions/Logs', value: 3981, route_to: 'caches/txs' },
       { header: 'Traces', value: 3981, route_to: 'caches/traces' },
       { header: 'Blocks', value: 0, route_to: 'caches/blocks' },
+      { header: 'Prices', value: 0, route_to: 'caches/prices' },
       { header: 'Slurps', value: 0, route_to: 'caches/slurps' },
-      { header: 'e-041' },
-      { header: 'e-042' }
+      { header: 'e-042' },
+      { header: 'e-043' }
     ],
     endnote: '',
     color: 'green'
   }
 ];
 
+/*-----------------------------------------------------------------------------*/
 export const summary_other_data = [
   {
     page: 'Other',
@@ -75,27 +98,11 @@ export const summary_other_data = [
       { header: 'Generated Blocks', value: 501, route_to: 'other/generated' },
       { header: 'Groups', value: 0, route_to: 'other/groups' },
       { header: 'Sub Groups', value: 0, route_to: 'other/subgroups' },
-      { header: 'e-051' }
+      { header: 'e-051' },
+      { header: 'e-052' }
     ],
     endnote: '',
     color: 'tan'
-  }
-];
-
-/*-----------------------------------------------------------------------------*/
-export const summary_explorer_data = [
-  {
-    page: 'Explorer',
-    items: [
-      { header: 'Explor', value: 0, route_to: 'explore' },
-      { header: 'e-001' },
-      { header: 'e-002' },
-      { header: 'e-003' },
-      { header: 'e-004' },
-      { header: 'e-005' }
-    ],
-    endnote: '',
-    color: 'purple'
   }
 ];
 
@@ -106,10 +113,11 @@ export const summary_settings_data = [
     items: [
       { header: 'Config Files', value: 0, route_to: 'settings/config' },
       { header: 'Skins', value: 0, route_to: 'settings/skins' },
-      { header: 'e-062' },
+      { header: 'Licenses', value: 0, route_to: 'settings/licenses' },
       { header: 'e-063' },
       { header: 'e-064' },
-      { header: 'e-065' }
+      { header: 'e-065' },
+      { header: 'e-066' }
     ],
     endnote: '',
     color: 'orange'
@@ -126,7 +134,8 @@ export const summary_support_data = [
       { header: 'Whatever', value: 0, route_to: 'support/whatever' },
       { header: 'e-001' },
       { header: 'e-002' },
-      { header: 'e-003' }
+      { header: 'e-003' },
+      { header: 'e-004' }
     ],
     endnote: '',
     color: 'purple'
@@ -143,7 +152,8 @@ export const summary_about_data = [
       { header: 'Team', value: 0, route_to: 'about/team' },
       { header: 'e-001' },
       { header: 'e-002' },
-      { header: 'e-003' }
+      { header: 'e-003' },
+      { header: 'e-004' }
     ],
     endnote: '',
     color: 'purple'
@@ -151,7 +161,7 @@ export const summary_about_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_data = [
+export const summary_dashboard_data = [
   {
     page: 'Addresses',
     items: [
@@ -166,14 +176,14 @@ export const summary_data = [
     color: 'pink'
   },
   {
-    page: 'Signatures',
+    page: 'Explore',
     items: [
-      { header: 'From Monitors', value: 406, route_to: 'signatures/monitors' },
-      { header: 'Known Signatures', value: 1559, route_to: 'signatures/known' },
-      { header: 'Generated', value: 1212121, route_to: 'signatures/generated' },
-      { header: 'ABIs', value: 0, route_to: 'signatures/abis' },
-      { header: 'e-121' },
-      { header: 'e-122' }
+      { header: 'Accounts', value: 0, route_to: 'explore/accounts' },
+      { header: 'Blocks', value: 0, route_to: 'explore/blocks' },
+      { header: 'Transactions', value: 0, route_to: 'explore/txs' },
+      { header: 'Receipts', value: 0, route_to: 'explore/receipts' },
+      { header: 'Logs', value: 0, route_to: 'explore/receipts' },
+      { header: 'Traces', value: 0, route_to: 'explore/logs' }
     ],
     endnote: '',
     color: 'purple'
@@ -192,13 +202,26 @@ export const summary_data = [
     color: 'blue'
   },
   {
+    page: 'Signatures',
+    items: [
+      { header: 'From Monitors', value: 406, route_to: 'signatures/monitors' },
+      { header: 'Known Signatures', value: 1559, route_to: 'signatures/known' },
+      { header: 'Generated', value: 1212121, route_to: 'signatures/generated' },
+      { header: 'ABIs', value: 0, route_to: 'signatures/abis' },
+      { header: 'e-121' },
+      { header: 'e-122' }
+    ],
+    endnote: '',
+    color: 'purple'
+  },
+  {
     page: 'Caches',
     items: [
       { header: 'Transactions/Logs', value: 3981, route_to: 'caches/txs' },
       { header: 'Traces', value: 3981, route_to: 'caches/traces' },
       { header: 'Blocks', value: 0, route_to: 'caches/blocks' },
+      { header: 'Prices', value: 0, route_to: 'caches/prices' },
       { header: 'Slurps', value: 0, route_to: 'caches/slurps' },
-      { header: 'e-141' },
       { header: 'e-142' }
     ],
     endnote: '',
@@ -222,7 +245,7 @@ export const summary_data = [
     items: [
       { header: 'Config Files', value: 0, route_to: 'settings/config' },
       { header: 'Skins', value: 0, route_to: 'settings/skins' },
-      { header: 'e-162' },
+      { header: 'Licenses', value: 0, route_to: 'settings/licenses' },
       { header: 'e-163' },
       { header: 'e-164' },
       { header: 'e-165' }

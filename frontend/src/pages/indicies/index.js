@@ -1,12 +1,10 @@
 import React from 'react';
-import Connection from '../../components';
+import Page from '../../components/page';
 import IndiciesInner from './indicies-inner';
 
-const Indicies = (props) => (
-  <div className="page">
-    <Connection props={props} />
-    <IndiciesInner props={props} />
-  </div>
-);
-
-export default Indicies;
+//----------------------------------------------------------------------
+export default class Indicies extends Page {
+  render = () => {
+    return <Page inner={<IndiciesInner />} />;
+  };
+}

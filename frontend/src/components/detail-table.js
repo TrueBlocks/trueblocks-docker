@@ -54,7 +54,7 @@ export class DetailTable extends React.Component {
                 key={index + '-5'}
                 css_pre={this.props.css_pre}
                 item={item}
-                content={item.description.substr(0, 50) + '...'}
+                content={item.description && item.description.substr(0, 50) + '...'}
               />
               <ColumnItemDetail
                 {...this.props}

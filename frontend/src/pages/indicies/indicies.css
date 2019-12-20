@@ -37,14 +37,14 @@
 }
 
 .right-panel .indicies-chart-container .indicies-grid .filling.in-progress:hover {
-  background: repeating-linear-gradient(-45deg, moccasin, moccasin 5px, white 5px, white 10px);
+  background: repeating-linear-gradient(-45deg, antiquewhite, antiquewhite 5px, white 5px, white 10px);
   background-repeat: repeat;
 }
 
 .right-panel .indicies-chart-container .indicies-grid .filling.finalized:hover,
 .right-panel .indicies-chart-container .indicies-grid .filling.in-progress:hover {
   /* background-color: lavender; */
-  background-color: moccasin;
+  background-color: antiquewhite;
   cursor: zoom-in;
   color: #b9c7b9;
 }
@@ -55,8 +55,8 @@
   justify-content: center;
   color: black;
   font-weight: 600;
-  /* background-color: #e2e5f0; */
-  background-color: red;
+  background-color: #e2e5f0;
+  /* background-color: red; */
   border-left: 1px solid #aaa;
 }
 
@@ -67,9 +67,9 @@
   height: 25px;
   color: black;
   font-weight: 600;
-  /* background-color: #e2e5f0; */
   border-top: 1px solid #aaa;
-  background-color: blue;
+  background-color: #e2e5f0;
+  /* background-color: blue; */
 }
 
 .indicies-index-container {
@@ -129,9 +129,9 @@
   display: flex;
   flex-wrap: wrap;
   /* background-color: rgb(245, 245, 245); */
-  background-color: orange;
+  background-color: antiquewhite;
   padding: 10px;
-  border: 1px dashed purple;
+  border: 1px solid purple;
 }
 
 .indicies-index-node :nth-child(odd) {

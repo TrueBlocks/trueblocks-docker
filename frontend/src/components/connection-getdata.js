@@ -1,4 +1,4 @@
-import { queryAPI } from '../utils';
+const Utils = require('../utils');
 
 //----------------------------------------------------------------
 const BEGIN = 'conne/BEGIN';
@@ -65,7 +65,7 @@ export const dispatcher_Connection = () => {
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'status', 'modes=some')
+    return Utils.queryAPI_get('status', 'modes=some')
       .then(async (res) => {
         const json = await res.json();
         const data = json.data[0];

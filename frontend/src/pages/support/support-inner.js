@@ -6,11 +6,11 @@ import { dispatcher_Support } from './support-getdata';
 
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
-import { SummaryTable } from '../../components/summary-table';
+import { LocalMenu } from '../../components/local-menu';
+import './support.css';
 
-import { summary_support_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
-//exiting1
+import { summary_support_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -18,32 +18,37 @@ class SupportInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      which: 'support'
       // EXISTING_CODE
-      //exiting2
       // EXISTING_CODE
+      subpage: 'support/pay'
     };
     this.innerEar = this.innerEar.bind(this);
   }
 
+  // EXISTING_CODE
+  // EXISTING_CODE
+
   innerEar = (cmd, value) => {
     console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
-    if (cmd === 'change_page') {
-      if (value === '/') {
-        window.open('/', '_self');
-      } else {
-        this.setState({
-          which: value
-          // EXISTING_CODE
-          //exiting3
-          // EXISTING_CODE
-        });
-      }
+
+    // EXISTING_CODE
+    // EXISTING_CODE
+
+    if (cmd === 'change_subpage') {
+      this.setState({
+        // EXISTING_CODE
+        // EXISTING_CODE
+        subpage: value
+      });
+    } else if (cmd === 'goto_page') {
+      window.open('/' + value.replace('/', '?sub='), '_self');
     }
     // EXISTING_CODE
-    //existing4
     // EXISTING_CODE
   };
+
+  // EXISTING_CODE
+  // EXISTING_CODE
 
   getInner = () => {
     return (
@@ -70,19 +75,21 @@ class SupportInner extends React.Component {
   };
 
   getContainer = () => {
+    var isConnected = this.props.isConnected;
+    // EXISTING_CODE
+    // EXISTING_CODE
     let container;
     if (this.props.error) {
       container = <Loading status="error" message={this.props.error} />;
-    } else if (this.props.isConnected) {
+    } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <SummaryTable data={summary_support_data} active={this.state.which} no_labels innerEar={this.innerEar} />
-          <h4>{this.state.which}</h4>
+          <LocalMenu data={summary_support_data} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Initializing..." />;
+      container = <Loading status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -108,6 +115,8 @@ class SupportInner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Support }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   isConnected: reducer_Connection.isConnected,
   isLoading: reducer_Connection.isLoading,
   error: reducer_Connection.error
@@ -117,6 +126,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_Support }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_Support
     },
     dispatch

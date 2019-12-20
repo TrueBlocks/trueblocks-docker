@@ -20,6 +20,7 @@
   "dependencies": {
     "connected-react-router": "4.5.0",
     "d3": "5",
+    "prop-types": "^15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-redux": "5.1.1",

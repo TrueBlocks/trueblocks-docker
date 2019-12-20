@@ -1,4 +1,4 @@
-import { queryAPI } from '../../utils';
+const Utils = require('../../utils');
 
 //----------------------------------------------------------------
 const initialState = {
@@ -46,7 +46,7 @@ export const dispatcher_MonitorRemove = (address, remove) => {
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'rm', 'address=' + address + (remove ? '&yes' : ''))
+    return Utils.queryAPI_get('rm', 'address=' + address + (remove ? '&yes' : ''))
       .then(async (res) => {
         let json = await res.json();
         return dispatch({

@@ -2,70 +2,100 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import { SummaryTable } from '../../components/summary-table';
-import { summary_indicies_data } from '../../fake_data/summary-data';
+import { dispatcher_Indicies } from './indicies-getdata';
 
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
-import { humanFileSize, fmtDouble, fmtInteger } from '../../utils';
-
-import { dispatcher_Indicies } from './indicies-getdata';
+import { LocalMenu } from '../../components/local-menu';
 import './indicies.css';
+
+// EXISTING_CODE
+import { summary_indicies_data } from '../../fake_data/summary-data';
+import { humanFileSize, fmtDouble, fmtInteger } from '../../utils';
 import '../../index.css';
+// EXISTING_CODE
 
 //----------------------------------------------------------------------
-const IndiciesInner = (props) => {
-  let status;
-  if (props.error) {
-    status = 'error';
-  } else if (props.caches === undefined || props.client === -1) {
-    status = 'initializing';
-  } else {
-    status = 'ready';
+class IndiciesInner extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // EXISTING_CODE
+      // EXISTING_CODE
+      subpage: 'indicies/full'
+    };
+    this.innerEar = this.innerEar.bind(this);
   }
 
-  function innerEar(cmd, value) {
+  // EXISTING_CODE
+  // EXISTING_CODE
+
+  innerEar = (cmd, value) => {
     console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
-    if (cmd === 'change_page') {
-      // this.setState(this.state);
+
+    // EXISTING_CODE
+    // EXISTING_CODE
+
+    if (cmd === 'change_subpage') {
+      this.setState({
+        // EXISTING_CODE
+        // EXISTING_CODE
+        subpage: value
+      });
+    } else if (cmd === 'goto_page') {
       window.open('/' + value.replace('/', '?sub='), '_self');
     }
-  }
+    // EXISTING_CODE
+    // EXISTING_CODE
+  };
 
-  let container;
-  switch (status) {
-    case 'ready':
+  // EXISTING_CODE
+  // EXISTING_CODE
+
+  getInner = () => {
+    return (
+      // EXISTING_CODE
+      <SystemProgressChart {...this.props} />
+      // EXISTING_CODE
+    );
+  };
+
+  getContainer = () => {
+    var isConnected = this.props.isConnected;
+    // EXISTING_CODE
+    isConnected = this.props.caches !== undefined && this.props.client !== -1;
+    // EXISTING_CODE
+    let container;
+    if (this.props.error) {
+      container = <Loading status="error" message={this.props.error} />;
+    } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <SummaryTable data={summary_indicies_data} no_labels innerEar={innerEar} />
-          <SystemProgressChart {...props} />
+          <LocalMenu data={summary_indicies_data} active={this.state.subpage} innerEar={this.innerEar} />
+          {this.getInner()}
         </div>
       );
-      break;
-    case 'error':
-      container = <Loading status={status} message={props.error} />;
-      break;
-    case 'initializing':
-    default:
-      container = <Loading status={status} message="Initializing..." />;
-      break;
-  }
+    } else {
+      container = <Loading status="initializing" message="Loading..." />;
+    }
+    return container;
+  };
 
-  return (
-    <div className="right-panel">
-      <div>
+  render = () => {
+    return (
+      <div className="right-panel">
         <PageHeader
           title="Indicies"
-          notes="TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a lot of space on your 
-          hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
+          notes="TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a 
+            lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
         />
-        {container}
+        {this.getContainer()}
       </div>
-    </div>
-  );
-};
+    );
+  };
+}
 
+// EXISTING_CODE
 //----------------------------------------------------------------------
 class SystemProgressChart extends React.Component {
   constructor(props) {
@@ -243,27 +273,32 @@ const IndexDetail = (props) => {
     </div>
   );
 };
+// EXISTING_CODE
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Indicies }) => ({
+  // EXISTING_CODE
   caches: reducer_Connection.systemData.caches,
   index_path: reducer_Connection.systemData.index_path,
   cache_path: reducer_Connection.systemData.cache_path,
-  isConnected: reducer_Connection.isConnected,
   unripe: reducer_Connection.unripe,
   staging: reducer_Connection.staging,
   finalized: reducer_Connection.finalized,
   client: reducer_Connection.client,
+  loadingIndex: reducer_Indicies.isLoading,
+  // EXISTING_CODE
+  isConnected: reducer_Connection.isConnected,
   isLoading: reducer_Connection.isLoading,
   error: reducer_Connection.error,
-  indexData: reducer_Indicies.indexData,
-  loadingIndex: reducer_Indicies.isLoading
+  indexData: reducer_Indicies.indexData
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_Indicies
     },
     dispatch

@@ -28,7 +28,7 @@ class BigRow extends React.Component {
         <LastCol key={id + '_03'} {...other} />
 
         <FirstCol key={id + '_11'} {...other} no_labels={no_labels} linked />
-        <ItemCols key={id + '_12'} {...other} />
+        <ItemCols key={id + '_12'} {...other} no_labels={no_labels} />
         <LastCol key={id + '_13'} {...other} />
 
         <SepRow key={id + '_21'} />
@@ -80,7 +80,7 @@ class ItemCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class ItemCol extends React.Component {
   itemClicked = () => {
-    this.props.innerEar('change_page', this.props.item.route_to);
+    this.props.innerEar(this.props.no_labels ? 'change_subpage' : 'goto_page', this.props.item.route_to);
   };
 
   render = () => {
@@ -103,9 +103,10 @@ class ItemCol extends React.Component {
 class FirstCol extends React.Component {
   itemClicked = () => {
     if (this.props.no_labels) {
-      this.props.innerEar('change_page', '/');
+      this.props.innerEar('goto_page', '/');
     }
   };
+
   render = () => {
     var cn = this.props.no_labels ? 'summary-table box frontpad' : 'summary-table box row-head';
     return (

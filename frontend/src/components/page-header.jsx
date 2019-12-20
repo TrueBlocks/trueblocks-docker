@@ -10,7 +10,7 @@ class PageHeader extends React.Component {
         <PageNotes text={this.props.notes} />
       </h1>
     );
-  }
+  };
 }
 
 //---------------------------------------------------------------------

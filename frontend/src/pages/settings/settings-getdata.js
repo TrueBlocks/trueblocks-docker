@@ -1,14 +1,15 @@
-import { queryAPI } from '../../utils';
+const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-const BEGIN = '[{SEVEN}]/BEGIN';
-const SUCCESS = '[{SEVEN}]/SUCCESS';
-const FAILURE = '[{SEVEN}]/FAILURE';
+const BEGIN = 'setting/BEGIN';
+const SUCCESS = 'setting/SUCCESS';
+const FAILURE = 'setting/FAILURE';
 
 //----------------------------------------------------------------------
 const initialState = {
   isLoading: false,
-  error: null[{GLOBAL_STATE1}]
+  error: null,
+  configSettings: {}
 };
 
 //----------------------------------------------------------------------
@@ -18,21 +19,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: null[{GLOBAL_STATE2}]
+        error: null,
+        configSettings: {}
       };
 
     case SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: null[{GLOBAL_STATE3}]
+        error: null,
+        configSettings: action.payload
       };
 
     case FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.e[{GLOBAL_STATE2}]
+        error: action.err,
+        configSettings: {}
       };
 
     default:
@@ -41,25 +45,25 @@ export default (state = initialState, action) => {
 };
 
 //----------------------------------------------------------------------
-export const dispatcher_[{PROPER}] = () => {
+export const dispatcher_Settings = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, '[{QUERY_URL}]', '[{QUERY_OPTS}]')
-      .then(async (res) => {
-        let json = await res.json();
+    return Utils.queryAPI_get('config', 'get')
+      .then(async (result) => {
+        let json = await result.json();
         dispatch({
           type: SUCCESS,
-          payload: json
+          payload: json.data[0]
         });
         return json;
       })
-      .catch((e) => {
+      .catch((err) => {
         dispatch({
           type: FAILURE,
-          e
+          err
         });
       });
   };

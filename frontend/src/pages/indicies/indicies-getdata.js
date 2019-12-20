@@ -1,24 +1,26 @@
-import { queryAPI } from '../../utils';
+const Utils = require('../../utils');
 
-//----------------------------------------------------------------
-const BEGIN = 'indic/BEGIN';
-const SUCCESS = 'indic/SUCCESS';
-const FAILURE = 'indic/FAILURE';
+//----------------------------------------------------------------------
+const BEGIN = 'indicie/BEGIN';
+const SUCCESS = 'indicie/SUCCESS';
+const FAILURE = 'indicie/FAILURE';
 
-//----------------------------------------------------------------
+//----------------------------------------------------------------------
 const initialState = {
-  indexData: {},
   isLoading: false,
-  error: null
+  error: null,
+  indexData: {}
 };
 
-//----------------------------------------------------------------
+//----------------------------------------------------------------------
 export default (state = initialState, action) => {
   switch (action.type) {
     case BEGIN:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        error: null,
+        indexData: {}
       };
 
     case SUCCESS:
@@ -33,7 +35,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: action.e,
+        error: action.err,
         indexData: {}
       };
 
@@ -42,27 +44,26 @@ export default (state = initialState, action) => {
   }
 };
 
-//----------------------------------------------------------------
+//----------------------------------------------------------------------
 export const dispatcher_Indicies = () => {
   return (dispatch, getState) => {
     dispatch({
       type: BEGIN
     });
 
-    return queryAPI(getState().reducer_Settings.apiProvider, 'status', 'modes=index&details')
-      .then(async (res) => {
-        let json = await res.json();
-        json = json.data[0].caches[0];
+    return Utils.queryAPI_get('status', 'modes=index&details')
+      .then(async (result) => {
+        let json = await result.json();
         dispatch({
           type: SUCCESS,
-          payload: json
+          payload: json.data[0].caches[0]
         });
         return json;
       })
-      .catch((e) => {
+      .catch((err) => {
         dispatch({
           type: FAILURE,
-          e
+          err
         });
       });
   };

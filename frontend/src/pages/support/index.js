@@ -1,14 +1,10 @@
 import React from 'react';
-import Connection from '../../components';
+import Page from '../../components/page';
 import SupportInner from './support-inner';
 
 //----------------------------------------------------------------------
-const Support = (props) => (
-  <div className="page">
-    <Connection props={props} />
-    <SupportInner props={props} />
-  </div>
-);
-
-//----------------------------------------------------------------------
-export default Support;
+export default class Support extends Page {
+  render = () => {
+    return <Page inner={<SupportInner />} />;
+  };
+}

@@ -1,14 +1,10 @@
 import React from 'react';
-import Connection from '../../components';
+import Page from '../../components/page';
 import AboutInner from './about-inner';
 
 //----------------------------------------------------------------------
-const About = (props) => (
-  <div className="page">
-    <Connection props={props} />
-    <AboutInner props={props} />
-  </div>
-);
-
-//----------------------------------------------------------------------
-export default About;
+export default class About extends Page {
+  render = () => {
+    return <Page inner={<AboutInner />} />;
+  };
+}
