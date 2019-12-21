@@ -7,6 +7,7 @@ import { dispatcher_Dashboard } from './dashboard-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { SummaryTable } from '../../components/summary-table';
+import { dashboard_local_menu } from '../../fake_data/summary-data';
 import './dashboard.css';
 
 import { polling } from '../../components/polling';
@@ -23,7 +24,7 @@ class DashboardInner extends React.Component {
     this.state = {
       // EXISTING_CODE
       // EXISTING_CODE
-      subpage: 'dashboard'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -44,7 +45,7 @@ class DashboardInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -71,7 +72,7 @@ class DashboardInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <SummaryTable data={summary_dashboard_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <SummaryTable data={dashboard_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -84,14 +85,12 @@ class DashboardInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="Dashboard"
-            notes="Learn about the TrubBlocks project, our organization, our philosopy 
+        <PageHeader
+          title="Dashboard"
+          notes="Learn about the TrubBlocks project, our organization, our philosopy 
             towards decentralization, and our team."
-          />
-          {this.getContainer()}
-        </div>
+        />
+        {this.getContainer()}
       </div>
     );
   };

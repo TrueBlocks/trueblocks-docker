@@ -7,10 +7,10 @@ import { dispatcher_Support } from './support-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { LocalMenu } from '../../components/local-menu';
+import { support_local_menu } from '../../fake_data/summary-data';
 import './support.css';
 
 // EXISTING_CODE
-import { summary_support_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -20,7 +20,7 @@ class SupportInner extends React.Component {
     this.state = {
       // EXISTING_CODE
       // EXISTING_CODE
-      subpage: 'support/pay'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -41,7 +41,7 @@ class SupportInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -84,7 +84,7 @@ class SupportInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <LocalMenu data={summary_support_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <LocalMenu data={support_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -97,14 +97,12 @@ class SupportInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="Support"
-            notes="We provide various support options ranging from online email/forum discussions to 
+        <PageHeader
+          title="Support"
+          notes="We provide various support options ranging from online email/forum discussions to 
             full enterprise-level support plans to suit your needs. We've got you covered."
-          />
-          {this.getContainer()}
-        </div>
+        />
+        {this.getContainer()}
       </div>
     );
   };

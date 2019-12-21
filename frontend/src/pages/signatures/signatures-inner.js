@@ -7,10 +7,10 @@ import { dispatcher_Signatures } from './signatures-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { LocalMenu } from '../../components/local-menu';
+import { signatures_local_menu } from '../../fake_data/summary-data';
 import './signatures.css';
 
 // EXISTING_CODE
-import { summary_signatures_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -20,7 +20,7 @@ class SignaturesInner extends React.Component {
     this.state = {
       // EXISTING_CODE
       // EXISTING_CODE
-      subpage: 'signatures/monitors'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -41,7 +41,7 @@ class SignaturesInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -73,7 +73,7 @@ class SignaturesInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <LocalMenu data={summary_signatures_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <LocalMenu data={signatures_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -86,14 +86,12 @@ class SignaturesInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="Signatures"
-            notes="TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your 
+        <PageHeader
+          title="Signatures"
+          notes="TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your 
             hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
-          />
-          {this.getContainer()}
-        </div>
+        />
+        {this.getContainer()}
       </div>
     );
   };

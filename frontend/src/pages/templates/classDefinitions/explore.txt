@@ -1,6 +1,6 @@
 [settings]
 class = CExplore
-fields = subpage: 'explore/accounts'
+subpage = accounts
 state = blocks: {}
 query_url = blocks
 query_opts = blocks=latest

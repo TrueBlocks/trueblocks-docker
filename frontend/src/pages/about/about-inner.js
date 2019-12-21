@@ -7,10 +7,10 @@ import { dispatcher_About } from './about-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { LocalMenu } from '../../components/local-menu';
+import { about_local_menu } from '../../fake_data/summary-data';
 import './about.css';
 
 // EXISTING_CODE
-import { summary_about_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -20,7 +20,7 @@ class AboutInner extends React.Component {
     this.state = {
       // EXISTING_CODE
       // EXISTING_CODE
-      subpage: 'about/team'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -41,7 +41,7 @@ class AboutInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -82,7 +82,7 @@ class AboutInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <LocalMenu data={summary_about_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <LocalMenu data={about_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -95,14 +95,12 @@ class AboutInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="About"
-            notes="Learn about the TrubBlocks project, our organization, our philosopy 
+        <PageHeader
+          title="About"
+          notes="Learn about the TrubBlocks project, our organization, our philosopy 
             towards decentralization, and our team."
-          />
-          {this.getContainer()}
-        </div>
+        />
+        {this.getContainer()}
       </div>
     );
   };

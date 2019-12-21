@@ -7,10 +7,10 @@ import { dispatcher_Other } from './other-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { LocalMenu } from '../../components/local-menu';
+import { other_local_menu } from '../../fake_data/summary-data';
 import './other.css';
 
 // EXISTING_CODE
-import { summary_other_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -20,7 +20,7 @@ class OtherInner extends React.Component {
     this.state = {
       // EXISTING_CODE
       // EXISTING_CODE
-      subpage: 'other/generated'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -41,7 +41,7 @@ class OtherInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -75,7 +75,7 @@ class OtherInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <LocalMenu data={summary_other_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <LocalMenu data={other_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -88,13 +88,11 @@ class OtherInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="Other"
-            notes="The Other panel allows you to configure various other items related to TrueBlocks."
-          />
-          {this.getContainer()}
-        </div>
+        <PageHeader
+          title="Other"
+          notes="The Other panel allows you to configure various other items related to TrueBlocks."
+        />
+        {this.getContainer()}
       </div>
     );
   };

@@ -3,8 +3,9 @@ import Page from '../../components/page';
 import AddressesInner from './addresses-inner';
 
 //----------------------------------------------------------------------
-export default class Addresses extends Page {
-  render = () => {
-    return <Page inner={<AddressesInner />} />;
-  };
-}
+var Addresses = (props) => {
+  var subpage = props.match.params.subpage ? props.match.params.subpage : 'addresses/custom';
+  var inner = <AddressesInner subpage={subpage} />;
+  return <Page inner={inner} />;
+};
+export default Addresses;

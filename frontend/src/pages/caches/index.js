@@ -3,8 +3,9 @@ import Page from '../../components/page';
 import CachesInner from './caches-inner';
 
 //----------------------------------------------------------------------
-export default class Caches extends Page {
-  render = () => {
-    return <Page inner={<CachesInner />} />;
-  };
-}
+var Caches = (props) => {
+  var subpage = props.match.params.subpage ? props.match.params.subpage : 'caches/overview';
+  var inner = <CachesInner subpage={subpage} />;
+  return <Page inner={inner} />;
+};
+export default Caches;

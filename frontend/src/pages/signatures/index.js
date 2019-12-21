@@ -3,8 +3,9 @@ import Page from '../../components/page';
 import SignaturesInner from './signatures-inner';
 
 //----------------------------------------------------------------------
-export default class Signatures extends Page {
-  render = () => {
-    return <Page inner={<SignaturesInner />} />;
-  };
-}
+var Signatures = (props) => {
+  var subpage = props.match.params.subpage ? props.match.params.subpage : 'signatures/monitors';
+  var inner = <SignaturesInner subpage={subpage} />;
+  return <Page inner={inner} />;
+};
+export default Signatures;

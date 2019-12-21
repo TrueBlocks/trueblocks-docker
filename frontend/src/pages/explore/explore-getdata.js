@@ -13,7 +13,7 @@ const initialState = {
 };
 
 //----------------------------------------------------------------------
-export default (state = initialState, action) => {
+export default function reducer_Explore(state = initialState, action) {
   switch (action.type) {
     case BEGIN:
       return {

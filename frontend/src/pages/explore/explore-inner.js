@@ -7,10 +7,10 @@ import { dispatcher_Explore } from './explore-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { LocalMenu } from '../../components/local-menu';
+import { explore_local_menu } from '../../fake_data/summary-data';
 import './explore.css';
 
 // EXISTING_CODE
-import { summary_explore_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -20,7 +20,7 @@ class ExploreInner extends React.Component {
     this.state = {
       // EXISTING_CODE
       // EXISTING_CODE
-      subpage: 'explore/accounts'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -41,7 +41,7 @@ class ExploreInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -78,7 +78,7 @@ class ExploreInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <LocalMenu data={summary_explore_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <LocalMenu data={explore_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -91,15 +91,13 @@ class ExploreInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="Explore"
-            notes="The Explore allows one to view the details of every transactions for 
+        <PageHeader
+          title="Explore"
+          notes="The Explore allows one to view the details of every transactions for 
             each previously monitored address. Because TrueBlocks runs on a local machine not a server, this 
             means that you are restricted to exploring only addresses that you've previously monitored."
-          />
-          {this.getContainer()}
-        </div>
+        />
+        {this.getContainer()}
       </div>
     );
   };

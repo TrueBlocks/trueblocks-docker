@@ -1,6 +1,6 @@
 [settings]
 class = CDashboard
-fields = subpage: 'dashboard'
+subpage = 
 state = names: []
 query_url = names
 query_opts = custom&expand

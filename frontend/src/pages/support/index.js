@@ -3,8 +3,9 @@ import Page from '../../components/page';
 import SupportInner from './support-inner';
 
 //----------------------------------------------------------------------
-export default class Support extends Page {
-  render = () => {
-    return <Page inner={<SupportInner />} />;
-  };
-}
+var Support = (props) => {
+  var subpage = props.match.params.subpage ? props.match.params.subpage : 'support/pay';
+  var inner = <SupportInner subpage={subpage} />;
+  return <Page inner={inner} />;
+};
+export default Support;

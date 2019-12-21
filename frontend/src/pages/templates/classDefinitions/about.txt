@@ -1,6 +1,6 @@
 [settings]
 class = CAbout
-fields = subpage: 'about/team'
+subpage = team
 query_url = ping
 query_opts = 
 page_notes = Learn about the TrubBlocks project, our organization, our philosopy|towards decentralization, and our team.

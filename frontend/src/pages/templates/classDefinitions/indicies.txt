@@ -1,6 +1,6 @@
 [settings]
 class = CIndicies
-fields = subpage: 'indicies/full'
+subpage = full
 state = indexData: {}
 query_url = status
 query_opts = modes=index&details

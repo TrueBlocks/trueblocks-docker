@@ -7,6 +7,7 @@ import { dispatcher_[{PROPER}] } from './[{LONG}]-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { [{MENU_TYPE}] } from '../../components/[{MENU_FILE}]';
+import { [{LONG}]_local_menu } from '../../fake_data/summary-data';
 import './[{LONG}].css';[{POLLING}]
 
 // EXISTING_CODE
@@ -19,7 +20,7 @@ class [{PROPER}]Inner extends React.Component {
     this.state = {
       // EXISTING_CODE
       // EXISTING_CODE
-      [{STATE_FIELDS}]
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -40,7 +41,7 @@ class [{PROPER}]Inner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -66,7 +67,7 @@ class [{PROPER}]Inner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <[{MENU_TYPE}] data={summary_[{LONG}]_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <[{MENU_TYPE}] data={[{LONG}]_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -79,13 +80,11 @@ class [{PROPER}]Inner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="[{PROPER}]"
-            notes="[{PAGENOTES}]"
-          />
-          {this.getContainer()}
-        </div>
+        <PageHeader
+          title="[{PROPER}]"
+          notes="[{PAGENOTES}]"
+        />
+        {this.getContainer()}
       </div>
     );
   };

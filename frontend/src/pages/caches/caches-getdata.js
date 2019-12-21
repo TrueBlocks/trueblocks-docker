@@ -12,7 +12,7 @@ const initialState = {
 };
 
 //----------------------------------------------------------------------
-export default (state = initialState, action) => {
+export default function reducer_Caches(state = initialState, action) {
   switch (action.type) {
     case BEGIN:
       return {

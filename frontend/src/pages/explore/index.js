@@ -3,8 +3,9 @@ import Page from '../../components/page';
 import ExploreInner from './explore-inner';
 
 //----------------------------------------------------------------------
-export default class Explore extends Page {
-  render = () => {
-    return <Page inner={<ExploreInner />} />;
-  };
-}
+var Explore = (props) => {
+  var subpage = props.match.params.subpage ? props.match.params.subpage : 'explore/accounts';
+  var inner = <ExploreInner subpage={subpage} />;
+  return <Page inner={inner} />;
+};
+export default Explore;

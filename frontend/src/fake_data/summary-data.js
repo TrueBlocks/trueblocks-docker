@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------*/
-export const summary_addresses_data = [
+export const addresses_local_menu = [
   {
     page: 'Addresses',
     items: [
@@ -8,7 +8,7 @@ export const summary_addresses_data = [
       { header: 'Known Contracts', value: 991, route_to: 'addresses/known' },
       { header: 'Prefunds', value: 8894, route_to: 'addresses/prefunds' },
       { header: 'Community', value: 916, route_to: 'addresses/community' },
-      { header: 'e-011' },
+      { header: 'Slurps', value: 0, route_to: 'addresses/slurps' },
       { header: 'e-012' }
     ],
     endnote: '',
@@ -17,16 +17,16 @@ export const summary_addresses_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_explore_data = [
+export const explore_local_menu = [
   {
     page: 'Explore',
     items: [
       { header: 'Accounts', value: 0, route_to: 'explore/accounts' },
       { header: 'Blocks', value: 0, route_to: 'explore/blocks' },
-      { header: 'Transactions', value: 0, route_to: 'explore/txs' },
-      { header: 'Receipts', value: 0, route_to: 'explore/receipts' },
-      { header: 'Logs', value: 0, route_to: 'explore/logs' },
+      { header: 'Transactions', value: 0, route_to: 'explore/transactions' },
+      { header: 'Receipts/Logs', value: 0, route_to: 'explore/logs' },
       { header: 'Traces', value: 0, route_to: 'explore/traces' },
+      { header: 'e-005' },
       { header: 'e-006' }
     ],
     endnote: '',
@@ -35,7 +35,7 @@ export const summary_explore_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_indicies_data = [
+export const indicies_local_menu = [
   {
     page: 'Indices',
     items: [
@@ -53,7 +53,7 @@ export const summary_indicies_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_signatures_data = [
+export const signatures_local_menu = [
   {
     page: 'Signatures',
     items: [
@@ -66,30 +66,30 @@ export const summary_signatures_data = [
       { header: 'e-023' }
     ],
     endnote: '',
-    color: 'purple'
-  }
-];
-
-/*-----------------------------------------------------------------------------*/
-export const summary_caches_data = [
-  {
-    page: 'Caches',
-    items: [
-      { header: 'Transactions/Logs', value: 3981, route_to: 'caches/txs' },
-      { header: 'Traces', value: 3981, route_to: 'caches/traces' },
-      { header: 'Blocks', value: 0, route_to: 'caches/blocks' },
-      { header: 'Prices', value: 0, route_to: 'caches/prices' },
-      { header: 'Slurps', value: 0, route_to: 'caches/slurps' },
-      { header: 'e-042' },
-      { header: 'e-043' }
-    ],
-    endnote: '',
     color: 'green'
   }
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_other_data = [
+export const caches_local_menu = [
+  {
+    page: 'Caches',
+    items: [
+      { header: 'Overview', value: 0, route_to: 'caches/overview' },
+      { header: 'Blocks', value: 0, route_to: 'caches/blocks' },
+      { header: 'Transactions', value: 3981, route_to: 'caches/transactions' },
+      { header: 'Traces', value: 3981, route_to: 'caches/traces' },
+      { header: 'Prices', value: 0, route_to: 'caches/prices' },
+      { header: 'e-043' },
+      { header: 'e-044' }
+    ],
+    endnote: '',
+    color: 'tan'
+  }
+];
+
+/*-----------------------------------------------------------------------------*/
+export const other_local_menu = [
   {
     page: 'Other',
     items: [
@@ -102,12 +102,12 @@ export const summary_other_data = [
       { header: 'e-052' }
     ],
     endnote: '',
-    color: 'tan'
+    color: 'orange'
   }
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_settings_data = [
+export const settings_local_menu = [
   {
     page: 'Settings',
     items: [
@@ -120,14 +120,14 @@ export const summary_settings_data = [
       { header: 'e-066' }
     ],
     endnote: '',
-    color: 'orange'
+    color: 'pink'
   }
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_support_data = [
+export const support_local_menu = [
   {
-    page: 'Signatures',
+    page: 'Support',
     items: [
       { header: 'Free Support', value: 0, route_to: 'support/free' },
       { header: 'For Pay', value: 0, route_to: 'support/pay' },
@@ -143,9 +143,9 @@ export const summary_support_data = [
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_about_data = [
+export const about_local_menu = [
   {
-    page: 'Signatures',
+    page: 'About',
     items: [
       { header: 'About', value: 0, route_to: 'about/about' },
       { header: 'Philosophy', value: 0, route_to: 'about/philosophy' },
@@ -156,12 +156,12 @@ export const summary_about_data = [
       { header: 'e-004' }
     ],
     endnote: '',
-    color: 'purple'
+    color: 'blue'
   }
 ];
 
 /*-----------------------------------------------------------------------------*/
-export const summary_dashboard_data = [
+export const dashboard_local_menu = [
   {
     page: 'Addresses',
     items: [
@@ -169,8 +169,8 @@ export const summary_dashboard_data = [
       { header: 'Custom Names', value: 40, route_to: 'addresses/custom' },
       { header: 'Known Contracts', value: 991, route_to: 'addresses/known' },
       { header: 'Prefunds', value: 8894, route_to: 'addresses/prefunds' },
-      { header: 'Community', value: 916, route_to: 'addresses/community' },
-      { header: 'e-111' }
+      { header: 'Slurps', value: 0, route_to: 'addresses/slurps' },
+      { header: 'Community', value: 916, route_to: 'addresses/community' }
     ],
     endnote: '',
     color: 'pink'
@@ -180,10 +180,10 @@ export const summary_dashboard_data = [
     items: [
       { header: 'Accounts', value: 0, route_to: 'explore/accounts' },
       { header: 'Blocks', value: 0, route_to: 'explore/blocks' },
-      { header: 'Transactions', value: 0, route_to: 'explore/txs' },
-      { header: 'Receipts', value: 0, route_to: 'explore/receipts' },
-      { header: 'Logs', value: 0, route_to: 'explore/receipts' },
-      { header: 'Traces', value: 0, route_to: 'explore/logs' }
+      { header: 'Transactions', value: 0, route_to: 'explore/transactions' },
+      { header: 'Receipts/Logs', value: 0, route_to: 'explore/logs' },
+      { header: 'Traces', value: 0, route_to: 'explore/traces' },
+      { header: 'e-191' }
     ],
     endnote: '',
     color: 'purple'
@@ -212,20 +212,20 @@ export const summary_dashboard_data = [
       { header: 'e-122' }
     ],
     endnote: '',
-    color: 'purple'
+    color: 'green'
   },
   {
     page: 'Caches',
     items: [
-      { header: 'Transactions/Logs', value: 3981, route_to: 'caches/txs' },
-      { header: 'Traces', value: 3981, route_to: 'caches/traces' },
+      { header: 'Overview', value: 0, route_to: 'caches/overview' },
       { header: 'Blocks', value: 0, route_to: 'caches/blocks' },
+      { header: 'Transactions', value: 3981, route_to: 'caches/transactions' },
+      { header: 'Traces', value: 3981, route_to: 'caches/traces' },
       { header: 'Prices', value: 0, route_to: 'caches/prices' },
-      { header: 'Slurps', value: 0, route_to: 'caches/slurps' },
-      { header: 'e-142' }
+      { header: 'e-121' }
     ],
     endnote: '',
-    color: 'green'
+    color: 'tan'
   },
   {
     page: 'Other',
@@ -238,7 +238,7 @@ export const summary_dashboard_data = [
       { header: 'e-151' }
     ],
     endnote: '',
-    color: 'tan'
+    color: 'orange'
   },
   {
     page: 'Settings',
@@ -251,6 +251,32 @@ export const summary_dashboard_data = [
       { header: 'e-165' }
     ],
     endnote: '',
-    color: 'orange'
+    color: 'pink'
+  },
+  {
+    page: 'Support',
+    items: [
+      { header: 'Free Support', value: 0, route_to: 'support/free' },
+      { header: 'For Pay', value: 0, route_to: 'support/pay' },
+      { header: 'Whatever', value: 0, route_to: 'support/whatever' },
+      { header: 'e-001' },
+      { header: 'e-002' },
+      { header: 'e-003' }
+    ],
+    endnote: '',
+    color: 'purple'
+  },
+  {
+    page: 'About',
+    items: [
+      { header: 'About', value: 0, route_to: 'about/about' },
+      { header: 'Philosophy', value: 0, route_to: 'about/philosophy' },
+      { header: 'Team', value: 0, route_to: 'about/team' },
+      { header: 'e-001' },
+      { header: 'e-002' },
+      { header: 'e-003' }
+    ],
+    endnote: '',
+    color: 'blue'
   }
 ];

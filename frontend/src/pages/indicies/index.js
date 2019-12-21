@@ -3,8 +3,9 @@ import Page from '../../components/page';
 import IndiciesInner from './indicies-inner';
 
 //----------------------------------------------------------------------
-export default class Indicies extends Page {
-  render = () => {
-    return <Page inner={<IndiciesInner />} />;
-  };
-}
+var Indicies = (props) => {
+  var subpage = props.match.params.subpage ? props.match.params.subpage : 'indicies/full';
+  var inner = <IndiciesInner subpage={subpage} />;
+  return <Page inner={inner} />;
+};
+export default Indicies;

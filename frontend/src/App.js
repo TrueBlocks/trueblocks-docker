@@ -51,15 +51,15 @@ const App = () => (
 
     <main>
       <Route exact path="/" component={Dashboard} />
-      <Route exact path="/addresses" component={Addresses} />
-      <Route exact path="/explore" component={Explore} />
-      <Route exact path="/indicies" component={Indcies} />
-      <Route exact path="/signatures" component={Signatures} />
-      <Route exact path="/caches" component={Caches} />
-      <Route exact path="/other" component={Other} />
-      <Route exact path="/settings" component={Settings} />
-      <Route exact path="/support" component={Support} />
-      <Route exact path="/about" component={About} />
+      <Route path="/addresses/:subpage?" component={Addresses} />
+      <Route path="/explore/:subpage?" component={Explore} />
+      <Route path="/indicies/:subpage?" component={Indcies} />
+      <Route path="/signatures/:subpage?" component={Signatures} />
+      <Route path="/caches/:subpage?" component={Caches} />
+      <Route path="/other/:subpage?" component={Other} />
+      <Route path="/settings/:subpage?" component={Settings} />
+      <Route path="/support/:subpage?" component={Support} />
+      <Route path="/about/:subpage?" component={About} />
     </main>
 
     <footer>This is the footer of the application and includes email contact, phone numbers, etc.</footer>

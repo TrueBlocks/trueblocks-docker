@@ -7,12 +7,12 @@ import { dispatcher_Addresses } from './addresses-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { LocalMenu } from '../../components/local-menu';
+import { addresses_local_menu } from '../../fake_data/summary-data';
 import './addresses.css';
 
 // EXISTING_CODE
 import { DetailTable } from '../../components/detail-table';
 import '../../components/detail-table.css';
-import { summary_addresses_data } from '../../fake_data/summary-data';
 import { your_names } from '../../fake_data/detail-data-your-names.js';
 import { tokens } from '../../fake_data/detail-data-tokens.js';
 import { shared } from '../../fake_data/detail-data-shared.js';
@@ -34,7 +34,7 @@ class AddressesInner extends React.Component {
       selectedRow: '',
       data: your_names,
       // EXISTING_CODE
-      subpage: 'addresses/custom'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -79,7 +79,7 @@ class AddressesInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
     if (cmd === 'remove') {
@@ -166,7 +166,7 @@ class AddressesInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <LocalMenu data={summary_addresses_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <LocalMenu data={addresses_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );
@@ -179,13 +179,11 @@ class AddressesInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <div>
-          <PageHeader
-            title="Addresses"
-            notes="Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note that the transactions/logs/receipts/traces are not downloaded until you explore an address."
-          />
-          {this.getContainer()}
-        </div>
+        <PageHeader
+          title="Addresses"
+          notes="Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note that the transactions/logs/receipts/traces are not downloaded until you explore an address."
+        />
+        {this.getContainer()}
       </div>
     );
   };

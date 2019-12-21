@@ -1,43 +1,43 @@
 /*-----------------------------------------------------------------------------*/
-export const txs = [
+export const blocks = [
   {
-    folder: '$CACHE/txs',
-    name: 'Name 1',
+    folder: '$CACHE/transactions',
+    name: 'Block 1',
     appearances: 900,
     transactions: 20,
     size: 212112
   },
   {
-    folder: '$CACHE/txs',
-    name: 'Name 2',
+    folder: '$CACHE/transactions',
+    name: 'Block 2',
     appearances: 900,
     transactions: 20,
     size: 212112
   },
   {
-    folder: '$CACHE/txs',
-    name: 'Name 3',
+    folder: '$CACHE/transactions',
+    name: 'Block 3',
     appearances: 900,
     transactions: 20,
     size: 212112
   },
   {
-    folder: '$CACHE/txs',
-    name: 'Name 4',
+    folder: '$CACHE/transactions',
+    name: 'Block 4',
     appearances: 900,
     transactions: 20,
     size: 212112
   },
   {
-    folder: '$CACHE/txs',
-    name: 'Name 5',
+    folder: '$CACHE/transactions',
+    name: 'Block 5',
     appearances: 900,
     transactions: 20,
     size: 212112
   },
   {
-    folder: '$CACHE/txs',
-    name: 'Name 6',
+    folder: '$CACHE/transactions',
+    name: 'Block 6',
     appearances: 900,
     transactions: 20,
     size: 212112

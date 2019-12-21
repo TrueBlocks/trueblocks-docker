@@ -7,13 +7,18 @@ import { dispatcher_Caches } from './caches-getdata';
 import Loading from '../../components/loading';
 import PageHeader from '../../components/page-header';
 import { LocalMenu } from '../../components/local-menu';
+import { caches_local_menu } from '../../fake_data/summary-data';
+import { overview } from '../../fake_data/caches-overview';
+import { blocks } from '../../fake_data/caches-blocks';
+import { transactions } from '../../fake_data/caches-transactions';
+import { traces } from '../../fake_data/caches-traces';
+import { prices } from '../../fake_data/caches-prices';
 import './caches.css';
 
 // EXISTING_CODE
-import { DetailTable } from '../../components/detail-table';
-import { summary_caches_data } from '../../fake_data/summary-data';
-import { txs } from '../../fake_data/detail-data-txs.js';
 import DetailPopup from '../../components/detail-popup';
+import { DetailTable } from '../../components/detail-table';
+import '../../components/detail-table.css';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -23,10 +28,8 @@ class CachesInner extends React.Component {
     this.state = {
       // EXISTING_CODE
       showPopup: false,
-      current: '',
-      data: txs,
       // EXISTING_CODE
-      subpage: 'caches/txs'
+      subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -37,6 +40,10 @@ class CachesInner extends React.Component {
       showPopup: !this.state.showPopup
     });
   }
+
+  componentDidMount = () => {
+    // this.props.monitorDispatch();
+  };
   // EXISTING_CODE
 
   innerEar = (cmd, value) => {
@@ -46,32 +53,51 @@ class CachesInner extends React.Component {
     // EXISTING_CODE
 
     if (cmd === 'change_subpage') {
+      var newData;
+      switch (value) {
+        case 'caches/blocks':
+          newData = blocks;
+          break;
+        case 'caches/transactions':
+          newData = transactions;
+          break;
+        case 'caches/traces':
+          newData = traces;
+          break;
+        case 'caches/prices':
+          newData = prices;
+          break;
+        default:
+          newData = overview;
+          break;
+      }
+
       this.setState({
         // EXISTING_CODE
-        data: txs,
         showPopup: false,
-        current: {},
         // EXISTING_CODE
-        subpage: value
+        subpage: value,
+        theData: newData,
+        selectedRow: {}
       });
     } else if (cmd === 'goto_page') {
-      window.open('/' + value.replace('/', '?sub='), '_self');
+      window.open('/' + value, '_self');
     }
     // EXISTING_CODE
-    if (cmd === 'expand') {
-      if (value === this.state.current) {
+    if (cmd === 'remove') {
+      //this.props.removeDispatch(value, true);
+    } else if (cmd === 'delete' || cmd === 'undo') {
+      //this.props.removeDispatch(value, false);
+    } else if (cmd === 'expand') {
+      if (value === this.state.selectedRow) {
         this.setState({
-          data: txs,
           showPopup: false,
-          current: {},
-          subpage: value
+          selectedRow: {}
         });
       } else {
         this.setState({
-          data: txs,
           showPopup: true,
-          current: value,
-          subpage: value
+          selectedRow: value
         });
       }
     }
@@ -85,8 +111,8 @@ class CachesInner extends React.Component {
     if (this.state.showPopup) {
       return (
         <Fragment>
-          <DetailTable css_pre="caches" data={this.state.data} innerEar={this.innerEar} />
-          <DetailPopup closePopup={this.closePopup.bind(this)} item={this.state.current} ear={this.innerEar} />
+          <DetailTable css_pre="caches" data={this.state.theData} innerEar={this.innerEar} />
+          <DetailPopup closePopup={this.closePopup.bind(this)} item={this.state.selectedRow} ear={this.innerEar} />
         </Fragment>
       );
     }
@@ -94,7 +120,7 @@ class CachesInner extends React.Component {
     return (
       // EXISTING_CODE
       <Fragment>
-        <DetailTable css_pre="caches" data={this.state.data} innerEar={this.innerEar} />
+        <DetailTable css_pre="caches" data={this.state.theData} innerEar={this.innerEar} />
       </Fragment>
       // EXISTING_CODE
     );
@@ -110,7 +136,7 @@ class CachesInner extends React.Component {
     } else if (isConnected) {
       container = (
         <div className="inner-panel">
-          <LocalMenu data={summary_caches_data} active={this.state.subpage} innerEar={this.innerEar} />
+          <LocalMenu data={caches_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
           {this.getInner()}
         </div>
       );

@@ -3,8 +3,9 @@ import Page from '../../components/page';
 import SettingsInner from './settings-inner';
 
 //----------------------------------------------------------------------
-export default class Settings extends Page {
-  render = () => {
-    return <Page inner={<SettingsInner />} />;
-  };
-}
+var Settings = (props) => {
+  var subpage = props.match.params.subpage ? props.match.params.subpage : 'settings/config';
+  var inner = <SettingsInner subpage={subpage} />;
+  return <Page inner={inner} />;
+};
+export default Settings;

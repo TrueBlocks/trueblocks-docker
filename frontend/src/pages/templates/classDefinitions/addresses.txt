@@ -1,6 +1,6 @@
 [settings]
 class = CAddresses
-fields = subpage: 'addresses/custom'
+subpage = custom
 state = monitorStatus: {}
 query_url = status
 query_opts = modes=monitors&details&ether

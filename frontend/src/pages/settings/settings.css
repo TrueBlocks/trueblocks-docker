@@ -1,1 +1,56 @@
 /*-----------------------------------------------------------------------------*/
+.setting-container {
+  margin-top: 0px;
+  display: flex;
+  flex-flow: row wrap;
+  /* justify-content: center; */
+  /* border: 4px solid pink; */
+  /* debug-css */
+}
+
+.setting-group {
+  margin-top: 0px;
+  width: 100%;
+  /* padding: 5px; */
+  /* border: 4px solid blue; */
+  /* debug-css */
+}
+
+.setting-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 0.1em;
+  /* border: 4px solid green; */
+  /* debug-css */
+}
+
+.setting-row label {
+  width: 14%;
+  /* border: 1px dashed grey; */
+}
+
+.setting-row side {
+  width: 1%;
+  /* border: 1px dashed grey; */
+}
+
+.setting-row .input {
+  width: 40%;
+  /* border: 1px dashed grey; */
+}
+
+.setting-row .input input {
+  width: 90%;
+  /* border: 1px dashed grey; */
+}
+
+.setting-row .description {
+  width: 35%;
+  /* border: 1px dashed grey; */
+}
+
+.setting-row .data-type {
+  width: 5%;
+  /* border: 1px dashed grey; */
+}

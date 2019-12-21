@@ -1,6 +1,6 @@
 [settings]
 class = CSettings
-fields = subpage: 'settings/config'
+subpage = config
 state = configSettings: {}
 query_url = config
 query_opts = get
