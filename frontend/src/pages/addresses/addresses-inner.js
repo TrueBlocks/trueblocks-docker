@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './addresses-getdata';
 
-import Loading from '../../components/loading';
-import PageHeader from '../../components/page-header';
+import { InnerPageHeader, DetailTable } from '../../components';
 import { LocalMenu } from '../../components/local-menu';
+import { Loading } from '../../components/loading';
 import { addresses_local_menu } from '../../fake_data/summary-data';
 import './addresses.css';
 
 // EXISTING_CODE
-import { DetailTable } from '../../components/detail-table';
 import '../../components/detail-table.css';
 import { your_names } from '../../fake_data/detail-data-your-names.js';
 import { tokens } from '../../fake_data/detail-data-tokens.js';
@@ -19,7 +18,6 @@ import { shared } from '../../fake_data/detail-data-shared.js';
 import { dispatcher_MonitorRemove } from './addresses-getdata-remove';
 import { dispatcher_AddressAdd, AddNewAddress } from './addresses-getdata-add';
 import DetailPopup from '../../components/detail-popup';
-import '../dashboard/dashboard.css';
 import DataTable from '../../components/data-table';
 const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
@@ -83,9 +81,9 @@ class AddressesInner extends React.Component {
     }
     // EXISTING_CODE
     if (cmd === 'remove') {
-      this.props.removeDispatch(value, true);
+      this.props.removeAddressDispatch(value, true);
     } else if (cmd === 'delete' || cmd === 'undo') {
-      this.props.removeDispatch(value, false);
+      this.props.removeAddressDispatch(value, false);
     } else if (cmd === 'expand') {
       if (value === this.state.selectedRow) {
         this.setState({
@@ -102,6 +100,8 @@ class AddressesInner extends React.Component {
           subpage: value
         });
       }
+    } else if (cmd === 'monitor') {
+      this.props.addAddressMonitor(value);
     }
     // EXISTING_CODE
   };
@@ -115,15 +115,15 @@ class AddressesInner extends React.Component {
     if (this.state.showPopup) {
       return (
         <Fragment>
-          <DetailTable css_pre="dashboard" data={this.state.data} innerEar={this.innerEar} />
-          <DetailPopup closePopup={this.closePopup.bind(this)} item={this.state.selectedRow} ear={this.innerEar} />
+          <DetailTable css_pre="addresses" data={this.state.data} innerEar={this.innerEar} />
+          <DetailPopup closePopup={this.closePopup.bind(this)} item={this.state.selectedRow} innerEar={this.innerEar} />
         </Fragment>
       );
     }
 
     return (
       <Fragment>
-        <DetailTable css_pre="dashboard" data={this.state.data} innerEar={this.innerEar} />
+        <DetailTable css_pre="addresses" data={this.state.data} innerEar={this.innerEar} />
       </Fragment>
     );
   };
@@ -137,7 +137,7 @@ class AddressesInner extends React.Component {
       <Fragment>
         <AddNewAddress {...this.props} />
         <div className="data-table">
-          <DataTable headings={headings} innerEar={this.innerEar} rows={this.props.monitorStatus.items} />
+          <DataTable headings={headings} rows={this.props.monitorStatus.items} innerEar={this.innerEar} />
         </div>
       </Fragment>
     );
@@ -145,25 +145,25 @@ class AddressesInner extends React.Component {
   // EXISTING_CODE
 
   getInner = () => {
-    return (
-      // EXISTING_CODE
-      <Fragment>{this.state.subpage !== 'addresses/monitors' ? this.getInner1() : this.getInner2()}</Fragment>
-      // EXISTING_CODE
-    );
+    let inner;
+    // EXISTING_CODE
+    inner = <Fragment>{this.state.subpage !== 'addresses/monitors' ? this.getInner1() : this.getInner2()}</Fragment>;
+    // EXISTING_CODE
+    return inner;
   };
 
   getContainer = () => {
-    var isConnected = this.props.isConnected;
     // EXISTING_CODE
     if (this.props.error) {
-      return <Loading status="error" message={this.props.error} />;
+      return <Loading source="addresses" status="error" message={this.props.error} />;
+    } else if (!this.props.isConnected || !this.props.monitorStatus || !this.props.monitorStatus.items) {
+      return <Loading source="addresses" status="initializing" message="Loading..." />;
     }
-    isConnected = this.props.isConnected && this.props.monitorStatus && this.props.monitorStatus.items;
     // EXISTING_CODE
     let container;
     if (this.props.error) {
-      container = <Loading status="error" message={this.props.error} />;
-    } else if (isConnected) {
+      container = <Loading source="addresses" status="error" message={this.props.error} />;
+    } else if (this.props.isConnected) {
       container = (
         <div className="inner-panel">
           <LocalMenu data={addresses_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
@@ -171,7 +171,7 @@ class AddressesInner extends React.Component {
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Loading..." />;
+      container = <Loading source="addresses" status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -179,7 +179,7 @@ class AddressesInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <PageHeader
+        <InnerPageHeader
           title="Addresses"
           notes="Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note that the transactions/logs/receipts/traces are not downloaded until you explore an address."
         />
@@ -208,8 +208,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       // EXISTING_CODE
       monitorDispatch: () => dispatcher_Addresses(),
-      removeDispatch: (address, remove) => dispatcher_MonitorRemove(address, remove),
-      addMonitor: (address) => dispatcher_AddressAdd(address),
+      removeAddressDispatch: (address, remove) => dispatcher_MonitorRemove(address, remove),
+      addAddressMonitor: (address) => dispatcher_AddressAdd(address),
       // EXISTING_CODE
       dispatcher_Addresses
     },

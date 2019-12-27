@@ -6,13 +6,13 @@ const SUCCESS = 'other__/SUCCESS';
 const FAILURE = 'other__/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialOtherState = {
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Other(state = initialState, action) {
+export default function reducer_Other(state = initialOtherState, action) {
   switch (action.type) {
     case BEGIN:
       return {

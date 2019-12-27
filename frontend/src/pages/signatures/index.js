@@ -4,7 +4,7 @@ import SignaturesInner from './signatures-inner';
 
 //----------------------------------------------------------------------
 var Signatures = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : 'signatures/monitors';
+  var subpage = 'signatures/' + (props.match.params.subpage || 'monitors');
   var inner = <SignaturesInner subpage={subpage} />;
   return <Page inner={inner} />;
 };

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_[{PROPER}] } from './[{LONG}]-getdata';
 
-import Loading from '../../components/loading';
-import PageHeader from '../../components/page-header';
+import { InnerPageHeader } from '../../components';
 import { [{MENU_TYPE}] } from '../../components/[{MENU_FILE}]';
+import { Loading } from '../../components/loading';
 import { [{LONG}]_local_menu } from '../../fake_data/summary-data';
 import './[{LONG}].css';[{POLLING}]
 
@@ -51,20 +51,19 @@ class [{PROPER}]Inner extends React.Component {
   // EXISTING_CODE
 
   getInner = () => {
-    return (
-      // EXISTING_CODE
-      // EXISTING_CODE
-    );
+    let inner;
+    // EXISTING_CODE
+    // EXISTING_CODE
+    return inner;
   };
 
   getContainer = () => {
-    var isConnected = this.props.isConnected;
     // EXISTING_CODE
     // EXISTING_CODE
     let container;
     if (this.props.error) {
-      container = <Loading status="error" message={this.props.error} />;
-    } else if (isConnected) {
+      container = <Loading source="[{LONG}]" status="error" message={this.props.error} />;
+    } else if (this.props.isConnected) {
       container = (
         <div className="inner-panel">
           <[{MENU_TYPE}] data={[{LONG}]_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
@@ -72,7 +71,7 @@ class [{PROPER}]Inner extends React.Component {
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Loading..." />;
+      container = <Loading source="[{LONG}]" status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -80,7 +79,7 @@ class [{PROPER}]Inner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <PageHeader
+        <InnerPageHeader
           title="[{PROPER}]"
           notes="[{PAGENOTES}]"
         />

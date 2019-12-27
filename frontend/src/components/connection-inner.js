@@ -200,7 +200,6 @@ const mapStateToProps = ({ reducer_Connection }) => ({
   index_path: reducer_Connection.systemData.index_path,
   client_version: reducer_Connection.systemData.client_version,
   trueblocks_version: reducer_Connection.systemData.trueblocks_version,
-  isLoading: reducer_Connection.isLoading,
   unripe: reducer_Connection.unripe,
   staging: reducer_Connection.staging,
   finalized: reducer_Connection.finalized,

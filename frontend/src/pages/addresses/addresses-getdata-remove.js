@@ -1,7 +1,7 @@
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------
-const initialState = {
+const initialAddressRemoveState = {
   isLoading: false,
   error: null
 };
@@ -12,8 +12,7 @@ const SUCCESS = 'monitRem/SUCCESS';
 const FAILURE = 'monitRem/FAILURE';
 
 //----------------------------------------------------------------
-export default (state = initialState, action) => {
-  //console.log('monitRem', action, state);
+export default function reducer_AddressRemove(state = initialAddressRemoveState, action) {
   switch (action.type) {
     case BEGIN:
       return {
@@ -37,7 +36,7 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
 //----------------------------------------------------------------
 export const dispatcher_MonitorRemove = (address, remove) => {

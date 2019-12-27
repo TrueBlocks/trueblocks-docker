@@ -4,7 +4,7 @@ import AboutInner from './about-inner';
 
 //----------------------------------------------------------------------
 var About = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : 'about/team';
+  var subpage = 'about/' + (props.match.params.subpage || 'team');
   var inner = <AboutInner subpage={subpage} />;
   return <Page inner={inner} />;
 };

@@ -6,14 +6,14 @@ const SUCCESS = 'setting/SUCCESS';
 const FAILURE = 'setting/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialSettingsState = {
   isLoading: false,
   error: null,
   configSettings: {}
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Settings(state = initialState, action) {
+export default function reducer_Settings(state = initialSettingsState, action) {
   switch (action.type) {
     case BEGIN:
       return {

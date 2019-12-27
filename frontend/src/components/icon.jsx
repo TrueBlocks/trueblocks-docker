@@ -11,11 +11,10 @@ export default class Icon extends Component {
       </i>
     );
   }
-}
 
-//----------------------------------------------------------------------
-Icon.propTypes = {
-  title: PropTypes.string,
-  icon: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
-};
+  static propTypes = {
+    title: PropTypes.string,
+    icon: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
+  };
+}

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dashboard-getdata';
 
-import Loading from '../../components/loading';
-import PageHeader from '../../components/page-header';
+import { InnerPageHeader } from '../../components';
+import { Loading } from '../../components/loading';
 import { SummaryTable } from '../../components/summary-table';
 import { dashboard_local_menu } from '../../fake_data/summary-data';
 import './dashboard.css';
@@ -14,7 +14,6 @@ import { polling } from '../../components/polling';
 import { poll_timeout } from '../../config.js';
 
 // EXISTING_CODE
-import { summary_dashboard_data } from '../../fake_data/summary-data';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -55,21 +54,20 @@ class DashboardInner extends React.Component {
   // EXISTING_CODE
 
   getInner = () => {
-    return (
-      // EXISTING_CODE
-      <Fragment></Fragment>
-      // EXISTING_CODE
-    );
+    let inner;
+    // EXISTING_CODE
+    inner = <Fragment></Fragment>;
+    // EXISTING_CODE
+    return inner;
   };
 
   getContainer = () => {
-    var isConnected = this.props.isConnected;
     // EXISTING_CODE
     // EXISTING_CODE
     let container;
     if (this.props.error) {
-      container = <Loading status="error" message={this.props.error} />;
-    } else if (isConnected) {
+      container = <Loading source="dashboard" status="error" message={this.props.error} />;
+    } else if (this.props.isConnected) {
       container = (
         <div className="inner-panel">
           <SummaryTable data={dashboard_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
@@ -77,7 +75,7 @@ class DashboardInner extends React.Component {
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Loading..." />;
+      container = <Loading source="dashboard" status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -85,7 +83,7 @@ class DashboardInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <PageHeader
+        <InnerPageHeader
           title="Dashboard"
           notes="Learn about the TrubBlocks project, our organization, our philosopy 
             towards decentralization, and our team."

@@ -4,3 +4,4 @@ subpage = generated
 query_url = ping
 query_opts = 
 page_notes = The Other panel allows you to configure various other items related to TrueBlocks.
+disabled = true

@@ -6,19 +6,18 @@ const SUCCESS = 'conne/SUCCESS';
 const FAILURE = 'conne/FAILURE';
 
 //----------------------------------------------------------------
-const initialState = {
+const initialConnectionState = {
   systemData: {},
   unripe: -1,
   staging: -1,
   finalized: -1,
   client: -1,
   isConnected: false,
-  isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
-export default function reducer_Connection(state = initialState, action) {
+export default function reducer_Connection(state = initialConnectionState, action) {
   if (action.payload && action.payload.errors) {
     var errMsg = action.payload.errors[0].replace('|', '\n');
     if (errMsg.indexOf("Couldn't connect to server") !== -1) {
@@ -34,14 +33,12 @@ export default function reducer_Connection(state = initialState, action) {
     case BEGIN:
       return {
         ...state,
-        error: null,
-        isLoading: true
+        error: null
       };
 
     case SUCCESS:
       return {
         ...state,
-        isLoading: false,
         isConnected: true,
         error: null,
         systemData: action.payload.data,
@@ -54,7 +51,6 @@ export default function reducer_Connection(state = initialState, action) {
     case FAILURE:
       return {
         ...state,
-        isLoading: false,
         isConnected: false,
         error: action.err + ' ', // don't remove, converts to string
         systemData: {},

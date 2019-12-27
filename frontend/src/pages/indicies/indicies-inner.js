@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Indicies } from './indicies-getdata';
 
-import Loading from '../../components/loading';
-import PageHeader from '../../components/page-header';
+import { InnerPageHeader } from '../../components';
 import { LocalMenu } from '../../components/local-menu';
+import { Loading } from '../../components/loading';
 import { indicies_local_menu } from '../../fake_data/summary-data';
 import './indicies.css';
 
@@ -53,22 +53,23 @@ class IndiciesInner extends React.Component {
   // EXISTING_CODE
 
   getInner = () => {
-    return (
-      // EXISTING_CODE
-      <SystemProgressChart {...this.props} />
-      // EXISTING_CODE
-    );
+    let inner;
+    // EXISTING_CODE
+    inner = <SystemProgressChart {...this.props} />;
+    // EXISTING_CODE
+    return inner;
   };
 
   getContainer = () => {
-    var isConnected = this.props.isConnected;
     // EXISTING_CODE
-    isConnected = this.props.caches !== undefined && this.props.client !== -1;
+    if (this.props.caches === undefined || this.props.client === -1) {
+      return <Loading source="indicies" status="initializing" message="Loading..." />;
+    }
     // EXISTING_CODE
     let container;
     if (this.props.error) {
-      container = <Loading status="error" message={this.props.error} />;
-    } else if (isConnected) {
+      container = <Loading source="indicies" status="error" message={this.props.error} />;
+    } else if (this.props.isConnected) {
       container = (
         <div className="inner-panel">
           <LocalMenu data={indicies_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
@@ -76,7 +77,7 @@ class IndiciesInner extends React.Component {
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Loading..." />;
+      container = <Loading source="indicies" status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -84,7 +85,7 @@ class IndiciesInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <PageHeader
+        <InnerPageHeader
           title="Indicies"
           notes="TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a 
             lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
@@ -237,7 +238,9 @@ const ZoomOnIndex = (props) => {
         been_here = true;
         props.dispatcher_Indicies();
       }
-      readyContainer = props.start && <Loading status="loading" message="Waiting for index data..." />;
+      readyContainer = props.start && (
+        <Loading source="indicies" status="loading" message="Waiting for index data..." />
+      );
   }
 
   return <div>{readyContainer}</div>;

@@ -4,7 +4,7 @@ import DashboardInner from './dashboard-inner';
 
 //----------------------------------------------------------------------
 var Dashboard = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : 'dashboard/';
+  var subpage = 'dashboard/' + (props.match.params.subpage || '');
   var inner = <DashboardInner subpage={subpage} />;
   return <Page inner={inner} />;
 };

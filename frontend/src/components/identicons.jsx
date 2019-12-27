@@ -150,14 +150,13 @@ export default class Identicon extends Component {
       />
     );
   }
-}
 
-//----------------------------------------------------------------------
-Identicon.propTypes = {
-  seed: PropTypes.string.isRequired,
-  size: PropTypes.number,
-  scale: PropTypes.number,
-  color: PropTypes.string,
-  bgColor: PropTypes.string,
-  spotColor: PropTypes.string
-};
+  static propTypes = {
+    seed: PropTypes.string.isRequired,
+    size: PropTypes.number,
+    scale: PropTypes.number,
+    color: PropTypes.string,
+    bgColor: PropTypes.string,
+    spotColor: PropTypes.string
+  };
+}

@@ -6,13 +6,13 @@ const SUCCESS = 'about__/SUCCESS';
 const FAILURE = 'about__/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialAboutState = {
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------------
-export default function reducer_About(state = initialState, action) {
+export default function reducer_About(state = initialAboutState, action) {
   switch (action.type) {
     case BEGIN:
       return {

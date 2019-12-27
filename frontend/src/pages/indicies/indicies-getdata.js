@@ -6,14 +6,14 @@ const SUCCESS = 'indicie/SUCCESS';
 const FAILURE = 'indicie/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialIndiciesState = {
   isLoading: false,
   error: null,
   indexData: {}
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Indicies(state = initialState, action) {
+export default function reducer_Indicies(state = initialIndiciesState, action) {
   switch (action.type) {
     case BEGIN:
       return {

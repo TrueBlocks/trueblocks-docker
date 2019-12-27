@@ -4,7 +4,7 @@ import SupportInner from './support-inner';
 
 //----------------------------------------------------------------------
 var Support = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : 'support/pay';
+  var subpage = 'support/' + (props.match.params.subpage || 'pay');
   var inner = <SupportInner subpage={subpage} />;
   return <Page inner={inner} />;
 };

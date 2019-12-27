@@ -24,6 +24,11 @@ let fmtDouble = (value, decimals) => {
 };
 
 //----------------------------------------------------------------
+let isNumber = function(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+//----------------------------------------------------------------
 let humanFileSize = function(bytes, si) {
   var thresh = si ? 1000 : 1024;
   if (Math.abs(bytes) < thresh) {
@@ -44,7 +49,7 @@ let humanFileSize = function(bytes, si) {
 const apiProvider = 'http://localhost:8080/';
 //----------------------------------------------------------------
 let queryAPI_get = function(cmd, params) {
-  console.log('GET: ', apiProvider, cmd, '?', params);
+  //  console.log('GET: ', apiProvider, cmd, '?', params);
   if (cmd === 'ping') return { json: {} };
   const url = apiProvider + cmd + '?' + params;
   return fetch(url);
@@ -74,6 +79,7 @@ module.exports = {
   humanFileSize,
   fmtInteger,
   fmtDouble,
+  isNumber,
   queryAPI_get,
   queryAPI_put,
   to_key

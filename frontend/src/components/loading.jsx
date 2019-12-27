@@ -4,22 +4,22 @@ import Icon from './icon';
 import './loading.css';
 
 //----------------------------------------------------------------------
-export default class Loading extends React.Component {
+export class Loading extends React.Component {
   noop = () => {};
   render = () => {
     if (this.props.status === 'error') {
       var msg;
-      if (!this.props.message) {
-        msg = 'There has been some sort of unspecified error';
-      } else if (typeof this.props.message === 'object') {
+      if (typeof this.props.message === 'object') {
         msg = JSON.stringify(this.props.message);
+      } else if (!this.props.message) {
+        msg = 'There has been some sort of unspecified error';
       } else {
         msg = this.props.message;
         if (this.props.message.indexOf('fetch') !== -1) {
           msg = this.props.message + ' ==> Is the TrueBlocks API running?';
         }
       }
-
+      if (msg.indexOf('SyntaxError') !== -1) msg += '. Is the API producing valid JSON?';
       return (
         <div className="error-msg">
           <Icon icon="error" onClick={this.noop} />
@@ -50,10 +50,10 @@ export default class Loading extends React.Component {
       </div>
     );
   };
-}
 
-//----------------------------------------------------------------------
-Loading.propTypes = {
-  status: PropTypes.string,
-  message: PropTypes.string
-};
+  static propTypes = {
+    source: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired
+  };
+}

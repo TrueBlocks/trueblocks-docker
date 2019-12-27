@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './explore-getdata';
 
-import Loading from '../../components/loading';
-import PageHeader from '../../components/page-header';
+import { InnerPageHeader } from '../../components';
 import { LocalMenu } from '../../components/local-menu';
+import { Loading } from '../../components/loading';
 import { explore_local_menu } from '../../fake_data/summary-data';
 import './explore.css';
 
@@ -51,8 +51,9 @@ class ExploreInner extends React.Component {
   // EXISTING_CODE
 
   getInner = () => {
-    return (
-      // EXISTING_CODE
+    let inner;
+    // EXISTING_CODE
+    inner = (
       <Fragment>
         <ul>
           <li>Item 1 1</li>
@@ -64,18 +65,18 @@ class ExploreInner extends React.Component {
           <li>Item 2 2</li>
         </ul>
       </Fragment>
-      // EXISTING_CODE
     );
+    // EXISTING_CODE
+    return inner;
   };
 
   getContainer = () => {
-    var isConnected = this.props.isConnected;
     // EXISTING_CODE
     // EXISTING_CODE
     let container;
     if (this.props.error) {
-      container = <Loading status="error" message={this.props.error} />;
-    } else if (isConnected) {
+      container = <Loading source="explore" status="error" message={this.props.error} />;
+    } else if (this.props.isConnected) {
       container = (
         <div className="inner-panel">
           <LocalMenu data={explore_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
@@ -83,7 +84,7 @@ class ExploreInner extends React.Component {
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Loading..." />;
+      container = <Loading source="explore" status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -91,7 +92,7 @@ class ExploreInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <PageHeader
+        <InnerPageHeader
           title="Explore"
           notes="The Explore allows one to view the details of every transactions for 
             each previously monitored address. Because TrueBlocks runs on a local machine not a server, this 

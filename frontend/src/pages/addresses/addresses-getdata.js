@@ -6,14 +6,14 @@ const SUCCESS = 'address/SUCCESS';
 const FAILURE = 'address/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialAddressesState = {
   isLoading: false,
   error: null,
   monitorStatus: {}
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Addresses(state = initialState, action) {
+export default function reducer_Addresses(state = initialAddressesState, action) {
   switch (action.type) {
     case BEGIN:
       return {

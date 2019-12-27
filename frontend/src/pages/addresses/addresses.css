@@ -1,14 +1,30 @@
-/*-----------------------------------------------------------------------------*/
-.address-table {
-  display: flex;
-  flex-flow: row wrap;
-  padding: 1px;
-}
-
-/*-----------------------------------------------------------------------------*/
+/* ------------------------------------------------------------------------ */
 .address-add input {
   margin: 0.1em;
   width: 40em;
   background-color: antiquewhite;
   padding: 0px;
+}
+
+/*-----------------------------------------------------------------------------*/
+.addresses_detail_header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: #e2e5f0;
+  text-align: center;
+  border-bottom: 1px solid darkgrey;
+  text-transform: capitalize;
+  height: 28px;
+  font-weight: 600;
+}
+
+.addresses_detail_row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  height: 25px;
+}
+
+.addresses_detail_row:hover {
+  background-color: antiquewhite;
+  cursor: pointer;
 }

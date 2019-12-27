@@ -1,6 +1,7 @@
 [settings]
 class = CCaches
-subpage = overview
-query_url = ping
-query_opts = 
+subpage = all
+query_url = status
+query_opts = options
 page_notes = TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your|hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big.
+disabled = true

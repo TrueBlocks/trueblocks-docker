@@ -4,7 +4,7 @@ import OtherInner from './other-inner';
 
 //----------------------------------------------------------------------
 var Other = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : 'other/generated';
+  var subpage = 'other/' + (props.match.params.subpage || 'generated');
   var inner = <OtherInner subpage={subpage} />;
   return <Page inner={inner} />;
 };

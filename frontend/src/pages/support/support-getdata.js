@@ -6,13 +6,13 @@ const SUCCESS = 'support/SUCCESS';
 const FAILURE = 'support/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialSupportState = {
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Support(state = initialState, action) {
+export default function reducer_Support(state = initialSupportState, action) {
   switch (action.type) {
     case BEGIN:
       return {

@@ -72,8 +72,13 @@ export class BodyRow extends React.Component {
     this.rowEar = this.rowEar.bind(this);
   }
 
-  rowEar(cmd, address) {
-    console.log('%crowEar - ' + cmd + ' address: ' + address, 'color:magenta');
+  rowEar(cmd, value) {
+    console.log('%crowEar - ' + cmd + ' value: ' + value, 'color:magenta');
+    if (!value) {
+      console.log('%crowEar - empty value', 'color:magenta');
+      return;
+    }
+
     if (cmd === 'remove') {
       this.setState({ isShowing: false, isExpanded: false });
     } else if (cmd === 'delete') {
@@ -84,8 +89,9 @@ export class BodyRow extends React.Component {
       this.props.row.deleted = false;
     } else if (cmd === 'expand') {
       this.setState({ isExpanded: !this.state.isExpanded });
+      cmd = 'noop';
     }
-    if (address) this.props.innerEar('expand2', address); // pass it to the parent in case they're interested
+    this.props.innerEar(cmd, value); // pass it to the parent in case they're interested
   }
 
   render = () => {
@@ -101,7 +107,6 @@ export class BodyRow extends React.Component {
     const c = Utils.fmtInteger(this.props.row.nRecords);
     const z = Utils.fmtInteger(this.props.row.sizeInBytes);
     const e = Utils.fmtDouble(this.props.row.curEther, 18);
-    const b = ' ';
     const q = this.props.row.nRecords
       ? Utils.fmtInteger(
           (Math.floor((this.props.row.latestAppearance - this.props.row.firstAppearance) / this.props.row.nRecords) *
@@ -129,7 +134,7 @@ export class BodyRow extends React.Component {
         <BodyCell key={a + '-q'} {...this.props} content={q} rowEar={this.rowEar} />
         <BodyCell key={a + '-z'} {...this.props} content={z} rowEar={this.rowEar} />
         <BodyCell key={a + '-e'} {...this.props} content={e} rowEar={this.rowEar} />
-        <IconCell key={a + '-b'} {...this.props} content={b} rowEar={this.rowEar} deleted={deleted} />
+        <IconCell key={a + '-b'} {...this.props} content={a} rowEar={this.rowEar} deleted={deleted} />
       </tr>
     );
   };
@@ -163,31 +168,31 @@ export class BodyCell extends React.Component {
 //---------------------------------------------------------------------
 export class IconCell extends React.Component {
   refreshClicked = () => {
-    this.props.rowEar('refresh', this.props.address);
+    this.props.rowEar('refresh', this.props.content);
   };
 
   exploreClicked = () => {
-    const url = '/explore/accounts/' + this.props.address;
+    const url = '/explore/accounts/' + this.props.content;
     window.open(url, '_self');
   };
 
   removeClicked = () => {
-    this.props.rowEar('remove', this.props.address);
+    this.props.rowEar('remove', this.props.content);
     this.setState(this.state);
   };
 
   deleteClicked = () => {
-    this.props.rowEar('delete', this.props.address);
+    this.props.rowEar('delete', this.props.content);
     this.setState(this.state);
   };
 
   undoClicked = () => {
-    this.props.rowEar('undo', this.props.address);
+    this.props.rowEar('undo', this.props.content);
     this.setState(this.state);
   };
 
   launchClicked = () => {
-    const url = 'https://etherscan.io/address/' + this.props.address;
+    const url = 'https://etherscan.io/address/' + this.props.content;
     window.open(url, '_blank');
   };
 

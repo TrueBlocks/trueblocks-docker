@@ -6,13 +6,13 @@ const SUCCESS = '[{SEVEN}]/SUCCESS';
 const FAILURE = '[{SEVEN}]/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initial[{PROPER}]State = {
   isLoading: false,
   error: null[{GLOBAL_STATE1}]
 };
 
 //----------------------------------------------------------------------
-export default function reducer_[{PROPER}](state = initialState, action) {
+export default function reducer_[{PROPER}](state = initial[{PROPER}]State, action) {
   switch (action.type) {
     case BEGIN:
       return {

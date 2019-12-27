@@ -6,14 +6,14 @@ const SUCCESS = 'setSetti/SUCCESS';
 const FAILURE = 'setSetti/FAILURE';
 
 //----------------------------------------------------------------
-const initialState = {
+const initialSettingsSetState = {
   res: {},
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------
-export default (state = initialState, action) => {
+export default function reducer_SettingsSet(state = initialSettingsSetState, action) {
   switch (action.type) {
     case BEGIN:
       return {
@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
 //----------------------------------------------------------------
 export const dispatcher_setSettings = (jsonAsString) => {

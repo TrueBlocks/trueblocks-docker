@@ -2,25 +2,25 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './detail-table.css';
+const Utils = require('../utils');
 
 //----------------------------------------------------------------------
 export class DetailTable extends React.Component {
-  constructor(props) {
-    super(props);
+  getHeaders = () => {
     var fields = [];
-    if (props.data && props.data.length > 0) {
-      Object.keys(props.data[0]).map((key) => {
+    if (this.props.data === undefined || this.props.data === null) {
+      Object.keys(this.props.data[0]).map((key) => {
         fields.push(key);
-        return null;
+        return true;
       });
     }
-    this.state = {
-      fields: fields
-    };
-  }
+    return fields;
+  };
+
+  componentDidMount() {}
 
   getContainer = () => {
-    if (!this.props.data) {
+    if (this.props.data === undefined || this.props.data === null) {
       return <Fragment></Fragment>;
     }
 
@@ -28,7 +28,7 @@ export class DetailTable extends React.Component {
       <Fragment>
         <h4>{this.props.title}</h4>
         <div className="detail_table">
-          <DTHeader {...this.props} headers={this.state.fields} />
+          <DTHeader {...this.props} headers={this.getHeaders()} />
           {this.props.data.map((item, index) => {
             return (
               <div key={index + 'a0'} className={this.props.css_pre + '_detail_row'}>
@@ -46,6 +46,12 @@ export class DetailTable extends React.Component {
   render = () => {
     return this.getContainer();
   };
+
+  static propTypes = {
+    title: PropTypes.string,
+    css_pre: PropTypes.string.isRequired,
+    data: PropTypes.arrayOf(PropTypes.object).isRequired
+  };
 }
 
 //----------------------------------------------------------------------
@@ -59,11 +65,11 @@ class DTHeader extends React.Component {
       </div>
     );
   };
+
+  static propTypes = {
+    headers: PropTypes.array
+  };
 }
-//----------------------------------------------------------------------
-DTHeader.propTypes = {
-  headers: PropTypes.array
-};
 
 //----------------------------------------------------------------------
 class DTHeaderCol extends React.Component {
@@ -74,12 +80,11 @@ class DTHeaderCol extends React.Component {
   render = () => {
     return <div onClick={this.sortClicked}>{this.props.value}</div>;
   };
-}
 
-//----------------------------------------------------------------------
-DTHeaderCol.propTypes = {
-  value: PropTypes.string
-};
+  static propTypes = {
+    value: PropTypes.string
+  };
+}
 
 //----------------------------------------------------------------------
 class DTCol extends React.Component {
@@ -88,17 +93,18 @@ class DTCol extends React.Component {
   };
 
   render = () => {
+    var cn = 'detail_table_item';
+    if (Utils.isNumber(this.props.value)) cn = 'detail_table_item number';
     return (
-      <div className={'detail_table_item'} onClick={this.expandClicked}>
-        {this.props.value}
+      <div className={cn} onClick={this.expandClicked}>
+        {Utils.isNumber(this.props.value) ? Utils.fmtInteger(this.props.value) : this.props.value}
       </div>
     );
   };
-}
 
-//----------------------------------------------------------------------
-DTCol.propTypes = {
-  css_pre: PropTypes.string.isRequired,
-  item: PropTypes.object,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
-};
+  static propTypes = {
+    css_pre: PropTypes.string.isRequired,
+    item: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+  };
+}

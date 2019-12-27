@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Signatures } from './signatures-getdata';
 
-import Loading from '../../components/loading';
-import PageHeader from '../../components/page-header';
+import { InnerPageHeader } from '../../components';
 import { LocalMenu } from '../../components/local-menu';
+import { Loading } from '../../components/loading';
 import { signatures_local_menu } from '../../fake_data/summary-data';
 import './signatures.css';
 
@@ -51,26 +51,27 @@ class SignaturesInner extends React.Component {
   // EXISTING_CODE
 
   getInner = () => {
-    return (
-      // EXISTING_CODE
+    let inner;
+    // EXISTING_CODE
+    inner = (
       <Fragment>
         <ul>
           <li>Item 1 1</li>
           <li>Item 1 2</li>
         </ul>
       </Fragment>
-      // EXISTING_CODE
     );
+    // EXISTING_CODE
+    return inner;
   };
 
   getContainer = () => {
-    var isConnected = this.props.isConnected;
     // EXISTING_CODE
     // EXISTING_CODE
     let container;
     if (this.props.error) {
-      container = <Loading status="error" message={this.props.error} />;
-    } else if (isConnected) {
+      container = <Loading source="signatures" status="error" message={this.props.error} />;
+    } else if (this.props.isConnected) {
       container = (
         <div className="inner-panel">
           <LocalMenu data={signatures_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
@@ -78,7 +79,7 @@ class SignaturesInner extends React.Component {
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Loading..." />;
+      container = <Loading source="signatures" status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -86,7 +87,7 @@ class SignaturesInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <PageHeader
+        <InnerPageHeader
           title="Signatures"
           notes="TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your 
             hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."

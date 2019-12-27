@@ -2,7 +2,7 @@ import React from 'react';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------
-const initialState = {
+const initialAddressAddState = {
   isLoading: false,
   error: null
 };
@@ -13,7 +13,7 @@ const SUCCESS = 'monitAdd/SUCCESS';
 const FAILURE = 'monitAdd/FAILURE';
 
 //----------------------------------------------------------------
-export default function reducer_AddressAdd(state = initialState, action) {
+export default function reducer_AddressAdd(state = initialAddressAddState, action) {
   switch (action.type) {
     case BEGIN:
       return {
@@ -68,7 +68,7 @@ export const AddNewAddress = (props) => {
 
   const onSubmit = (el) => {
     el.preventDefault();
-    props.addMonitor(inputAddress.value);
+    props.addAddressMonitor(inputAddress.value);
   };
 
   return (

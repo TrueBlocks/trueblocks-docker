@@ -6,14 +6,14 @@ const SUCCESS = 'explore/SUCCESS';
 const FAILURE = 'explore/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialExploreState = {
   isLoading: false,
   error: null,
   blocks: {}
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Explore(state = initialState, action) {
+export default function reducer_Explore(state = initialExploreState, action) {
   switch (action.type) {
     case BEGIN:
       return {

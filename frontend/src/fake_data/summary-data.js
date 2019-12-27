@@ -8,7 +8,7 @@ export const addresses_local_menu = [
       { header: 'Known Contracts', value: 991, route_to: 'addresses/known' },
       { header: 'Prefunds', value: 8894, route_to: 'addresses/prefunds' },
       { header: 'Community', value: 916, route_to: 'addresses/community' },
-      { header: 'Slurps', value: 0, route_to: 'addresses/slurps' },
+      { header: 'e-011' },
       { header: 'e-012' }
     ],
     endnote: '',
@@ -75,11 +75,11 @@ export const caches_local_menu = [
   {
     page: 'Caches',
     items: [
-      { header: 'Overview', value: 0, route_to: 'caches/overview' },
-      { header: 'Blocks', value: 0, route_to: 'caches/blocks' },
-      { header: 'Transactions', value: 3981, route_to: 'caches/transactions' },
-      { header: 'Traces', value: 3981, route_to: 'caches/traces' },
-      { header: 'Prices', value: 0, route_to: 'caches/prices' },
+      { header: 'Overview', value: 0, route_to: 'caches/all' },
+      { header: 'Blocks', value: 0, route_to: 'caches/blocks&details&depth=2' },
+      { header: 'Transactions', value: 3981, route_to: 'caches/transactions&details&depth=2' },
+      { header: 'Traces', value: 3981, route_to: 'caches/traces&details&depth=2' },
+      { header: 'Slurps', value: 0, route_to: 'caches/slurps&details&depth=2' },
       { header: 'e-043' },
       { header: 'e-044' }
     ],
@@ -112,9 +112,9 @@ export const settings_local_menu = [
     page: 'Settings',
     items: [
       { header: 'Config Files', value: 0, route_to: 'settings/config' },
+      { header: 'USD/ETH', value: 0, route_to: 'settings/prices' },
       { header: 'Skins', value: 0, route_to: 'settings/skins' },
       { header: 'Licenses', value: 0, route_to: 'settings/licenses' },
-      { header: 'e-063' },
       { header: 'e-064' },
       { header: 'e-065' },
       { header: 'e-066' }
@@ -169,8 +169,8 @@ export const dashboard_local_menu = [
       { header: 'Custom Names', value: 40, route_to: 'addresses/custom' },
       { header: 'Known Contracts', value: 991, route_to: 'addresses/known' },
       { header: 'Prefunds', value: 8894, route_to: 'addresses/prefunds' },
-      { header: 'Slurps', value: 0, route_to: 'addresses/slurps' },
-      { header: 'Community', value: 916, route_to: 'addresses/community' }
+      { header: 'Community', value: 916, route_to: 'addresses/community' },
+      { header: 'e-191' }
     ],
     endnote: '',
     color: 'pink'
@@ -217,12 +217,12 @@ export const dashboard_local_menu = [
   {
     page: 'Caches',
     items: [
-      { header: 'Overview', value: 0, route_to: 'caches/overview' },
-      { header: 'Blocks', value: 0, route_to: 'caches/blocks' },
-      { header: 'Transactions', value: 3981, route_to: 'caches/transactions' },
-      { header: 'Traces', value: 3981, route_to: 'caches/traces' },
-      { header: 'Prices', value: 0, route_to: 'caches/prices' },
-      { header: 'e-121' }
+      { header: 'Overview', value: 0, route_to: 'caches/all' },
+      { header: 'Blocks', value: 0, route_to: 'caches/blocks&details&depth=2' },
+      { header: 'Transactions', value: 3981, route_to: 'caches/transactions&details&depth=2' },
+      { header: 'Traces', value: 3981, route_to: 'caches/traces&details&depth=2' },
+      { header: 'Slurps', value: 0, route_to: 'caches/slurps&details&depth=2' },
+      { header: 'e-137' }
     ],
     endnote: '',
     color: 'tan'
@@ -235,7 +235,7 @@ export const dashboard_local_menu = [
       { header: 'Generated Blocks', value: 501, route_to: 'other/generated' },
       { header: 'Groups', value: 0, route_to: 'other/groups' },
       { header: 'Sub Groups', value: 0, route_to: 'other/subgroups' },
-      { header: 'e-151' }
+      { header: 'e-417' }
     ],
     endnote: '',
     color: 'orange'
@@ -244,9 +244,9 @@ export const dashboard_local_menu = [
     page: 'Settings',
     items: [
       { header: 'Config Files', value: 0, route_to: 'settings/config' },
+      { header: 'USD/ETH', value: 0, route_to: 'settings/prices' },
       { header: 'Skins', value: 0, route_to: 'settings/skins' },
       { header: 'Licenses', value: 0, route_to: 'settings/licenses' },
-      { header: 'e-163' },
       { header: 'e-164' },
       { header: 'e-165' }
     ],

@@ -4,7 +4,7 @@ import [{PROPER}]Inner from './[{LONG}]-inner';
 
 //----------------------------------------------------------------------
 var [{PROPER}] = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : '[{LONG}]/[{SUBPAGE}]';
+  var subpage = '[{LONG}]/' + (props.match.params.subpage || '[{SUBPAGE}]');
   var inner = <[{PROPER}]Inner subpage={subpage} />;
   return <Page inner={inner} />;
 };

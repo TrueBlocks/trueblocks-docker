@@ -4,7 +4,7 @@ import IndiciesInner from './indicies-inner';
 
 //----------------------------------------------------------------------
 var Indicies = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : 'indicies/full';
+  var subpage = 'indicies/' + (props.match.params.subpage || 'full');
   var inner = <IndiciesInner subpage={subpage} />;
   return <Page inner={inner} />;
 };

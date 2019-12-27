@@ -9,7 +9,7 @@ export default class DetailPopup extends React.Component {
   render = () => {
     return (
       <div className="popup">
-        <PopIconRow prompt="Address:" value={this.props.item.address} ear={this.props.ear} />
+        <PopIconRow prompt="Address:" value={this.props.item.address} innerEar={this.props.innerEar} />
         <PopTextRow prompt="Group:" value={this.props.item.group} />
         <PopTextRow prompt="Subgroup:" value={this.props.item.subgroup} />
         <PopTextRow prompt="Name:" value={this.props.item.name} />
@@ -23,35 +23,34 @@ export default class DetailPopup extends React.Component {
       </div>
     );
   };
-}
 
-//----------------------------------------------------------------------
-DetailPopup.propTypes = {
-  item: PropTypes.object.isRequired,
-  ear: PropTypes.func.isRequired,
-  closePopup: PropTypes.func.isRequired
-};
+  static propTypes = {
+    item: PropTypes.object.isRequired,
+    innerEar: PropTypes.func.isRequired,
+    closePopup: PropTypes.func.isRequired
+  };
+}
 
 //----------------------------------------------------------------------
 class PopIconRow extends React.Component {
   monitorClicked = () => {
-    this.props.ear('monitor', this.props.value);
+    this.props.innerEar('monitor', this.props.value);
   };
 
   exploreClicked = () => {
-    this.props.ear('explore', this.props.value);
+    this.props.innerEar('explore', this.props.value);
   };
 
   shareClicked = () => {
-    this.props.ear('share', this.props.value);
+    this.props.innerEar('share', this.props.value);
   };
 
   deleteClicked = () => {
-    this.props.ear('delete', this.props.value);
+    this.props.innerEar('delete', this.props.value);
   };
 
   editClicked = () => {
-    this.props.ear('edit', this.props.value);
+    this.props.innerEar('edit', this.props.value);
   };
 
   render = () => {
@@ -69,14 +68,13 @@ class PopIconRow extends React.Component {
       </div>
     );
   };
-}
 
-//----------------------------------------------------------------------
-PopIconRow.propTypes = {
-  prompt: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-  ear: PropTypes.func.isRequired
-};
+  static propTypes = {
+    prompt: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+    innerEar: PropTypes.func.isRequired
+  };
+}
 
 //----------------------------------------------------------------------
 class PopTextRow extends React.Component {
@@ -88,10 +86,9 @@ class PopTextRow extends React.Component {
       </div>
     );
   };
-}
 
-//----------------------------------------------------------------------
-PopTextRow.propTypes = {
-  prompt: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
-};
+  static propTypes = {
+    prompt: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+  };
+}

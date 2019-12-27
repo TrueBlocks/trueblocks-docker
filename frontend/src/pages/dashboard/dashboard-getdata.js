@@ -6,14 +6,14 @@ const SUCCESS = 'dashboa/SUCCESS';
 const FAILURE = 'dashboa/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialDashboardState = {
   isLoading: false,
   error: null,
   names: []
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Dashboard(state = initialState, action) {
+export default function reducer_Dashboard(state = initialDashboardState, action) {
   switch (action.type) {
     case BEGIN:
       return {

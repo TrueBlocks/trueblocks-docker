@@ -3,7 +3,7 @@ import ConnectionInner from './connection-inner';
 
 import './connection.css';
 
-const Connection = (props) => {
+export const Connection = (props) => {
   return (
     <div className="status-panel">
       <h1>Status</h1>
@@ -11,5 +11,3 @@ const Connection = (props) => {
     </div>
   );
 };
-
-export default Connection;

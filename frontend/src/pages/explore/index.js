@@ -4,7 +4,7 @@ import ExploreInner from './explore-inner';
 
 //----------------------------------------------------------------------
 var Explore = (props) => {
-  var subpage = props.match.params.subpage ? props.match.params.subpage : 'explore/accounts';
+  var subpage = 'explore/' + (props.match.params.subpage || 'accounts');
   var inner = <ExploreInner subpage={subpage} />;
   return <Page inner={inner} />;
 };

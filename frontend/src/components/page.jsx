@@ -1,5 +1,7 @@
 import React from 'react';
-import Connection from './';
+import PropTypes from 'prop-types';
+
+import { Connection } from './';
 
 //----------------------------------------------------------------------
 export default class Page extends React.Component {
@@ -10,5 +12,9 @@ export default class Page extends React.Component {
         {this.props.inner}
       </div>
     );
+  };
+
+  static propTypes = {
+    inner: PropTypes.element.isRequired
   };
 }

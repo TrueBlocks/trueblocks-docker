@@ -6,13 +6,13 @@ const SUCCESS = 'signatu/SUCCESS';
 const FAILURE = 'signatu/FAILURE';
 
 //----------------------------------------------------------------------
-const initialState = {
+const initialSignaturesState = {
   isLoading: false,
   error: null
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Signatures(state = initialState, action) {
+export default function reducer_Signatures(state = initialSignaturesState, action) {
   switch (action.type) {
     case BEGIN:
       return {

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Other } from './other-getdata';
 
-import Loading from '../../components/loading';
-import PageHeader from '../../components/page-header';
+import { InnerPageHeader } from '../../components';
 import { LocalMenu } from '../../components/local-menu';
+import { Loading } from '../../components/loading';
 import { other_local_menu } from '../../fake_data/summary-data';
 import './other.css';
 
@@ -51,8 +51,9 @@ class OtherInner extends React.Component {
   // EXISTING_CODE
 
   getInner = () => {
-    return (
-      // EXISTING_CODE
+    let inner;
+    // EXISTING_CODE
+    inner = (
       <Fragment>
         <ul>
           <li>Item 1 1</li>
@@ -61,18 +62,18 @@ class OtherInner extends React.Component {
           <li>Item 1 2</li>
         </ul>
       </Fragment>
-      // EXISTING_CODE
     );
+    // EXISTING_CODE
+    return inner;
   };
 
   getContainer = () => {
-    var isConnected = this.props.isConnected;
     // EXISTING_CODE
     // EXISTING_CODE
     let container;
     if (this.props.error) {
-      container = <Loading status="error" message={this.props.error} />;
-    } else if (isConnected) {
+      container = <Loading source="other" status="error" message={this.props.error} />;
+    } else if (this.props.isConnected) {
       container = (
         <div className="inner-panel">
           <LocalMenu data={other_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
@@ -80,7 +81,7 @@ class OtherInner extends React.Component {
         </div>
       );
     } else {
-      container = <Loading status="initializing" message="Loading..." />;
+      container = <Loading source="other" status="initializing" message="Loading..." />;
     }
     return container;
   };
@@ -88,7 +89,7 @@ class OtherInner extends React.Component {
   render = () => {
     return (
       <div className="right-panel">
-        <PageHeader
+        <InnerPageHeader
           title="Other"
           notes="The Other panel allows you to configure various other items related to TrueBlocks."
         />

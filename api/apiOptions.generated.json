@@ -1346,8 +1346,8 @@
       "docs_visible": true,
       "generate": "local",
       "option_kind": "positional",
-      "data_type": "list<enum[index|monitors|names|abis|blocks|transactions|traces|data|slurps|prices|some*|all]>",
-      "description": "one or more types of data to retrieve"
+      "data_type": "list<enum[index|monitors|names|abis|caches|data|slurps|prices|some*|all]>",
+      "description": "the type of status info to retrieve"
     },
     "details": {
       "num": "10720",
@@ -1365,6 +1365,40 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "include details about items found in monitors&#44; slurps&#44; abis&#44; or price caches"
+    },
+    "types": {
+      "num": "10730",
+      "group": "apps",
+      "api_route": "status",
+      "tool": "cacheStatus",
+      "command": "types",
+      "hotkey": "t",
+      "def_val": "",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "flag",
+      "data_type": "list<enum[blocks|transactions|traces|all*]>",
+      "description": "for cache mode only&#44; which type(s) of cache to report"
+    },
+    "level": {
+      "num": "10735",
+      "group": "apps",
+      "api_route": "status",
+      "tool": "cacheStatus",
+      "command": "level",
+      "hotkey": "e",
+      "def_val": "1",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<uint64>",
+      "description": "for cache mode only&#44; levels deep into cache to report"
     },
     "list": {
       "num": "10740",
@@ -3550,8 +3584,8 @@
       "core_visible": true,
       "docs_visible": false,
       "generate": "local",
-      "option_kind": "flag",
-      "data_type": "<string>",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
       "description": "export javaScript code from the class definition"
     },
     "options": {
