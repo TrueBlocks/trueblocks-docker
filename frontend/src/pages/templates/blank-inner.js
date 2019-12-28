@@ -2,13 +2,12 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dispatcher_[{PROPER}] } from './[{LONG}]-getdata';
+import { dispatcher_[{PROPER}] } from './dispatchers';
 
-import { InnerPageHeader } from '../../components';
-import { [{MENU_TYPE}] } from '../../components/[{MENU_FILE}]';
-import { Loading } from '../../components/loading';
+import { InnerPageHeader, DetailTable, [{MENU_TYPE}], isReady, NotReady } from '../../components';
 import { [{LONG}]_local_menu } from '../../fake_data/summary-data';
-import './[{LONG}].css';[{POLLING}]
+import './[{LONG}].css';
+
 
 // EXISTING_CODE
 // EXISTING_CODE
@@ -18,8 +17,6 @@ class [{PROPER}]Inner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // EXISTING_CODE
-      // EXISTING_CODE
       subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
@@ -28,20 +25,22 @@ class [{PROPER}]Inner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
+  componentWillMount = () => {};
+
+  componentDidMount = () => {
+    this.innerEar('change_subpage', this.props.subpage);
+  };
+
   innerEar = (cmd, value) => {
     console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
-
-    // EXISTING_CODE
-    // EXISTING_CODE
-
     if (cmd === 'change_subpage') {
+      // update the local state...
       this.setState({
-        // EXISTING_CODE
-        // EXISTING_CODE
         subpage: value
       });
-    } else if (cmd === 'goto_page') {
-      window.open('/' + value, '_self');
+      // update the global state...
+      // var query = 'modes=[{LONG}]&types=' + value.replace('[{LONG}]/', '');
+      // this.props.dispatcher_[{PROPER}](query);
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -50,30 +49,23 @@ class [{PROPER}]Inner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  getInner = () => {
-    let inner;
+  getInnerMost = () => {
     // EXISTING_CODE
     // EXISTING_CODE
-    return inner;
+    // return <DetailTable css_pre="[{LONG}]" data={this.props.data} innerEar={this.innerEar} />;
   };
 
-  getContainer = () => {
+  getInnerPage = () => {
+    // if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+
     // EXISTING_CODE
     // EXISTING_CODE
-    let container;
-    if (this.props.error) {
-      container = <Loading source="[{LONG}]" status="error" message={this.props.error} />;
-    } else if (this.props.isConnected) {
-      container = (
-        <div className="inner-panel">
-          <[{MENU_TYPE}] data={[{LONG}]_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
-          {this.getInner()}
-        </div>
-      );
-    } else {
-      container = <Loading source="[{LONG}]" status="initializing" message="Loading..." />;
-    }
-    return container;
+    return (
+      <Fragment>
+        <LocalMenu data={[{LONG}]_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        {this.getInnerMost()}
+      </Fragment>
+    );
   };
 
   render = () => {
@@ -83,7 +75,7 @@ class [{PROPER}]Inner extends React.Component {
           title="[{PROPER}]"
           notes="[{PAGENOTES}]"
         />
-        {this.getContainer()}
+        {this.getInnerPage()}
       </div>
     );
   };
@@ -94,23 +86,24 @@ class [{PROPER}]Inner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_[{PROPER}] }) => ({
-  // EXISTING_CODE
-  // EXISTING_CODE
-  isConnected: reducer_Connection.isConnected,
-  isLoading: reducer_Connection.isLoading,
-  error: reducer_Connection.error[{GLOBAL_STATE4}]
+  sysConnected: reducer_Connection.isConnected,
+  sysError: reducer_Connection.error,
+  isLoading: reducer_[{PROPER}].isLoading,
+  error: reducer_[{PROPER}].error,
+  data: reducer_[{PROPER}].data
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // EXISTING_CODE
-      // EXISTING_CODE
       dispatcher_[{PROPER}]
     },
     dispatch
   );
 
 //----------------------------------------------------------------------
-[{CONNECT}]
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)([{PROPER}]Inner);

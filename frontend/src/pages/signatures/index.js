@@ -1,11 +1,16 @@
 import React from 'react';
 import Page from '../../components/page';
-import SignaturesInner from './signatures-inner';
+import SignaturesInner from './inner';
 
 //----------------------------------------------------------------------
-var Signatures = (props) => {
-  var subpage = 'signatures/' + (props.match.params.subpage || 'monitors');
-  var inner = <SignaturesInner subpage={subpage} />;
-  return <Page inner={inner} />;
-};
+class Signatures extends React.Component {
+  getInner = () => {
+    var subpage = 'signatures/' + (this.props.match.params.subpage || 'monitors');
+    return <SignaturesInner subpage={subpage} />;
+  };
+
+  render = () => {
+    return <Page inner={this.getInner()} />;
+  };
+}
 export default Signatures;

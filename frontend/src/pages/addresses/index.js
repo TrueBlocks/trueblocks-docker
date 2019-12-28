@@ -1,11 +1,16 @@
 import React from 'react';
 import Page from '../../components/page';
-import AddressesInner from './addresses-inner';
+import AddressesInner from './inner';
 
 //----------------------------------------------------------------------
-var Addresses = (props) => {
-  var subpage = 'addresses/' + (props.match.params.subpage || 'custom');
-  var inner = <AddressesInner subpage={subpage} />;
-  return <Page inner={inner} />;
-};
+class Addresses extends React.Component {
+  getInner = () => {
+    var subpage = 'addresses/' + (this.props.match.params.subpage || 'custom');
+    return <AddressesInner subpage={subpage} />;
+  };
+
+  render = () => {
+    return <Page inner={this.getInner()} />;
+  };
+}
 export default Addresses;

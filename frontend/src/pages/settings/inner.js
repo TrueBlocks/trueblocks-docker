@@ -2,11 +2,9 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dispatcher_Settings } from './settings-getdata';
+import { dispatcher_Settings } from './dispatchers';
 
-import { InnerPageHeader } from '../../components';
-import { LocalMenu } from '../../components/local-menu';
-import { Loading } from '../../components/loading';
+import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
 import { settings_local_menu } from '../../fake_data/summary-data';
 import './settings.css';
 
@@ -19,48 +17,41 @@ class SettingsInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // EXISTING_CODE
-      configSettings: [],
-      // EXISTING_CODE
       subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
   }
 
   // EXISTING_CODE
-  componentDidMount = () => {
-    this.props.dispatcher_Settings().then(() => {
-      this.setState({ configSettings: this.props.configSettings.files });
-    });
-  };
-
   submit = (e) => {
     e.preventDefault();
-    this.props.sendToApi(JSON.stringify(this.state.configSettings));
+    this.props.sendToApi(JSON.stringify(this.props.data.files));
   };
 
   onChange = (loc, e) => {
-    let settings = [...this.state.configSettings];
+    let settings = [...this.props.data.files];
     let newVal = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     settings[loc[0]].groups[loc[1]].keys[loc[2]].value = newVal;
-    this.setState({ configSettings: settings });
+    this.setState({ data: settings });
   };
   // EXISTING_CODE
 
+  componentWillMount = () => {};
+
+  componentDidMount = () => {
+    this.innerEar('change_subpage', this.props.subpage);
+  };
+
   innerEar = (cmd, value) => {
     console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
-
-    // EXISTING_CODE
-    // EXISTING_CODE
-
     if (cmd === 'change_subpage') {
+      // update the local state...
       this.setState({
-        // EXISTING_CODE
-        // EXISTING_CODE
         subpage: value
       });
-    } else if (cmd === 'goto_page') {
-      window.open('/' + value, '_self');
+      // update the global state...
+      var query = 'get';
+      this.props.dispatcher_Settings(query);
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -69,18 +60,17 @@ class SettingsInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  getInner = () => {
-    let inner;
+  getInnerMost = () => {
     // EXISTING_CODE
-    inner = (
+    return (
       <Fragment>
         <form onSubmit={this.submit}>
-          {this.state.configSettings.map((file, fileI) =>
+          {this.props.data.files.map((file, fileI) =>
             file.groups.map((category, categoryI) => (
               <div className="setting-group" key={category.section}>
                 <h4>{category.section}</h4>
                 {category.keys.map((settingKey, keyI) => {
-                  const el = this.state.configSettings[fileI].groups[categoryI].keys[keyI];
+                  const el = this.props.data.files[fileI].groups[categoryI].keys[keyI];
                   const loc = [fileI, categoryI, keyI];
                   return (
                     <div key={settingKey.name}>
@@ -96,26 +86,20 @@ class SettingsInner extends React.Component {
       </Fragment>
     );
     // EXISTING_CODE
-    return inner;
+    // return <DetailTable css_pre="settings" data={this.props.data} innerEar={this.innerEar} />;
   };
 
-  getContainer = () => {
+  getInnerPage = () => {
+    if (!isReady(this.props, this.props)) return <NotReady {...this.props} />;
+
     // EXISTING_CODE
     // EXISTING_CODE
-    let container;
-    if (this.props.error) {
-      container = <Loading source="settings" status="error" message={this.props.error} />;
-    } else if (this.props.isConnected) {
-      container = (
-        <div className="inner-panel">
-          <LocalMenu data={settings_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
-          {this.getInner()}
-        </div>
-      );
-    } else {
-      container = <Loading source="settings" status="initializing" message="Loading..." />;
-    }
-    return container;
+    return (
+      <Fragment>
+        <LocalMenu data={settings_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        {this.getInnerMost()}
+      </Fragment>
+    );
   };
 
   render = () => {
@@ -125,7 +109,7 @@ class SettingsInner extends React.Component {
           title="Settings"
           notes="Monitors are per-address index caches that enable fast retreival of appearance histories for any account."
         />
-        {this.getContainer()}
+        {this.getInnerPage()}
       </div>
     );
   };
@@ -151,21 +135,18 @@ const SettingInput = ({ name, value, type, tip, onChange }) => {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Settings }) => ({
-  // EXISTING_CODE
-  // EXISTING_CODE
-  isConnected: reducer_Connection.isConnected,
-  isLoading: reducer_Connection.isLoading,
-  error: reducer_Connection.error,
-  configSettings: reducer_Settings.configSettings
+  sysConnected: reducer_Connection.isConnected,
+  sysError: reducer_Connection.error,
+  isLoading: reducer_Settings.isLoading,
+  error: reducer_Settings.error,
+  data: reducer_Settings.data
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // EXISTING_CODE
       sendToApi: (json) => dispatcher_setSettings(json),
-      // EXISTING_CODE
       dispatcher_Settings
     },
     dispatch

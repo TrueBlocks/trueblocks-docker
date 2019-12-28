@@ -75,12 +75,14 @@ export const dispatcher_Connection = () => {
     return Utils.queryAPI_get('status', 'modes=some')
       .then(async (res) => {
         const json = await res.json();
-        const data = json.data ? json.data[0] : {};
-        const meta = json.meta;
-        const errors = json.errors;
+        if (json.errors) {
+          throw json.errors[0];
+        } else if (!json.data) {
+          throw new Error('no data returned from API');
+        }
         dispatch({
           type: SUCCESS,
-          payload: { data, meta, errors }
+          payload: { data: json.data[0], meta: json.meta }
         });
         return json;
       })

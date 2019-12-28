@@ -8,22 +8,16 @@ const Utils = require('../utils');
 export class DetailTable extends React.Component {
   getHeaders = () => {
     var fields = [];
-    if (this.props.data === undefined || this.props.data === null) {
-      Object.keys(this.props.data[0]).map((key) => {
-        fields.push(key);
-        return true;
-      });
-    }
+    Object.keys(this.props.data[0]).map((key) => {
+      fields.push(key);
+      return true;
+    });
     return fields;
   };
 
   componentDidMount() {}
 
   getContainer = () => {
-    if (this.props.data === undefined || this.props.data === null) {
-      return <Fragment></Fragment>;
-    }
-
     return (
       <Fragment>
         <h4>{this.props.title}</h4>
@@ -33,6 +27,7 @@ export class DetailTable extends React.Component {
             return (
               <div key={index + 'a0'} className={this.props.css_pre + '_detail_row'}>
                 {Object.values(item).map((val, vid) => {
+                  // console.log('x', typeof val, val);
                   return <DTCol key={index + '-' + vid} {...this.props} item={item} value={val} />;
                 })}
               </div>
@@ -105,6 +100,6 @@ class DTCol extends React.Component {
   static propTypes = {
     css_pre: PropTypes.string.isRequired,
     item: PropTypes.object,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool, PropTypes.array])
   };
 }

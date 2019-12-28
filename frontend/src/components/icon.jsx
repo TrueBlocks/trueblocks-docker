@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 //----------------------------------------------------------------------
-export default class Icon extends Component {
+export class Icon extends Component {
   render() {
     var title = this.props.title || this.props.icon;
+    var size = this.props.small ? 'md-small' : this.props.large ? 'md-large' : 'md-regular';
     return (
-      <i className="material-icons md-20" onClick={this.props.onClick} title={title}>
+      <i className={'material-icons ' + size} onClick={this.props.onClick} title={title}>
         {this.props.icon}
       </i>
     );
@@ -15,6 +16,6 @@ export default class Icon extends Component {
   static propTypes = {
     title: PropTypes.string,
     icon: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func
   };
 }

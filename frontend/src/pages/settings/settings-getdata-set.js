@@ -7,9 +7,9 @@ const FAILURE = 'setSetti/FAILURE';
 
 //----------------------------------------------------------------
 const initialSettingsSetState = {
-  res: {},
   isLoading: false,
-  error: null
+  error: null,
+  res: {}
 };
 
 //----------------------------------------------------------------

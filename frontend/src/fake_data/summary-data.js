@@ -39,11 +39,11 @@ export const indicies_local_menu = [
   {
     page: 'Indices',
     items: [
-      { header: 'Full Index', value: 3981, route_to: 'indicies/full' },
-      { header: 'Blooms', value: 3981, route_to: 'indicies/blooms' },
+      { header: 'Finalized', value: 3981, route_to: 'indicies/full' },
+      { header: 'Staged', value: 12, route_to: 'indicies/staged' },
+      { header: 'Unripe', value: 200, route_to: 'indicies/unrip' },
       { header: 'Columns', value: 3981, route_to: 'indicies/columns' },
-      { header: 'Shared', value: 3981, route_to: 'indicies/shared' },
-      { header: 'e-031' },
+      { header: 'Shared', value: 1001, route_to: 'indicies/shared' },
       { header: 'e-032' },
       { header: 'e-033' }
     ],
@@ -191,11 +191,11 @@ export const dashboard_local_menu = [
   {
     page: 'Indices',
     items: [
-      { header: 'Full Index', value: 3981, route_to: 'indicies/full' },
-      { header: 'Blooms', value: 3981, route_to: 'indicies/blooms' },
+      { header: 'Finalized', value: 3981, route_to: 'indicies/full' },
+      { header: 'Staged', value: 12, route_to: 'indicies/staged' },
+      { header: 'Unripe', value: 200, route_to: 'indicies/unrip' },
       { header: 'Columns', value: 3981, route_to: 'indicies/columns' },
-      { header: 'Shared', value: 3981, route_to: 'indicies/shared' },
-      { header: 'e-131' },
+      { header: 'Shared', value: 1001, route_to: 'indicies/shared' },
       { header: 'e-132' }
     ],
     endnote: '',

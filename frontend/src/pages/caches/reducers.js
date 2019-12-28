@@ -4,21 +4,21 @@ import * as ca from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: []
+  data: null
 };
 
 //----------------------------------------------------------------------
 export default function reducer_Caches(state = initialState, action) {
   switch (action.type) {
-    case ca.CA_BEGIN:
+    case ca.BEGIN:
       return {
         ...state,
         isLoading: true,
         error: null,
-        data: []
+        data: null
       };
 
-    case ca.CA_SUCCESS:
+    case ca.SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -26,15 +26,15 @@ export default function reducer_Caches(state = initialState, action) {
         data: action.payload
       };
 
-    case ca.CA_FAILURE:
+    case ca.FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.err,
-        data: []
+        data: null
       };
 
     default:
       return state;
   }
-}
+};

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from './icon';
+import { Icon } from './icon';
 import './loading.css';
 
 //----------------------------------------------------------------------
 export class Loading extends React.Component {
-  noop = () => {};
   render = () => {
     if (this.props.status === 'error') {
       var msg;
@@ -22,10 +21,10 @@ export class Loading extends React.Component {
       if (msg.indexOf('SyntaxError') !== -1) msg += '. Is the API producing valid JSON?';
       return (
         <div className="error-msg">
-          <Icon icon="error" onClick={this.noop} />
+          <Icon icon="error" onClick={null} />
           <h3>{msg}</h3>
           <br />
-          <Icon icon="error" onClick={this.noop} />
+          <Icon icon="error" onClick={null} />
         </div>
       );
     }
@@ -54,6 +53,6 @@ export class Loading extends React.Component {
   static propTypes = {
     source: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired
+    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
   };
 }

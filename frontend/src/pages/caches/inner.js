@@ -2,12 +2,11 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { dispatcher_Caches } from './dispatchers';
+
+import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
 import { caches_local_menu } from '../../fake_data/summary-data';
 import './caches.css';
-
-import { InnerPageHeader, DetailTable, LocalMenu, Loading } from '../../components';
 
 // EXISTING_CODE
 // EXISTING_CODE
@@ -17,8 +16,6 @@ class CachesInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // EXISTING_CODE
-      // EXISTING_CODE
       subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
@@ -57,25 +54,8 @@ class CachesInner extends React.Component {
     return <DetailTable css_pre="caches" data={this.props.data} innerEar={this.innerEar} />;
   };
 
-  isReady = (props) => {
-    return props.isLoading || (props.sysConnected && props.error) || (!props.sysConnected && props.sysError)
-      ? false
-      : true;
-  };
-
-  notReady = (props) => {
-    if (props.isLoading) {
-      return <Loading source="caches" message="Loading..." />;
-    } else if (props.sysConnected && props.error) {
-      return <Loading source="caches" status="error" message={props.error} />;
-    } else if (!props.sysConnected && props.sysError) {
-      return <Loading source="caches" status="error" message={props.sysError} />;
-    }
-    return <Fragment />;
-  };
-
   getInnerPage = () => {
-    if (!this.isReady(this.props)) return this.notReady(this.props);
+    if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
 
     // EXISTING_CODE
     // EXISTING_CODE
@@ -88,8 +68,6 @@ class CachesInner extends React.Component {
   };
 
   render = () => {
-    // EXISTING_CODE
-    // EXISTING_CODE
     return (
       <div className="right-panel">
         <InnerPageHeader

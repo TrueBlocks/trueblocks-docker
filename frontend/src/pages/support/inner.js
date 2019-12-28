@@ -2,11 +2,9 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dispatcher_Support } from './support-getdata';
+import { dispatcher_Support } from './dispatchers';
 
-import { InnerPageHeader } from '../../components';
-import { LocalMenu } from '../../components/local-menu';
-import { Loading } from '../../components/loading';
+import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
 import { support_local_menu } from '../../fake_data/summary-data';
 import './support.css';
 
@@ -18,8 +16,6 @@ class SupportInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // EXISTING_CODE
-      // EXISTING_CODE
       subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
@@ -28,20 +24,22 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
+  componentWillMount = () => {};
+
+  componentDidMount = () => {
+    this.innerEar('change_subpage', this.props.subpage);
+  };
+
   innerEar = (cmd, value) => {
     console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
-
-    // EXISTING_CODE
-    // EXISTING_CODE
-
     if (cmd === 'change_subpage') {
+      // update the local state...
       this.setState({
-        // EXISTING_CODE
-        // EXISTING_CODE
         subpage: value
       });
-    } else if (cmd === 'goto_page') {
-      window.open('/' + value, '_self');
+      // update the global state...
+      //var query = 'modes=support';
+      //this.props.dispatcher_Support(query);
     }
     // EXISTING_CODE
     // EXISTING_CODE
@@ -50,10 +48,9 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  getInner = () => {
-    let inner;
+  getInnerMost = () => {
     // EXISTING_CODE
-    inner = (
+    return (
       <Fragment>
         <ul>
           <li>Email support: &lt;support@trueblocks.io&gt;</li>
@@ -73,26 +70,20 @@ class SupportInner extends React.Component {
       </Fragment>
     );
     // EXISTING_CODE
-    return inner;
+    //    return <DetailTable css_pre="support" data={this.props.data} innerEar={this.innerEar} />;
   };
 
-  getContainer = () => {
+  getInnerPage = () => {
+    if (!isReady(this.props, this.props)) return <NotReady {...this.props} />;
+
     // EXISTING_CODE
     // EXISTING_CODE
-    let container;
-    if (this.props.error) {
-      container = <Loading source="support" status="error" message={this.props.error} />;
-    } else if (this.props.isConnected) {
-      container = (
-        <div className="inner-panel">
-          <LocalMenu data={support_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
-          {this.getInner()}
-        </div>
-      );
-    } else {
-      container = <Loading source="support" status="initializing" message="Loading..." />;
-    }
-    return container;
+    return (
+      <Fragment>
+        <LocalMenu data={support_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        {this.getInnerMost()}
+      </Fragment>
+    );
   };
 
   render = () => {
@@ -103,7 +94,7 @@ class SupportInner extends React.Component {
           notes="We provide various support options ranging from online email/forum discussions to 
             full enterprise-level support plans to suit your needs. We've got you covered."
         />
-        {this.getContainer()}
+        {this.getInnerPage()}
       </div>
     );
   };
@@ -114,19 +105,17 @@ class SupportInner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Support }) => ({
-  // EXISTING_CODE
-  // EXISTING_CODE
-  isConnected: reducer_Connection.isConnected,
-  isLoading: reducer_Connection.isLoading,
-  error: reducer_Connection.error
+  sysConnected: reducer_Connection.isConnected,
+  sysError: reducer_Connection.error,
+  isLoading: reducer_Support.isLoading,
+  error: reducer_Support.error,
+  data: reducer_Support.data
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // EXISTING_CODE
-      // EXISTING_CODE
       dispatcher_Support
     },
     dispatch

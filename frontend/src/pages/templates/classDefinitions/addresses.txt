@@ -1,9 +1,7 @@
 [settings]
 class = CAddresses
 subpage = custom
-state = monitorStatus: {}
 query_url = status
 query_opts = modes=monitors&details&ether
 query_extract = .data[0].caches[0]
 page_notes = Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note that the transactions/logs/receipts/traces are not downloaded until you explore an address.
-disabled = true

@@ -50,7 +50,7 @@ const apiProvider = 'http://localhost:8080/';
 //----------------------------------------------------------------
 let queryAPI_get = function(cmd, params) {
   //  console.log('GET: ', apiProvider, cmd, '?', params);
-  if (cmd === 'ping') return { json: {} };
+  if (cmd === 'ping') return { data: {} };
   const url = apiProvider + cmd + '?' + params;
   return fetch(url);
 };

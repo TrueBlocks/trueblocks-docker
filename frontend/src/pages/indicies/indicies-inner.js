@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Indicies } from './indicies-getdata';
 
-import { InnerPageHeader } from '../../components';
-import { LocalMenu } from '../../components/local-menu';
-import { Loading } from '../../components/loading';
+import { InnerPageHeader, LocalMenu, Icon, Loading } from '../../components';
 import { indicies_local_menu } from '../../fake_data/summary-data';
 import './indicies.css';
 
@@ -20,8 +18,6 @@ class IndiciesInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // EXISTING_CODE
-      // EXISTING_CODE
       subpage: props.subpage
     };
     this.innerEar = this.innerEar.bind(this);
@@ -166,7 +162,7 @@ class SystemProgressChart extends React.Component {
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[1].type}:</div>
-          <div>{this.props.caches[1].path.replace(this.props.index_path, '$indexPath/')}</div>
+          <div>{this.props.caches[1].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
             {fmtInteger(this.props.caches[1].sizeInBytes)} / {fmtInteger(this.props.caches[1].nFiles)} /{' '}
             {fmtDouble(this.props.caches[1].sizeInBytes / this.props.caches[1].nFiles, 1)}
@@ -174,7 +170,7 @@ class SystemProgressChart extends React.Component {
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[2].type}:</div>
-          <div>{this.props.caches[2].path.replace(this.props.index_path, '$indexPath/')}</div>
+          <div>{this.props.caches[2].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
             {fmtInteger(this.props.caches[2].sizeInBytes)} / {fmtInteger(this.props.caches[2].nFiles)} /{' '}
             {fmtDouble(this.props.caches[2].sizeInBytes / this.props.caches[2].nFiles, 1)}
@@ -182,7 +178,7 @@ class SystemProgressChart extends React.Component {
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[3].type}:</div>
-          <div>{this.props.caches[3].path.replace(this.props.index_path, '$indexPath/')}</div>
+          <div>{this.props.caches[3].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
             {fmtInteger(this.props.caches[3].sizeInBytes)} / {fmtInteger(this.props.caches[3].nFiles)} /{' '}
             {fmtDouble(this.props.caches[3].sizeInBytes / this.props.caches[3].nFiles, 1)}
@@ -190,7 +186,7 @@ class SystemProgressChart extends React.Component {
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[4].type}:</div>
-          <div>{this.props.caches[4].path.replace(this.props.index_path, '$indexPath/')}</div>
+          <div>{this.props.caches[4].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
             {fmtInteger(this.props.caches[4].sizeInBytes)} / {fmtInteger(this.props.caches[4].nFiles)} /{' '}
             {fmtDouble(this.props.caches[4].sizeInBytes / this.props.caches[4].nFiles, 1)}
@@ -222,10 +218,7 @@ const ZoomOnIndex = (props) => {
   switch (hasData) {
     case true:
       const filteredData = props.indexData.items.filter(
-        (item) =>
-          item.path.startsWith('finalized') &
-          (item.firstAppearance >= props.start) &
-          (item.firstAppearance < props.start + props.n)
+        (item) => (item.firstAppearance >= props.start) & (item.firstAppearance < props.start + props.n)
       );
       readyContainer = (
         <div>
@@ -262,14 +255,19 @@ const IndexDetail = (props) => {
       <div className="indicies-index-container">
         {props.data.map((item) => (
           <div className="indicies-index-node" key={`x${item.firstAppearance}`}>
-            <div>ipfs hash:</div> <div className="indicies-inright_blue">{item.hash}</div>
+            <div>bloom hash:</div>{' '}
+            <div className="indicies-inright_blue">
+              {item.bloom_hash} <Icon icon="check_box" small onClick={null} />
+            </div>
+            <div>index hash:</div> <div className="indicies-inright_blue">{item.index_hash}</div>
             <div>first block:</div> <div className="indicies-inright">{fmtInteger(item.firstAppearance)}</div>
             <div>latest block:</div> <div className="indicies-inright">{fmtInteger(item.latestAppearance)}</div>
             <div>nBlocks:</div>{' '}
             <div className="indicies-inright">{fmtInteger(item.latestAppearance - item.firstAppearance + 1)}</div>
             <div>nAddresses:</div> <div className="indicies-inright">{fmtInteger(item.nAddresses)}</div>
             <div>nAppearances:</div> <div className="indicies-inright_red">{fmtInteger(item.nAppearances)}</div>
-            <div>file size:</div> <div className="indicies-inright">{humanFileSize(item.sizeInBytes)}</div>
+            <div>chunk size:</div> <div className="indicies-inright">{humanFileSize(item.indexSizeBytes)}</div>
+            <div>bloom size:</div> <div className="indicies-inright">{humanFileSize(item.bloomSizeBytes)}</div>
           </div>
         ))}
       </div>

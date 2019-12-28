@@ -42,7 +42,7 @@ export default function reducer_Indicies(state = initialIndiciesState, action) {
     default:
       return state;
   }
-};
+}
 
 //----------------------------------------------------------------------
 export const dispatcher_Indicies = () => {

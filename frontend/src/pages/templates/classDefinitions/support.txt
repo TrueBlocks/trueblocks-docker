@@ -4,4 +4,3 @@ subpage = pay
 query_url = ping
 query_opts = 
 page_notes = We provide various support options ranging from online email/forum discussions to|full enterprise-level support plans to suit your needs. We've got you covered.
-disabled = true

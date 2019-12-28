@@ -3,9 +3,14 @@ import Page from '../../components/page';
 import CachesInner from './inner';
 
 //----------------------------------------------------------------------
-var Caches = (props) => {
-  var subpage = 'caches/' + (props.match.params.subpage || 'all');
-  var inner = <CachesInner subpage={subpage} />;
-  return <Page inner={inner} />;
-};
+class Caches extends React.Component {
+  getInner = () => {
+    var subpage = 'caches/' + (this.props.match.params.subpage || 'all');
+    return <CachesInner subpage={subpage} />;
+  };
+
+  render = () => {
+    return <Page inner={this.getInner()} />;
+  };
+}
 export default Caches;

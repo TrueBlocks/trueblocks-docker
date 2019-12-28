@@ -1,15 +1,15 @@
 //----------------------------------------------------------------------
 import React, { Fragment } from 'react';
-import './data-table.css';
+import './old-data-table.css';
 import Identicon from './identicons';
-import Icon from './icon';
+import { Icon } from './icon';
 var Utils = require('../utils');
 
 //---------------------------------------------------------------------
-export default class DataTable extends React.Component {
+export default class OldDataTable extends React.Component {
   render = () => {
     return (
-      <table className="data-table">
+      <table className="old-data-table">
         <HeaderRow headings={this.props.headings} innerEar={this.props.innerEar} />
         <TableBody rows={this.props.rows} innerEar={this.props.innerEar} />
       </table>

@@ -1,11 +1,16 @@
 import React from 'react';
 import Page from '../../components/page';
-import DashboardInner from './dashboard-inner';
+import DashboardInner from './inner';
 
 //----------------------------------------------------------------------
-var Dashboard = (props) => {
-  var subpage = 'dashboard/' + (props.match.params.subpage || '');
-  var inner = <DashboardInner subpage={subpage} />;
-  return <Page inner={inner} />;
-};
+class Dashboard extends React.Component {
+  getInner = () => {
+    var subpage = 'dashboard/' + (this.props.match.params.subpage || '');
+    return <DashboardInner subpage={subpage} />;
+  };
+
+  render = () => {
+    return <Page inner={this.getInner()} />;
+  };
+}
 export default Dashboard;

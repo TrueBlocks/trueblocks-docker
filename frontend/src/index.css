@@ -158,13 +158,26 @@ h1 {
 }
 
 /*-----------------------------------------------------------------------------*/
-.material-icons.md-20 {
+.material-icons.md-small {
+  font-size: 15px;
+  padding-right: 3px;
+  opacity: 54%;
+  vertical-align: text-bottom;
+}
+
+.material-icons.md-regular {
   font-size: 20px;
   padding-right: 3px;
   opacity: 54%;
 }
 
-.material-icons.md-20:hover {
+.material-icons.md-large {
+  font-size: 30px;
+  padding-right: 3px;
+  opacity: 54%;
+}
+
+.material-icons.hover {
   opacity: 100%;
 }
 

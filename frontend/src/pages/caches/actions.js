@@ -1,4 +1,4 @@
 //----------------------------------------------------------------------
-export const CA_BEGIN = 'caches_/BEGIN';
-export const CA_SUCCESS = 'caches_/SUCCESS';
-export const CA_FAILURE = 'caches_/FAILURE';
+export const BEGIN = 'caches_/BEGIN';
+export const SUCCESS = 'caches_/SUCCESS';
+export const FAILURE = 'caches_/FAILURE';
