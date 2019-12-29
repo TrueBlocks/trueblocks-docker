@@ -10,7 +10,7 @@ import './addresses.css';
 
 // EXISTING_CODE
 import '../../components/detail-table.css';
-import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
+import { dispatcher_RemoveMonitor, dispatcher_AddMonitor, dispatcher_Names } from './dispatchers';
 import DetailPopup from '../../components/detail-popup';
 import OldDataTable from '../../components/old-data-table';
 const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
@@ -43,15 +43,21 @@ class AddressesInner extends React.Component {
         subpage: value
       });
       // update the global state...
-      var query = 'modes=monitors&details&ether';
-      this.props.dispatcher_Addresses('status', query);
+      if (value === 'addresses/monitors') {
+        var query = 'modes=monitors&details&ether';
+        this.props.dispatcher_Addresses('status', query);
+      } else {
+        var query = value.replace('addresses/','');
+        this.props.dispatcher_Names('names', query);
+      }
     }
 
     // EXISTING_CODE
+    console.log("HERE");
     if (cmd === 'remove') {
-      this.props.removeAddress(value, true);
+      this.props.dispatcher_RemoveMonitor(value, true);
     } else if (cmd === 'delete' || cmd === 'undo') {
-      this.props.removeAddress(value, false);
+      this.props.dispatcher_RemoveMonitor(value, false);
     } else if (cmd === 'expand') {
       this.setState({
         subpage: value
@@ -67,7 +73,7 @@ class AddressesInner extends React.Component {
 
   getInnerMost = () => {
     // EXISTING_CODE
-    if (false && this.state.subpage === 'addresses/monitors') {
+    if (this.state.subpage === 'addresses/monitors') {
       return (
         <Fragment>
           <AddNewAddress {...this.props} />
@@ -148,8 +154,9 @@ const mapStateToProps = ({ reducer_Connection, reducer_Addresses }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      removeAddress: (address, remove) => dispatcher_RemoveMonitor(address, remove),
+      dispatcher_RemoveMonitor,
       addAddress: (address) => dispatcher_AddMonitor(address),
+      dispatcher_Names,
       dispatcher_Addresses
     },
     dispatch

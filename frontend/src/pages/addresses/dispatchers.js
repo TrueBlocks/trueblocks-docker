@@ -17,9 +17,9 @@ export const dispatcher_Addresses = (cmd, options) => {
         } else {
           dispatch({
             type: ad.SUCCESS,
-            payload: json.data[0]
+            payload: json.data[0].caches[0].items
           });
-          return json.data[0];
+          return json.data[0].caches[0].items;
         }
       })
       .catch((err) => {
@@ -40,15 +40,18 @@ export const dispatcher_RemoveMonitor = (address, remove) => {
 
     return Utils.queryAPI_get('rm', 'address=' + address + (remove ? '&yes' : ''))
       .then(async (res) => {
+        console.log(res);
+        console.log(res.json());
         let json = await res.json();
         return dispatch({
           type: ad.REMOVE,
           payload: json
         });
       })
-      .catch((e) => {
+      .catch((err) => {
         dispatch({
-          type: ad.FAILURE
+          type: ad.FAILURE,
+          err
         });
       });
   };
@@ -69,9 +72,40 @@ export const dispatcher_AddMonitor = (address) => {
           payload: json
         });
       })
-      .catch((e) => {
+      .catch((err) => {
         dispatch({
-          type: ad.FAILURE
+          type: ad.FAILURE,
+          err
+        });
+      });
+  };
+};
+
+//----------------------------------------------------------------------
+export const dispatcher_Names = (cmd, options) => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: ad.BEGIN
+    });
+
+    console.log(cmd, options);
+    return Utils.queryAPI_get(cmd, options)
+      .then(async (result) => {
+        let json = await result.json();
+        if (json.errors) {
+          throw json.errors[0];
+        } else {
+          dispatch({
+            type: ad.SUCCESS,
+            payload: json.data
+          });
+          return json.data
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: ad.FAILURE,
+          err
         });
       });
   };

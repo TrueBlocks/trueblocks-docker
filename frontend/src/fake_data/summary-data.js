@@ -5,10 +5,10 @@ export const addresses_local_menu = [
     items: [
       { header: 'Monitored', value: 40, route_to: 'addresses/monitors' },
       { header: 'Custom Names', value: 40, route_to: 'addresses/custom' },
-      { header: 'Known Contracts', value: 991, route_to: 'addresses/known' },
-      { header: 'Prefunds', value: 8894, route_to: 'addresses/prefunds' },
-      { header: 'Community', value: 916, route_to: 'addresses/community' },
-      { header: 'e-011' },
+      { header: 'Owned', value: 40, route_to: 'addresses/owned' },
+      { header: 'Known Contracts', value: 991, route_to: 'addresses/named' },
+      { header: 'Prefunds', value: 8894, route_to: 'addresses/prefund' },
+      { header: 'Community', value: 916, route_to: 'addresses/other' },
       { header: 'e-012' }
     ],
     endnote: '',
@@ -167,10 +167,10 @@ export const dashboard_local_menu = [
     items: [
       { header: 'Monitored', value: 40, route_to: 'addresses/monitors' },
       { header: 'Custom Names', value: 40, route_to: 'addresses/custom' },
-      { header: 'Known Contracts', value: 991, route_to: 'addresses/known' },
-      { header: 'Prefunds', value: 8894, route_to: 'addresses/prefunds' },
-      { header: 'Community', value: 916, route_to: 'addresses/community' },
-      { header: 'e-191' }
+      { header: 'Owned', value: 40, route_to: 'addresses/owned' },
+      { header: 'Known Contracts', value: 991, route_to: 'addresses/named' },
+      { header: 'Prefunds', value: 8894, route_to: 'addresses/prefund' },
+      { header: 'Community', value: 916, route_to: 'addresses/other' }
     ],
     endnote: '',
     color: 'pink'

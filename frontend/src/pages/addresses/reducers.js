@@ -27,6 +27,7 @@ export default function reducer_Addresses(state = initialState, action) {
       };
 
     case ad.REMOVE:
+      console.log(action);
       return {
         ...state,
         isLoading: false,
