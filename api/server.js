@@ -71,6 +71,10 @@ app.get(`/log-message`, (req, res) => {
     res.send("")
 })
 
+app.get(`/ping`, (req, res) => {
+    res.send(JSON.stringify(req.query));
+})
+
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
     if(apiOptions[routeName] === undefined) {
