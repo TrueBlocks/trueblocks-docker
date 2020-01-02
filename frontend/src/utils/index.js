@@ -30,7 +30,7 @@ let isNumber = function(n) {
 
 //----------------------------------------------------------------
 let isAddress = function(addr) {
-  return addr && (addr.length === 42 && addr.substring(0, 2) === '0x');
+  return addr && ((addr.length === 42 || addr.length === 66) && addr.substring(0, 2) === '0x');
 };
 
 //----------------------------------------------------------------
