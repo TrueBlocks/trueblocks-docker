@@ -13,7 +13,6 @@ import './addresses.css';
 // EXISTING_CODE
 import '../../components/detail-table.css';
 import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
-//import DetailPopup from '../../components/detail-popup';
 import OldDataTable from '../../components/old-data-table';
 const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
