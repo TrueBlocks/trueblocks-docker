@@ -18,10 +18,10 @@ export default function reducer_Support(state = initialState, action) {
         error: null
       };
 
-    case su.CONNECT:
+    case su.CONNECT_US:
     case su.DOCUMENTATION:
-    case su.PAY:
-    case su.FREE:
+    case su.PAY_TEIR:
+    case su.FREE_TEIR:
       return {
         ...state,
         isLoading: false,

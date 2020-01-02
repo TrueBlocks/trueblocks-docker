@@ -8,8 +8,8 @@ export const UNDELETE = 'setting/UNDELETE';
 export const DELETE = 'setting/DELETE';
 export const REMOVE = 'setting/REMOVE';
 
-export const CONFIGS = 'settings/get';
-export const PRICES = 'settings/prices';
+export const CONFIGURATION = 'settings/get';
+export const PRICE_QUOTES = 'settings/prices';
 export const SKINS = 'settings/skins';
 export const LICENSES = 'settings/licenses';
 
@@ -18,8 +18,8 @@ export const settings_menu = [
   {
     page: 'Settings',
     items: [
-      { header: 'Configs', value: 'VAL', action: CONFIGS },
-      { header: 'Prices', value: 'VAL', action: PRICES },
+      { header: 'Configuration', value: 'VAL', action: CONFIGURATION },
+      { header: 'Price Quotes', value: 'VAL', action: PRICE_QUOTES },
       { header: 'Skins', value: 'VAL', action: SKINS },
       { header: 'Licenses', value: 'VAL', action: LICENSES },
       { header: 'se-0004' },

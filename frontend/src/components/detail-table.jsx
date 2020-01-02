@@ -1,41 +1,82 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from './icon';
 import './detail-table.css';
 const Utils = require('../utils');
 
 //----------------------------------------------------------------------
-export class DetailTable extends React.Component {
-  getHeaders = () => {
+export class DataTable extends React.Component {
+  constructor(props) {
+    super(props);
     var fields = [];
     Object.keys(this.props.data[0]).map((key) => {
       fields.push(key);
       return true;
     });
-    return fields;
+    this.state = {
+      sortedBy: fields[0],
+      sortDir: true,
+      fieldList: fields
+    };
+  }
+
+  sortData(data, field, asc) {
+    data.sort(function(a, b) {
+      if (asc) {
+        return a[field] > b[field] ? 1 : a[field] < b[field] ? -1 : 0;
+      } else {
+        return b[field] > a[field] ? 1 : b[field] < a[field] ? -1 : 0;
+      }
+    });
+    return data;
+  }
+
+  sortBy = (field) => {
+    var sortDir = this.state.sortedBy === field ? !this.state.sortDir : true;
+    this.setState({
+      ...this.state,
+      sortedBy: field,
+      sortDir: sortDir,
+      data: this.sortData(this.props.data, field, sortDir)
+    });
+    return;
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.sortData(this.props.data, this.state.sortedBy, this.state.sortDir);
+  }
 
   getContainer = () => {
     return (
       <Fragment>
         <h4>{this.props.title}</h4>
         <div className="detail_table">
-          <DTHeader {...this.props} headers={this.getHeaders()} />
+          <DT_HeaderRow
+            {...this.props}
+            headers={this.state.fieldList}
+            sortBy={this.sortBy}
+            sortedBy={this.state.sortedBy}
+            sortDir={this.state.sortDir}
+          />
           {this.props.data.map((item, index) => {
             return (
-              <div key={index + 'a0'} className={this.props.css_pre + '_detail_row'}>
-                {Object.values(item).map((val, vid) => {
-                  return <DTCol key={index + '-' + vid} {...this.props} item={item} value={val} />;
-                })}
-              </div>
+              <Fragment>
+                <div key={index + 'a0'} className={'detail_row ' + this.props.css_pre}>
+                  {Object.values(item).map((val, vid) => {
+                    return <DT_Item key={index + '-' + vid} {...this.props} item={item} value={val} />;
+                  })}
+                </div>
+              </Fragment>
             );
           })}
         </div>
       </Fragment>
     );
   };
+  // <div key={index + 'b0'} className={'detail_wide_row ' + this.props.css_pre}>
+  //   <Fragment>Expanded</Fragment>;
+  // </div>
 
   render = () => {
     return this.getContainer();
@@ -49,12 +90,12 @@ export class DetailTable extends React.Component {
 }
 
 //----------------------------------------------------------------------
-class DTHeader extends React.Component {
+class DT_HeaderRow extends React.Component {
   render = () => {
     return (
-      <div className={this.props.css_pre + '_detail_header'}>
+      <div className={'detail_header ' + this.props.css_pre}>
         {this.props.headers.map((field) => (
-          <DTHeaderCol {...this.props} key={'h' + field} value={field} />
+          <DT_HeaderItem {...this.props} key={'h' + field} value={field} />
         ))}
       </div>
     );
@@ -66,13 +107,26 @@ class DTHeader extends React.Component {
 }
 
 //----------------------------------------------------------------------
-class DTHeaderCol extends React.Component {
+class DT_HeaderItem extends React.Component {
   sortClicked = (el) => {
-    this.props.innerEar('sort', this.props.value);
+    this.props.sortBy(this.props.value);
+  };
+
+  getSortIcon = (field) => {
+    if (this.props.value === this.props.sortedBy) {
+      if (this.props.sortDir)
+        return <Icon midsize icon="arrow_drop_down" color="orange" title="ascending" onClick={null} />;
+      return <Icon midsize icon="arrow_drop_up" color="orange" title="descending" onClick={null} />;
+    }
+    return <Icon midsize invisible onClick={null} />;
   };
 
   render = () => {
-    return <div onClick={this.sortClicked}>{this.props.value}</div>;
+    return (
+      <div className="detail_header_item" onClick={this.sortClicked}>
+        {this.props.value} {this.getSortIcon()}
+      </div>
+    );
   };
 
   static propTypes = {
@@ -81,7 +135,7 @@ class DTHeaderCol extends React.Component {
 }
 
 //----------------------------------------------------------------------
-class DTCol extends React.Component {
+class DT_Item extends React.Component {
   expandClicked = () => {
     this.props.innerEar('expand', this.props.item);
   };

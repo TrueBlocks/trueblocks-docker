@@ -34,7 +34,6 @@ class IndiciesInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -42,6 +41,7 @@ class IndiciesInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_Indicies(value);
+      return;
     }
 
     // EXISTING_CODE

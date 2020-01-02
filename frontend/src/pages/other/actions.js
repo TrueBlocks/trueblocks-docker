@@ -8,22 +8,22 @@ export const UNDELETE = 'other__/UNDELETE';
 export const DELETE = 'other__/DELETE';
 export const REMOVE = 'other__/REMOVE';
 
-export const CUSTOM = 'other/custom';
-export const KNOWN = 'when/list';
-export const GENERATED = 'other/generated';
-export const GROUPS = 'other/groups';
-export const SUBGROUPS = 'other/subgroups';
+export const CUSTOM_BLOCKS = 'when/list&verbose';
+export const KNOWN_BLOCKS = 'when/list';
+export const GENERATED_BLOCKS = 'other/generated';
+export const GROUP_NAMES = 'other/groups';
+export const SUBGROUP_NAMES = 'other/subgroups';
 
 //----------------------------------------------------------------------
 export const other_menu = [
   {
     page: 'Other',
     items: [
-      { header: 'Custom', value: 'VAL', action: CUSTOM },
-      { header: 'Known', value: 'VAL', action: KNOWN },
-      { header: 'Generated', value: 'VAL', action: GENERATED },
-      { header: 'Groups', value: 'VAL', action: GROUPS },
-      { header: 'Subgroups', value: 'VAL', action: SUBGROUPS },
+      { header: 'Custom Blocks', value: 'VAL', action: CUSTOM_BLOCKS },
+      { header: 'Known Blocks', value: 'VAL', action: KNOWN_BLOCKS },
+      { header: 'Generated Blocks', value: 'VAL', action: GENERATED_BLOCKS },
+      { header: 'Group Names', value: 'VAL', action: GROUP_NAMES },
+      { header: 'Subgroup Names', value: 'VAL', action: SUBGROUP_NAMES },
       { header: 'ot-0005' },
       { header: 'ot-0006' }
     ],

@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Signatures } from './dispatchers';
 
 import { InnerPageHeader, LocalMenu } from '../../components';
+import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
+import { isReady } from '../../components';
+import { DataTable } from '../../components';
 import './signatures.css';
 
 // EXISTING_CODE
@@ -30,7 +33,6 @@ class SignaturesInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -38,6 +40,7 @@ class SignaturesInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_Signatures(value);
+      return;
     }
 
     // EXISTING_CODE
@@ -48,6 +51,9 @@ class SignaturesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     return (
       <Fragment>
@@ -59,6 +65,7 @@ class SignaturesInner extends React.Component {
       </Fragment>
     );
     // EXISTING_CODE
+    return <DataTable css_pre="signatures" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {

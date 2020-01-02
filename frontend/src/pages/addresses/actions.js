@@ -8,11 +8,11 @@ export const UNDELETE = 'address/UNDELETE';
 export const DELETE = 'address/DELETE';
 export const REMOVE = 'address/REMOVE';
 
-export const MONITORS = 'status/modes=monitors&details&ether';
-export const CUSTOM = 'names/custom';
-export const OWNED = 'names/owned';
-export const NAMED = 'names/named';
-export const PREFUND = 'names/prefund';
+export const MONITORED = 'status/modes=monitors&details&ether';
+export const CUSTOM_NAMES = 'names/custom';
+export const OWNED_ADDRESSES = 'names/owned';
+export const KNOWN_TOKENS = 'names/named';
+export const PREFUNDS = 'names/prefund';
 export const OTHER = 'names/other';
 
 //----------------------------------------------------------------------
@@ -20,11 +20,11 @@ export const addresses_menu = [
   {
     page: 'Addresses',
     items: [
-      { header: 'Monitors', value: 'VAL', action: MONITORS },
-      { header: 'Custom', value: 'VAL', action: CUSTOM },
-      { header: 'Owned', value: 'VAL', action: OWNED },
-      { header: 'Named', value: 'VAL', action: NAMED },
-      { header: 'Prefund', value: 'VAL', action: PREFUND },
+      { header: 'Monitored', value: 'VAL', action: MONITORED },
+      { header: 'Custom Names', value: 'VAL', action: CUSTOM_NAMES },
+      { header: 'Owned Addresses', value: 'VAL', action: OWNED_ADDRESSES },
+      { header: 'Known Tokens', value: 'VAL', action: KNOWN_TOKENS },
+      { header: 'Prefunds', value: 'VAL', action: PREFUNDS },
       { header: 'Other', value: 'VAL', action: OTHER },
       { header: 'ad-0006' }
     ],

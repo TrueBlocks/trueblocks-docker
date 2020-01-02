@@ -7,7 +7,7 @@ import { dispatcher_Other } from './dispatchers';
 import { InnerPageHeader, LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
-import { DetailTable } from '../../components';
+import { DataTable } from '../../components';
 import './other.css';
 
 // EXISTING_CODE
@@ -33,7 +33,6 @@ class OtherInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -41,6 +40,7 @@ class OtherInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_Other(value);
+      return;
     }
 
     // EXISTING_CODE
@@ -55,19 +55,8 @@ class OtherInner extends React.Component {
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-//    return (
-//      <Fragment>
-//        {this.state.subpage}
-//        <ul>
-//          <li>Item 1 1</li>
-//          <li>Item 1 2</li>
-//          <li>Item 1 2</li>
-//          <li>Item 1 2</li>
-//        </ul>
-//      </Fragment>
-//    );
     // EXISTING_CODE
-    return <DetailTable css_pre="other" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="other" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {

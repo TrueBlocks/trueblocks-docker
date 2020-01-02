@@ -1,13 +1,12 @@
 [settings]
 class = CSignatures
 page_notes = TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your|hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big.
-no_error = true
 color = green
 
 [[subpages]]
 list = [
-    { page = "signatures", subpage = "monitored", route = "signatures", options = "monitored" },
-    { page = "signatures", subpage = "known", route = "signatures", options = "known" },
-    { page = "signatures", subpage = "generated", route = "signatures", options = "generated" },
+    { page = "signatures", subpage = "from_monitors", route = "signatures", options = "monitored" },
+    { page = "signatures", subpage = "known_signatures", route = "signatures", options = "known" },
+    { page = "signatures", subpage = "generated_signatures", route = "signatures", options = "generated" },
     { page = "signatures", subpage = "abis", route = "signatures", options = "abis" },
 ]

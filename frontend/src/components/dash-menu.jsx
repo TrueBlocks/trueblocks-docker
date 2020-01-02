@@ -14,6 +14,21 @@ import * as ab from '../pages/about/actions';
 const utils = require('../utils');
 
 /*-----------------------------------------------------------------------------*/
+export const getDashMenu = () => {
+  var theMenu = [];
+  theMenu.push(ad.addresses_menu[0]);
+  theMenu.push(ex.explore_menu[0]);
+  theMenu.push(ind.indicies_menu[0]);
+  theMenu.push(si.signatures_menu[0]);
+  theMenu.push(ca.caches_menu[0]);
+  theMenu.push(ot.other_menu[0]);
+  theMenu.push(se.settings_menu[0]);
+  theMenu.push(su.support_menu[0]);
+  theMenu.push(ab.about_menu[0]);
+  return theMenu;
+};
+
+/*-----------------------------------------------------------------------------*/
 export class DashMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -144,18 +159,3 @@ export class SepRow extends React.Component {
     return <div className="summary-table box sep"></div>;
   };
 }
-
-/*-----------------------------------------------------------------------------*/
-export const getDashMenu = () => {
-  var ret = [];
-  ret.push(ad.addresses_menu[0]);
-  ret.push(ex.explore_menu[0]);
-  ret.push(ind.indicies_menu[0]);
-  ret.push(si.signatures_menu[0]);
-  ret.push(ca.caches_menu[0]);
-  ret.push(ot.other_menu[0]);
-  ret.push(se.settings_menu[0]);
-  ret.push(su.support_menu[0]);
-  ret.push(ab.about_menu[0]);
-  return ret;
-};

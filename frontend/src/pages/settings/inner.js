@@ -7,6 +7,8 @@ import { dispatcher_Settings } from './dispatchers';
 import { InnerPageHeader, LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
+import { licensesText } from './text/licenses';
+import * as se from './actions';
 import './settings.css';
 
 // EXISTING_CODE
@@ -44,7 +46,6 @@ class SettingsInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -52,6 +53,7 @@ class SettingsInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_Settings(value);
+      return;
     }
 
     // EXISTING_CODE
@@ -62,6 +64,9 @@ class SettingsInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
+    if (this.state.subpage === se.LICENSES) {
+      return licensesText();
+    }
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;

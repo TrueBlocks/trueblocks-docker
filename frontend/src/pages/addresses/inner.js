@@ -7,7 +7,7 @@ import { dispatcher_Addresses } from './dispatchers';
 import { InnerPageHeader, LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
-import { DetailTable } from '../../components';
+import { DataTable } from '../../components';
 import './addresses.css';
 
 // EXISTING_CODE
@@ -38,7 +38,6 @@ class AddressesInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -46,6 +45,7 @@ class AddressesInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_Addresses(value);
+      return;
     }
 
     // EXISTING_CODE
@@ -83,7 +83,7 @@ class AddressesInner extends React.Component {
       );
     }
     // EXISTING_CODE
-    return <DetailTable css_pre="addresses" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="addresses" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {

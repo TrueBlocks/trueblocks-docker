@@ -19,9 +19,9 @@ export default function reducer_Signatures(state = initialState, action) {
       };
 
     case si.ABIS:
-    case si.GENERATED:
-    case si.KNOWN:
-    case si.MONITORED:
+    case si.GENERATED_SIGNATURES:
+    case si.KNOWN_SIGNATURES:
+    case si.FROM_MONITORS:
       return {
         ...state,
         isLoading: false,

@@ -5,9 +5,9 @@ color = orange
 
 [[subpages]]
 list = [
-    { page = "other", subpage = "custom", route = "other", options = "custom" },
-    { page = "other", subpage = "known", route = "when", options = "list" },
-    { page = "other", subpage = "generated", route = "other", options = "generated" },
-    { page = "other", subpage = "groups", route = "other", options = "groups" },
-    { page = "other", subpage = "subgroups", route = "other", options = "subgroups" },
+    { page = "other", subpage = "custom_blocks", route = "when", options = "list&verbose" },
+    { page = "other", subpage = "known_blocks", route = "when", options = "list" },
+    { page = "other", subpage = "generated_blocks", route = "other", options = "generated" },
+    { page = "other", subpage = "group_names", route = "other", options = "groups" },
+    { page = "other", subpage = "subgroup_names", route = "other", options = "subgroups" },
 ]

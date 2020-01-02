@@ -7,7 +7,7 @@ import { dispatcher_Caches } from './dispatchers';
 import { InnerPageHeader, LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
-import { DetailTable } from '../../components';
+import { DataTable } from '../../components';
 import './caches.css';
 
 // EXISTING_CODE
@@ -33,7 +33,6 @@ class CachesInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -41,6 +40,7 @@ class CachesInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_Caches(value);
+      return;
     }
 
     // EXISTING_CODE
@@ -56,7 +56,7 @@ class CachesInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DetailTable css_pre="caches" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="caches" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {

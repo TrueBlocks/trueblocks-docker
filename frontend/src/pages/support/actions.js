@@ -8,20 +8,20 @@ export const UNDELETE = 'support/UNDELETE';
 export const DELETE = 'support/DELETE';
 export const REMOVE = 'support/REMOVE';
 
-export const FREE = 'support/free';
-export const PAY = 'support/pay';
+export const FREE_TEIR = 'support/free';
+export const PAY_TEIR = 'support/pay';
 export const DOCUMENTATION = 'support/documentation';
-export const CONNECT = 'support/connect';
+export const CONNECT_US = 'support/connect';
 
 //----------------------------------------------------------------------
 export const support_menu = [
   {
     page: 'Support',
     items: [
-      { header: 'Free', value: 'VAL', action: FREE },
-      { header: 'Pay', value: 'VAL', action: PAY },
+      { header: 'Free Teir', value: 'VAL', action: FREE_TEIR },
+      { header: 'Pay Teir', value: 'VAL', action: PAY_TEIR },
       { header: 'Documentation', value: 'VAL', action: DOCUMENTATION },
-      { header: 'Connect', value: 'VAL', action: CONNECT },
+      { header: 'Connect Us', value: 'VAL', action: CONNECT_US },
       { header: 'su-0004' },
       { header: 'su-0005' },
       { header: 'su-0006' }

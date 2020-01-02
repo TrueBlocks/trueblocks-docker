@@ -6,10 +6,10 @@ color = tan
 
 [[subpages]]
 list = [
-    { page = "caches", subpage = "overview", route = "status", options = "modes_EQ_caches&types_EQ_all", extract = "_0.caches" },
-    { page = "caches", subpage = "blocks", route = "status", options = "modes_EQ_caches&types_EQ_blocks&details&depth_EQ_2", extract = "_0.caches" },
-    { page = "caches", subpage = "transactions", route = "status", options = "modes_EQ_caches&types_EQ_transactions&details&depth_EQ_2", extract = "_0.caches" },
-    { page = "caches", subpage = "traces", route = "status", options = "modes_EQ_caches&types_EQ_traces&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "cache_overview", route = "status", options = "modes_EQ_caches&types_EQ_all", extract = "_0.caches" },
+    { page = "caches", subpage = "block_cache", route = "status", options = "modes_EQ_caches&types_EQ_blocks&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "transaction_cache", route = "status", options = "modes_EQ_caches&types_EQ_transactions&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "trace_cache", route = "status", options = "modes_EQ_caches&types_EQ_traces&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "slurps", route = "status", options = "modes_EQ_caches&types_EQ_slurps&details&depth_EQ_2", extract = "_0.caches" },
 ]
 

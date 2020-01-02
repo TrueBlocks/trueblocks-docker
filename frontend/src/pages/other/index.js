@@ -5,7 +5,7 @@ import OtherInner from './inner';
 //----------------------------------------------------------------------
 class Other extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'other/custom';
+    var params = this.props.match.params.subpage || 'when/list&verbose';
     params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
     return <OtherInner subpage={params} />;
   };

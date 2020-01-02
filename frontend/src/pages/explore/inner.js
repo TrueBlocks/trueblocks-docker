@@ -7,7 +7,7 @@ import { dispatcher_Explore } from './dispatchers';
 import { InnerPageHeader, LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
-import { DetailTable } from '../../components';
+import { DataTable } from '../../components';
 import './explore.css';
 
 // EXISTING_CODE
@@ -17,6 +17,9 @@ import './explore.css';
 class ExploreInner extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      subpage: props.subpage
+    };
     this.innerEar = this.innerEar.bind(this);
   }
 
@@ -31,7 +34,13 @@ class ExploreInner extends React.Component {
 
   innerEar = (cmd, value) => {
     if (cmd === 'change_subpage') {
+      // update the local state...
+      this.setState({
+        subpage: value
+      });
+      // update the global state...
       this.props.dispatcher_Explore(value);
+      return;
     }
 
     // EXISTING_CODE
@@ -44,10 +53,10 @@ class ExploreInner extends React.Component {
   getInnerMost = () => {
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.props.subpage} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DetailTable css_pre="explore" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="explore" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
@@ -55,7 +64,7 @@ class ExploreInner extends React.Component {
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={this.props.menu} active={this.props.subpage} innerEar={this.innerEar} />
+        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );

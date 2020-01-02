@@ -20,7 +20,7 @@ export default function reducer_Settings(state = initialState, action) {
 
     case se.LICENSES:
     case se.SKINS:
-    case se.PRICES:
+    case se.PRICE_QUOTES:
       return {
         ...state,
         isLoading: false,
@@ -28,7 +28,7 @@ export default function reducer_Settings(state = initialState, action) {
         data: action.payload
       };
 
-    case se.CONFIGS:
+    case se.CONFIGURATION:
       return {
         ...state,
         isLoading: false,

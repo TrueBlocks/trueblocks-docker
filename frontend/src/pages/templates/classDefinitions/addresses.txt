@@ -7,10 +7,10 @@ polling = true
 
 [[subpages]]
 list = [
-    { page = "addresses", subpage = "monitors", route = "status", options = "modes_EQ_monitors&details&ether",	extract = "_0.caches_0.items" },
-    { page = "addresses", subpage = "custom", route = "names", options = "custom" },
-    { page = "addresses", subpage = "owned", route = "names", options = "owned" },
-    { page = "addresses", subpage = "named", route = "names", options = "named" },
-    { page = "addresses", subpage = "prefund", route = "names", options = "prefund" },
+    { page = "addresses", subpage = "monitored", route = "status", options = "modes_EQ_monitors&details&ether",	extract = "_0.caches_0.items" },
+    { page = "addresses", subpage = "custom_names", route = "names", options = "custom" },
+    { page = "addresses", subpage = "owned_addresses", route = "names", options = "owned" },
+    { page = "addresses", subpage = "known_tokens", route = "names", options = "named" },
+    { page = "addresses", subpage = "prefunds", route = "names", options = "prefund" },
     { page = "addresses", subpage = "other", route = "names", options = "other" },
 ]

@@ -3,20 +3,63 @@
   background-color: #fff;
   color: #444;
   font-family: 'Courier New', Courier, monospace;
-  border: 1px solid darkgrey;
-  margin-bottom: 10px;
+  border-top: 1px solid darkgrey;
+  border-left: 1px solid darkgrey;
+  border-bottom: 1px solid darkgrey;
+  /* margin-bottom: 10px; */
+}
+
+.detail_header {
+  display: grid;
+  background-color: #e2e5f0;
+  text-align: center;
+  border-bottom: 1px solid darkgrey;
+  text-transform: capitalize;
+  height: 28px;
+  font-weight: 600;
+  vertical-align: middle;
+  /* border: 1px dashed blue; */
+}
+
+.detail_header_item {
+  border-right: 1px solid darkgrey;
+}
+
+.detail_row {
+  display: grid;
+  height: 25px;
+  /* border: 1px dashed blue; */
+}
+
+.detail_row:hover {
+  background-color: antiquewhite;
+  cursor: pointer;
+}
+
+.detail_wide_row {
+  display: grid;
+  height: 25px;
+  grid-template-columns: 1r;
+  border: 1px dashed blue;
+  text-align: center;
+}
+
+.detail_wide_row:hover {
+  background-color: antiquewhite;
+  cursor: pointer;
 }
 
 .detail_table_item {
   text-align: left;
-  border-right: 1px solid #aaa;
+  border-right: 1px solid darkgrey;
+  padding-left: 8px;
+  padding-right: 8px;
   /* border: 1px dashed blue; */
-  padding: 1px;
 }
 
 .detail_table_item.number {
   text-align: right;
-  border-right: 1px solid #aaa;
+  padding-left: 8px;
+  padding-right: 8px;
   /* border: 1px dashed blue; */
-  padding: 1px;
 }

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Support } from './dispatchers';
 
 import { InnerPageHeader, LocalMenu } from '../../components';
-import { documentationText } from './text-documentation';
+import { documentationText } from './text/documentation';
 import * as su from './actions';
 import './support.css';
 
@@ -32,7 +32,6 @@ class SupportInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -40,6 +39,7 @@ class SupportInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_Support(value);
+      return;
     }
 
     // EXISTING_CODE

@@ -19,10 +19,10 @@ export default function reducer_Caches(state = initialState, action) {
       };
 
     case ca.SLURPS:
-    case ca.TRACES:
-    case ca.TRANSACTIONS:
-    case ca.BLOCKS:
-    case ca.OVERVIEW:
+    case ca.TRACE_CACHE:
+    case ca.TRANSACTION_CACHE:
+    case ca.BLOCK_CACHE:
+    case ca.CACHE_OVERVIEW:
       return {
         ...state,
         isLoading: false,

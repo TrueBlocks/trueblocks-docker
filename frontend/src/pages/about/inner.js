@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_About } from './dispatchers';
 
 import { InnerPageHeader, LocalMenu } from '../../components';
-import { teamText } from './text-team';
+import { teamText } from './text/team';
 import * as ab from './actions';
 import './about.css';
 
@@ -32,7 +32,6 @@ class AboutInner extends React.Component {
   };
 
   innerEar = (cmd, value) => {
-    console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
@@ -40,6 +39,7 @@ class AboutInner extends React.Component {
       });
       // update the global state...
       this.props.dispatcher_About(value);
+      return;
     }
 
     // EXISTING_CODE
@@ -54,9 +54,6 @@ class AboutInner extends React.Component {
       return teamText();
     }
     // EXISTING_CODE
-    if (this.state.subpage === ab.TEAM) {
-      return teamText();
-    }
     return (
       <Fragment>
         <h4>QuickBlocks {this.state.subpage}</h4>

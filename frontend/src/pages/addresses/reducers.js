@@ -19,10 +19,10 @@ export default function reducer_Addresses(state = initialState, action) {
       };
 
     case ad.OTHER:
-    case ad.PREFUND:
-    case ad.NAMED:
-    case ad.OWNED:
-    case ad.CUSTOM:
+    case ad.PREFUNDS:
+    case ad.KNOWN_TOKENS:
+    case ad.OWNED_ADDRESSES:
+    case ad.CUSTOM_NAMES:
       return {
         ...state,
         isLoading: false,
@@ -30,7 +30,7 @@ export default function reducer_Addresses(state = initialState, action) {
         data: action.payload
       };
 
-    case ad.MONITORS:
+    case ad.MONITORED:
       return {
         ...state,
         isLoading: false,
