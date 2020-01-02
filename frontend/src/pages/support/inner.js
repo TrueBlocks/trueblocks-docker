@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Support } from './dispatchers';
 
-import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
-import { support_local_menu } from '../../fake_data/summary-data';
+import { InnerPageHeader, LocalMenu } from '../../components';
+import { documentationText } from './text-documentation';
+import * as su from './actions';
 import './support.css';
 
 // EXISTING_CODE
@@ -38,9 +39,9 @@ class SupportInner extends React.Component {
         subpage: value
       });
       // update the global state...
-      //var query = 'modes=support';
-      //this.props.dispatcher_Support(query);
+      this.props.dispatcher_Support(value);
     }
+
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -49,9 +50,13 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
+    if (this.state.subpage === su.DOCUMENTATION) {
+      return documentationText();
+    }
     // EXISTING_CODE
     return (
       <Fragment>
+        {this.state.subpage}
         <ul>
           <li>Email support: &lt;support@trueblocks.io&gt;</li>
           <li>Online forums: &lt;https://discord.gg/zGh6PdN&gt;</li>
@@ -70,17 +75,14 @@ class SupportInner extends React.Component {
       </Fragment>
     );
     // EXISTING_CODE
-    //    return <DetailTable css_pre="support" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
-    if (!isReady(this.props, this.props)) return <NotReady {...this.props} />;
-
     // EXISTING_CODE
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={support_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -105,17 +107,22 @@ class SupportInner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Support }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   sysConnected: reducer_Connection.isConnected,
   sysError: reducer_Connection.error,
   isLoading: reducer_Support.isLoading,
   error: reducer_Support.error,
-  data: reducer_Support.data
+  data: reducer_Support.data,
+  menu: reducer_Support.menu
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_Support
     },
     dispatch

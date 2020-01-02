@@ -74,9 +74,9 @@ app.get(`/log-message`, (req, res) => {
 app.get(`/:routeName`, (req, res) => {
     let routeName = req.params.routeName;
     if(apiOptions[routeName] === undefined) {
-        var msg = '{ "error": "Route ';
+        var msg = '{ "errors": [ "JS API: Route ';
         msg += routeName;
-        msg += ' is not available." }';
+        msg += ' is not available." ] }';
         console.log(msg);
         return res.send(msg);
     }
@@ -104,8 +104,8 @@ app.get(`/:routeName`, (req, res) => {
     })
 })
 
-app.put(`/config`, (req, res) => {
-    const routeName = 'config';
+app.put(`/settings`, (req, res) => {
+    const routeName = 'settings';
     if (debug)
         console.log(req.query)
     if(req.query.set !== undefined) {

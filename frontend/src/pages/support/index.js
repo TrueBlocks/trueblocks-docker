@@ -5,8 +5,9 @@ import SupportInner from './inner';
 //----------------------------------------------------------------------
 class Support extends React.Component {
   getInner = () => {
-    var subpage = 'support/' + (this.props.match.params.subpage || 'pay');
-    return <SupportInner subpage={subpage} />;
+    var params = this.props.match.params.subpage || 'support/free';
+    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    return <SupportInner subpage={params} />;
   };
 
   render = () => {

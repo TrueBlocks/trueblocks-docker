@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
 
-import { InnerPageHeader, DetailTable, SummaryTable, isReady, NotReady } from '../../components';
-import { dashboard_local_menu } from '../../fake_data/summary-data';
+import { InnerPageHeader, DashMenu } from '../../components';
 import './dashboard.css';
 
 // EXISTING_CODE
@@ -22,6 +21,11 @@ class DashboardInner extends React.Component {
   }
 
   // EXISTING_CODE
+  changePage = (page, action) => {
+    var res = action.split('/');
+    var dest = page + '/subpage=' + res[0] + '-' + res[1];
+    window.open('/' + dest, '_self');
+  };
   // EXISTING_CODE
 
   componentWillMount = () => {};
@@ -38,13 +42,10 @@ class DashboardInner extends React.Component {
         subpage: value
       });
       // update the global state...
-      // var query = 'modes=dashboard&types=' + value.replace('dashboard/', '');
-      // this.props.dispatcher_Dashboard(query);
+      this.props.dispatcher_Dashboard(value);
     }
+
     // EXISTING_CODE
-    if (cmd === 'goto_page') {
-      window.open('/' + value, '_self');
-    }
     // EXISTING_CODE
   };
 
@@ -55,17 +56,14 @@ class DashboardInner extends React.Component {
     // EXISTING_CODE
     return <Fragment></Fragment>;
     // EXISTING_CODE
-    // return <DetailTable css_pre="dashboard" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
-    if (!isReady(this.props, this.props)) return <NotReady {...this.props} />;
-
     // EXISTING_CODE
     // EXISTING_CODE
     return (
       <Fragment>
-        <SummaryTable data={dashboard_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        <DashMenu data={this.props.menu} active={this.state.subpage} changePage={this.changePage} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -90,17 +88,22 @@ class DashboardInner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Dashboard }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   sysConnected: reducer_Connection.isConnected,
   sysError: reducer_Connection.error,
   isLoading: reducer_Dashboard.isLoading,
   error: reducer_Dashboard.error,
-  data: reducer_Dashboard.data
+  data: reducer_Dashboard.data,
+  menu: reducer_Dashboard.menu
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_Dashboard
     },
     dispatch

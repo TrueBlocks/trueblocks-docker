@@ -27,7 +27,6 @@ export class DetailTable extends React.Component {
             return (
               <div key={index + 'a0'} className={this.props.css_pre + '_detail_row'}>
                 {Object.values(item).map((val, vid) => {
-                  // console.log('x', typeof val, val);
                   return <DTCol key={index + '-' + vid} {...this.props} item={item} value={val} />;
                 })}
               </div>
@@ -89,10 +88,16 @@ class DTCol extends React.Component {
 
   render = () => {
     var cn = 'detail_table_item';
-    if (Utils.isNumber(this.props.value)) cn = 'detail_table_item number';
+    var isNum = !Utils.isAddress(this.props.value) && Utils.isNumber(this.props.value);
+    if (isNum) cn = 'detail_table_item number';
+    var val = this.props.value;
+    if (typeof this.props.value === 'object') {
+      val = JSON.stringify(this.props.value);
+    }
+
     return (
       <div className={cn} onClick={this.expandClicked}>
-        {Utils.isNumber(this.props.value) ? Utils.fmtInteger(this.props.value) : this.props.value}
+        {isNum ? Utils.fmtInteger(val) : val}
       </div>
     );
   };

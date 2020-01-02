@@ -4,7 +4,8 @@ import * as su from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: su.support_menu
 };
 
 //----------------------------------------------------------------------
@@ -14,17 +15,22 @@ export default function reducer_Support(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case su.SUCCESS:
+    case su.CONNECT:
+    case su.DOCUMENTATION:
+    case su.PAY:
+    case su.FREE:
       return {
         ...state,
         isLoading: false,
         error: null,
         data: action.payload
       };
+
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case su.FAILURE:
       return {
@@ -37,4 +43,4 @@ export default function reducer_Support(state = initialState, action) {
     default:
       return state;
   }
-};
+}

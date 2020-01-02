@@ -4,9 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_[{PROPER}] } from './dispatchers';
 
-import { InnerPageHeader, DetailTable, [{MENU_TYPE}], isReady, NotReady } from '../../components';
-import { [{LONG}]_local_menu } from '../../fake_data/summary-data';
-import './[{LONG}].css';
+import { InnerPageHeader, [{MENU_TYPE}] } from '../../components';
+[{NO_ERROR}]import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
+[{NO_DATA}]import { isReady } from '../../components';
+[{NO_DT}]import { DetailTable } from '../../components';
+[{NO_TEXT}][{TEXT_IMPORTS}]
+[{NO_TEXT}][{TEXT_ACTIONS}]
+import './[{LOWER}].css';
 
 
 // EXISTING_CODE
@@ -39,9 +43,9 @@ class [{PROPER}]Inner extends React.Component {
         subpage: value
       });
       // update the global state...
-      // var query = 'modes=[{LONG}]&types=' + value.replace('[{LONG}]/', '');
-      // this.props.dispatcher_[{PROPER}](query);
+      this.props.dispatcher_[{PROPER}](value);
     }
+
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -50,19 +54,21 @@ class [{PROPER}]Inner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
+[{NO_TEXT}][{TEXT_CODE}]
+    [{NO_ERROR}]if (isError(this.props)) return <NotReady {...this.props} />;
+    [{NO_DATA}]else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    [{NO_ERROR}]else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    // return <DetailTable css_pre="[{LONG}]" data={this.props.data} innerEar={this.innerEar} />;
+    [{NO_DT}]return <DetailTable css_pre="[{LOWER}]" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
-    // if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-
     // EXISTING_CODE
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={[{LONG}]_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        <[{MENU_TYPE}] data={this.props.menu} active={this.state.subpage} [{MENU_CLICK}] />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -86,17 +92,22 @@ class [{PROPER}]Inner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_[{PROPER}] }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   sysConnected: reducer_Connection.isConnected,
   sysError: reducer_Connection.error,
   isLoading: reducer_[{PROPER}].isLoading,
   error: reducer_[{PROPER}].error,
-  data: reducer_[{PROPER}].data
+  data: reducer_[{PROPER}].data,
+  menu: reducer_[{PROPER}].menu
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_[{PROPER}]
     },
     dispatch

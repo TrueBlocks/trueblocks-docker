@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Signatures } from './dispatchers';
 
-import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
-import { signatures_local_menu } from '../../fake_data/summary-data';
+import { InnerPageHeader, LocalMenu } from '../../components';
 import './signatures.css';
 
 // EXISTING_CODE
@@ -38,9 +37,9 @@ class SignaturesInner extends React.Component {
         subpage: value
       });
       // update the global state...
-      //var query = 'modes=signatures&types=' + value.replace('signatures/', '');
-      //this.props.dispatcher_Signatures(query);
+      this.props.dispatcher_Signatures(value);
     }
+
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -52,6 +51,7 @@ class SignaturesInner extends React.Component {
     // EXISTING_CODE
     return (
       <Fragment>
+        {this.state.subpage}
         <ul>
           <li>Item 1 1</li>
           <li>Item 1 2</li>
@@ -59,17 +59,14 @@ class SignaturesInner extends React.Component {
       </Fragment>
     );
     // EXISTING_CODE
-    // return <DetailTable css_pre="signatures" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
-    if (!isReady(this.props, this.props)) return <NotReady {...this.props} />;
-
     // EXISTING_CODE
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={signatures_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -94,17 +91,22 @@ class SignaturesInner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Signatures }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   sysConnected: reducer_Connection.isConnected,
   sysError: reducer_Connection.error,
   isLoading: reducer_Signatures.isLoading,
   error: reducer_Signatures.error,
-  data: reducer_Signatures.data
+  data: reducer_Signatures.data,
+  menu: reducer_Signatures.menu
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_Signatures
     },
     dispatch

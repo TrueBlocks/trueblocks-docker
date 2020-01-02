@@ -2,23 +2,23 @@ import * as ca from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Caches = (options) => {
+export const dispatcher_Caches = (action) => {
   return (dispatch, getState) => {
     dispatch({
       type: ca.BEGIN
     });
 
-    return Utils.queryAPI_get('status', options)
+    var res = action.split('/');
+    return Utils.queryAPI_get(res[0], res[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: ca.SUCCESS,
-            payload: json.data[0].caches
+            type: action,
+            payload: json.data
           });
-          return json.data[0].caches;
         }
       })
       .catch((err) => {
@@ -29,3 +29,6 @@ export const dispatcher_Caches = (options) => {
       });
   };
 };
+
+// EXISTING_CODE
+// EXISTING_CODE

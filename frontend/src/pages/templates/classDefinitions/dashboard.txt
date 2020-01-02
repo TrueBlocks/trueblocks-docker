@@ -1,9 +1,6 @@
 [settings]
 class = CDashboard
-subpage = 
-state = names: []
-query_url = names
-query_opts = custom&expand
 page_notes = Learn about the TrubBlocks project, our organization, our philosopy|towards decentralization, and our team.
-polling = true
-menuType = SummaryTable
+menuType = DashMenu
+color = white
+no_error = true

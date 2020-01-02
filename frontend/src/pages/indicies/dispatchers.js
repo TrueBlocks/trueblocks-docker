@@ -1,11 +1,11 @@
-import * as si from './actions';
+import * as ind from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Signatures = (action) => {
+export const dispatcher_Indicies = (action) => {
   return (dispatch, getState) => {
     dispatch({
-      type: si.BEGIN
+      type: ind.BEGIN
     });
 
     var res = action.split('/');
@@ -23,7 +23,7 @@ export const dispatcher_Signatures = (action) => {
       })
       .catch((err) => {
         dispatch({
-          type: si.FAILURE,
+          type: ind.FAILURE,
           err
         });
       });

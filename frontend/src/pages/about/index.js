@@ -5,8 +5,9 @@ import AboutInner from './inner';
 //----------------------------------------------------------------------
 class About extends React.Component {
   getInner = () => {
-    var subpage = 'about/' + (this.props.match.params.subpage || 'team');
-    return <AboutInner subpage={subpage} />;
+    var params = this.props.match.params.subpage || 'about/about';
+    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    return <AboutInner subpage={params} />;
   };
 
   render = () => {

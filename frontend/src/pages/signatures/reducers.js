@@ -4,7 +4,8 @@ import * as si from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: si.signatures_menu
 };
 
 //----------------------------------------------------------------------
@@ -14,17 +15,22 @@ export default function reducer_Signatures(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case si.SUCCESS:
+    case si.ABIS:
+    case si.GENERATED:
+    case si.KNOWN:
+    case si.MONITORED:
       return {
         ...state,
         isLoading: false,
         error: null,
         data: action.payload
       };
+
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case si.FAILURE:
       return {
@@ -37,4 +43,4 @@ export default function reducer_Signatures(state = initialState, action) {
     default:
       return state;
   }
-};
+}

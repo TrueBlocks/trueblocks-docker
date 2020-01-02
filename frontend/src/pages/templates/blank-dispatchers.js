@@ -1,31 +1,34 @@
-import * as [{TWO2}] from './actions';
+import * as [{TWO}] from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_[{PROPER}] = (options) => {
+export const dispatcher_[{PROPER}] = (action) => {
   return (dispatch, getState) => {
     dispatch({
-      type: [{TWO2}].BEGIN
+      type: [{TWO}].BEGIN
     });
 
-    return Utils.queryAPI_get('[{QUERY_URL}]', options)
+    var res = action.split('/');
+    return Utils.queryAPI_get(res[0], res[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: [{TWO2}].SUCCESS,
-            payload: json[{QUERY_EXTRACT}]
+            type: action,
+            payload: json.data
           });
-          return json[{QUERY_EXTRACT}];
         }
       })
       .catch((err) => {
         dispatch({
-          type: [{TWO2}].FAILURE,
+          type: [{TWO}].FAILURE,
           err
         });
       });
   };
 };
+
+// EXISTING_CODE
+// EXISTING_CODE

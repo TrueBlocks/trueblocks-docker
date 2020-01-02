@@ -1,1 +1,22 @@
 /*-----------------------------------------------------------------------------*/
+.explore_detail_header {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: #e2e5f0;
+  text-align: center;
+  border-bottom: 1px solid darkgrey;
+  text-transform: capitalize;
+  height: 28px;
+  font-weight: 600;
+}
+
+.explore_detail_row {
+  display: grid;
+  grid-template-columns: 1r;
+  height: 25px;
+}
+
+.explore_detail_row:hover {
+  background-color: antiquewhite;
+  cursor: pointer;
+}

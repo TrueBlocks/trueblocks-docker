@@ -5,8 +5,9 @@ import AddressesInner from './inner';
 //----------------------------------------------------------------------
 class Addresses extends React.Component {
   getInner = () => {
-    var subpage = 'addresses/' + (this.props.match.params.subpage || 'custom');
-    return <AddressesInner subpage={subpage} />;
+    var params = this.props.match.params.subpage || 'status/modes=monitors&details&ether';
+    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    return <AddressesInner subpage={params} />;
   };
 
   render = () => {

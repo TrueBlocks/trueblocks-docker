@@ -558,10 +558,10 @@
       "customizeable": false,
       "core_visible": true,
       "docs_visible": false,
-      "generate": "header",
-      "option_kind": "toggle",
+      "generate": "local",
+      "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "toggle writing blocks to the binary cache ([{DEF}] by default)"
+      "description": "write blocks to the binary cache ('off' by default)"
     },
     "write_txs": {
       "num": "10360",
@@ -570,15 +570,15 @@
       "tool": "acctExport",
       "command": "write_txs",
       "hotkey": "i",
-      "def_val": "true",
+      "def_val": "false",
       "is_required": false,
       "customizeable": false,
       "core_visible": true,
       "docs_visible": false,
-      "generate": "header",
-      "option_kind": "toggle",
+      "generate": "local",
+      "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "toggle writing transactions to the cache ([{DEF}] by default)"
+      "description": "write transactions to the cache (see notes)"
     },
     "write_traces": {
       "num": "10380",
@@ -587,15 +587,15 @@
       "tool": "acctExport",
       "command": "write_traces",
       "hotkey": "R",
-      "def_val": "true",
+      "def_val": "false",
       "is_required": false,
       "customizeable": false,
       "core_visible": true,
       "docs_visible": false,
-      "generate": "header",
-      "option_kind": "toggle",
+      "generate": "local",
+      "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "toggle writing traces to the cache ([{DEF}] by default)"
+      "description": "write traces to the cache (see notes)"
     },
     "skip_ddos": {
       "num": "10400",
@@ -1346,7 +1346,7 @@
       "docs_visible": true,
       "generate": "local",
       "option_kind": "positional",
-      "data_type": "list<enum[index|monitors|names|abis|caches|data|slurps|prices|some*|all]>",
+      "data_type": "list<enum[index|monitors|names|abis|caches|some*|all]>",
       "description": "the type of status info to retrieve"
     },
     "details": {
@@ -1380,25 +1380,42 @@
       "docs_visible": false,
       "generate": "local",
       "option_kind": "flag",
-      "data_type": "list<enum[blocks|transactions|traces|all*]>",
+      "data_type": "list<enum[blocks|transactions|traces|slurps|prices|all*]>",
       "description": "for cache mode only&#44; which type(s) of cache to report"
     },
-    "level": {
+    "depth": {
       "num": "10735",
       "group": "apps",
       "api_route": "status",
       "tool": "cacheStatus",
-      "command": "level",
-      "hotkey": "e",
-      "def_val": "1",
+      "command": "depth",
+      "hotkey": "p",
+      "def_val": "",
       "is_required": false,
       "customizeable": false,
-      "core_visible": true,
+      "core_visible": false,
       "docs_visible": false,
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
-      "description": "for cache mode only&#44; levels deep into cache to report"
+      "description": "for cache mode only&#44; number of levels deep to report"
+    },
+    "heatmap": {
+      "num": "10730",
+      "group": "apps",
+      "api_route": "status",
+      "tool": "cacheStatus",
+      "command": "heatmap",
+      "hotkey": "a",
+      "def_val": "",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "enum[blocks|transactions|traces]",
+      "description": "for cache mode only&#44; return a heatmap of the given (single) cache"
     },
     "list": {
       "num": "10740",
@@ -1775,45 +1792,11 @@
       "description": "mimic parity's output"
     }
   },
-  "config": {
-    "addrs": {
-      "num": "10900",
-      "group": "apps",
-      "api_route": "config",
-      "tool": "",
-      "command": "addrs",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "customizeable": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "--",
-      "option_kind": "positional",
-      "data_type": "list<addr>",
-      "description": "show or edit one or more addresses' config file"
-    },
-    "mode": {
-      "num": "10920",
-      "group": "apps",
-      "api_route": "config",
-      "tool": "",
-      "command": "mode",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "customizeable": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "--",
-      "option_kind": "flag",
-      "data_type": "enum[show|edit]",
-      "description": "whether to show or edit the config"
-    },
+  "settings": {
     "get": {
       "num": "10940",
       "group": "apps",
-      "api_route": "config",
+      "api_route": "settings",
       "tool": "",
       "command": "get",
       "hotkey": "",
@@ -1830,7 +1813,7 @@
     "set": {
       "num": "10960",
       "group": "apps",
-      "api_route": "config",
+      "api_route": "settings",
       "tool": "",
       "command": "set",
       "hotkey": "",
@@ -3245,7 +3228,7 @@
       "docs_visible": true,
       "generate": "--weird",
       "option_kind": "positional",
-      "data_type": "list<enum[list|export|slurp|names|abi|state|tokens|data|blocks|transactions|receipts|logs|traces|quotes|scrape|status|config|rm|message|leech|seed]>",
+      "data_type": "list<enum[list|export|slurp|names|abi|state|tokens|data|blocks|transactions|receipts|logs|traces|quotes|scrape|status|settings|rm|message|leech|seed]>",
       "description": "which command to run"
     },
     "sleep": {
@@ -3280,7 +3263,7 @@
       "generate": "--weird",
       "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "for status config only&#44; indicates that this is config --sef"
+      "description": "for 'settings' only&#44; indicates that this is a --set"
     },
     "start": {
       "num": "11280",
@@ -3331,7 +3314,7 @@
       "generate": "--",
       "option_kind": "description",
       "data_type": "",
-      "description": "Create a TrueBlocks monitor configuration."
+      "description": "Main TrueBlocks command line controls."
     },
     "files": {
       "num": "11360",

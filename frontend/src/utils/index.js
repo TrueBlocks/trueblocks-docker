@@ -29,6 +29,11 @@ let isNumber = function(n) {
 };
 
 //----------------------------------------------------------------
+let isAddress = function(addr) {
+  return addr && (addr.length === 42 && addr.substring(0, 2) === '0x');
+};
+
+//----------------------------------------------------------------
 let humanFileSize = function(bytes, si) {
   var thresh = si ? 1000 : 1024;
   if (Math.abs(bytes) < thresh) {
@@ -50,7 +55,7 @@ const apiProvider = 'http://localhost:8080/';
 //----------------------------------------------------------------
 let queryAPI_get = function(cmd, params) {
   //  console.log('GET: ', apiProvider, cmd, '?', params);
-  if (cmd === 'ping') return { data: {} };
+  if (cmd === 'ping') return { data: [{}] };
   const url = apiProvider + cmd + '?' + params;
   return fetch(url);
 };
@@ -80,6 +85,7 @@ module.exports = {
   fmtInteger,
   fmtDouble,
   isNumber,
+  isAddress,
   queryAPI_get,
   queryAPI_put,
   to_key

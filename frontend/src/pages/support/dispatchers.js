@@ -2,23 +2,23 @@ import * as su from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Support = (options) => {
+export const dispatcher_Support = (action) => {
   return (dispatch, getState) => {
     dispatch({
       type: su.BEGIN
     });
 
-    return Utils.queryAPI_get('ping', options)
+    var res = action.split('/');
+    return Utils.queryAPI_get(res[0], res[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: su.SUCCESS,
-            payload: json
+            type: action,
+            payload: json.data
           });
-          return json;
         }
       })
       .catch((err) => {
@@ -29,3 +29,6 @@ export const dispatcher_Support = (options) => {
       });
   };
 };
+
+// EXISTING_CODE
+// EXISTING_CODE

@@ -1,7 +1,16 @@
 [settings]
 class = CAddresses
-subpage = custom
-query_url = status
-query_opts = modes=monitors&details&ether
-query_extract = .data[0].caches[0]
-page_notes = Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note that the transactions/logs/receipts/traces are not downloaded until you explore an address.
+page_notes = Monitors are per-address index caches that enable fast reteival of transaction histories for any account. \
+                Note that the transactions/logs/receipts/traces are not downloaded until you explore an address.
+color = pink
+polling = true
+
+[[subpages]]
+list = [
+    { page = "addresses", subpage = "monitors", route = "status", options = "modes_EQ_monitors&details&ether",	extract = "_0.caches_0.items" },
+    { page = "addresses", subpage = "custom", route = "names", options = "custom" },
+    { page = "addresses", subpage = "owned", route = "names", options = "owned" },
+    { page = "addresses", subpage = "named", route = "names", options = "named" },
+    { page = "addresses", subpage = "prefund", route = "names", options = "prefund" },
+    { page = "addresses", subpage = "other", route = "names", options = "other" },
+]

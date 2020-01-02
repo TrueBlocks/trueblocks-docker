@@ -2,15 +2,16 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dispatcher_Indicies } from './indicies-getdata';
+import { dispatcher_Indicies } from './dispatchers';
 
-import { InnerPageHeader, LocalMenu, Icon, Loading } from '../../components';
-import { indicies_local_menu } from '../../fake_data/summary-data';
+import { InnerPageHeader, LocalMenu } from '../../components';
 import './indicies.css';
 
 // EXISTING_CODE
-import { humanFileSize, fmtDouble, fmtInteger } from '../../utils';
+import { Loading, Icon } from '../../components';
+import * as ind from './actions';
 import '../../index.css';
+var Utils = require('../../utils');
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -26,21 +27,23 @@ class IndiciesInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
+  componentWillMount = () => {};
+
+  componentDidMount = () => {
+    this.innerEar('change_subpage', this.props.subpage);
+  };
+
   innerEar = (cmd, value) => {
     console.log('%cinnerEar - ' + cmd + ' value: ' + value, 'color:orange');
-
-    // EXISTING_CODE
-    // EXISTING_CODE
-
     if (cmd === 'change_subpage') {
+      // update the local state...
       this.setState({
-        // EXISTING_CODE
-        // EXISTING_CODE
         subpage: value
       });
-    } else if (cmd === 'goto_page') {
-      window.open('/' + value, '_self');
+      // update the global state...
+      this.props.dispatcher_Indicies(value);
     }
+
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -48,34 +51,24 @@ class IndiciesInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  getInner = () => {
-    let inner;
+  getInnerMost = () => {
     // EXISTING_CODE
-    inner = <SystemProgressChart {...this.props} />;
+    if (!this.props.data) {
+      return <Loading source="indicies" status="loading" message="Loading..." />;
+    }
+    return <SystemProgressChart {...this.props} />;
     // EXISTING_CODE
-    return inner;
   };
 
-  getContainer = () => {
+  getInnerPage = () => {
     // EXISTING_CODE
-    if (this.props.caches === undefined || this.props.client === -1) {
-      return <Loading source="indicies" status="initializing" message="Loading..." />;
-    }
     // EXISTING_CODE
-    let container;
-    if (this.props.error) {
-      container = <Loading source="indicies" status="error" message={this.props.error} />;
-    } else if (this.props.isConnected) {
-      container = (
-        <div className="inner-panel">
-          <LocalMenu data={indicies_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
-          {this.getInner()}
-        </div>
-      );
-    } else {
-      container = <Loading source="indicies" status="initializing" message="Loading..." />;
-    }
-    return container;
+    return (
+      <Fragment>
+        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
+        {this.getInnerMost()}
+      </Fragment>
+    );
   };
 
   render = () => {
@@ -86,7 +79,7 @@ class IndiciesInner extends React.Component {
           notes="TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a 
             lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
         />
-        {this.getContainer()}
+        {this.getInnerPage()}
       </div>
     );
   };
@@ -116,14 +109,14 @@ class SystemProgressChart extends React.Component {
       {[...Array(this.cols).keys()].map((col, colI) => {
         return (
           <div className="indicies-y-axis indicies-grid" key={`x${col}`}>
-            {fmtInteger(col * 1e5)}
+            {Utils.fmtInteger(col * 1e5)}
           </div>
         );
       })}
       {[...Array(this.rows).keys()].map((row, rowI) => {
         return (
           <Fragment key={`x${row}`}>
-            <div className="indicies-x-axis indicies-grid">{fmtInteger(row * 1e6)}</div>
+            <div className="indicies-x-axis indicies-grid">{Utils.fmtInteger(row * 1e6)}</div>
             {[...Array(this.cols).keys()].map((col, colI) => {
               let indexClass;
               if (this.props.finalized >= row * 1e6 + (col + 1) * 1e5) {
@@ -156,40 +149,40 @@ class SystemProgressChart extends React.Component {
           <div className="indicies-fact-top">{this.props.caches[0].type}:</div>
           <div>{this.props.caches[0].path.replace(this.props.index_path, '$indexPath/')}</div>
           <div>
-            {fmtInteger(this.props.caches[0].sizeInBytes)} / {fmtInteger(this.props.caches[0].nFiles)} /{' '}
-            {fmtDouble(this.props.caches[0].sizeInBytes / this.props.caches[0].nFiles, 1)}
+            {Utils.fmtInteger(this.props.caches[0].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[0].nFiles)} /{' '}
+            {Utils.fmtDouble(this.props.caches[0].sizeInBytes / this.props.caches[0].nFiles, 1)}
           </div>
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[1].type}:</div>
           <div>{this.props.caches[1].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
-            {fmtInteger(this.props.caches[1].sizeInBytes)} / {fmtInteger(this.props.caches[1].nFiles)} /{' '}
-            {fmtDouble(this.props.caches[1].sizeInBytes / this.props.caches[1].nFiles, 1)}
+            {Utils.fmtInteger(this.props.caches[1].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[1].nFiles)} /{' '}
+            {Utils.fmtDouble(this.props.caches[1].sizeInBytes / this.props.caches[1].nFiles, 1)}
           </div>
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[2].type}:</div>
           <div>{this.props.caches[2].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
-            {fmtInteger(this.props.caches[2].sizeInBytes)} / {fmtInteger(this.props.caches[2].nFiles)} /{' '}
-            {fmtDouble(this.props.caches[2].sizeInBytes / this.props.caches[2].nFiles, 1)}
+            {Utils.fmtInteger(this.props.caches[2].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[2].nFiles)} /{' '}
+            {Utils.fmtDouble(this.props.caches[2].sizeInBytes / this.props.caches[2].nFiles, 1)}
           </div>
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[3].type}:</div>
           <div>{this.props.caches[3].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
-            {fmtInteger(this.props.caches[3].sizeInBytes)} / {fmtInteger(this.props.caches[3].nFiles)} /{' '}
-            {fmtDouble(this.props.caches[3].sizeInBytes / this.props.caches[3].nFiles, 1)}
+            {Utils.fmtInteger(this.props.caches[3].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[3].nFiles)} /{' '}
+            {Utils.fmtDouble(this.props.caches[3].sizeInBytes / this.props.caches[3].nFiles, 1)}
           </div>
         </div>
         <div>
           <div className="indicies-fact-top">{this.props.caches[4].type}:</div>
           <div>{this.props.caches[4].path.replace(this.props.cache_path, '$cachePath/')}</div>
           <div>
-            {fmtInteger(this.props.caches[4].sizeInBytes)} / {fmtInteger(this.props.caches[4].nFiles)} /{' '}
-            {fmtDouble(this.props.caches[4].sizeInBytes / this.props.caches[4].nFiles, 1)}
+            {Utils.fmtInteger(this.props.caches[4].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[4].nFiles)} /{' '}
+            {Utils.fmtDouble(this.props.caches[4].sizeInBytes / this.props.caches[4].nFiles, 1)}
           </div>
         </div>
       </div>
@@ -214,10 +207,10 @@ class SystemProgressChart extends React.Component {
 var been_here = false;
 const ZoomOnIndex = (props) => {
   let readyContainer;
-  const hasData = props.indexData.items !== undefined && props.start !== undefined;
+  const hasData = props.data[0].items !== undefined && props.start !== undefined;
   switch (hasData) {
     case true:
-      const filteredData = props.indexData.items.filter(
+      const filteredData = props.data[0].items.filter(
         (item) => (item.firstAppearance >= props.start) & (item.firstAppearance < props.start + props.n)
       );
       readyContainer = (
@@ -229,7 +222,7 @@ const ZoomOnIndex = (props) => {
     default:
       if (!been_here && !props.loadingIndex) {
         been_here = true;
-        props.dispatcher_Indicies();
+        props.dispatcher_Indicies(ind.FINALIZED);
       }
       readyContainer = props.start && (
         <Loading source="indicies" status="loading" message="Waiting for index data..." />
@@ -260,14 +253,14 @@ const IndexDetail = (props) => {
               {item.bloom_hash} <Icon icon="check_box" small onClick={null} />
             </div>
             <div>index hash:</div> <div className="indicies-inright_blue">{item.index_hash}</div>
-            <div>first block:</div> <div className="indicies-inright">{fmtInteger(item.firstAppearance)}</div>
-            <div>latest block:</div> <div className="indicies-inright">{fmtInteger(item.latestAppearance)}</div>
+            <div>first block:</div> <div className="indicies-inright">{Utils.fmtInteger(item.firstAppearance)}</div>
+            <div>latest block:</div> <div className="indicies-inright">{Utils.fmtInteger(item.latestAppearance)}</div>
             <div>nBlocks:</div>{' '}
-            <div className="indicies-inright">{fmtInteger(item.latestAppearance - item.firstAppearance + 1)}</div>
-            <div>nAddresses:</div> <div className="indicies-inright">{fmtInteger(item.nAddresses)}</div>
-            <div>nAppearances:</div> <div className="indicies-inright_red">{fmtInteger(item.nAppearances)}</div>
-            <div>chunk size:</div> <div className="indicies-inright">{humanFileSize(item.indexSizeBytes)}</div>
-            <div>bloom size:</div> <div className="indicies-inright">{humanFileSize(item.bloomSizeBytes)}</div>
+            <div className="indicies-inright">{Utils.fmtInteger(item.latestAppearance - item.firstAppearance + 1)}</div>
+            <div>nAddresses:</div> <div className="indicies-inright">{Utils.fmtInteger(item.nAddresses)}</div>
+            <div>nAppearances:</div> <div className="indicies-inright_red">{Utils.fmtInteger(item.nAppearances)}</div>
+            <div>chunk size:</div> <div className="indicies-inright">{Utils.humanFileSize(item.indexSizeBytes)}</div>
+            <div>bloom size:</div> <div className="indicies-inright">{Utils.humanFileSize(item.bloomSizeBytes)}</div>
           </div>
         ))}
       </div>
@@ -288,10 +281,12 @@ const mapStateToProps = ({ reducer_Connection, reducer_Indicies }) => ({
   client: reducer_Connection.client,
   loadingIndex: reducer_Indicies.isLoading,
   // EXISTING_CODE
-  isConnected: reducer_Connection.isConnected,
-  isLoading: reducer_Connection.isLoading,
-  error: reducer_Connection.error,
-  indexData: reducer_Indicies.indexData
+  sysConnected: reducer_Connection.isConnected,
+  sysError: reducer_Connection.error,
+  isLoading: reducer_Indicies.isLoading,
+  error: reducer_Indicies.error,
+  data: reducer_Indicies.data,
+  menu: reducer_Indicies.menu
 });
 
 //----------------------------------------------------------------------

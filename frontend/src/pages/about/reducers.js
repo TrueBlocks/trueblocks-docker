@@ -4,7 +4,8 @@ import * as ab from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: ab.about_menu
 };
 
 //----------------------------------------------------------------------
@@ -14,17 +15,21 @@ export default function reducer_About(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case ab.SUCCESS:
+    case ab.TEAM:
+    case ab.PHILOSOPHY:
+    case ab.ABOUT:
       return {
         ...state,
         isLoading: false,
         error: null,
         data: action.payload
       };
+
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case ab.FAILURE:
       return {
@@ -37,4 +42,4 @@ export default function reducer_About(state = initialState, action) {
     default:
       return state;
   }
-};
+}

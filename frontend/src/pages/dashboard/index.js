@@ -5,8 +5,9 @@ import DashboardInner from './inner';
 //----------------------------------------------------------------------
 class Dashboard extends React.Component {
   getInner = () => {
-    var subpage = 'dashboard/' + (this.props.match.params.subpage || '');
-    return <DashboardInner subpage={subpage} />;
+    var params = this.props.match.params.subpage || '';
+    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    return <DashboardInner subpage={params} />;
   };
 
   render = () => {

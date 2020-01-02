@@ -1,6 +1,13 @@
 [settings]
 class = CSupport
-subpage = pay
-query_url = ping
-query_opts = 
 page_notes = We provide various support options ranging from online email/forum discussions to|full enterprise-level support plans to suit your needs. We've got you covered.
+no_error = true
+color = purple
+
+[[subpages]]
+list = [
+    { page = "support", subpage = "free", route = "support", options = "free" },
+    { page = "support", subpage = "pay", route = "support", options = "pay" },
+    { page = "support", subpage = "documentation", route = "support", options = "documentation", from_text: true },
+    { page = "support", subpage = "connect", route = "support", options = "connect" },
+]

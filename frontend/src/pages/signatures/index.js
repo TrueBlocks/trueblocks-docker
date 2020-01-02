@@ -5,8 +5,9 @@ import SignaturesInner from './inner';
 //----------------------------------------------------------------------
 class Signatures extends React.Component {
   getInner = () => {
-    var subpage = 'signatures/' + (this.props.match.params.subpage || 'monitors');
-    return <SignaturesInner subpage={subpage} />;
+    var params = this.props.match.params.subpage || 'signatures/monitored';
+    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    return <SignaturesInner subpage={params} />;
   };
 
   render = () => {

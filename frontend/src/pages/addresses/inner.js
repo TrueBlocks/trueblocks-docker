@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
 
-import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
-import { addresses_local_menu } from '../../fake_data/summary-data';
+import { InnerPageHeader, LocalMenu } from '../../components';
+import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
+import { isReady } from '../../components';
+import { DetailTable } from '../../components';
 import './addresses.css';
 
 // EXISTING_CODE
 import '../../components/detail-table.css';
-import { dispatcher_RemoveMonitor, dispatcher_AddMonitor, dispatcher_Names } from './dispatchers';
-import DetailPopup from '../../components/detail-popup';
+import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
+//import DetailPopup from '../../components/detail-popup';
 import OldDataTable from '../../components/old-data-table';
 const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
@@ -43,17 +45,10 @@ class AddressesInner extends React.Component {
         subpage: value
       });
       // update the global state...
-      if (value === 'addresses/monitors') {
-        var query = 'modes=monitors&details&ether';
-        this.props.dispatcher_Addresses('status', query);
-      } else {
-        var query = value.replace('addresses/','');
-        this.props.dispatcher_Names('names', query);
-      }
+      this.props.dispatcher_Addresses(value);
     }
 
     // EXISTING_CODE
-    console.log("HERE");
     if (cmd === 'remove') {
       this.props.dispatcher_RemoveMonitor(value, true);
     } else if (cmd === 'delete' || cmd === 'undo') {
@@ -63,7 +58,7 @@ class AddressesInner extends React.Component {
         subpage: value
       });
     } else if (cmd === 'monitor') {
-      this.props.addAddress(value);
+      this.props.dispatcher_AddMonitor(value);
     }
     // EXISTING_CODE
   };
@@ -72,8 +67,11 @@ class AddressesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    if (this.state.subpage === 'addresses/monitors') {
+    if (this.state.subpage === 'addresses/monitors' || this.state.subpage.substring(0, 7) === 'status/') {
       return (
         <Fragment>
           <AddNewAddress {...this.props} />
@@ -84,24 +82,16 @@ class AddressesInner extends React.Component {
         </Fragment>
       );
     }
-
-    return (
-      <Fragment>
-        <DetailTable css_pre="addresses" data={this.props.data} innerEar={this.innerEar} />
-      </Fragment>
-    );
     // EXISTING_CODE
-    // return <DetailTable css_pre="addresses" data={this.props.data} innerEar={this.innerEar} />;
+    return <DetailTable css_pre="addresses" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
-    if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-
     // EXISTING_CODE
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={addresses_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -127,7 +117,7 @@ export const AddNewAddress = (props) => {
 
   const onSubmit = (el) => {
     el.preventDefault();
-    props.addAddress(inputAddress.value);
+    props.dispatcher_AddMonitor(inputAddress.value);
   };
 
   return (
@@ -143,20 +133,24 @@ export const AddNewAddress = (props) => {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Addresses }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   sysConnected: reducer_Connection.isConnected,
   sysError: reducer_Connection.error,
   isLoading: reducer_Addresses.isLoading,
   error: reducer_Addresses.error,
-  data: reducer_Addresses.data
+  data: reducer_Addresses.data,
+  menu: reducer_Addresses.menu
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
       dispatcher_RemoveMonitor,
-      addAddress: (address) => dispatcher_AddMonitor(address),
-      dispatcher_Names,
+      dispatcher_AddMonitor,
+      // EXISTING_CODE
       dispatcher_Addresses
     },
     dispatch

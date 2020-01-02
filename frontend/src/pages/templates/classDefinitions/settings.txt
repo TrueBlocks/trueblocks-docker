@@ -1,7 +1,13 @@
 [settings]
 class = CSettings
-subpage = config
-query_url = config
-query_opts = get
-query_extract = .data[0]
 page_notes = Monitors are per-address index caches that enable fast retreival of appearance histories for any account.
+no_dt = true
+color = pink
+
+[[subpages]]
+list = [
+    { page = "settings", subpage = "configs", route = "settings", options = "get", extract = "_0" },
+    { page = "settings", subpage = "prices", route = "settings", options = "prices" },
+    { page = "settings", subpage = "skins", route = "settings", options = "skins" },
+    { page = "settings", subpage = "licenses", route = "settings", options = "licenses" },
+]

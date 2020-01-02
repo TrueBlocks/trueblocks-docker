@@ -1,5 +1,6 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
+import { LastCol, SepRow } from './dash-menu';
 import './local-menu.css';
 const utils = require('../utils');
 
@@ -59,7 +60,7 @@ class HeaderCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class HeaderCol extends React.Component {
   render = () => {
-    var empty = this.props.header.substr(0, 2) === 'e-';
+    var empty = this.props.header.substr(0, 2) === 'e-' || this.props.header.includes('-00');
     var cn = empty
       ? 'summary-table box endpad '
       : 'summary-table box header ' + this.props.color + (this._reactInternalFiber.index === 0 ? ' lborder' : '');
@@ -84,15 +85,15 @@ class ItemCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class ItemCol extends React.Component {
   itemClicked = () => {
-    this.props.innerEar(this.props.no_labels ? 'change_subpage' : 'goto_page', this.props.item.route_to);
+    this.props.innerEar('change_subpage', this.props.item.action);
   };
 
   render = () => {
-    var empty = this.props.item.header.substr(0, 2) === 'e-';
+    var empty = this.props.item.header.substr(0, 2) === 'e-' || this.props.item.header.includes('-00');
     var cn =
       (empty
         ? 'summary-table box endpad '
-        : this.props.item.route_to === this.props.active
+        : this.props.item.action === this.props.active
         ? 'summary-table box col-item selected'
         : 'summary-table box col-item ') + (this._reactInternalFiber.index === 0 ? ' lborder' : '');
     if (empty) {
@@ -109,19 +110,5 @@ class ItemCol extends React.Component {
         <button>{value}</button>
       </div>
     );
-  };
-}
-
-/*-----------------------------------------------------------------------------*/
-class LastCol extends React.Component {
-  render = () => {
-    return <div className="summary-table box endpad">{this.props.row.endnote}</div>;
-  };
-}
-
-/*-----------------------------------------------------------------------------*/
-class SepRow extends React.Component {
-  render = () => {
-    return <div className="summary-table box sep"></div>;
   };
 }

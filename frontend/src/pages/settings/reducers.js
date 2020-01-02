@@ -4,7 +4,8 @@ import * as se from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: se.settings_menu
 };
 
 //----------------------------------------------------------------------
@@ -14,17 +15,29 @@ export default function reducer_Settings(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case se.SUCCESS:
+    case se.LICENSES:
+    case se.SKINS:
+    case se.PRICES:
       return {
         ...state,
         isLoading: false,
         error: null,
         data: action.payload
       };
+
+    case se.CONFIGS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        data: action.payload[0]
+      };
+
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case se.FAILURE:
       return {
@@ -37,4 +50,4 @@ export default function reducer_Settings(state = initialState, action) {
     default:
       return state;
   }
-};
+}

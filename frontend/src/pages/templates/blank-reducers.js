@@ -1,32 +1,27 @@
-import * as [{TWO2}] from './actions';
+import * as [{TWO}] from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: [{TWO}].[{LOWER}]_menu
 };
 
 //----------------------------------------------------------------------
 export default function reducer_[{PROPER}](state = initialState, action) {
   switch (action.type) {
-    case [{TWO2}].BEGIN:
+    case [{TWO}].BEGIN:
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case [{TWO2}].SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-        data: action.payload
-      };
+[{REDUCERS}]    // EXISTING_CODE
+    // EXISTING_CODE
 
-    case [{TWO2}].FAILURE:
+    case [{TWO}].FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -37,4 +32,4 @@ export default function reducer_[{PROPER}](state = initialState, action) {
     default:
       return state;
   }
-};
+}

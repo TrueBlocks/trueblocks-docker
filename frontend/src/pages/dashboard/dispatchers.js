@@ -2,23 +2,23 @@ import * as da from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Dashboard = (options) => {
+export const dispatcher_Dashboard = (action) => {
   return (dispatch, getState) => {
     dispatch({
       type: da.BEGIN
     });
 
-    return Utils.queryAPI_get('names', options)
+    var res = action.split('/');
+    return Utils.queryAPI_get(res[0], res[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: da.SUCCESS,
-            payload: json
+            type: action,
+            payload: json.data
           });
-          return json;
         }
       })
       .catch((err) => {
@@ -29,3 +29,6 @@ export const dispatcher_Dashboard = (options) => {
       });
   };
 };
+
+// EXISTING_CODE
+// EXISTING_CODE

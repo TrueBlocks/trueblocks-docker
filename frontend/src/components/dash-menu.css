@@ -91,9 +91,9 @@
   border: 0px !important;
 }
 
-.summary-table.box.sep {
+.summary-table.box.sep9 {
   border: 0px;
-  grid-column: auto / span 8;
+  grid-column: auto / span 9;
   height: 10px;
   /* background-color: maroon; */
 }

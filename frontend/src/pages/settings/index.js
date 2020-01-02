@@ -5,8 +5,9 @@ import SettingsInner from './inner';
 //----------------------------------------------------------------------
 class Settings extends React.Component {
   getInner = () => {
-    var subpage = 'settings/' + (this.props.match.params.subpage || 'config');
-    return <SettingsInner subpage={subpage} />;
+    var params = this.props.match.params.subpage || 'settings/get';
+    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    return <SettingsInner subpage={params} />;
   };
 
   render = () => {

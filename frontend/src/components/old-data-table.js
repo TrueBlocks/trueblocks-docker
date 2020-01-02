@@ -88,7 +88,7 @@ export class BodyRow extends React.Component {
       this.setState({ isDeleted: false, isExpanded: false });
       this.props.row.deleted = false;
     } else if (cmd === 'expand') {
-      this.setState({ isExpanded: !this.state.isExpanded });
+      if (!this.props.row.deleted) this.setState({ isExpanded: !this.state.isExpanded });
       cmd = 'noop';
     }
     this.props.innerEar(cmd, value); // pass it to the parent in case they're interested

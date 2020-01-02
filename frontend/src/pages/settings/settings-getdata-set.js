@@ -46,7 +46,7 @@ export const dispatcher_setSettings = (jsonAsString) => {
       type: BEGIN
     });
 
-    return Utils.queryAPI_put('config', 'set', jsonAsString)
+    return Utils.queryAPI_put('settings', 'set', jsonAsString)
       .then(async (res) => {
         const json = await res.json();
         const data = json.data[0];

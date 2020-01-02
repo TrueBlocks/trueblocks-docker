@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Other } from './dispatchers';
 
-import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
-import { other_local_menu } from '../../fake_data/summary-data';
+import { InnerPageHeader, LocalMenu } from '../../components';
+import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
+import { isReady } from '../../components';
+import { DetailTable } from '../../components';
 import './other.css';
 
 // EXISTING_CODE
@@ -38,9 +40,9 @@ class OtherInner extends React.Component {
         subpage: value
       });
       // update the global state...
-      //var query = 'modes=other&types=' + value.replace('other/', '');
-      //this.props.dispatcher_Other(query);
+      this.props.dispatcher_Other(value);
     }
+
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -49,29 +51,31 @@ class OtherInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    return (
-      <Fragment>
-        <ul>
-          <li>Item 1 1</li>
-          <li>Item 1 2</li>
-          <li>Item 1 2</li>
-          <li>Item 1 2</li>
-        </ul>
-      </Fragment>
-    );
+//    return (
+//      <Fragment>
+//        {this.state.subpage}
+//        <ul>
+//          <li>Item 1 1</li>
+//          <li>Item 1 2</li>
+//          <li>Item 1 2</li>
+//          <li>Item 1 2</li>
+//        </ul>
+//      </Fragment>
+//    );
     // EXISTING_CODE
-    // return <DetailTable css_pre="other" data={this.props.data} innerEar={this.innerEar} />;
+    return <DetailTable css_pre="other" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
-    if (!isReady(this.props, this.props)) return <NotReady {...this.props} />;
-
     // EXISTING_CODE
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={other_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -95,17 +99,22 @@ class OtherInner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_Other }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   sysConnected: reducer_Connection.isConnected,
   sysError: reducer_Connection.error,
   isLoading: reducer_Other.isLoading,
   error: reducer_Other.error,
-  data: reducer_Other.data
+  data: reducer_Other.data,
+  menu: reducer_Other.menu
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_Other
     },
     dispatch

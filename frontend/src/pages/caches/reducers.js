@@ -4,7 +4,8 @@ import * as ca from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: ca.caches_menu
 };
 
 //----------------------------------------------------------------------
@@ -14,17 +15,23 @@ export default function reducer_Caches(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case ca.SUCCESS:
+    case ca.SLURPS:
+    case ca.TRACES:
+    case ca.TRANSACTIONS:
+    case ca.BLOCKS:
+    case ca.OVERVIEW:
       return {
         ...state,
         isLoading: false,
         error: null,
-        data: action.payload
+        data: action.payload[0].caches
       };
+
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case ca.FAILURE:
       return {
@@ -37,4 +44,4 @@ export default function reducer_Caches(state = initialState, action) {
     default:
       return state;
   }
-};
+}

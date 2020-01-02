@@ -4,7 +4,8 @@ import * as ot from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: ot.other_menu
 };
 
 //----------------------------------------------------------------------
@@ -14,17 +15,23 @@ export default function reducer_Other(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case ot.SUCCESS:
+    case ot.SUBGROUPS:
+    case ot.GROUPS:
+    case ot.GENERATED:
+    case ot.KNOWN:
+    case ot.CUSTOM:
       return {
         ...state,
         isLoading: false,
         error: null,
         data: action.payload
       };
+
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case ot.FAILURE:
       return {
@@ -37,4 +44,4 @@ export default function reducer_Other(state = initialState, action) {
     default:
       return state;
   }
-};
+}

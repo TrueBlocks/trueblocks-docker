@@ -1,7 +1,15 @@
 [settings]
 class = CCaches
-subpage = all
-query_url = status
-query_opts = options
-query_extract = .data[0].caches
-page_notes = TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your|hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big.
+page_notes = TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your \
+                |hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big.
+color = tan
+
+[[subpages]]
+list = [
+    { page = "caches", subpage = "overview", route = "status", options = "modes_EQ_caches&types_EQ_all", extract = "_0.caches" },
+    { page = "caches", subpage = "blocks", route = "status", options = "modes_EQ_caches&types_EQ_blocks&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "transactions", route = "status", options = "modes_EQ_caches&types_EQ_transactions&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "traces", route = "status", options = "modes_EQ_caches&types_EQ_traces&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "slurps", route = "status", options = "modes_EQ_caches&types_EQ_slurps&details&depth_EQ_2", extract = "_0.caches" },
+]
+

@@ -5,8 +5,9 @@ import CachesInner from './inner';
 //----------------------------------------------------------------------
 class Caches extends React.Component {
   getInner = () => {
-    var subpage = 'caches/' + (this.props.match.params.subpage || 'all');
-    return <CachesInner subpage={subpage} />;
+    var params = this.props.match.params.subpage || 'status/modes=caches&types=all';
+    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    return <CachesInner subpage={params} />;
   };
 
   render = () => {

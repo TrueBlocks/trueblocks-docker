@@ -1,6 +1,13 @@
 [settings]
 class = COther
-subpage = generated
-query_url = ping
-query_opts = 
 page_notes = The Other panel allows you to configure various other items related to TrueBlocks.
+color = orange
+
+[[subpages]]
+list = [
+    { page = "other", subpage = "custom", route = "other", options = "custom" },
+    { page = "other", subpage = "known", route = "when", options = "list" },
+    { page = "other", subpage = "generated", route = "other", options = "generated" },
+    { page = "other", subpage = "groups", route = "other", options = "groups" },
+    { page = "other", subpage = "subgroups", route = "other", options = "subgroups" },
+]

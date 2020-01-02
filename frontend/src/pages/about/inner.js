@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_About } from './dispatchers';
 
-import { InnerPageHeader, DetailTable, LocalMenu, isReady, NotReady } from '../../components';
-import { about_local_menu } from '../../fake_data/summary-data';
+import { InnerPageHeader, LocalMenu } from '../../components';
+import { teamText } from './text-team';
+import * as ab from './actions';
 import './about.css';
 
 // EXISTING_CODE
@@ -38,9 +39,9 @@ class AboutInner extends React.Component {
         subpage: value
       });
       // update the global state...
-      // var query = 'modes=about&types=' + value.replace('about/', '');
-      // this.props.dispatcher_About(query);
+      this.props.dispatcher_About(value);
     }
+
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -49,10 +50,16 @@ class AboutInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
+    if (this.state.subpage === ab.TEAM) {
+      return teamText();
+    }
     // EXISTING_CODE
+    if (this.state.subpage === ab.TEAM) {
+      return teamText();
+    }
     return (
       <Fragment>
-        <h4>QuickBlocks</h4>
+        <h4>QuickBlocks {this.state.subpage}</h4>
         <div>
           The fastest, fully-decentralized way to access data from any Ethereum address or smart contract. Providing
           open source software libraries and tools for developers and accounting / auditing / monitoring solutions for
@@ -68,17 +75,14 @@ class AboutInner extends React.Component {
       </Fragment>
     );
     // EXISTING_CODE
-    // return <DetailTable css_pre="about" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
-    if (!isReady(this.props, this.props)) return <NotReady {...this.props} />;
-
     // EXISTING_CODE
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={about_local_menu} active={this.state.subpage} innerEar={this.innerEar} />
+        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -103,17 +107,22 @@ class AboutInner extends React.Component {
 
 //----------------------------------------------------------------------
 const mapStateToProps = ({ reducer_Connection, reducer_About }) => ({
+  // EXISTING_CODE
+  // EXISTING_CODE
   sysConnected: reducer_Connection.isConnected,
   sysError: reducer_Connection.error,
   isLoading: reducer_About.isLoading,
   error: reducer_About.error,
-  data: reducer_About.data
+  data: reducer_About.data,
+  menu: reducer_About.menu
 });
 
 //----------------------------------------------------------------------
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+      // EXISTING_CODE
+      // EXISTING_CODE
       dispatcher_About
     },
     dispatch

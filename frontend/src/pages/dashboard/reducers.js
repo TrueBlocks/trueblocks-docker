@@ -4,7 +4,8 @@ import * as da from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: da.dashboard_menu
 };
 
 //----------------------------------------------------------------------
@@ -14,17 +15,11 @@ export default function reducer_Dashboard(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        error: null,
-        data: null
+        error: null
       };
 
-    case da.SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-        data: action.payload
-      };
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case da.FAILURE:
       return {
@@ -37,4 +32,4 @@ export default function reducer_Dashboard(state = initialState, action) {
     default:
       return state;
   }
-};
+}

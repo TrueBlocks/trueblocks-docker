@@ -1,6 +1,12 @@
 [settings]
 class = CAbout
-subpage = team
-query_url = ping
-query_opts = 
 page_notes = Learn about the TrubBlocks project, our organization, our philosopy|towards decentralization, and our team.
+no_error = true
+color = blue
+
+[[subpages]]
+list = [
+    { page = "about", subpage = "about", route = "about", options = "about" },
+    { page = "about", subpage = "philosophy", route = "about", options = "philosophy" },
+    { page = "about", subpage = "team", route = "about", options = "team", from_text: true },
+]

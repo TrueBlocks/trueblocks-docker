@@ -1,25 +1,24 @@
-import React from 'react';
 import * as ad from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Addresses = (cmd, options) => {
+export const dispatcher_Addresses = (action) => {
   return (dispatch, getState) => {
     dispatch({
       type: ad.BEGIN
     });
 
-    return Utils.queryAPI_get(cmd, options)
+    var res = action.split('/');
+    return Utils.queryAPI_get(res[0], res[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: ad.SUCCESS,
-            payload: json.data[0].caches[0].items
+            type: action,
+            payload: json.data
           });
-          return json.data[0].caches[0].items;
         }
       })
       .catch((err) => {
@@ -31,21 +30,14 @@ export const dispatcher_Addresses = (cmd, options) => {
   };
 };
 
+// EXISTING_CODE
 //----------------------------------------------------------------
 export const dispatcher_RemoveMonitor = (address, remove) => {
   return (dispatch, getState) => {
-    dispatch({
-      type: ad.BEGIN
-    });
-
     return Utils.queryAPI_get('rm', 'address=' + address + (remove ? '&yes' : ''))
       .then(async (res) => {
-        console.log(res);
-        console.log(res.json());
-        let json = await res.json();
         return dispatch({
-          type: ad.REMOVE,
-          payload: json
+          type: ad.REMOVE
         });
       })
       .catch((err) => {
@@ -64,7 +56,7 @@ export const dispatcher_AddMonitor = (address) => {
       type: ad.BEGIN
     });
 
-    return Utils.queryAPI_get('list', 'verbose=10&addrs=' + address)
+    return Utils.queryAPI_get('list', 'addrs=' + address)
       .then(async (res) => {
         let json = await res.json();
         return dispatch({
@@ -80,33 +72,4 @@ export const dispatcher_AddMonitor = (address) => {
       });
   };
 };
-
-//----------------------------------------------------------------------
-export const dispatcher_Names = (cmd, options) => {
-  return (dispatch, getState) => {
-    dispatch({
-      type: ad.BEGIN
-    });
-
-    console.log(cmd, options);
-    return Utils.queryAPI_get(cmd, options)
-      .then(async (result) => {
-        let json = await result.json();
-        if (json.errors) {
-          throw json.errors[0];
-        } else {
-          dispatch({
-            type: ad.SUCCESS,
-            payload: json.data
-          });
-          return json.data
-        }
-      })
-      .catch((err) => {
-        dispatch({
-          type: ad.FAILURE,
-          err
-        });
-      });
-  };
-};
+// EXISTING_CODE

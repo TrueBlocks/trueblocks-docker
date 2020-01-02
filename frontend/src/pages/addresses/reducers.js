@@ -4,7 +4,8 @@ import * as ad from './actions';
 const initialState = {
   isLoading: false,
   error: null,
-  data: null
+  data: null,
+  menu: ad.addresses_menu
 };
 
 //----------------------------------------------------------------------
@@ -17,8 +18,11 @@ export default function reducer_Addresses(state = initialState, action) {
         error: null
       };
 
-    case ad.SUCCESS:
-      console.log(action);
+    case ad.OTHER:
+    case ad.PREFUND:
+    case ad.NAMED:
+    case ad.OWNED:
+    case ad.CUSTOM:
       return {
         ...state,
         isLoading: false,
@@ -26,16 +30,18 @@ export default function reducer_Addresses(state = initialState, action) {
         data: action.payload
       };
 
-    case ad.REMOVE:
-      console.log(action);
+    case ad.MONITORS:
       return {
         ...state,
         isLoading: false,
-        error: null
+        error: null,
+        data: action.payload[0].caches[0].items
       };
 
+    // EXISTING_CODE
+    // EXISTING_CODE
+
     case ad.FAILURE:
-      console.log(action);
       return {
         ...state,
         isLoading: false,

@@ -1,14 +1,31 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
-import './summary-table.css';
+import './dash-menu.css';
+import * as ad from '../pages/addresses/actions';
+import * as ex from '../pages/explore/actions';
+import * as ind from '../pages/indicies/actions';
+import * as ca from '../pages/caches/actions';
+import * as si from '../pages/signatures/actions';
+import * as ot from '../pages/other/actions';
+import * as se from '../pages/settings/actions';
+import * as su from '../pages/support/actions';
+import * as ab from '../pages/about/actions';
+
 const utils = require('../utils');
 
 /*-----------------------------------------------------------------------------*/
-export class SummaryTable extends React.Component {
+export class DashMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menu: getDashMenu()
+    };
+  }
+
   render = () => {
     return (
       <Fragment>
-        {this.props.data.map((_row) => {
+        {this.state.menu.map((_row) => {
           return <BigRow key={_row.page.toLowerCase()} {...this.props} row={_row} />;
         })}
       </Fragment>
@@ -31,7 +48,7 @@ class BigRow extends React.Component {
         <ItemCols key={id + '_12'} {...other} no_labels={no_labels} />
         <LastCol key={id + '_13'} {...other} />
 
-        <SepRow key={id + '_21'} />
+        <SepRow9 key={id + '_21'} />
       </div>
     );
   };
@@ -57,7 +74,7 @@ class HeaderCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class HeaderCol extends React.Component {
   render = () => {
-    var empty = this.props.header.substr(0, 2) === 'e-';
+    var empty = this.props.header.includes('-');
     var cn = empty ? 'summary-table box endpad ' : 'summary-table box header ' + this.props.color;
     var head = empty ? '' : this.props.header;
     return <div className={cn}>{head}</div>;
@@ -80,14 +97,14 @@ class ItemCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class ItemCol extends React.Component {
   itemClicked = () => {
-    this.props.innerEar(this.props.no_labels ? 'change_subpage' : 'goto_page', this.props.item.route_to);
+    this.props.changePage(this.props.row.page.toLowerCase(), this.props.item.action);
   };
 
   render = () => {
-    var empty = this.props.item.header.substr(0, 2) === 'e-';
+    var empty = this.props.item.header.includes('-');
     var cn = empty
       ? 'summary-table box endpad '
-      : this.props.item.route_to === this.props.active
+      : this.props.item.action === this.props.active
       ? 'summary-table box col-item selected'
       : 'summary-table box col-item ';
     var value = empty ? '' : utils.fmtInteger(this.props.item.value);
@@ -101,32 +118,44 @@ class ItemCol extends React.Component {
 
 /*-----------------------------------------------------------------------------*/
 class FirstCol extends React.Component {
-  itemClicked = () => {
-    if (this.props.no_labels) {
-      this.props.innerEar('goto_page', '/');
-    }
-  };
-
   render = () => {
     var cn = this.props.no_labels ? 'summary-table box frontpad' : 'summary-table box row-head';
-    return (
-      <div className={cn} onClick={this.itemClicked}>
-        {this.props.no_labels ? (this.props.linked ? 'Home' : '') : this.props.row.page}
-      </div>
-    );
+    return <div className={cn}>{this.props.no_labels ? (this.props.linked ? 'Home' : '') : this.props.row.page}</div>;
   };
 }
 
 /*-----------------------------------------------------------------------------*/
-class LastCol extends React.Component {
+export class LastCol extends React.Component {
   render = () => {
-    return <div className="summary-table box endpad">{this.props.row.endnote}</div>;
+    return <div className="summary-table box endpad"></div>;
   };
 }
 
 /*-----------------------------------------------------------------------------*/
-class SepRow extends React.Component {
+export class SepRow9 extends React.Component {
+  render = () => {
+    return <div className="summary-table box sep9"></div>;
+  };
+}
+
+/*-----------------------------------------------------------------------------*/
+export class SepRow extends React.Component {
   render = () => {
     return <div className="summary-table box sep"></div>;
   };
 }
+
+/*-----------------------------------------------------------------------------*/
+export const getDashMenu = () => {
+  var ret = [];
+  ret.push(ad.addresses_menu[0]);
+  ret.push(ex.explore_menu[0]);
+  ret.push(ind.indicies_menu[0]);
+  ret.push(si.signatures_menu[0]);
+  ret.push(ca.caches_menu[0]);
+  ret.push(ot.other_menu[0]);
+  ret.push(se.settings_menu[0]);
+  ret.push(su.support_menu[0]);
+  ret.push(ab.about_menu[0]);
+  return ret;
+};
