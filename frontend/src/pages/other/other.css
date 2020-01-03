@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
-.detail_header.other {
+.data_table_header.other {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.detail_row.other {
+.data_table_row.other {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }

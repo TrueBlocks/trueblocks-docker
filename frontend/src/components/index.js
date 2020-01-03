@@ -1,6 +1,6 @@
 import { Connection } from './connection';
 import { InnerPageHeader } from './page-header';
-import { DataTable } from './detail-table';
+import { DataTable } from './data-table';
 import { LocalMenu } from './local-menu';
 import { DashMenu } from './dash-menu';
 import { Icon } from './icon';

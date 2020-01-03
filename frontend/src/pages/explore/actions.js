@@ -2,10 +2,11 @@
 export const BEGIN = 'explore/BEGIN';
 export const FAILURE = 'explore/FAILURE';
 
-export const ADD = 'explore/ADD';
 export const EDIT = 'explore/EDIT';
-export const UNDELETE = 'explore/UNDELETE';
+export const CREATE = 'explore/CREATE';
+export const UPDATE = 'explore/UPDATE';
 export const DELETE = 'explore/DELETE';
+export const UNDELETE = 'explore/UNDELETE';
 export const REMOVE = 'explore/REMOVE';
 
 export const BLOCKS = 'blocks/blocks=latest&hashes_only';

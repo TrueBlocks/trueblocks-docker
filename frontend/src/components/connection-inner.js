@@ -9,7 +9,7 @@ import { fmtDouble, fmtInteger } from '../utils';
 import green_light from '../img/connection-green-light.png';
 import yellow_light from '../img/connection-yellow-light.png';
 import red_light from '../img/connection-red-light.png';
-import { dispatcher_Connection } from './connection-getdata';
+import { dispatcher_Connection } from './connection-actions';
 import './connection.css';
 
 //---------------------------------------------------------------------

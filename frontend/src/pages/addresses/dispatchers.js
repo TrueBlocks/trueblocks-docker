@@ -60,7 +60,7 @@ export const dispatcher_AddMonitor = (address) => {
       .then(async (res) => {
         let json = await res.json();
         return dispatch({
-          type: ad.ADD,
+          type: ad.CREATE,
           payload: json
         });
       })

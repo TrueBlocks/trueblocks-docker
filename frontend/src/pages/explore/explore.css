@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
-.detail_header.explore {
+.data_table_header.explore {
   grid-template-columns: 1fr;
 }
 
-.detail_row.explore {
+.data_table_row.explore {
   grid-template-columns: 1r;
 }

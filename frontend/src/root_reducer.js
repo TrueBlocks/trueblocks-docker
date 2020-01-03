@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 //------------------------------------------------------------------------
-import reducer_Connection from './components/connection-getdata';
+import reducer_Connection from './components/connection-actions';
 import reducer_Dashboard from './pages/dashboard/reducers';
 import reducer_Addresses from './pages/addresses/reducers';
 import reducer_Explore from './pages/explore/reducers';
@@ -12,6 +12,7 @@ import reducer_Other from './pages/other/reducers';
 import reducer_Settings from './pages/settings/reducers';
 import reducer_Support from './pages/support/reducers';
 import reducer_About from './pages/about/reducers';
+
 //------------------------------------------------------------------------
 export default combineReducers({
   reducer_Connection,

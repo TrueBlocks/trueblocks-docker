@@ -2,10 +2,11 @@
 export const BEGIN = 'signatu/BEGIN';
 export const FAILURE = 'signatu/FAILURE';
 
-export const ADD = 'signatu/ADD';
 export const EDIT = 'signatu/EDIT';
-export const UNDELETE = 'signatu/UNDELETE';
+export const CREATE = 'signatu/CREATE';
+export const UPDATE = 'signatu/UPDATE';
 export const DELETE = 'signatu/DELETE';
+export const UNDELETE = 'signatu/UNDELETE';
 export const REMOVE = 'signatu/REMOVE';
 
 export const FROM_MONITORS = 'signatures/monitored';

@@ -12,7 +12,7 @@ import * as se from './actions';
 import './settings.css';
 
 // EXISTING_CODE
-import { dispatcher_setSettings } from './settings-getdata-set';
+import { dispatcher_setSettings } from './settings-actions-set';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------

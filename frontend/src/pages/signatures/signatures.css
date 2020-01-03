@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
-.detail_header.signatures {
+.data_table_header.signatures {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.detail_row.signatures {
+.data_table_row.signatures {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }

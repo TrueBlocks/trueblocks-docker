@@ -2,10 +2,11 @@
 export const BEGIN = 'indicie/BEGIN';
 export const FAILURE = 'indicie/FAILURE';
 
-export const ADD = 'indicie/ADD';
 export const EDIT = 'indicie/EDIT';
-export const UNDELETE = 'indicie/UNDELETE';
+export const CREATE = 'indicie/CREATE';
+export const UPDATE = 'indicie/UPDATE';
 export const DELETE = 'indicie/DELETE';
+export const UNDELETE = 'indicie/UNDELETE';
 export const REMOVE = 'indicie/REMOVE';
 
 export const FINALIZED = 'status/modes=index&details';

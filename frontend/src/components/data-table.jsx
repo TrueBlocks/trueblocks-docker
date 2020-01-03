@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from './icon';
-import './detail-table.css';
+import './data-table.css';
 const Utils = require('../utils');
 
 //----------------------------------------------------------------------
@@ -11,7 +11,7 @@ export class DataTable extends React.Component {
     super(props);
     var fields = [];
     Object.keys(this.props.data[0]).map((key) => {
-      fields.push(key);
+      fields.push(key.replace('_', ' '));
       return true;
     });
     this.state = {
@@ -51,7 +51,7 @@ export class DataTable extends React.Component {
     return (
       <Fragment>
         <h4>{this.props.title}</h4>
-        <div className="detail_table">
+        <div className="data_table">
           <DataTableHeaderRow
             {...this.props}
             headers={this.state.fieldList}
@@ -62,7 +62,7 @@ export class DataTable extends React.Component {
           {this.props.data.map((item, index) => {
             return (
               <Fragment>
-                <div key={index + 'a0'} className={'detail_row ' + this.props.css_pre}>
+                <div key={index + 'a0'} className={'data_table_row ' + this.props.css_pre}>
                   {Object.values(item).map((val, vid) => {
                     return <DataTableItem key={index + '-' + vid} {...this.props} item={item} value={val} />;
                   })}
@@ -74,7 +74,7 @@ export class DataTable extends React.Component {
       </Fragment>
     );
   };
-  // <div key={index + 'b0'} className={'detail_wide_row ' + this.props.css_pre}>
+  // <div key={index + 'b0'} className={'data_table_wide_row ' + this.props.css_pre}>
   //   <Fragment>Expanded</Fragment>;
   // </div>
 
@@ -93,7 +93,7 @@ export class DataTable extends React.Component {
 class DataTableHeaderRow extends React.Component {
   render = () => {
     return (
-      <div className={'detail_header ' + this.props.css_pre}>
+      <div className={'data_table_header ' + this.props.css_pre}>
         {this.props.headers.map((field) => (
           <DataTableHeaderItem {...this.props} key={'h' + field} value={field} />
         ))}
@@ -123,7 +123,7 @@ class DataTableHeaderItem extends React.Component {
 
   render = () => {
     return (
-      <div className="detail_header_item" onClick={this.sortClicked}>
+      <div className="data_table_header_item" onClick={this.sortClicked}>
         {this.props.value} {this.getSortIcon()}
       </div>
     );
@@ -141,9 +141,9 @@ class DataTableItem extends React.Component {
   };
 
   render = () => {
-    var cn = 'detail_table_item';
+    var cn = 'data_table_table_item';
     var isNum = !Utils.isAddress(this.props.value) && Utils.isNumber(this.props.value);
-    if (isNum) cn = 'detail_table_item number';
+    if (isNum) cn = 'data_table_table_item number';
     var val = this.props.value;
     if (typeof this.props.value === 'object') {
       val = JSON.stringify(this.props.value);

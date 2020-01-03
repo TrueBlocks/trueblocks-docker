@@ -2,10 +2,11 @@
 export const BEGIN = 'caches_/BEGIN';
 export const FAILURE = 'caches_/FAILURE';
 
-export const ADD = 'caches_/ADD';
 export const EDIT = 'caches_/EDIT';
-export const UNDELETE = 'caches_/UNDELETE';
+export const CREATE = 'caches_/CREATE';
+export const UPDATE = 'caches_/UPDATE';
 export const DELETE = 'caches_/DELETE';
+export const UNDELETE = 'caches_/UNDELETE';
 export const REMOVE = 'caches_/REMOVE';
 
 export const CACHE_OVERVIEW = 'status/modes=caches&types=all';

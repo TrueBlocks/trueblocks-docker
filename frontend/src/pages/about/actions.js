@@ -2,10 +2,11 @@
 export const BEGIN = 'about__/BEGIN';
 export const FAILURE = 'about__/FAILURE';
 
-export const ADD = 'about__/ADD';
 export const EDIT = 'about__/EDIT';
-export const UNDELETE = 'about__/UNDELETE';
+export const CREATE = 'about__/CREATE';
+export const UPDATE = 'about__/UPDATE';
 export const DELETE = 'about__/DELETE';
+export const UNDELETE = 'about__/UNDELETE';
 export const REMOVE = 'about__/REMOVE';
 
 export const ABOUT = 'about/about';

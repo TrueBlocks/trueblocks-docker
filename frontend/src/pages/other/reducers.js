@@ -20,8 +20,7 @@ export default function reducer_Other(state = initialState, action) {
         error: null
       };
 
-    case ot.SUBGROUP_NAMES:
-    case ot.GROUP_NAMES:
+    case ot.GROUPS:
     case ot.GENERATED_BLOCKS:
     case ot.KNOWN_BLOCKS:
     case ot.CUSTOM_BLOCKS:

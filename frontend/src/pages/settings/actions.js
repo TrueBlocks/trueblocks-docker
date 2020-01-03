@@ -2,10 +2,11 @@
 export const BEGIN = 'setting/BEGIN';
 export const FAILURE = 'setting/FAILURE';
 
-export const ADD = 'setting/ADD';
 export const EDIT = 'setting/EDIT';
-export const UNDELETE = 'setting/UNDELETE';
+export const CREATE = 'setting/CREATE';
+export const UPDATE = 'setting/UPDATE';
 export const DELETE = 'setting/DELETE';
+export const UNDELETE = 'setting/UNDELETE';
 export const REMOVE = 'setting/REMOVE';
 
 export const CONFIGURATION = 'settings/get';

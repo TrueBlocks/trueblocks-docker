@@ -2,10 +2,11 @@
 export const BEGIN = '[{SEVEN}]/BEGIN';
 export const FAILURE = '[{SEVEN}]/FAILURE';
 
-export const ADD = '[{SEVEN}]/ADD';
 export const EDIT = '[{SEVEN}]/EDIT';
-export const UNDELETE = '[{SEVEN}]/UNDELETE';
+export const CREATE = '[{SEVEN}]/CREATE';
+export const UPDATE = '[{SEVEN}]/UPDATE';
 export const DELETE = '[{SEVEN}]/DELETE';
+export const UNDELETE = '[{SEVEN}]/UNDELETE';
 export const REMOVE = '[{SEVEN}]/REMOVE';
 
 [{ COMMANDS }];

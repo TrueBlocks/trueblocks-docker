@@ -7,10 +7,10 @@
 }
 
 /*-----------------------------------------------------------------------------*/
-.detail_header.addresses {
+.data_table_header.addresses {
   grid-template-columns: 2fr 1fr 3fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.detail_row.addresses {
+.data_table_row.addresses {
   grid-template-columns: 2fr 1fr 3fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
