@@ -56,7 +56,7 @@ class ExploreInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DataTable css_pre="explore" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="explore" fields={this.props.fieldList} data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
@@ -97,6 +97,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_Explore }) => ({
   isLoading: reducer_Explore.isLoading,
   error: reducer_Explore.error,
   data: reducer_Explore.data,
+  meta: reducer_Explore.meta,
+  fieldList: reducer_Explore.fieldList,
   menu: reducer_Explore.menu
 });
 

@@ -9,7 +9,7 @@ export const DELETE = 'signatu/DELETE';
 export const REMOVE = 'signatu/REMOVE';
 
 export const FROM_MONITORS = 'signatures/monitored';
-export const KNOWN_SIGNATURES = 'signatures/known';
+export const KNOWN_SIGNATURES = 'abi/known';
 export const GENERATED_SIGNATURES = 'signatures/generated';
 export const ABIS = 'signatures/abis';
 

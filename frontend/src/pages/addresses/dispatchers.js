@@ -17,7 +17,7 @@ export const dispatcher_Addresses = (action) => {
         } else {
           dispatch({
             type: action,
-            payload: json.data
+            payload: json
           });
         }
       })

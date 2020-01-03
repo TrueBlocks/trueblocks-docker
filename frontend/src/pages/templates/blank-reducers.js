@@ -2,10 +2,12 @@ import * as [{TWO}] from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: [{TWO}].[{LOWER}]_menu,
   data: null,
-  menu: [{TWO}].[{LOWER}]_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -24,9 +26,11 @@ export default function reducer_[{PROPER}](state = initialState, action) {
     case [{TWO}].FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

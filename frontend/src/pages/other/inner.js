@@ -56,7 +56,7 @@ class OtherInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DataTable css_pre="other" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="other" fields={this.props.fieldList} data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
@@ -95,6 +95,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_Other }) => ({
   isLoading: reducer_Other.isLoading,
   error: reducer_Other.error,
   data: reducer_Other.data,
+  meta: reducer_Other.meta,
+  fieldList: reducer_Other.fieldList,
   menu: reducer_Other.menu
 });
 

@@ -286,6 +286,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_Indicies }) => ({
   isLoading: reducer_Indicies.isLoading,
   error: reducer_Indicies.error,
   data: reducer_Indicies.data,
+  meta: reducer_Indicies.meta,
+  fieldList: reducer_Indicies.fieldList,
   menu: reducer_Indicies.menu
 });
 

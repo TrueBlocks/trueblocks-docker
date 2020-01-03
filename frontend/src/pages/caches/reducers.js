@@ -2,10 +2,12 @@ import * as ca from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: ca.caches_menu,
   data: null,
-  menu: ca.caches_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -25,9 +27,11 @@ export default function reducer_Caches(state = initialState, action) {
     case ca.CACHE_OVERVIEW:
       return {
         ...state,
+        data: action.payload.data[0].caches,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload[0].caches
+        error: null
       };
 
     // EXISTING_CODE
@@ -36,9 +40,11 @@ export default function reducer_Caches(state = initialState, action) {
     case ca.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

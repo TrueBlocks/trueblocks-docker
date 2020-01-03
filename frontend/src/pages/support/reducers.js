@@ -2,10 +2,12 @@ import * as su from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: su.support_menu,
   data: null,
-  menu: su.support_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -24,9 +26,11 @@ export default function reducer_Support(state = initialState, action) {
     case su.FREE_TEIR:
       return {
         ...state,
+        data: action.payload.data,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload
+        error: null
       };
 
     // EXISTING_CODE
@@ -35,9 +39,11 @@ export default function reducer_Support(state = initialState, action) {
     case su.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

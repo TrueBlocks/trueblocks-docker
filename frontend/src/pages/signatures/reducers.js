@@ -2,10 +2,12 @@ import * as si from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: si.signatures_menu,
   data: null,
-  menu: si.signatures_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -24,9 +26,11 @@ export default function reducer_Signatures(state = initialState, action) {
     case si.FROM_MONITORS:
       return {
         ...state,
+        data: action.payload.data,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload
+        error: null
       };
 
     // EXISTING_CODE
@@ -35,9 +39,11 @@ export default function reducer_Signatures(state = initialState, action) {
     case si.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

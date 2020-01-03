@@ -111,6 +111,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_About }) => ({
   isLoading: reducer_About.isLoading,
   error: reducer_About.error,
   data: reducer_About.data,
+  meta: reducer_About.meta,
+  fieldList: reducer_About.fieldList,
   menu: reducer_About.menu
 });
 

@@ -52,7 +52,7 @@ export class DataTable extends React.Component {
       <Fragment>
         <h4>{this.props.title}</h4>
         <div className="detail_table">
-          <DT_HeaderRow
+          <DataTableHeaderRow
             {...this.props}
             headers={this.state.fieldList}
             sortBy={this.sortBy}
@@ -64,7 +64,7 @@ export class DataTable extends React.Component {
               <Fragment>
                 <div key={index + 'a0'} className={'detail_row ' + this.props.css_pre}>
                   {Object.values(item).map((val, vid) => {
-                    return <DT_Item key={index + '-' + vid} {...this.props} item={item} value={val} />;
+                    return <DataTableItem key={index + '-' + vid} {...this.props} item={item} value={val} />;
                   })}
                 </div>
               </Fragment>
@@ -90,12 +90,12 @@ export class DataTable extends React.Component {
 }
 
 //----------------------------------------------------------------------
-class DT_HeaderRow extends React.Component {
+class DataTableHeaderRow extends React.Component {
   render = () => {
     return (
       <div className={'detail_header ' + this.props.css_pre}>
         {this.props.headers.map((field) => (
-          <DT_HeaderItem {...this.props} key={'h' + field} value={field} />
+          <DataTableHeaderItem {...this.props} key={'h' + field} value={field} />
         ))}
       </div>
     );
@@ -107,7 +107,7 @@ class DT_HeaderRow extends React.Component {
 }
 
 //----------------------------------------------------------------------
-class DT_HeaderItem extends React.Component {
+class DataTableHeaderItem extends React.Component {
   sortClicked = (el) => {
     this.props.sortBy(this.props.value);
   };
@@ -135,7 +135,7 @@ class DT_HeaderItem extends React.Component {
 }
 
 //----------------------------------------------------------------------
-class DT_Item extends React.Component {
+class DataTableItem extends React.Component {
   expandClicked = () => {
     this.props.innerEar('expand', this.props.item);
   };

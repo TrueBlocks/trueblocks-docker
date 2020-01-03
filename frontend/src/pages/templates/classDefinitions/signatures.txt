@@ -6,7 +6,7 @@ color = green
 [[subpages]]
 list = [
     { page = "signatures", subpage = "from_monitors", route = "signatures", options = "monitored" },
-    { page = "signatures", subpage = "known_signatures", route = "signatures", options = "known" },
+    { page = "signatures", subpage = "known_signatures", route = "abi", options = "known" },
     { page = "signatures", subpage = "generated_signatures", route = "signatures", options = "generated" },
     { page = "signatures", subpage = "abis", route = "signatures", options = "abis" },
 ]

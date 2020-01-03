@@ -82,7 +82,7 @@ class AddressesInner extends React.Component {
       );
     }
     // EXISTING_CODE
-    return <DataTable css_pre="addresses" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="addresses" fields={this.props.fieldList} data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
@@ -139,6 +139,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_Addresses }) => ({
   isLoading: reducer_Addresses.isLoading,
   error: reducer_Addresses.error,
   data: reducer_Addresses.data,
+  meta: reducer_Addresses.meta,
+  fieldList: reducer_Addresses.fieldList,
   menu: reducer_Addresses.menu
 });
 

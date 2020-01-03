@@ -2,10 +2,12 @@ import * as se from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: se.settings_menu,
   data: null,
-  menu: se.settings_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -23,17 +25,21 @@ export default function reducer_Settings(state = initialState, action) {
     case se.PRICE_QUOTES:
       return {
         ...state,
+        data: action.payload.data,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload
+        error: null
       };
 
     case se.CONFIGURATION:
       return {
         ...state,
+        data: action.payload.data[0],
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload[0]
+        error: null
       };
 
     // EXISTING_CODE
@@ -42,9 +48,11 @@ export default function reducer_Settings(state = initialState, action) {
     case se.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

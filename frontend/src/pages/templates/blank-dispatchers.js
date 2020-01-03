@@ -17,7 +17,7 @@ export const dispatcher_[{PROPER}] = (action) => {
         } else {
           dispatch({
             type: action,
-            payload: json.data
+            payload: json
           });
         }
       })

@@ -2,10 +2,12 @@ import * as ind from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: ind.indicies_menu,
   data: null,
-  menu: ind.indicies_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -25,9 +27,11 @@ export default function reducer_Indicies(state = initialState, action) {
     case ind.FINALIZED:
       return {
         ...state,
+        data: action.payload.data[0].caches,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload[0].caches
+        error: null
       };
 
     // EXISTING_CODE
@@ -36,9 +40,11 @@ export default function reducer_Indicies(state = initialState, action) {
     case ind.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

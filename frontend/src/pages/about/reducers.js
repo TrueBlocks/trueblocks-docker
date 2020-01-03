@@ -2,10 +2,12 @@ import * as ab from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: ab.about_menu,
   data: null,
-  menu: ab.about_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -23,9 +25,11 @@ export default function reducer_About(state = initialState, action) {
     case ab.ABOUT:
       return {
         ...state,
+        data: action.payload.data,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload
+        error: null
       };
 
     // EXISTING_CODE
@@ -34,9 +38,11 @@ export default function reducer_About(state = initialState, action) {
     case ab.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

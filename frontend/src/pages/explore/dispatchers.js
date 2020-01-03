@@ -17,7 +17,7 @@ export const dispatcher_Explore = (action) => {
         } else {
           dispatch({
             type: action,
-            payload: json.data
+            payload: json
           });
         }
       })

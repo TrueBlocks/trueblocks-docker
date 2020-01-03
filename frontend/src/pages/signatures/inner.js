@@ -55,17 +55,8 @@ class SignaturesInner extends React.Component {
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.state.subpage}
-        <ul>
-          <li>Item 1 1</li>
-          <li>Item 1 2</li>
-        </ul>
-      </Fragment>
-    );
     // EXISTING_CODE
-    return <DataTable css_pre="signatures" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="signatures" fields={this.props.fieldList} data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
@@ -105,6 +96,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_Signatures }) => ({
   isLoading: reducer_Signatures.isLoading,
   error: reducer_Signatures.error,
   data: reducer_Signatures.data,
+  meta: reducer_Signatures.meta,
+  fieldList: reducer_Signatures.fieldList,
   menu: reducer_Signatures.menu
 });
 

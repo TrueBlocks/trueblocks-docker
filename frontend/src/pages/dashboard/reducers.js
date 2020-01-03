@@ -2,10 +2,12 @@ import * as da from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: da.dashboard_menu,
   data: null,
-  menu: da.dashboard_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -24,9 +26,11 @@ export default function reducer_Dashboard(state = initialState, action) {
     case da.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

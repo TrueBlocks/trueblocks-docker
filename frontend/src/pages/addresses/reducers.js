@@ -2,10 +2,12 @@ import * as ad from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: ad.addresses_menu,
   data: null,
-  menu: ad.addresses_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -25,17 +27,21 @@ export default function reducer_Addresses(state = initialState, action) {
     case ad.CUSTOM_NAMES:
       return {
         ...state,
+        data: action.payload.data,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload
+        error: null
       };
 
     case ad.MONITORED:
       return {
         ...state,
+        data: action.payload.data[0].caches[0].items,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload[0].caches[0].items
+        error: null
       };
 
     // EXISTING_CODE
@@ -44,9 +50,11 @@ export default function reducer_Addresses(state = initialState, action) {
     case ad.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

@@ -2,10 +2,12 @@ import * as ot from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
-  isLoading: false,
-  error: null,
+  menu: ot.other_menu,
   data: null,
-  menu: ot.other_menu
+  fieldList: null,
+  meta: null,
+  isLoading: false,
+  error: null
 };
 
 //----------------------------------------------------------------------
@@ -25,9 +27,11 @@ export default function reducer_Other(state = initialState, action) {
     case ot.CUSTOM_BLOCKS:
       return {
         ...state,
+        data: action.payload.data,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
         isLoading: false,
-        error: null,
-        data: action.payload
+        error: null
       };
 
     // EXISTING_CODE
@@ -36,9 +40,11 @@ export default function reducer_Other(state = initialState, action) {
     case ot.FAILURE:
       return {
         ...state,
+        data: null,
+        fieldList: null,
+        meta: null,
         isLoading: false,
-        error: action.err,
-        data: null
+        error: action.err
       };
 
     default:

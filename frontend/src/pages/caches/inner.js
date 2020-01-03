@@ -56,7 +56,7 @@ class CachesInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DataTable css_pre="caches" data={this.props.data} innerEar={this.innerEar} />;
+    return <DataTable css_pre="caches" fields={this.props.fieldList} data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
@@ -96,6 +96,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_Caches }) => ({
   isLoading: reducer_Caches.isLoading,
   error: reducer_Caches.error,
   data: reducer_Caches.data,
+  meta: reducer_Caches.meta,
+  fieldList: reducer_Caches.fieldList,
   menu: reducer_Caches.menu
 });
 

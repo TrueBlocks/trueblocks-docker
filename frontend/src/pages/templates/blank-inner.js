@@ -60,7 +60,7 @@ class [{PROPER}]Inner extends React.Component {
     [{NO_ERROR}]else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    [{NO_DT}]return <DataTable css_pre="[{LOWER}]" data={this.props.data} innerEar={this.innerEar} />;
+    [{NO_DT}]return <DataTable css_pre="[{LOWER}]" fields={this.props.fieldList} data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
@@ -99,6 +99,8 @@ const mapStateToProps = ({ reducer_Connection, reducer_[{PROPER}] }) => ({
   isLoading: reducer_[{PROPER}].isLoading,
   error: reducer_[{PROPER}].error,
   data: reducer_[{PROPER}].data,
+  meta: reducer_[{PROPER}].meta,
+  fieldList: reducer_[{PROPER}].fieldList,
   menu: reducer_[{PROPER}].menu
 });
 
