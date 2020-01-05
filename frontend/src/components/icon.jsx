@@ -14,7 +14,11 @@ export class Icon extends Component {
       ? 'md-midsize'
       : 'md-regular';
     return (
-      <i className={'material-icons ' + size + ' ' + this.props.color} onClick={this.props.onClick} title={title}>
+      <i
+        className={'material-icons ' + size + ' ' + this.props.color + (this.props.bordered ? ' bordered' : '')}
+        onClick={this.props.onClick}
+        title={title}
+      >
         {this.props.icon}
       </i>
     );
@@ -22,7 +26,7 @@ export class Icon extends Component {
 
   static propTypes = {
     title: PropTypes.string,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.string,
     onClick: PropTypes.func
   };
 }

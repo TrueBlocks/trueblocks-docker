@@ -81,7 +81,15 @@ class AddressesInner extends React.Component {
       );
     }
     // EXISTING_CODE
-    return <DataTable css_pre="addresses" fields={this.props.fieldList} data={this.props.data} innerEar={this.innerEar} />;
+    return (
+      <DataTable
+        subpage="addresses"
+        fields={this.props.fieldList}
+        data={this.props.data}
+        meta={this.props.meta}
+        innerEar={this.innerEar}
+      />
+    );
   };
 
   getInnerPage = () => {

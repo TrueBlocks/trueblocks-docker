@@ -3,17 +3,18 @@
   background-color: #fff;
   color: #444;
   font-family: 'Courier New', Courier, monospace;
-  border-top: 1px solid darkgrey;
   border-left: 1px solid darkgrey;
   border-bottom: 1px solid darkgrey;
   /* margin-bottom: 10px; */
 }
 
+.data_table:hover {
+  cursor: pointer;
+}
+
 .data_table_header {
   display: grid;
-  background-color: #e2e5f0;
   text-align: center;
-  border-bottom: 1px solid darkgrey;
   text-transform: capitalize;
   height: 28px;
   font-weight: 600;
@@ -22,6 +23,9 @@
 }
 
 .data_table_header_item {
+  background-color: #e2e5f0;
+  border-top: 1px solid darkgrey;
+  border-bottom: 1px solid darkgrey;
   border-right: 1px solid darkgrey;
 }
 
@@ -33,28 +37,52 @@
 
 .data_table_row:hover {
   background-color: antiquewhite;
-  cursor: pointer;
 }
 
 .data_table_wide_row {
   display: grid;
   height: 25px;
-  grid-template-columns: 1r;
+  grid-template-columns: 1fr;
   border: 1px dashed blue;
   text-align: center;
 }
 
 .data_table_wide_row:hover {
   background-color: antiquewhite;
-  cursor: pointer;
+}
+
+.data_table_half_wide_row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 0 !important;
+}
+
+.thing {
+  vertical-align: text-middle;
+  /* background-color: red; */
+  border: 1px solid lightgray;
+  font-size: 13px;
+}
+
+.half_wide_left {
+  text-align: left;
+  height: 26px;
+}
+
+.half_wide_right {
+  text-align: right;
+  height: 26px;
 }
 
 .data_table_table_item {
+  /* background-color: white; */
   text-align: left;
   border-right: 1px solid darkgrey;
   padding-left: 8px;
   padding-right: 8px;
-  /* border: 1px dashed blue; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; /* border: 1px dashed blue; */
 }
 
 .data_table_table_item.number {
@@ -62,4 +90,48 @@
   padding-left: 8px;
   padding-right: 8px;
   /* border: 1px dashed blue; */
+}
+
+.one_bang {
+  grid-template-columns: 1fr;
+}
+
+.two_bang {
+  grid-template-columns: 1fr 1fr;
+}
+
+.three_bang {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.four_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.five_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.six_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.seven_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.eight_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.nine_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.ten_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.eleven_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }

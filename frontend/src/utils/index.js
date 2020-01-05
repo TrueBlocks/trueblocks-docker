@@ -29,8 +29,9 @@ let isNumber = function(n) {
 };
 
 //----------------------------------------------------------------
-let isAddress = function(addr) {
-  return addr && ((addr.length === 42 || addr.length === 66) && addr.substring(0, 2) === '0x');
+let isHex = function(str) {
+  if (typeof str !== 'string') return false;
+  return str.substring(0, 2) === '0x' && (str.length === 10 || str.length === 42 || str.length === 66);
 };
 
 //----------------------------------------------------------------
@@ -85,7 +86,7 @@ module.exports = {
   fmtInteger,
   fmtDouble,
   isNumber,
-  isAddress,
+  isHex,
   queryAPI_get,
   queryAPI_put,
   to_key

@@ -9,10 +9,10 @@ export const DELETE = 'signatu/DELETE';
 export const UNDELETE = 'signatu/UNDELETE';
 export const REMOVE = 'signatu/REMOVE';
 
-export const FROM_MONITORS = 'signatures/monitored';
-export const KNOWN_SIGNATURES = 'abi/known';
+export const FROM_MONITORS = 'abi/monitored&verbose';
+export const KNOWN_SIGNATURES = 'abi/known&verbose';
 export const GENERATED_SIGNATURES = 'signatures/generated';
-export const ABIS = 'signatures/abis';
+export const ABI_FILES = 'status/modes=abis&details';
 
 //----------------------------------------------------------------------
 export const signatures_menu = [
@@ -22,7 +22,7 @@ export const signatures_menu = [
       { header: 'From Monitors', value: 'VAL', action: FROM_MONITORS },
       { header: 'Known Signatures', value: 'VAL', action: KNOWN_SIGNATURES },
       { header: 'Generated Signatures', value: 'VAL', action: GENERATED_SIGNATURES },
-      { header: 'Abis', value: 'VAL', action: ABIS },
+      { header: 'Abi Files', value: 'VAL', action: ABI_FILES },
       { header: 'si-0004' },
       { header: 'si-0005' },
       { header: 'si-0006' }

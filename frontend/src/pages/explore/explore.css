@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
-.data_table_header.explore {
-  grid-template-columns: 1fr;
+.data_table.explore {
+  width: 90%;
 }
 
-.data_table_row.explore {
-  grid-template-columns: 1r;
+.data_table_half_wide_row.explore {
+  width: 90%;
 }

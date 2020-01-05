@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import { LastCol, SepRow } from './dash-menu';
+import * as utils from '../utils';
 import './local-menu.css';
-const utils = require('../utils');
 
 /*-----------------------------------------------------------------------------*/
 export class LocalMenu extends React.Component {
@@ -12,14 +12,6 @@ export class LocalMenu extends React.Component {
         {this.props.data.map((_row) => {
           return <BigRow key={_row.page.toLowerCase()} {...this.props} row={_row} no_labels />;
         })}
-        <h4>
-          Active subpage:{' '}
-          {this.props.active
-            ? typeof this.props.active === 'object'
-              ? JSON.stringify(this.props.active)
-              : this.props.active
-            : ''}
-        </h4>
       </Fragment>
     );
   };

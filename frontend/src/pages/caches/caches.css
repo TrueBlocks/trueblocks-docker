@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
-.data_table_header.caches {
-  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+.data_table.caches {
+  width: 90%;
 }
 
-.data_table_row.caches {
-  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+.data_table_half_wide_row.caches {
+  width: 90%;
 }

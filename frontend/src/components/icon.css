@@ -39,6 +39,14 @@
   color: green;
 }
 
+.material-icons.bordered {
+  border: 1px solid darkgrey;
+}
+
+.material-icons.bordered:hover {
+  background-color: antiquewhite;
+}
+
 .material-icons:hover {
   opacity: 100%;
 }
