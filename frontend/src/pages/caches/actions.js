@@ -14,6 +14,7 @@ export const BLOCK_CACHE = 'status/modes=caches&types=blocks&details&depth=2';
 export const TRANSACTION_CACHE = 'status/modes=caches&types=transactions&details&depth=2';
 export const TRACE_CACHE = 'status/modes=caches&types=traces&details&depth=2';
 export const SLURPS = 'status/modes=caches&types=slurps&details&depth=2';
+export const ABI_CACHE = 'status/modes=abis&details';
 
 //----------------------------------------------------------------------
 export const caches_menu = [
@@ -25,7 +26,7 @@ export const caches_menu = [
       { header: 'Transaction Cache', value: 'VAL', action: TRANSACTION_CACHE },
       { header: 'Trace Cache', value: 'VAL', action: TRACE_CACHE },
       { header: 'Slurps', value: 'VAL', action: SLURPS },
-      { header: 'ca-0005' },
+      { header: 'Abi Cache', value: 'VAL', action: ABI_CACHE },
       { header: 'ca-0006' }
     ],
     color: 'tan'

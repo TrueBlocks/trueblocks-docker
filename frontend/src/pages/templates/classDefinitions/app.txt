@@ -1,0 +1,3 @@
+[settings]
+pages = dashboard,/,exact|addresses|explore|indicies|signatures|caches|other|settings|support
+

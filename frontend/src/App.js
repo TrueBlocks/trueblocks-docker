@@ -5,15 +5,57 @@ import logo from './img/logo.png';
 import Dashboard from './pages/dashboard';
 import Addresses from './pages/addresses';
 import Explore from './pages/explore';
-import Indcies from './pages/indicies';
+import Indicies from './pages/indicies';
 import Signatures from './pages/signatures';
 import Caches from './pages/caches';
 import Other from './pages/other';
 import Settings from './pages/settings';
 import Support from './pages/support';
-import About from './pages/about';
 
 const App = () => (
+//  var whole_page = {
+//    margin: '10px',
+//    padding: '10px',
+//    border: '1px red dashed',
+//    display: 'flex',
+//    'grid-template-columns': '1fr 11fr',
+//    backgroundImage: 'url(http://localhost/images/whole_page.png)'
+//  };
+//  var menu = {
+//    'background-color': 'blue',
+//    border: '1px red dashed',
+//    display: 'flex',
+//    'flex-flow': 'column nowrap',
+//    width: '100%',
+//    margin: '10px',
+//    padding: '10px'
+//  };
+//  var body = {
+//    'background-color': 'green',
+//    border: '1px red dashed',
+//    width: '100%',
+//    'text-color': 'white',
+//    margin: '10px',
+//    padding: '10px'
+//  };
+//  return (
+//    <Fragment>
+//      <div style={whole_page}>
+//        <div style={menu}>
+//          <NavLink activeClassName="is-active" exact to="/">
+//            Dashboard
+//          </NavLink>
+//          <NavLink activeClassName="is-active" exact to="/">
+//            Dashboard
+//          </NavLink>
+//          <NavLink activeClassName="is-active" exact to="/">
+//            Dashboard
+//          </NavLink>
+//        </div>
+//        <div style={body}>X</div>
+//      </div>
+//    </Fragment>
+//  );
   <div>
     <header>
       <img className="logo" alt={logo} src={logo} />
@@ -27,7 +69,7 @@ const App = () => (
         Explore
       </NavLink>
       <NavLink activeClassName="is-active" to="/indicies">
-        Indcies
+        Indicies
       </NavLink>
       <NavLink activeClassName="is-active" to="/signatures">
         Signatures
@@ -44,22 +86,18 @@ const App = () => (
       <NavLink activeClassName="is-active" to="/support">
         Support
       </NavLink>
-      <NavLink activeClassName="is-active" to="/about">
-        About
-      </NavLink>
     </header>
 
     <main>
       <Route exact path="/" component={Dashboard} />
       <Route path="/addresses/:subpage?" component={Addresses} />
       <Route path="/explore/:subpage?" component={Explore} />
-      <Route path="/indicies/:subpage?" component={Indcies} />
+      <Route path="/indicies/:subpage?" component={Indicies} />
       <Route path="/signatures/:subpage?" component={Signatures} />
       <Route path="/caches/:subpage?" component={Caches} />
       <Route path="/other/:subpage?" component={Other} />
       <Route path="/settings/:subpage?" component={Settings} />
       <Route path="/support/:subpage?" component={Support} />
-      <Route path="/about/:subpage?" component={About} />
     </main>
 
     <footer>This is the footer of the application and includes email contact, phone numbers, etc.</footer>

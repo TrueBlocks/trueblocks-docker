@@ -10,4 +10,5 @@ list = [
     { page = "support", subpage = "pay_teir", route = "support", options = "pay" },
     { page = "support", subpage = "documentation", route = "support", options = "documentation", from_text: true },
     { page = "support", subpage = "connect_us", route = "support", options = "connect" },
+    { page = "support", subpage = "about", route = "about", options = "about" },
 ]

@@ -34,6 +34,16 @@ export default function reducer_Caches(state = initialState, action) {
         error: null
       };
 
+    case ca.ABI_CACHE:
+      return {
+        ...state,
+        data: action.payload.data[0].caches[0].items,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
+        isLoading: false,
+        error: null
+      };
+
     // EXISTING_CODE
     // EXISTING_CODE
 

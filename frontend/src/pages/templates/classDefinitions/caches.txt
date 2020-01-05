@@ -11,5 +11,5 @@ list = [
     { page = "caches", subpage = "transaction_cache", route = "status", options = "modes_EQ_caches&types_EQ_transactions&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "trace_cache", route = "status", options = "modes_EQ_caches&types_EQ_traces&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "slurps", route = "status", options = "modes_EQ_caches&types_EQ_slurps&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "abi_cache", route = "status", options = "modes_EQ_abis&details", extract = "_0.caches_0.items" },
 ]
-

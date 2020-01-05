@@ -9,7 +9,6 @@ import * as si from '../pages/signatures/actions';
 import * as ot from '../pages/other/actions';
 import * as se from '../pages/settings/actions';
 import * as su from '../pages/support/actions';
-import * as ab from '../pages/about/actions';
 
 const utils = require('../utils');
 
@@ -24,7 +23,6 @@ export const getDashMenu = () => {
   theMenu.push(ot.other_menu[0]);
   theMenu.push(se.settings_menu[0]);
   theMenu.push(su.support_menu[0]);
-  theMenu.push(ab.about_menu[0]);
   return theMenu;
 };
 

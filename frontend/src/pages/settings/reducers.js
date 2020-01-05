@@ -22,7 +22,6 @@ export default function reducer_Settings(state = initialState, action) {
 
     case se.LICENSES:
     case se.SKINS:
-    case se.PRICE_QUOTES:
       return {
         ...state,
         data: action.payload.data,

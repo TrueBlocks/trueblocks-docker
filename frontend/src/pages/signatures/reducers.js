@@ -32,16 +32,6 @@ export default function reducer_Signatures(state = initialState, action) {
         error: null
       };
 
-    case si.ABI_FILES:
-      return {
-        ...state,
-        data: action.payload.data[0].caches[0].items,
-        fieldList: action.payload.fieldList,
-        meta: action.payload.meta,
-        isLoading: false,
-        error: null
-      };
-
     // EXISTING_CODE
     // EXISTING_CODE
 

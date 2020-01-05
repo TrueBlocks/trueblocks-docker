@@ -12,7 +12,6 @@ export const REMOVE = 'signatu/REMOVE';
 export const FROM_MONITORS = 'abi/monitored&verbose';
 export const KNOWN_SIGNATURES = 'abi/known&verbose';
 export const GENERATED_SIGNATURES = 'signatures/generated';
-export const ABI_FILES = 'status/modes=abis&details';
 
 //----------------------------------------------------------------------
 export const signatures_menu = [
@@ -22,7 +21,7 @@ export const signatures_menu = [
       { header: 'From Monitors', value: 'VAL', action: FROM_MONITORS },
       { header: 'Known Signatures', value: 'VAL', action: KNOWN_SIGNATURES },
       { header: 'Generated Signatures', value: 'VAL', action: GENERATED_SIGNATURES },
-      { header: 'Abi Files', value: 'VAL', action: ABI_FILES },
+      { header: 'si-0003' },
       { header: 'si-0004' },
       { header: 'si-0005' },
       { header: 'si-0006' }

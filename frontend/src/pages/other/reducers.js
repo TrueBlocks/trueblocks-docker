@@ -21,6 +21,7 @@ export default function reducer_Other(state = initialState, action) {
       };
 
     case ot.GROUPS:
+    case ot.PRICE_QUOTES:
     case ot.GENERATED_BLOCKS:
     case ot.KNOWN_BLOCKS:
     case ot.CUSTOM_BLOCKS:

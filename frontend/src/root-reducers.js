@@ -11,7 +11,6 @@ import reducer_Caches from './pages/caches/reducers';
 import reducer_Other from './pages/other/reducers';
 import reducer_Settings from './pages/settings/reducers';
 import reducer_Support from './pages/support/reducers';
-import reducer_About from './pages/about/reducers';
 
 //------------------------------------------------------------------------
 export default combineReducers({
@@ -24,6 +23,5 @@ export default combineReducers({
   reducer_Caches,
   reducer_Other,
   reducer_Settings,
-  reducer_Support,
-  reducer_About
+  reducer_Support
 });

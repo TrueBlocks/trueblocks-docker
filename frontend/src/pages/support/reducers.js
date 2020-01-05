@@ -20,6 +20,7 @@ export default function reducer_Support(state = initialState, action) {
         error: null
       };
 
+    case su.ABOUT:
     case su.CONNECT_US:
     case su.DOCUMENTATION:
     case su.PAY_TEIR:
