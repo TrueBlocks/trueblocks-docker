@@ -1,5 +1,5 @@
 import { Footer } from './footer';
-import { Status } from './status';
+import Status from './status';
 import { InnerPageHeader } from './page-header';
 import { DataTable } from './data-table';
 import { LocalMenu } from './local-menu';
