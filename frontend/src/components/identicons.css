@@ -1,0 +1,16 @@
+.identicon {
+  border-radius: 30%;
+  border: 1px grey solid;
+  opacity: 75%;
+}
+
+.identicon-deleted {
+  border-radius: 30%;
+  border: 1px grey solid;
+  opacity: 75%;
+  visibility: hidden;
+}
+
+.identicon:hover {
+  opacity: 100%;
+}

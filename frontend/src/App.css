@@ -1,0 +1,150 @@
+/*------------------------------------------*/
+.page-container {
+  margin: 2px;
+  padding: 2px 8px 2px 2px;
+  border: 1px dotted black;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+  background-color: #8d9cab;
+}
+
+/*------------------------------------------*/
+.header-item,
+.body-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: flex-start;
+}
+
+.footer-item {
+  display: flex;
+  align-content: flex-start;
+  margin-left: 7%;
+}
+
+/*------------------------------------------*/
+.header-left {
+  width: 3%;
+  /* background-color: blue; */
+  /* border: 1px dashed blue; */
+}
+
+.header-middle {
+  width: 95%;
+  /* background-color: green; */
+}
+
+.header-right {
+  width: 2%;
+  text-align: center;
+  line-height: 0.75em;
+  /* background-color: orange;
+  display: flex;
+  flex-flow: column;
+  align-content: flex-end; */
+}
+
+/*------------------------------------------*/
+.left-body-container {
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 7%;
+  padding: 3px 0px;
+}
+
+.right-body-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  border: 1px solid #777;
+  background-color: white;
+}
+
+/*------------------------------------------*/
+.status-panel {
+  flex-basis: 15%;
+  min-width: 15%;
+  padding: 0px 10px 15px 10px;
+  border-right: 1px solid #ddd;
+  /* background-color: cornflowerblue; */
+}
+
+/*------------------------------------------*/
+.right-panel {
+  flex-basis: auto;
+  min-width: 85%;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* background-color: pink; */
+}
+
+.page-notes {
+  display: inline-flex;
+  float: right;
+  text-align: right;
+  width: 50%;
+  color: black;
+  font-size: 9pt;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+/*------------------------------------------*/
+.menu-item {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 1em;
+  line-height: 1.25em;
+  text-align: left;
+  padding: 0.5em;
+  margin: 0px 4px 4px 4px;
+  border: 1px solid #6b7a89;
+  background-color: #a7b7c2;
+}
+
+.menu-item.is-active {
+  width: 96%;
+  font-weight: 700;
+  color: #42505f;
+  background-color: #e2e5f0;
+  border: 1px dashed #6b7a89;
+}
+
+.menu-item:hover {
+  color: #6f8296;
+  background-color: #e2e5f0;
+}
+
+/*------------------------------------------*/
+.logo {
+  width: 50px;
+  height: 70px;
+  margin: 2px 10px 2px 4px;
+}
+
+/*------------------------------------------*/
+.title {
+  font-size: 1.6em;
+  font-weight: 300;
+  border-bottom: 1px solid #777;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.title.app {
+  font-size: 1.8em;
+  border: 0px !important;
+  margin: 15px 0px 8px 0px;
+  color: #444;
+}
+
+.title.inner-page {
+  color: #cdada7;
+}
+
+.title.status {
+  color: #4c7c9c;
+}
