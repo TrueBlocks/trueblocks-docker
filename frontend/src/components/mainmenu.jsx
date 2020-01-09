@@ -38,7 +38,7 @@ class MainMenuItem extends Component {
   };
 
   getSubmenu = () => {
-    if (!this.state.active) return <Fragment></Fragment>;
+    if (!this.state.active || !this.props.submenu) return <Fragment></Fragment>;
     return (
       <div className="submenu-container">
         {this.props.submenu.map((sub) => {
@@ -49,7 +49,7 @@ class MainMenuItem extends Component {
   };
 
   render = () => {
-    var hasSub = this.props.submenu.length > 0;
+    var hasSub = this.props.submenu && this.props.submenu.length > 0;
     return (
       <Fragment>
         <NavLink

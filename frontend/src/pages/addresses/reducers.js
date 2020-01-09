@@ -26,7 +26,6 @@ export default function reducer_Addresses(state = initialState, action) {
     case ad.TOKENS:
     case ad.OWNED:
     case ad.NAMES:
-      console.log('reducer -> ', action, state);
       return {
         ...state,
         data: action.payload.data,

@@ -216,13 +216,9 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 //---------------------------------------------------------------------
-// export default polling(dispatcher_Status, 10000)(
-//   connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-//   )(StatusInner)
-// );
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StatusInner);
+export default polling(dispatcher_Status, 10000)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(StatusInner)
+);
