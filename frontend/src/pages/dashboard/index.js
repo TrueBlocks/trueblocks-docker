@@ -1,12 +1,13 @@
 import React from 'react';
 import Page from '../../components/page';
 import DashboardInner from './inner';
+import { dispatcher_Dashboard, dashboard_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 class Dashboard extends React.Component {
   getInner = () => {
     var params = this.props.match.params.subpage || '';
-    params = params.replace('subpage=', '').replace('-', '/');  // weird cleanup
+    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
     return <DashboardInner subpage={params} />;
   };
 
@@ -15,3 +16,4 @@ class Dashboard extends React.Component {
   };
 }
 export default Dashboard;
+export { dispatcher_Dashboard, dashboard_menu };

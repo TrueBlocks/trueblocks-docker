@@ -96,11 +96,11 @@ class CachesInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_Caches }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_Caches }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_Caches.isLoading,
   error: reducer_Caches.error,
   data: reducer_Caches.data,

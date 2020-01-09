@@ -30,5 +30,14 @@ export const dispatcher_Dashboard = (action) => {
   };
 };
 
+//----------------------------------------------------------------------
+export const dashboard_menu = {
+  page: 'Dashboard',
+  submenu: [],
+  active: false,
+  color: 'white',
+  dispatcher: dispatcher_Dashboard
+};
+
 // EXISTING_CODE
 // EXISTING_CODE

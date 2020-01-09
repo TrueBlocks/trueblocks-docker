@@ -106,11 +106,11 @@ class SupportInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_Support }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_Support }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_Support.isLoading,
   error: reducer_Support.error,
   data: reducer_Support.data,

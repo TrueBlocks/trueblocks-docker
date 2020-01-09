@@ -1,8 +1,9 @@
 import * as su from './actions';
+import { support_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: su.support_menu,
+  menu: support_menu,
   data: null,
   fieldList: null,
   meta: null,

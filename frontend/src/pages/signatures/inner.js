@@ -96,11 +96,11 @@ class SignaturesInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_Signatures }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_Signatures }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_Signatures.isLoading,
   error: reducer_Signatures.error,
   data: reducer_Signatures.data,

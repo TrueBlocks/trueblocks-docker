@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
 //------------------------------------------------------------------------
-import reducer_Connection from './components/connection-actions';
+import reducer_Status from './components/status-actions';
 [{IMPORTS}]
 //------------------------------------------------------------------------
 export default combineReducers({
-  reducer_Connection,
+  reducer_Status,
 [{REDUCERS}]
 });

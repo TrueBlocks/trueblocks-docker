@@ -270,19 +270,19 @@ const IndexDetail = (props) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_Indicies }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_Indicies }) => ({
   // EXISTING_CODE
-  caches: reducer_Connection.systemData.caches,
-  index_path: reducer_Connection.systemData.index_path,
-  cache_path: reducer_Connection.systemData.cache_path,
-  unripe: reducer_Connection.unripe,
-  staging: reducer_Connection.staging,
-  finalized: reducer_Connection.finalized,
-  client: reducer_Connection.client,
+  caches: reducer_Status.systemData.caches,
+  index_path: reducer_Status.systemData.index_path,
+  cache_path: reducer_Status.systemData.cache_path,
+  unripe: reducer_Status.unripe,
+  staging: reducer_Status.staging,
+  finalized: reducer_Status.finalized,
+  client: reducer_Status.client,
   loadingIndex: reducer_Indicies.isLoading,
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_Indicies.isLoading,
   error: reducer_Indicies.error,
   data: reducer_Indicies.data,

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 //------------------------------------------------------------------------
-import reducer_Connection from './components/connection-actions';
+import reducer_Status from './components/status-actions';
 import reducer_Dashboard from './pages/dashboard/reducers';
 import reducer_Addresses from './pages/addresses/reducers';
 import reducer_Explore from './pages/explore/reducers';
@@ -14,7 +14,7 @@ import reducer_Support from './pages/support/reducers';
 
 //------------------------------------------------------------------------
 export default combineReducers({
-  reducer_Connection,
+  reducer_Status,
   reducer_Dashboard,
   reducer_Addresses,
   reducer_Explore,

@@ -1,28 +1,28 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import './dash-menu.css';
-import * as ad from '../pages/addresses/actions';
-import * as ex from '../pages/explore/actions';
-import * as ind from '../pages/indicies/actions';
-import * as ca from '../pages/caches/actions';
-import * as si from '../pages/signatures/actions';
-import * as ot from '../pages/other/actions';
-import * as se from '../pages/settings/actions';
-import * as su from '../pages/support/actions';
+import * as ad from '../pages/addresses/dispatchers';
+import * as ex from '../pages/explore/dispatchers';
+import * as ind from '../pages/indicies/dispatchers';
+import * as ca from '../pages/caches/dispatchers';
+import * as si from '../pages/signatures/dispatchers';
+import * as ot from '../pages/other/dispatchers';
+import * as se from '../pages/settings/dispatchers';
+import * as su from '../pages/support/dispatchers';
 
 const utils = require('../utils');
 
 /*-----------------------------------------------------------------------------*/
 export const getDashMenu = () => {
   var theMenu = [];
-  theMenu.push(ad.addresses_menu[0]);
-  theMenu.push(ex.explore_menu[0]);
-  theMenu.push(ind.indicies_menu[0]);
-  theMenu.push(si.signatures_menu[0]);
-  theMenu.push(ca.caches_menu[0]);
-  theMenu.push(ot.other_menu[0]);
-  theMenu.push(se.settings_menu[0]);
-  theMenu.push(su.support_menu[0]);
+  theMenu.push(ad.addresses_menu);
+  theMenu.push(ex.explore_menu);
+  theMenu.push(ind.indicies_menu);
+  theMenu.push(si.signatures_menu);
+  theMenu.push(ca.caches_menu);
+  theMenu.push(ot.other_menu);
+  theMenu.push(se.settings_menu);
+  theMenu.push(su.support_menu);
   return theMenu;
 };
 
@@ -72,10 +72,10 @@ class HeaderCols extends React.Component {
   render = () => {
     return (
       <Fragment>
-        {this.props.row.items.map((item) => (
+        {this.props.row.submenu.map((item) => (
           <HeaderCol
-            key={(this.props.row.page + '_' + item.header + '_h').toLowerCase()}
-            header={item.header}
+            key={(this.props.row.page + '_' + item.menu_text + '_h').toLowerCase()}
+            menu_text={item.menu_text}
             color={this.props.row.color}
           />
         ))}
@@ -87,9 +87,9 @@ class HeaderCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class HeaderCol extends React.Component {
   render = () => {
-    var empty = this.props.header.includes('-');
+    var empty = this.props.menu_text.includes('-');
     var cn = empty ? 'summary-table box endpad ' : 'summary-table box header ' + this.props.color;
-    var head = empty ? '' : this.props.header;
+    var head = empty ? '' : this.props.menu_text;
     return <div className={cn}>{head}</div>;
   };
 }
@@ -99,8 +99,8 @@ class ItemCols extends React.Component {
   render = () => {
     return (
       <Fragment>
-        {this.props.row.items.map((item) => (
-          <ItemCol {...this.props} key={item.header} item={item} />
+        {this.props.row.submenu.map((item) => (
+          <ItemCol {...this.props} key={item.menu_text} item={item} />
         ))}
       </Fragment>
     );
@@ -114,7 +114,7 @@ class ItemCol extends React.Component {
   };
 
   render = () => {
-    var empty = this.props.item.header.includes('-');
+    var empty = this.props.item.menu_text.includes('-');
     var cn = empty
       ? 'summary-table box endpad '
       : this.props.item.action === this.props.active

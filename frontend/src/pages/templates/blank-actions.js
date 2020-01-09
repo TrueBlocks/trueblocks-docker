@@ -10,14 +10,3 @@ export const UNDELETE = '[{SEVEN}]/UNDELETE';
 export const REMOVE = '[{SEVEN}]/REMOVE';
 
 [{ COMMANDS }];
-
-//----------------------------------------------------------------------
-export const [{LOWER}]_menu = [
-  {
-    page: '[{PROPER}]',
-    items: [
-[{MENU_ITEMS}]    ],
-    color: '[{COLOR}]'
-  }
-];
-

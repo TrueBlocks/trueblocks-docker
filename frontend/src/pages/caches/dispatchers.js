@@ -30,5 +30,22 @@ export const dispatcher_Caches = (action) => {
   };
 };
 
+//----------------------------------------------------------------------
+export const caches_menu = {
+  page: 'Caches',
+  submenu: [
+    { menu_text: 'Overview', value: 'VAL', active: false, action: ca.OVERVIEW },
+    { menu_text: 'Block Cache', value: 'VAL', active: false, action: ca.BLOCK_CACHE },
+    { menu_text: 'Tx Cache', value: 'VAL', active: false, action: ca.TX_CACHE },
+    { menu_text: 'Trace Cache', value: 'VAL', active: false, action: ca.TRACE_CACHE },
+    { menu_text: 'Slurps', value: 'VAL', active: false, action: ca.SLURPS },
+    { menu_text: 'Abi Cache', value: 'VAL', active: false, action: ca.ABI_CACHE },
+    { menu_text: 'ca-0006' }
+  ],
+  active: false,
+  color: 'tan',
+  dispatcher: dispatcher_Caches
+};
+
 // EXISTING_CODE
 // EXISTING_CODE

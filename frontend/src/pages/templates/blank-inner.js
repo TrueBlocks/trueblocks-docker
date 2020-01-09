@@ -99,11 +99,11 @@ class [{PROPER}]Inner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_[{PROPER}] }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_[{PROPER}] }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_[{PROPER}].isLoading,
   error: reducer_[{PROPER}].error,
   data: reducer_[{PROPER}].data,

@@ -30,5 +30,15 @@ export const dispatcher_[{PROPER}] = (action) => {
   };
 };
 
+//----------------------------------------------------------------------
+export const [{LOWER}]_menu = {
+  page: '[{PROPER}]',
+  submenu: [
+[{MENU_ITEMS}]  ],
+  active: false,
+  color: '[{COLOR}]',
+  dispatcher: dispatcher_[{PROPER}]
+};
+
 // EXISTING_CODE
 // EXISTING_CODE

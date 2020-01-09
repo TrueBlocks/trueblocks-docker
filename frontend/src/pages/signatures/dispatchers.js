@@ -30,5 +30,22 @@ export const dispatcher_Signatures = (action) => {
   };
 };
 
+//----------------------------------------------------------------------
+export const signatures_menu = {
+  page: 'Signatures',
+  submenu: [
+    { menu_text: 'Downloaded', value: 'VAL', active: false, action: si.DOWNLOADED },
+    { menu_text: 'Common', value: 'VAL', active: false, action: si.COMMON },
+    { menu_text: 'Generated', value: 'VAL', active: false, action: si.GENERATED },
+    { menu_text: 'si-0003' },
+    { menu_text: 'si-0004' },
+    { menu_text: 'si-0005' },
+    { menu_text: 'si-0006' }
+  ],
+  active: false,
+  color: 'green',
+  dispatcher: dispatcher_Signatures
+};
+
 // EXISTING_CODE
 // EXISTING_CODE

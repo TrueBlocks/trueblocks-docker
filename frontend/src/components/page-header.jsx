@@ -5,10 +5,10 @@ import './page-header.css';
 export class InnerPageHeader extends React.Component {
   render = () => {
     return (
-      <h1>
+      <div className="title inner-page">
         {this.props.title}
         <InnerPageNotes text={this.props.notes} />
-      </h1>
+      </div>
     );
   };
 }

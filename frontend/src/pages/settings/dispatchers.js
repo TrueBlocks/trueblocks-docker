@@ -30,5 +30,22 @@ export const dispatcher_Settings = (action) => {
   };
 };
 
+//----------------------------------------------------------------------
+export const settings_menu = {
+  page: 'Settings',
+  submenu: [
+    { menu_text: 'Configuration', value: 'VAL', active: false, action: se.CONFIGURATION },
+    { menu_text: 'Skins', value: 'VAL', active: false, action: se.SKINS },
+    { menu_text: 'Licenses', value: 'VAL', active: false, action: se.LICENSES },
+    { menu_text: 'se-0003' },
+    { menu_text: 'se-0004' },
+    { menu_text: 'se-0005' },
+    { menu_text: 'se-0006' }
+  ],
+  active: false,
+  color: 'pink',
+  dispatcher: dispatcher_Settings
+};
+
 // EXISTING_CODE
 // EXISTING_CODE

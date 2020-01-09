@@ -30,5 +30,22 @@ export const dispatcher_Support = (action) => {
   };
 };
 
+//----------------------------------------------------------------------
+export const support_menu = {
+  page: 'Support',
+  submenu: [
+    { menu_text: 'Free Teir', value: 'VAL', active: false, action: su.FREE_TEIR },
+    { menu_text: 'Pay Teir', value: 'VAL', active: false, action: su.PAY_TEIR },
+    { menu_text: 'Documentation', value: 'VAL', active: false, action: su.DOCUMENTATION },
+    { menu_text: 'Connect Us', value: 'VAL', active: false, action: su.CONNECT_US },
+    { menu_text: 'About', value: 'VAL', active: false, action: su.ABOUT },
+    { menu_text: 'su-0005' },
+    { menu_text: 'su-0006' }
+  ],
+  active: false,
+  color: 'purple',
+  dispatcher: dispatcher_Support
+};
+
 // EXISTING_CODE
 // EXISTING_CODE

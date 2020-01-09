@@ -1,8 +1,9 @@
 import * as se from './actions';
+import { settings_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: se.settings_menu,
+  menu: settings_menu,
   data: null,
   fieldList: null,
   meta: null,

@@ -39,6 +39,10 @@
   color: green;
 }
 
+.material-icons.darkblue {
+  color: darkblue;
+}
+
 .material-icons.bordered {
   border: 1px solid darkgrey;
 }

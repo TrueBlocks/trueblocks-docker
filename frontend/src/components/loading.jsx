@@ -22,7 +22,7 @@ export class Loading extends React.Component {
       return (
         <div className="error-msg">
           <Icon icon="error" onClick={null} />
-          <h3>{msg}</h3>
+          <h3 className="error-message">{msg}</h3>
           <br />
           <Icon icon="error" onClick={null} />
         </div>

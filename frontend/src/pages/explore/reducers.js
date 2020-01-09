@@ -1,8 +1,9 @@
 import * as ex from './actions';
+import { explore_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: ex.explore_menu,
+  menu: explore_menu,
   data: null,
   fieldList: null,
   meta: null,

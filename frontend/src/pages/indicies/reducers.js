@@ -1,8 +1,9 @@
 import * as ind from './actions';
+import { indicies_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: ind.indicies_menu,
+  menu: indicies_menu,
   data: null,
   fieldList: null,
   meta: null,

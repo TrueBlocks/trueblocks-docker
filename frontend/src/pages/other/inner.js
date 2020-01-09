@@ -95,11 +95,11 @@ class OtherInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_Other }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_Other }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_Other.isLoading,
   error: reducer_Other.error,
   data: reducer_Other.data,

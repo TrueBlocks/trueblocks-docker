@@ -87,11 +87,11 @@ class DashboardInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_Dashboard }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_Dashboard }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_Dashboard.isLoading,
   error: reducer_Dashboard.error,
   data: reducer_Dashboard.data,

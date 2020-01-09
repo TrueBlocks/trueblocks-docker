@@ -1,8 +1,9 @@
 import * as ad from './actions';
+import { addresses_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: ad.addresses_menu,
+  menu: addresses_menu,
   data: null,
   fieldList: null,
   meta: null,
@@ -22,9 +23,10 @@ export default function reducer_Addresses(state = initialState, action) {
 
     case ad.OTHER:
     case ad.PREFUNDS:
-    case ad.KNOWN_TOKENS:
-    case ad.OWNED_ADDRESSES:
-    case ad.CUSTOM_NAMES:
+    case ad.TOKENS:
+    case ad.OWNED:
+    case ad.NAMES:
+      console.log('reducer -> ', action, state);
       return {
         ...state,
         data: action.payload.data,
@@ -34,7 +36,7 @@ export default function reducer_Addresses(state = initialState, action) {
         error: null
       };
 
-    case ad.MONITORED:
+    case ad.MONITORS:
       return {
         ...state,
         data: action.payload.data[0].caches[0].items,

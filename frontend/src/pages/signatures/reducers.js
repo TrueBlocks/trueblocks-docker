@@ -1,8 +1,9 @@
 import * as si from './actions';
+import { signatures_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: si.signatures_menu,
+  menu: signatures_menu,
   data: null,
   fieldList: null,
   meta: null,
@@ -20,9 +21,9 @@ export default function reducer_Signatures(state = initialState, action) {
         error: null
       };
 
-    case si.GENERATED_SIGNATURES:
-    case si.KNOWN_SIGNATURES:
-    case si.FROM_MONITORS:
+    case si.GENERATED:
+    case si.COMMON:
+    case si.DOWNLOADED:
       return {
         ...state,
         data: action.payload.data,

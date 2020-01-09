@@ -1,8 +1,9 @@
 import * as da from './actions';
+import { dashboard_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: da.dashboard_menu,
+  menu: dashboard_menu,
   data: null,
   fieldList: null,
   meta: null,

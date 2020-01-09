@@ -138,11 +138,11 @@ export const AddNewAddress = (props) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Connection, reducer_Addresses }) => ({
+const mapStateToProps = ({ reducer_Status, reducer_Addresses }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Connection.isConnected,
-  sysError: reducer_Connection.error,
+  sysConnected: reducer_Status.isConnected,
+  sysError: reducer_Status.error,
   isLoading: reducer_Addresses.isLoading,
   error: reducer_Addresses.error,
   data: reducer_Addresses.data,

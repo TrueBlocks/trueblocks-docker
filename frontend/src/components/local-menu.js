@@ -7,11 +7,10 @@ import './local-menu.css';
 /*-----------------------------------------------------------------------------*/
 export class LocalMenu extends React.Component {
   render = () => {
+    var _row = this.props.data;
     return (
       <Fragment>
-        {this.props.data.map((_row) => {
-          return <BigRow key={_row.page.toLowerCase()} {...this.props} row={_row} no_labels />;
-        })}
+        <BigRow key={_row.page.toLowerCase()} {...this.props} row={_row} no_labels />
       </Fragment>
     );
   };
@@ -41,8 +40,8 @@ class HeaderCols extends React.Component {
   render = () => {
     return (
       <Fragment>
-        {this.props.row.items.map((item, i) => (
-          <HeaderCol key={'h' + i} header={item.header} color={this.props.row.color} />
+        {this.props.row.submenu.map((item, i) => (
+          <HeaderCol key={'h' + i} menu_text={item.menu_text} color={this.props.row.color} />
         ))}
       </Fragment>
     );
@@ -52,11 +51,11 @@ class HeaderCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class HeaderCol extends React.Component {
   render = () => {
-    var empty = this.props.header.substr(0, 2) === 'e-' || this.props.header.includes('-00');
+    var empty = this.props.menu_text.substr(0, 2) === 'e-' || this.props.menu_text.includes('-00');
     var cn = empty
       ? 'summary-table box endpad '
       : 'summary-table box header ' + this.props.color + (this._reactInternalFiber.index === 0 ? ' lborder' : '');
-    var head = empty ? '' : this.props.header;
+    var head = empty ? '' : this.props.menu_text;
     return <div className={cn}>{head}</div>;
   };
 }
@@ -66,8 +65,8 @@ class ItemCols extends React.Component {
   render = () => {
     return (
       <Fragment>
-        {this.props.row.items.map((item) => (
-          <ItemCol {...this.props} key={item.header} item={item} />
+        {this.props.row.submenu.map((item) => (
+          <ItemCol {...this.props} key={item.menu_text} item={item} />
         ))}
       </Fragment>
     );
@@ -81,7 +80,7 @@ class ItemCol extends React.Component {
   };
 
   render = () => {
-    var empty = this.props.item.header.substr(0, 2) === 'e-' || this.props.item.header.includes('-00');
+    var empty = this.props.item.menu_text.substr(0, 2) === 'e-' || this.props.item.menu_text.includes('-00');
     var cn =
       (empty
         ? 'summary-table box endpad '

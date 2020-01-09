@@ -62,7 +62,7 @@ export class DataTable extends React.Component {
             return item.name;
           }) +
             ' ' +
-            JSON.stringify(this.props.meta).replace(/\"/g, '')
+            JSON.stringify(this.props.meta).replace(/"/g, '')
         );
     return (
       <Fragment>
@@ -107,8 +107,8 @@ export class DataTable extends React.Component {
   };
 
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    explainer: PropTypes.string.isRequired,
+    // title: PropTypes.string.isRequired,
+    // explainer: PropTypes.string.isRequired,
     subpage: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object).isRequired
   };
@@ -158,7 +158,7 @@ class DataTableHeaderItem extends React.Component {
   render = () => {
     if (!this.props.value || this.props.value === '') return <Fragment></Fragment>;
     return (
-      <div className="data_table_header_item" onClick={this.sortClicked}>
+      <div className="data_table_header-item" onClick={this.sortClicked}>
         {this.props.value.replace('_', ' ')} {this.getSortIcon()}
       </div>
     );

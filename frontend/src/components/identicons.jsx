@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './identicons';
 
 export default class Identicon extends Component {
   constructor(props) {

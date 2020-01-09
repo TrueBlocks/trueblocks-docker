@@ -7,10 +7,10 @@ color = purple
 
 [[subpages]]
 list = [
+    { page = "explore", subpage = "accounts", route = "status", options = "modes_EQ_monitors&details&ether", extract = "_0.caches_0.items" },
     { page = "explore", subpage = "blocks", route = "blocks", options = "blocks_EQ_latest&hashes_only" },
     { page = "explore", subpage = "transactions", route = "transactions", options = "transactions_EQ_8001001.0" },
     { page = "explore", subpage = "receipts", route = "receipts", options = "transactions_EQ_8001001.0" },
     { page = "explore", subpage = "logs", route = "logs", options = "transactions_EQ_46147.0" },
     { page = "explore", subpage = "traces", route = "traces", options = "transactions_EQ_8001001.1" },
-    { page = "explore", subpage = "accounts", route = "status", options = "modes_EQ_monitors&details&ether", extract = "_0.caches_0.items" },
 ]

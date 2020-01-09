@@ -1,8 +1,9 @@
 import * as ca from './actions';
+import { caches_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: ca.caches_menu,
+  menu: caches_menu,
   data: null,
   fieldList: null,
   meta: null,
@@ -22,9 +23,9 @@ export default function reducer_Caches(state = initialState, action) {
 
     case ca.SLURPS:
     case ca.TRACE_CACHE:
-    case ca.TRANSACTION_CACHE:
+    case ca.TX_CACHE:
     case ca.BLOCK_CACHE:
-    case ca.CACHE_OVERVIEW:
+    case ca.OVERVIEW:
       return {
         ...state,
         data: action.payload.data[0].caches,

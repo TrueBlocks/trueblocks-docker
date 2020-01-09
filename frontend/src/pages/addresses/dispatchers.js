@@ -9,6 +9,7 @@ export const dispatcher_Addresses = (action) => {
     });
 
     var res = action.split('/');
+    console.log('dispatcher --> r0', res[0], ' r1', res[1]);
     return Utils.queryAPI_get(res[0], res[1])
       .then(async (result) => {
         let json = await result.json();
@@ -28,6 +29,23 @@ export const dispatcher_Addresses = (action) => {
         });
       });
   };
+};
+
+//----------------------------------------------------------------------
+export const addresses_menu = {
+  page: 'Addresses',
+  submenu: [
+    { menu_text: 'Monitors', value: 'VAL', active: false, action: ad.MONITORS },
+    { menu_text: 'Names', value: 'VAL', active: true, action: ad.NAMES },
+    { menu_text: 'Owned', value: 'VAL', active: false, action: ad.OWNED },
+    { menu_text: 'Tokens', value: 'VAL', active: false, action: ad.TOKENS },
+    { menu_text: 'Prefunds', value: 'VAL', active: false, action: ad.PREFUNDS },
+    { menu_text: 'Other', value: 'VAL', active: false, action: ad.OTHER },
+    { menu_text: 'ad-0006' }
+  ],
+  active: false,
+  color: 'pink',
+  dispatcher: dispatcher_Addresses
 };
 
 // EXISTING_CODE

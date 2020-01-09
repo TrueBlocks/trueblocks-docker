@@ -1,8 +1,9 @@
 import * as ot from './actions';
+import { other_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: ot.other_menu,
+  menu: other_menu,
   data: null,
   fieldList: null,
   meta: null,
@@ -21,10 +22,10 @@ export default function reducer_Other(state = initialState, action) {
       };
 
     case ot.GROUPS:
-    case ot.PRICE_QUOTES:
-    case ot.GENERATED_BLOCKS:
-    case ot.KNOWN_BLOCKS:
-    case ot.CUSTOM_BLOCKS:
+    case ot.PRICES:
+    case ot.GENERATED:
+    case ot.KNOWN:
+    case ot.CUSTOM:
       return {
         ...state,
         data: action.payload.data,
