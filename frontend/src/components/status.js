@@ -16,7 +16,7 @@ export const Status = (props) => {
   return (
     <div className={classes}>
       <div className="title status">
-        <span>Help</span>
+        <span>Status</span>
         <Icon icon={iconName} onClick={toggle} />
       </div>
       {isExpanded ? <StatusInner {...props} /> : null}
