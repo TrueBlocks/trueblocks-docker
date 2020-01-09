@@ -6,8 +6,7 @@ import { dispatcher_Indicies, indicies_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Indicies extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'status/modes=index&details';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <IndiciesInner subpage={params} />;
   };
 

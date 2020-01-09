@@ -9,8 +9,8 @@ export const DELETE = 'indicie/DELETE';
 export const UNDELETE = 'indicie/UNDELETE';
 export const REMOVE = 'indicie/REMOVE';
 
-export const FINALIZED = 'status/modes=index&details';
-export const STAGED = 'status/modes=index';
-export const UNRIPE = 'status/modes=index';
-export const COLUMNS = 'status/modes=index';
-export const SHARED = 'status/modes=index';
+export const FINALIZED = 'modes=index&details';
+export const STAGED = 'modes=index';
+export const UNRIPE = 'modes=index';
+export const COLUMNS = 'modes=index';
+export const SHARED = 'modes=index';

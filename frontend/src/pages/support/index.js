@@ -6,8 +6,7 @@ import { dispatcher_Support, support_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Support extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'support/free';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <SupportInner subpage={params} />;
   };
 

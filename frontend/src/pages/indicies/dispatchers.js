@@ -32,19 +32,17 @@ export const dispatcher_Indicies = (action) => {
 
 //----------------------------------------------------------------------
 export const indicies_menu = {
-  page: 'Indicies',
-  submenu: [
-    { menu_text: 'Finalized', value: 'VAL', active: false, action: ind.FINALIZED },
-    { menu_text: 'Staged', value: 'VAL', active: false, action: ind.STAGED },
-    { menu_text: 'Unripe', value: 'VAL', active: false, action: ind.UNRIPE },
-    { menu_text: 'Columns', value: 'VAL', active: false, action: ind.COLUMNS },
-    { menu_text: 'Shared', value: 'VAL', active: false, action: ind.SHARED },
-    { menu_text: 'ind-0005' },
-    { menu_text: 'ind-0006' }
+  page: 'indicies',
+  items: [
+    { subpage: 'finalized', route: 'status', query: ind.FINALIZED },
+    { subpage: 'staged', route: 'status', query: ind.STAGED },
+    { subpage: 'unripe', route: 'status', query: ind.UNRIPE },
+    { subpage: 'columns', route: 'status', query: ind.COLUMNS },
+    { subpage: 'shared', route: 'status', query: ind.SHARED },
+    { subpage: 'ind-0005' },
+    { subpage: 'ind-0006' }
   ],
-  active: false,
-  color: 'blue',
-  dispatcher: dispatcher_Indicies
+  color: 'blue'
 };
 
 // EXISTING_CODE

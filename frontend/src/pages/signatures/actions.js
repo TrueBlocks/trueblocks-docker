@@ -9,6 +9,6 @@ export const DELETE = 'signatu/DELETE';
 export const UNDELETE = 'signatu/UNDELETE';
 export const REMOVE = 'signatu/REMOVE';
 
-export const DOWNLOADED = 'abi/monitored&verbose';
-export const COMMON = 'abi/known&verbose';
-export const GENERATED = 'signatures/generated';
+export const DOWNLOADED = 'monitored&verbose';
+export const COMMON = 'known&verbose';
+export const GENERATED = 'generated';

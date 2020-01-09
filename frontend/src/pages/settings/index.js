@@ -6,8 +6,7 @@ import { dispatcher_Settings, settings_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Settings extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'settings/get';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <SettingsInner subpage={params} />;
   };
 

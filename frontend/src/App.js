@@ -54,7 +54,7 @@ class Body extends React.Component {
         <MainMenu mainMenu={mainMenu} />
         <div className="right-body-container">
           <Route component={Dashboard} exact path="/" />
-          <Route component={Addresses} path="/addresses/:subpage?" />
+          <Route component={Addresses} path="/addresses/:subpage/:query" />
           <Route component={Explore} path="/explore/:subpage?" />
           <Route component={Indicies} path="/indicies/:subpage?" />
           <Route component={Signatures} path="/signatures/:subpage?" />
@@ -62,6 +62,7 @@ class Body extends React.Component {
           <Route component={Other} path="/other/:subpage?" />
           <Route component={Settings} path="/settings/:subpage?" />
           <Route component={Support} path="/support/:subpage?" />
+          <Route component={Dashboard} path="/dashboard/:junk" />
         </div>
       </div>
     );

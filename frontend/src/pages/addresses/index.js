@@ -6,9 +6,12 @@ import { dispatcher_Addresses, addresses_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Addresses extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'status/modes=monitors&details&ether';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
-    return <AddressesInner subpage={params} />;
+    console.log('match: ', this.props.match);
+    console.log('params: ', this.props.match.params);
+    var query = this.props.match.params.query;
+    if (query) query.replace('-', '?');
+    console.log('query: ', query);
+    return <AddressesInner subpage={query} />;
   };
 
   render = () => {

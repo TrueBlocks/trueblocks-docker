@@ -4,7 +4,7 @@ import { InnerPageHeader } from './page-header';
 import { DataTable } from './data-table';
 import { LocalMenu } from './local-menu';
 import { DashMenu } from './dash-menu';
-import { MainMenu } from './mainmenu';
+import { MainMenu } from './menu';
 import { Icon } from './icon';
 import { Loading } from './loading';
 import { isReady, isError, NotReady, isEmpty, EmptyQuery } from './not-ready';

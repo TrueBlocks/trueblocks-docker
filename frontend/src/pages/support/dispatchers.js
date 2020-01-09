@@ -32,19 +32,17 @@ export const dispatcher_Support = (action) => {
 
 //----------------------------------------------------------------------
 export const support_menu = {
-  page: 'Support',
-  submenu: [
-    { menu_text: 'Free Teir', value: 'VAL', active: false, action: su.FREE_TEIR },
-    { menu_text: 'Pay Teir', value: 'VAL', active: false, action: su.PAY_TEIR },
-    { menu_text: 'Documentation', value: 'VAL', active: false, action: su.DOCUMENTATION },
-    { menu_text: 'Connect Us', value: 'VAL', active: false, action: su.CONNECT_US },
-    { menu_text: 'About', value: 'VAL', active: false, action: su.ABOUT },
-    { menu_text: 'su-0005' },
-    { menu_text: 'su-0006' }
+  page: 'support',
+  items: [
+    { subpage: 'free teir', route: 'support', query: su.FREE_TEIR },
+    { subpage: 'pay teir', route: 'support', query: su.PAY_TEIR },
+    { subpage: 'documentation', route: 'support', query: su.DOCUMENTATION },
+    { subpage: 'connect us', route: 'support', query: su.CONNECT_US },
+    { subpage: 'about', route: 'about', query: su.ABOUT },
+    { subpage: 'su-0005' },
+    { subpage: 'su-0006' }
   ],
-  active: false,
-  color: 'purple',
-  dispatcher: dispatcher_Support
+  color: 'purple'
 };
 
 // EXISTING_CODE

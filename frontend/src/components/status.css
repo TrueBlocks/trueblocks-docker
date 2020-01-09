@@ -24,7 +24,7 @@
   top: 3.8em;
   left: 0.7em;
 
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
   transform-origin: left;
   line-height: 1;
 

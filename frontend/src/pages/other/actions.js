@@ -9,8 +9,8 @@ export const DELETE = 'other__/DELETE';
 export const UNDELETE = 'other__/UNDELETE';
 export const REMOVE = 'other__/REMOVE';
 
-export const CUSTOM = 'when/list&verbose';
-export const KNOWN = 'when/list';
-export const GENERATED = 'other/generated';
-export const PRICES = 'quotes/prices';
-export const GROUPS = 'names/groups';
+export const CUSTOM = 'list&verbose';
+export const KNOWN = 'list';
+export const GENERATED = 'generated';
+export const PRICES = 'prices';
+export const GROUPS = 'groups';

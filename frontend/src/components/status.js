@@ -16,10 +16,10 @@ export const Status = (props) => {
   return (
     <div className={classes}>
       <div className="title status">
-        <span>Status</span>
+        <span>Help</span>
         <Icon icon={iconName} onClick={toggle} />
       </div>
-      { isExpanded ? <StatusInner {...props} /> : null }
+      {isExpanded ? <StatusInner {...props} /> : null}
     </div>
   );
 };

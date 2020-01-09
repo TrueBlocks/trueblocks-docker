@@ -9,9 +9,9 @@ export const DELETE = 'address/DELETE';
 export const UNDELETE = 'address/UNDELETE';
 export const REMOVE = 'address/REMOVE';
 
-export const MONITORS = 'status/modes=monitors&details&ether';
-export const NAMES = 'names/custom';
-export const OWNED = 'names/owned';
-export const TOKENS = 'names/named';
-export const PREFUNDS = 'names/prefund';
-export const OTHER = 'names/other';
+export const MONITORS = 'modes=monitors&details&ether';
+export const NAMES = 'custom';
+export const OWNED = 'owned';
+export const TOKENS = 'named';
+export const PREFUNDS = 'prefund';
+export const OTHER = 'other';

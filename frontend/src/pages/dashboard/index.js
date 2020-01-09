@@ -6,8 +6,7 @@ import { dispatcher_Dashboard, dashboard_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Dashboard extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || '';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <DashboardInner subpage={params} />;
   };
 
