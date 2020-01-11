@@ -1,6 +1,6 @@
 /*-----------------------------------------------------------------------------*/
 .status-panel .title .material-icons {
-  background: #e3e5ef;
+  /* background: #e3e5ef; */
 }
 
 .status-panel:not(.shrinked) .title {
