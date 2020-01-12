@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { Status } from './';
+import { HelpPanel } from './';
 
 //----------------------------------------------------------------------
 export default class Page extends React.Component {
@@ -10,6 +11,7 @@ export default class Page extends React.Component {
       <Fragment>
         <Status {...this.props} />
         {this.props.inner}
+        <HelpPanel />
       </Fragment>
     );
   };

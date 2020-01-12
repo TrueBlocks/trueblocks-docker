@@ -64,17 +64,13 @@
 
 /*------------------------------------------*/
 .status-panel {
-  flex-basis: 15%;
-  min-width: 15%;
-  padding: 0px 10px 15px 10px;
-  border-right: 1px solid #ddd;
-  /* background-color: cornflowerblue; */
+  border-right: 1px solid #ddd;;
 }
 
 /*------------------------------------------*/
 .right-panel {
   flex-basis: auto;
-  min-width: 85%;
+  min-width: 70%;
   padding-left: 10px;
   padding-right: 10px;
   /* background-color: pink; */
@@ -89,6 +85,11 @@
   font-size: 9pt;
   background-color: white;
   border: 1px solid #ddd;
+}
+
+/*------------------------------------------*/
+.help-panel {
+  border-left: 1px solid #ddd;
 }
 
 /*------------------------------------------*/

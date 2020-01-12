@@ -4,7 +4,6 @@ const Utils = require('../utils');
 const BEGIN = 'conne/BEGIN';
 const SUCCESS = 'conne/SUCCESS';
 const FAILURE = 'conne/FAILURE';
-const TOGGLE = 'statu/TOGGLE';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -14,8 +13,7 @@ const initialState = {
   finalized: -1,
   client: -1,
   isConnected: false,
-  error: null,
-  isExpanded: true
+  error: null
 };
 
 //----------------------------------------------------------------
@@ -62,11 +60,6 @@ export default function reducer_Status(state = initialState, action) {
         client: -1
       };
 
-    case TOGGLE:
-      return {
-        ...state,
-        isExpanded: !state.isExpanded
-      };
 
     default:
       return state;

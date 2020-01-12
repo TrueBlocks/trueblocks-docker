@@ -8,6 +8,8 @@ import { MainMenu } from './menu';
 import { Icon } from './icon';
 import { Loading } from './loading';
 import { isReady, isError, NotReady, isEmpty, EmptyQuery } from './not-ready';
+import { SidePanel } from './side-panel';
+import HelpPanel from './help-panel';
 
 export {
   Footer,
@@ -23,5 +25,7 @@ export {
   isError,
   NotReady,
   isEmpty,
-  EmptyQuery
+  EmptyQuery,
+  SidePanel,
+  HelpPanel
 };
