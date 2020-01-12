@@ -32,19 +32,17 @@ export const dispatcher_Addresses = (action) => {
 
 //----------------------------------------------------------------------
 export const addresses_menu = {
-  page: 'Addresses',
-  submenu: [
-    { menu_text: 'Monitors', value: 'VAL', active: false, action: ad.MONITORS },
-    { menu_text: 'Names', value: 'VAL', active: false, action: ad.NAMES },
-    { menu_text: 'Owned', value: 'VAL', active: false, action: ad.OWNED },
-    { menu_text: 'Tokens', value: 'VAL', active: false, action: ad.TOKENS },
-    { menu_text: 'Prefunds', value: 'VAL', active: false, action: ad.PREFUNDS },
-    { menu_text: 'Other', value: 'VAL', active: false, action: ad.OTHER },
-    { menu_text: 'ad-0006' }
+  page: 'addresses',
+  items: [
+    { subpage: 'monitors', route: 'status', query: ad.MONITORS },
+    { subpage: 'names', route: 'names', query: ad.NAMES },
+    { subpage: 'owned', route: 'names', query: ad.OWNED },
+    { subpage: 'tokens', route: 'names', query: ad.TOKENS },
+    { subpage: 'prefunds', route: 'names', query: ad.PREFUNDS },
+    { subpage: 'other', route: 'names', query: ad.OTHER },
+    { subpage: 'ad-0006' }
   ],
-  active: false,
-  color: 'pink',
-  dispatcher: dispatcher_Addresses
+  color: 'pink'
 };
 
 // EXISTING_CODE

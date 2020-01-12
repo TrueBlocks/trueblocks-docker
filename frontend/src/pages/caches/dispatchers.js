@@ -32,19 +32,17 @@ export const dispatcher_Caches = (action) => {
 
 //----------------------------------------------------------------------
 export const caches_menu = {
-  page: 'Caches',
-  submenu: [
-    { menu_text: 'Overview', value: 'VAL', active: false, action: ca.OVERVIEW },
-    { menu_text: 'Block Cache', value: 'VAL', active: false, action: ca.BLOCK_CACHE },
-    { menu_text: 'Tx Cache', value: 'VAL', active: false, action: ca.TX_CACHE },
-    { menu_text: 'Trace Cache', value: 'VAL', active: false, action: ca.TRACE_CACHE },
-    { menu_text: 'Slurps', value: 'VAL', active: false, action: ca.SLURPS },
-    { menu_text: 'Abi Cache', value: 'VAL', active: false, action: ca.ABI_CACHE },
-    { menu_text: 'ca-0006' }
+  page: 'caches',
+  items: [
+    { subpage: 'overview', route: 'status', query: ca.OVERVIEW },
+    { subpage: 'block cache', route: 'status', query: ca.BLOCK_CACHE },
+    { subpage: 'tx cache', route: 'status', query: ca.TX_CACHE },
+    { subpage: 'trace cache', route: 'status', query: ca.TRACE_CACHE },
+    { subpage: 'slurps', route: 'status', query: ca.SLURPS },
+    { subpage: 'abi cache', route: 'status', query: ca.ABI_CACHE },
+    { subpage: 'ca-0006' }
   ],
-  active: false,
-  color: 'tan',
-  dispatcher: dispatcher_Caches
+  color: 'tan'
 };
 
 // EXISTING_CODE

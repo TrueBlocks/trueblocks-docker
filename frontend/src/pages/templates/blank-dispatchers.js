@@ -32,12 +32,10 @@ export const dispatcher_[{PROPER}] = (action) => {
 
 //----------------------------------------------------------------------
 export const [{LOWER}]_menu = {
-  page: '[{PROPER}]',
-  submenu: [
+  page: '[{LOWER}]',
+  items: [
 [{MENU_ITEMS}]  ],
-  active: false,
-  color: '[{COLOR}]',
-  dispatcher: dispatcher_[{PROPER}]
+  color: '[{COLOR}]'
 };
 
 // EXISTING_CODE

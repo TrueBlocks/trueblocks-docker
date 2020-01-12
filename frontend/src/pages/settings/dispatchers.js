@@ -32,19 +32,17 @@ export const dispatcher_Settings = (action) => {
 
 //----------------------------------------------------------------------
 export const settings_menu = {
-  page: 'Settings',
-  submenu: [
-    { menu_text: 'Configuration', value: 'VAL', active: false, action: se.CONFIGURATION },
-    { menu_text: 'Skins', value: 'VAL', active: false, action: se.SKINS },
-    { menu_text: 'Licenses', value: 'VAL', active: false, action: se.LICENSES },
-    { menu_text: 'se-0003' },
-    { menu_text: 'se-0004' },
-    { menu_text: 'se-0005' },
-    { menu_text: 'se-0006' }
+  page: 'settings',
+  items: [
+    { subpage: 'configuration', route: 'settings', query: se.CONFIGURATION },
+    { subpage: 'skins', route: 'settings', query: se.SKINS },
+    { subpage: 'licenses', route: 'settings', query: se.LICENSES },
+    { subpage: 'se-0003' },
+    { subpage: 'se-0004' },
+    { subpage: 'se-0005' },
+    { subpage: 'se-0006' }
   ],
-  active: false,
-  color: 'pink',
-  dispatcher: dispatcher_Settings
+  color: 'pink'
 };
 
 // EXISTING_CODE

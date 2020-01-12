@@ -40,8 +40,8 @@ class HeaderCols extends React.Component {
   render = () => {
     return (
       <Fragment>
-        {this.props.row.submenu.map((item, i) => (
-          <HeaderCol key={'h' + i} menu_text={item.menu_text} color={this.props.row.color} />
+        {this.props.row.items.map((item, i) => (
+          <HeaderCol key={'h' + i} subpage={item.subpage} color={this.props.row.color} />
         ))}
       </Fragment>
     );
@@ -51,11 +51,11 @@ class HeaderCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class HeaderCol extends React.Component {
   render = () => {
-    var empty = this.props.menu_text.substr(0, 2) === 'e-' || this.props.menu_text.includes('-00');
+    var empty = this.props.subpage.substr(0, 2) === 'e-' || this.props.subpage.includes('-00');
     var cn = empty
       ? 'summary-table box endpad '
       : 'summary-table box header ' + this.props.color + (this._reactInternalFiber.index === 0 ? ' lborder' : '');
-    var head = empty ? '' : this.props.menu_text;
+    var head = empty ? '' : this.props.subpage;
     return <div className={cn}>{head}</div>;
   };
 }
@@ -65,8 +65,8 @@ class ItemCols extends React.Component {
   render = () => {
     return (
       <Fragment>
-        {this.props.row.submenu.map((item) => (
-          <ItemCol {...this.props} key={item.menu_text} item={item} />
+        {this.props.row.items.map((item) => (
+          <ItemCol {...this.props} key={item.subpage} item={item} />
         ))}
       </Fragment>
     );
@@ -80,7 +80,7 @@ class ItemCol extends React.Component {
   };
 
   render = () => {
-    var empty = this.props.item.menu_text.substr(0, 2) === 'e-' || this.props.item.menu_text.includes('-00');
+    var empty = this.props.item.subpage.substr(0, 2) === 'e-' || this.props.item.subpage.includes('-00');
     var cn =
       (empty
         ? 'summary-table box endpad '

@@ -9,6 +9,6 @@ export const DELETE = 'setting/DELETE';
 export const UNDELETE = 'setting/UNDELETE';
 export const REMOVE = 'setting/REMOVE';
 
-export const CONFIGURATION = 'settings/get';
-export const SKINS = 'settings/skins';
-export const LICENSES = 'settings/licenses';
+export const CONFIGURATION = 'get';
+export const SKINS = 'skins';
+export const LICENSES = 'licenses';

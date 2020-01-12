@@ -32,19 +32,9 @@ export const dispatcher_Dashboard = (action) => {
 
 //----------------------------------------------------------------------
 export const dashboard_menu = {
-  page: 'Dashboard',
-  smx: [
-    { menu_text: 'da-0000' },
-    { menu_text: 'da-0001' },
-    { menu_text: 'da-0002' },
-    { menu_text: 'da-0003' },
-    { menu_text: 'da-0004' },
-    { menu_text: 'da-0005' },
-    { menu_text: 'da-0006' }
-  ],
-  active: false,
-  color: 'white',
-  dispatcher: dispatcher_Dashboard
+  page: 'dashboard',
+  items: [],
+  color: 'white'
 };
 
 // EXISTING_CODE

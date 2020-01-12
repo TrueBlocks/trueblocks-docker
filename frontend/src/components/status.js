@@ -19,7 +19,7 @@ export const Status = (props) => {
         <span>Status</span>
         <Icon icon={iconName} onClick={toggle} />
       </div>
-      { isExpanded ? <StatusInner {...props} /> : null }
+      {isExpanded ? <StatusInner {...props} /> : null}
     </div>
   );
 };

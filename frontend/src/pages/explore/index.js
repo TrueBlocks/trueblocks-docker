@@ -6,8 +6,7 @@ import { dispatcher_Explore, explore_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Explore extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'status/modes=monitors&details&ether';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <ExploreInner subpage={params} />;
   };
 

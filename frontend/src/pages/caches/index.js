@@ -6,8 +6,7 @@ import { dispatcher_Caches, caches_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Caches extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'status/modes=caches&types=all';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <CachesInner subpage={params} />;
   };
 

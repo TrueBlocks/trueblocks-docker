@@ -32,19 +32,17 @@ export const dispatcher_Signatures = (action) => {
 
 //----------------------------------------------------------------------
 export const signatures_menu = {
-  page: 'Signatures',
-  submenu: [
-    { menu_text: 'Downloaded', value: 'VAL', active: false, action: si.DOWNLOADED },
-    { menu_text: 'Common', value: 'VAL', active: false, action: si.COMMON },
-    { menu_text: 'Generated', value: 'VAL', active: false, action: si.GENERATED },
-    { menu_text: 'si-0003' },
-    { menu_text: 'si-0004' },
-    { menu_text: 'si-0005' },
-    { menu_text: 'si-0006' }
+  page: 'signatures',
+  items: [
+    { subpage: 'downloaded', route: 'abi', query: si.DOWNLOADED },
+    { subpage: 'common', route: 'abi', query: si.COMMON },
+    { subpage: 'generated', route: 'signatures', query: si.GENERATED },
+    { subpage: 'si-0003' },
+    { subpage: 'si-0004' },
+    { subpage: 'si-0005' },
+    { subpage: 'si-0006' }
   ],
-  active: false,
-  color: 'green',
-  dispatcher: dispatcher_Signatures
+  color: 'green'
 };
 
 // EXISTING_CODE

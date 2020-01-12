@@ -9,8 +9,8 @@ export const DELETE = 'support/DELETE';
 export const UNDELETE = 'support/UNDELETE';
 export const REMOVE = 'support/REMOVE';
 
-export const FREE_TEIR = 'support/free';
-export const PAY_TEIR = 'support/pay';
-export const DOCUMENTATION = 'support/documentation';
-export const CONNECT_US = 'support/connect';
-export const ABOUT = 'about/about';
+export const FREE_TEIR = 'free';
+export const PAY_TEIR = 'pay';
+export const DOCUMENTATION = 'documentation';
+export const CONNECT_US = 'connect';
+export const ABOUT = 'about';

@@ -32,19 +32,17 @@ export const dispatcher_Other = (action) => {
 
 //----------------------------------------------------------------------
 export const other_menu = {
-  page: 'Other',
-  submenu: [
-    { menu_text: 'Custom', value: 'VAL', active: false, action: ot.CUSTOM },
-    { menu_text: 'Known', value: 'VAL', active: false, action: ot.KNOWN },
-    { menu_text: 'Generated', value: 'VAL', active: false, action: ot.GENERATED },
-    { menu_text: 'Prices', value: 'VAL', active: false, action: ot.PRICES },
-    { menu_text: 'Groups', value: 'VAL', active: false, action: ot.GROUPS },
-    { menu_text: 'ot-0005' },
-    { menu_text: 'ot-0006' }
+  page: 'other',
+  items: [
+    { subpage: 'custom', route: 'when', query: ot.CUSTOM },
+    { subpage: 'known', route: 'when', query: ot.KNOWN },
+    { subpage: 'generated', route: 'other', query: ot.GENERATED },
+    { subpage: 'prices', route: 'quotes', query: ot.PRICES },
+    { subpage: 'groups', route: 'names', query: ot.GROUPS },
+    { subpage: 'ot-0005' },
+    { subpage: 'ot-0006' }
   ],
-  active: false,
-  color: 'orange',
-  dispatcher: dispatcher_Other
+  color: 'orange'
 };
 
 // EXISTING_CODE

@@ -6,8 +6,7 @@ import { dispatcher_Signatures, signatures_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Signatures extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'abi/monitored&verbose';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <SignaturesInner subpage={params} />;
   };
 

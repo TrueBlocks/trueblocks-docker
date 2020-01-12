@@ -6,8 +6,7 @@ import { dispatcher_[{PROPER}], [{LOWER}]_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class [{PROPER}] extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || '[{DEFAULT_MENU}]';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <[{PROPER}]Inner subpage={params} />;
   };
 

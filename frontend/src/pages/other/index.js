@@ -6,8 +6,7 @@ import { dispatcher_Other, other_menu } from './dispatchers';
 //----------------------------------------------------------------------
 class Other extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.subpage || 'when/list&verbose';
-    params = params.replace('subpage=', '').replace('-', '/'); // weird cleanup
+    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
     return <OtherInner subpage={params} />;
   };
 
