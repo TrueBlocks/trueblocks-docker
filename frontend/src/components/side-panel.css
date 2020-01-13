@@ -1,0 +1,48 @@
+/*-----------------------------------------------------------------------------*/
+.side-panel {
+  flex-basis: 15%;
+  min-width: 15%;
+  padding: 0px 10px 15px 10px;
+  /* background-color: cornflowerblue; */
+}
+
+.side-panel .title {
+  color: #4c7c9c;
+}
+
+.side-panel:not(.shrinked) .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.side-panel.shrinked {
+  position: relative;
+  min-width: auto;
+  flex-basis: auto;
+}
+
+.side-panel.shrinked .title {
+  border-bottom: none;
+}
+
+.side-panel.shrinked .title span {
+  position: absolute;
+  left: 0.7em;
+
+  transform-origin: left;
+  line-height: 1;
+
+  word-break: normal;
+}
+
+.side-panel.shrinked.shrink-to-left .title span {
+  transform: rotate(-90deg);
+  top: 3.8em;
+}
+
+.side-panel.shrinked.shrink-to-right .title span {
+  transform: rotate(90deg);
+  top: 1.1em;
+  left: 0.8em;
+}

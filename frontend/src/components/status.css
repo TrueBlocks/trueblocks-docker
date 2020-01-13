@@ -1,36 +1,4 @@
 /*-----------------------------------------------------------------------------*/
-.status-panel .title .material-icons {
-  /* background: #e3e5ef; */
-}
-
-.status-panel:not(.shrinked) .title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.status-panel.shrinked {
-  position: relative;
-  min-width: auto;
-  flex-basis: auto;
-}
-
-.status-panel.shrinked .title {
-  border-bottom: none;
-}
-
-.status-panel.shrinked .title span {
-  position: absolute;
-  top: 3.8em;
-  left: 0.7em;
-
-  transform: rotate(-90deg);
-  transform-origin: left;
-  line-height: 1;
-
-  word-break: normal;
-}
-
 .status-details {
   display: flex;
   flex-flow: row wrap;

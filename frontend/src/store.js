@@ -5,10 +5,11 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import thunk from 'redux-thunk';
 import rootReducer from './root-reducers';
+import PersistentStore from './persistent-store';
 
 export const history = createBrowserHistory();
 
-const initialAppState = {};
+const initialAppState = PersistentStore.loadState();
 const enhancers = [];
 const middleware = [thunk, routerMiddleware(history)];
 
@@ -24,4 +25,12 @@ const composedEnhancers = compose(
   ...enhancers
 );
 
-export default createStore(connectRouter(history)(rootReducer), initialAppState, composedEnhancers);
+const store = createStore(connectRouter(history)(rootReducer), initialAppState, composedEnhancers);
+
+store.subscribe(() => {
+  PersistentStore.saveState({
+    reducer_SidePanels: store.getState().reducer_SidePanels
+  });
+});
+
+export default store;

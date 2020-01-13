@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 //------------------------------------------------------------------------
 import reducer_Status from './components/status-actions';
+import reducer_SidePanels from './components/side-panels-actions';
 import reducer_Dashboard from './pages/dashboard/reducers';
 import reducer_Addresses from './pages/addresses/reducers';
 import reducer_Explore from './pages/explore/reducers';
@@ -23,5 +24,6 @@ export default combineReducers({
   reducer_Caches,
   reducer_Other,
   reducer_Settings,
-  reducer_Support
+  reducer_Support,
+  reducer_SidePanels
 });

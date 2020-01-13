@@ -30,7 +30,6 @@ class Header extends React.Component {
         </div>
         <div className="header-right">
           <div style={{ height: '2.8em' }}></div>
-          <Icon color="darkblue" midsize icon="help" />
         </div>
       </div>
     );
