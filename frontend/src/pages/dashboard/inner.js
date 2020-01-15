@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
 
-import { InnerPageHeader, DashMenu } from '../../components';
+import { DashMenu } from '../../components';
 import './dashboard.css';
 
 // EXISTING_CODE
@@ -56,6 +56,7 @@ class DashboardInner extends React.Component {
     // EXISTING_CODE
     return <Fragment></Fragment>;
     // EXISTING_CODE
+    return <div style={{ width: '98%' }}>Content of Dashboard page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -71,14 +72,12 @@ class DashboardInner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="Dashboard"
-          notes="Learn about the TrubBlocks project, our organization, our philosopy 
-            towards decentralization, and our team."
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">Dashboard</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Settings } from './dispatchers';
 
-import { InnerPageHeader, LocalMenu } from '../../components';
+import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { licensesText } from './text/licenses';
@@ -67,34 +67,35 @@ class SettingsInner extends React.Component {
     if (this.state.subpage === se.LICENSES) {
       return licensesText();
     }
-    if (isError(this.props)) return <NotReady {...this.props} />;
-    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    //if (isError(this.props)) return <NotReady {...this.props} />;
+    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    return (
-      <Fragment>
-        <form onSubmit={this.submit}>
-          {this.props.data.files.map((file, fileI) =>
-            file.groups.map((category, categoryI) => (
-              <div className="setting-group" key={category.section}>
-                <h4>{category.section}</h4>
-                {category.keys.map((settingKey, keyI) => {
-                  const el = this.props.data.files[fileI].groups[categoryI].keys[keyI];
-                  const loc = [fileI, categoryI, keyI];
-                  return (
-                    <div key={settingKey.name}>
-                      <SettingInput {...el} onChange={(e) => this.onChange(loc, e)} />
-                    </div>
-                  );
-                })}
-              </div>
-            ))
-          )}
-          <button type="submit">Submit</button>
-        </form>
-      </Fragment>
-    );
+    //return (
+    //  <Fragment>
+    //    <form onSubmit={this.submit}>
+    //      {this.props.data.files.map((file, fileI) =>
+    //        file.groups.map((category, categoryI) => (
+    //          <div className="setting-group" key={category.section}>
+    //            <h4>{category.section}</h4>
+    //            {category.keys.map((settingKey, keyI) => {
+    //              const el = this.props.data.files[fileI].groups[categoryI].keys[keyI];
+    //              const loc = [fileI, categoryI, keyI];
+    //              return (
+    //                <div key={settingKey.name}>
+    //                  <SettingInput {...el} onChange={(e) => this.onChange(loc, e)} />
+    //                </div>
+    //              );
+    //            })}
+    //          </div>
+    //        ))
+    //      )}
+    //      <button type="submit">Submit</button>
+    //    </form>
+    //  </Fragment>
+    //);
     // EXISTING_CODE
+    return <div style={{ width: '98%' }}>Content of Settings page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -110,13 +111,12 @@ class SettingsInner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="Settings"
-          notes="Monitors are per-address index caches that enable fast retreival of appearance histories for any account."
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">Settings</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './dispatchers';
 
-import { InnerPageHeader, LocalMenu } from '../../components';
+import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
@@ -51,20 +51,21 @@ class ExploreInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    if (isError(this.props)) return <NotReady {...this.props} />;
-    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    //if (isError(this.props)) return <NotReady {...this.props} />;
+    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return (
-      <DataTable
-        subpage="explore"
-        fields={this.props.fieldList}
-        data={this.props.data}
-        meta={this.props.meta}
-        innerEar={this.innerEar}
-      />
-    );
+    //return (
+    //  <DataTable
+    //    subpage="explore"
+    //    fields={this.props.fieldList}
+    //    data={this.props.data}
+    //    meta={this.props.meta}
+    //    innerEar={this.innerEar}
+    //  />
+    //);
+    return <div style={{ width: '98%' }}>Content of Explore page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -80,15 +81,12 @@ class ExploreInner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="Explore"
-          notes="The Explore module allows one to view the details of every transactions for 
-            each previously monitored address. Because TrueBlocks runs on a local machine not a server, this 
-            means that you are restricted to exploring only addresses that you've previously monitored."
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">Explore</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }

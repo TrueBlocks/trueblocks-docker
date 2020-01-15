@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Indicies } from './dispatchers';
 
-import { InnerPageHeader, LocalMenu } from '../../components';
+import { LocalMenu } from '../../components';
 import './indicies.css';
 
 // EXISTING_CODE
@@ -53,11 +53,12 @@ class IndiciesInner extends React.Component {
 
   getInnerMost = () => {
     // EXISTING_CODE
-    if (!this.props.data) {
-      return <Loading source="indicies" status="loading" message="Loading..." />;
-    }
-    return <SystemProgressChart {...this.props} />;
+    //if (!this.props.data) {
+    //  return <Loading source="indicies" status="loading" message="Loading..." />;
+    //}
+    //return <SystemProgressChart {...this.props} />;
     // EXISTING_CODE
+    return <div style={{ width: '98%' }}>Content of Indicies page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -73,14 +74,12 @@ class IndiciesInner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="Indicies"
-          notes="TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a 
-            lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big."
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">Indicies</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }
@@ -141,7 +140,7 @@ class SystemProgressChart extends React.Component {
   );
 
   cache_chart = (
-    <div className="inner-panel">
+    <div className="inner-index">
       <h4>Caches</h4>
       <p> </p>
       <div className="indicies-fun-facts">
@@ -243,7 +242,7 @@ const IndexDetail = (props) => {
     '-' +
     props.range.end;
   return (
-    <div className="inner-panel">
+    <div className="inner-index">
       <h4>{subtit}</h4>
       <div className="indicies-index-container">
         {props.data.map((item) => (

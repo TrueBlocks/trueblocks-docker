@@ -1,7 +1,7 @@
 [settings]
 class = CAddresses
 page_notes = Monitors are per-address index caches that enable fast reteival of transaction histories for any account. \
-                Note that the transactions/logs/receipts/traces are not downloaded until you explore an address.
+            Note|that the transactions/logs/receipts/traces are not downloaded until you explore an address.
 color = pink
 polling = true
 

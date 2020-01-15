@@ -1,20 +1,20 @@
-import { Footer } from './footer';
-import Status from './status';
-import { InnerPageHeader } from './page-header';
+import { Page, PageHeader, PageFooter } from './page';
 import { DataTable } from './data-table';
-import { LocalMenu } from './local-menu';
-import { DashMenu } from './dash-menu';
-import { MainMenu } from './menu';
 import { Icon } from './icon';
 import { Loading } from './loading';
 import { isReady, isError, NotReady, isEmpty, EmptyQuery } from './not-ready';
-import { SidePanel } from './side-panel';
-import HelpPanel from './help-panel';
+import { MainMenu, LocalMenu, DashMenu } from './menus';
+import { SidePanel } from './panels/side-panel';
+import StatusPanel from './panels/status';
+import HelpPanel from './panels/help';
 
 export {
-  Footer,
-  Status,
-  InnerPageHeader,
+  Page,
+  PageHeader,
+  PageFooter,
+  SidePanel,
+  StatusPanel,
+  HelpPanel,
   DataTable,
   DashMenu,
   LocalMenu,
@@ -25,7 +25,5 @@ export {
   isError,
   NotReady,
   isEmpty,
-  EmptyQuery,
-  SidePanel,
-  HelpPanel
+  EmptyQuery
 };

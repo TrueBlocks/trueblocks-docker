@@ -1,7 +1,8 @@
 [settings]
 class = CIndicies
 page_notes = TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take \
-            up a|lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big.
+            up a lot of|space on your hard drive, so you have to keep any eye on them. Clean them out \
+            periodically so they don't get too|big.
 color = blue
 no_error = true
 

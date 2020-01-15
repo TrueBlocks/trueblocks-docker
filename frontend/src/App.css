@@ -63,28 +63,22 @@
 }
 
 /*------------------------------------------*/
-.status-panel {
-  border-right: 1px solid #ddd;;
+.menu-panel {
+  border-right: 1px solid #ddd;
 }
 
 /*------------------------------------------*/
-.right-panel {
+.status-panel {
+  border-right: 1px solid #ddd;
+}
+
+/*------------------------------------------*/
+.inner-panel {
   flex-basis: auto;
   min-width: 70%;
   padding-left: 10px;
   padding-right: 10px;
   /* background-color: pink; */
-}
-
-.page-notes {
-  display: inline-flex;
-  float: right;
-  text-align: right;
-  width: 50%;
-  color: black;
-  font-size: 9pt;
-  background-color: white;
-  border: 1px solid #ddd;
 }
 
 /*------------------------------------------*/

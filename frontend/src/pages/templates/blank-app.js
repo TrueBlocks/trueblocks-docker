@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import logo from './img/logo.png';
 import './App.css';
-import { Icon, MainMenu, Footer } from './components';
+import { Icon, MainMenu, PageFooter } from './components';
 
 //------------------------------------------------------------
 [{IMPORTS}]
@@ -10,15 +9,15 @@ import { Icon, MainMenu, Footer } from './components';
 function App() {
   return (
     <div className="page-container">
-      <Header />
+      <PageHeader />
       <Body />
-      <Footer />
+      <PageFooter />
     </div>
   );
 }
 
 //------------------------------------------------------------
-class Header extends React.Component {
+class PageHeader extends React.Component {
   render = () => {
     return (
       <div className="header-item">

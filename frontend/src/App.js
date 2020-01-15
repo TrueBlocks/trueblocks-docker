@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import logo from './img/logo.png';
 import './App.css';
-import { Icon, MainMenu, Footer } from './components';
+import { Icon, MainMenu, PageHeader, PageFooter } from './components';
 
 //------------------------------------------------------------
 import Dashboard, { dashboard_menu } from './pages/dashboard';
@@ -19,30 +18,11 @@ import Support, { support_menu } from './pages/support';
 function App() {
   return (
     <div className="page-container">
-      <Header />
+      <PageHeader />
       <Body />
-      <Footer />
+      <PageFooter />
     </div>
   );
-}
-
-//------------------------------------------------------------
-class Header extends React.Component {
-  render = () => {
-    return (
-      <div className="header-item">
-        <div className="header-left">
-          <img className="logo" alt={logo} src={logo} />
-        </div>
-        <div className="header-middle">
-          <div className="title app">TrueBlocks Account Explorer</div>
-        </div>
-        <div className="header-right">
-          <div style={{ height: '2.8em' }}></div>
-        </div>
-      </div>
-    );
-  };
 }
 
 //------------------------------------------------------------
@@ -53,15 +33,15 @@ class Body extends React.Component {
         <MainMenu mainMenu={mainMenu} />
         <div className="right-body-container">
           <Route component={Dashboard} exact path="/" />
-          <Route component={Addresses} path="/addresses/:subpage/:query" />
-          <Route component={Explore} path="/explore/:subpage?" />
-          <Route component={Indicies} path="/indicies/:subpage?" />
-          <Route component={Signatures} path="/signatures/:subpage?" />
-          <Route component={Caches} path="/caches/:subpage?" />
-          <Route component={Other} path="/other/:subpage?" />
-          <Route component={Settings} path="/settings/:subpage?" />
-          <Route component={Support} path="/support/:subpage?" />
-          <Route component={Dashboard} path="/dashboard/:junk" />
+          <Route component={Addresses} path="/addresses/:subpage?/:query?" />
+          <Route component={Explore} path="/explore/:subpage?/:query?" />
+          <Route component={Indicies} path="/indicies/:subpage?/:query?" />
+          <Route component={Signatures} path="/signatures/:subpage?/:query?" />
+          <Route component={Caches} path="/caches/:subpage?/:query?" />
+          <Route component={Other} path="/other/:subpage?/:query?" />
+          <Route component={Settings} path="/settings/:subpage?/:query?" />
+          <Route component={Support} path="/support/:subpage?/:query?" />
+          <Route component={Dashboard} path="/dashboard/:subpage/:query?" />
         </div>
       </div>
     );

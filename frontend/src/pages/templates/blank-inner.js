@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_[{PROPER}] } from './dispatchers';
 
-import { InnerPageHeader, [{MENU_TYPE}] } from '../../components';
+import { [{MENU_TYPE}] } from '../../components';
 [{NO_ERROR}]import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 [{NO_DATA}]import { isReady } from '../../components';
 [{NO_DT}]import { DataTable } from '../../components';
@@ -55,20 +55,21 @@ class [{PROPER}]Inner extends React.Component {
 
   getInnerMost = () => {
 [{NO_TEXT}][{TEXT_CODE}]
-    [{NO_ERROR}]if (isError(this.props)) return <NotReady {...this.props} />;
-    [{NO_DATA}]else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    [{NO_ERROR}]else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    [{NO_ERROR}]//if (isError(this.props)) return <NotReady {...this.props} />;
+    [{NO_DATA}]//else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    [{NO_ERROR}]//else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    [{NO_DT}]return (
-    [{NO_DT}]  <DataTable
-    [{NO_DT}]    subpage="[{LOWER}]"
-    [{NO_DT}]    fields={this.props.fieldList}
-    [{NO_DT}]    data={this.props.data}
-    [{NO_DT}]    meta={this.props.meta}
-    [{NO_DT}]    innerEar={this.innerEar}
-    [{NO_DT}]  />
-    [{NO_DT}]);
+    [{NO_DT}]//return (
+    [{NO_DT}]//  <DataTable
+    [{NO_DT}]//    subpage="[{LOWER}]"
+    [{NO_DT}]//    fields={this.props.fieldList}
+    [{NO_DT}]//    data={this.props.data}
+    [{NO_DT}]//    meta={this.props.meta}
+    [{NO_DT}]//    innerEar={this.innerEar}
+    [{NO_DT}]//  />
+    [{NO_DT}]//);
+    return <div style={{ width: '98%' }}>Content of [{PROPER}] page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -84,13 +85,12 @@ class [{PROPER}]Inner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="[{PROPER}]"
-          notes="[{PAGENOTES}]"
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">[{PROPER}]</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }

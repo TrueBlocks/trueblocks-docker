@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
 
-import { InnerPageHeader, LocalMenu } from '../../components';
+import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
@@ -65,31 +65,32 @@ class AddressesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    if (isError(this.props)) return <NotReady {...this.props} />;
-    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    //if (isError(this.props)) return <NotReady {...this.props} />;
+    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    if (this.state.subpage === 'addresses/monitors' || this.state.subpage.substring(0, 7) === 'status/') {
-      return (
-        <Fragment>
-          <AddNewAddress {...this.props} />
-          <div className="old-data-table">
-            <OldDataTable headings={headings} rows={this.props.data} innerEar={this.innerEar} />
-          </div>
-          ;
-        </Fragment>
-      );
-    }
+    //if (this.state.subpage === 'addresses/monitors' || this.state.subpage.substring(0, 7) === 'status/') {
+    //  return (
+    //    <Fragment>
+    //      <AddNewAddress {...this.props} />
+    //      <div className="old-data-table">
+    //        <OldDataTable headings={headings} rows={this.props.data} innerEar={this.innerEar} />
+    //      </div>
+    //      ;
+    //    </Fragment>
+    //  );
+    //}
     // EXISTING_CODE
-    return (
-      <DataTable
-        subpage="addresses"
-        fields={this.props.fieldList}
-        data={this.props.data}
-        meta={this.props.meta}
-        innerEar={this.innerEar}
-      />
-    );
+    //return (
+    //  <DataTable
+    //    subpage="addresses"
+    //    fields={this.props.fieldList}
+    //    data={this.props.data}
+    //    meta={this.props.meta}
+    //    innerEar={this.innerEar}
+    //  />
+    //);
+    return <div style={{ width: '98%' }}>Content of Addresses page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -105,13 +106,12 @@ class AddressesInner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="Addresses"
-          notes="Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note that the transactions/logs/receipts/traces are not downloaded until you explore an address."
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">Addresses</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }

@@ -1,6 +1,6 @@
 [settings]
 class = CDashboard
-page_notes = Learn about the TrubBlocks project, our organization, our philosopy|towards decentralization, and our team.
+page_notes = Learn about the TrubBlocks project, our organization, our philosopy towards decentralization, and our team.
 menuType = DashMenu
 color = white
 no_error = true

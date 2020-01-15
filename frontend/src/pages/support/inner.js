@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Support } from './dispatchers';
 
-import { InnerPageHeader, LocalMenu } from '../../components';
+import { LocalMenu } from '../../components';
 import { documentationText } from './text/documentation';
 import * as su from './actions';
 import './support.css';
@@ -54,27 +54,28 @@ class SupportInner extends React.Component {
       return documentationText();
     }
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.state.subpage}
-        <ul>
-          <li>Email support: &lt;support@trueblocks.io&gt;</li>
-          <li>Online forums: &lt;https://discord.gg/zGh6PdN&gt;</li>
-          <li>Free support during installation and setup</li>
-        </ul>
-        <h4>Per Incident</h4>
-        <ul>
-          <li>$95 US per hour until resolved</li>
-          <li>Pay in Ether for a 10% discount</li>
-        </ul>
-        <h4>Support Plans</h4>
-        <ul>
-          <li>5 per-incident issue packs (10% discount)</li>
-          <li>Annual subscription (20% discount)</li>
-        </ul>
-      </Fragment>
-    );
+    //return (
+    //  <Fragment>
+    //    {this.state.subpage}
+    //    <ul>
+    //      <li>Email support: &lt;support@trueblocks.io&gt;</li>
+    //      <li>Online forums: &lt;https://discord.gg/zGh6PdN&gt;</li>
+    //      <li>Free support during installation and setup</li>
+    //    </ul>
+    //    <h4>Per Incident</h4>
+    //    <ul>
+    //      <li>$95 US per hour until resolved</li>
+    //      <li>Pay in Ether for a 10% discount</li>
+    //    </ul>
+    //    <h4>Support Plans</h4>
+    //    <ul>
+    //      <li>5 per-incident issue packs (10% discount)</li>
+    //      <li>Annual subscription (20% discount)</li>
+    //    </ul>
+    //  </Fragment>
+    //);
     // EXISTING_CODE
+    return <div style={{ width: '98%' }}>Content of Support page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -90,14 +91,12 @@ class SupportInner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="Support"
-          notes="We provide various support options ranging from online email/forum discussions to 
-            full enterprise-level support plans to suit your needs. We've got you covered."
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">Support</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }

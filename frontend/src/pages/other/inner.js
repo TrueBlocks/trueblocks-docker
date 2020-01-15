@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Other } from './dispatchers';
 
-import { InnerPageHeader, LocalMenu } from '../../components';
+import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
@@ -51,20 +51,21 @@ class OtherInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    if (isError(this.props)) return <NotReady {...this.props} />;
-    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    //if (isError(this.props)) return <NotReady {...this.props} />;
+    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return (
-      <DataTable
-        subpage="other"
-        fields={this.props.fieldList}
-        data={this.props.data}
-        meta={this.props.meta}
-        innerEar={this.innerEar}
-      />
-    );
+    //return (
+    //  <DataTable
+    //    subpage="other"
+    //    fields={this.props.fieldList}
+    //    data={this.props.data}
+    //    meta={this.props.meta}
+    //    innerEar={this.innerEar}
+    //  />
+    //);
+    return <div style={{ width: '98%' }}>Content of Other page with subpage: {this.state.subpage}</div>;
   };
 
   getInnerPage = () => {
@@ -80,13 +81,12 @@ class OtherInner extends React.Component {
 
   render = () => {
     return (
-      <div className="right-panel">
-        <InnerPageHeader
-          title="Other"
-          notes="The Other panel allows you to configure various other items related to TrueBlocks."
-        />
-        {this.getInnerPage()}
-      </div>
+      <Fragment>
+        <div className="inner-panel">
+          <div className="title inner-page">Other</div>
+          {this.getInnerPage()}
+        </div>
+      </Fragment>
     );
   };
 }
