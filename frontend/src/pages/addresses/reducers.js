@@ -3,9 +3,7 @@ import { addresses_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: addresses_menu,
   data: null,
-  fieldList: null,
   meta: null,
   isLoading: false,
   error: null
@@ -52,7 +50,6 @@ export default function reducer_Addresses(state = initialState, action) {
       return {
         ...state,
         data: null,
-        fieldList: null,
         meta: null,
         isLoading: false,
         error: action.err

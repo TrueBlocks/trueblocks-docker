@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Indicies } from './dispatchers';
 
 import { LocalMenu } from '../../components';
+import { indicies_menu } from './';
 import './indicies.css';
 
 // EXISTING_CODE
@@ -19,7 +20,7 @@ class IndiciesInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subpage: props.subpage
+      cur_submenu: props.cur_submenu
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -30,17 +31,17 @@ class IndiciesInner extends React.Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.props.subpage);
+    this.innerEar('change_subpage', this.state.cur_submenu);
   };
 
-  innerEar = (cmd, value) => {
+  innerEar = (cmd, submenu) => {
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
-        subpage: value
+        cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Indicies(value);
+      this.props.dispatcher_Indicies(submenu.route, submenu.query);
       return;
     }
 
@@ -58,15 +59,16 @@ class IndiciesInner extends React.Component {
     //}
     //return <SystemProgressChart {...this.props} />;
     // EXISTING_CODE
-    return <div style={{ width: '98%' }}>Content of Indicies page with subpage: {this.state.subpage}</div>;
+    //return <div>{JSON.stringify(this.props)}</div>;
+    return <div style={{ width: '98%' }}>Content of Indicies page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
+    // <LocalMenu data={indicies_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -102,102 +104,103 @@ class SystemProgressChart extends React.Component {
     this.setState({ ...this.state, zoomStart });
   };
 
-  chart = (
-    <div className="indicies-chart-container">
-      <div className="indicies-grid"></div>
-      {[...Array(this.cols).keys()].map((col, colI) => {
-        return (
-          <div className="indicies-y-axis indicies-grid" key={`x${col}`}>
-            {Utils.fmtInteger(col * 1e5)}
-          </div>
-        );
-      })}
-      {[...Array(this.rows).keys()].map((row, rowI) => {
-        return (
-          <Fragment key={`x${row}`}>
-            <div className="indicies-x-axis indicies-grid">{Utils.fmtInteger(row * 1e6)}</div>
-            {[...Array(this.cols).keys()].map((col, colI) => {
-              let indexClass;
-              if (this.props.finalized >= row * 1e6 + (col + 1) * 1e5) {
-                indexClass = 'finalized';
-              } else if (this.props.finalized >= row * 1e6 + col * 1e5) {
-                indexClass = 'in-progress';
-              } else {
-                indexClass = 'inactive';
-              }
-              return (
-                <div className="indicies-grid" key={`x${row}${col}`}>
-                  <div className={`filling ${indexClass}`} onClick={() => this.zoom(row * 1e6 + col * 1e5)}>
-                    {indexClass === 'finalized' && '✔'}
-                  </div>
-                </div>
-              );
-            })}
-          </Fragment>
-        );
-      })}
-    </div>
-  );
+  // chart = (
+  // <div className="indicies-chart-container">
+  //   <div className="indicies-grid"></div>
+  //   {[...Array(this.cols).keys()].map((col, colI) => {
+  //     return (
+  //       <div className="indicies-y-axis indicies-grid" key={`x${col}`}>
+  //         {Utils.fmtInteger(col * 1e5)}
+  //       </div>
+  //     );
+  //   })}
+  //   {[...Array(this.rows).keys()].map((row, rowI) => {
+  //     return (
+  //       <Fragment key={`x${row}`}>
+  //         <div className="indicies-x-axis indicies-grid">{Utils.fmtInteger(row * 1e6)}</div>
+  //         {[...Array(this.cols).keys()].map((col, colI) => {
+  //           let indexClass;
+  //           if (this.props.finalized >= row * 1e6 + (col + 1) * 1e5) {
+  //             indexClass = 'finalized';
+  //           } else if (this.props.finalized >= row * 1e6 + col * 1e5) {
+  //             indexClass = 'in-progress';
+  //           } else {
+  //             indexClass = 'inactive';
+  //           }
+  //           return (
+  //             <div className="indicies-grid" key={`x${row}${col}`}>
+  //               <div className={`filling ${indexClass}`} onClick={() => this.zoom(row * 1e6 + col * 1e5)}>
+  //                 {indexClass === 'finalized' && '✔'}
+  //               </div>
+  //             </div>
+  //           );
+  //         })}
+  //       </Fragment>
+  //     );
+  //   })}
+  // </div>
+  // );
 
-  cache_chart = (
-    <div className="inner-index">
-      <h4>Caches</h4>
-      <p> </p>
-      <div className="indicies-fun-facts">
-        <div>
-          <div className="indicies-fact-top">{this.props.caches[0].type}:</div>
-          <div>{this.props.caches[0].path.replace(this.props.index_path, '$indexPath/')}</div>
-          <div>
-            {Utils.fmtInteger(this.props.caches[0].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[0].nFiles)} /{' '}
-            {Utils.fmtDouble(this.props.caches[0].sizeInBytes / this.props.caches[0].nFiles, 1)}
-          </div>
-        </div>
-        <div>
-          <div className="indicies-fact-top">{this.props.caches[1].type}:</div>
-          <div>{this.props.caches[1].path.replace(this.props.cache_path, '$cachePath/')}</div>
-          <div>
-            {Utils.fmtInteger(this.props.caches[1].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[1].nFiles)} /{' '}
-            {Utils.fmtDouble(this.props.caches[1].sizeInBytes / this.props.caches[1].nFiles, 1)}
-          </div>
-        </div>
-        <div>
-          <div className="indicies-fact-top">{this.props.caches[2].type}:</div>
-          <div>{this.props.caches[2].path.replace(this.props.cache_path, '$cachePath/')}</div>
-          <div>
-            {Utils.fmtInteger(this.props.caches[2].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[2].nFiles)} /{' '}
-            {Utils.fmtDouble(this.props.caches[2].sizeInBytes / this.props.caches[2].nFiles, 1)}
-          </div>
-        </div>
-        <div>
-          <div className="indicies-fact-top">{this.props.caches[3].type}:</div>
-          <div>{this.props.caches[3].path.replace(this.props.cache_path, '$cachePath/')}</div>
-          <div>
-            {Utils.fmtInteger(this.props.caches[3].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[3].nFiles)} /{' '}
-            {Utils.fmtDouble(this.props.caches[3].sizeInBytes / this.props.caches[3].nFiles, 1)}
-          </div>
-        </div>
-        <div>
-          <div className="indicies-fact-top">{this.props.caches[4].type}:</div>
-          <div>{this.props.caches[4].path.replace(this.props.cache_path, '$cachePath/')}</div>
-          <div>
-            {Utils.fmtInteger(this.props.caches[4].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[4].nFiles)} /{' '}
-            {Utils.fmtDouble(this.props.caches[4].sizeInBytes / this.props.caches[4].nFiles, 1)}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  // cache_chart = (
+  // <div className="inner-index">
+  //   <h4>Caches</h4>
+  //   <p> </p>
+  //   <div className="indicies-fun-facts">
+  //     <div>
+  //       <div className="indicies-fact-top">{this.props.caches[0].type}:</div>
+  //       <div>{this.props.caches[0].path.replace(this.props.index_path, '$indexPath/')}</div>
+  //       <div>
+  //         {Utils.fmtInteger(this.props.caches[0].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[0].nFiles)} /{' '}
+  //         {Utils.fmtDouble(this.props.caches[0].sizeInBytes / this.props.caches[0].nFiles, 1)}
+  //       </div>
+  //     </div>
+  //     <div>
+  //       <div className="indicies-fact-top">{this.props.caches[1].type}:</div>
+  //       <div>{this.props.caches[1].path.replace(this.props.cache_path, '$cachePath/')}</div>
+  //       <div>
+  //         {Utils.fmtInteger(this.props.caches[1].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[1].nFiles)} /{' '}
+  //         {Utils.fmtDouble(this.props.caches[1].sizeInBytes / this.props.caches[1].nFiles, 1)}
+  //       </div>
+  //     </div>
+  //     <div>
+  //       <div className="indicies-fact-top">{this.props.caches[2].type}:</div>
+  //       <div>{this.props.caches[2].path.replace(this.props.cache_path, '$cachePath/')}</div>
+  //       <div>
+  //         {Utils.fmtInteger(this.props.caches[2].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[2].nFiles)} /{' '}
+  //         {Utils.fmtDouble(this.props.caches[2].sizeInBytes / this.props.caches[2].nFiles, 1)}
+  //       </div>
+  //     </div>
+  //     <div>
+  //       <div className="indicies-fact-top">{this.props.caches[3].type}:</div>
+  //       <div>{this.props.caches[3].path.replace(this.props.cache_path, '$cachePath/')}</div>
+  //       <div>
+  //         {Utils.fmtInteger(this.props.caches[3].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[3].nFiles)} /{' '}
+  //         {Utils.fmtDouble(this.props.caches[3].sizeInBytes / this.props.caches[3].nFiles, 1)}
+  //       </div>
+  //     </div>
+  //     <div>
+  //       <div className="indicies-fact-top">{this.props.caches[4].type}:</div>
+  //       <div>{this.props.caches[4].path.replace(this.props.cache_path, '$cachePath/')}</div>
+  //       <div>
+  //         {Utils.fmtInteger(this.props.caches[4].sizeInBytes)} / {Utils.fmtInteger(this.props.caches[4].nFiles)} /{' '}
+  //         {Utils.fmtDouble(this.props.caches[4].sizeInBytes / this.props.caches[4].nFiles, 1)}
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>
+  // );
 
   render() {
-    return (
-      <div>
-        {this.chart}
-        <p> </p>
-        {this.cache_chart}
-        <p> </p>
-        <ZoomOnIndex {...this.props} start={this.state.zoomStart} n={1e5} />
-      </div>
-    );
+    return <div>{JSON.stringify(this.props)}</div>;
+    // return (
+    //   <div>
+    //     {this.chart}
+    //     <p> </p>
+    //     {this.cache_chart}
+    //     <p> </p>
+    //     <ZoomOnIndex {...this.props} start={this.state.zoomStart} n={1e5} />
+    //   </div>
+    // );
   }
 }
 
@@ -286,8 +289,6 @@ const mapStateToProps = ({ reducer_Status, reducer_Indicies }) => ({
   error: reducer_Indicies.error,
   data: reducer_Indicies.data,
   meta: reducer_Indicies.meta,
-  fieldList: reducer_Indicies.fieldList,
-  menu: reducer_Indicies.menu
 });
 
 //----------------------------------------------------------------------

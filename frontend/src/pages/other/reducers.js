@@ -3,9 +3,7 @@ import { other_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: other_menu,
   data: null,
-  fieldList: null,
   meta: null,
   isLoading: false,
   error: null
@@ -42,7 +40,6 @@ export default function reducer_Other(state = initialState, action) {
       return {
         ...state,
         data: null,
-        fieldList: null,
         meta: null,
         isLoading: false,
         error: action.err

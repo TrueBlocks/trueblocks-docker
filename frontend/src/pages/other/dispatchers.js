@@ -2,21 +2,20 @@ import * as ot from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Other = (action) => {
+export const dispatcher_Other = (route, query) => {
   return (dispatch, getState) => {
     dispatch({
       type: ot.BEGIN
     });
 
-    var res = action.split('/');
-    return Utils.queryAPI_get(res[0], res[1])
+    return Utils.queryAPI_get(route, query)
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: action,
+            type: query,
             payload: json
           });
         }

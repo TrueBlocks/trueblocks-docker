@@ -3,9 +3,7 @@ import { [{LOWER}]_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: [{LOWER}]_menu,
   data: null,
-  fieldList: null,
   meta: null,
   isLoading: false,
   error: null
@@ -28,7 +26,6 @@ export default function reducer_[{PROPER}](state = initialState, action) {
       return {
         ...state,
         data: null,
-        fieldList: null,
         meta: null,
         isLoading: false,
         error: action.err

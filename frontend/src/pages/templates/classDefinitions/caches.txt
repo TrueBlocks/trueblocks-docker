@@ -1,7 +1,7 @@
 [settings]
 class = CCaches
-page_notes = TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your \
-                |hard drive, so you have to keep any eye on them. Clean them out periodically so they don't get too big.
+page_notes = TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space \
+                on your|hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
 color = tan
 
 [[subpages]]

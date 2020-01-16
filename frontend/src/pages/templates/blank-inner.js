@@ -10,6 +10,7 @@ import { [{MENU_TYPE}] } from '../../components';
 [{NO_DT}]import { DataTable } from '../../components';
 [{NO_TEXT}][{TEXT_IMPORTS}]
 [{NO_TEXT}][{TEXT_ACTIONS}]
+import { [{LOWER}]_menu } from './';
 import './[{LOWER}].css';
 
 
@@ -21,7 +22,7 @@ class [{PROPER}]Inner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subpage: props.subpage
+      cur_submenu: props.cur_submenu
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -32,17 +33,17 @@ class [{PROPER}]Inner extends React.Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.props.subpage);
+    this.innerEar('change_subpage', this.state.cur_submenu);
   };
 
-  innerEar = (cmd, value) => {
+  innerEar = (cmd, submenu) => {
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
-        subpage: value
+        cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_[{PROPER}](value);
+      this.props.dispatcher_[{PROPER}](submenu.route, submenu.query);
       return;
     }
 
@@ -63,21 +64,21 @@ class [{PROPER}]Inner extends React.Component {
     [{NO_DT}]//return (
     [{NO_DT}]//  <DataTable
     [{NO_DT}]//    subpage="[{LOWER}]"
-    [{NO_DT}]//    fields={this.props.fieldList}
     [{NO_DT}]//    data={this.props.data}
     [{NO_DT}]//    meta={this.props.meta}
     [{NO_DT}]//    innerEar={this.innerEar}
     [{NO_DT}]//  />
     [{NO_DT}]//);
-    return <div style={{ width: '98%' }}>Content of [{PROPER}] page with subpage: {this.state.subpage}</div>;
+    //return <div>{JSON.stringify(this.props)}</div>;
+    return <div style={{ width: '98%' }}>Content of [{PROPER}] page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
+    // <[{MENU_TYPE}] data={[{LOWER}]_menu} active={this.state.subpage} [{MENU_CLICK}] />
     // EXISTING_CODE
     return (
       <Fragment>
-        <[{MENU_TYPE}] data={this.props.menu} active={this.state.subpage} [{MENU_CLICK}] />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -108,8 +109,6 @@ const mapStateToProps = ({ reducer_Status, reducer_[{PROPER}] }) => ({
   error: reducer_[{PROPER}].error,
   data: reducer_[{PROPER}].data,
   meta: reducer_[{PROPER}].meta,
-  fieldList: reducer_[{PROPER}].fieldList,
-  menu: reducer_[{PROPER}].menu
 });
 
 //----------------------------------------------------------------------

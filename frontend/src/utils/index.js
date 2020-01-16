@@ -80,6 +80,25 @@ let to_key = function(s1, s2) {
   return (s1 + '_' + s2).toLowerCase();
 };
 
+//----------------------------------------------------------------------
+const findMenu = (page, menu, match) => {
+  var ret = { subpage: page, route: '', query: '' };
+  if (menu.items && menu.items.length > 0) {
+    ret.subpage = menu.items[0].subpage;
+    ret.route = menu.items[0].route;
+    ret.query = menu.items[0].query;
+    if (match.url !== '/' + page) {
+      if (match.params) {
+        ret.subpage = match.params.subpage;
+        var res = match.params.query.split('+');
+        ret.route = res[0];
+        ret.query = res[1];
+      }
+    }
+  }
+  return ret;
+};
+
 //----------------------------------------------------------------
 module.exports = {
   humanFileSize,
@@ -89,5 +108,6 @@ module.exports = {
   isHex,
   queryAPI_get,
   queryAPI_put,
-  to_key
+  to_key,
+  findMenu
 };

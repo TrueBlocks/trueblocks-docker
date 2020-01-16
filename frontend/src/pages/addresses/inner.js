@@ -8,6 +8,7 @@ import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
+import { addresses_menu } from './';
 import './addresses.css';
 
 // EXISTING_CODE
@@ -21,7 +22,7 @@ class AddressesInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subpage: props.subpage
+      cur_submenu: props.cur_submenu
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -32,21 +33,22 @@ class AddressesInner extends React.Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.props.subpage);
+    this.innerEar('change_subpage', this.state.cur_submenu);
   };
 
-  innerEar = (cmd, value) => {
+  innerEar = (cmd, submenu) => {
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
-        subpage: value
+        cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Addresses(value);
+      this.props.dispatcher_Addresses(submenu.route, submenu.query);
       return;
     }
 
     // EXISTING_CODE
+    var value = submenu.route + '/' + submenu.query;
     if (cmd === 'remove') {
       this.props.dispatcher_RemoveMonitor(value, true);
     } else if (cmd === 'delete' || cmd === 'undo') {
@@ -84,21 +86,21 @@ class AddressesInner extends React.Component {
     //return (
     //  <DataTable
     //    subpage="addresses"
-    //    fields={this.props.fieldList}
     //    data={this.props.data}
     //    meta={this.props.meta}
     //    innerEar={this.innerEar}
     //  />
     //);
-    return <div style={{ width: '98%' }}>Content of Addresses page with subpage: {this.state.subpage}</div>;
+    //return <div>{JSON.stringify(this.props)}</div>;
+    return <div style={{ width: '98%' }}>Content of Addresses page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
+    // <LocalMenu data={addresses_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -147,8 +149,6 @@ const mapStateToProps = ({ reducer_Status, reducer_Addresses }) => ({
   error: reducer_Addresses.error,
   data: reducer_Addresses.data,
   meta: reducer_Addresses.meta,
-  fieldList: reducer_Addresses.fieldList,
-  menu: reducer_Addresses.menu
 });
 
 //----------------------------------------------------------------------

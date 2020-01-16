@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Page } from '../../components';
 import { HelpPanel } from '../../components';
 import DashboardInner from './inner';
 import { dispatcher_Dashboard, dashboard_menu } from './dispatchers';
+import * as utils from '../../utils';
 
 //----------------------------------------------------------------------
 class Dashboard extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
-    return <DashboardInner subpage={params} match={this.props.match} />;
+    var item = utils.findMenu('dashboard', dashboard_menu, this.props.match);
+    //return <Fragment>{JSON.stringify(item)}</Fragment>;
+    console.log("Dashboard::getInner")
+    return <DashboardInner key={Math.random()} cur_submenu={item} />;
   };
 
   getHelp = () => {

@@ -9,6 +9,7 @@ import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { licensesText } from './text/licenses';
 import * as se from './actions';
+import { settings_menu } from './';
 import './settings.css';
 
 // EXISTING_CODE
@@ -20,7 +21,7 @@ class SettingsInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subpage: props.subpage
+      cur_submenu: props.cur_submenu
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -42,17 +43,17 @@ class SettingsInner extends React.Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.props.subpage);
+    this.innerEar('change_subpage', this.state.cur_submenu);
   };
 
-  innerEar = (cmd, value) => {
+  innerEar = (cmd, submenu) => {
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
-        subpage: value
+        cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Settings(value);
+      this.props.dispatcher_Settings(submenu.route, submenu.query);
       return;
     }
 
@@ -95,15 +96,16 @@ class SettingsInner extends React.Component {
     //  </Fragment>
     //);
     // EXISTING_CODE
-    return <div style={{ width: '98%' }}>Content of Settings page with subpage: {this.state.subpage}</div>;
+    //return <div>{JSON.stringify(this.props)}</div>;
+    return <div style={{ width: '98%' }}>Content of Settings page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
+    // <LocalMenu data={settings_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -149,8 +151,6 @@ const mapStateToProps = ({ reducer_Status, reducer_Settings }) => ({
   error: reducer_Settings.error,
   data: reducer_Settings.data,
   meta: reducer_Settings.meta,
-  fieldList: reducer_Settings.fieldList,
-  menu: reducer_Settings.menu
 });
 
 //----------------------------------------------------------------------

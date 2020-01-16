@@ -7,6 +7,7 @@ import { dispatcher_Support } from './dispatchers';
 import { LocalMenu } from '../../components';
 import { documentationText } from './text/documentation';
 import * as su from './actions';
+import { support_menu } from './';
 import './support.css';
 
 // EXISTING_CODE
@@ -17,7 +18,7 @@ class SupportInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subpage: props.subpage
+      cur_submenu: props.cur_submenu
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -28,17 +29,17 @@ class SupportInner extends React.Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.props.subpage);
+    this.innerEar('change_subpage', this.state.cur_submenu);
   };
 
-  innerEar = (cmd, value) => {
+  innerEar = (cmd, submenu) => {
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
-        subpage: value
+        cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Support(value);
+      this.props.dispatcher_Support(submenu.route, submenu.query);
       return;
     }
 
@@ -50,7 +51,7 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    if (this.state.subpage === su.DOCUMENTATION) {
+    if (this.state.cur_submenu.query === su.DOCUMENTATION) {
       return documentationText();
     }
     // EXISTING_CODE
@@ -75,15 +76,16 @@ class SupportInner extends React.Component {
     //  </Fragment>
     //);
     // EXISTING_CODE
-    return <div style={{ width: '98%' }}>Content of Support page with subpage: {this.state.subpage}</div>;
+    //return <div>{JSON.stringify(this.props)}</div>;
+    return <div style={{ width: '98%' }}>Content of Support page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
+    // <LocalMenu data={support_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -114,8 +116,6 @@ const mapStateToProps = ({ reducer_Status, reducer_Support }) => ({
   error: reducer_Support.error,
   data: reducer_Support.data,
   meta: reducer_Support.meta,
-  fieldList: reducer_Support.fieldList,
-  menu: reducer_Support.menu
 });
 
 //----------------------------------------------------------------------

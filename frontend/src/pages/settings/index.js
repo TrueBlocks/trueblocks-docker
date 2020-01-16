@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Page } from '../../components';
 import { HelpPanel } from '../../components';
 import SettingsInner from './inner';
 import { dispatcher_Settings, settings_menu } from './dispatchers';
+import * as utils from '../../utils';
 
 //----------------------------------------------------------------------
 class Settings extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
-    return <SettingsInner subpage={params} match={this.props.match} />;
+    var item = utils.findMenu('settings', settings_menu, this.props.match);
+    //return <Fragment>{JSON.stringify(item)}</Fragment>;
+    console.log("Settings::getInner")
+    return <SettingsInner key={Math.random()} cur_submenu={item} />;
   };
 
   getHelp = () => {

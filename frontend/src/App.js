@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import './App.css';
 import { Icon, MainMenu, PageHeader, PageFooter } from './components';
+import './App.css';
 
 //------------------------------------------------------------
 import Dashboard, { dashboard_menu } from './pages/dashboard';

@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Page } from '../../components';
 import { HelpPanel } from '../../components';
 import ExploreInner from './inner';
 import { dispatcher_Explore, explore_menu } from './dispatchers';
+import * as utils from '../../utils';
 
 //----------------------------------------------------------------------
 class Explore extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
-    return <ExploreInner subpage={params} match={this.props.match} />;
+    var item = utils.findMenu('explore', explore_menu, this.props.match);
+    //return <Fragment>{JSON.stringify(item)}</Fragment>;
+    console.log("Explore::getInner")
+    return <ExploreInner key={Math.random()} cur_submenu={item} />;
   };
 
   getHelp = () => {
     return (
       <HelpPanel>
-        The Explore module allows one to view the details of every transactions for each previously monitored address.
-        Because TrueBlocks runs on a local machine not a server, this means that you are restricted to exploring only
-        addresses that you've previously monitored.
+        The Explore module allows one to view the details of every transactions for each previously monitored address. \
+        Because TrueBlocks runs on a local machine not a server, this means that you are restricted to exploring only \
+        addresses that youve previously monitored.
       </HelpPanel>
     );
   };

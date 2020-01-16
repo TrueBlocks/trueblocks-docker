@@ -2,21 +2,20 @@ import * as ind from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Indicies = (action) => {
+export const dispatcher_Indicies = (route, query) => {
   return (dispatch, getState) => {
     dispatch({
       type: ind.BEGIN
     });
 
-    var res = action.split('/');
-    return Utils.queryAPI_get(res[0], res[1])
+    return Utils.queryAPI_get(route, query)
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: action,
+            type: query,
             payload: json
           });
         }

@@ -3,9 +3,7 @@ import { support_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: support_menu,
   data: null,
-  fieldList: null,
   meta: null,
   isLoading: false,
   error: null
@@ -42,7 +40,6 @@ export default function reducer_Support(state = initialState, action) {
       return {
         ...state,
         data: null,
-        fieldList: null,
         meta: null,
         isLoading: false,
         error: action.err

@@ -3,9 +3,7 @@ import { signatures_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: signatures_menu,
   data: null,
-  fieldList: null,
   meta: null,
   isLoading: false,
   error: null
@@ -40,7 +38,6 @@ export default function reducer_Signatures(state = initialState, action) {
       return {
         ...state,
         data: null,
-        fieldList: null,
         meta: null,
         isLoading: false,
         error: action.err

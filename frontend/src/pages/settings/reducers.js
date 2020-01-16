@@ -3,9 +3,7 @@ import { settings_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: settings_menu,
   data: null,
-  fieldList: null,
   meta: null,
   isLoading: false,
   error: null
@@ -49,7 +47,6 @@ export default function reducer_Settings(state = initialState, action) {
       return {
         ...state,
         data: null,
-        fieldList: null,
         meta: null,
         isLoading: false,
         error: action.err

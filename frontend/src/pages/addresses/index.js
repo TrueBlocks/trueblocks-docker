@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Page } from '../../components';
 import { HelpPanel } from '../../components';
 import AddressesInner from './inner';
 import { dispatcher_Addresses, addresses_menu } from './dispatchers';
+import * as utils from '../../utils';
 
 //----------------------------------------------------------------------
 class Addresses extends React.Component {
   getInner = () => {
-    var params = this.props.match.params.query ? this.props.match.params.query.replace('-', '/') : '';
-    return <AddressesInner subpage={params} match={this.props.match} />;
+    var item = utils.findMenu('addresses', addresses_menu, this.props.match);
+    //return <Fragment>{JSON.stringify(item)}</Fragment>;
+    console.log("Addresses::getInner")
+    return <AddressesInner key={Math.random()} cur_submenu={item} />;
   };
 
   getHelp = () => {
     return (
       <HelpPanel>
-        Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note
+        Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note \
         that the transactions/logs/receipts/traces are not downloaded until you explore an address.
       </HelpPanel>
     );

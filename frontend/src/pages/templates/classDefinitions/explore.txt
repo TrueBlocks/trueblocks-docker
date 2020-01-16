@@ -2,7 +2,7 @@
 class = CExplore
 page_notes = The Explore module allows one to view the details of every transactions for each previously monitored \
                 address.|Because TrueBlocks runs on a local machine not a server, this means that you are restricted \
-                to exploring only|addresses that you've previously monitored.
+                to exploring only|addresses that youve previously monitored.
 color = purple
 
 [[subpages]]

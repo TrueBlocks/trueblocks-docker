@@ -3,9 +3,7 @@ import { dashboard_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
-  menu: dashboard_menu,
   data: null,
-  fieldList: null,
   meta: null,
   isLoading: false,
   error: null
@@ -28,7 +26,6 @@ export default function reducer_Dashboard(state = initialState, action) {
       return {
         ...state,
         data: null,
-        fieldList: null,
         meta: null,
         isLoading: false,
         error: action.err

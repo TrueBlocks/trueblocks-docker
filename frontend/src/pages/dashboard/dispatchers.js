@@ -2,21 +2,20 @@ import * as da from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Dashboard = (action) => {
+export const dispatcher_Dashboard = (route, query) => {
   return (dispatch, getState) => {
     dispatch({
       type: da.BEGIN
     });
 
-    var res = action.split('/');
-    return Utils.queryAPI_get(res[0], res[1])
+    return Utils.queryAPI_get(route, query)
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: action,
+            type: query,
             payload: json
           });
         }

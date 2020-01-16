@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
 
 import { DashMenu } from '../../components';
+import { dashboard_menu } from './';
 import './dashboard.css';
 
 // EXISTING_CODE
@@ -15,7 +16,7 @@ class DashboardInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subpage: props.subpage
+      cur_submenu: props.cur_submenu
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -31,17 +32,17 @@ class DashboardInner extends React.Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.props.subpage);
+    this.innerEar('change_subpage', this.state.cur_submenu);
   };
 
-  innerEar = (cmd, value) => {
+  innerEar = (cmd, submenu) => {
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
-        subpage: value
+        cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Dashboard(value);
+      this.props.dispatcher_Dashboard(submenu.route, submenu.query);
       return;
     }
 
@@ -56,15 +57,16 @@ class DashboardInner extends React.Component {
     // EXISTING_CODE
     return <Fragment></Fragment>;
     // EXISTING_CODE
-    return <div style={{ width: '98%' }}>Content of Dashboard page with subpage: {this.state.subpage}</div>;
+    //return <div>{JSON.stringify(this.props)}</div>;
+    return <div style={{ width: '98%' }}>Content of Dashboard page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
+    // <DashMenu data={dashboard_menu} active={this.state.subpage} changePage={this.changePage} />
     // EXISTING_CODE
     return (
       <Fragment>
-        <DashMenu data={this.props.menu} active={this.state.subpage} changePage={this.changePage} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -95,8 +97,6 @@ const mapStateToProps = ({ reducer_Status, reducer_Dashboard }) => ({
   error: reducer_Dashboard.error,
   data: reducer_Dashboard.data,
   meta: reducer_Dashboard.meta,
-  fieldList: reducer_Dashboard.fieldList,
-  menu: reducer_Dashboard.menu
 });
 
 //----------------------------------------------------------------------

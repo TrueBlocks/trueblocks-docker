@@ -8,6 +8,7 @@ import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
+import { other_menu } from './';
 import './other.css';
 
 // EXISTING_CODE
@@ -18,7 +19,7 @@ class OtherInner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subpage: props.subpage
+      cur_submenu: props.cur_submenu
     };
     this.innerEar = this.innerEar.bind(this);
   }
@@ -29,17 +30,17 @@ class OtherInner extends React.Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.props.subpage);
+    this.innerEar('change_subpage', this.state.cur_submenu);
   };
 
-  innerEar = (cmd, value) => {
+  innerEar = (cmd, submenu) => {
     if (cmd === 'change_subpage') {
       // update the local state...
       this.setState({
-        subpage: value
+        cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Other(value);
+      this.props.dispatcher_Other(submenu.route, submenu.query);
       return;
     }
 
@@ -59,21 +60,21 @@ class OtherInner extends React.Component {
     //return (
     //  <DataTable
     //    subpage="other"
-    //    fields={this.props.fieldList}
     //    data={this.props.data}
     //    meta={this.props.meta}
     //    innerEar={this.innerEar}
     //  />
     //);
-    return <div style={{ width: '98%' }}>Content of Other page with subpage: {this.state.subpage}</div>;
+    //return <div>{JSON.stringify(this.props)}</div>;
+    return <div style={{ width: '98%' }}>Content of Other page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
+    // <LocalMenu data={other_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
     return (
       <Fragment>
-        <LocalMenu data={this.props.menu} active={this.state.subpage} innerEar={this.innerEar} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -104,8 +105,6 @@ const mapStateToProps = ({ reducer_Status, reducer_Other }) => ({
   error: reducer_Other.error,
   data: reducer_Other.data,
   meta: reducer_Other.meta,
-  fieldList: reducer_Other.fieldList,
-  menu: reducer_Other.menu
 });
 
 //----------------------------------------------------------------------
