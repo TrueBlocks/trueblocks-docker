@@ -58,15 +58,19 @@ class DashboardInner extends React.Component {
     return <Fragment></Fragment>;
     // EXISTING_CODE
     //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of Dashboard page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
+    return (
+      <div style={{ width: '98%' }}>
+        Content of Dashboard page with submenu: {JSON.stringify(this.state.cur_submenu)}
+      </div>
+    );
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <DashMenu data={dashboard_menu} active={this.state.subpage} changePage={this.changePage} />
     // EXISTING_CODE
     return (
       <Fragment>
+        <DashMenu data={dashboard_menu} active={this.state.subpage} changePage={this.changePage} />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -96,7 +100,7 @@ const mapStateToProps = ({ reducer_Status, reducer_Dashboard }) => ({
   isLoading: reducer_Dashboard.isLoading,
   error: reducer_Dashboard.error,
   data: reducer_Dashboard.data,
-  meta: reducer_Dashboard.meta,
+  meta: reducer_Dashboard.meta
 });
 
 //----------------------------------------------------------------------
