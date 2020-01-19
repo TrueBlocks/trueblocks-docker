@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { history } from './store';
-import { Icon, MainMenu, PageHeader, PageFooter } from './components';
 import { SET as SET_LAST_LOCATION } from './last-location-actions';
+import { MainMenu, PageHeader, PageFooter } from './components';
 import './App.css';
 
 //------------------------------------------------------------
@@ -24,10 +24,7 @@ const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocati
 function App({ lastLocation, setLastLocation, currentLocation }) {
   if (lastLocation && currentLocation.pathname === '/') {
     setLastLocation(null);
-
-    return (
-      <Redirect to={lastLocation} />
-    );
+    return <Redirect to={lastLocation} />
   }
 
   history.listen(({ pathname, search, hash }) => {

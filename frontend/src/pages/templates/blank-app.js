@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { history } from './store';
-import { Icon, MainMenu, PageHeader, PageFooter } from './components';
 import { SET as SET_LAST_LOCATION } from './last-location-actions';
+import { MainMenu, PageHeader, PageFooter } from './components';
 import './App.css';
 
 //------------------------------------------------------------
@@ -15,10 +15,7 @@ const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocati
 function App({ lastLocation, setLastLocation, currentLocation }) {
   if (lastLocation && currentLocation.pathname === '/') {
     setLastLocation(null);
-
-    return (
-        <Redirect to={lastLocation} />
-    );
+    return <Redirect to={lastLocation} />;
   }
 
   history.listen(({ pathname, search, hash }) => {
@@ -41,15 +38,16 @@ class Body extends React.Component {
       <div className="body-item">
         <MainMenu mainMenu={mainMenu} />
         <div className="right-body-container">
-[{ROUTES}]        </div>
+[{ROUTES}]          <Route component={Dashboard} path="/dashboard/:subpage/:query?" />
+        </div>
       </div>
     );
   };
 }
 
 //------------------------------------------------------------
-var mainMenu = [
-[{NAVLINKS}]];
+var mainMenu = [];
+[{NAVLINKS}]
 
 const mapStateToProps = ({ reducer_LastLocation, router }) => ({
   lastLocation: reducer_LastLocation.lastLocation,

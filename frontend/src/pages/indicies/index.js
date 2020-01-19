@@ -9,8 +9,6 @@ import * as utils from '../../utils';
 class Indicies extends React.Component {
   getInner = () => {
     var item = utils.findMenu('indicies', indicies_menu, this.props.match);
-    //return <Fragment>{JSON.stringify(item)}</Fragment>;
-    console.log("Indicies::getInner")
     return <IndiciesInner key={Math.random()} cur_submenu={item} />;
   };
 

@@ -100,6 +100,7 @@
   border-bottom: 1px solid #777;
   margin-top: 2px;
   margin-bottom: 8px;
+  text-transform: capitalize;
 }
 
 .title.app {

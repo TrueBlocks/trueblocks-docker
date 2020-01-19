@@ -1,5 +1,4 @@
 import * as si from './actions';
-import { signatures_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {

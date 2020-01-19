@@ -9,8 +9,6 @@ import * as utils from '../../utils';
 class Addresses extends React.Component {
   getInner = () => {
     var item = utils.findMenu('addresses', addresses_menu, this.props.match);
-    //return <Fragment>{JSON.stringify(item)}</Fragment>;
-    console.log("Addresses::getInner")
     return <AddressesInner key={Math.random()} cur_submenu={item} />;
   };
 

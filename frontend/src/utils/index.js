@@ -99,6 +99,12 @@ const findMenu = (page, menu, match) => {
   return ret;
 };
 
+//----------------------------------------------------------------------
+const breadCrumb = (page, menu) => {
+  if (!menu) return page;
+  return page + ' : ' + menu.subpage.replace('_', ' ');
+};
+
 //----------------------------------------------------------------
 module.exports = {
   humanFileSize,
@@ -109,5 +115,6 @@ module.exports = {
   queryAPI_get,
   queryAPI_put,
   to_key,
-  findMenu
+  findMenu,
+  breadCrumb
 };

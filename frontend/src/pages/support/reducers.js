@@ -1,5 +1,4 @@
 import * as su from './actions';
-import { support_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
@@ -19,8 +18,8 @@ export default function reducer_Support(state = initialState, action) {
         error: null
       };
 
-    case su.ABOUT:
-    case su.CONNECT_US:
+    case su.ABOUT_US:
+    case su.CONTACT_US:
     case su.DOCUMENTATION:
     case su.PAY_TEIR:
     case su.FREE_TEIR:

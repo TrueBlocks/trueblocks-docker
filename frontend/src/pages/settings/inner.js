@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Settings } from './dispatchers';
 
-import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { licensesText } from './text/licenses';
 import * as se from './actions';
-import { settings_menu } from './';
+import * as utils from '../../utils';
 import './settings.css';
 
 // EXISTING_CODE
@@ -53,7 +52,7 @@ class SettingsInner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Settings(submenu.route, submenu.query);
+      this.props.dispatcher_Settings(submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -65,57 +64,50 @@ class SettingsInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    if (this.state.subpage === se.LICENSES) {
+    if (this.state.cur_submenu.query === se.LICENSES) {
       return licensesText();
     }
-    //if (isError(this.props)) return <NotReady {...this.props} />;
-    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    //return (
-    //  <Fragment>
-    //    <form onSubmit={this.submit}>
-    //      {this.props.data.files.map((file, fileI) =>
-    //        file.groups.map((category, categoryI) => (
-    //          <div className="setting-group" key={category.section}>
-    //            <h4>{category.section}</h4>
-    //            {category.keys.map((settingKey, keyI) => {
-    //              const el = this.props.data.files[fileI].groups[categoryI].keys[keyI];
-    //              const loc = [fileI, categoryI, keyI];
-    //              return (
-    //                <div key={settingKey.name}>
-    //                  <SettingInput {...el} onChange={(e) => this.onChange(loc, e)} />
-    //                </div>
-    //              );
-    //            })}
-    //          </div>
-    //        ))
-    //      )}
-    //      <button type="submit">Submit</button>
-    //    </form>
-    //  </Fragment>
-    //);
+    return (
+      <Fragment>
+        <form onSubmit={this.submit}>
+          {this.props.data.files.map((file, fileI) =>
+            file.groups.map((category, categoryI) => (
+              <div className="setting-group" key={category.section}>
+                <h4>{category.section}</h4>
+                {category.keys.map((settingKey, keyI) => {
+                  const el = this.props.data.files[fileI].groups[categoryI].keys[keyI];
+                  const loc = [fileI, categoryI, keyI];
+                  return (
+                    <div key={settingKey.name}>
+                      <SettingInput {...el} onChange={(e) => this.onChange(loc, e)} />
+                    </div>
+                  );
+                })}
+              </div>
+            ))
+          )}
+          <button type="submit">Submit</button>
+        </form>
+      </Fragment>
+    );
     // EXISTING_CODE
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of Settings page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <LocalMenu data={settings_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.getInnerMost()}
-      </Fragment>
-    );
+    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">Settings</div>
+          <div className="title inner-page">{utils.breadCrumb('Settings', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>
@@ -150,7 +142,7 @@ const mapStateToProps = ({ reducer_Status, reducer_Settings }) => ({
   isLoading: reducer_Settings.isLoading,
   error: reducer_Settings.error,
   data: reducer_Settings.data,
-  meta: reducer_Settings.meta,
+  meta: reducer_Settings.meta
 });
 
 //----------------------------------------------------------------------

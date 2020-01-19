@@ -4,16 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
 
-import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
-import { addresses_menu } from './';
+import * as utils from '../../utils';
 import './addresses.css';
 
 // EXISTING_CODE
 import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
-import OldDataTable from '../../components/old-data-table';
+import { OldDataTable } from '../../components';
 const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
 
@@ -43,7 +42,7 @@ class AddressesInner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Addresses(submenu.route, submenu.query);
+      this.props.dispatcher_Addresses(submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -67,50 +66,36 @@ class AddressesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    //if (isError(this.props)) return <NotReady {...this.props} />;
-    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    //if (this.state.subpage === 'addresses/monitors' || this.state.subpage.substring(0, 7) === 'status/') {
-    //  return (
-    //    <Fragment>
-    //      <AddNewAddress {...this.props} />
-    //      <div className="old-data-table">
-    //        <OldDataTable headings={headings} rows={this.props.data} innerEar={this.innerEar} />
-    //      </div>
-    //      ;
-    //    </Fragment>
-    //  );
-    //}
+    if (this.state.cur_submenu.query === 'monitors' || this.state.cur_submenu.route === 'status') {
+      return (
+        <Fragment>
+          <AddNewAddress {...this.props} />
+          <div className="old-data-table">
+            <OldDataTable headings={headings} rows={this.props.data} innerEar={this.innerEar} />
+          </div>
+          ;
+        </Fragment>
+      );
+    }
     // EXISTING_CODE
-    //return (
-    //  <DataTable
-    //    subpage="addresses"
-    //    data={this.props.data}
-    //    meta={this.props.meta}
-    //    innerEar={this.innerEar}
-    //  />
-    //);
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of Addresses page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
+    return <DataTable subpage="addresses" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <LocalMenu data={addresses_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.getInnerMost()}
-      </Fragment>
-    );
+    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">Addresses</div>
+          <div className="title inner-page">{utils.breadCrumb('Addresses', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>
@@ -148,7 +133,7 @@ const mapStateToProps = ({ reducer_Status, reducer_Addresses }) => ({
   isLoading: reducer_Addresses.isLoading,
   error: reducer_Addresses.error,
   data: reducer_Addresses.data,
-  meta: reducer_Addresses.meta,
+  meta: reducer_Addresses.meta
 });
 
 //----------------------------------------------------------------------

@@ -9,7 +9,6 @@ export const DELETE = 'explore/DELETE';
 export const UNDELETE = 'explore/UNDELETE';
 export const REMOVE = 'explore/REMOVE';
 
-export const ACCOUNTS = 'modes=monitors&details&ether';
 export const BLOCKS = 'blocks=latest&hashes_only';
 export const TRANSACTIONS = 'transactions=8001001.0';
 export const RECEIPTS = 'transactions=8001001.0';

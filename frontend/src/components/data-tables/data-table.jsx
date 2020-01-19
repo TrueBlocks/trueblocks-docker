@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from './icon';
-import * as utils from '../utils';
+import { Icon } from '../icon';
+import * as utils from '../../utils';
 import './data-table.css';
 
 //----------------------------------------------------------------------
@@ -55,15 +55,13 @@ export class DataTable extends React.Component {
   }
 
   getContainer = () => {
-    var str = !this.props.fields
-      ? ''
-      : JSON.stringify(
-          this.props.fields.map((item) => {
-            return item.name;
-          }) +
-            ' ' +
-            JSON.stringify(this.props.meta).replace(/"/g, '')
-        );
+    var str =
+      !this.props.fields ||
+      JSON.stringify(
+        this.props.fields.map((item) => {
+          return item.name;
+        })
+      );
     return (
       <Fragment>
         <h4>{'Table title: ' + str}</h4>
@@ -237,6 +235,17 @@ class DataTableControlsSearch extends React.Component {
 
 //----------------------------------------------------------------------
 class DataTableControlsScroll extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      perPage: props.per_page
+    };
+  }
+
+  onSelectChange = (event) => {
+    this.setState({ perPage: event.target.value });
+  };
+
   render = () => {
     if (this.props.pages < 2) {
       return <Fragment></Fragment>;
@@ -248,22 +257,10 @@ class DataTableControlsScroll extends React.Component {
             page {this.props.cur_page} of {this.props.pages} <Icon bordered icon="first_page" />{' '}
             <Icon bordered icon="chevron_left" /> <Icon bordered icon="chevron_right" />{' '}
             <Icon bordered icon="last_page" /> showing{' '}
-            <select className="thing" name="what">
+            <select className="thing" name="what" value={this.state.perPage} onChange={this.onSelectChange}>
               <option key="10">10</option>
-              {this.props.per_page === 25 ? (
-                <option selected key="25">
-                  25
-                </option>
-              ) : (
-                <option key="25">25</option>
-              )}
-              {this.props.per_page === 100 ? (
-                <option selected key="100">
-                  100
-                </option>
-              ) : (
-                <option key="100">100</option>
-              )}
+              <option key="25">25</option>
+              <option key="100">100</option>
             </select>{' '}
             of {this.props.data ? this.props.data.length : 0}
           </form>

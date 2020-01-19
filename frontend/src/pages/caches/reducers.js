@@ -1,5 +1,4 @@
 import * as ca from './actions';
-import { caches_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {

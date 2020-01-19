@@ -9,8 +9,6 @@ import * as utils from '../../utils';
 class Caches extends React.Component {
   getInner = () => {
     var item = utils.findMenu('caches', caches_menu, this.props.match);
-    //return <Fragment>{JSON.stringify(item)}</Fragment>;
-    console.log("Caches::getInner")
     return <CachesInner key={Math.random()} cur_submenu={item} />;
   };
 

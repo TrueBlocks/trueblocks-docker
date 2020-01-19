@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { HELP_TOGGLE } from './side-panel-actions';
 import { SidePanel } from '../';
+import { HELP_TOGGLE } from './side-panel-actions';
 
 const toggle = () => ({ type: HELP_TOGGLE });
 

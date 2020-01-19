@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
 
 import { DashMenu } from '../../components';
+import * as utils from '../../utils';
 import { dashboard_menu } from './';
 import './dashboard.css';
 
@@ -22,10 +23,8 @@ class DashboardInner extends React.Component {
   }
 
   // EXISTING_CODE
-  changePage = (page, action) => {
-    var res = action.split('/');
-    var dest = page + '/subpage=' + res[0] + '-' + res[1];
-    window.open('/' + dest, '_self');
+  changePage = (dest) => {
+    window.open(dest, '_self');
   };
   // EXISTING_CODE
 
@@ -42,7 +41,7 @@ class DashboardInner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Dashboard(submenu.route, submenu.query);
+      this.props.dispatcher_Dashboard(submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -57,12 +56,6 @@ class DashboardInner extends React.Component {
     // EXISTING_CODE
     return <Fragment></Fragment>;
     // EXISTING_CODE
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return (
-      <div style={{ width: '98%' }}>
-        Content of Dashboard page with submenu: {JSON.stringify(this.state.cur_submenu)}
-      </div>
-    );
   };
 
   getInnerPage = () => {
@@ -80,7 +73,7 @@ class DashboardInner extends React.Component {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">Dashboard</div>
+          <div className="title inner-page">{utils.breadCrumb('Dashboard', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>

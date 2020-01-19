@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Signatures } from './dispatchers';
 
-import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
-import { signatures_menu } from './';
+import * as utils from '../../utils';
 import './signatures.css';
 
 // EXISTING_CODE
@@ -40,7 +39,7 @@ class SignaturesInner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Signatures(submenu.route, submenu.query);
+      this.props.dispatcher_Signatures(submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -52,39 +51,25 @@ class SignaturesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    //if (isError(this.props)) return <NotReady {...this.props} />;
-    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    //return (
-    //  <DataTable
-    //    subpage="signatures"
-    //    data={this.props.data}
-    //    meta={this.props.meta}
-    //    innerEar={this.innerEar}
-    //  />
-    //);
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of Signatures page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
+    return <DataTable subpage="signatures" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <LocalMenu data={signatures_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.getInnerMost()}
-      </Fragment>
-    );
+    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">Signatures</div>
+          <div className="title inner-page">{utils.breadCrumb('Signatures', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>
@@ -104,7 +89,7 @@ const mapStateToProps = ({ reducer_Status, reducer_Signatures }) => ({
   isLoading: reducer_Signatures.isLoading,
   error: reducer_Signatures.error,
   data: reducer_Signatures.data,
-  meta: reducer_Signatures.meta,
+  meta: reducer_Signatures.meta
 });
 
 //----------------------------------------------------------------------

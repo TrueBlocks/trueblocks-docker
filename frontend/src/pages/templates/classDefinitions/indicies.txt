@@ -4,7 +4,7 @@ page_notes = TrueBlocks index of appearances greatly speed up access to the Ethe
             up a lot of|space on your hard drive, so you have to keep any eye on them. Clean them out \
             periodically so they dont get too|big.
 color = blue
-no_error = true
+no_data = true
 
 [[subpages]]
 list = [

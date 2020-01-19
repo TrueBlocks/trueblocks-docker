@@ -7,10 +7,11 @@ import { dispatcher_[{PROPER}] } from './dispatchers';
 import { [{MENU_TYPE}] } from '../../components';
 [{NO_ERROR}]import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 [{NO_DATA}]import { isReady } from '../../components';
-[{NO_DT}]import { DataTable } from '../../components';
+[{NO_DT}]import { [{DT_TYPE}] } from '../../components';
 [{NO_TEXT}][{TEXT_IMPORTS}]
 [{NO_TEXT}][{TEXT_ACTIONS}]
-import { [{LOWER}]_menu } from './';
+import * as utils from '../../utils';
+[{MENU_COMMENT}]import { [{LOWER}]_menu } from './';
 import './[{LOWER}].css';
 
 
@@ -43,7 +44,7 @@ class [{PROPER}]Inner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_[{PROPER}](submenu.route, submenu.query);
+      this.props.dispatcher_[{PROPER}](submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -56,29 +57,20 @@ class [{PROPER}]Inner extends React.Component {
 
   getInnerMost = () => {
 [{NO_TEXT}][{TEXT_CODE}]
-    [{NO_ERROR}]//if (isError(this.props)) return <NotReady {...this.props} />;
-    [{NO_DATA}]//else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    [{NO_ERROR}]//else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    [{NO_ERROR}]if (isError(this.props)) return <NotReady {...this.props} />;
+    [{NO_DATA}]else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    [{NO_ERROR}]else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    [{NO_DT}]//return (
-    [{NO_DT}]//  <DataTable
-    [{NO_DT}]//    subpage="[{LOWER}]"
-    [{NO_DT}]//    data={this.props.data}
-    [{NO_DT}]//    meta={this.props.meta}
-    [{NO_DT}]//    innerEar={this.innerEar}
-    [{NO_DT}]//  />
-    [{NO_DT}]//);
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of [{PROPER}] page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
+    [{NO_DT}]return <[{DT_TYPE}] subpage="[{LOWER}]" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <[{MENU_TYPE}] data={[{LOWER}]_menu} active={this.state.subpage} [{MENU_CLICK}] />
     // EXISTING_CODE
     return (
       <Fragment>
+        <[{MENU_TYPE}] data={[{LOWER}]_menu} active={this.state.subpage} [{MENU_CLICK}] />
         {this.getInnerMost()}
       </Fragment>
     );
@@ -88,7 +80,7 @@ class [{PROPER}]Inner extends React.Component {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">[{PROPER}]</div>
+          <div className="title inner-page">{utils.breadCrumb('[{PROPER}]', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>
@@ -108,7 +100,7 @@ const mapStateToProps = ({ reducer_Status, reducer_[{PROPER}] }) => ({
   isLoading: reducer_[{PROPER}].isLoading,
   error: reducer_[{PROPER}].error,
   data: reducer_[{PROPER}].data,
-  meta: reducer_[{PROPER}].meta,
+  meta: reducer_[{PROPER}].meta
 });
 
 //----------------------------------------------------------------------

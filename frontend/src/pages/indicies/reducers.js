@@ -1,5 +1,4 @@
 import * as ind from './actions';
-import { indicies_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {

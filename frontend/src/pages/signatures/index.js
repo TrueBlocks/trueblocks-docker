@@ -9,8 +9,6 @@ import * as utils from '../../utils';
 class Signatures extends React.Component {
   getInner = () => {
     var item = utils.findMenu('signatures', signatures_menu, this.props.match);
-    //return <Fragment>{JSON.stringify(item)}</Fragment>;
-    console.log("Signatures::getInner")
     return <SignaturesInner key={Math.random()} cur_submenu={item} />;
   };
 

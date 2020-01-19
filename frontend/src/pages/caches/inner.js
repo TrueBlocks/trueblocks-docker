@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Caches } from './dispatchers';
 
-import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
-import { caches_menu } from './';
+import * as utils from '../../utils';
 import './caches.css';
 
 // EXISTING_CODE
@@ -40,7 +39,7 @@ class CachesInner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Caches(submenu.route, submenu.query);
+      this.props.dispatcher_Caches(submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -52,39 +51,25 @@ class CachesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    //if (isError(this.props)) return <NotReady {...this.props} />;
-    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    //return (
-    //  <DataTable
-    //    subpage="caches"
-    //    data={this.props.data}
-    //    meta={this.props.meta}
-    //    innerEar={this.innerEar}
-    //  />
-    //);
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of Caches page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
+    return <DataTable subpage="caches" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <LocalMenu data={caches_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.getInnerMost()}
-      </Fragment>
-    );
+    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">Caches</div>
+          <div className="title inner-page">{utils.breadCrumb('Caches', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>
@@ -104,7 +89,7 @@ const mapStateToProps = ({ reducer_Status, reducer_Caches }) => ({
   isLoading: reducer_Caches.isLoading,
   error: reducer_Caches.error,
   data: reducer_Caches.data,
-  meta: reducer_Caches.meta,
+  meta: reducer_Caches.meta
 });
 
 //----------------------------------------------------------------------

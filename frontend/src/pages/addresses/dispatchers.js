@@ -2,20 +2,21 @@ import * as ad from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Addresses = (route, query) => {
+export const dispatcher_Addresses = (str) => {
   return (dispatch, getState) => {
     dispatch({
       type: ad.BEGIN
     });
 
-    return Utils.queryAPI_get(route, query)
+    var array = str.split('?');
+    return Utils.queryAPI_get(array[0], array[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: query,
+            type: array[1],
             payload: json
           });
         }

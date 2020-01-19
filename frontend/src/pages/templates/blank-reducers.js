@@ -1,5 +1,4 @@
 import * as [{TWO}] from './actions';
-import { [{LOWER}]_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {

@@ -4,10 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Support } from './dispatchers';
 
-import { LocalMenu } from '../../components';
+import { free_teirText } from './text/free_teir';
+import { pay_teirText } from './text/pay_teir';
 import { documentationText } from './text/documentation';
+import { contact_usText } from './text/contact_us';
+import { about_usText } from './text/about_us';
 import * as su from './actions';
-import { support_menu } from './';
+import * as utils from '../../utils';
 import './support.css';
 
 // EXISTING_CODE
@@ -39,7 +42,7 @@ class SupportInner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Support(submenu.route, submenu.query);
+      this.props.dispatcher_Support(submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -51,51 +54,33 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    if (this.state.cur_submenu.query === su.DOCUMENTATION) {
+    if (this.state.cur_submenu.query === su.FREE_TEIR) {
+      return free_teirText();
+    } else if (this.state.cur_submenu.query === su.PAY_TEIR) {
+      return pay_teirText();
+    } else if (this.state.cur_submenu.query === su.DOCUMENTATION) {
       return documentationText();
+    } else if (this.state.cur_submenu.query === su.CONTACT_US) {
+      return contact_usText();
+    } else if (this.state.cur_submenu.query === su.ABOUT_US) {
+      return about_usText();
     }
     // EXISTING_CODE
-    //return (
-    //  <Fragment>
-    //    {this.state.subpage}
-    //    <ul>
-    //      <li>Email support: &lt;support@trueblocks.io&gt;</li>
-    //      <li>Online forums: &lt;https://discord.gg/zGh6PdN&gt;</li>
-    //      <li>Free support during installation and setup</li>
-    //    </ul>
-    //    <h4>Per Incident</h4>
-    //    <ul>
-    //      <li>$95 US per hour until resolved</li>
-    //      <li>Pay in Ether for a 10% discount</li>
-    //    </ul>
-    //    <h4>Support Plans</h4>
-    //    <ul>
-    //      <li>5 per-incident issue packs (10% discount)</li>
-    //      <li>Annual subscription (20% discount)</li>
-    //    </ul>
-    //  </Fragment>
-    //);
+    return <Fragment></Fragment>;
     // EXISTING_CODE
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of Support page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <LocalMenu data={support_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.getInnerMost()}
-      </Fragment>
-    );
+    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">Support</div>
+          <div className="title inner-page">{utils.breadCrumb('Support', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>
@@ -115,7 +100,7 @@ const mapStateToProps = ({ reducer_Status, reducer_Support }) => ({
   isLoading: reducer_Support.isLoading,
   error: reducer_Support.error,
   data: reducer_Support.data,
-  meta: reducer_Support.meta,
+  meta: reducer_Support.meta
 });
 
 //----------------------------------------------------------------------

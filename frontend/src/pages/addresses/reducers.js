@@ -1,5 +1,4 @@
 import * as ad from './actions';
-import { addresses_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {

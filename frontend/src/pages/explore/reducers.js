@@ -1,5 +1,4 @@
 import * as ex from './actions';
-import { explore_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
@@ -27,16 +26,6 @@ export default function reducer_Explore(state = initialState, action) {
       return {
         ...state,
         data: action.payload.data,
-        fieldList: action.payload.fieldList,
-        meta: action.payload.meta,
-        isLoading: false,
-        error: null
-      };
-
-    case ex.ACCOUNTS:
-      return {
-        ...state,
-        data: action.payload.data[0].caches[0].items,
         fieldList: action.payload.fieldList,
         meta: action.payload.meta,
         isLoading: false,

@@ -1,0 +1,70 @@
+.object_table {
+  font-size: 0.9em;
+  background-color: #fff;
+  color: #444;
+  font-family: 'Courier New', Courier, monospace;
+  border-left: 1px solid darkgrey;
+  border-bottom: 1px solid darkgrey;
+  /* margin-bottom: 10px; */
+}
+
+.object_table:hover {
+  cursor: pointer;
+}
+
+.object_table_header {
+  display: grid;
+  text-align: center;
+  text-transform: capitalize;
+  height: 28px;
+  font-weight: 600;
+  vertical-align: middle;
+  /* border: 1px dashed blue; */
+}
+
+.object_table_header-item {
+  background-color: #e2e5f0;
+  border-top: 1px solid darkgrey;
+  border-bottom: 1px solid darkgrey;
+  border-right: 1px solid darkgrey;
+}
+
+.object_table_row {
+  display: grid;
+  height: 25px;
+  /* border: 1px dashed blue; */
+}
+
+.object_table_row:hover {
+  background-color: antiquewhite;
+}
+
+.object_table_wide_row {
+  display: grid;
+  height: 25px;
+  grid-template-columns: 1fr;
+  border: 1px dashed blue;
+  text-align: center;
+}
+
+.object_table_wide_row:hover {
+  background-color: antiquewhite;
+}
+
+.object_table_table_item {
+  /* background-color: white; */
+  text-align: left;
+  border-right: 1px solid darkgrey;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; /* border: 1px dashed blue; */
+}
+
+.object_table_table_item.number {
+  text-align: right;
+  padding-left: 8px;
+  padding-right: 8px;
+  /* border: 1px dashed blue; */
+}

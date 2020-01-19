@@ -110,16 +110,16 @@ class ItemCols extends React.Component {
 /*-----------------------------------------------------------------------------*/
 class ItemCol extends React.Component {
   itemClicked = () => {
-    this.props.changePage(this.props.row.page.toLowerCase(), this.props.item.action);
+    var to = '/' + this.props.row.page;
+    to += '/' + this.props.item.subpage;
+    to += '/' + this.props.item.route;
+    to += '+' + this.props.item.query;
+    this.props.changePage(to);
   };
 
   render = () => {
     var empty = this.props.item.subpage.includes('-');
-    var cn = empty
-      ? 'summary-table box endpad '
-      : this.props.item.action === this.props.active
-      ? 'summary-table box col-item selected'
-      : 'summary-table box col-item ';
+    var cn = empty ? 'summary-table box endpad ' : 'summary-table box col-item ';
     var value = empty ? '' : utils.fmtInteger(this.props.item.value);
     return (
       <div key={this.props.type} className={cn} onClick={this.itemClicked}>

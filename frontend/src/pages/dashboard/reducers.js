@@ -1,5 +1,4 @@
 import * as da from './actions';
-import { dashboard_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {

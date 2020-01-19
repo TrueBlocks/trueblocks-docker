@@ -9,8 +9,6 @@ import * as utils from '../../utils';
 class Support extends React.Component {
   getInner = () => {
     var item = utils.findMenu('support', support_menu, this.props.match);
-    //return <Fragment>{JSON.stringify(item)}</Fragment>;
-    console.log("Support::getInner")
     return <SupportInner key={Math.random()} cur_submenu={item} />;
   };
 

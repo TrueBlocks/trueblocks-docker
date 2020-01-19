@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Other } from './dispatchers';
 
-import { LocalMenu } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
-import { other_menu } from './';
+import * as utils from '../../utils';
 import './other.css';
 
 // EXISTING_CODE
@@ -40,7 +39,7 @@ class OtherInner extends React.Component {
         cur_submenu: submenu
       });
       // update the global state...
-      this.props.dispatcher_Other(submenu.route, submenu.query);
+      this.props.dispatcher_Other(submenu.route + '?' + submenu.query);
       return;
     }
 
@@ -52,39 +51,25 @@ class OtherInner extends React.Component {
   // EXISTING_CODE
 
   getInnerMost = () => {
-    //if (isError(this.props)) return <NotReady {...this.props} />;
-    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
-    //else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    //return (
-    //  <DataTable
-    //    subpage="other"
-    //    data={this.props.data}
-    //    meta={this.props.meta}
-    //    innerEar={this.innerEar}
-    //  />
-    //);
-    //return <div>{JSON.stringify(this.props)}</div>;
-    return <div style={{ width: '98%' }}>Content of Other page with submenu: {JSON.stringify(this.state.cur_submenu)}</div>;
+    return <DataTable subpage="other" data={this.props.data} innerEar={this.innerEar} />;
   };
 
   getInnerPage = () => {
     // EXISTING_CODE
-    // <LocalMenu data={other_menu} active={this.state.subpage} innerEar={this.innerEar} />
     // EXISTING_CODE
-    return (
-      <Fragment>
-        {this.getInnerMost()}
-      </Fragment>
-    );
+    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {
     return (
       <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">Other</div>
+          <div className="title inner-page">{utils.breadCrumb('Other', this.state.cur_submenu)}</div>
           {this.getInnerPage()}
         </div>
       </Fragment>
@@ -104,7 +89,7 @@ const mapStateToProps = ({ reducer_Status, reducer_Other }) => ({
   isLoading: reducer_Other.isLoading,
   error: reducer_Other.error,
   data: reducer_Other.data,
-  meta: reducer_Other.meta,
+  meta: reducer_Other.meta
 });
 
 //----------------------------------------------------------------------

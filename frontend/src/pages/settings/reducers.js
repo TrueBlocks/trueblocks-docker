@@ -1,5 +1,4 @@
 import * as se from './actions';
-import { settings_menu } from './dispatchers';
 
 //----------------------------------------------------------------------
 const initialState = {
@@ -20,6 +19,7 @@ export default function reducer_Settings(state = initialState, action) {
       };
 
     case se.LICENSES:
+    case se.FORMATS:
     case se.SKINS:
       return {
         ...state,

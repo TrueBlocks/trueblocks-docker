@@ -11,4 +11,5 @@ export const REMOVE = 'setting/REMOVE';
 
 export const CONFIGURATION = 'get';
 export const SKINS = 'skins';
+export const FORMATS = 'formats';
 export const LICENSES = 'licenses';

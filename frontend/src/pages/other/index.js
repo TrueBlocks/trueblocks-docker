@@ -9,8 +9,6 @@ import * as utils from '../../utils';
 class Other extends React.Component {
   getInner = () => {
     var item = utils.findMenu('other', other_menu, this.props.match);
-    //return <Fragment>{JSON.stringify(item)}</Fragment>;
-    console.log("Other::getInner")
     return <OtherInner key={Math.random()} cur_submenu={item} />;
   };
 

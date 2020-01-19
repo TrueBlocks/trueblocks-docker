@@ -9,8 +9,6 @@ import * as utils from '../../utils';
 class Settings extends React.Component {
   getInner = () => {
     var item = utils.findMenu('settings', settings_menu, this.props.match);
-    //return <Fragment>{JSON.stringify(item)}</Fragment>;
-    console.log("Settings::getInner")
     return <SettingsInner key={Math.random()} cur_submenu={item} />;
   };
 

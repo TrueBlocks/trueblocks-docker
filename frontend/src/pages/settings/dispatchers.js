@@ -2,20 +2,21 @@ import * as se from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Settings = (route, query) => {
+export const dispatcher_Settings = (str) => {
   return (dispatch, getState) => {
     dispatch({
       type: se.BEGIN
     });
 
-    return Utils.queryAPI_get(route, query)
+    var array = str.split('?');
+    return Utils.queryAPI_get(array[0], array[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
           throw json.errors[0];
         } else {
           dispatch({
-            type: query,
+            type: array[1],
             payload: json
           });
         }
@@ -35,8 +36,8 @@ export const settings_menu = {
   items: [
     { subpage: 'configuration', route: 'settings', query: se.CONFIGURATION },
     { subpage: 'skins', route: 'settings', query: se.SKINS },
-    { subpage: 'licenses', route: 'settings', query: se.LICENSES },
-    { subpage: 'se-0003' },
+    { subpage: 'formats', route: 'settings', query: se.FORMATS },
+    { subpage: 'licenses', route: '', query: se.LICENSES },
     { subpage: 'se-0004' },
     { subpage: 'se-0005' },
     { subpage: 'se-0006' }
