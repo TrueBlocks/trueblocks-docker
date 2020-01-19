@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import SubMenuItem from './submenu-item';
 import Chevron from './chevron';
 
 export default function MainMenuItem({ id, active: mainMenuActive, page, items, onClick }) {
@@ -13,7 +14,14 @@ export default function MainMenuItem({ id, active: mainMenuActive, page, items, 
     return items.map((item, index) => {
       if (item.subpage.includes('-')) return null;
 
-      return <MainMenuItem key={index} page={page} item={item} onClick={onThisMenuClick} />;
+      return (
+        <SubMenuItem
+          key={index}
+          page={page}
+          item={item}
+          onClick={onThisMenuClick}
+          />
+      );
     });
   })();
 
