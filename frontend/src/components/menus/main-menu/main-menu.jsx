@@ -3,23 +3,17 @@ import { connect } from 'react-redux';
 import MainMenuItem from './main-menu-item';
 import './main-menu.css';
 
-//------------------------------------------------------------
-function markAsActiveIfMatchesLocation(pathname, menu) {
-  const { page } = menu;
-  const pageRegExp = new RegExp(`^/${page}`);
-  const rootRouteDisplayed = pathname === '/' && page === 'dashboard';
-
-  if (!pageRegExp.test(pathname) && !rootRouteDisplayed) return {...menu, active: false};
-
-  return {
-    ...menu,
-    active: true
-  };
-}
-
+/**
+ * Check which main menu matches loaded page and returns its index
+ * @param {string} pathname - current pathname
+ * @param {Array} menus - array of main menus
+ * @return {boolean} Index of main menu
+ */
 function getInitialActiveMenuIndex(pathname, menus) {
-  const pageToMatch = pathname.replace(/^\/([^\/]+).*/, '$1');
-  console.log(pageToMatch);
+  // RegExp matches everything after the first '/' that is not '/'
+  // e.g. /page/subpage -> page
+  const pageToMatch = pathname.replace(/^\/([^/]+).*/, '$1');
+
   return menus.findIndex(menu => menu.page === pageToMatch);
 }
 
@@ -28,27 +22,13 @@ export class MainMenu extends React.Component {
     super(props);
     this.state = {
       mainMenu: props.mainMenu,
-      activeMenuIndex: getInitialActiveMenuIndex(props.location.pathname, props.mainMenu),
-      activeSubMenuIndex: undefined
+      activeMenuIndex: getInitialActiveMenuIndex(props.location.pathname, props.mainMenu)
     };
   }
 
-  onMainClick = (id) => {
-    const mainMenu = this.state.mainMenu
-          .map((menu, index) => ({
-            ...menu,
-            active: index === id
-          }));
-
+  onMenuClick = ({ menuId }) => {
     this.setState({
-      mainMenu
-    });
-  };
-
-  onMenuClick = ({ menuId, subMenuId }) => {
-    this.setState({
-      activeMenuIndex: menuId,
-      activeSubMenuIndex: subMenuId
+      activeMenuIndex: menuId
     });
   };
 
@@ -57,7 +37,6 @@ export class MainMenu extends React.Component {
       <div className="left-body-container">
         {this.state.mainMenu.map((menu, index) => {
           const active = index === this.state.activeMenuIndex;
-          const activeSubMenuIndex = active ? this.state.activeSubMenuIndex : undefined;
 
           return (
             <MainMenuItem
@@ -65,10 +44,9 @@ export class MainMenu extends React.Component {
               key={index}
               page={menu.page}
               active={active}
-              activeSubMenuIndex={activeSubMenuIndex}
               items={menu.items}
               currentPathname={this.props.location.pathname}
-              onMenuClick={this.onMenuClick}
+              onClick={this.onMenuClick}
             />
           );
         })}

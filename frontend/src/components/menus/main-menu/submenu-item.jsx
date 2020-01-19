@@ -1,13 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function SubMenuItem({ id, item, page, active, onSubClick }) {
+export default function SubMenuItem({ item, page, onClick }) {
   const to = `/${page}/${item.subpage.replace(' ', '_')}/${item.route}+${item.query}`;
-  const onClick = () => onSubClick(id);
 
   return (
     <NavLink
-      className={'submenu-item' + (active ? ' is-active' : '')}
+      className="submenu-item"
       activeClassName="is-active"
       to={to}
       onClick={onClick}
