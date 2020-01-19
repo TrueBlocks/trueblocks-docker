@@ -1,21 +1,42 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
 import { Icon } from '../icon';
 import './main-menu.css';
 
 //------------------------------------------------------------
+function markAsActiveIfMatchesLocation(pathname, menu) {
+  const { page } = menu;
+  const pageRegExp = new RegExp(`^/${page}`);
+  const rootRouteDisplayed = pathname === '/' && page === 'dashboard';
+
+  if (!pageRegExp.test(pathname) && !rootRouteDisplayed) return {...menu, active: false};
+
+  return {
+    ...menu,
+    active: true
+  };
+}
+
 export class MainMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mainMenu: props.mainMenu
+      mainMenu: props.mainMenu.map(menu => markAsActiveIfMatchesLocation(props.location.pathname, menu)),
+      location: props.location
     };
   }
 
   onMainClick = (id) => {
-    var menu = this.state.mainMenu;
-    menu[id].active = !menu[id].active;
-    this.setState({ mainMenu: menu });
+    const mainMenu = this.state.mainMenu
+          .map((menu, index) => ({
+            ...menu,
+            active: index === id
+          }));
+
+    this.setState({
+      mainMenu
+    });
   };
 
   render = () => {
@@ -29,6 +50,7 @@ export class MainMenu extends React.Component {
               page={menu.page}
               active={menu.active}
               items={menu.items}
+              currentPathname={this.state.location.pathname}
               onMainClick={this.onMainClick}
             />
           );
@@ -38,63 +60,103 @@ export class MainMenu extends React.Component {
   };
 }
 
+const mapStateToProps = ({ router }, ownProps) => ({
+  location: router.location,
+  mainMenu: ownProps.mainMenu
+});
+
+export const ConnectedMainMenu = connect(
+  mapStateToProps
+)(MainMenu);
+
 //------------------------------------------------------------
 class MainMenuItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: props.items
+      id: props.id,
+      page: props.page
     };
+
+    this.state.items = props.items.map(item => ({
+      ...item,
+      active: this.isSubmenuItemActive(item)
+    }));
   }
 
   onClick = () => {
-    this.props.onMainClick(this.props.id);
+    this.props.onMainClick(this.state.id);
   };
 
   onSubClick = (id) => {
-    var items = this.state.items;
-    items.map((item) => {
-      item.active = item.subpage === items[id].subpage;
+    const items = this.state.items;
+
+    this.setState({
+      items: items.map((item) => ({
+        ...item,
+        active: item.subpage === items[id].subpage
+      }))
     });
-    this.setState({ items: items });
   };
 
   render = () => {
-    var hasSub = this.props.items && this.props.items.length > 0;
+    const { items, page } = this.state;
+    const { active } = this.props;
+    const hasSub = items && items.length > 0;
+
     return (
       <Fragment>
-        <Link
+        <NavLink
           className="menu-item"
           activeClassName="is-active"
           exact={hasSub ? false : true}
           onClick={this.onClick}
-          to={'/' + (hasSub ? this.props.page.toLowerCase() : '')}
+          to={'/' + (hasSub ? page.toLowerCase() : '')}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div>{this.props.page}</div>
-            <div>{hasSub ? chevron(this.props.active) : <Fragment></Fragment>}</div>
+            <div>{page}</div>
+            <div>{hasSub ? chevron(active) : <Fragment></Fragment>}</div>
           </div>
-        </Link>
+        </NavLink>
         {this.getSubmenu()}
       </Fragment>
     );
   };
 
+  // Checks if a submenu item is active, based on current route (used to
+  // determine active item when site loads)
+  isSubmenuItemActive = (item) => {
+    const { page } = this.state;
+    const { active, currentPathname } = this.props;
+
+    if (!active) return false;
+
+    const routeRegExp = new RegExp(`/${page}.+/${item.subpage}`);
+
+    if (!routeRegExp.test(currentPathname)) return false;
+
+    return true;
+  };
+
   // { subpage: 'accounts', route: 'status', query: 'modes=monitors&details&ether' },
   getSubmenu = () => {
-    if (!this.props.active || !this.props.items) return <Fragment></Fragment>;
+    const { items, page } = this.state;
+    const { active } = this.props;
+
+    if (!active || !items) return <Fragment></Fragment>;
+
     return (
       <div className="submenu-container">
-        {this.props.items.map((item, id) => {
+        {items.map((item, id) => {
           if (item.subpage.includes('-')) return <Fragment key={id}></Fragment>;
-          //console.log(item);
+
           return (
             <SubMenuItem
               key={id}
               id={id}
-              page={this.props.page}
+              page={page}
               item={item}
-              active={this.state.items[id].active}
+              active={item.active}
               onSubClick={this.onSubClick}
             />
           );
@@ -104,29 +166,20 @@ class MainMenuItem extends Component {
   };
 }
 
-//------------------------------------------------------------
-class SubMenuItem extends Component {
-  onClick = () => {
-    this.props.onSubClick(this.props.id);
-  };
+const SubMenuItem = ({ id, item, page, active, onSubClick }) => {
+  const to = `/${page}/${item.subpage.replace(' ', '_')}/${item.route}+${item.query}`;
+  const onClick = () => onSubClick(id);
 
-  render = () => {
-    var p = this.props;
-    var i = this.props.item;
-    var to = '/' + p.page + '/' + i.subpage.replace(' ', '_') + '/' + i.route + '+' + i.query;
-    var s = this.props.active ? { borderRight: '2px black dotted', backgroundColor: 'salmon' } : {};
-    return (
-      <Link
-        className={'submenu-item' + (this.props.active ? ' is-active' : '')}
-        activeClassName="is-active"
-        style={s}
-        to={to}
-        onClick={this.onClick}
+  return (
+    <NavLink
+      className={'submenu-item' + (active ? ' is-active' : '')}
+      activeClassName="is-active"
+      to={to}
+      onClick={onClick}
       >
-        {i.subpage}
-      </Link>
-    );
-  };
+      {item.subpage}
+    </NavLink>
+  );
 }
 
 //------------------------------------------------------------

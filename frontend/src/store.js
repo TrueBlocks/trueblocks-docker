@@ -29,7 +29,8 @@ const store = createStore(connectRouter(history)(rootReducer), initialAppState, 
 
 store.subscribe(() => {
   PersistentStore.saveState({
-    reducer_SidePanels: store.getState().reducer_SidePanels
+    reducer_SidePanels: store.getState().reducer_SidePanels,
+    reducer_LastLocation: store.getState().reducer_LastLocation
   });
 });
 

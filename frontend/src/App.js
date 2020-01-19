@@ -1,6 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { history } from './store';
 import { Icon, MainMenu, PageHeader, PageFooter } from './components';
+import { SET as SET_LAST_LOCATION } from './last-location-actions';
 import './App.css';
 
 //------------------------------------------------------------
@@ -15,7 +19,21 @@ import Settings, { settings_menu } from './pages/settings';
 import Support, { support_menu } from './pages/support';
 
 //------------------------------------------------------------
-function App() {
+const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocation });
+
+function App({ lastLocation, setLastLocation, currentLocation }) {
+  if (lastLocation && currentLocation.pathname === '/') {
+    setLastLocation(null);
+
+    return (
+      <Redirect to={lastLocation} />
+    );
+  }
+
+  history.listen(({ pathname, search, hash }) => {
+    setLastLocation({ pathname, search, hash });
+  });
+
   return (
     <div className="page-container">
       <PageHeader />
@@ -60,4 +78,20 @@ mainMenu.push(other_menu);
 mainMenu.push(settings_menu);
 mainMenu.push(support_menu);
 
-export default App;
+const mapStateToProps = ({ reducer_LastLocation, router }) => ({
+  lastLocation: reducer_LastLocation.lastLocation,
+  currentLocation: router.location
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      setLastLocation
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

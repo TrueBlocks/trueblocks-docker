@@ -62,7 +62,7 @@
   text-decoration: none;
 }
 
-.submenu-item .is-active {
+.submenu-item.is-active {
   /* font-weight: 700; */
   background-color: salmon;
   border-right: 3px salmon solid;
