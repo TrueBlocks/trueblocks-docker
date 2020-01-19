@@ -34,10 +34,8 @@ export default function MainMenuItem({ id, active: mainMenuActive, page, items, 
         onClick={onThisMenuClick}
         to={toLocation}
         >
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div>{page}</div>
-          <div>{subMenuPresent ? <Chevron active={mainMenuActive} /> : <Fragment></Fragment>}</div>
-        </div>
+          <span>{page}</span>
+          {subMenuPresent ? <Chevron active={mainMenuActive} /> : null}
       </NavLink>
       {subMenu}
     </Fragment>
