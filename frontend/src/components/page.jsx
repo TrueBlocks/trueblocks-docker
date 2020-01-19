@@ -29,22 +29,25 @@ export class Page extends React.Component {
 }
 
 //------------------------------------------------------------
-export class PageHeader extends React.Component {
-  render = () => {
-    return (
-      <div className="header-item">
-        <div className="header-left">
-          <img className="logo" alt={logo} src={logo} />
-        </div>
-        <div className="header-middle">
-          <div className="title app">TrueBlocks Account Explorer</div>
-        </div>
-        <div className="header-right">
-          <div style={{ height: '2.8em' }}></div>
-        </div>
+export function PageHeader({ small }) {
+  const className = [
+    'header-item',
+    (small ? 'small' : '')
+  ].join(' ');
+
+  return (
+    <div className={className}>
+      <div className="header-left">
+        <img className="logo" alt={logo} src={logo} />
       </div>
-    );
-  };
+      <div className="header-middle">
+        <div className="title app">TrueBlocks Account Explorer</div>
+      </div>
+      <div className="header-right">
+        <div style={{ height: '2.8em' }}></div>
+      </div>
+    </div>
+  );
 }
 
 //------------------------------------------------------------

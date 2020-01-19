@@ -10,6 +10,7 @@ import { MainMenu, DashMenu } from './menus';
 import { SidePanel } from './panels/side-panel';
 import StatusPanel from './panels/status';
 import HelpPanel from './panels/help';
+import TopScrollObserver from './top-scroll-observer';
 
 export {
   Page,
@@ -30,5 +31,6 @@ export {
   DashMenu,
   SidePanel,
   StatusPanel,
-  HelpPanel
+  HelpPanel,
+  TopScrollObserver
 };
