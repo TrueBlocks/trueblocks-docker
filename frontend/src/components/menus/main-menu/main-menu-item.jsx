@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import SubMenuItem from './submenu-item';
 import Chevron from './chevron';
 
-export default class MainMenuItem extends Component {
+export /*default*/ class XMainMenuItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -97,4 +97,45 @@ export default class MainMenuItem extends Component {
       </div>
     );
   };
+}
+
+export default function MainMenuItem({ id, active, activeSubMenuIndex, page, items, onMenuClick }) {
+  const submenuPresent = items && items.length > 0;
+  const toLocation = '/' + (submenuPresent ? page.toLowerCase() : '');
+  const onSubMenuClick = (subMenuId) => onMenuClick({ menuId: id, subMenuId });
+
+  const submenu = (!submenuPresent || !active) ? null : items.map((item, index) => {
+    if (item.subpage.includes('-')) return null;
+
+    const subMenuActive = activeSubMenuIndex === index;
+
+    return (
+      <SubMenuItem
+        id={index}
+        key={index}
+        page={page}
+        item={item}
+        active={subMenuActive}
+        onSubClick={onSubMenuClick}
+        />
+    );
+  });
+
+  return (
+    <Fragment>
+      <NavLink
+        className="menu-item"
+        activeClassName="is-active"
+        exact={!submenuPresent}
+        onClick={() => onMenuClick({ menuId: id })}
+        to={toLocation}
+        >
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>{page}</div>
+          <div>{submenuPresent ? <Chevron active={active} /> : <Fragment></Fragment>}</div>
+        </div>
+      </NavLink>
+      {submenu}
+    </Fragment>
+  );
 }

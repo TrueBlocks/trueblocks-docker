@@ -17,12 +17,19 @@ function markAsActiveIfMatchesLocation(pathname, menu) {
   };
 }
 
+function getInitialActiveMenuIndex(pathname, menus) {
+  const pageToMatch = pathname.replace(/^\/([^\/]+).*/, '$1');
+  console.log(pageToMatch);
+  return menus.findIndex(menu => menu.page === pageToMatch);
+}
+
 export class MainMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mainMenu: props.mainMenu
-        .map(menu => markAsActiveIfMatchesLocation(props.location.pathname, menu))
+      mainMenu: props.mainMenu,
+      activeMenuIndex: getInitialActiveMenuIndex(props.location.pathname, props.mainMenu),
+      activeSubMenuIndex: undefined
     };
   }
 
@@ -38,19 +45,30 @@ export class MainMenu extends React.Component {
     });
   };
 
+  onMenuClick = ({ menuId, subMenuId }) => {
+    this.setState({
+      activeMenuIndex: menuId,
+      activeSubMenuIndex: subMenuId
+    });
+  };
+
   render = () => {
     return (
       <div className="left-body-container">
-        {this.state.mainMenu.map((menu, id) => {
+        {this.state.mainMenu.map((menu, index) => {
+          const active = index === this.state.activeMenuIndex;
+          const activeSubMenuIndex = active ? this.state.activeSubMenuIndex : undefined;
+
           return (
             <MainMenuItem
-              key={id}
-              id={id}
+              id={index}
+              key={index}
               page={menu.page}
-              active={menu.active}
+              active={active}
+              activeSubMenuIndex={activeSubMenuIndex}
               items={menu.items}
               currentPathname={this.props.location.pathname}
-              onMainClick={this.onMainClick}
+              onMenuClick={this.onMenuClick}
             />
           );
         })}
