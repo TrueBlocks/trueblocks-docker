@@ -4,12 +4,12 @@ import SubMenuItem from './submenu-item';
 import Chevron from './chevron';
 
 export default function MainMenuItem({ id, active: mainMenuActive, page, items, onClick }) {
-  const submenuPresent = items && items.length > 0;
-  const toLocation = '/' + (submenuPresent ? page.toLowerCase() : '');
+  const subMenuPresent = items && items.length > 0;
+  const toLocation = '/' + (subMenuPresent ? page.toLowerCase() : '');
   const onThisMenuClick = onClick.bind(null, { menuId: id });
 
-  const submenu = (() => {
-    if(!submenuPresent || !mainMenuActive) return null;
+  const subMenu = (() => {
+    if(!subMenuPresent || !mainMenuActive) return null;
 
     return items.map((item, index) => {
       if (item.subpage.includes('-')) return null;
@@ -30,16 +30,16 @@ export default function MainMenuItem({ id, active: mainMenuActive, page, items, 
       <NavLink
         className="menu-item"
         activeClassName="is-active"
-        exact={!submenuPresent}
+        exact={!subMenuPresent}
         onClick={onThisMenuClick}
         to={toLocation}
         >
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div>{page}</div>
-          <div>{submenuPresent ? <Chevron active={mainMenuActive} /> : <Fragment></Fragment>}</div>
+          <div>{subMenuPresent ? <Chevron active={mainMenuActive} /> : <Fragment></Fragment>}</div>
         </div>
       </NavLink>
-      {submenu}
+      {subMenu}
     </Fragment>
   );
 }
