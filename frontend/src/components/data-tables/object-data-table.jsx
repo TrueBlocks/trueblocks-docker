@@ -1,8 +1,6 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from '../icon';
-import * as utils from '../../utils';
 import './object-data-table.css';
 
 //----------------------------------------------------------------------
@@ -72,6 +70,7 @@ export class ObjectTable extends React.Component {
   };
 }
 
+/*
 //----------------------------------------------------------------------
 class ObjectTableHeaderRow extends React.Component {
   render = () => {
@@ -129,3 +128,4 @@ class ObjectTableItem extends React.Component {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool, PropTypes.array])
   };
 }
+*/

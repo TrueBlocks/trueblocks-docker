@@ -171,7 +171,7 @@ class DataTableHeaderItem extends React.Component {
 //----------------------------------------------------------------------
 class DataTableItem extends React.Component {
   expandClicked = () => {
-    this.props.innerEar('expand', this.props.item);
+    if (this.props.innerEar) this.props.innerEar('expand', this.props.item);
   };
 
   render = () => {

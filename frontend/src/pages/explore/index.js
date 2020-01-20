@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Page } from '../../components';
 import { HelpPanel } from '../../components';
 import ExploreInner from './inner';

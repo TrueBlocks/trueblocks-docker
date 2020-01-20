@@ -35,7 +35,7 @@ export class HeaderRow extends React.Component {
 //---------------------------------------------------------------------
 export class HeaderCell extends React.Component {
   sortClicked = (el) => {
-    this.props.innerEar('sort', this.props.content);
+    if (this.props.innerEar) this.props.innerEar('sort', this.props.content);
   };
 
   render = () => {
@@ -91,7 +91,7 @@ export class BodyRow extends React.Component {
       if (!this.props.row.deleted) this.setState({ isExpanded: !this.state.isExpanded });
       cmd = 'noop';
     }
-    this.props.innerEar(cmd, value); // pass it to the parent in case they're interested
+    if (this.props.innerEar) this.props.innerEar(cmd, value); // pass it to the parent in case they're interested
   }
 
   render = () => {

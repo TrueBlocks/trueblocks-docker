@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 
 export const documentationText = () => {
   return (
@@ -16,7 +15,7 @@ export const documentationText = () => {
         our clients. In early 2016, we pivoted our full attention to the Ethereum blockchain space. We first released
         EthSlurp™ in March of 2016. Since then we’ve been working on QuickBlocks™.{' '}
         {
-          <a target="_blank" href="http://quickblocks.io">
+          <a target="_blank" href="http://quickblocks.io" rel="noopener noreferrer">
             Link
           </a>
         }
