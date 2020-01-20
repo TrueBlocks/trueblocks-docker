@@ -22,48 +22,23 @@ class IndiciesInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
-    this.innerEar = this.innerEar.bind(this);
+    // EXISTING_CODE
+    // EXISTING_CODE
   }
 
-  // EXISTING_CODE
-  // EXISTING_CODE
-
-  componentWillMount = () => {};
-
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.state.cur_submenu);
-  };
-
-  innerEar = (cmd, submenu) => {
-    if (cmd === 'change_subpage') {
-      // update the local state...
-      this.setState({
-        cur_submenu: submenu
-      });
-      // update the global state...
-      this.props.dispatcher_Indicies(submenu.route + '?' + submenu.query);
-      return;
-    }
-
-    // EXISTING_CODE
-    // EXISTING_CODE
+    this.props.dispatcher_Indicies(this.state.cur_submenu.route + '?' + this.state.cur_submenu.query);
   };
 
   // EXISTING_CODE
   // EXISTING_CODE
 
-  getInnerMost = () => {
+  getInnerPage = () => {
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     return <SystemProgressChart {...this.props} />;
     // EXISTING_CODE
-  };
-
-  getInnerPage = () => {
-    // EXISTING_CODE
-    // EXISTING_CODE
-    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {

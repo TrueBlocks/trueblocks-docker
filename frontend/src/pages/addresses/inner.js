@@ -23,30 +23,17 @@ class AddressesInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
+    // EXISTING_CODE
     this.innerEar = this.innerEar.bind(this);
+    // EXISTING_CODE
   }
 
-  // EXISTING_CODE
-  // EXISTING_CODE
-
-  componentWillMount = () => {};
-
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.state.cur_submenu);
+    this.props.dispatcher_Addresses(this.state.cur_submenu.route + '?' + this.state.cur_submenu.query);
   };
 
+  // EXISTING_CODE
   innerEar = (cmd, submenu) => {
-    if (cmd === 'change_subpage') {
-      // update the local state...
-      this.setState({
-        cur_submenu: submenu
-      });
-      // update the global state...
-      this.props.dispatcher_Addresses(submenu.route + '?' + submenu.query);
-      return;
-    }
-
-    // EXISTING_CODE
     var value = submenu.route + '/' + submenu.query;
     if (cmd === 'remove') {
       this.props.dispatcher_RemoveMonitor(value, true);
@@ -59,13 +46,10 @@ class AddressesInner extends React.Component {
     } else if (cmd === 'monitor') {
       this.props.dispatcher_AddMonitor(value);
     }
-    // EXISTING_CODE
   };
-
-  // EXISTING_CODE
   // EXISTING_CODE
 
-  getInnerMost = () => {
+  getInnerPage = () => {
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
@@ -83,12 +67,6 @@ class AddressesInner extends React.Component {
     }
     // EXISTING_CODE
     return <DataTable subpage="addresses" data={this.props.data} innerEar={this.innerEar} />;
-  };
-
-  getInnerPage = () => {
-    // EXISTING_CODE
-    // EXISTING_CODE
-    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {

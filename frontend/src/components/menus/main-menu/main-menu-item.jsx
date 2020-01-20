@@ -13,15 +13,7 @@ export default function MainMenuItem({ id, active: mainMenuActive, page, items, 
 
     return items.map((item, index) => {
       if (item.subpage.includes('-')) return null;
-
-      return (
-        <SubMenuItem
-          key={index}
-          page={page}
-          item={item}
-          onClick={onThisMenuClick}
-          />
-      );
+      return <SubMenuItem key={index} page={page} item={item} onClick={onThisMenuClick} />;
     });
   })();
 
@@ -41,20 +33,3 @@ export default function MainMenuItem({ id, active: mainMenuActive, page, items, 
     </Fragment>
   );
 }
-
-/*
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import MainMenuItem from './main-menu-item';
-import Chevron from './chevron';
-
-export default function MainMenuItem({ item, page, onClick }) {
-  const to = `/${page}/${item.subpage.replace(' ', '_')}/${item.route}+${item.query}`;
-
-  return (
-    <NavLink className="submenu-item" activeClassName="is-active" to={to} onClick={onClick}>
-      {item.subpage}
-    </NavLink>
-  );
-}
-*/

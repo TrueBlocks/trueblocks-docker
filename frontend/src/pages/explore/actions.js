@@ -9,8 +9,8 @@ export const DELETE = 'explore/DELETE';
 export const UNDELETE = 'explore/UNDELETE';
 export const REMOVE = 'explore/REMOVE';
 
-export const BLOCKS = 'blocks=latest&hashes_only';
-export const TRANSACTIONS = 'transactions=8001001.0';
+export const BLOCKS = 'blocks=latest&hashes_only&raw';
+export const TRANSACTIONS = 'transactions=8001001.0&raw';
 export const RECEIPTS = 'transactions=8001001.0';
 export const LOGS = 'transactions=46147.0';
 export const TRACES = 'transactions=8001001.1';

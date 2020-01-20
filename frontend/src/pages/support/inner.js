@@ -23,37 +23,18 @@ class SupportInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
-    this.innerEar = this.innerEar.bind(this);
+    // EXISTING_CODE
+    // EXISTING_CODE
   }
 
-  // EXISTING_CODE
-  // EXISTING_CODE
-
-  componentWillMount = () => {};
-
   componentDidMount = () => {
-    this.innerEar('change_subpage', this.state.cur_submenu);
-  };
-
-  innerEar = (cmd, submenu) => {
-    if (cmd === 'change_subpage') {
-      // update the local state...
-      this.setState({
-        cur_submenu: submenu
-      });
-      // update the global state...
-      this.props.dispatcher_Support(submenu.route + '?' + submenu.query);
-      return;
-    }
-
-    // EXISTING_CODE
-    // EXISTING_CODE
+    this.props.dispatcher_Support(this.state.cur_submenu.route + '?' + this.state.cur_submenu.query);
   };
 
   // EXISTING_CODE
   // EXISTING_CODE
 
-  getInnerMost = () => {
+  getInnerPage = () => {
     if (this.state.cur_submenu.query === su.FREE_TEIR) {
       return free_teirText();
     } else if (this.state.cur_submenu.query === su.PAY_TEIR) {
@@ -68,12 +49,6 @@ class SupportInner extends React.Component {
     // EXISTING_CODE
     return <Fragment></Fragment>;
     // EXISTING_CODE
-  };
-
-  getInnerPage = () => {
-    // EXISTING_CODE
-    // EXISTING_CODE
-    return <Fragment>{this.getInnerMost()}</Fragment>;
   };
 
   render = () => {

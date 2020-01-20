@@ -15,7 +15,7 @@ const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocati
 function App({ lastLocation, setLastLocation, currentLocation }) {
   if (lastLocation && currentLocation.pathname === '/') {
     setLastLocation(null);
-    return <Redirect to={lastLocation} />;
+    return <Redirect to={lastLocation} />
   }
 
   history.listen(({ pathname, search, hash }) => {
@@ -48,7 +48,6 @@ class Body extends React.Component {
 //------------------------------------------------------------
 var mainMenu = [];
 [{NAVLINKS}]
-
 const mapStateToProps = ({ reducer_LastLocation, router }) => ({
   lastLocation: reducer_LastLocation.lastLocation,
   currentLocation: router.location
