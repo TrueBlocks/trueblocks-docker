@@ -1,6 +1,5 @@
 import React from 'react';
 import { Page } from '../../components';
-import { HelpPanel } from '../../components';
 import OtherInner from './inner';
 import { dispatcher_Other, other_menu } from './dispatchers';
 import * as utils from '../../utils';
@@ -12,16 +11,8 @@ class Other extends React.Component {
     return <OtherInner key={Math.random()} cur_submenu={item} />;
   };
 
-  getHelp = () => {
-    return (
-      <HelpPanel>
-        The Other panel allows you to configure various other items related to TrueBlocks. This panel allows for many things including some other stuff.
-      </HelpPanel>
-    );
-  };
-
   render = () => {
-    return <Page inner={this.getInner()} help={this.getHelp()} />;
+    return <Page inner={this.getInner()} />;
   };
 }
 export default Other;

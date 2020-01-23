@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ExpandShrinkIcon } from '../../';
 import MenuItem from './menu-item';
 import './main-menu.css';
 
@@ -37,8 +38,19 @@ export class MainMenu extends React.Component {
   };
 
   render = () => {
+    const { isExpanded } = this.props;
+    const className = [
+      'left-body-container',
+      isExpanded ? 'expanded' : ''
+    ].join(' ');
+
     return (
-      <div className="left-body-container">
+      <div className={className}>
+        <button className="toggle-button" onClick={this.props.toggle}>
+          <ExpandShrinkIcon
+            shrinkTo="left"
+            isExpanded={isExpanded} />
+        </button>
         {this.state.mainMenu.map((menu, index) => {
           return (
             <MenuItem
@@ -57,9 +69,13 @@ export class MainMenu extends React.Component {
   };
 }
 
-const mapStateToProps = ({ router }, ownProps) => ({
+const mapStateToProps = ({ router, reducer_MainMenu }, ownProps) => ({
   location: router.location,
-  mainMenu: ownProps.mainMenu
+  mainMenu: ownProps.mainMenu,
+  isExpanded: ownProps.isExpanded,
+  toggle: ownProps.toggle
 });
 
-export const ConnectedMainMenu = connect(mapStateToProps)(MainMenu);
+export const ConnectedMainMenu = connect(
+  mapStateToProps
+)(MainMenu);
