@@ -6,7 +6,7 @@ color = tan
 
 [[subpages]]
 list = [
-    { page = "caches", subpage = "overview", route = "status", options = "modes_EQ_caches&types_EQ_all", extract = "_0.caches" },
+    { page = "caches", subpage = "dashboard", route = "status", options = "modes_EQ_caches&types_EQ_all", extract = "_0.caches" },
     { page = "caches", subpage = "block_cache", route = "status", options = "modes_EQ_caches&types_EQ_blocks&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "tx_cache", route = "status", options = "modes_EQ_caches&types_EQ_transactions&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "trace_cache", route = "status", options = "modes_EQ_caches&types_EQ_traces&details&depth_EQ_2", extract = "_0.caches" },

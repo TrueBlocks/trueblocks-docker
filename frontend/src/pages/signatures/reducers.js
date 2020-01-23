@@ -21,6 +21,7 @@ export default function reducer_Signatures(state = initialState, action) {
     case si.GENERATED:
     case si.COMMON:
     case si.DOWNLOADED:
+    case si.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,

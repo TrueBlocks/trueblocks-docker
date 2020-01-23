@@ -9,6 +9,7 @@ export const DELETE = 'other__/DELETE';
 export const UNDELETE = 'other__/UNDELETE';
 export const REMOVE = 'other__/REMOVE';
 
+export const DASHBOARD = 'other';
 export const CUSTOM = 'list&verbose';
 export const KNOWN = 'list';
 export const GENERATED = 'generated';

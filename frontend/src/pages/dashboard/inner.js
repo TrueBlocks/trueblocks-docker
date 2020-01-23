@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
 
 import { DashMenu } from '../../components';
+import { BreadCrumb } from '../../components'
 import * as utils from '../../utils';
 import { dashboard_menu } from './';
 import './dashboard.css';
@@ -41,12 +42,11 @@ class DashboardInner extends React.Component {
 
   render = () => {
     return (
-      <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">{utils.breadCrumb('Dashboard', this.state.cur_submenu)}</div>
+          <BreadCrumb page='Dashboard' menu={this.state.cur_submenu} />
           {this.getInnerPage()}
+          {JSON.stringify(this.state)}
         </div>
-      </Fragment>
     );
   };
 }

@@ -8,6 +8,7 @@ no_data = true
 
 [[subpages]]
 list = [
+    { page = "indicies", subpage = "dashboard" },
     { page = "indicies", subpage = "finalized", route = "status", options = "modes_EQ_index&details", extract = "_0.caches" },
     { page = "indicies", subpage = "staged", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
     { page = "indicies", subpage = "unripe", route = "status", options = "modes_EQ_index", extract = "_0.caches" },

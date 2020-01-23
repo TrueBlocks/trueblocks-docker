@@ -34,14 +34,15 @@ export const dispatcher_Settings = (str) => {
 export const settings_menu = {
   page: 'settings',
   items: [
+    { subpage: 'dashboard', route: 'dashboard', query: se.DASHBOARD },
     { subpage: 'configuration', route: 'settings', query: se.CONFIGURATION },
     { subpage: 'skins', route: 'settings', query: se.SKINS },
     { subpage: 'formats', route: 'settings', query: se.FORMATS },
     { subpage: 'licenses', route: '', query: se.LICENSES },
-    { subpage: 'se-0004' },
     { subpage: 'se-0005' },
     { subpage: 'se-0006' }
   ],
+  expanded: false,
   color: 'pink'
 };
 

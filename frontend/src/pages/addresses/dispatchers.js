@@ -34,14 +34,15 @@ export const dispatcher_Addresses = (str) => {
 export const addresses_menu = {
   page: 'addresses',
   items: [
+    { subpage: 'dashboard', route: 'dashboard', query: ad.DASHBOARD },
     { subpage: 'monitors', route: 'status', query: ad.MONITORS },
     { subpage: 'names', route: 'names', query: ad.NAMES },
-    { subpage: 'owned', route: 'names', query: ad.OWNED },
+    { subpage: 'wallets', route: 'names', query: ad.WALLETS },
     { subpage: 'tokens', route: 'names', query: ad.TOKENS },
     { subpage: 'prefunds', route: 'names', query: ad.PREFUNDS },
-    { subpage: 'other', route: 'names', query: ad.OTHER },
-    { subpage: 'ad-0006' }
+    { subpage: 'other', route: 'names', query: ad.OTHER }
   ],
+  expanded: false,
   color: 'pink'
 };
 

@@ -9,6 +9,7 @@ export const DELETE = 'setting/DELETE';
 export const UNDELETE = 'setting/UNDELETE';
 export const REMOVE = 'setting/REMOVE';
 
+export const DASHBOARD = 'settings';
 export const CONFIGURATION = 'get';
 export const SKINS = 'skins';
 export const FORMATS = 'formats';

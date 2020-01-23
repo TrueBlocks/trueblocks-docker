@@ -7,8 +7,9 @@ color = purple
 
 [[subpages]]
 list = [
-    { page = "support", subpage = "free_teir", route = "", options = "free_teir" },
-    { page = "support", subpage = "pay_teir", route = "", options = "pay_teir" },
+    { page = "support", subpage = "dashboard" },
+    { page = "support", subpage = "free_support", route = "", options = "free_support" },
+    { page = "support", subpage = "per_incident", route = "", options = "per_incident" },
     { page = "support", subpage = "documentation", route = "", options = "documentation" },
     { page = "support", subpage = "contact_us", route = "", options = "contact_us" },
     { page = "support", subpage = "about_us", route = "", options = "about_us" },

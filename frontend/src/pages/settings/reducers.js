@@ -21,6 +21,7 @@ export default function reducer_Settings(state = initialState, action) {
     case se.LICENSES:
     case se.FORMATS:
     case se.SKINS:
+    case se.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,

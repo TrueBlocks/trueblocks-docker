@@ -34,14 +34,15 @@ export const dispatcher_Other = (str) => {
 export const other_menu = {
   page: 'other',
   items: [
+    { subpage: 'dashboard', route: 'dashboard', query: ot.DASHBOARD },
     { subpage: 'custom', route: 'when', query: ot.CUSTOM },
     { subpage: 'known', route: 'when', query: ot.KNOWN },
     { subpage: 'generated', route: 'other', query: ot.GENERATED },
     { subpage: 'prices', route: 'quotes', query: ot.PRICES },
     { subpage: 'groups', route: 'names', query: ot.GROUPS },
-    { subpage: 'ot-0005' },
     { subpage: 'ot-0006' }
   ],
+  expanded: false,
   color: 'orange'
 };
 

@@ -9,6 +9,7 @@ export const DELETE = 'indicie/DELETE';
 export const UNDELETE = 'indicie/UNDELETE';
 export const REMOVE = 'indicie/REMOVE';
 
+export const DASHBOARD = 'indicies';
 export const FINALIZED = 'modes=index&details';
 export const STAGED = 'modes=index';
 export const UNRIPE = 'modes=index';

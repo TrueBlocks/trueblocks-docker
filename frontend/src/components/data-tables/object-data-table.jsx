@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './object-data-table.css';
+import * as utils from '../../utils';
 
 //----------------------------------------------------------------------
 export class ObjectTable extends React.Component {
@@ -19,7 +20,7 @@ export class ObjectTable extends React.Component {
         return true;
       });
     }
-    console.log('fields: ', fields);
+    // console.log('fields: ', fields);
     this.state = {
       fieldList: fields
     };
@@ -30,32 +31,27 @@ export class ObjectTable extends React.Component {
   getContainer = () => {
     if (!this.state.fieldList) return <Fragment></Fragment>;
     var str = this.state.fieldList.map((item) => {
+      var value = this.props.data[0].result ? this.props.data[0].result[item] : this.props.data[0][item];
       return (
         <Fragment>
-          <div key={'a0'} className={'object_table_col '}>
-            <p style={{ fontWeight: '700', display: 'inline' }}>{item + ':'}</p>{' '}
-            {JSON.stringify(this.props.data[0].result ? this.props.data[0].result[item] : this.props.data[0][item])}
+          <div key={'a0'} className={'object_table_row '}>
+            <ObjectTableItem cn="object_table_row left" value={item + ':'} />
+            <ObjectTableItem cn="object_table_right" value={value} />
           </div>
         </Fragment>
       );
     });
-    //   <ObjectTableHeaderRow {...this.props} headers={this.state.fieldList} bang={this.state.fieldList.length} />
-    //   {this.props.data.map((item, index) => {
-    //     return (
-    //       <Fragment>
-    //         <div key={index + 'a0'} className={'object_table_row '}>
-    //           {Object.values(item).map((val, vid) => {
-    //             return <ObjectTableItem key={index + '-' + vid} {...this.props} item={item} value={val} />;
-    //           })}
-    //         </div>
-    //       </Fragment>
-    //     );
-    //   })}
-    // </div>
+
     return (
       <Fragment>
-        <h4>{'Table title: ' + str}</h4>
-        <div className={'object_table ' + this.props.subpage}>{str}</div>
+        <h4>{'Table: '}</h4>
+        <div className={'object_table ' + this.props.subpage}>
+          <div className="object_table_header">
+            <div className="object_table_header_item">{this.props.type}</div>
+          </div>
+          <div>{str}</div>
+        </div>
+        <p></p>
       </Fragment>
     );
   };
@@ -70,62 +66,17 @@ export class ObjectTable extends React.Component {
   };
 }
 
-/*
-//----------------------------------------------------------------------
-class ObjectTableHeaderRow extends React.Component {
-  render = () => {
-    return (
-      <div className={'object_table_header '}>
-        {this.props.headers.map((field) => (
-          <ObjectTableHeaderItem {...this.props} key={'h' + field} value={field} />
-        ))}
-      </div>
-    );
-  };
-
-  static propTypes = {
-    headers: PropTypes.array
-  };
-}
-
-//----------------------------------------------------------------------
-class ObjectTableHeaderItem extends React.Component {
-  render = () => {
-    if (!this.props.value || this.props.value === '') return <Fragment></Fragment>;
-    return <div className="object_table_header-item">{this.props.value.replace('_', ' ')}</div>;
-  };
-
-  static propTypes = {
-    value: PropTypes.string
-  };
-}
-
 //----------------------------------------------------------------------
 class ObjectTableItem extends React.Component {
-  expandClicked = () => {
-    this.props.innerEar('expand', this.props.item);
-  };
-
   render = () => {
-    var cn = 'object_table_table_item';
+    var cn = this.props.cn;
     var isNum = !utils.isHex(this.props.value) && utils.isNumber(this.props.value);
-    if (isNum) cn = 'object_table_table_item number';
+    if (isNum) cn = cn + ' number';
     var val = this.props.value;
     if (typeof this.props.value === 'object') {
       val = JSON.stringify(this.props.value);
     }
-
-    return (
-      <div className={cn} onClick={this.expandClicked}>
-        {isNum ? utils.fmtInteger(val) : val}
-      </div>
-    );
-  };
-
-  static propTypes = {
-    subpage: PropTypes.string.isRequired,
-    item: PropTypes.object,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool, PropTypes.array])
+    if (val && typeof val === 'string') val = val.replace(/([A-Z])/g, ' $1').trim();
+    return <div className={cn}>{isNum ? utils.fmtInteger(val) : val}</div>;
   };
 }
-*/

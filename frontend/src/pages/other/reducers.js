@@ -23,6 +23,7 @@ export default function reducer_Other(state = initialState, action) {
     case ot.GENERATED:
     case ot.KNOWN:
     case ot.CUSTOM:
+    case ot.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,

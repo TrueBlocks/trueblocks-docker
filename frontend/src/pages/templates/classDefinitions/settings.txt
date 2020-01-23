@@ -6,6 +6,7 @@ color = pink
 
 [[subpages]]
 list = [
+    { page = "settings", subpage = "dashboard" },
     { page = "settings", subpage = "configuration", route = "settings", options = "get", extract = "_0" },
     { page = "settings", subpage = "skins", route = "settings", options = "skins" },
     { page = "settings", subpage = "formats", route = "settings", options = "formats" },

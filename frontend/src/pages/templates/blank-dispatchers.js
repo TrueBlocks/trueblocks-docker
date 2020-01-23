@@ -34,6 +34,7 @@ export const dispatcher_[{PROPER}] = (str) => {
 export const [{LOWER}]_menu = {
   page: '[{LOWER}]',
   items: [[{MENU_ITEMS}]  ],
+  expanded: false,
   color: '[{COLOR}]'
 };
 

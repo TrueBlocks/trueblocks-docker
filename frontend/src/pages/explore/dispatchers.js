@@ -34,14 +34,15 @@ export const dispatcher_Explore = (str) => {
 export const explore_menu = {
   page: 'explore',
   items: [
+    { subpage: 'dashboard', route: 'dashboard', query: ex.DASHBOARD },
     { subpage: 'blocks', route: 'blocks', query: ex.BLOCKS },
     { subpage: 'transactions', route: 'transactions', query: ex.TRANSACTIONS },
     { subpage: 'receipts', route: 'receipts', query: ex.RECEIPTS },
     { subpage: 'logs', route: 'logs', query: ex.LOGS },
     { subpage: 'traces', route: 'traces', query: ex.TRACES },
-    { subpage: 'ex-0005' },
     { subpage: 'ex-0006' }
   ],
+  expanded: false,
   color: 'purple'
 };
 

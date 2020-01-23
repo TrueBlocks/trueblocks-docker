@@ -34,14 +34,15 @@ export const dispatcher_Support = (str) => {
 export const support_menu = {
   page: 'support',
   items: [
-    { subpage: 'free teir', route: '', query: su.FREE_TEIR },
-    { subpage: 'pay teir', route: '', query: su.PAY_TEIR },
+    { subpage: 'dashboard', route: 'dashboard', query: su.DASHBOARD },
+    { subpage: 'free support', route: '', query: su.FREE_SUPPORT },
+    { subpage: 'per incident', route: '', query: su.PER_INCIDENT },
     { subpage: 'documentation', route: '', query: su.DOCUMENTATION },
     { subpage: 'contact us', route: '', query: su.CONTACT_US },
     { subpage: 'about us', route: '', query: su.ABOUT_US },
-    { subpage: 'su-0005' },
     { subpage: 'su-0006' }
   ],
+  expanded: false,
   color: 'purple'
 };
 

@@ -23,6 +23,7 @@ export default function reducer_Explore(state = initialState, action) {
     case ex.RECEIPTS:
     case ex.TRANSACTIONS:
     case ex.BLOCKS:
+    case ex.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,

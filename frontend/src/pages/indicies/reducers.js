@@ -18,6 +18,16 @@ export default function reducer_Indicies(state = initialState, action) {
         error: null
       };
 
+    case ind.DASHBOARD:
+      return {
+        ...state,
+        data: action.payload.data,
+        fieldList: action.payload.fieldList,
+        meta: action.payload.meta,
+        isLoading: false,
+        error: null
+      };
+
     case ind.SHARED:
     case ind.COLUMNS:
     case ind.UNRIPE:

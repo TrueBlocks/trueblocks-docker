@@ -21,8 +21,9 @@ export default function reducer_Addresses(state = initialState, action) {
     case ad.OTHER:
     case ad.PREFUNDS:
     case ad.TOKENS:
-    case ad.OWNED:
+    case ad.WALLETS:
     case ad.NAMES:
+    case ad.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,

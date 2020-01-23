@@ -9,7 +9,7 @@ export const DELETE = 'caches_/DELETE';
 export const UNDELETE = 'caches_/UNDELETE';
 export const REMOVE = 'caches_/REMOVE';
 
-export const OVERVIEW = 'modes=caches&types=all';
+export const DASHBOARD = 'caches';
 export const BLOCK_CACHE = 'modes=caches&types=blocks&details&depth=2';
 export const TX_CACHE = 'modes=caches&types=transactions&details&depth=2';
 export const TRACE_CACHE = 'modes=caches&types=traces&details&depth=2';

@@ -34,14 +34,15 @@ export const dispatcher_Signatures = (str) => {
 export const signatures_menu = {
   page: 'signatures',
   items: [
+    { subpage: 'dashboard', route: 'dashboard', query: si.DASHBOARD },
     { subpage: 'downloaded', route: 'abi', query: si.DOWNLOADED },
     { subpage: 'common', route: 'abi', query: si.COMMON },
     { subpage: 'generated', route: 'signatures', query: si.GENERATED },
-    { subpage: 'si-0003' },
     { subpage: 'si-0004' },
     { subpage: 'si-0005' },
     { subpage: 'si-0006' }
   ],
+  expanded: false,
   color: 'green'
 };
 

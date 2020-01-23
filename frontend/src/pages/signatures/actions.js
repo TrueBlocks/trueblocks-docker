@@ -9,6 +9,7 @@ export const DELETE = 'signatu/DELETE';
 export const UNDELETE = 'signatu/UNDELETE';
 export const REMOVE = 'signatu/REMOVE';
 
+export const DASHBOARD = 'signatures';
 export const DOWNLOADED = 'monitored&verbose';
 export const COMMON = 'known&verbose';
 export const GENERATED = 'generated';

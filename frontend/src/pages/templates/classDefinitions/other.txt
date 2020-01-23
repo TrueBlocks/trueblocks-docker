@@ -6,6 +6,7 @@ color = orange
 
 [[subpages]]
 list = [
+    { page = "other", subpage = "dashboard" },
     { page = "other", subpage = "custom", route = "when", options = "list&verbose" },
     { page = "other", subpage = "known", route = "when", options = "list" },
     { page = "other", subpage = "generated", route = "other", options = "generated" },

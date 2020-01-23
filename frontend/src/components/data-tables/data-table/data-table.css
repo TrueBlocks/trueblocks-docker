@@ -25,8 +25,9 @@
 .data_table_header-item {
   background-color: #e2e5f0;
   border-top: 1px solid darkgrey;
-  border-bottom: 1px solid darkgrey;
+  border-bottom: 3px double darkgrey;
   border-right: 1px solid darkgrey;
+  overflow: hidden; /* border: 1px dashed blue; */
 }
 
 .data_table_row {
@@ -55,23 +56,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 0 !important;
-}
-
-.thing {
   vertical-align: text-middle;
   /* background-color: red; */
   border: 1px solid lightgray;
   font-size: 13px;
-}
-
-.half_wide_left {
-  text-align: left;
-  height: 26px;
-}
-
-.half_wide_right {
-  text-align: right;
-  height: 26px;
+  /* background-color: orange; */
 }
 
 .data_table_table_item {

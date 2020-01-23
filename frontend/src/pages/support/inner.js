@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Support } from './dispatchers';
 
-import { free_teirText } from './text/free_teir';
-import { pay_teirText } from './text/pay_teir';
+import { BreadCrumb } from '../../components'
+import { free_supportText } from './text/free_support';
+import { per_incidentText } from './text/per_incident';
 import { documentationText } from './text/documentation';
 import { contact_usText } from './text/contact_us';
 import { about_usText } from './text/about_us';
@@ -35,10 +36,12 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
 
   getInnerPage = () => {
-    if (this.state.cur_submenu.query === su.FREE_TEIR) {
-      return free_teirText();
-    } else if (this.state.cur_submenu.query === su.PAY_TEIR) {
-      return pay_teirText();
+    if (this.state.cur_submenu.subpage === 'dashboard')
+      return <div>The dashboard for Support</div>
+    if (this.state.cur_submenu.query === su.FREE_SUPPORT) {
+      return free_supportText();
+    } else if (this.state.cur_submenu.query === su.PER_INCIDENT) {
+      return per_incidentText();
     } else if (this.state.cur_submenu.query === su.DOCUMENTATION) {
       return documentationText();
     } else if (this.state.cur_submenu.query === su.CONTACT_US) {
@@ -53,12 +56,11 @@ class SupportInner extends React.Component {
 
   render = () => {
     return (
-      <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">{utils.breadCrumb('Support', this.state.cur_submenu)}</div>
+          <BreadCrumb page='Support' menu={this.state.cur_submenu} />
           {this.getInnerPage()}
+          {JSON.stringify(this.state)}
         </div>
-      </Fragment>
     );
   };
 }

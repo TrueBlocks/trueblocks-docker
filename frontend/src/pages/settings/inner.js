@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Settings } from './dispatchers';
 
+import { BreadCrumb } from '../../components'
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { licensesText } from './text/licenses';
@@ -45,6 +46,8 @@ class SettingsInner extends React.Component {
   // EXISTING_CODE
 
   getInnerPage = () => {
+    if (this.state.cur_submenu.subpage === 'dashboard')
+      return <div>The dashboard for Settings</div>
     if (this.state.cur_submenu.query === se.LICENSES) {
       return licensesText();
     }
@@ -80,12 +83,11 @@ class SettingsInner extends React.Component {
 
   render = () => {
     return (
-      <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">{utils.breadCrumb('Settings', this.state.cur_submenu)}</div>
+          <BreadCrumb page='Settings' menu={this.state.cur_submenu} />
           {this.getInnerPage()}
+          {JSON.stringify(this.state)}
         </div>
-      </Fragment>
     );
   };
 }

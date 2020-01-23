@@ -22,7 +22,7 @@ export default function reducer_Caches(state = initialState, action) {
     case ca.TRACE_CACHE:
     case ca.TX_CACHE:
     case ca.BLOCK_CACHE:
-    case ca.OVERVIEW:
+    case ca.DASHBOARD:
       return {
         ...state,
         data: action.payload.data[0].caches,

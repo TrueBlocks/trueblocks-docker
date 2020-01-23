@@ -63,7 +63,7 @@ let queryAPI_get = function(cmd, params) {
 
 //----------------------------------------------------------------
 let queryAPI_put = function(cmd, params, body) {
-  console.log('PUT: ', apiProvider, cmd, '?', params);
+  //  console.log('PUT: ', apiProvider, cmd, '?', params);
   if (cmd === 'ping') return { json: {} };
   const url = apiProvider + cmd + '?' + params;
   return fetch(url, {
@@ -100,9 +100,15 @@ const findMenu = (page, menu, match) => {
 };
 
 //----------------------------------------------------------------------
-const breadCrumb = (page, menu) => {
-  if (!menu) return page;
-  return page + ' : ' + menu.subpage.replace('_', ' ');
+const nParts = (haystack) => {
+  return (haystack.match(/\//g) || []).length;
+};
+
+//----------------------------------------------------------------------
+const getBang = (num) => {
+  var bangs = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
+  if (num > 11) num = 11;
+  return bangs[num] + '_bang';
 };
 
 //----------------------------------------------------------------
@@ -116,5 +122,6 @@ module.exports = {
   queryAPI_put,
   to_key,
   findMenu,
-  breadCrumb
+  nParts,
+  getBang
 };

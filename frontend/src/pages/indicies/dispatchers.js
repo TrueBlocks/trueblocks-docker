@@ -34,14 +34,15 @@ export const dispatcher_Indicies = (str) => {
 export const indicies_menu = {
   page: 'indicies',
   items: [
+    { subpage: 'dashboard', route: 'dashboard', query: ind.DASHBOARD },
     { subpage: 'finalized', route: 'status', query: ind.FINALIZED },
     { subpage: 'staged', route: 'status', query: ind.STAGED },
     { subpage: 'unripe', route: 'status', query: ind.UNRIPE },
     { subpage: 'columns', route: 'status', query: ind.COLUMNS },
     { subpage: 'shared', route: 'status', query: ind.SHARED },
-    { subpage: 'ind-0005' },
     { subpage: 'ind-0006' }
   ],
+  expanded: false,
   color: 'blue'
 };
 

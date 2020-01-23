@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import MainMenuItem from './main-menu-item';
+import MenuItem from './menu-item';
 import './main-menu.css';
 
 /**
@@ -26,7 +26,12 @@ export class MainMenu extends React.Component {
   }
 
   onMenuClick = ({ menuId }) => {
+    var mainMenu = this.state.mainMenu;
+    if (mainMenu[this.state.activeMenuIndex] && this.state.activeMenuIndex !== menuId)
+      mainMenu[this.state.activeMenuIndex].expanded = false;
+    mainMenu[menuId].expanded = !mainMenu[menuId].expanded;
     this.setState({
+      mainMenu: mainMenu,
       activeMenuIndex: menuId
     });
   };
@@ -35,14 +40,12 @@ export class MainMenu extends React.Component {
     return (
       <div className="left-body-container">
         {this.state.mainMenu.map((menu, index) => {
-          const active = index === this.state.activeMenuIndex;
-
           return (
-            <MainMenuItem
+            <MenuItem
               id={index}
               key={index}
               page={menu.page}
-              active={active}
+              active={menu.expanded}
               items={menu.items}
               currentPathname={this.props.location.pathname}
               onClick={this.onMenuClick}

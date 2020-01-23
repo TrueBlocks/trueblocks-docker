@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Indicies } from './dispatchers';
 
+import { BreadCrumb } from '../../components'
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import * as utils from '../../utils';
 import './indicies.css';
@@ -34,6 +35,8 @@ class IndiciesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerPage = () => {
+    if (this.state.cur_submenu.subpage === 'dashboard')
+      return <div>The dashboard for Indicies</div>
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
@@ -43,12 +46,11 @@ class IndiciesInner extends React.Component {
 
   render = () => {
     return (
-      <Fragment>
         <div className="inner-panel">
-          <div className="title inner-page">{utils.breadCrumb('Indicies', this.state.cur_submenu)}</div>
+          <BreadCrumb page='Indicies' menu={this.state.cur_submenu} />
           {this.getInnerPage()}
+          {JSON.stringify(this.state)}
         </div>
-      </Fragment>
     );
   };
 }

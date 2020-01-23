@@ -21,8 +21,9 @@ export default function reducer_Support(state = initialState, action) {
     case su.ABOUT_US:
     case su.CONTACT_US:
     case su.DOCUMENTATION:
-    case su.PAY_TEIR:
-    case su.FREE_TEIR:
+    case su.PER_INCIDENT:
+    case su.FREE_SUPPORT:
+    case su.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,

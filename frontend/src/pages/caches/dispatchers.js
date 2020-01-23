@@ -34,7 +34,7 @@ export const dispatcher_Caches = (str) => {
 export const caches_menu = {
   page: 'caches',
   items: [
-    { subpage: 'overview', route: 'status', query: ca.OVERVIEW },
+    { subpage: 'dashboard', route: 'dashboard', query: ca.DASHBOARD },
     { subpage: 'block cache', route: 'status', query: ca.BLOCK_CACHE },
     { subpage: 'tx cache', route: 'status', query: ca.TX_CACHE },
     { subpage: 'trace cache', route: 'status', query: ca.TRACE_CACHE },
@@ -42,6 +42,7 @@ export const caches_menu = {
     { subpage: 'abi cache', route: 'status', query: ca.ABI_CACHE },
     { subpage: 'ca-0006' }
   ],
+  expanded: false,
   color: 'tan'
 };
 
