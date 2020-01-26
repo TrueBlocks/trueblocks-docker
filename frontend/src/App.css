@@ -1,3 +1,12 @@
+:root {
+    --color-background: #8d9cab;
+    --logo-width: 50px;
+    --logo-height: 70px;
+    --header-font-size: 1.8em;
+    --header-small-factor: 0.6;
+    --footer-height: 84px;
+}
+
 /*------------------------------------------*/
 .page-container {
   margin: 2px;
@@ -7,7 +16,7 @@
   flex-flow: column nowrap;
   justify-content: space-evenly;
   align-content: flex-start;
-  background-color: #8d9cab;
+  background-color: var(--color-background);
 }
 
 /*------------------------------------------*/
@@ -18,32 +27,57 @@
   align-content: flex-start;
 }
 
+.header-item {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1;
+  align-items: center;
+
+  background-color: var(--color-background);
+}
+
+.body-item {
+  margin-bottom: var(--footer-height);
+}
+
 .footer-item {
+  position: fixed;
   display: flex;
   align-content: flex-start;
-  margin-left: 7%;
+  margin: 2px 2px 0 2px;
+  padding: 5px 5% 5px 7%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background: var(--color-background);
+  /* Bottom border to mimic body-item margin */
+  border-bottom: 2px solid white;
 }
 
 /*------------------------------------------*/
-.header-left {
-  width: 3%;
-  /* background-color: blue; */
-  /* border: 1px dashed blue; */
-}
-
-.header-middle {
-  width: 95%;
-  /* background-color: green; */
-}
-
 .header-right {
-  width: 2%;
   text-align: center;
   line-height: 0.75em;
   /* background-color: orange;
   display: flex;
   flex-flow: column;
   align-content: flex-end; */
+}
+
+.header-item img.logo,
+.header-item .app.title {
+  transition: .4s all;
+}
+
+.header-item.small img.logo {
+  width: calc(var(--logo-width) * var(--header-small-factor));
+  height: calc(var(--logo-height) * var(--header-small-factor));
+}
+
+.header-item.small .app.title {
+  font-size: calc(var(--header-font-size) * var(--header-small-factor));
 }
 
 /*------------------------------------------*/
@@ -88,8 +122,8 @@
 
 /*------------------------------------------*/
 .logo {
-  width: 50px;
-  height: 70px;
+  width: var(--logo-width);
+  height: var(--logo-height);
   margin: 2px 10px 2px 4px;
 }
 
@@ -104,9 +138,9 @@
 }
 
 .title.app {
-  font-size: 1.8em;
+  font-size: var(--header-font-size);
   border: 0px !important;
-  margin: 15px 0px 8px 0px;
+  margin: 0;
   color: #444;
 }
 
@@ -116,4 +150,19 @@
 
 .title.status {
   color: #4c7c9c;
+}
+
+/* Minimum height layout */
+
+@media screen and (max-height: 600px) {
+  .body-item {
+    margin-bottom: 0;
+  }
+
+  .footer-item {
+    position: static;
+    border-bottom: none;
+    padding-left: 7%;
+    margin: 0;
+  }
 }
