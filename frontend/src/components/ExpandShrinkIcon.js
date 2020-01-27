@@ -11,7 +11,5 @@ const getIconsNames = (shrinkTo) => chevronDirectionByShrinkTo.get(shrinkTo);
 export default function ExpandShrinkIcon({ shrinkTo, isExpanded, toggleIcon, onClick }) {
   const iconName = toggleIcon || getIconsNames(shrinkTo)[isExpanded ? 'shrink' : 'expand'];
 
-  return (
-    <Icon icon={iconName} onClick={onClick} />
-  );
+  return <Icon icon={iconName} onClick={onClick} />;
 }

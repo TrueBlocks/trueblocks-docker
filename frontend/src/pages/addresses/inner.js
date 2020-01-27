@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
 
-import { BreadCrumb } from '../../components'
+import { BreadCrumb } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTable } from '../../components';
@@ -51,8 +51,7 @@ class AddressesInner extends React.Component {
   // EXISTING_CODE
 
   getInnerPage = () => {
-    if (this.state.cur_submenu.subpage === 'dashboard')
-      return <div>The dashboard for Addresses</div>
+    if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Addresses</div>;
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
@@ -74,11 +73,11 @@ class AddressesInner extends React.Component {
 
   render = () => {
     return (
-        <div className="inner-panel">
-          <BreadCrumb page='Addresses' menu={this.state.cur_submenu} />
-          {this.getInnerPage()}
-          {JSON.stringify(this.state)}
-        </div>
+      <div className="inner-panel">
+        <BreadCrumb page="Addresses" menu={this.state.cur_submenu} />
+        {this.getInnerPage()}
+        {JSON.stringify(this.state)}
+      </div>
     );
   };
 }
@@ -130,7 +129,4 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 //----------------------------------------------------------------------
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddressesInner);
+export default connect(mapStateToProps, mapDispatchToProps)(AddressesInner);

@@ -33,7 +33,7 @@ export const dispatcher_Dashboard = (str) => {
 //----------------------------------------------------------------------
 export const dashboard_menu = {
   page: 'dashboard',
-  items: [  ],
+  items: [],
   expanded: false,
   color: 'white'
 };

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Support } from './dispatchers';
 
-import { BreadCrumb } from '../../components'
+import { BreadCrumb } from '../../components';
 import { free_supportText } from './text/free_support';
 import { per_incidentText } from './text/per_incident';
 import { documentationText } from './text/documentation';
@@ -36,8 +36,7 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
 
   getInnerPage = () => {
-    if (this.state.cur_submenu.subpage === 'dashboard')
-      return <div>The dashboard for Support</div>
+    if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Support</div>;
     if (this.state.cur_submenu.query === su.FREE_SUPPORT) {
       return free_supportText();
     } else if (this.state.cur_submenu.query === su.PER_INCIDENT) {
@@ -56,11 +55,11 @@ class SupportInner extends React.Component {
 
   render = () => {
     return (
-        <div className="inner-panel">
-          <BreadCrumb page='Support' menu={this.state.cur_submenu} />
-          {this.getInnerPage()}
-          {JSON.stringify(this.state)}
-        </div>
+      <div className="inner-panel">
+        <BreadCrumb page="Support" menu={this.state.cur_submenu} />
+        {this.getInnerPage()}
+        {JSON.stringify(this.state)}
+      </div>
     );
   };
 }
@@ -92,7 +91,4 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 //----------------------------------------------------------------------
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SupportInner);
+export default connect(mapStateToProps, mapDispatchToProps)(SupportInner);

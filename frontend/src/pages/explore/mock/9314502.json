@@ -16,10 +16,7 @@
         "number": "0x8e20c6",
         "parentHash": "0x84af80278c37ac0c35f49c9e431a7ae334d9da89e1153cf02969b949557fd1d4",
         "receiptsRoot": "0x820b0e2baaa33790bae2d9ec92e9efa178345504c0a86fca3f18232e7820862f",
-        "sealFields": [
-          "0xa0ed2d9d355e599567337b81ce02e28638f6a4a459a5150051095e2908b13ce553",
-          "0x8844bf0a80089444cc"
-        ],
+        "sealFields": ["0xa0ed2d9d355e599567337b81ce02e28638f6a4a459a5150051095e2908b13ce553", "0x8844bf0a80089444cc"],
         "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
         "size": "0x79b9",
         "stateRoot": "0x5c09338eb810537b09c4106e3f5e14b13cfda2cde44a642c5b6d317ccd9dc1b7",

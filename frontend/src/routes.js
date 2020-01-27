@@ -13,55 +13,55 @@ import Support from './pages/support';
 export const routes = [
   {
     name: 'dashboard',
-    component: (routeProps) => (<Dashboard {...routeProps} />),
+    component: (routeProps) => <Dashboard {...routeProps} />,
     exact: true,
     path: '/'
   },
   {
     name: 'addresses',
-    component: (routeProps) => (<Addresses {...routeProps} />),
+    component: (routeProps) => <Addresses {...routeProps} />,
     exact: true,
     path: '/addresses/:subpage?/:query?'
   },
   {
     name: 'explore',
-    component: (routeProps) => (<Explore {...routeProps} />),
+    component: (routeProps) => <Explore {...routeProps} />,
     exact: true,
     path: '/explore/:subpage?/:query?'
   },
   {
     name: 'indicies',
-    component: (routeProps) => (<Indicies {...routeProps} />),
+    component: (routeProps) => <Indicies {...routeProps} />,
     exact: true,
     path: '/indicies/:subpage?/:query?'
   },
   {
     name: 'signatures',
-    component: (routeProps) => (<Signatures {...routeProps} />),
+    component: (routeProps) => <Signatures {...routeProps} />,
     exact: true,
     path: '/signatures/:subpage?/:query?'
   },
   {
     name: 'caches',
-    component: (routeProps) => (<Caches {...routeProps} />),
+    component: (routeProps) => <Caches {...routeProps} />,
     exact: true,
     path: '/caches/:subpage?/:query?'
   },
   {
     name: 'other',
-    component: (routeProps) => (<Other {...routeProps} />),
+    component: (routeProps) => <Other {...routeProps} />,
     exact: true,
     path: '/other/:subpage?/:query?'
   },
   {
     name: 'settings',
-    component: (routeProps) => (<Settings {...routeProps} />),
+    component: (routeProps) => <Settings {...routeProps} />,
     exact: true,
     path: '/settings/:subpage?/:query?'
   },
   {
     name: 'support',
-    component: (routeProps) => (<Support {...routeProps} />),
+    component: (routeProps) => <Support {...routeProps} />,
     exact: true,
     path: '/support/:subpage?/:query?'
   }

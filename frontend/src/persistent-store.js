@@ -13,7 +13,7 @@ export function loadState() {
   }
 }
 
-export function saveState (state) {
+export function saveState(state) {
   try {
     const serializedState = JSON.stringify(state);
 
@@ -21,9 +21,9 @@ export function saveState (state) {
   } catch (e) {
     console.error('Error while saving state to localStorage', e);
   }
-};
+}
 
 export default {
   loadState,
   saveState
-}
+};

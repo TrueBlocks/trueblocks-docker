@@ -21,8 +21,5 @@ export const polling = (pollingAction, duration = 5000) => (Component) => {
   const mapStateToProps = () => ({});
 
   const mapDispatchToProps = { pollingAction };
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Wrapper());
+  return connect(mapStateToProps, mapDispatchToProps)(Wrapper());
 };

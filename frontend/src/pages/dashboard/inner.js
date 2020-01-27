@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
 
 import { DashMenu } from '../../components';
-import { BreadCrumb } from '../../components'
+import { BreadCrumb } from '../../components';
 import * as utils from '../../utils';
 import { dashboard_menu } from './';
 import './dashboard.css';
@@ -42,11 +42,11 @@ class DashboardInner extends React.Component {
 
   render = () => {
     return (
-        <div className="inner-panel">
-          <BreadCrumb page='Dashboard' menu={this.state.cur_submenu} />
-          {this.getInnerPage()}
-          {JSON.stringify(this.state)}
-        </div>
+      <div className="inner-panel">
+        <BreadCrumb page="Dashboard" menu={this.state.cur_submenu} />
+        {this.getInnerPage()}
+        {JSON.stringify(this.state)}
+      </div>
     );
   };
 }
@@ -78,7 +78,4 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 //----------------------------------------------------------------------
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DashboardInner);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardInner);

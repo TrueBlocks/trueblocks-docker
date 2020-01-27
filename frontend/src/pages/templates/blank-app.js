@@ -26,7 +26,7 @@ class App extends React.Component {
     return currentLocation.pathname === '/';
   }
 
-  onTopScroll = scrolledDown => {
+  onTopScroll = (scrolledDown) => {
     this.setState({
       smallHeader: scrolledDown
     });
@@ -75,7 +75,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
