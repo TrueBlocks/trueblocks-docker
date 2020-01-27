@@ -8,16 +8,12 @@ import medium from '../img/medium.svg';
 import twitter from '../img/twitter.svg';
 // import facebook from '../img/facebook.svg';
 // import linkedin from '../img/linkedin.svg';
-import './page.css';
+import './Page.css';
 
 //----------------------------------------------------------------------
 export class Page extends React.Component {
   render = () => {
-    return (
-      <Fragment>
-        {this.props.inner}
-      </Fragment>
-    );
+    return <Fragment>{this.props.inner}</Fragment>;
   };
 
   static propTypes = {
@@ -27,10 +23,7 @@ export class Page extends React.Component {
 
 //------------------------------------------------------------
 export function PageHeader({ small }) {
-  const className = [
-    'header-item',
-    (small ? 'small' : '')
-  ].join(' ');
+  const className = ['header-item', small ? 'small' : ''].join(' ');
 
   return (
     <div className={className}>

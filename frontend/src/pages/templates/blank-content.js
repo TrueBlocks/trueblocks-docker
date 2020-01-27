@@ -3,15 +3,14 @@ import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-[{IMPORTS1}]
-import { STATUS_TOGGLE, HELP_TOGGLE } from './components/panels/side-panel-actions';
-import { MAIN_MENU_TOGGLE } from './components/menus/main-menu/reducer';
+[{ IMPORTS1 }];
+import { STATUS_TOGGLE, HELP_TOGGLE } from './components/SidePanel/reducers';
+import { MAIN_MENU_TOGGLE } from './components/MainMenu/reducers';
 import { MainMenu, StatusPanel, HelpPanel, PageHelp } from './components';
 import Routes from './routes';
 import './Content.css';
 
-const mainMenu = [
-[{NAVLINKS}]];
+const mainMenu = [[{ NAVLINKS }]];
 
 const toggleStatus = () => ({ type: STATUS_TOGGLE });
 const toggleHelp = () => ({ type: HELP_TOGGLE });

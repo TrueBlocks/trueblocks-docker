@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ExpandShrinkIcon } from '../';
-import './side-panel.css';
+import './SidePanel.css';
 
 const getShrinkToClass = (shrinkTo) => `shrink-to-${shrinkTo}`;
 
@@ -14,11 +14,7 @@ export const SidePanel = (props) => {
     <div className={classes}>
       <div className="title">
         <span>{props.title}</span>
-        <ExpandShrinkIcon
-          shrinkTo={shrinkTo}
-          isExpanded={isExpanded}
-          toggleIcon={toggleIcon}
-          onClick={onToggle} />
+        <ExpandShrinkIcon shrinkTo={shrinkTo} isExpanded={isExpanded} toggleIcon={toggleIcon} onClick={onToggle} />
       </div>
       {isExpanded ? props.children : null}
     </div>

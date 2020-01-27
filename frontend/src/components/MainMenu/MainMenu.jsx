@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ExpandShrinkIcon } from '../../';
+import { ExpandShrinkIcon } from '../';
 import MenuItem from './MenuItem';
-import './main-menu.css';
+import './MainMenu.css';
 
 /**
  * Check which main menu matches loaded page and returns its index
@@ -17,7 +17,7 @@ function getInitialActiveMenuIndex(pathname, menus) {
   return menus.findIndex((menu) => menu.page === pageToMatch);
 }
 
-export class MainMenu extends React.Component {
+class MainMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,17 +39,12 @@ export class MainMenu extends React.Component {
 
   render = () => {
     const { isExpanded } = this.props;
-    const className = [
-      'left-body-container',
-      isExpanded ? 'expanded' : ''
-    ].join(' ');
+    const className = ['left-body-container', isExpanded ? 'expanded' : ''].join(' ');
 
     return (
       <div className={className}>
         <button className="toggle-button" onClick={this.props.toggle}>
-          <ExpandShrinkIcon
-            shrinkTo="left"
-            isExpanded={isExpanded} />
+          <ExpandShrinkIcon shrinkTo="left" isExpanded={isExpanded} />
         </button>
         {this.state.mainMenu.map((menu, index) => {
           return (
@@ -76,6 +71,4 @@ const mapStateToProps = ({ router, reducer_MainMenu }, ownProps) => ({
   toggle: ownProps.toggle
 });
 
-export const ConnectedMainMenu = connect(
-  mapStateToProps
-)(MainMenu);
+export default connect(mapStateToProps)(MainMenu);

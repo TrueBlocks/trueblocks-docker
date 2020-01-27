@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------
 import React, { Fragment } from 'react';
 import './old-data-table.css';
-import Identicon from '../identicons';
+import Identicon from './identicons';
 import { Icon } from '../icon';
 var Utils = require('../../utils');
 

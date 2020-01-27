@@ -1,5 +1,5 @@
 import React from 'react';
-import { SidePanel } from './side-panel';
+import { SidePanel } from '../SidePanel';
 import StatusInner from './status-inner';
 import './status.css';
 

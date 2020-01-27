@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import SubmenuItem from './SubmenuItem';
-import Chevron from './chevron';
+import Chevron from './Chevron';
 
 export default function MenuItem({ id, active: mainMenuActive, page, items, onClick }) {
   const hasSubMenu = items && items.length > 0;

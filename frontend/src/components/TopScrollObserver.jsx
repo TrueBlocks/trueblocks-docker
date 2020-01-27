@@ -1,21 +1,19 @@
 import React from 'react';
 
-export default class TopScrollObserver extends React.Component {
+export class TopScrollObserver extends React.Component {
   constructor(props) {
     super(props);
 
     this.targetRef = React.createRef();
-    this.observer = new IntersectionObserver(entries => {
-      const [ firstEntry ] = entries;
+    this.observer = new IntersectionObserver((entries) => {
+      const [firstEntry] = entries;
 
       props.onTopScroll(firstEntry.intersectionRatio < 1);
     });
   }
 
   render() {
-    return (
-      <div ref={this.targetRef}></div>
-    );
+    return <div ref={this.targetRef}></div>;
   }
 
   componentDidMount() {

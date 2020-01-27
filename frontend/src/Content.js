@@ -13,8 +13,8 @@ import { other_menu } from './pages/other';
 import { settings_menu } from './pages/settings';
 import { support_menu } from './pages/support';
 
-import { STATUS_TOGGLE, HELP_TOGGLE } from './components/panels/side-panel-actions';
-import { MAIN_MENU_TOGGLE } from './components/menus/main-menu/reducer';
+import { STATUS_TOGGLE, HELP_TOGGLE } from './components/SidePanel/reducers';
+import { MAIN_MENU_TOGGLE } from './components/MainMenu/reducers';
 import { MainMenu, StatusPanel, HelpPanel, PageHelp } from './components';
 import Routes from './routes';
 import './Content.css';
@@ -28,7 +28,7 @@ const mainMenu = [
   caches_menu,
   other_menu,
   settings_menu,
-  support_menu,
+  support_menu
 ];
 
 const toggleStatus = () => ({ type: STATUS_TOGGLE });

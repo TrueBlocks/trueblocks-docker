@@ -1,6 +1,6 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
-import './dash-menu.css';
+import './DashMenu.css';
 import * as ad from '../../pages/addresses/dispatchers';
 import * as ex from '../../pages/explore/dispatchers';
 import * as ind from '../../pages/indicies/dispatchers';
