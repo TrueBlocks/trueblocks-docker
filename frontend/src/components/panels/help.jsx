@@ -1,10 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { SidePanel } from '../';
-import { HELP_TOGGLE } from './side-panel-actions';
-
-const toggle = () => ({ type: HELP_TOGGLE });
 
 export const HelpPanel = (props) => {
   const { isExpanded, toggle } = props;
@@ -22,19 +17,4 @@ export const HelpPanel = (props) => {
   );
 };
 
-const mapStateToProps = ({ reducer_SidePanels }) => ({
-  isExpanded: reducer_SidePanels.isHelpExpanded
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      toggle
-    },
-    dispatch
-  );
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HelpPanel);
+export default HelpPanel;

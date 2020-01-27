@@ -11,6 +11,8 @@ import { SidePanel } from './panels/side-panel';
 import StatusPanel from './panels/status';
 import HelpPanel from './panels/help';
 import TopScrollObserver from './top-scroll-observer';
+import PageHelp from './PageHelp';
+import ExpandShrinkIcon from './ExpandShrinkIcon';
 
 export {
   Page,
@@ -32,5 +34,7 @@ export {
   SidePanel,
   StatusPanel,
   HelpPanel,
-  TopScrollObserver
+  TopScrollObserver,
+  PageHelp,
+  ExpandShrinkIcon
 };

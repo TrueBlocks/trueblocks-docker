@@ -1,10 +1,12 @@
 :root {
-    --color-background: #8d9cab;
-    --logo-width: 50px;
-    --logo-height: 70px;
-    --header-font-size: 1.8em;
-    --header-small-factor: 0.6;
-    --footer-height: 84px;
+  --color-background: #8d9cab;
+  --logo-width: 50px;
+  --logo-height: 70px;
+  --header-font-size: 1.8em;
+  --header-small-factor: 0.6;
+  --footer-height: 84px;
+  --color-border-primary: #777;
+  --color-border-seconary: #ddd;
 }
 
 /*------------------------------------------*/
@@ -20,8 +22,7 @@
 }
 
 /*------------------------------------------*/
-.header-item,
-.body-item {
+.header-item {
   display: flex;
   flex-flow: row nowrap;
   align-content: flex-start;
@@ -81,28 +82,7 @@
 }
 
 /*------------------------------------------*/
-.left-body-container {
-  display: flex;
-  flex-flow: column nowrap;
-  min-width: 7%;
-  padding: 3px 0px;
-}
-
-.right-body-container {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  border: 1px solid #777;
-  background-color: white;
-}
-
-/*------------------------------------------*/
 .menu-panel {
-  border-right: 1px solid #ddd;
-}
-
-/*------------------------------------------*/
-.status-panel {
   border-right: 1px solid #ddd;
 }
 
@@ -113,11 +93,6 @@
   padding-left: 10px;
   padding-right: 10px;
   /* background-color: pink; */
-}
-
-/*------------------------------------------*/
-.help-panel {
-  border-left: 1px solid #ddd;
 }
 
 /*------------------------------------------*/

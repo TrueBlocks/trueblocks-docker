@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { StatusPanel } from './';
 import logo from '../img/logo.png';
 import discord from '../img/discord.svg';
 import github from '../img/github.svg';
@@ -16,9 +15,7 @@ export class Page extends React.Component {
   render = () => {
     return (
       <Fragment>
-        <StatusPanel {...this.props} />
         {this.props.inner}
-        {this.props.help}
       </Fragment>
     );
   };

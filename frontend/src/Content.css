@@ -1,0 +1,90 @@
+.app-content {
+  display: grid;
+  align-content: flex-start;
+
+  grid-template-columns: 1fr 1fr 81fr 1fr;
+}
+
+.left-body-container {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 3px 0px;
+  overflow-x: hidden;
+}
+
+.left-body-container.expanded {
+  min-width: 7%;
+}
+
+.left-body-container .toggle-button {
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 0;
+}
+
+.left-body-container.expanded .toggle-button {
+  text-align: right;
+}
+
+.status-panel {
+  background: white;
+  border-width: 1px 0 1px 1px;
+  border-style: solid;
+  border-color: var(--color-border-primary) var(--color-border-seconary) var(--color-border-primary) var(--color-border-primary);
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  border: 1px solid var(--color-border-primary);
+  background-color: white;
+}
+
+.help-panel {
+  background: white;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: var(--color-border-primary) var(--color-border-primary) var(--color-border-primary) var(--color-border-seconary);
+  overflow-x: hidden;
+}
+
+/* Grid */
+
+/* 1. Help expanded */
+.app-content.help-expanded {
+  grid-template-columns: 1fr 1fr 70fr 12fr;
+}
+
+/* 2. Status expanded */
+.app-content.status-expanded {
+  grid-template-columns: 1fr 12fr 70fr 1fr;
+}
+
+/* 3. Status and help expanded */
+.app-content.status-expanded.help-expanded {
+  grid-template-columns: 1fr 12fr 59fr 12fr;
+}
+
+/* 4. Only menu expanded */
+.app-content.menu-expanded {
+  grid-template-columns: 6fr 1fr 76fr 1fr;
+}
+
+/* 5. Menu and help expanded */
+.app-content.menu-expanded.help-expanded {
+  grid-template-columns: 6fr 1fr 65fr 12fr;
+}
+
+/* 6. Menu and status expanded */
+.app-content.menu-expanded.status-expanded {
+  grid-template-columns: 6fr 12fr 65fr 1fr;
+}
+
+/* 7. Everything expanded expanded */
+.app-content.menu-expanded.status-expanded.help-expanded {
+  grid-template-columns: 6fr 12fr 54fr 12fr;
+}
