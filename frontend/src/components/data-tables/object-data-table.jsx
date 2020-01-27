@@ -44,7 +44,6 @@ export class ObjectTable extends React.Component {
 
     return (
       <Fragment>
-        <h4>{'Table: '}</h4>
         <div className={'object_table ' + this.props.subpage}>
           <div className="object_table_header">
             <div className="object_table_header_item">{this.props.type}</div>

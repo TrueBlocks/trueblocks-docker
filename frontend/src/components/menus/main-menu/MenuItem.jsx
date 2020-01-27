@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-import SubMenuItem from './submenu-item';
+import SubmenuItem from './SubmenuItem';
 import Chevron from './chevron';
 
 export default function MenuItem({ id, active: mainMenuActive, page, items, onClick }) {
@@ -12,7 +12,7 @@ export default function MenuItem({ id, active: mainMenuActive, page, items, onCl
     if (!hasSubMenu || !mainMenuActive) return null;
     return items.map((item, index) => {
       if (item.subpage.includes('-') || item.subpage === 'dashboard') return null;
-      return <SubMenuItem key={index} page={page} item={item} />;
+      return <SubmenuItem key={index} page={page} item={item} />;
     });
   })();
 

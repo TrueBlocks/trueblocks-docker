@@ -5,11 +5,7 @@ import { connect } from 'react-redux';
 import { history } from './store';
 import { SET as SET_LAST_LOCATION } from './last-location-actions';
 import Content from './Content';
-import {
-  PageHeader,
-  PageFooter,
-  TopScrollObserver
-} from './components';
+import { PageHeader, PageFooter, TopScrollObserver } from './components';
 import './App.css';
 
 //------------------------------------------------------------

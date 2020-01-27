@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ExpandShrinkIcon } from '../../';
-import MenuItem from './menu-item';
+import MenuItem from './MenuItem';
 import './main-menu.css';
 
 /**

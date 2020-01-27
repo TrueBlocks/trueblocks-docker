@@ -21,6 +21,15 @@ const helpToPage = new Map([
       ),
   ],
   [
+    'caches',
+      () => (
+          <span>
+            TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your
+            hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
+          </span>
+      ),
+  ],
+  [
     'explore',
       () => (
           <span>
@@ -41,28 +50,11 @@ const helpToPage = new Map([
       ),
   ],
   [
-    'signatures',
-      () => (
-          <span>
-            TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your
-            hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
-          </span>
-      ),
-  ],
-  [
-    'caches',
-      () => (
-          <span>
-            TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your
-            hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
-          </span>
-      ),
-  ],
-  [
     'other',
       () => (
           <span>
-            The Other panel allows you to configure various other items related to TrueBlocks. This panel allows for many things including some other stuff.
+            The Other panel allows you to configure various other items related to TrueBlocks. This panel allows for many
+            things including some other stuff.
           </span>
       ),
   ],
@@ -75,6 +67,15 @@ const helpToPage = new Map([
       ),
   ],
   [
+    'signatures',
+      () => (
+          <span>
+            TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your
+            hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
+          </span>
+      ),
+  ],
+  [
     'support',
       () => (
           <span>
@@ -82,10 +83,6 @@ const helpToPage = new Map([
             plans to suit your needs. Weve got you covered.
           </span>
       ),
-  ],
-  [
-    'dashboard',
-    () => (<span></span>),
   ],
 ]);
 

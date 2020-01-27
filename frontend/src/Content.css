@@ -2,7 +2,7 @@
   display: grid;
   align-content: flex-start;
 
-  grid-template-columns: 1fr 1fr 81fr 1fr;
+  grid-template-columns: 2fr 2fr 78fr 2fr;
 }
 
 .left-body-container {
@@ -56,32 +56,32 @@ main {
 
 /* 1. Help expanded */
 .app-content.help-expanded {
-  grid-template-columns: 1fr 1fr 70fr 12fr;
+  grid-template-columns: 2fr 2fr 68fr 12fr;
 }
 
 /* 2. Status expanded */
 .app-content.status-expanded {
-  grid-template-columns: 1fr 12fr 70fr 1fr;
+  grid-template-columns: 2fr 12fr 68fr 2fr;
 }
 
 /* 3. Status and help expanded */
 .app-content.status-expanded.help-expanded {
-  grid-template-columns: 1fr 12fr 59fr 12fr;
+  grid-template-columns: 2fr 12fr 58fr 12fr;
 }
 
 /* 4. Only menu expanded */
 .app-content.menu-expanded {
-  grid-template-columns: 6fr 1fr 76fr 1fr;
+  grid-template-columns: 6fr 2fr 74fr 2fr;
 }
 
 /* 5. Menu and help expanded */
 .app-content.menu-expanded.help-expanded {
-  grid-template-columns: 6fr 1fr 65fr 12fr;
+  grid-template-columns: 6fr 2fr 64fr 12fr;
 }
 
 /* 6. Menu and status expanded */
 .app-content.menu-expanded.status-expanded {
-  grid-template-columns: 6fr 12fr 65fr 1fr;
+  grid-template-columns: 6fr 12fr 64fr 2fr;
 }
 
 /* 7. Everything expanded expanded */

@@ -3,16 +3,7 @@ import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { dashboard_menu } from './pages/dashboard';
-import { addresses_menu } from './pages/addresses';
-import { explore_menu } from './pages/explore';
-import { indicies_menu } from './pages/indicies';
-import { signatures_menu } from './pages/signatures';
-import { caches_menu } from './pages/caches';
-import { other_menu } from './pages/other';
-import { settings_menu } from './pages/settings';
-import { support_menu } from './pages/support';
-
+[{IMPORTS1}]
 import { STATUS_TOGGLE, HELP_TOGGLE } from './components/panels/side-panel-actions';
 import { MAIN_MENU_TOGGLE } from './components/menus/main-menu/reducer';
 import { MainMenu, StatusPanel, HelpPanel, PageHelp } from './components';
@@ -20,16 +11,7 @@ import Routes from './routes';
 import './Content.css';
 
 const mainMenu = [
-  dashboard_menu,
-  addresses_menu,
-  explore_menu,
-  indicies_menu,
-  signatures_menu,
-  caches_menu,
-  other_menu,
-  settings_menu,
-  support_menu,
-];
+[{NAVLINKS}]];
 
 const toggleStatus = () => ({ type: STATUS_TOGGLE });
 const toggleHelp = () => ({ type: HELP_TOGGLE });
