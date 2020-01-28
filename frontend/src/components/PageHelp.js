@@ -15,6 +15,7 @@ const helpToPage = new Map([
     'addresses',
     () => (
       <span>
+        <h4>Addresses Page</h4>
         Monitors are per-address index caches that enable fast reteival of transaction histories for any account. Note
         that the transactions/logs/receipts/traces are not downloaded until you explore an address.
       </span>
@@ -24,6 +25,7 @@ const helpToPage = new Map([
     'caches',
     () => (
       <span>
+        <h4>Caches Page</h4>
         TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your
         hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
       </span>
@@ -33,6 +35,7 @@ const helpToPage = new Map([
     'explore',
     () => (
       <span>
+        <h4>Explore Page</h4>
         The Explore module allows one to view the details of every transactions for each previously monitored address.
         Because TrueBlocks runs on a local machine not a server, this means that you are restricted to exploring only
         addresses that youve previously monitored.
@@ -43,6 +46,7 @@ const helpToPage = new Map([
     'indicies',
     () => (
       <span>
+        <h4>Indicies Page</h4>
         TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a lot of
         space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too
         big.
@@ -53,6 +57,7 @@ const helpToPage = new Map([
     'other',
     () => (
       <span>
+        <h4>Other Page</h4>
         The Other panel allows you to configure various other items related to TrueBlocks. This panel allows for many
         things including some other stuff.
       </span>
@@ -62,6 +67,7 @@ const helpToPage = new Map([
     'settings',
     () => (
       <span>
+        <h4>Settings Page</h4>
         Monitors are per-address index caches that enable fast retreival of appearance histories for any account.
       </span>
     )
@@ -70,6 +76,7 @@ const helpToPage = new Map([
     'signatures',
     () => (
       <span>
+        <h4>Signatures Page</h4>
         TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your
         hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
       </span>
@@ -79,6 +86,7 @@ const helpToPage = new Map([
     'support',
     () => (
       <span>
+        <h4>Support Page</h4>
         We provide various support options ranging from online email/forum discussions to full enterprise-level support
         plans to suit your needs. Weve got you covered.
       </span>
