@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from '../../icon';
-import './data-table.css';
+import { Icon } from '../Icon';
+import './DataTable.css';
 
 //----------------------------------------------------------------------
 export default class HeaderCell extends React.Component {

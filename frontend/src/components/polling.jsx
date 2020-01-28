@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-export const polling = (pollingAction, duration = 5000) => (Component) => {
+export const Polling = (pollingAction, duration = 5000) => (Component) => {
   const Wrapper = () =>
     class extends React.Component {
       componentDidMount = () => {

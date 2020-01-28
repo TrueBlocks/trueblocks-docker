@@ -1,9 +1,9 @@
 /*-----------------------------------------------------------------------------*/
 import React from 'react';
 import PropTypes from 'prop-types';
-import HeaderCell from './header-cell';
-import * as utils from '../../../utils';
-import './data-table.css';
+import HeaderCell from './HeaderCell';
+import * as utils from '../../utils';
+import './DataTable.css';
 
 //----------------------------------------------------------------------
 export default class HeaderRow extends React.Component {

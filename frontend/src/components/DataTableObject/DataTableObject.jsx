@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import './object-data-table.css';
+import './DataTableObject.css';
 import * as utils from '../../utils';
 
 //----------------------------------------------------------------------
-export class ObjectTable extends React.Component {
+export class DataTableObject extends React.Component {
   constructor(props) {
     super(props);
     var fields = [];

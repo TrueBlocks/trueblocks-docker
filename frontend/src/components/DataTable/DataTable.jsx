@@ -3,12 +3,12 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import TableControls from '../table-controls';
-import HeaderRow from './header-row';
-import DataRow from './data-row';
+import { DataTableControls } from '../DataTableControls';
+import HeaderRow from './HeaderRow';
+import DataRow from './DataRow';
 
-import * as utils from '../../../utils';
-import './data-table.css';
+import * as utils from '../../utils';
+import './DataTable.css';
 
 //----------------------------------------------------------------------
 class DataTable extends React.Component {
@@ -86,7 +86,7 @@ class DataTable extends React.Component {
     return (
       <Fragment>
         <h4>{'Table title: ' + str}</h4>
-        <TableControls
+        <DataTableControls
           n_items={this.props.data ? this.props.data.length : 0}
           pages={this.state.pages}
           cur_page={this.state.cur_page}

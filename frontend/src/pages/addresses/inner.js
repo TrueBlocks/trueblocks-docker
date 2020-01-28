@@ -13,7 +13,7 @@ import './addresses.css';
 
 // EXISTING_CODE
 import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
-import { OldDataTable } from '../../components';
+import { DataTableOld } from '../../components';
 const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
 
@@ -61,7 +61,7 @@ class AddressesInner extends React.Component {
         <Fragment>
           <AddNewAddress {...this.props} />
           <div className="old-data-table">
-            <OldDataTable headings={headings} rows={this.props.data} innerEar={this.innerEar} />
+            <DataTableOld headings={headings} rows={this.props.data} innerEar={this.innerEar} />
           </div>
           ;
         </Fragment>

@@ -11,7 +11,8 @@ import Routes from './routes';
 import './Content.css';
 
 const mainMenu = [
-[{NAVLINKS}]];
+[{NAVLINKS}]
+];
 
 const toggleStatus = () => ({ type: STATUS_TOGGLE });
 const toggleHelp = () => ({ type: HELP_TOGGLE });

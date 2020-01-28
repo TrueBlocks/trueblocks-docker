@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from './icon';
-import './loading.css';
+import { Icon } from './Icon';
+import './Loading.css';
 
 //----------------------------------------------------------------------
 export class Loading extends React.Component {

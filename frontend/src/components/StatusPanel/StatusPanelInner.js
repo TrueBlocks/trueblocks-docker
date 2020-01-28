@@ -3,14 +3,14 @@ import { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { polling } from '../polling';
+import { Polling } from '../Polling';
 import { fmtDouble, fmtInteger } from '../../utils';
 
 import green_light from '../../img/status-green-light.png';
 import yellow_light from '../../img/status-yellow-light.png';
 import red_light from '../../img/status-red-light.png';
-import { dispatcher_Status } from './status-actions';
-import './status.css';
+import { dispatcher_Status } from './reducers';
+import './StatusPanel.css';
 
 //---------------------------------------------------------------------
 const StatusInner = (props) => {
@@ -216,4 +216,4 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 //---------------------------------------------------------------------
-export default polling(dispatcher_Status, 10000)(connect(mapStateToProps, mapDispatchToProps)(StatusInner));
+export default Polling(dispatcher_Status, 10000)(connect(mapStateToProps, mapDispatchToProps)(StatusInner));

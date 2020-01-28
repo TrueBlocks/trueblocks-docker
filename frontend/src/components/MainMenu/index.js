@@ -1,2 +1,2 @@
-import MainMenu from './MainMenu';
+import { ConnectedMainMenu as MainMenu } from './MainMenu';
 export { MainMenu };

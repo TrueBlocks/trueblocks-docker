@@ -71,4 +71,4 @@ const mapStateToProps = ({ router, reducer_MainMenu }, ownProps) => ({
   toggle: ownProps.toggle
 });
 
-export default connect(mapStateToProps)(MainMenu);
+export const ConnectedMainMenu = connect(mapStateToProps)(MainMenu);

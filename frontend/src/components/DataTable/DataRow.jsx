@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------*/
 import React from 'react';
-import DataCell from './data-cell';
-import './data-table.css';
+import DataCell from './DataCell';
+import './DataTable.css';
 
 //----------------------------------------------------------------------
 export default class DataRow extends React.Component {

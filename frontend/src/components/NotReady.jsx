@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-//import PropTypes from 'prop-types';
-import { Loading } from './loading';
+import { Loading } from './Loading';
 
 //----------------------------------------------------------------
 export class NotReady extends React.Component {

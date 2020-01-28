@@ -1,12 +1,12 @@
 //----------------------------------------------------------------------
 import React, { Fragment } from 'react';
-import './old-data-table.css';
+import './DataTableOld.css';
 import Identicon from './identicons';
-import { Icon } from '../icon';
+import { Icon } from '../Icon';
 var Utils = require('../../utils');
 
 //---------------------------------------------------------------------
-export class OldDataTable extends React.Component {
+export class DataTableOld extends React.Component {
   render = () => {
     return (
       <table className="old-data-table">

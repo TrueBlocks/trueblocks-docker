@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_[{PROPER}] } from './dispatchers';
 
 import { [{MENU_TYPE}] } from '../../components';
-import { BreadCrumb } from '../../components'
+import { BreadCrumb } from '../../components';
 [{NO_ERROR}]import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 [{NO_DATA}]import { isReady } from '../../components';
 [{NO_DT}]import { [{DT_TYPE}] } from '../../components';
@@ -37,8 +37,7 @@ class [{PROPER}]Inner extends React.Component {
   // EXISTING_CODE
 
   getInnerPage = () => {
-    [{NO_DASH}]if (this.state.cur_submenu.subpage === 'dashboard')
-    [{NO_DASH}]  return <div>The dashboard for [{PROPER}]</div>
+    [{NO_DASH}]if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for [{PROPER}]</div>;
 [{NO_TEXT}][{TEXT_CODE}]
     [{NO_ERROR}]if (isError(this.props)) return <NotReady {...this.props} />;
     [{NO_DATA}]else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
@@ -50,11 +49,11 @@ class [{PROPER}]Inner extends React.Component {
 
   render = () => {
     return (
-        <div className="inner-panel">
-          <BreadCrumb page='[{PROPER}]' menu={this.state.cur_submenu} />
-          {this.getInnerPage()}
-          {JSON.stringify(this.state)}
-        </div>
+      <div className="inner-panel">
+        <BreadCrumb page="[{PROPER}]" menu={this.state.cur_submenu} />
+        {this.getInnerPage()}
+        {JSON.stringify(this.state)}
+      </div>
     );
   };
 }
@@ -86,7 +85,4 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 //----------------------------------------------------------------------
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)([{PROPER}]Inner);
+export default connect(mapStateToProps, mapDispatchToProps)([{PROPER}]Inner);

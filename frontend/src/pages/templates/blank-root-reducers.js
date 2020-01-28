@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 //------------------------------------------------------------------------
-import reducer_Status from './components/panels/status-actions';
+import reducer_Status from './components/StatusPanel/reducers';
 import reducer_SidePanels from './components/SidePanel/reducers';
 import reducer_LastLocation from './last-location-actions';
 import reducer_MainMenu from './components/MainMenu/reducers';

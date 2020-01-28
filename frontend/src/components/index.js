@@ -1,17 +1,17 @@
 import { Page, PageHeader, PageFooter } from './Page';
-import { DataTable } from './data-tables';
-import { OldDataTable } from './data-tables/old-data-table';
-import { ObjectTable } from './data-tables/object-data-table';
-import { Icon } from './icon';
-import { Loading } from './loading';
-import { isReady, isError, NotReady, isEmpty, EmptyQuery } from './not-ready';
+import { DataTable } from './DataTable';
+import { DataTableOld } from './DataTableOld';
+import { DataTableObject } from './DataTableObject';
+import { Icon } from './Icon';
+import { Loading } from './Loading';
+import { isReady, isError, NotReady, isEmpty, EmptyQuery } from './NotReady';
 import { BreadCrumb } from './BreadCrumb';
 import { DashMenu } from './DashMenu';
 import { TopScrollObserver } from './TopScrollObserver';
 import { MainMenu } from './MainMenu';
 import { SidePanel } from './SidePanel';
-import StatusPanel from './panels/status';
-import HelpPanel from './panels/help';
+import { StatusPanel } from './StatusPanel';
+import HelpPanel from './HelpPanel';
 import PageHelp from './PageHelp';
 import ExpandShrinkIcon from './ExpandShrinkIcon';
 
@@ -20,8 +20,8 @@ export {
   PageHeader,
   PageFooter,
   DataTable,
-  OldDataTable,
-  ObjectTable,
+  DataTableOld,
+  DataTableObject,
   Icon,
   Loading,
   isReady,

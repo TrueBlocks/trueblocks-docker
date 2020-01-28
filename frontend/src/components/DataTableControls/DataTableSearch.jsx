@@ -1,9 +1,9 @@
 /*-----------------------------------------------------------------------------*/
 import React from 'react';
-import '../data-table/data-table.css';
+import '../DataTable/DataTable.css';
 
 //----------------------------------------------------------------------
-function TableSearch({ size = '70', placeholder = 'Search...', style = { textAlign: 'left' } }) {
+export function DataTableSearch({ size = '70', placeholder = 'Search...', style = { textAlign: 'left' } }) {
   return (
     <div style={style}>
       <form onSubmit={null}>
@@ -12,5 +12,3 @@ function TableSearch({ size = '70', placeholder = 'Search...', style = { textAli
     </div>
   );
 }
-
-export default TableSearch;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SidePanel } from '../';
+import { SidePanel } from './SidePanel';
 
 export const HelpPanel = (props) => {
   const { isExpanded, toggle } = props;

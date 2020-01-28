@@ -1,10 +1,10 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
-import { Icon } from '../../icon';
-import '../data-table/data-table.css';
+import { Icon } from '../Icon';
+import '../DataTable/DataTable.css';
 
 //----------------------------------------------------------------------
-function TableScroll({ n_items, pages, cur_page, per_page, perPageChanged }) {
+export function DataTableScroll({ n_items, pages, cur_page, per_page, perPageChanged }) {
   return (
     <div style={{ textAlign: 'right' }}>
       <form onSubmit={null}>
@@ -22,5 +22,3 @@ function TableScroll({ n_items, pages, cur_page, per_page, perPageChanged }) {
     </div>
   );
 }
-
-export default TableScroll;

@@ -7,7 +7,7 @@ import { dispatcher_Explore } from './dispatchers';
 import { BreadCrumb } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
-import { ObjectTable } from '../../components';
+import { DataTableObject } from '../../components';
 import * as utils from '../../utils';
 import './explore.css';
 
@@ -39,7 +39,7 @@ class ExploreInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <ObjectTable subpage="explore" data={this.props.data} />;
+    return <DataTableObject subpage="explore" data={this.props.data} />;
   };
 
   render = () => {
