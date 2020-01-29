@@ -4,9 +4,14 @@
   --logo-height: 70px;
   --header-font-size: 1.8em;
   --header-small-factor: 0.6;
-  --footer-height: 84px;
+  --header-height: 74px;
+  --footer-height: 54px;
   --color-border-primary: #777;
   --color-border-seconary: #ddd;
+}
+
+#root {
+  overflow: auto;
 }
 
 /*------------------------------------------*/
@@ -14,11 +19,10 @@
   margin: 2px;
   padding: 2px 8px 2px 2px;
   border: 1px dotted black;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-evenly;
-  align-content: flex-start;
   background-color: var(--color-background);
+
+  display: grid;
+  grid-template-rows: var(--header-height) calc(100vh - var(--header-height) - var(--footer-height) - 10px) 54px;
 }
 
 /*------------------------------------------*/
@@ -38,23 +42,13 @@
   background-color: var(--color-background);
 }
 
-.body-item {
-  margin-bottom: var(--footer-height);
-}
-
 .footer-item {
-  position: fixed;
   display: flex;
   align-content: flex-start;
   margin: 2px 2px 0 2px;
   padding: 5px 5% 5px 7%;
-  bottom: 0;
-  left: 0;
-  right: 0;
 
   background: var(--color-background);
-  /* Bottom border to mimic body-item margin */
-  border-bottom: 2px solid white;
 }
 
 /*------------------------------------------*/
