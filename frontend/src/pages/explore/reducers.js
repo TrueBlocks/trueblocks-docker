@@ -33,8 +33,8 @@ export default function reducer_Explore(state = initialState, action) {
         error: null
       };
 
-    // EXISTING_CODE
-    // EXISTING_CODE
+      // EXISTING_CODE
+      // EXISTING_CODE
 
     case ex.FAILURE:
       return {

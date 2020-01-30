@@ -1,6 +1,7 @@
 {
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
+  "prettier.tabWidth": 2,
   "files.associations": {
     "**/templates/blank-app.js": "plaintext"
   }

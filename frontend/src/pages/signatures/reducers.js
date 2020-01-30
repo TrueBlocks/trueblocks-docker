@@ -31,8 +31,8 @@ export default function reducer_Signatures(state = initialState, action) {
         error: null
       };
 
-    // EXISTING_CODE
-    // EXISTING_CODE
+      // EXISTING_CODE
+      // EXISTING_CODE
 
     case si.FAILURE:
       return {

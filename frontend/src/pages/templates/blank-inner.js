@@ -11,7 +11,6 @@ import { BreadCrumb } from '../../components';
 [{NO_DT}]import { [{DT_TYPE}] } from '../../components';
 [{NO_TEXT}][{TEXT_IMPORTS}]
 [{NO_TEXT}][{TEXT_ACTIONS}]
-import * as utils from '../../utils';
 [{MENU_COMMENT}]import { [{LOWER}]_menu } from './';
 import './[{LOWER}].css';
 

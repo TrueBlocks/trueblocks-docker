@@ -109,10 +109,10 @@ export class BodyRow extends React.Component {
     const e = Utils.fmtDouble(this.props.row.curEther, 18);
     const q = this.props.row.nRecords
       ? Utils.fmtInteger(
-          (Math.floor((this.props.row.latestAppearance - this.props.row.firstAppearance) / this.props.row.nRecords) *
+        (Math.floor((this.props.row.latestAppearance - this.props.row.firstAppearance) / this.props.row.nRecords) *
             100) /
             100
-        )
+      )
       : 0;
 
     if (!this.state.isShowing) {

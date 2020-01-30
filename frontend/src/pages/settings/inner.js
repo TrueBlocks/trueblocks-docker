@@ -9,7 +9,6 @@ import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { licensesText } from './text/licenses';
 import * as se from './actions';
-import * as utils from '../../utils';
 import './settings.css';
 
 // EXISTING_CODE

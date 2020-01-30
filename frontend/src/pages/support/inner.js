@@ -11,7 +11,6 @@ import { documentationText } from './text/documentation';
 import { contact_usText } from './text/contact_us';
 import { about_usText } from './text/about_us';
 import * as su from './actions';
-import * as utils from '../../utils';
 import './support.css';
 
 // EXISTING_CODE

@@ -8,7 +8,6 @@ import { BreadCrumb } from '../../components';
 import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
 import { isReady } from '../../components';
 import { DataTableObject } from '../../components';
-import * as utils from '../../utils';
 import './explore.css';
 
 // EXISTING_CODE

@@ -6,7 +6,6 @@ import { dispatcher_Dashboard } from './dispatchers';
 
 import { DashMenu } from '../../components';
 import { BreadCrumb } from '../../components';
-import * as utils from '../../utils';
 import { dashboard_menu } from './';
 import './dashboard.css';
 
