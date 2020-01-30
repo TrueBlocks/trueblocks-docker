@@ -16,7 +16,16 @@ export class NotReady extends React.Component {
       return <Loading source="caches" status="error" message={'System error: ' + this.props.sysError} />;
     }
 
-    return <Fragment>Unknown error: is the TrueBlocks API running?</Fragment>;
+    return (
+      <Fragment>
+        <div style={{ color: 'red' }}>
+          Unknown error: Is the TrueBlocks API running?
+          <p />
+          IS THE STATUS PANEL OPEN?????
+          <p />
+        </div>
+      </Fragment>
+    );
   };
 }
 

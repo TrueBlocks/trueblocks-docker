@@ -18,8 +18,8 @@ export default function reducer_Dashboard(state = initialState, action) {
         error: null
       };
 
-      // EXISTING_CODE
-      // EXISTING_CODE
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case da.FAILURE:
       return {

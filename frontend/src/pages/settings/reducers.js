@@ -41,8 +41,8 @@ export default function reducer_Settings(state = initialState, action) {
         error: null
       };
 
-      // EXISTING_CODE
-      // EXISTING_CODE
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case se.FAILURE:
       return {

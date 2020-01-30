@@ -42,8 +42,8 @@ export default function reducer_Indicies(state = initialState, action) {
         error: null
       };
 
-      // EXISTING_CODE
-      // EXISTING_CODE
+    // EXISTING_CODE
+    // EXISTING_CODE
 
     case ind.FAILURE:
       return {
