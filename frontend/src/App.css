@@ -20,9 +20,11 @@
   padding: 2px 8px 2px 2px;
   border: 1px dotted black;
   background-color: var(--color-background);
+  height: calc(100vh - 4px);
 
   display: grid;
-  grid-template-rows: var(--header-height) calc(100vh - var(--header-height) - var(--footer-height) - 10px) 54px;
+  grid-template-rows: auto calc(100vh - var(--header-height) - var(--footer-height) - 10px) minmax(54px, 78px);
+  grid-auto-rows: minmax(min-content, max-content);
 }
 
 /*------------------------------------------*/

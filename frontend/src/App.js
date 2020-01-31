@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { history } from './store';
 import { SET as SET_LAST_LOCATION } from './last-location-actions';
 import Content from './Content';
-import { PageHeader, PageFooter, TopScrollObserver } from './components';
+import { PageHeader, PageFooter } from './components';
 import './App.css';
 
 //------------------------------------------------------------
@@ -50,10 +50,9 @@ class App extends React.Component {
 
     return (
       <Fragment>
-        <TopScrollObserver onTopScroll={this.onTopScroll} />
         <div className="page-container">
           <PageHeader small={this.state.smallHeader} />
-          <Content />
+          <Content onTopScroll={this.onTopScroll} />
           <PageFooter />
         </div>
       </Fragment>
