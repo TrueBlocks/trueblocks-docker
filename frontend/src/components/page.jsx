@@ -22,11 +22,9 @@ export class Page extends React.Component {
 }
 
 //------------------------------------------------------------
-export function PageHeader({ small }) {
-  const className = ['header-item', small ? 'small' : ''].join(' ');
-
+export function PageHeader() {
   return (
-    <div className={className}>
+    <div className="header-item">
       <div className="header-left">
         <img className="logo" alt={logo} src={logo} />
       </div>

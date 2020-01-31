@@ -15,7 +15,7 @@ import { support_menu } from './pages/support';
 
 import { STATUS_TOGGLE, HELP_TOGGLE } from './components/SidePanel/reducers';
 import { MAIN_MENU_TOGGLE } from './components/MainMenu/reducers';
-import { MainMenu, StatusPanel, HelpPanel, PageHelp, TopScrollObserver } from './components';
+import { MainMenu, StatusPanel, HelpPanel, PageHelp } from './components';
 import Routes from './routes';
 import './Content.css';
 
@@ -50,7 +50,6 @@ export function Content(props) {
       <MainMenu mainMenu={mainMenu} isExpanded={isMainMenuExpanded} toggle={toggleMainMenu} />
       <StatusPanel isExpanded={isStatusExpanded} toggle={toggleStatus} />
       <main>
-        <TopScrollObserver onTopScroll={props.onTopScroll} />
         {Routes.map((route, index) => (
           <Route key={index} render={route.component} exact={route.exact} path={route.path} />
         ))}

@@ -7,7 +7,6 @@ import { Loading } from './Loading';
 import { isReady, isError, NotReady, isEmpty, EmptyQuery } from './NotReady';
 import { BreadCrumb } from './BreadCrumb';
 import { DashMenu } from './DashMenu';
-import { TopScrollObserver } from './TopScrollObserver';
 import { MainMenu } from './MainMenu';
 import { SidePanel } from './SidePanel';
 import { StatusPanel } from './StatusPanel';
@@ -35,7 +34,6 @@ export {
   SidePanel,
   StatusPanel,
   HelpPanel,
-  TopScrollObserver,
   PageHelp,
   ExpandShrinkIcon
 };

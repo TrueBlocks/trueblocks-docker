@@ -65,16 +65,7 @@
 
 .header-item img.logo,
 .header-item .app.title {
-  transition: .4s all;
-}
-
-.header-item.small img.logo {
-  width: calc(var(--logo-width) * var(--header-small-factor));
-  height: calc(var(--logo-height) * var(--header-small-factor));
-}
-
-.header-item.small .app.title {
-  font-size: calc(var(--header-font-size) * var(--header-small-factor));
+  transition: 0.4s all;
 }
 
 /*------------------------------------------*/
