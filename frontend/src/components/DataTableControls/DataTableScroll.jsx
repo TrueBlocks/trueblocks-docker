@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------*/
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Icon } from '../Icon';
 import '../DataTable/DataTable.css';
 

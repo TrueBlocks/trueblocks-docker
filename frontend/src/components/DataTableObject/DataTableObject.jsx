@@ -9,13 +9,8 @@ export class DataTableObject extends React.Component {
   constructor(props) {
     super(props);
     var fields = [];
-    if (this.props.data[0].result) {
-      Object.keys(this.props.data[0].result).map((key) => {
-        fields.push(key);
-        return true;
-      });
-    } else {
-      Object.keys(this.props.data[0]).map((key) => {
+    if (this.props.data) {
+      Object.keys(this.props.data).map((key) => {
         fields.push(key);
         return true;
       });
@@ -31,7 +26,7 @@ export class DataTableObject extends React.Component {
   getContainer = () => {
     if (!this.state.fieldList) return <Fragment></Fragment>;
     var str = this.state.fieldList.map((item) => {
-      var value = this.props.data[0].result ? this.props.data[0].result[item] : this.props.data[0][item];
+      var value = this.props.data[item];
       return (
         <Fragment>
           <div key={'a0'} className={'object_table_row '}>

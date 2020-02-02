@@ -8,7 +8,7 @@ import reducer_MainMenu from './components/MainMenu/reducers';
 import reducer_Dashboard from './pages/dashboard/reducers';
 import reducer_Addresses from './pages/addresses/reducers';
 import reducer_Explore from './pages/explore/reducers';
-import reducer_Indicies from './pages/indicies/reducers';
+import reducer_Digests from './pages/digests/reducers';
 import reducer_Signatures from './pages/signatures/reducers';
 import reducer_Caches from './pages/caches/reducers';
 import reducer_Other from './pages/other/reducers';
@@ -24,7 +24,7 @@ export default combineReducers({
   reducer_Dashboard,
   reducer_Addresses,
   reducer_Explore,
-  reducer_Indicies,
+  reducer_Digests,
   reducer_Signatures,
   reducer_Caches,
   reducer_Other,

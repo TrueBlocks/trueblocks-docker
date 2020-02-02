@@ -10,7 +10,7 @@ export default class HeaderRow extends React.Component {
   render = () => {
     return (
       <div className={'data_table_header ' + utils.getBang(this.props.bang)}>
-        {this.props.headers.map((field) => (
+        {this.props.fields.map((field) => (
           <HeaderCell {...this.props} key={'h' + field} value={field} sort_str={field} />
         ))}
       </div>
@@ -18,6 +18,6 @@ export default class HeaderRow extends React.Component {
   };
 
   static propTypes = {
-    headers: PropTypes.array
+    fields: PropTypes.array
   };
 }

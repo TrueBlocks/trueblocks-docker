@@ -1,13 +1,17 @@
 :root {
-  --color-background: #8d9cab;
   --logo-width: 50px;
   --logo-height: 70px;
   --header-font-size: 1.8em;
   --header-small-factor: 0.6;
   --header-height: 74px;
   --footer-height: 54px;
+  --color-background: #8d9cab;
   --color-border-primary: #777;
-  --color-border-seconary: #ddd;
+  --color-border-secondary: #ddd;
+  --color-table-header: #e2e5f0;
+  --color-table-body: white;
+  --color-table-text: black;
+  --color-hover: antiquewhite;
 }
 
 #root {

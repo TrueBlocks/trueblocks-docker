@@ -5,20 +5,18 @@ import './Icon.css';
 //----------------------------------------------------------------------
 export class Icon extends Component {
   render() {
-    var title = this.props.title || this.props.icon;
-    var size = this.props.small
+    const title = this.props.title || this.props.icon;
+    const size = this.props.small
       ? 'md-small'
       : this.props.large
       ? 'md-large'
       : this.props.midsize
       ? 'md-midsize'
       : 'md-regular';
+    let cn = 'material-icons ' + size + ' ' + this.props.color;
+    if (this.props.bordered) cn += ' bordered';
     return (
-      <i
-        className={'material-icons ' + size + ' ' + this.props.color + (this.props.bordered ? ' bordered' : '')}
-        onClick={this.props.onClick}
-        title={title}
-      >
+      <i className={cn} onClick={this.props.onClick} title={title}>
         {this.props.icon}
       </i>
     );

@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
@@ -12,8 +12,8 @@ import './addresses.css';
 
 // EXISTING_CODE
 import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
-import { DataTableOld } from '../../components';
-const headings = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
+import { DataTableNew } from '../../components';
+const fields = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -57,13 +57,10 @@ class AddressesInner extends React.Component {
     // EXISTING_CODE
     if (this.state.cur_submenu.query === 'monitors' || this.state.cur_submenu.route === 'status') {
       return (
-        <Fragment>
+        <div style={{ paddingLeft: '1%' }}>
           <AddNewAddress {...this.props} />
-          <div className="old-data-table">
-            <DataTableOld headings={headings} rows={this.props.data} innerEar={this.innerEar} />
-          </div>
-          ;
-        </Fragment>
+          <DataTableNew fields={fields} rows={this.props.data} ear={this.innerEar} />
+        </div>
       );
     }
     // EXISTING_CODE

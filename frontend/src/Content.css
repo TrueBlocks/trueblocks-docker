@@ -33,7 +33,8 @@
   background: white;
   border-width: 1px 0 1px 1px;
   border-style: solid;
-  border-color: var(--color-border-primary) var(--color-border-seconary) var(--color-border-primary) var(--color-border-primary);
+  border-color: var(--color-border-primary) var(--color-border-secondary) var(--color-border-primary)
+    var(--color-border-primary);
   overflow: hidden;
 }
 
@@ -50,7 +51,8 @@ main {
   background: white;
   border-width: 1px 1px 1px 0;
   border-style: solid;
-  border-color: var(--color-border-primary) var(--color-border-primary) var(--color-border-primary) var(--color-border-seconary);
+  border-color: var(--color-border-primary) var(--color-border-primary) var(--color-border-primary)
+    var(--color-border-secondary);
   overflow: hidden;
 }
 

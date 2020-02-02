@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './dispatchers';
@@ -38,7 +38,12 @@ class ExploreInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DataTableObject subpage="explore" data={this.props.data} />;
+    return (
+      <DataTableObject
+        subpage="explore"
+        data={this.props.data[0].result ? this.props.data[0].result : this.props.data[0]}
+      />
+    );
   };
 
   render = () => {

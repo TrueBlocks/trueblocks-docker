@@ -85,7 +85,6 @@ class DataTable extends React.Component {
       );
     return (
       <Fragment>
-        <h4>{'Table title: ' + str}</h4>
         <DataTableControls
           n_items={this.props.data ? this.props.data.length : 0}
           pages={this.state.pages}
@@ -96,7 +95,7 @@ class DataTable extends React.Component {
         <div className={'data_table ' + this.props.subpage}>
           <HeaderRow
             {...this.props}
-            headers={this.state.fieldList}
+            fields={this.state.fieldList}
             sortBy={this.sortBy}
             sortedBy={this.state.sortedBy}
             sortDir={this.state.sortDir}

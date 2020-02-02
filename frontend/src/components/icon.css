@@ -54,3 +54,7 @@
 .material-icons:hover {
   opacity: 100%;
 }
+
+.material-icons.hidden {
+  visibility: hidden;
+}

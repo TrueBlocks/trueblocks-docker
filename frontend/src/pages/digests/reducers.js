@@ -1,4 +1,4 @@
-import * as ind from './actions';
+import * as di from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
@@ -9,16 +9,16 @@ const initialState = {
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Indicies(state = initialState, action) {
+export default function reducer_Digests(state = initialState, action) {
   switch (action.type) {
-    case ind.BEGIN:
+    case di.BEGIN:
       return {
         ...state,
         isLoading: true,
         error: null
       };
 
-    case ind.DASHBOARD:
+    case di.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,
@@ -28,11 +28,11 @@ export default function reducer_Indicies(state = initialState, action) {
         error: null
       };
 
-    case ind.SHARED:
-    case ind.COLUMNS:
-    case ind.UNRIPE:
-    case ind.STAGED:
-    case ind.FINALIZED:
+    case di.SHARED:
+    case di.COLUMNS:
+    case di.UNRIPE:
+    case di.STAGED:
+    case di.FINALIZED:
       return {
         ...state,
         data: action.payload.data[0].caches,
@@ -45,7 +45,7 @@ export default function reducer_Indicies(state = initialState, action) {
     // EXISTING_CODE
     // EXISTING_CODE
 
-    case ind.FAILURE:
+    case di.FAILURE:
       return {
         ...state,
         data: null,

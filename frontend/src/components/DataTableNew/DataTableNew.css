@@ -1,0 +1,58 @@
+:root {
+  --color-table-bg: white;
+  --color-table-border: var(--color-border-primary);
+  --color-table-header-bg: var(--color-table-header);
+  --color-table-body-bg: var(--color-table-body);
+}
+
+/*-----------------------------------------------------------------------------*/
+.dt-old {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  width: 98%;
+  background-color: var(--color-table-bg);
+  border: 1px solid var(--color-border-primary);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/*-----------------------------------------------------------------------------*/
+.dt-old thead {
+  text-align: center;
+  font-weight: 600;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.dt-old th {
+  border-width: 1px 1px 3px 1px;
+  border-style: solid solid double solid;
+  border-color: var(--color-table-border);
+  background-color: var(--color-table-header-bg);
+  color: var(--color-table-text);
+}
+
+/*-----------------------------------------------------------------------------*/
+.dt-old tr {
+  color: var(--color-table-text);
+}
+
+.dt-old tr:hover {
+  opacity: 1;
+  background-color: var(--color-hover);
+}
+
+.dt-old tr.deleted {
+  opacity: 0.5;
+  text-decoration-line: line-through;
+  font-style: italic;
+}
+
+/*-----------------------------------------------------------------------------*/
+.dt-old td {
+  padding: 1px;
+  vertical-align: middle;
+  border-right: 1px solid var(--color-border-primary);
+  padding: 1px 4px 1px 4px;
+  white-space: nowrap;
+}

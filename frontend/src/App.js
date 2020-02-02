@@ -12,6 +12,7 @@ import './App.css';
 const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocation });
 
 class App extends React.Component {
+
   isShowingRootRoute() {
     const { currentLocation } = this.props;
 

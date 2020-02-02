@@ -1,11 +1,11 @@
-import * as ind from './actions';
+import * as di from './actions';
 const Utils = require('../../utils');
 
 //----------------------------------------------------------------------
-export const dispatcher_Indicies = (str) => {
+export const dispatcher_Digests = (str) => {
   return (dispatch, getState) => {
     dispatch({
-      type: ind.BEGIN
+      type: di.BEGIN
     });
 
     var array = str.split('?');
@@ -23,7 +23,7 @@ export const dispatcher_Indicies = (str) => {
       })
       .catch((err) => {
         dispatch({
-          type: ind.FAILURE,
+          type: di.FAILURE,
           err
         });
       });
@@ -31,16 +31,16 @@ export const dispatcher_Indicies = (str) => {
 };
 
 //----------------------------------------------------------------------
-export const indicies_menu = {
-  page: 'indicies',
+export const digests_menu = {
+  page: 'digests',
   items: [
-    { subpage: 'dashboard', route: 'dashboard', query: ind.DASHBOARD },
-    { subpage: 'finalized', route: 'status', query: ind.FINALIZED },
-    { subpage: 'staged', route: 'status', query: ind.STAGED },
-    { subpage: 'unripe', route: 'status', query: ind.UNRIPE },
-    { subpage: 'columns', route: 'status', query: ind.COLUMNS },
-    { subpage: 'shared', route: 'status', query: ind.SHARED },
-    { subpage: 'ind-0006' }
+    { subpage: 'dashboard', route: 'dashboard', query: di.DASHBOARD },
+    { subpage: 'finalized', route: 'status', query: di.FINALIZED },
+    { subpage: 'staged', route: 'status', query: di.STAGED },
+    { subpage: 'unripe', route: 'status', query: di.UNRIPE },
+    { subpage: 'columns', route: 'status', query: di.COLUMNS },
+    { subpage: 'shared', route: 'status', query: di.SHARED },
+    { subpage: 'di-0006' }
   ],
   expanded: false,
   color: 'blue'

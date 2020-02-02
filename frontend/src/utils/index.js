@@ -107,9 +107,15 @@ const nParts = (haystack) => {
 //----------------------------------------------------------------------
 const getBang = (num) => {
   var bangs = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
+  if (num === 20) return 'twenty_bang';
   if (num > 11) num = 11;
   return bangs[num] + '_bang';
 };
+
+//----------------------------------------------------------------
+function getKeys(str) {
+  return { key: str, parentKey: str };
+}
 
 //----------------------------------------------------------------
 module.exports = {
@@ -123,5 +129,6 @@ module.exports = {
   to_key,
   findMenu,
   nParts,
-  getBang
+  getBang,
+  getKeys
 };

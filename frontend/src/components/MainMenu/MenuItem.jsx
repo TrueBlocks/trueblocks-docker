@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import SubmenuItem from './SubmenuItem';
 import Chevron from './Chevron';
 
-export default function MenuItem({ id, active: mainMenuActive, page, items, onClick }) {
+function MenuItem({ id, active: mainMenuActive, page, items, onClick }) {
   const hasSubMenu = items && items.length > 0;
   const toLocation = '/' + (hasSubMenu ? page.toLowerCase() : '');
   const onThisMenuClick = onClick.bind(null, { menuId: id });
@@ -32,3 +32,5 @@ export default function MenuItem({ id, active: mainMenuActive, page, items, onCl
     </Fragment>
   );
 }
+
+export default MenuItem;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './identicons';
+import './Identicons.css';
 
 export default class Identicon extends Component {
   constructor(props) {
@@ -132,13 +132,11 @@ export default class Identicon extends Component {
 
     seedrand(seed);
 
-    const color = opts.color || createColor();
-    const bgcolor = opts.bgColor || createColor();
-    const spotcolor = opts.spotColor || createColor();
-    const imageData = createImageData(size);
-    const canvas = setCanvas(this.identicon, imageData, color, scale, bgcolor, spotcolor);
-
-    return canvas;
+    let color = opts.color || createColor();
+    let bgcolor = opts.bgColor || createColor();
+    let spotcolor = opts.spotColor || createColor();
+    let imageData = createImageData(size);
+    return setCanvas(this.identicon, imageData, color, scale, bgcolor, spotcolor);
   }
 
   render() {
@@ -147,7 +145,7 @@ export default class Identicon extends Component {
         ref={(identicon) => {
           this.identicon = identicon;
         }}
-        className={this.props.deleted ? 'identicon-deleted' : 'identicon'}
+        className="identicon"
       />
     );
   }
@@ -160,4 +158,12 @@ export default class Identicon extends Component {
     bgColor: PropTypes.string,
     spotColor: PropTypes.string
   };
+}
+
+export function addrDisplay(addr, deleted) {
+  return (
+    <div>
+      {addr.substr(0, 5)}...{addr.substr(addr.length - 4, addr.length)} {deleted ? <div /> : <Identicon seed={addr} />}
+    </div>
+  );
 }

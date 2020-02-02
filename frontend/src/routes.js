@@ -2,7 +2,7 @@ import React from 'react';
 import Dashboard from './pages/dashboard';
 import Addresses from './pages/addresses';
 import Explore from './pages/explore';
-import Indicies from './pages/indicies';
+import Digests from './pages/digests';
 import Signatures from './pages/signatures';
 import Caches from './pages/caches';
 import Other from './pages/other';
@@ -30,10 +30,10 @@ export const routes = [
     path: '/explore/:subpage?/:query?'
   },
   {
-    name: 'indicies',
-    component: (routeProps) => <Indicies {...routeProps} />,
+    name: 'digests',
+    component: (routeProps) => <Digests {...routeProps} />,
     exact: true,
-    path: '/indicies/:subpage?/:query?'
+    path: '/digests/:subpage?/:query?'
   },
   {
     name: 'signatures',

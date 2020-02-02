@@ -1,0 +1,17 @@
+[settings]
+class = CDigests
+page_notes = TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take \
+            up a lot of|space on your hard drive, so you have to keep any eye on them. Clean them out \
+            periodically so they dont get too|big.
+color = blue
+no_data = true
+
+[[subpages]]
+list = [
+    { page = "digests", subpage = "dashboard" },
+    { page = "digests", subpage = "finalized", route = "status", options = "modes_EQ_index&details", extract = "_0.caches" },
+    { page = "digests", subpage = "staged", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
+    { page = "digests", subpage = "unripe", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
+    { page = "digests", subpage = "columns", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
+    { page = "digests", subpage = "shared", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
+]

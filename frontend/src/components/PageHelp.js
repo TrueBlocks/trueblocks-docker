@@ -32,6 +32,17 @@ const helpToPage = new Map([
     )
   ],
   [
+    'digests',
+    () => (
+      <span>
+        <h4>Digests Page</h4>
+        TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a lot of
+        space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too
+        big.
+      </span>
+    )
+  ],
+  [
     'explore',
     () => (
       <span>
@@ -39,17 +50,6 @@ const helpToPage = new Map([
         The Explore module allows one to view the details of every transactions for each previously monitored address.
         Because TrueBlocks runs on a local machine not a server, this means that you are restricted to exploring only
         addresses that youve previously monitored.
-      </span>
-    )
-  ],
-  [
-    'indicies',
-    () => (
-      <span>
-        <h4>Indicies Page</h4>
-        TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a lot of
-        space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too
-        big.
       </span>
     )
   ],

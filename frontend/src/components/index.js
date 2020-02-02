@@ -1,6 +1,6 @@
 import { Page, PageHeader, PageFooter } from './Page';
 import { DataTable } from './DataTable';
-import { DataTableOld } from './DataTableOld';
+import DataTableNew from './DataTableNew';
 import { DataTableObject } from './DataTableObject';
 import { Icon } from './Icon';
 import { Loading } from './Loading';
@@ -19,7 +19,7 @@ export {
   PageHeader,
   PageFooter,
   DataTable,
-  DataTableOld,
+  DataTableNew,
   DataTableObject,
   Icon,
   Loading,

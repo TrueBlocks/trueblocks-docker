@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import './DashMenu.css';
 import * as ad from '../../pages/addresses/dispatchers';
 import * as ex from '../../pages/explore/dispatchers';
-import * as ind from '../../pages/indicies/dispatchers';
+import * as di from '../../pages/digests/dispatchers';
 import * as ca from '../../pages/caches/dispatchers';
 import * as si from '../../pages/signatures/dispatchers';
 import * as ot from '../../pages/other/dispatchers';
@@ -17,7 +17,7 @@ export const getDashMenu = () => {
   var theMenu = [];
   theMenu.push(ad.addresses_menu);
   theMenu.push(ex.explore_menu);
-  theMenu.push(ind.indicies_menu);
+  theMenu.push(di.digests_menu);
   theMenu.push(si.signatures_menu);
   theMenu.push(ca.caches_menu);
   theMenu.push(ot.other_menu);

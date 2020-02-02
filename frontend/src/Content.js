@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { dashboard_menu } from './pages/dashboard';
 import { addresses_menu } from './pages/addresses';
 import { explore_menu } from './pages/explore';
-import { indicies_menu } from './pages/indicies';
+import { digests_menu } from './pages/digests';
 import { signatures_menu } from './pages/signatures';
 import { caches_menu } from './pages/caches';
 import { other_menu } from './pages/other';
@@ -23,7 +23,7 @@ const mainMenu = [
   dashboard_menu,
   addresses_menu,
   explore_menu,
-  indicies_menu,
+  digests_menu,
   signatures_menu,
   caches_menu,
   other_menu,
