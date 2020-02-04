@@ -16,7 +16,7 @@
     "generate": "cd src/pages/templates ; makeClass -jav ; cd - 1>/dev/null 2>&1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
+    "babel-eslint": "^9.0.0",
     "eslint-plugin-react": "^7.18.0",
     "prettier": "^1.19.1",
     "react-scripts": "2.1.8",
