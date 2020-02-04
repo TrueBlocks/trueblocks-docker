@@ -1,86 +1,75 @@
+/*-----------------------------------------------------------------------------*/
 .data_table {
-  font-size: 0.9em;
-  background-color: #fff;
-  color: #444;
   font-family: 'Courier New', Courier, monospace;
-  border-left: 1px solid darkgrey;
-  border-bottom: 1px solid darkgrey;
-  /* margin-bottom: 10px; */
-}
-
-.data_table:hover {
+  font-size: 0.9em;
+  width: 98%;
+  background-color: var(--color-table-body-bg);
+  border: 1px solid var(--color-border-primary);
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
-.data_table_header {
+/*-----------------------------------------------------------------------------*/
+.dt_thead {
   display: grid;
   text-align: center;
-  text-transform: capitalize;
-  height: 28px;
   font-weight: 600;
   vertical-align: middle;
-  /* border: 1px dashed blue; */
+  text-transform: capitalize;
 }
 
-.data_table_header-item {
-  background-color: #e2e5f0;
-  border-top: 1px solid darkgrey;
-  border-bottom: 3px double darkgrey;
-  border-right: 1px solid darkgrey;
-  overflow: hidden; /* border: 1px dashed blue; */
+.dt_th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-width: 1px 1px 3px 1px;
+  border-style: solid solid double solid;
+  border-color: var(--color-table-border);
+  background-color: var(--color-table-header-bg);
+  color: var(--color-table-text);
 }
 
-.data_table_row {
+/*-----------------------------------------------------------------------------*/
+.dt_tr {
   display: grid;
-  height: 25px;
-  /* border: 1px dashed blue; */
+  color: var(--color-table-text);
 }
 
-.data_table_row:hover {
-  background-color: antiquewhite;
+.dt_tr:hover {
+  opacity: 1;
+  background-color: var(--color-hover);
 }
 
-.data_table_wide_row {
-  display: grid;
-  height: 25px;
-  grid-template-columns: 1fr;
-  border: 1px dashed blue;
-  text-align: center;
+.dt_tr.deleted {
+  opacity: 0.5;
+  text-decoration-line: line-through;
+  font-style: italic;
 }
 
-.data_table_wide_row:hover {
-  background-color: antiquewhite;
-}
-
-.data_table_half_wide_row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 0 !important;
-  vertical-align: text-middle;
-  /* background-color: red; */
-  border: 1px solid lightgray;
-  font-size: 13px;
-  /* background-color: orange; */
-}
-
+/*-----------------------------------------------------------------------------*/
 .data_table_table_item {
   /* background-color: white; */
   text-align: left;
   border-right: 1px solid darkgrey;
-  padding-left: 8px;
-  padding-right: 8px;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden; /* border: 1px dashed blue; */
 }
 
 .data_table_table_item.number {
   text-align: right;
-  padding-left: 8px;
-  padding-right: 8px;
-  /* border: 1px dashed blue; */
 }
 
+/*-----------------------------------------------------------------------------*/
+.data_table_half_wide_row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 0 !important;
+  vertical-align: text-middle;
+  border: 1px solid lightgray;
+  font-size: 13px;
+}
+
+/*-----------------------------------------------------------------------------*/
 .one_bang {
   grid-template-columns: 1fr;
 }

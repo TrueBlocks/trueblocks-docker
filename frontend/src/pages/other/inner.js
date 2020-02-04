@@ -38,7 +38,7 @@ class OtherInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DataTable subpage="other" data={this.props.data} />;
+    return <DataTable fields={null} rows={this.props.data} innerEar={null} />;
   };
 
   render = () => {
@@ -56,11 +56,11 @@ class OtherInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Status, reducer_Other }) => ({
+const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Other }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Status.isConnected,
-  sysError: reducer_Status.error,
+  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Other.isLoading,
   error: reducer_Other.error,
   data: reducer_Other.data,

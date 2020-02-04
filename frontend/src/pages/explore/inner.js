@@ -61,11 +61,11 @@ class ExploreInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Status, reducer_Explore }) => ({
+const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Explore }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Status.isConnected,
-  sysError: reducer_Status.error,
+  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Explore.isLoading,
   error: reducer_Explore.error,
   data: reducer_Explore.data,

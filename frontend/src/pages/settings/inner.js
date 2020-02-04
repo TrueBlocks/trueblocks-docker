@@ -109,11 +109,11 @@ const SettingInput = ({ name, value, type, tip, onChange }) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Status, reducer_Settings }) => ({
+const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Settings }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Status.isConnected,
-  sysError: reducer_Status.error,
+  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Settings.isLoading,
   error: reducer_Settings.error,
   data: reducer_Settings.data,

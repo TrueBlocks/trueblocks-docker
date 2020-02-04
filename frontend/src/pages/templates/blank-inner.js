@@ -43,7 +43,7 @@ class [{PROPER}]Inner extends React.Component {
     [{NO_ERROR}]else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    [{NO_DT}]return <[{DT_TYPE}] subpage="[{LOWER}]" data={this.props.data} [IE]/>;
+    return [{NO_DT}]<[{DT_TYPE}] fields={null} rows={this.props.data} [IE1] />;
   };
 
   render = () => {
@@ -61,11 +61,11 @@ class [{PROPER}]Inner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Status, reducer_[{PROPER}] }) => ({
+const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_[{PROPER}] }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Status.isConnected,
-  sysError: reducer_Status.error,
+  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_[{PROPER}].isLoading,
   error: reducer_[{PROPER}].error,
   data: reducer_[{PROPER}].data,

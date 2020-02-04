@@ -1,11 +1,11 @@
-/*-----------------------------------------------------------------------------*/
+//----------------------------------------------------------------------
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as utils from '../../utils';
-import './DataTable.css';
+import * as utils from '../../../../../utils';
+import '../../../DataTable.css';
 
 //----------------------------------------------------------------------
-export default class DataCell extends React.Component {
+class Cell extends React.Component {
   expandClicked = () => {
     if (this.props.innerEar) this.props.innerEar('expand', this.props.item);
   };
@@ -25,10 +25,13 @@ export default class DataCell extends React.Component {
       </div>
     );
   };
-
-  static propTypes = {
-    subpage: PropTypes.string.isRequired,
-    item: PropTypes.object,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool, PropTypes.array])
-  };
 }
+
+//----------------------------------------------------------------------
+Cell.propTypes = {
+  item: PropTypes.object,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool, PropTypes.array])
+};
+
+//----------------------------------------------------------------------
+export default Cell;

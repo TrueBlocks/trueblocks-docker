@@ -236,7 +236,7 @@ const IndexDetail = (props) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Status, reducer_Digests }) => ({
+const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Digests }) => ({
   // EXISTING_CODE
   caches: reducer_Status.systemData.caches,
   index_path: reducer_Status.systemData.index_path,
@@ -247,8 +247,8 @@ const mapStateToProps = ({ reducer_Status, reducer_Digests }) => ({
   client: reducer_Status.client,
   loadingIndex: reducer_Digests.isLoading,
   // EXISTING_CODE
-  sysConnected: reducer_Status.isConnected,
-  sysError: reducer_Status.error,
+  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Digests.isLoading,
   error: reducer_Digests.error,
   data: reducer_Digests.data,

@@ -8,7 +8,7 @@ import { addrDisplay } from '../../../Identicons';
 var Utils = require('../../../../utils');
 
 //---------------------------------------------------------------------
-export default class BodyRow extends React.Component {
+class Row extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +24,6 @@ export default class BodyRow extends React.Component {
   };
 
   getExpanded = () => {
-    this.props.onCloseAll();
     if (!this.state.isExpanded) return <Fragment />;
     return (
       <tr>
@@ -100,3 +99,5 @@ export default class BodyRow extends React.Component {
     );
   };
 }
+
+export default Row;

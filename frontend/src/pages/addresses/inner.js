@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
@@ -13,7 +13,7 @@ import './addresses.css';
 // EXISTING_CODE
 import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
 import { DataTableNew } from '../../components';
-const fields = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
+const fieldList = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -55,16 +55,13 @@ class AddressesInner extends React.Component {
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    if (this.state.cur_submenu.query === 'monitors' || this.state.cur_submenu.route === 'status') {
-      return (
-        <div style={{ paddingLeft: '1%' }}>
-          <AddNewAddress {...this.props} />
-          <DataTableNew fields={fields} rows={this.props.data} ear={this.innerEar} />
-        </div>
-      );
-    }
     // EXISTING_CODE
-    return <DataTable subpage="addresses" data={this.props.data} innerEar={this.innerEar} />;
+    return (
+      <Fragment>
+        <DataTable fields={null} rows={this.props.data} innerEar={null} />;
+        <DataTableNew fields={fieldList} rows={this.props.data} ear={this.innerEar} />
+      </Fragment>
+    );
   };
 
   render = () => {
@@ -100,11 +97,11 @@ export const AddNewAddress = (props) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Status, reducer_Addresses }) => ({
+const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Addresses }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Status.isConnected,
-  sysError: reducer_Status.error,
+  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Addresses.isLoading,
   error: reducer_Addresses.error,
   data: reducer_Addresses.data,

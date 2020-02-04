@@ -5,12 +5,3 @@
   background-color: antiquewhite;
   padding: 0px;
 }
-
-/*-----------------------------------------------------------------------------*/
-.data_table.addresses {
-  width: 90%;
-}
-
-.data_table_half_wide_row.addresses {
-  width: 82%;
-}

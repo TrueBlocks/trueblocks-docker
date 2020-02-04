@@ -1,13 +1,13 @@
-/*-----------------------------------------------------------------------------*/
+//----------------------------------------------------------------------
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { DataTableControls } from '../DataTableControls';
-import HeaderRow from './HeaderRow';
-import DataRow from './DataRow';
+import Header from './Header';
+import Body from './Body';
 
-import * as utils from '../../utils';
+import * as Utils from '../../utils';
 import './DataTable.css';
 
 //----------------------------------------------------------------------
@@ -15,12 +15,12 @@ class DataTable extends React.Component {
   constructor(props) {
     super(props);
     var fields = [];
-    Object.keys(this.props.data[0]).map((key) => {
+    Object.keys(this.props.rows[0]).map((key) => {
       fields.push(key);
       return true;
     });
 
-    var n_items = props.data ? props.data.length : 1;
+    var n_items = props.rows ? props.rows.length : 1;
     var per_page = localStorage.getItem('per_page') || 25;
     var pages = Math.floor((n_items - 1) / per_page) + 1;
     this.state = {
@@ -53,7 +53,7 @@ class DataTable extends React.Component {
       ...this.state,
       sortedBy: field,
       sortDir: sortDir,
-      data: this.sortData(this.props.data, field, sortDir)
+      rows: this.sortData(this.props.rows, field, sortDir)
     });
     return;
   };
@@ -76,24 +76,25 @@ class DataTable extends React.Component {
   };
 
   render = () => {
-    var str =
-      !this.props.fields ||
-      JSON.stringify(
-        this.props.fields.map((item) => {
-          return item.name;
-        })
-      );
+    const showControls = true;
+    const { rows } = this.props;
     return (
       <Fragment>
-        <DataTableControls
-          n_items={this.props.data ? this.props.data.length : 0}
-          pages={this.state.pages}
-          cur_page={this.state.cur_page}
-          per_page={this.state.per_page}
-          perPageChanged={this.perPageChanged}
-        />
-        <div className={'data_table ' + this.props.subpage}>
-          <HeaderRow
+        <div>new table</div>
+        {showControls ? (
+          <DataTableControls
+            n_items={this.props.data ? this.props.data.length : 0}
+            pages={this.state.pages}
+            cur_page={this.state.cur_page}
+            per_page={this.state.per_page}
+            perPageChanged={this.perPageChanged}
+          />
+        ) : (
+          <Fragment></Fragment>
+        )}
+        <div className={'data_table'}>
+          <Header
+            {...Utils.getKeys('dth')}
             {...this.props}
             fields={this.state.fieldList}
             sortBy={this.sortBy}
@@ -101,35 +102,25 @@ class DataTable extends React.Component {
             sortDir={this.state.sortDir}
             bang={this.state.fieldList.length}
           />
-          {this.props.data.map((item, index) => {
-            return (
-              <Fragment key={index + 'a0'}>
-                <DataRow
-                  key={index + 'a0'}
-                  index={index + 'a0'}
-                  cn={'data_table_row ' + utils.getBang(this.state.fieldList.length)}
-                  item={item}
-                  {...this.props}
-                />
-              </Fragment>
-            );
-          })}
+          <Body rows={rows} fields={this.state.fieldList} />
         </div>
       </Fragment>
     );
   };
-
-  static propTypes = {
-    // title: PropTypes.string.isRequired,
-    // explainer: PropTypes.string.isRequired,
-    subpage: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(PropTypes.object).isRequired
-  };
 }
 
+//----------------------------------------------------------------------
+DataTable.propTypes = {
+  // title: PropTypes.string.isRequired,
+  // explainer: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
+//----------------------------------------------------------------------
 const mapStateToProps = ({ router }, ownProps) => ({
   location: router.location,
   mainMenu: ownProps.mainMenu
 });
 
+//----------------------------------------------------------------------
 export const ConnectedDataTable = connect(mapStateToProps)(DataTable);

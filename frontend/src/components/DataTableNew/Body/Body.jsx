@@ -1,19 +1,15 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import BodyRow from './BodyRow';
+import Row from './Row';
 
 //---------------------------------------------------------------------
 class Body extends React.Component {
-  onCloseAll = () => {
-    this.setState(this.state);
-  };
-
   render = () => {
     return (
       <tbody>
-        {this.props.rows.map((_row) => {
-          return <BodyRow key={_row.address} {...this.props} row={_row} onCloseAll={this.onCloseAll} />;
+        {this.props.rows.map((_row, index) => {
+          return <Row key={_row.address} {...this.props} row={_row} />;
         })}
       </tbody>
     );

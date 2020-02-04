@@ -8,10 +8,11 @@
   --color-background: #8d9cab;
   --color-border-primary: #777;
   --color-border-secondary: #ddd;
-  --color-table-header: #e2e5f0;
-  --color-table-body: white;
-  --color-table-text: black;
   --color-hover: antiquewhite;
+  --color-table-text: black;
+  --color-table-border: var(--color-border-primary);
+  --color-table-header-bg: #e2e5f0;
+  --color-table-body-bg: white;
 }
 
 #root {

@@ -38,7 +38,7 @@ class SignaturesInner extends React.Component {
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return <DataTable subpage="signatures" data={this.props.data} />;
+    return <DataTable fields={null} rows={this.props.data} innerEar={null} />;
   };
 
   render = () => {
@@ -56,11 +56,11 @@ class SignaturesInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Status, reducer_Signatures }) => ({
+const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Signatures }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_Status.isConnected,
-  sysError: reducer_Status.error,
+  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Signatures.isLoading,
   error: reducer_Signatures.error,
   data: reducer_Signatures.data,

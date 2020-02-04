@@ -25,10 +25,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  /* background-color: pink; */
+  background-color: pink;
   text-transform: capitalize;
   font-weight: 600;
-  background-color: #e2e5f0;
+  /* background-color: #e2e5f0; */
 }
 
 .object_table_row {

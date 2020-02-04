@@ -1,3 +1,4 @@
+//----------------------------------------------------------------------
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Icon.css';
@@ -27,4 +28,11 @@ export class Icon extends Component {
     icon: PropTypes.string,
     onClick: PropTypes.func
   };
+}
+
+//----------------------------------------------------------------------
+export function SortIcon({ field, sortedBy, sortDir, color }) {
+  if (field !== sortedBy) return <Icon midsize invisible />;
+  if (sortDir) return <Icon midsize icon="arrow_drop_down" color={color} title="ascending" />;
+  return <Icon midsize icon="arrow_drop_up" color={color} title="descending" />;
 }

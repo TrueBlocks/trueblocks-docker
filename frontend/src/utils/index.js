@@ -114,7 +114,7 @@ const getBang = (num) => {
 
 //----------------------------------------------------------------
 function getKeys(str) {
-  return { key: str, parentKey: str };
+  return { key: str, pKey: str };
 }
 
 //----------------------------------------------------------------

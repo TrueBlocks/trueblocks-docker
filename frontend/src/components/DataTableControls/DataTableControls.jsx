@@ -8,7 +8,7 @@ import '../DataTable/DataTable.css';
 //----------------------------------------------------------------------
 export function DataTableControls(props) {
   return (
-    <div className={'data_table_half_wide_row ' + props.subpage}>
+    <div className={'data_table_half_wide_row'}>
       <DataTableSearch />
       <DataTableScroll {...props}></DataTableScroll>
     </div>

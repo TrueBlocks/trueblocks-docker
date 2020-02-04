@@ -1,16 +1,9 @@
-:root {
-  --color-table-bg: white;
-  --color-table-border: var(--color-border-primary);
-  --color-table-header-bg: var(--color-table-header);
-  --color-table-body-bg: var(--color-table-body);
-}
-
 /*-----------------------------------------------------------------------------*/
 .dt-old {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9em;
   width: 98%;
-  background-color: var(--color-table-bg);
+  background-color: var(--color-table-body-bg);
   border: 1px solid var(--color-border-primary);
   margin-bottom: 10px;
   cursor: pointer;
