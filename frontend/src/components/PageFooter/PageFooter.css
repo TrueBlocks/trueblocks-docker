@@ -1,0 +1,42 @@
+.page-footer {
+  display: flex;
+  align-content: flex-start;
+  margin: 2px 2px 0 2px;
+  padding: 5px 5% 5px 7%;
+  background: var(--color-background-primary);
+}
+
+.linker {
+  text-decoration: none;
+  color: #444;
+}
+
+.social {
+  height: 33px;
+  width: 33px;
+  color: #444;
+}
+
+.footer-container {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-basis: 100%;
+  align-content: flex-start;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #444;
+}
+
+.left-item {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-basis: 40%;
+  padding-left: 5px;
+}
+
+.right-item {
+  flex-flow: row;
+  box-align: right;
+  padding-top: 3px;
+}

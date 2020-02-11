@@ -1,0 +1,60 @@
+/*-----------------------------------------------------------------------------*/
+.material-icons.md-small {
+  font-size: 15px;
+  padding-right: 3px;
+  opacity: 54%;
+  vertical-align: text-bottom;
+}
+
+.material-icons.md-regular {
+  font-size: 20px;
+  padding-right: 3px;
+  opacity: 54%;
+  vertical-align: middle;
+}
+
+.material-icons.md-midsize {
+  font-size: 25px;
+  padding-right: 3px;
+  opacity: 54%;
+  vertical-align: middle;
+}
+
+.material-icons.md-large {
+  font-size: 30px;
+  padding-right: 3px;
+  opacity: 54%;
+  vertical-align: middle;
+}
+
+.material-icons.red {
+  color: red;
+}
+
+.material-icons.orange {
+  color: orangered;
+}
+
+.material-icons.green {
+  color: green;
+}
+
+.material-icons.darkblue {
+  color: darkblue;
+}
+
+.material-icons.bordered {
+  border: 1px solid darkgrey;
+}
+
+.material-icons.bordered:hover {
+  background-color: antiquewhite;
+}
+
+.material-icons:hover {
+  opacity: 100%;
+}
+
+.material-icons.hidden {
+  visibility: hidden;
+}

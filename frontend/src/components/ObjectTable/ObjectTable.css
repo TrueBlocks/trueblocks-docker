@@ -1,0 +1,75 @@
+.object_table {
+  font-size: 0.9em;
+  background-color: #fff;
+  color: #444;
+  font-family: 'Courier New', Courier, monospace;
+  border: 1px solid var(--color-border-primary);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.object_table:hover {
+  cursor: pointer;
+}
+
+.ot_thead {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-bottom: 3px double var(--color-border-primary);
+}
+
+.ot_th {
+  text-align: left;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: var(--color-table-header-bg);
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+.ot_tbody {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+}
+
+.ot_data {
+  overflow: hidden;
+  background-color: var(--color-background-primary);
+  text-overflow: ellipsis;
+  color: var(--color-text-primary);
+}
+
+.ot_chart {
+  background-color: antiquewhite;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.ot_tr {
+  display: grid;
+  grid-template-columns: 4fr 12fr;
+  text-align: left;
+  height: 1.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ot_tr:hover {
+  background-color: var(--color-hover);
+}
+
+.ot_prompt {
+  font-weight: 600;
+  border-right: 1px solid var(--color-border-primary);
+  padding-top: 0.2em;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.ot_inner {
+  padding-top: 0.2em;
+  padding-left: 8px;
+  padding-right: 8px;
+}
