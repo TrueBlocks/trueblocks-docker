@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import './Identicons.css';
 
@@ -161,6 +161,7 @@ export default class Identicon extends Component {
 }
 
 export function addrDisplay(addr, deleted) {
+  if (!addr) return <Fragment></Fragment>;
   return (
     <div>
       {addr.substr(0, 5)}...{addr.substr(addr.length - 4, addr.length)} {deleted ? <div /> : <Identicon seed={addr} />}

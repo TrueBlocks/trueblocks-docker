@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Support } from './dispatchers';
 
-import { BreadCrumb } from '../../components';
+import { BreadCrumb } from 'components';
+import { Debug } from 'components';
 import { free_supportText } from './text/free_support';
 import { per_incidentText } from './text/per_incident';
 import { documentationText } from './text/documentation';
@@ -34,6 +35,11 @@ class SupportInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
+  pageEar = (cmd, arg) => {
+    // EXISTING_CODE
+    // EXISTING_CODE
+  };
+
   getInnerPage = () => {
     if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Support</div>;
     if (this.state.cur_submenu.query === su.FREE_SUPPORT) {
@@ -57,7 +63,7 @@ class SupportInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Support" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        {JSON.stringify(this.state)}
+        <Debug state={this.state} fieldList={this.props.fieldList} />
       </div>
     );
   };
@@ -67,13 +73,14 @@ class SupportInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Support }) => ({
+const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Support }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
-  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
+  sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Support.isLoading,
   error: reducer_Support.error,
+  fieldList: reducer_Support.fieldList,
   data: reducer_Support.data,
   meta: reducer_Support.meta
 });

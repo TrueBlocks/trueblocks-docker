@@ -1,7 +1,7 @@
 [settings]
 class = CSettings
 page_notes = Monitors are per-address index caches that enable fast retreival of appearance histories for any account.
-no_dt = true
+no_table = true
 color = pink
 
 [[subpages]]

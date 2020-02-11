@@ -13,5 +13,5 @@ export const DASHBOARD = 'other';
 export const CUSTOM = 'list&verbose';
 export const KNOWN = 'list';
 export const GENERATED = 'generated';
-export const PRICES = 'prices';
+export const PRICES = 'period=1440';
 export const GROUPS = 'groups';

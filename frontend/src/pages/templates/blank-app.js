@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { history } from './store';
 import { SET as SET_LAST_LOCATION } from './last-location-actions';
 import Content from './Content';
+import logo from 'img/logo.png';
 import { PageHeader, PageFooter } from './components';
 import './App.css';
 
@@ -12,7 +13,6 @@ import './App.css';
 const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocation });
 
 class App extends React.Component {
-
   isShowingRootRoute() {
     const { currentLocation } = this.props;
 
@@ -38,7 +38,7 @@ class App extends React.Component {
     return (
       <Fragment>
         <div className="page-container">
-          <PageHeader />
+          <PageHeader logo={logo} text={'TrueBlocks Account Explorer'}/>
           <Content />
           <PageFooter />
         </div>

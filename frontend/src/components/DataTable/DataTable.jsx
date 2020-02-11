@@ -3,63 +3,68 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { DataTableControls } from '../DataTableControls';
+import Controls from '../Controls';
 import Header from './Header';
 import Body from './Body';
 
-import * as Utils from '../../utils';
+import { getKeys, sortArray } from 'utils';
 import './DataTable.css';
 
+/**
+ * A table to display row major data
+ * @param {array} theData - array containing the rows of data
+ * @param {array} theFields - array matching `theData` describing each column in the rows
+ * @param {array} displayMap - a map describing what to display in what order with optional alternative name for fields
+ * @param {array} headerIcons - list of icons for the header's icon tray
+ * @param {array} icons - list of icons for the rows' icon tray
+ * @param {func} pageEar - listener for all bubbled up events on the table
+ */
 //----------------------------------------------------------------------
 class DataTable extends React.Component {
   constructor(props) {
     super(props);
-    var fields = [];
-    Object.keys(this.props.rows[0]).map((key) => {
-      fields.push(key);
-      return true;
-    });
 
-    var n_items = props.rows ? props.rows.length : 1;
+    var n_items = props.theData ? props.theData.length : 1;
     var per_page = localStorage.getItem('per_page') || 25;
     var pages = Math.floor((n_items - 1) / per_page) + 1;
     this.state = {
-      sortedBy: localStorage.getItem('dt_sortedby') || fields[0],
-      sortDir: localStorage.getItem('dt_sortdir') || true,
+      sortCtx: {
+        sortedBy: localStorage.getItem('dt_sortedby'),
+        sortDir: localStorage.getItem('dt_sortdir') || true,
+        sortBy: this.sortBy
+      },
       n_items: n_items,
       cur_page: 1,
       pages: pages,
       per_page: per_page,
-      fieldList: fields
+      theData: props.theData
     };
   }
 
-  sortData(data, field, asc) {
-    data.sort(function(a, b) {
-      if (asc) {
-        return a[field] > b[field] ? 1 : a[field] < b[field] ? -1 : 0;
-      } else {
-        return b[field] > a[field] ? 1 : b[field] < a[field] ? -1 : 0;
-      }
-    });
-    return data;
-  }
-
-  sortBy = (field, dir) => {
-    var sortDir = this.state.sortedBy === field ? !this.state.sortDir : dir ? dir : true;
+  sortBy = (cmd, field, dir) => {
+    field = field.toLowerCase();
+    // console.log('cmd: ', cmd, 'field: ', field, 'predir: ', dir);
+    // If it's the same field, switch direction, otherwise sort ascending
+    var sortDir = this.state.sortCtx.sortedBy === field ? !this.state.sortCtx.sortDir : true;
+    // console.log('sortDir: ', sortDir);
     localStorage.setItem('dt_sortedby', field);
     localStorage.setItem('dt_sortdir', sortDir);
+    // console.log('rows-before', this.state.rows[0]);
     this.setState({
       ...this.state,
-      sortedBy: field,
-      sortDir: sortDir,
-      rows: this.sortData(this.props.rows, field, sortDir)
+      sortCtx: {
+        sortedBy: field,
+        sortDir: sortDir,
+        sortBy: this.sortBy
+      },
+      theData: sortArray(this.state.theData, field, sortDir)
     });
+    // console.log('rows-after', this.state.rows[0]);
     return;
   };
 
   componentWillMount() {
-    this.sortBy(this.state.sortedBy, this.state.sortDir);
+    this.sortBy('sort', this.state.sortCtx.sortedBy, this.state.sortCtx.sortDir);
   }
 
   perPageChanged = (event) => {
@@ -69,40 +74,77 @@ class DataTable extends React.Component {
     var cur_page = Math.min(pages, this.state.cur_page);
     console.log(per_page, n_items, pages, cur_page);
     this.setState({
+      ...this.state,
       pages: pages,
       cur_page: cur_page,
       per_page: per_page
     });
   };
 
+  pageChange = (dir) => {
+    let new_page = this.state.cur_page;
+    if (dir === 'first') new_page = 0;
+    else if (dir === 'last') new_page = this.state.pages;
+    else if (dir === 'next') new_page = this.state.cur_page + 1;
+    else if (dir === 'prev') new_page = this.state.cur_page - 1;
+    this.setState({
+      ...this.state,
+      cur_page: new_page < 1 ? 1 : new_page > this.state.pages ? this.state.pages : new_page
+    });
+  };
+
   render = () => {
+    if (!this.props.theFields || this.props.theFields.length === 0) {
+      return <div>No fields were supplied, can't draw anything.</div>;
+    }
     const showControls = true;
-    const { rows } = this.props;
+    const { pageEar } = this.props;
+    const { theData } = this.state;
+    const icons = [
+      { action: 'launch' },
+      { action: 'refresh' },
+      { action: 'explore', icon: 'list_alt' },
+      { action: 'delete', icon: 'delete_outline' },
+      { action: 'add', icon: 'add' }
+    ];
+    const del_icons = [
+      { action: 'launch', disabled: true },
+      { action: 'refresh', disabled: true },
+      { action: 'remove', icon: 'delete_forever' },
+      { action: 'undo' }
+    ];
     return (
       <Fragment>
-        <div>new table</div>
         {showControls ? (
-          <DataTableControls
-            n_items={this.props.data ? this.props.data.length : 0}
+          <Controls
+            title="page"
+            n_items={theData ? theData.length : 0}
             pages={this.state.pages}
             cur_page={this.state.cur_page}
             per_page={this.state.per_page}
             perPageChanged={this.perPageChanged}
+            pageChange={this.pageChange}
           />
         ) : (
           <Fragment></Fragment>
         )}
         <div className={'data_table'}>
           <Header
-            {...Utils.getKeys('dth')}
-            {...this.props}
-            fields={this.state.fieldList}
-            sortBy={this.sortBy}
-            sortedBy={this.state.sortedBy}
-            sortDir={this.state.sortDir}
-            bang={this.state.fieldList.length}
+            {...getKeys('dth')}
+            displayMap={this.props.displayMap}
+            theFields={this.props.theFields}
+            sortCtx={this.state.sortCtx}
           />
-          <Body rows={rows} fields={this.state.fieldList} />
+          <Body
+            theData={theData}
+            displayMap={this.props.displayMap}
+            theFields={this.props.theFields}
+            controls={{ cur_page: this.state.cur_page, per_page: this.state.per_page }}
+            sortBy={this.sortBy}
+            tableEar={pageEar}
+            icons={icons}
+            del_icons={del_icons}
+          />
         </div>
       </Fragment>
     );
@@ -113,7 +155,9 @@ class DataTable extends React.Component {
 DataTable.propTypes = {
   // title: PropTypes.string.isRequired,
   // explainer: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired
+  theFields: PropTypes.array.isRequired,
+  rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pageEar: PropTypes.func.isRequired
 };
 
 //----------------------------------------------------------------------

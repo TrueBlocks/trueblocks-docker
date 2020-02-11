@@ -1,16 +1,16 @@
 /*-----------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
 import './DashMenu.css';
-import * as ad from '../../pages/addresses/dispatchers';
-import * as ex from '../../pages/explore/dispatchers';
-import * as di from '../../pages/digests/dispatchers';
-import * as ca from '../../pages/caches/dispatchers';
-import * as si from '../../pages/signatures/dispatchers';
-import * as ot from '../../pages/other/dispatchers';
-import * as se from '../../pages/settings/dispatchers';
-import * as su from '../../pages/support/dispatchers';
+import * as ad from 'pages/addresses/dispatchers';
+import * as ex from 'pages/explore/dispatchers';
+import * as di from 'pages/digests/dispatchers';
+import * as ca from 'pages/caches/dispatchers';
+import * as si from 'pages/signatures/dispatchers';
+import * as ot from 'pages/other/dispatchers';
+import * as se from 'pages/settings/dispatchers';
+import * as su from 'pages/support/dispatchers';
 
-const utils = require('../../utils');
+import { fmtInteger } from 'utils';
 
 /*-----------------------------------------------------------------------------*/
 export const getDashMenu = () => {
@@ -120,7 +120,7 @@ class ItemCol extends React.Component {
   render = () => {
     var empty = this.props.item.subpage.includes('-');
     var cn = empty ? 'summary-table box endpad ' : 'summary-table box col-item ';
-    var value = empty ? '' : utils.fmtInteger(this.props.item.value);
+    var value = empty ? '' : fmtInteger(this.props.item.value);
     return (
       <div key={this.props.type} className={cn} onClick={this.itemClicked}>
         {value}

@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './dispatchers';
 
-import { BreadCrumb } from '../../components';
-import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
-import { isReady } from '../../components';
-import { DataTableObject } from '../../components';
+import { BreadCrumb } from 'components';
+import { Debug } from 'components';
+import { isReady } from 'components';
+import { ObjectTable } from 'components';
+import { isError, NotReady, isEmpty, EmptyQuery } from 'components';
 import './explore.css';
 
 // EXISTING_CODE
@@ -31,17 +32,25 @@ class ExploreInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
+  pageEar = (cmd, arg) => {
+    // EXISTING_CODE
+    // EXISTING_CODE
+  };
+
   getInnerPage = () => {
     if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Explore</div>;
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
+    let object = this.props.data[0].result ? this.props.data[0].result : this.props.data[0];
     // EXISTING_CODE
     return (
-      <DataTableObject
-        subpage="explore"
-        data={this.props.data[0].result ? this.props.data[0].result : this.props.data[0]}
+      <ObjectTable
+        title={'Explore: ' + this.state.cur_submenu}
+        theFields={this.props.fieldList}
+        object={object}
+        pageEar={this.pageEar}
       />
     );
   };
@@ -51,7 +60,7 @@ class ExploreInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Explore" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        {JSON.stringify(this.state)}
+        <Debug state={this.state} fieldList={this.props.fieldList} />
       </div>
     );
   };
@@ -61,13 +70,14 @@ class ExploreInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Explore }) => ({
+const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Explore }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
-  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
+  sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Explore.isLoading,
   error: reducer_Explore.error,
+  fieldList: reducer_Explore.fieldList,
   data: reducer_Explore.data,
   meta: reducer_Explore.meta
 });

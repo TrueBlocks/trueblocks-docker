@@ -3,6 +3,7 @@ class = CCaches
 page_notes = TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space \
                 on your|hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.
 color = tan
+obj_table = true
 
 [[subpages]]
 list = [
@@ -11,5 +12,6 @@ list = [
     { page = "caches", subpage = "tx_cache", route = "status", options = "modes_EQ_caches&types_EQ_transactions&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "trace_cache", route = "status", options = "modes_EQ_caches&types_EQ_traces&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "slurps", route = "status", options = "modes_EQ_caches&types_EQ_slurps&details&depth_EQ_2", extract = "_0.caches" },
+    { page = "caches", subpage = "prices", route = "status", options = "modes_EQ_caches&types_EQ_prices&details&depth_EQ_2", extract = "_0.caches" },
     { page = "caches", subpage = "abi_cache", route = "status", options = "modes_EQ_abis&details", extract = "_0.caches_0.items" },
 ]

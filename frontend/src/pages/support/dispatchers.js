@@ -1,5 +1,5 @@
 import * as su from './actions';
-const Utils = require('../../utils');
+import { queryAPI_get } from 'utils';
 
 //----------------------------------------------------------------------
 export const dispatcher_Support = (str) => {
@@ -9,7 +9,7 @@ export const dispatcher_Support = (str) => {
     });
 
     var array = str.split('?');
-    return Utils.queryAPI_get(array[0], array[1])
+    return queryAPI_get(array[0], array[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {

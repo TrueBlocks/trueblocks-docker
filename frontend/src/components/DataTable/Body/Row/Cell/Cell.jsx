@@ -1,36 +1,28 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import * as utils from '../../../../../utils';
+import { isHex, isNumber, fmtInteger } from 'utils';
 import '../../../DataTable.css';
 
 //----------------------------------------------------------------------
-class Cell extends React.Component {
-  expandClicked = () => {
-    if (this.props.innerEar) this.props.innerEar('expand', this.props.item);
-  };
-
-  render = () => {
-    var cn = 'data_table_table_item';
-    var isNum = !utils.isHex(this.props.value) && utils.isNumber(this.props.value);
-    if (isNum) cn = 'data_table_table_item number';
-    var val = this.props.value;
-    if (typeof this.props.value === 'object') {
-      val = JSON.stringify(this.props.value);
-    }
-
-    return (
-      <div className={cn} onClick={this.expandClicked}>
-        {isNum ? utils.fmtInteger(val) : val}
-      </div>
-    );
-  };
+function Cell({ content, align, showing, rowEar }) {
+  if (!showing) return <Fragment></Fragment>;
+  var val = content;
+  var isNum = !isHex(content) && isNumber(content) && !content.toString().includes('.');
+  return (
+    <div
+      style={{ textAlign: align }}
+      className={'dt_td' + (isNum ? ' number' : '')}
+      onClick={() => rowEar('expand', '')}
+    >
+      {isNum ? fmtInteger(val) : val}
+    </div>
+  );
 }
 
 //----------------------------------------------------------------------
 Cell.propTypes = {
-  item: PropTypes.object,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool, PropTypes.array])
+  content: PropTypes.any
 };
 
 //----------------------------------------------------------------------

@@ -1,61 +1,115 @@
-/*-----------------------------------------------------------------------------*/
+//----------------------------------------------------------------------
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Cell from './Cell';
-import { DataTableObject } from '../../../DataTableObject';
+import ObjectTable from 'components/ObjectTable';
+import IconTray from 'components/IconTray';
+import { addrDisplay } from 'components/Identicons';
 import '../../DataTable.css';
 
-//----------------------------------------------------------------------
+/**
+ * A row in the Body component of the DataTable component
+ * @param {array} rows - an JSON array of rows of data
+ * @param {array} theFields - JSON array matching rows describing types of columns in rows
+ * @param {array} displayMap - Map describing which fields to display and alternative name for fields
+ * @param {func} bodyEar - listener to bubble up events to the body, handled by rowEar first
+ * @param {string} pKey - the key of the containing Body
+ * @param {string} cn - className for this row
+ * @param {array} icons - a list of icons for the icon tray
+ */
 class Row extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isShowing: true,
       isExpanded: false,
-      isDeleted: false
+      isDeleted: false,
+      wasDeleted: false
     };
     this.rowEar = this.rowEar.bind(this);
   }
 
-  expandClicked = () => {
-    console.log('I am here');
-    if (!this.state.isDeleted) this.rowEar('expand', '');
-  };
-
   getExpanded = () => {
     if (!this.state.isExpanded) return <Fragment />;
+    let title = this.props.row['display_name'];
+    title += ' (' + this.props.row['nRecords'] + ' appearances';
+    title += ' - ' + this.props.row['curEther'] + ' balance in Ether)';
     return (
-      <div>
-        <DataTableObject style={{ width: '20%' }} subpage="x" data={this.props.row} />
+      <div style={{ borderBottom: 'solid 1px' }}>
+        <ObjectTable margin={'12%'} title={title} theFields={this.props.theFields} object={this.props.row} />
       </div>
     );
   };
 
+  getIdenticon(row, pKey, deleted) {
+    const i = addrDisplay(row['address'], deleted);
+    return <Cell key={pKey + '-x'} content={i} align="center" />;
+  }
+
   rowEar(cmd, value) {
-    if (cmd === 'remove') {
+    if (cmd === 'launch') {
+      // LAUNCH
+      const url = 'https://etherscan.io/address/' + value;
+      window.open(url, '_blank');
+    } else if (cmd === 'explore') {
+      // EXPLORE
+      const url = '/explore/accounts/' + value;
+      window.open(url, '_self');
+    } else if (cmd === 'refresh') {
+      // REFRESH
+      this.props.bodyEar(cmd, value);
+    } else if (cmd === 'add') {
+      // ADD
+      this.props.bodyEar(cmd, value);
+    } else if (cmd === 'remove') {
+      // REMOVE
       this.setState({ isShowing: false, isExpanded: false });
+      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
     } else if (cmd === 'delete') {
-      this.setState({ isDeleted: true, isExpanded: false });
+      // DELETE
+      this.setState({ isDeleted: true, wasDeleted: false, isExpanded: false });
       this.props.row.deleted = true;
-      cmd = 'noop';
+      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
     } else if (cmd === 'undo') {
-      this.setState({ isDeleted: false, isExpanded: false });
+      // UNDO
+      this.setState({ isDeleted: false, wasDeleted: true, isExpanded: false });
       this.props.row.deleted = false;
-      cmd = 'noop';
+      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
     } else if (cmd === 'expand') {
-      if (!this.props.row.deleted) this.setState({ isExpanded: !this.state.isExpanded });
-      cmd = 'noop';
+      // EXPAND
+      console.log('expand-in', this.state.isExpanded);
+      if (!this.state.isDeleted && !this.state.wasDeleted) this.setState({ isExpanded: !this.state.isExpanded });
+      else this.setState({ isDeleted: false, wasDeleted: false });
+      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
+      console.log('expand-out', this.state.isExpanded);
     }
-    if (this.props.innerEar) this.props.innerEar(cmd, value); // pass it to the parent in case they're interested
   }
 
   render = (props) => {
-    const { pKey, cn, item } = this.props;
+    const { pKey, cn, row, icon_list } = this.props;
+    if (!this.state.isShowing) {
+      return <Fragment></Fragment>;
+    }
     return (
       <Fragment>
-        <div key={pKey + 'r'} className={cn} onClick={this.expandClicked}>
-          {Object.values(item).map((val, index) => {
-            return <Cell key={`${pKey}-c${index}`} item={item} value={val} />;
-          })}
+        <div key={pKey + 'r'} className={cn}>
+          {
+            <Fragment>
+              {Object.keys(row).map((key, index) => {
+                const showing = this.props.displayMap.get(key) && this.props.displayMap.get(key).showing;
+                let val = row[key];
+                val = typeof val === 'object' ? JSON.stringify(val) : val;
+                return <Cell key={`${pKey}-c${index}`} showing={showing} content={val} rowEar={this.rowEar} />;
+              })}
+            </Fragment>
+          }
+          <IconTray
+            cn="dt_td"
+            key={pKey + '-it'}
+            content={row['address'] === undefined ? ' ' : row['address']}
+            trayEar={this.rowEar}
+            icons={icon_list}
+          />
         </div>
         {this.getExpanded()}
       </Fragment>
@@ -63,4 +117,10 @@ class Row extends React.Component {
   };
 }
 
+//----------------------------------------------------------------------
+Row.propTypes = {
+  bodyEar: PropTypes.func.isRequired
+};
+
+//----------------------------------------------------------------------
 export default Row;

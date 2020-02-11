@@ -1,5 +1,5 @@
 import * as ex from './actions';
-const Utils = require('../../utils');
+import { queryAPI_get } from 'utils';
 
 //----------------------------------------------------------------------
 export const dispatcher_Explore = (str) => {
@@ -9,7 +9,7 @@ export const dispatcher_Explore = (str) => {
     });
 
     var array = str.split('?');
-    return Utils.queryAPI_get(array[0], array[1])
+    return queryAPI_get(array[0], array[1])
       .then(async (result) => {
         let json = await result.json();
         if (json.errors) {
@@ -35,12 +35,12 @@ export const explore_menu = {
   page: 'explore',
   items: [
     { subpage: 'dashboard', route: 'dashboard', query: ex.DASHBOARD },
+    { subpage: 'accounts', route: 'export', query: ex.ACCOUNTS },
     { subpage: 'blocks', route: 'blocks', query: ex.BLOCKS },
     { subpage: 'transactions', route: 'transactions', query: ex.TRANSACTIONS },
     { subpage: 'receipts', route: 'receipts', query: ex.RECEIPTS },
     { subpage: 'logs', route: 'logs', query: ex.LOGS },
-    { subpage: 'traces', route: 'traces', query: ex.TRACES },
-    { subpage: 'ex-0006' }
+    { subpage: 'traces', route: 'traces', query: ex.TRACES }
   ],
   expanded: false,
   color: 'purple'

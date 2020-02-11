@@ -1,24 +1,23 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { SortIcon } from '../../../Icon';
+import { SortIcon } from 'components/Icon/Icon';
 import '../../DataTable.css';
 
 //----------------------------------------------------------------------
-function HeaderCell({ field, sortedBy, sortDir, sortBy }) {
+function HeaderCell({ content, sortCtx, sortField, showing }) {
+  if (!showing) return <Fragment></Fragment>;
   return (
-    <div className="dt_th" onClick={() => sortBy(field)}>
-      <SortIcon field={field} sortedBy={sortedBy} sortDir={sortDir} color={'orange'} /> {field}
+    <div className="dt_th" onClick={() => sortCtx.sortBy('sort', sortField, sortCtx.sortDir)}>
+      <SortIcon field={sortField} sortCtx={sortCtx} color={'orange'} /> {content}
     </div>
   );
 }
 
 //----------------------------------------------------------------------
 HeaderCell.propTypes = {
-  field: PropTypes.string.isRequired,
-  sortedBy: PropTypes.string.isRequired,
-  sortDir: PropTypes.string.isRequired,
-  sortBy: PropTypes.func.isRequired
+  content: PropTypes.string.isRequired,
+  sortCtx: PropTypes.object.isRequired
 };
 
 //----------------------------------------------------------------------

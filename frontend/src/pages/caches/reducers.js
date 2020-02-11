@@ -18,6 +18,7 @@ export default function reducer_Caches(state = initialState, action) {
         error: null
       };
 
+    case ca.PRICES:
     case ca.SLURPS:
     case ca.TRACE_CACHE:
     case ca.TX_CACHE:
@@ -26,7 +27,7 @@ export default function reducer_Caches(state = initialState, action) {
       return {
         ...state,
         data: action.payload.data[0].caches,
-        fieldList: action.payload.fieldList,
+        fieldList: action.payload.types[0].fields,
         meta: action.payload.meta,
         isLoading: false,
         error: null
@@ -36,7 +37,7 @@ export default function reducer_Caches(state = initialState, action) {
       return {
         ...state,
         data: action.payload.data[0].caches[0].items,
-        fieldList: action.payload.fieldList,
+        fieldList: action.payload.types[1].fields,
         meta: action.payload.meta,
         isLoading: false,
         error: null

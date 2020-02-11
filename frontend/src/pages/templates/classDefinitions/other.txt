@@ -10,6 +10,6 @@ list = [
     { page = "other", subpage = "custom", route = "when", options = "list&verbose" },
     { page = "other", subpage = "known", route = "when", options = "list" },
     { page = "other", subpage = "generated", route = "other", options = "generated" },
-    { page = "other", subpage = "prices", route = "quotes", options = "prices" },
+    { page = "other", subpage = "prices", route = "quotes", options = "period_EQ_1440" },
     { page = "other", subpage = "groups", route = "names", options = "groups" },
 ]

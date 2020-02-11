@@ -1,19 +1,15 @@
 import React from 'react';
-import { Page } from '../../components';
+import { Page } from 'components';
 import AddressesInner from './inner';
 import { dispatcher_Addresses, addresses_menu } from './dispatchers';
-import * as utils from '../../utils';
+import { findMenu } from 'utils';
 
 //----------------------------------------------------------------------
-class Addresses extends React.Component {
-  getInner = () => {
-    var item = utils.findMenu('addresses', addresses_menu, this.props.match);
-    return <AddressesInner key={Math.random()} cur_submenu={item} />;
-  };
-
-  render = () => {
-    return <Page inner={this.getInner()} />;
-  };
+function Addresses({ match }) {
+  return (
+    <Page inner={<AddressesInner key={Math.random()} cur_submenu={findMenu('addresses', addresses_menu, match)} />} />
+  );
 }
 export default Addresses;
+
 export { dispatcher_Addresses, addresses_menu };

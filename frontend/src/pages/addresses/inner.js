@@ -1,19 +1,18 @@
 //----------------------------------------------------------------------
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
 
-import { BreadCrumb } from '../../components';
-import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
-import { isReady } from '../../components';
-import { DataTable } from '../../components';
+import { BreadCrumb } from 'components';
+import { Debug } from 'components';
+import { isReady } from 'components';
+import { DataTable } from 'components';
+import { isError, NotReady, isEmpty, EmptyQuery } from 'components';
 import './addresses.css';
 
 // EXISTING_CODE
 import { dispatcher_RemoveMonitor, dispatcher_AddMonitor } from './dispatchers';
-import { DataTableNew } from '../../components';
-const fieldList = ['', 'Name', 'First', 'Last', 'Range', 'Count', 'Interval', 'Bytes', 'Balance', ''];
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -24,7 +23,7 @@ class AddressesInner extends React.Component {
       cur_submenu: props.cur_submenu
     };
     // EXISTING_CODE
-    this.innerEar = this.innerEar.bind(this);
+    this.pageEar = this.pageEar.bind(this);
     // EXISTING_CODE
   }
 
@@ -33,21 +32,34 @@ class AddressesInner extends React.Component {
   };
 
   // EXISTING_CODE
-  innerEar = (cmd, submenu) => {
-    var value = submenu.route + '/' + submenu.query;
+  switch_page = () => {
+    this.setState({ ...this.state });
+    window.open('http://localhost:3000/addresses/monitors/status+modes=monitors&details&ether', '_self');
+  };
+  async add(addr) {
+    return await this.props.dispatcher_AddMonitor(addr);
+  }
+  // EXISTING_CODE
+
+  pageEar = (cmd, arg) => {
+    // EXISTING_CODE
     if (cmd === 'remove') {
-      this.props.dispatcher_RemoveMonitor(value, true);
+      this.props.dispatcher_RemoveMonitor(arg, true);
     } else if (cmd === 'delete' || cmd === 'undo') {
-      this.props.dispatcher_RemoveMonitor(value, false);
+      this.props.dispatcher_RemoveMonitor(arg, false);
+      this.setState({ ...this.state });
     } else if (cmd === 'expand') {
       this.setState({
-        subpage: value
+        subpage: arg
       });
-    } else if (cmd === 'monitor') {
-      this.props.dispatcher_AddMonitor(value);
+    } else if (cmd === 'add') {
+      this.props.dispatcher_AddMonitor(arg);
+      // this.setState({ ...this.state });
+      // window.open('http://localhost:3000/addresses/monitors/status+modes=monitors&details&ether', '_self');
+      // this.add(arg).then(this.switch_page());
     }
+    // EXISTING_CODE
   };
-  // EXISTING_CODE
 
   getInnerPage = () => {
     if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Addresses</div>;
@@ -55,12 +67,34 @@ class AddressesInner extends React.Component {
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
+    const displayMap = new Map();
+    displayMap.set('group', { showing: true });
+    displayMap.set('name', { showing: true });
+    displayMap.set('address', { showing: true });
+    if (this.state.cur_submenu.subpage !== 'monitors') {
+      displayMap.set('symbol', { showing: true });
+      displayMap.set('source', { showing: true });
+      displayMap.set('logo', { showing: true });
+      displayMap.set('description', { showing: true });
+    } else {
+      displayMap.set('nAppearances', { showing: true, name: 'Count' });
+      displayMap.set('firstAppearance', { showing: true, name: 'First' });
+      displayMap.set('latestAppearance', { showing: true, name: 'Latest' });
+      displayMap.set('appearanceRange', { showing: true, name: 'Range' });
+      displayMap.set('appearanceInterval', { showing: true, name: 'Interval' });
+      displayMap.set('sizeInBytes', { showing: true, name: 'Size' });
+      displayMap.set('curEther', { showing: true, name: 'Balance' });
+    }
     // EXISTING_CODE
     return (
-      <Fragment>
-        <DataTable fields={null} rows={this.props.data} innerEar={null} />;
-        <DataTableNew fields={fieldList} rows={this.props.data} ear={this.innerEar} />
-      </Fragment>
+      <DataTable
+        displayMap={displayMap}
+        theFields={this.props.fieldList}
+        theData={this.props.data}
+        headerIcons={['add']}
+        icons={['explore', 'refresh', 'explore|remove', 'delete|undo']}
+        pageEar={this.pageEar}
+      />
     );
   };
 
@@ -69,7 +103,7 @@ class AddressesInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Addresses" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        {JSON.stringify(this.state)}
+        <Debug state={this.state} fieldList={this.props.fieldList} />
       </div>
     );
   };
@@ -97,13 +131,14 @@ export const AddNewAddress = (props) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Addresses }) => ({
+const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Addresses }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
-  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
+  sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Addresses.isLoading,
   error: reducer_Addresses.error,
+  fieldList: reducer_Addresses.fieldList,
   data: reducer_Addresses.data,
   meta: reducer_Addresses.meta
 });

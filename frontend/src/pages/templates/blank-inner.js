@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_[{PROPER}] } from './dispatchers';
 
-import { [{MENU_TYPE}] } from '../../components';
-import { BreadCrumb } from '../../components';
-[{NO_ERROR}]import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
-[{NO_DATA}]import { isReady } from '../../components';
-[{NO_DT}]import { [{DT_TYPE}] } from '../../components';
+import { [{MENU_TYPE}] } from 'components';
+import { BreadCrumb } from 'components';
+import { Debug } from 'components';
+[{NO_DATA}]import { isReady } from 'components';
+[{NO_DT}]import { DataTable } from 'components';
+[{NO_OBJ}]import { ObjectTable } from 'components';
+[{NO_ERROR}]import { isError, NotReady, isEmpty, EmptyQuery } from 'components';
 [{NO_TEXT}][{TEXT_IMPORTS}]
 [{NO_TEXT}][{TEXT_ACTIONS}]
 [{MENU_COMMENT}]import { [{LOWER}]_menu } from './';
@@ -35,15 +37,37 @@ class [{PROPER}]Inner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
+  pageEar = (cmd, arg) => {
+    // EXISTING_CODE
+    // EXISTING_CODE
+  };
+
   getInnerPage = () => {
     [{NO_DASH}]if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for [{PROPER}]</div>;
-[{NO_TEXT}][{TEXT_CODE}]
+    [{NO_TEXT}][{TEXT_CODE}]
     [{NO_ERROR}]if (isError(this.props)) return <NotReady {...this.props} />;
     [{NO_DATA}]else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     [{NO_ERROR}]else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     // EXISTING_CODE
-    return [{NO_DT}]<[{DT_TYPE}] fields={null} rows={this.props.data} [IE1] />;
+    [{NO_DT}]return (
+    [{NO_DT}]  <DataTable
+    [{NO_DT}]    displayMap={displayMap}
+    [{NO_DT}]    theFields={this.props.fieldList}
+    [{NO_DT}]    theData={this.props.data}
+    [{NO_DT}]    headerIcons={['add']}
+    [{NO_DT}]    icons={['explore', 'refresh', 'explore|remove', 'delete|undo']}
+    [{NO_DT}]    pageEar={this.pageEar}
+    [{NO_DT}]  />
+    [{NO_DT}]);
+    [{NO_OBJ}]return (
+    [{NO_OBJ}]  <ObjectTable
+    [{NO_OBJ}]    title={'[{PROPER}]: ' + this.state.cur_submenu}
+    [{NO_OBJ}]    theFields={this.props.fieldList}
+    [{NO_OBJ}]    object={object}
+    [{NO_OBJ}]    pageEar={this.pageEar}
+    [{NO_OBJ}]  />
+    [{NO_OBJ}]);
   };
 
   render = () => {
@@ -51,7 +75,7 @@ class [{PROPER}]Inner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="[{PROPER}]" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        {JSON.stringify(this.state)}
+        <Debug state={this.state} fieldList={this.props.fieldList} />
       </div>
     );
   };
@@ -61,13 +85,14 @@ class [{PROPER}]Inner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_[{PROPER}] }) => ({
+const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_[{PROPER}] }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
-  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
+  sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_[{PROPER}].isLoading,
   error: reducer_[{PROPER}].error,
+  fieldList: reducer_[{PROPER}].fieldList,
   data: reducer_[{PROPER}].data,
   meta: reducer_[{PROPER}].meta
 });

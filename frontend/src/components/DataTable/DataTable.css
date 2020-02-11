@@ -1,10 +1,13 @@
 /*-----------------------------------------------------------------------------*/
 .data_table {
+  margin: 0 !important;
+  padding: 0 !important;
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9em;
-  width: 98%;
+  width: var(--data-table-width);
+  /* background-color: dodgerblue; */
   background-color: var(--color-table-body-bg);
-  border: 1px solid var(--color-border-primary);
+  border-left: 1px solid var(--color-border-primary);
   margin-bottom: 10px;
   cursor: pointer;
 }
@@ -21,9 +24,8 @@
 .dt_th {
   overflow: hidden;
   text-overflow: ellipsis;
-  border-width: 1px 1px 3px 1px;
-  border-style: solid solid double solid;
-  border-color: var(--color-table-border);
+  border-right: 1px solid var(--color-border-primary);
+  border-bottom: 3px double var(--color-border-primary);
   background-color: var(--color-table-header-bg);
   color: var(--color-table-text);
 }
@@ -46,27 +48,19 @@
 }
 
 /*-----------------------------------------------------------------------------*/
-.data_table_table_item {
-  /* background-color: white; */
-  text-align: left;
-  border-right: 1px solid darkgrey;
-  white-space: nowrap;
+.dt_td {
+  overflow: hidden;
   text-overflow: ellipsis;
-  overflow: hidden; /* border: 1px dashed blue; */
+  padding: 2px 4px 2px 4px;
+  vertical-align: middle;
+  text-align: left;
+  border-right: 1px solid var(--color-border-primary);
+  border-bottom: 1px solid var(--color-border-primary);
+  white-space: nowrap;
 }
 
-.data_table_table_item.number {
+.dt_td.number {
   text-align: right;
-}
-
-/*-----------------------------------------------------------------------------*/
-.data_table_half_wide_row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 0 !important;
-  vertical-align: text-middle;
-  border: 1px solid lightgray;
-  font-size: 13px;
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -103,17 +97,77 @@
 }
 
 .nine_bang {
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .ten_bang {
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .eleven_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twelve_bang {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+.thirteen_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.fourteen_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.fifteen_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.sixteen_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.seventeen_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.eightteen_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.nineteen_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
 .twenty_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twentyone_bang {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twentytwo_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twentythree_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twentyfour_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twentyfive_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twentysix_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.twentyseven_bang {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }

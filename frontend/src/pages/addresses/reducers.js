@@ -27,17 +27,18 @@ export default function reducer_Addresses(state = initialState, action) {
       return {
         ...state,
         data: action.payload.data,
-        fieldList: action.payload.fieldList,
+        fieldList: action.payload.types[0].fields,
         meta: action.payload.meta,
         isLoading: false,
         error: null
       };
 
+    case ad.CREATE:
     case ad.MONITORS:
       return {
         ...state,
         data: action.payload.data[0].caches[0].items,
-        fieldList: action.payload.fieldList,
+        fieldList: action.payload.types[1].fields,
         meta: action.payload.meta,
         isLoading: false,
         error: null

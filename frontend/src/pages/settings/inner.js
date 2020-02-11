@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Settings } from './dispatchers';
 
-import { BreadCrumb } from '../../components';
-import { isError, NotReady, isEmpty, EmptyQuery } from '../../components';
-import { isReady } from '../../components';
+import { BreadCrumb } from 'components';
+import { Debug } from 'components';
+import { isReady } from 'components';
+import { isError, NotReady, isEmpty, EmptyQuery } from 'components';
 import { licensesText } from './text/licenses';
 import * as se from './actions';
 import './settings.css';
@@ -43,6 +44,11 @@ class SettingsInner extends React.Component {
     this.setState({ data: settings });
   };
   // EXISTING_CODE
+
+  pageEar = (cmd, arg) => {
+    // EXISTING_CODE
+    // EXISTING_CODE
+  };
 
   getInnerPage = () => {
     if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Settings</div>;
@@ -84,7 +90,7 @@ class SettingsInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Settings" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        {JSON.stringify(this.state)}
+        <Debug state={this.state} fieldList={this.props.fieldList} />
       </div>
     );
   };
@@ -109,13 +115,14 @@ const SettingInput = ({ name, value, type, tip, onChange }) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Settings }) => ({
+const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Settings }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
-  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
+  sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Settings.isLoading,
   error: reducer_Settings.error,
+  fieldList: reducer_Settings.fieldList,
   data: reducer_Settings.data,
   meta: reducer_Settings.meta
 });

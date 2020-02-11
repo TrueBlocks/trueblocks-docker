@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from './';
+import Icon from './Icon';
 
 const chevronDirectionByShrinkTo = new Map([
   ['left', { shrink: 'chevron_left', expand: 'chevron_right' }],
@@ -8,8 +8,10 @@ const chevronDirectionByShrinkTo = new Map([
 
 const getIconsNames = (shrinkTo) => chevronDirectionByShrinkTo.get(shrinkTo);
 
-export default function ExpandShrinkIcon({ shrinkTo, isExpanded, toggleIcon, onClick }) {
+export function ExpandShrinkIcon({ shrinkTo, isExpanded, toggleIcon, onClick }) {
   const iconName = toggleIcon || getIconsNames(shrinkTo)[isExpanded ? 'shrink' : 'expand'];
 
   return <Icon icon={iconName} onClick={onClick} />;
 }
+
+export default ExpandShrinkIcon;

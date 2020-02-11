@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
 
-import { DashMenu } from '../../components';
-import { BreadCrumb } from '../../components';
+import { DashMenu } from 'components';
+import { BreadCrumb } from 'components';
+import { Debug } from 'components';
 import { dashboard_menu } from './';
 import './dashboard.css';
 
@@ -33,6 +34,11 @@ class DashboardInner extends React.Component {
   };
   // EXISTING_CODE
 
+  pageEar = (cmd, arg) => {
+    // EXISTING_CODE
+    // EXISTING_CODE
+  };
+
   getInnerPage = () => {
     // EXISTING_CODE
     return <DashMenu data={dashboard_menu} active={this.state.subpage} changePage={this.changePage} />;
@@ -44,7 +50,7 @@ class DashboardInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Dashboard" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        {JSON.stringify(this.state)}
+        <Debug state={this.state} fieldList={this.props.fieldList} />
       </div>
     );
   };
@@ -54,13 +60,14 @@ class DashboardInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_SidePanels, reducer_Status, reducer_Dashboard }) => ({
+const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Dashboard }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
-  sysConnected: reducer_SidePanels.isStatusExpanded ? reducer_Status.isConnected : true,
-  sysError: reducer_SidePanels.isStatusExpanded ? reducer_Status.error : false,
+  sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
+  sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Dashboard.isLoading,
   error: reducer_Dashboard.error,
+  fieldList: reducer_Dashboard.fieldList,
   data: reducer_Dashboard.data,
   meta: reducer_Dashboard.meta
 });

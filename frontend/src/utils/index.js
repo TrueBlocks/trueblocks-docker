@@ -105,16 +105,56 @@ const nParts = (haystack) => {
 };
 
 //----------------------------------------------------------------------
+// This is obviously not right -- how do you change the grid-template thing?
 const getBang = (num) => {
-  var bangs = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
-  if (num === 20) return 'twenty_bang';
-  if (num > 11) num = 11;
+  var bangs = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+    'eleven',
+    'twelve',
+    'thirteen',
+    'fourteen',
+    'fifteen',
+    'sixteen',
+    'seventeen',
+    'eighteen',
+    'nineteen',
+    'twenty',
+    'twentyone',
+    'twentytwo',
+    'twentythree',
+    'twentyfour',
+    'twentyfive',
+    'twentysix',
+    'twentyseven'
+  ];
+  if (num > 27) num = 27;
   return bangs[num] + '_bang';
 };
 
 //----------------------------------------------------------------
 function getKeys(str) {
   return { key: str, pKey: str };
+}
+
+function sortArray(array, field, asc) {
+  array.sort(function(a, b) {
+    if (asc) {
+      return a[field] > b[field] ? 1 : a[field] < b[field] ? -1 : 0;
+    } else {
+      return b[field] > a[field] ? 1 : b[field] < a[field] ? -1 : 0;
+    }
+  });
+  return array;
 }
 
 //----------------------------------------------------------------
@@ -130,5 +170,6 @@ module.exports = {
   findMenu,
   nParts,
   getBang,
-  getKeys
+  getKeys,
+  sortArray
 };

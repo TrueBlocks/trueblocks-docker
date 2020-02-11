@@ -15,6 +15,7 @@
   margin: 2px 5px 1px 4px;
   border: 1px solid #6b7a89;
   background-color: #a7b7c2;
+  opacity: 75%;
 }
 
 .menu-item.is-active {
@@ -23,11 +24,14 @@
   color: #42505f;
   background-color: #e2e5f0;
   border: 1px dashed #6b7a89;
+  opacity: 100%;
 }
 
 .menu-item:hover {
-  color: #6f8296;
-  background-color: #e2e5f0;
+  background-color: var(--color-hover);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  opacity: 75%;
 }
 
 /*------------------------------------------*/
@@ -55,11 +59,15 @@
   margin: 0px 4px 4px 4px; */
   border: 1px solid #6b7a89;
   background-color: #a7b7c2;
+  opacity: 75%;
 }
 
 .submenu-item:hover {
   border: 1px solid #bbb;
-  background-color: lightsalmon;
+  background-color: var(--color-hover);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  opacity: 75%;
 }
 
 .submenu-item a {
@@ -68,6 +76,8 @@
 
 .submenu-item.is-active {
   /* font-weight: 700; */
-  background-color: salmon;
-  border-right: 3px salmon solid;
+  background-color: var(--color-hover);
+  /* border-right: 3px salmon solid; */
+  font-weight: 500;
+  opacity: 100%;
 }

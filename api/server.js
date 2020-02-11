@@ -142,5 +142,5 @@ app.put(`/settings`, (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('TrueBlocks Data API initialized on port ' + port);
+    console.log('TrueBlocks Data API (version 0.6.7) initialized on port ' + port);
 });
