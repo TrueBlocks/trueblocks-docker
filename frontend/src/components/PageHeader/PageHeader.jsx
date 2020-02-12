@@ -22,7 +22,7 @@ function PageHeader({ logo, title }) {
 //------------------------------------------------------------
 PageHeader.propTypes = {
   logo: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 };
 
 //------------------------------------------------------------

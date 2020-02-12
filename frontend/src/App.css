@@ -39,6 +39,12 @@
 
 /* fly50 */
 :fly50 {
+  --logo-width: 43px;
+  --logo-height: 60px;
+  --header-font-size: 1.8em;
+  --header-small-factor: 0.6;
+  --header-height: 74px;
+  --footer-height: 54px;
   /**/
   --color-border-primary: #687864;
   --color-table-border: var(--color-border-primary);

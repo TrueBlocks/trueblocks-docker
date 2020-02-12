@@ -6,10 +6,10 @@ import Cell from './Cell';
 import '../../ObjectTable.css';
 
 //----------------------------------------------------------------------
-function Row({ object, field, index, right }) {
+function Row({ pKey, object, field, index, right }) {
   return (
-    <div key={'a' + index} className={right ? 'ot_tr_right' : 'ot_tr'}>
-      <Cell cn="ot_prompt" value={field.name + ':'} />
+    <div key={pKey + index} className={right ? 'ot_tr_right' : 'ot_tr'}>
+      <Cell cn="ot_prompt" type={'string'} value={field.name + ':'} />
       <Cell
         cn={right ? 'ot_inner_right' : 'ot_inner'}
         type={field.type}
@@ -23,8 +23,8 @@ function Row({ object, field, index, right }) {
 
 //----------------------------------------------------------------------
 Row.propTypes = {
-  value: PropTypes.any.isRequired,
-  cn: PropTypes.string.isRequired
+  object: PropTypes.any.isRequired,
+  field: PropTypes.any.isRequired
 };
 
 //----------------------------------------------------------------------

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { Loading, Icon } from 'components';
+import { Loading } from 'components';
 import { ObjectTable } from 'components';
 import * as di from '../actions';
 import 'index.css';
 import '../digests.css';
-import { fmtInteger, humanFileSize } from 'utils';
+import { fmtInteger } from 'utils';
 
 //----------------------------------------------------------------------
 class DigestChart extends React.Component {
@@ -129,7 +129,7 @@ const IndexDetail = (props) => {
         {props.data.map((item) => (
           <ObjectTable
             options={{
-              style: { width: '23%', margin: '1% 1% 0% 0%', padding: '0' },
+              style: { width: '20%', margin: '1% 1% 0% 0%', padding: '100px' },
               header: false,
               sider: false,
               rightAlign: true

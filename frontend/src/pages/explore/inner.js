@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './dispatchers';
 
 import { BreadCrumb } from 'components';
-import { Icon } from 'components';
+//import { Icon } from 'components';
 import { Debug } from 'components';
 import { isReady } from 'components';
 import { ObjectTable } from 'components';
@@ -36,24 +36,39 @@ class ExploreInner extends React.Component {
 
   tableEar = (cmd, arg) => {
     // EXISTING_CODE
-    const link = this.props.meta.links;
-    const loc = this.props.location.pathname;
-    if (cmd === 'next') {
-      window.open(loc.replace(link.current, link.next), '_self');
-    } else if (cmd === 'previous') {
-      window.open(loc.replace(link.current, link.prev), '_self');
-    } else if (cmd === 'first') {
-      window.open(loc.replace(link.current, 'occurrence=0'), '_self');
-    } else if (cmd === 'latest') {
-      window.open(loc.replace(link.current, 'occurrence=latest'), '_self');
+    const links = this.props.meta.links;
+    let loc = this.props.location.pathname;
+    console.log('links: ', links);
+    console.log('loc: ', loc);
+    if (loc.includes('=latest&') && links.current === links.next) {
+      console.log('here1-loc: ', loc);
+      console.log('here2-cur: ', links.current);
+      loc = loc.replace('=latest', '=' + links.current);
+      console.log('here3-loc: ', loc);
     }
+    let url;
+    if (cmd === 'next') {
+      url = loc.replace('=' + links.current + '&', '=' + links.next + '&');
+      window.open(url, '_self');
+    } else if (cmd === 'previous') {
+      url = loc.replace('=' + links.current + '&', '=' + links.prev + '&');
+      window.open(url, '_self');
+    } else if (cmd === 'first') {
+      url = loc.replace('=' + links.current + '&', '=0&');
+      window.open(url, '_self');
+    } else if (cmd === 'latest') {
+      url = loc.replace('=' + links.current + '&', '=latest&');
+      window.open(url, '_self');
+    }
+    console.log('cmd: ', cmd);
+    console.log('url: ', url);
     // EXISTING_CODE
   };
 
   getInnerPage = () => {
     if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Explore</div>;
     if (isError(this.props)) return <NotReady {...this.props} />;
-    //else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
     const object = this.props.data[0].result ? this.props.data[0].result : this.props.data[0];
