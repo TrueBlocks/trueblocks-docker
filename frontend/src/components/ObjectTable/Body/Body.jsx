@@ -6,27 +6,32 @@ import Row from './Row';
 import '../ObjectTable.css';
 
 //----------------------------------------------------------------------
-function Body({ theFields, object }) {
+function Body({ theFields, object, side, right }) {
   if (!theFields || theFields.length === 0) {
     return <div>No field list</div>;
   }
   return (
-    <Fragment>
-      <div className="ot_tbody">
-        <div className="ot_data">
-          {theFields.map((field, index) => {
-            return <Row object={object} field={field} index={index} />;
-          })}
-        </div>
-        <div className="ot_chart">
-          <Link to="/support/about_us/+about_us">Meta</Link>
-          <br />
-          <Link to={'/explore/accounts/export+addrs=' + object.address}>Explore</Link>
-          <br />
-          <Link to="/explore/accounts">Charts</Link>
-        </div>
+    <div className={side ? 'ot_tbody' : 'ot_body_1'}>
+      <div className="ot_data">
+        {theFields.map((field, index) => {
+          return <Row object={object} field={field} index={index} right={right} />;
+        })}
       </div>
-    </Fragment>
+      {side ? <DetailPanel address={object.address} /> : <Fragment />}
+    </div>
+  );
+}
+
+//----------------------------------------------------------------------
+function DetailPanel({ address }) {
+  return (
+    <div className="ot_chart">
+      <Link to="/support/about_us/+about_us">Meta</Link>
+      <br />
+      <Link to={'/explore/accounts/export+addrs=' + address + '&occurrence=0&articulate'}>Explore</Link>
+      <br />
+      <Link to="/explore/accounts">Charts</Link>
+    </div>
   );
 }
 

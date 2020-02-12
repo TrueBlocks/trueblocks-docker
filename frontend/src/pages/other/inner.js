@@ -21,6 +21,7 @@ class OtherInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
+    this.tableEar = this.tableEar.bind(this);
     // EXISTING_CODE
     // EXISTING_CODE
   }
@@ -32,7 +33,7 @@ class OtherInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  pageEar = (cmd, arg) => {
+  tableEar = (cmd, arg) => {
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -83,7 +84,7 @@ class OtherInner extends React.Component {
         theData={this.props.data}
         headerIcons={['add']}
         icons={['explore', 'refresh', 'explore|remove', 'delete|undo']}
-        pageEar={this.pageEar}
+        tableEar={this.tableEar}
       />
     );
   };

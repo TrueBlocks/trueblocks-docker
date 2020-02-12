@@ -26,6 +26,7 @@ class [{PROPER}]Inner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
+    this.tableEar = this.tableEar.bind(this);
     // EXISTING_CODE
     // EXISTING_CODE
   }
@@ -37,7 +38,7 @@ class [{PROPER}]Inner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  pageEar = (cmd, arg) => {
+  tableEar = (cmd, arg) => {
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -57,7 +58,7 @@ class [{PROPER}]Inner extends React.Component {
     [{NO_DT}]    theData={this.props.data}
     [{NO_DT}]    headerIcons={['add']}
     [{NO_DT}]    icons={['explore', 'refresh', 'explore|remove', 'delete|undo']}
-    [{NO_DT}]    pageEar={this.pageEar}
+    [{NO_DT}]    tableEar={this.tableEar}
     [{NO_DT}]  />
     [{NO_DT}]);
     [{NO_OBJ}]return (
@@ -65,7 +66,7 @@ class [{PROPER}]Inner extends React.Component {
     [{NO_OBJ}]    title={'[{PROPER}]: ' + this.state.cur_submenu}
     [{NO_OBJ}]    theFields={this.props.fieldList}
     [{NO_OBJ}]    object={object}
-    [{NO_OBJ}]    pageEar={this.pageEar}
+    [{NO_OBJ}]    tableEar={this.tableEar}
     [{NO_OBJ}]  />
     [{NO_OBJ}]);
   };
@@ -75,7 +76,7 @@ class [{PROPER}]Inner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="[{PROPER}]" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} />
+        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta}/>
       </div>
     );
   };

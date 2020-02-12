@@ -22,8 +22,8 @@ class AddressesInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
+    this.tableEar = this.tableEar.bind(this);
     // EXISTING_CODE
-    this.pageEar = this.pageEar.bind(this);
     // EXISTING_CODE
   }
 
@@ -41,7 +41,7 @@ class AddressesInner extends React.Component {
   }
   // EXISTING_CODE
 
-  pageEar = (cmd, arg) => {
+  tableEar = (cmd, arg) => {
     // EXISTING_CODE
     if (cmd === 'remove') {
       this.props.dispatcher_RemoveMonitor(arg, true);
@@ -93,7 +93,7 @@ class AddressesInner extends React.Component {
         theData={this.props.data}
         headerIcons={['add']}
         icons={['explore', 'refresh', 'explore|remove', 'delete|undo']}
-        pageEar={this.pageEar}
+        tableEar={this.tableEar}
       />
     );
   };

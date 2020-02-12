@@ -6,11 +6,17 @@ import Body from './Body';
 import './ObjectTable.css';
 
 //----------------------------------------------------------------------
-function ObjectTable({ object, theFields, title, margin = '0%', width = '75%' }) {
+function ObjectTable({ object, theFields, title, tableEar, icons, options = defaultOpts }) {
   return (
-    <div className={'object_table'} style={{ marginLeft: margin, width: width }}>
-      <Header title={title} />
-      <Body theFields={theFields} object={object} />
+    <div className={'object_table'} style={{ width: options.width, margin: options.margin, padding: options.padding }}>
+      {options.header ? (
+        <Header title={title} icons={icons} headerEar={tableEar} />
+      ) : (
+        <div>
+          <p></p>
+        </div>
+      )}
+      <Body theFields={theFields} object={object} side={options.sider} right={options.rightAlign} bodyEar={tableEar} />
     </div>
   );
 }
@@ -20,6 +26,9 @@ ObjectTable.propTypes = {
   object: PropTypes.PropTypes.object.isRequired,
   theFields: PropTypes.PropTypes.array.isRequired
 };
+
+//----------------------------------------------------------------------
+export const defaultOpts = { margin: '0%', width: '75%', padding: '0', header: true, sider: true, rightAlign: false };
 
 //----------------------------------------------------------------------
 export default ObjectTable;

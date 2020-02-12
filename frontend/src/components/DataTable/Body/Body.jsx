@@ -12,7 +12,7 @@ import { getKeys, getBang } from 'utils';
  * @param {object} controls - Controls (next, prev, search, etc.) for the table
  * @param {func} tableEar - listener to bubble up events to the table, passed on as bodyEar
  */
-function Body({ theData, theFields, displayMap, controls, icons, del_icons, tableEar }) {
+function Body({ theData, theFields, displayMap, controls, icons, del_icons, bodyEar }) {
   const classNames = ['dt_tr', getBang(displayMap.size + 1)].join(' ');
   const start = (controls.cur_page - 1) * controls.per_page;
   return (
@@ -26,7 +26,7 @@ function Body({ theData, theFields, displayMap, controls, icons, del_icons, tabl
               theFields={theFields}
               row={row}
               cn={classNames}
-              bodyEar={tableEar}
+              rowEar={bodyEar}
               icon_list={row['deleted'] ? del_icons : icons}
             />
           );

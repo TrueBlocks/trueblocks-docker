@@ -10,6 +10,9 @@ const initialState = {
 
 //----------------------------------------------------------------------
 export default function reducer_Addresses(state = initialState, action) {
+  // EXISTING_CODE
+  // EXISTING_CODE
+
   switch (action.type) {
     case ad.BEGIN:
       return {
@@ -18,6 +21,7 @@ export default function reducer_Addresses(state = initialState, action) {
         error: null
       };
 
+    case ad.CREATE:
     case ad.OTHER:
     case ad.PREFUNDS:
     case ad.TOKENS:
@@ -33,7 +37,6 @@ export default function reducer_Addresses(state = initialState, action) {
         error: null
       };
 
-    case ad.CREATE:
     case ad.MONITORS:
       return {
         ...state,

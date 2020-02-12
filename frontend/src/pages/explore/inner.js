@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './dispatchers';
 
 import { BreadCrumb } from 'components';
+import { Icon } from 'components';
 import { Debug } from 'components';
 import { isReady } from 'components';
 import { ObjectTable } from 'components';
@@ -21,6 +22,7 @@ class ExploreInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
+    this.tableEar = this.tableEar.bind(this);
     // EXISTING_CODE
     // EXISTING_CODE
   }
@@ -32,8 +34,13 @@ class ExploreInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  pageEar = (cmd, arg) => {
+  tableEar = (cmd, arg) => {
     // EXISTING_CODE
+    if (cmd === 'next') {
+      console.log('next', arg, this.props.meta);
+    } else if (cmd === 'previous') {
+      console.log('previous', arg, this.props.meta);
+    }
     // EXISTING_CODE
   };
 
@@ -43,14 +50,15 @@ class ExploreInner extends React.Component {
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
     // EXISTING_CODE
-    let object = this.props.data[0].result ? this.props.data[0].result : this.props.data[0];
+    const object = this.props.data[0].result ? this.props.data[0].result : this.props.data[0];
     // EXISTING_CODE
     return (
       <ObjectTable
         title={'Explore: ' + this.state.cur_submenu}
         theFields={this.props.fieldList}
         object={object}
-        pageEar={this.pageEar}
+        tableEar={this.tableEar}
+        icons={['next', 'prev']}
       />
     );
   };

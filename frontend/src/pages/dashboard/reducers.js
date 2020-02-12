@@ -10,6 +10,9 @@ const initialState = {
 
 //----------------------------------------------------------------------
 export default function reducer_Dashboard(state = initialState, action) {
+  // EXISTING_CODE
+  // EXISTING_CODE
+
   switch (action.type) {
     case da.BEGIN:
       return {

@@ -44,17 +44,18 @@
 .inner-panel .digests-chart-container .digests-grid .filling.finalized:hover,
 .inner-panel .digests-chart-container .digests-grid .filling.in-progress:hover {
   /* background-color: lavender; */
-  background-color: antiquewhite;
+  background-color: var(--color-hover);
   cursor: zoom-in;
-  color: #b9c7b9;
 }
 
 /*------------------------------------------*/
 .inner-index {
-  width: 100%;
-  padding: 0px;
-  margin-top: 0px;
-  background-color: sandybrown;
+  width: 99%;
+  padding: 2px;
+  margin-left: 6px;
+  margin-top: 2px;
+  background-color: wheat;
+  border: 1px dashed sandybrown;
 }
 
 .inner-index h4 {
@@ -94,72 +95,4 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-}
-
-.digests-inright {
-  text-align: right;
-  color: gray;
-}
-
-.digests-inright_red {
-  text-align: right;
-  color: red;
-  font-weight: 900;
-}
-
-.digests-inright_blue {
-  text-align: right;
-  color: blue;
-  font-weight: 900;
-}
-
-.digests-fun-facts {
-  display: flex;
-  /* border: 1px dashed #333; */
-}
-
-.digests-fun-facts div {
-  width: 100%;
-  font-size: smaller;
-  align-items: center;
-  justify-content: center;
-  font-style: italic;
-  margin-left: 4px;
-}
-
-.fact {
-  position: absolute;
-}
-
-.fact div {
-  background-color: whitesmoke;
-}
-
-.digests-fact-top {
-  font-weight: 700;
-}
-
-/*-----------------------------------------------------------------------------*/
-.digests-index-node {
-  width: 19.5%;
-  font-size: 0.8em;
-  margin: 0.2%;
-  display: flex;
-  flex-wrap: wrap;
-  /* background-color: rgb(245, 245, 245); */
-  background-color: antiquewhite;
-  padding: 10px;
-  border: 1px solid purple;
-}
-
-.digests-index-node :nth-child(odd) {
-  font-weight: bold;
-}
-
-.digests-index-node div {
-  width: 50%;
-}
-
-.digests-index-node .first {
-  background-color: #eee;
 }

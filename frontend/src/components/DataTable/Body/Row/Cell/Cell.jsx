@@ -5,7 +5,7 @@ import { isHex, isNumber, fmtInteger } from 'utils';
 import '../../../DataTable.css';
 
 //----------------------------------------------------------------------
-function Cell({ content, align, showing, rowEar }) {
+function Cell({ content, align, showing, cellEar }) {
   if (!showing) return <Fragment></Fragment>;
   var val = content;
   var isNum = !isHex(content) && isNumber(content) && !content.toString().includes('.');
@@ -13,7 +13,7 @@ function Cell({ content, align, showing, rowEar }) {
     <div
       style={{ textAlign: align }}
       className={'dt_td' + (isNum ? ' number' : '')}
-      onClick={() => rowEar('expand', '')}
+      onClick={() => cellEar('expand', '')}
     >
       {isNum ? fmtInteger(val) : val}
     </div>

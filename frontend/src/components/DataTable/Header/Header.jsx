@@ -13,7 +13,7 @@ import '../DataTable.css';
  * @param {array} displayMap - Map describing which fields to display and alternative name for fields
  * @param {array} sortCtx - context for the current sorting context of the DataTable
  */
-function Header({ pKey, theFields, displayMap, sortCtx }) {
+function Header({ pKey, theFields, displayMap, sortCtx, headerEar }) {
   return (
     <div className={'dt_thead ' + getBang(displayMap.size + 1)}>
       {theFields.map((field, index) => {

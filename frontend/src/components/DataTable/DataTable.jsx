@@ -17,7 +17,7 @@ import './DataTable.css';
  * @param {array} displayMap - a map describing what to display in what order with optional alternative name for fields
  * @param {array} headerIcons - list of icons for the header's icon tray
  * @param {array} icons - list of icons for the rows' icon tray
- * @param {func} pageEar - listener for all bubbled up events on the table
+ * @param {func} tableEar - listener for all bubbled up events on the table
  */
 //----------------------------------------------------------------------
 class DataTable extends React.Component {
@@ -98,8 +98,7 @@ class DataTable extends React.Component {
       return <div>No fields were supplied, can't draw anything.</div>;
     }
     const showControls = true;
-    const { pageEar } = this.props;
-    const { theData } = this.state;
+    const { tableEar, theData } = this.props;
     const icons = [
       { action: 'launch' },
       { action: 'refresh' },
@@ -134,6 +133,7 @@ class DataTable extends React.Component {
             displayMap={this.props.displayMap}
             theFields={this.props.theFields}
             sortCtx={this.state.sortCtx}
+            headerEar={tableEar}
           />
           <Body
             theData={theData}
@@ -141,7 +141,7 @@ class DataTable extends React.Component {
             theFields={this.props.theFields}
             controls={{ cur_page: this.state.cur_page, per_page: this.state.per_page }}
             sortBy={this.sortBy}
-            tableEar={pageEar}
+            bodyEar={tableEar}
             icons={icons}
             del_icons={del_icons}
           />
@@ -157,7 +157,7 @@ DataTable.propTypes = {
   // explainer: PropTypes.string.isRequired,
   theFields: PropTypes.array.isRequired,
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pageEar: PropTypes.func.isRequired
+  tableEar: PropTypes.func.isRequired
 };
 
 //----------------------------------------------------------------------

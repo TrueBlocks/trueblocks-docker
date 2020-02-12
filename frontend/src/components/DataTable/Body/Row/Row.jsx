@@ -12,7 +12,7 @@ import '../../DataTable.css';
  * @param {array} rows - an JSON array of rows of data
  * @param {array} theFields - JSON array matching rows describing types of columns in rows
  * @param {array} displayMap - Map describing which fields to display and alternative name for fields
- * @param {func} bodyEar - listener to bubble up events to the body, handled by rowEar first
+ * @param {func} rowEar - listener to bubble up events to the body, handled by rowEar first
  * @param {string} pKey - the key of the containing Body
  * @param {string} cn - className for this row
  * @param {array} icons - a list of icons for the icon tray
@@ -26,7 +26,7 @@ class Row extends React.Component {
       isDeleted: false,
       wasDeleted: false
     };
-    this.rowEar = this.rowEar.bind(this);
+    this.cellEar = this.cellEar.bind(this);
   }
 
   getExpanded = () => {
@@ -35,8 +35,14 @@ class Row extends React.Component {
     title += ' (' + this.props.row['nRecords'] + ' appearances';
     title += ' - ' + this.props.row['curEther'] + ' balance in Ether)';
     return (
-      <div style={{ borderBottom: 'solid 1px' }}>
-        <ObjectTable margin={'12%'} title={title} theFields={this.props.theFields} object={this.props.row} />
+      <div style={{ borderBottom: 'solid 1px', borderRight: 'solid 1px' }}>
+        <ObjectTable
+          options={{ style: { width: '75%', margin: '.5% 0% .5% 12.5%', padding: '0px' }, header: true, sider: true }}
+          title={title}
+          theFields={this.props.theFields}
+          object={this.props.row}
+          tableEar={this.cellEar}
+        />
       </div>
     );
   };
@@ -46,41 +52,41 @@ class Row extends React.Component {
     return <Cell key={pKey + '-x'} content={i} align="center" />;
   }
 
-  rowEar(cmd, value) {
+  cellEar(cmd, value) {
     if (cmd === 'launch') {
       // LAUNCH
       const url = 'https://etherscan.io/address/' + value;
       window.open(url, '_blank');
     } else if (cmd === 'explore') {
       // EXPLORE
-      const url = '/explore/accounts/' + value;
+      const url = '/explore/accounts/export+addrs=' + value + '&occurrence=0&articulate';
       window.open(url, '_self');
     } else if (cmd === 'refresh') {
       // REFRESH
-      this.props.bodyEar(cmd, value);
+      this.props.rowEar(cmd, value);
     } else if (cmd === 'add') {
       // ADD
-      this.props.bodyEar(cmd, value);
+      this.props.rowEar(cmd, value);
     } else if (cmd === 'remove') {
       // REMOVE
       this.setState({ isShowing: false, isExpanded: false });
-      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
+      this.props.rowEar(cmd, value); // pass it to the parent in case they're interested
     } else if (cmd === 'delete') {
       // DELETE
       this.setState({ isDeleted: true, wasDeleted: false, isExpanded: false });
       this.props.row.deleted = true;
-      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
+      this.props.rowEar(cmd, value); // pass it to the parent in case they're interested
     } else if (cmd === 'undo') {
       // UNDO
       this.setState({ isDeleted: false, wasDeleted: true, isExpanded: false });
       this.props.row.deleted = false;
-      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
+      this.props.rowEar(cmd, value); // pass it to the parent in case they're interested
     } else if (cmd === 'expand') {
       // EXPAND
       console.log('expand-in', this.state.isExpanded);
       if (!this.state.isDeleted && !this.state.wasDeleted) this.setState({ isExpanded: !this.state.isExpanded });
       else this.setState({ isDeleted: false, wasDeleted: false });
-      this.props.bodyEar(cmd, value); // pass it to the parent in case they're interested
+      this.props.rowEar(cmd, value); // pass it to the parent in case they're interested
       console.log('expand-out', this.state.isExpanded);
     }
   }
@@ -99,7 +105,7 @@ class Row extends React.Component {
                 const showing = this.props.displayMap.get(key) && this.props.displayMap.get(key).showing;
                 let val = row[key];
                 val = typeof val === 'object' ? JSON.stringify(val) : val;
-                return <Cell key={`${pKey}-c${index}`} showing={showing} content={val} rowEar={this.rowEar} />;
+                return <Cell key={`${pKey}-c${index}`} showing={showing} content={val} cellEar={this.cellEar} />;
               })}
             </Fragment>
           }
@@ -107,7 +113,7 @@ class Row extends React.Component {
             cn="dt_td"
             key={pKey + '-it'}
             content={row['address'] === undefined ? ' ' : row['address']}
-            trayEar={this.rowEar}
+            trayEar={this.cellEar}
             icons={icon_list}
           />
         </div>
@@ -119,7 +125,7 @@ class Row extends React.Component {
 
 //----------------------------------------------------------------------
 Row.propTypes = {
-  bodyEar: PropTypes.func.isRequired
+  rowEar: PropTypes.func.isRequired
 };
 
 //----------------------------------------------------------------------

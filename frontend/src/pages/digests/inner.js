@@ -3,13 +3,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Digests } from './dispatchers';
+
 import { BreadCrumb } from 'components';
 import { Debug } from 'components';
 import { isError, NotReady, isEmpty, EmptyQuery } from 'components';
-import DigestChart from './DigestChart';
 import './digests.css';
 
 // EXISTING_CODE
+import DigestChart from './DigestChart';
 import '../../index.css';
 // EXISTING_CODE
 
@@ -20,6 +21,7 @@ class DigestsInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
+    this.tableEar = this.tableEar.bind(this);
     // EXISTING_CODE
     // EXISTING_CODE
   }
@@ -31,7 +33,7 @@ class DigestsInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  pageEar = (cmd, arg) => {
+  tableEar = (cmd, arg) => {
     // EXISTING_CODE
     // EXISTING_CODE
   };

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Loading, Icon } from 'components';
+import { ObjectTable } from 'components';
 import * as di from '../actions';
 import 'index.css';
 import '../digests.css';
@@ -62,7 +63,6 @@ class DigestChart extends React.Component {
     return (
       <div>
         {this.chart}
-        <p> </p>
         <ZoomOnIndex {...this.props} start={this.state.zoomStart} n={1e5} />
       </div>
     );
@@ -107,30 +107,44 @@ const IndexDetail = (props) => {
     props.range.start +
     '-' +
     props.range.end;
+  const fieldList = [
+    { name: 'type', type: 'string' },
+    { name: 'index_hash', type: 'string', color: 'turquoise', bold: true },
+    { name: 'bloom_hash', type: 'string', color: 'turquoise', bold: true },
+    { name: 'nAppearances', type: 'unumber', color: 'red', bold: true },
+    { name: 'nAddresses', type: 'unumber' },
+    { name: 'firstAppearance', type: 'unumber' },
+    { name: 'latestAppearance', type: 'unumber' },
+    { name: 'firstTs', type: 'timestamp' },
+    { name: 'lastestTs', type: 'timestamp' },
+    { name: 'indexSizeBytes', type: 'unumber' },
+    { name: 'bloomSizeBytes', type: 'unumber' }
+    // { name: 'filename', type: 'string' },
+  ];
+
   return (
     <div className="inner-index">
       <h4>{subtit}</h4>
-      <div className="digests-index-container">
+      <div className="digests-index-container" style={{ paddingLeft: '15px' }}>
         {props.data.map((item) => (
-          <div className="digests-index-node" key={`x${item.firstAppearance}`}>
-            <div>bloom hash:</div>{' '}
-            <div className="digests-inright_blue">
-              {item.bloom_hash} <Icon icon="check_box" small onClick={null} />
-            </div>
-            <div>index hash:</div> <div className="digests-inright_blue">{item.index_hash}</div>
-            <div>first block:</div> <div className="digests-inright">{fmtInteger(item.firstAppearance)}</div>
-            <div>latest block:</div> <div className="digests-inright">{fmtInteger(item.latestAppearance)}</div>
-            <div>nBlocks:</div>{' '}
-            <div className="digests-inright">{fmtInteger(item.latestAppearance - item.firstAppearance + 1)}</div>
-            <div>nAddresses:</div> <div className="digests-inright">{fmtInteger(item.nAddresses)}</div>
-            <div>nAppearances:</div> <div className="digests-inright_red">{fmtInteger(item.nAppearances)}</div>
-            <div>chunk size:</div> <div className="digests-inright">{humanFileSize(item.indexSizeBytes)}</div>
-            <div>bloom size:</div> <div className="digests-inright">{humanFileSize(item.bloomSizeBytes)}</div>
-          </div>
+          <ObjectTable
+            options={{
+              style: { width: '23%', margin: '1% 1% 0% 0%', padding: '0' },
+              header: false,
+              sider: false,
+              rightAlign: true
+            }}
+            object={item}
+            theFields={fieldList}
+          />
         ))}
       </div>
     </div>
   );
 };
+
+/*
+{item.bloom_hash} <Icon icon="check_box" small onClick={null} />
+*/
 
 export default DigestChart;

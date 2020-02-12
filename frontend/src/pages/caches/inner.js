@@ -21,6 +21,7 @@ class CachesInner extends React.Component {
     this.state = {
       cur_submenu: props.cur_submenu
     };
+    this.tableEar = this.tableEar.bind(this);
     // EXISTING_CODE
     // EXISTING_CODE
   }
@@ -32,7 +33,7 @@ class CachesInner extends React.Component {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  pageEar = (cmd, arg) => {
+  tableEar = (cmd, arg) => {
     // EXISTING_CODE
     // EXISTING_CODE
   };
@@ -50,7 +51,7 @@ class CachesInner extends React.Component {
         title={'Caches: ' + this.state.cur_submenu}
         theFields={this.props.fieldList}
         object={object}
-        pageEar={this.pageEar}
+        tableEar={this.tableEar}
       />
     );
   };

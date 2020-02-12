@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 //----------------------------------------------------------------------
-function Debug({ state, fieldList }) {
+function Debug({ state, fieldList, meta }) {
   return (
     <Fragment>
       <hr />
@@ -12,6 +12,8 @@ function Debug({ state, fieldList }) {
       <div>{'state: ' + JSON.stringify(state)}</div>
       <hr />
       <div>{'fields: ' + JSON.stringify(fieldList)}</div>
+      <hr />
+      <div>{'meta: ' + JSON.stringify(meta)}</div>
       <hr />
     </Fragment>
   );
