@@ -6,11 +6,11 @@ import Body from './Body';
 import './ObjectTable.css';
 
 //----------------------------------------------------------------------
-function ObjectTable({ object, theFields, title, tableEar, icons, options = defaultOpts }) {
+function ObjectTable({ object, theFields, title, tableEar, showNav, options = defaultOpts }) {
   return (
     <div className={'object_table'} style={{ width: options.width, margin: options.margin, padding: options.padding }}>
       {options.header ? (
-        <Header title={title} icons={icons} headerEar={tableEar} />
+        <Header title={title} showNav={showNav} headerEar={tableEar} />
       ) : (
         <div>
           <p></p>

@@ -12,7 +12,6 @@ const initialState = {
 export default function reducer_Explore(state = initialState, action) {
   // EXISTING_CODE
   if (action.type.includes('addrs=')) {
-    console.log('See it');
     return {
       ...state,
       data: action.payload.data[0],

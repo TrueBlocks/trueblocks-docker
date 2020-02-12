@@ -28,7 +28,7 @@ function DetailPanel({ address }) {
     <div className="ot_chart">
       <Link to="/support/about_us/+about_us">Meta</Link>
       <br />
-      <Link to={'/explore/accounts/export+addrs=' + address + '&occurrence=0&articulate'}>Explore</Link>
+      <Link to={'/explore/accounts/export+addrs=' + address + '&occurrence=0&all_abis&articulate'}>Explore</Link>
       <br />
       <Link to="/explore/accounts">Charts</Link>
     </div>

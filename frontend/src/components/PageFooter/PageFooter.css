@@ -1,20 +1,15 @@
 .page-footer {
   display: flex;
   align-content: flex-start;
-  margin: 2px 2px 0 2px;
-  padding: 5px 5% 5px 7%;
+  margin: 0;
+  padding: 2px 0.5% 0 7%;
   background: var(--color-background-primary);
+  color: var(--color-text-primary);
 }
 
 .linker {
   text-decoration: none;
-  color: #444;
-}
-
-.social {
-  height: 33px;
-  width: 33px;
-  color: #444;
+  color: var(--color-text-primary);
 }
 
 .footer-container {
@@ -24,19 +19,22 @@
   align-content: flex-start;
   justify-content: space-between;
   font-size: 14px;
-  line-height: 1.5em;
-  color: #444;
+  line-height: 1.3em;
+  color: var(--color-text-primary);
 }
 
 .left-item {
   display: flex;
   flex-flow: column nowrap;
-  flex-basis: 40%;
+  flex-basis: 80%;
   padding-left: 5px;
+  /* border: 1px solid blue; */
+  color: var(--color-text-primary);
 }
 
 .right-item {
   flex-flow: row;
   box-align: right;
-  padding-top: 3px;
+  padding-top: 2px;
+  color: var(--color-text-primary);
 }

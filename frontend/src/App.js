@@ -38,7 +38,7 @@ class App extends React.Component {
     return (
       <Fragment>
         <div className="page-container">
-          <PageHeader logo={logo} text={'TrueBlocks Account Explorer'}/>
+          <PageHeader logo={logo} title={'TrueBlocks Account Explorer'} />
           <Content />
           <PageFooter />
         </div>

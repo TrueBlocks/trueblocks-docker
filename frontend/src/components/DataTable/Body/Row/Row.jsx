@@ -59,7 +59,7 @@ class Row extends React.Component {
       window.open(url, '_blank');
     } else if (cmd === 'explore') {
       // EXPLORE
-      const url = '/explore/accounts/export+addrs=' + value + '&occurrence=0&articulate';
+      const url = '/explore/accounts/export+addrs=' + value + '&occurrence=0&all_abis&articulate';
       window.open(url, '_self');
     } else if (cmd === 'refresh') {
       // REFRESH

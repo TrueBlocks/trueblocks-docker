@@ -14,7 +14,7 @@
 
 .ot_thead {
   display: grid;
-  grid-template-columns: 5fr 1fr;
+  grid-template-columns: 5fr 2fr 3fr;
   border-bottom: 3px double var(--color-border-primary);
 }
 
