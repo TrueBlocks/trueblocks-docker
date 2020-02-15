@@ -14,6 +14,7 @@ import './settings.css';
 
 // EXISTING_CODE
 import { dispatcher_setSettings } from './settings-actions-set';
+import { showSkins } from 'components/Palette';
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
@@ -56,6 +57,9 @@ class SettingsInner extends React.Component {
     if (this.state.cur_submenu.query === se.LICENSES) {
       return licensesText();
     }
+    if (this.state.cur_submenu.query === se.SKINS) {
+      return showSkins();
+    }
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
@@ -91,7 +95,7 @@ class SettingsInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Settings" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} />
+        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
       </div>
     );
   };

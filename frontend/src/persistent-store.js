@@ -1,7 +1,6 @@
 export function loadState() {
   try {
     const rawState = localStorage.getItem('state');
-
     if (!rawState) {
       return undefined;
     }

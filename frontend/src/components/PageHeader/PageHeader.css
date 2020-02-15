@@ -5,11 +5,11 @@
   flex-flow: row nowrap;
   align-content: flex-start;
   align-items: center;
-  background-color: var(--color-background-primary);
+  background-color: var(--color-bg-primary);
 }
 
 .title.app {
-  font-size: var(--header-font-size);
+  font-size: var(--page-header-font-size);
   border: 0px !important;
   margin: 0;
   color: var(--color-text-primary);

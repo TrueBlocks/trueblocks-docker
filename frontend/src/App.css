@@ -1,63 +1,39 @@
-/* control_everything */
 :root {
-  --logo-width: 43px;
-  --logo-height: 60px;
-  --header-font-size: 1.8em;
-  --header-small-factor: 0.6;
-  --header-height: 74px;
-  --footer-height: 54px;
   /**/
-  --color-border-primary: #1f2605;
-  --color-table-border: var(--color-border-primary);
-  /**/
-  --color-background-primary: #1f2605;
-  --color-background-secondary: #53900f;
+  --color-bg-primary: #1f2605;
+  --color-bg-secondary: #53900f;
   --color-text-primary: white;
+  --color-border-primary: #1f2605;
+  --color-bg-hover: #d6ce15;
+  --color-text-hover:  #1f2605;
   /**/
-  --color-table-text: #1f2605;
-  --color-table-header-bg: #53900f;
-  --color-table-body-bg: white;
-  --color-hover: #d6ce15;
-  --data-table-width: 98%;
-}
-.social {
-  height: 33px;
-  width: 33px;
-  /* see https://codepen.io/sosuke/pen/Pjoqqp -- this filter, which colors SVG files, is for color white */
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2106%) hue-rotate(68deg) brightness(125%)
+  --color-table-bg-primary: #53900f;
+  --color-table-bg-secondary: white;
+  --color-table-text-primary: #1f2605;
+  --color-table-border-primary: #1f2605;
+  /**/
+  --logo-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2106%) hue-rotate(68deg) brightness(125%)
     contrast(111%);
-  color: var(--color-text-primary);
+  --social-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2106%) hue-rotate(68deg) brightness(125%)
+    contrast(111%);
+  /**/
+  --logo-height: 60px;
+  --logo-width: 43px;
+  /**/
+  --page-header-font-size: 1.8em;
+  --page-header-height: 74px;
+  --page-footer-height: 54px;
+  /**/
+  --datatable-width: 98%;
 }
-/*------------------------------------------*/
+
+/* For the filters, see https://codepen.io/sosuke/pen/Pjoqqp -- filters color SVG files and logos */
+
 .logo {
   width: var(--logo-width);
   height: var(--logo-height);
   margin: 2px 10px 2px 4px;
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2106%) hue-rotate(68deg) brightness(125%)
-    contrast(111%);
-}
-
-/* fly50 */
-:fly50 {
-  --logo-width: 43px;
-  --logo-height: 60px;
-  --header-font-size: 1.8em;
-  --header-small-factor: 0.6;
-  --header-height: 74px;
-  --footer-height: 54px;
-  /**/
-  --color-border-primary: #687864;
-  --color-table-border: var(--color-border-primary);
-  /**/
-  --color-background-primary: #687864;
-  --color-background-secondary: #31708e;
-  --color-text-primary: white;
-  /**/
-  --color-table-text: #5085a5;
-  --color-table-header-bg: #8fc1e3;
-  --color-table-body-bg: #8fc1e3;
-  --color-hover: #f7f9fb;
-  --data-table-width: 98%;
+  filter: var(--logo-filter);
 }
 
 #root {
@@ -69,11 +45,10 @@
   margin: 2px;
   padding: 2px 8px 2px 2px;
   border: 1px dotted black;
-  background-color: var(--color-background-primary);
+  background-color: var(--color-bg-primary);
   height: calc(100vh - 4px);
-
   display: grid;
-  grid-template-rows: auto calc(100vh - var(--header-height) - var(--footer-height) - 10px) minmax(54px, 78px);
+  grid-template-rows: auto calc(100vh - var(--page-header-height) - var(--page-footer-height) - 10px) minmax(54px, 78px);
   grid-auto-rows: minmax(min-content, max-content);
 }
 

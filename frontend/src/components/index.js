@@ -11,6 +11,7 @@ import BreadCrumb from './BreadCrumb';
 import Debug from './Debug';
 import { DashMenu } from './DashMenu';
 import { MainMenu } from './MainMenu';
+import { Palette } from './Palette';
 import { PanelBase } from './PanelBase';
 import PanelStatus from './PanelStatus';
 import PanelHelp from './PanelHelp';
@@ -37,6 +38,7 @@ export {
   Debug,
   MainMenu,
   DashMenu,
+  Palette,
   PanelBase,
   PanelStatus,
   PanelHelp,

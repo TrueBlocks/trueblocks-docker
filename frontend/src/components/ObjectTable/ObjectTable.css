@@ -22,7 +22,7 @@
   text-align: left;
   padding-left: 8px;
   padding-right: 8px;
-  background-color: var(--color-table-header-bg);
+  background-color: var(--color-table-bg-primary);
   text-transform: capitalize;
   font-weight: 600;
   font-size: 1.3em;
@@ -40,7 +40,7 @@
 
 .ot_data {
   overflow: hidden;
-  background-color: var(--color-background-primary);
+  background-color: var(--color-bg-primary);
   text-overflow: ellipsis;
   color: var(--color-text-primary);
 }
@@ -72,11 +72,12 @@
 }
 
 .ot_tr:hover {
-  background-color: var(--color-hover);
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
 }
 
 .ot_tr_right:hover {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-bg-secondary);
 }
 
 .ot_prompt {

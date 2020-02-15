@@ -12,10 +12,9 @@ function ObjectTable({ object, theFields, title, tableEar, showNav, options = de
       {options.header ? (
         <Header title={title} showNav={showNav} headerEar={tableEar} />
       ) : (
-        <div>
-          <p></p>
-        </div>
-      )}
+          <div>
+          </div>
+        )}
       <Body theFields={theFields} object={object} side={options.sider} right={options.rightAlign} bodyEar={tableEar} />
     </div>
   );

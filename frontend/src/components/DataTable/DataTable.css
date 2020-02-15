@@ -5,8 +5,7 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9em;
   width: var(--data-table-width);
-  /* background-color: dodgerblue; */
-  background-color: var(--color-table-body-bg);
+  background-color: var(--color-table-bg-secondary);
   border-left: 1px solid var(--color-border-primary);
   margin-bottom: 10px;
   cursor: pointer;
@@ -26,19 +25,20 @@
   text-overflow: ellipsis;
   border-right: 1px solid var(--color-border-primary);
   border-bottom: 3px double var(--color-border-primary);
-  background-color: var(--color-table-header-bg);
-  color: var(--color-table-text);
+  background-color: var(--color-table-bg-primary);
+  color: var(--color-table-text-primary);
 }
 
 /*-----------------------------------------------------------------------------*/
 .dt_tr {
   display: grid;
-  color: var(--color-table-text);
+  color: var(--color-table-text-primary);
 }
 
 .dt_tr:hover {
   opacity: 1;
-  background-color: var(--color-hover);
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
 }
 
 .dt_tr.deleted {
