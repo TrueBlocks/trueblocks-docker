@@ -15,7 +15,7 @@
   margin: 2px 5px 1px 4px;
   border: 1px solid #6b7a89;
   background-color: #a7b7c2;
-  opacity: 75%;
+  opacity: .75;
 }
 
 .menu-item.is-active {
@@ -24,14 +24,14 @@
   color: #42505f;
   background-color: #e2e5f0;
   border: 1px dashed #6b7a89;
-  opacity: 100%;
+  opacity: 1;
 }
 
 .menu-item:hover {
   background-color: var(--color-bg-hover);
   color: var(--color-text-hover);
   font-weight: 500;
-  opacity: 75%;
+  opacity: .75;
 }
 
 /*------------------------------------------*/
@@ -59,7 +59,7 @@
   margin: 0px 4px 4px 4px; */
   border: 1px solid #6b7a89;
   background-color: #a7b7c2;
-  opacity: 75%;
+  opacity: .75;
 }
 
 .submenu-item:hover {
@@ -67,7 +67,7 @@
   background-color: var(--color-bg-hover);
   color: var(--color-text-hover);
   font-weight: 500;
-  opacity: 75%;
+  opacity: .75;
 }
 
 .submenu-item a {
@@ -78,5 +78,5 @@
   background-color: var(--color-bg-hover);
   color: var(--color-text-hover);
   font-weight: 500;
-  opacity: 100%;
+  opacity: 1;
 }
