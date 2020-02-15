@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './dispatchers';
 
 import { BreadCrumb } from 'components';
-//import { Icon } from 'components';
 import { Debug } from 'components';
 import { isReady } from 'components';
 import { ObjectTable } from 'components';

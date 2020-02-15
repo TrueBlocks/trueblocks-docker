@@ -125,8 +125,8 @@ class DataTable extends React.Component {
             pageChange={this.pageChange}
           />
         ) : (
-          <Fragment></Fragment>
-        )}
+            <Fragment></Fragment>
+          )}
         <div className={'data_table'}>
           <Header
             {...getKeys('dth')}

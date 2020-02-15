@@ -43,8 +43,8 @@
 
 .inner-panel .digests-chart-container .digests-grid .filling.finalized:hover,
 .inner-panel .digests-chart-container .digests-grid .filling.in-progress:hover {
-  /* background-color: lavender; */
-  background-color: var(--color-hover);
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
   cursor: zoom-in;
 }
 

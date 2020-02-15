@@ -8,6 +8,7 @@ import Content from './Content';
 import logo from 'img/logo.png';
 import { PageHeader, PageFooter } from './components';
 import './App.css';
+import { changeSkin } from 'components/Palette';
 
 //------------------------------------------------------------
 const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocation });
@@ -34,6 +35,8 @@ class App extends React.Component {
       setLastLocation(null);
       return <Redirect to={lastLocation} />;
     }
+
+    changeSkin(localStorage.getItem('skin') || 'futuramo');
 
     return (
       <Fragment>

@@ -103,7 +103,7 @@ class AddressesInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Addresses" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} />
+        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta}/>
       </div>
     );
   };

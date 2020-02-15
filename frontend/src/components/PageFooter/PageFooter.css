@@ -3,8 +3,15 @@
   align-content: flex-start;
   margin: 0;
   padding: 2px 0.5% 0 7%;
-  background: var(--color-background-primary);
+  background: var(--color-bg-primary);
   color: var(--color-text-primary);
+}
+
+.social {
+  height: 33px;
+  width: 33px;
+  color: var(--color-text-primary);
+  filter: var(--social-filter);
 }
 
 .linker {

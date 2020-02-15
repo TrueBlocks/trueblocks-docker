@@ -28,8 +28,8 @@
 }
 
 .menu-item:hover {
-  background-color: var(--color-hover);
-  color: var(--color-text-primary);
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
   font-weight: 500;
   opacity: 75%;
 }
@@ -64,8 +64,8 @@
 
 .submenu-item:hover {
   border: 1px solid #bbb;
-  background-color: var(--color-hover);
-  color: var(--color-text-primary);
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
   font-weight: 500;
   opacity: 75%;
 }
@@ -75,9 +75,8 @@
 }
 
 .submenu-item.is-active {
-  /* font-weight: 700; */
-  background-color: var(--color-hover);
-  /* border-right: 3px salmon solid; */
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
   font-weight: 500;
   opacity: 100%;
 }
