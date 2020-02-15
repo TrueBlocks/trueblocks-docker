@@ -1,9 +1,9 @@
 const { queryAPI_get } = require('utils');
 
 //----------------------------------------------------------------
-const BEGIN = 'conne/BEGIN';
-const SUCCESS = 'conne/SUCCESS';
-const FAILURE = 'conne/FAILURE';
+export const BEGIN = 'conne/BEGIN';
+export const SUCCESS = 'conne/SUCCESS';
+export const FAILURE = 'conne/FAILURE';
 
 //----------------------------------------------------------------
 const initialState = {
@@ -52,7 +52,7 @@ export default function reducer_Status(state = initialState, action) {
       return {
         ...state,
         isConnected: false,
-        error: action.err + ' ', // don't remove, converts to string
+        error: action.err + '', // don't remove, converts to string
         systemData: {},
         unripe: -1,
         staging: -1,
