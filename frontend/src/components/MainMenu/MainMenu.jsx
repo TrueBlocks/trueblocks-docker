@@ -53,6 +53,7 @@ class MainMenu extends React.Component {
               key={index}
               page={menu.page}
               active={menu.expanded}
+              collapsed={this.props.isMainMenuExpanded}
               items={menu.items}
               currentPathname={this.props.location.pathname}
               onClick={this.onMenuClick}
@@ -68,7 +69,8 @@ const mapStateToProps = ({ router, reducer_MainMenu }, ownProps) => ({
   location: router.location,
   mainMenu: ownProps.mainMenu,
   isExpanded: ownProps.isExpanded,
-  toggle: ownProps.toggle
+  toggle: ownProps.toggle,
+  isMainMenuExpanded: reducer_MainMenu.isMainMenuExpanded
 });
 
 export const ConnectedMainMenu = connect(mapStateToProps)(MainMenu);
