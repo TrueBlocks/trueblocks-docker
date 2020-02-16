@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import SubmenuItem from './SubmenuItem';
 import Chevron from './Chevron';
 
-function MenuItem({ id, active: mainMenuActive, page, items, onClick }) {
+function MenuItem({ id, active: mainMenuActive, page, items, onClick, ...props }) {
   const hasSubMenu = items && items.length > 0;
   const toLocation = '/' + (hasSubMenu ? page.toLowerCase() : '');
   const onThisMenuClick = onClick.bind(null, { menuId: id });
@@ -26,6 +26,7 @@ function MenuItem({ id, active: mainMenuActive, page, items, onClick }) {
         to={toLocation}
       >
         <span>{page}</span>
+        {props.children}
         {hasSubMenu ? <Chevron active={mainMenuActive} /> : null}
       </NavLink>
       {subMenu}

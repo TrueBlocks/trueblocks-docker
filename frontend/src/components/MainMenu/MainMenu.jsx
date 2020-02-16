@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { dashboard_menu as DashboardMenu } from  'pages/dashboard';
 import { ExpandShrinkIcon } from '../';
 import MenuItem from './MenuItem';
 import './MainMenu.css';
@@ -40,12 +41,15 @@ class MainMenu extends React.Component {
   render = () => {
     const { isExpanded } = this.props;
     const className = ['left-body-container', isExpanded ? 'expanded' : ''].join(' ');
+    const isDashboard = (menu) => menu === DashboardMenu;
+    const onToggleButtonClick = event => {
+      event.stopPropagation();
+      event.preventDefault();
+      this.props.toggle();
+    };
 
     return (
       <div className={className}>
-        <button className="toggle-button" onClick={this.props.toggle}>
-          <ExpandShrinkIcon shrinkTo="left" isExpanded={isExpanded} />
-        </button>
         {this.state.mainMenu.map((menu, index) => {
           return (
             <MenuItem
@@ -55,8 +59,15 @@ class MainMenu extends React.Component {
               active={menu.expanded}
               items={menu.items}
               currentPathname={this.props.location.pathname}
-              onClick={this.onMenuClick}
-            />
+              onClick={this.onMenuClick}>
+              {
+                isDashboard(menu)
+                  ? <button className="toggle-button" onClick={onToggleButtonClick}>
+                      <ExpandShrinkIcon shrinkTo="left" isExpanded={isExpanded} />
+                    </button>
+                  : null
+              }
+            </MenuItem>
           );
         })}
       </div>
