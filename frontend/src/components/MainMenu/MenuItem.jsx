@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import SubmenuItem from './SubmenuItem';
-import Chevron from './Chevron';
+import Icon from 'components/Icon';
 
-function MenuItem({ id, active: mainMenuActive, collapsed, page, items, onClick }) {
+function MenuItem({ id, active: mainMenuActive, collapsed, page, items, onClick, toggle }) {
   const hasSubMenu = items && items.length > 0;
   const toLocation = '/' + (hasSubMenu ? page.toLowerCase() : '');
   const onThisMenuClick = onClick.bind(null, { menuId: id });
@@ -16,6 +16,12 @@ function MenuItem({ id, active: mainMenuActive, collapsed, page, items, onClick 
     });
   })();
 
+  const collapseAll = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    toggle();
+  };
+
   return (
     <Fragment>
       <NavLink
@@ -26,7 +32,11 @@ function MenuItem({ id, active: mainMenuActive, collapsed, page, items, onClick 
         to={toLocation}
       >
         {collapsed ? null : <span>{page}</span>}
-        {hasSubMenu ? <Chevron active={mainMenuActive} /> : null}
+        {hasSubMenu ? (
+          <Icon icon={mainMenuActive ? 'keyboard_arrow_down' : 'keyboard_arrow_right'} />
+        ) : (
+          <Icon icon="keyboard_arrow_left" onClick={collapseAll} />
+        )}
       </NavLink>
       {subMenu}
     </Fragment>

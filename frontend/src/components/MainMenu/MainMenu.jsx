@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ExpandShrinkIcon } from '../';
 import MenuItem from './MenuItem';
 import './MainMenu.css';
 
@@ -43,9 +42,6 @@ class MainMenu extends React.Component {
 
     return (
       <div className={className}>
-        <button className="toggle-button" onClick={this.props.toggle}>
-          <ExpandShrinkIcon shrinkTo="left" isExpanded={isExpanded} />
-        </button>
         {this.state.mainMenu.map((menu, index) => {
           return (
             <MenuItem
@@ -57,6 +53,7 @@ class MainMenu extends React.Component {
               items={menu.items}
               currentPathname={this.props.location.pathname}
               onClick={this.onMenuClick}
+              toggle={this.props.toggle}
             />
           );
         })}
