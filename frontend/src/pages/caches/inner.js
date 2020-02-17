@@ -61,7 +61,7 @@ class CachesInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Caches" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta}/>
+        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
       </div>
     );
   };

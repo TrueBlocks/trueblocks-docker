@@ -5,8 +5,13 @@ import love_apart from 'skins/love_apart';
 import time_likes from 'skins/time_likes';
 import fay from 'skins/fay';
 import futuramo from 'skins/futuramo';
+import lowflo from 'skins/lowflo';
+import armchair from 'skins/armchair';
+import fireworks from 'skins/fireworks';
 
-export const skinList = ['fly50', 'control', 'love_apart', 'time_likes', 'fay', 'futuramo'];
+export const skinList = [
+  'fly50', 'control', 'love_apart', 'time_likes', 'fay', 'futuramo', 'lowflo', 'armchair', 'fireworks'
+];
 export var skins = [];
 skins['fly50'] = fly50;
 skins['control'] = control;
@@ -14,6 +19,9 @@ skins['love_apart'] = love_apart;
 skins['time_likes'] = time_likes;
 skins['fay'] = fay;
 skins['futuramo'] = futuramo;
+skins['lowflo'] = lowflo;
+skins['armchair'] = armchair;
+skins['fireworks'] = fireworks;
 
 export function changeSkin(newSkin) {
   let skin = skins[newSkin];

@@ -36,7 +36,7 @@ class App extends React.Component {
       return <Redirect to={lastLocation} />;
     }
 
-    changeSkin(localStorage.getItem('skin') || 'futuramo');
+    changeSkin(localStorage.getItem('skin') || 'control');
 
     return (
       <Fragment>
