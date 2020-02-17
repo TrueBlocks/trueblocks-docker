@@ -1,16 +1,16 @@
 const lowflo = {
    colorBgPrimary: '#d79922',
    colorBgSecondary: '#efe2ba',
-   colorTextPrimary: '#4056a1',
+   colorTextPrimary: 'yellow',
    colorBorderPrimary: '#d79922',
 
    colorTableBgPrimary: '#4056a1',
-   colorTableBgSecondary: '#c5cbe3',
-   colorTableTextPrimary: '#4056a1',
-   colorTableBorderPrimary: 'navyblue',
+   colorTableBgSecondary: '#efe2ba',
+   colorTableTextPrimary: 'yellow',
+   colorTableBorderPrimary: '#4056a1',
 
-   colorBgHover: '#f13c20',
-   colorTextHover: 'yellow'
+   colorBgHover: '#c5cbe3',
+   colorTextHover: '#d79922'
 };
 
 export default lowflo;

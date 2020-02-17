@@ -1,16 +1,16 @@
 const fireworks = {
-   colorBgPrimary: '#eae7dc',
-   colorBgSecondary: '#d8c3a5',
-   colorTextPrimary: '#8e8d8a',
-   colorBorderPrimary: '#eae7dc',
+   colorBgPrimary: '#272727',
+   colorBgSecondary: '#747474',
+   colorTextPrimary: '#ff652f',
+   colorBorderPrimary: '#272727',
 
-   colorTableBgPrimary: '#e98074',
-   colorTableBgSecondary: '#d8c3a5',
-   colorTableTextPrimary: '#8e8d8a',
-   colorTableBorderPrimary: '#e98074',
+   colorTableBgPrimary: '#ffe400',
+   colorTableBgSecondary: '#747474',
+   colorTableTextPrimary: '#ff652f',
+   colorTableBorderPrimary: '#ffe400',
 
-   colorBgHover: '#e85a4f',
-   colorTextHover: '#eae7dc'
+   colorBgHover: '#14a76c',
+   colorTextHover: '#272727'
 };
 
 export default fireworks;
