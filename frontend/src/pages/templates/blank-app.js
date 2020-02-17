@@ -8,6 +8,7 @@ import Content from './Content';
 import logo from 'img/logo.png';
 import { PageHeader, PageFooter } from './components';
 import './App.css';
+import { changeSkin } from 'components/Palette';
 
 //------------------------------------------------------------
 const setLastLocation = (lastLocation) => ({ type: SET_LAST_LOCATION, lastLocation });
@@ -35,10 +36,12 @@ class App extends React.Component {
       return <Redirect to={lastLocation} />;
     }
 
+    changeSkin(localStorage.getItem('skin') || 'control');
+
     return (
       <Fragment>
         <div className="page-container">
-          <PageHeader logo={logo} text={'TrueBlocks Account Explorer'}/>
+          <PageHeader logo={logo} title={'TrueBlocks Account Explorer'} />
           <Content />
           <PageFooter />
         </div>
