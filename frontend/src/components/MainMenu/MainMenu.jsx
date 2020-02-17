@@ -52,6 +52,7 @@ class MainMenu extends React.Component {
               id={index}
               key={index}
               page={menu.page}
+              collapsed={!this.props.isExpanded}
               active={menu.expanded}
               items={menu.items}
               currentPathname={this.props.location.pathname}
