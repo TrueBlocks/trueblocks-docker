@@ -34,11 +34,11 @@ export const dispatcher_Settings = (str) => {
 export const settings_menu = {
   page: 'settings',
   items: [
-    { subpage: 'dashboard', route: 'dashboard', query: se.DASHBOARD },
-    { subpage: 'configuration', route: 'settings', query: se.CONFIGURATION },
-    { subpage: 'skins', route: 'settings', query: se.SKINS },
-    { subpage: 'formats', route: 'settings', query: se.FORMATS },
-    { subpage: 'licenses', route: '', query: se.LICENSES },
+    { subpage: 'dashboard', route: 'dashboard', query: se.DASHBOARD, icon: 'settings' },
+    { subpage: 'configuration', route: 'settings', query: se.CONFIGURATION, icon: 'settings' },
+    { subpage: 'skins', route: 'settings', query: se.SKINS, icon: 'layers' },
+    { subpage: 'formats', route: 'settings', query: se.FORMATS, icon: 'square_foot' },
+    { subpage: 'licenses', route: '', query: se.LICENSES, icon: 'assessment' },
     { subpage: 'se-0005' },
     { subpage: 'se-0006' }
   ],

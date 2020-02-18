@@ -86,9 +86,10 @@ class [{PROPER}]Inner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_[{PROPER}] }) => ({
+const mapStateToProps = ({ router, reducer_Panels, reducer_Status, reducer_[{PROPER}] }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
+  location: router.location,
   sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
   sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_[{PROPER}].isLoading,

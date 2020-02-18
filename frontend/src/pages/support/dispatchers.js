@@ -34,12 +34,12 @@ export const dispatcher_Support = (str) => {
 export const support_menu = {
   page: 'support',
   items: [
-    { subpage: 'dashboard', route: 'dashboard', query: su.DASHBOARD },
-    { subpage: 'free support', route: '', query: su.FREE_SUPPORT },
-    { subpage: 'per incident', route: '', query: su.PER_INCIDENT },
-    { subpage: 'documentation', route: '', query: su.DOCUMENTATION },
-    { subpage: 'contact us', route: '', query: su.CONTACT_US },
-    { subpage: 'about us', route: '', query: su.ABOUT_US },
+    { subpage: 'dashboard', route: 'dashboard', query: su.DASHBOARD, icon: 'contact_support' },
+    { subpage: 'free support', route: '', query: su.FREE_SUPPORT, icon: 'money_off' },
+    { subpage: 'per incident', route: '', query: su.PER_INCIDENT, icon: 'attach_money' },
+    { subpage: 'documentation', route: '', query: su.DOCUMENTATION, icon: 'help' },
+    { subpage: 'contact us', route: '', query: su.CONTACT_US, icon: 'contact_mail' },
+    { subpage: 'about us', route: '', query: su.ABOUT_US, icon: 'people' },
     { subpage: 'su-0006' }
   ],
   expanded: false,

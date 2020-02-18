@@ -100,8 +100,8 @@ class ExploreInner extends React.Component {
 //----------------------------------------------------------------------
 const mapStateToProps = ({ router, reducer_Panels, reducer_Status, reducer_Explore }) => ({
   // EXISTING_CODE
-  location: router.location,
   // EXISTING_CODE
+  location: router.location,
   sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
   sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Explore.isLoading,

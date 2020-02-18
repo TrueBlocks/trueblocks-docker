@@ -64,7 +64,7 @@ class DigestsInner extends React.Component {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Digests }) => ({
+const mapStateToProps = ({ router, reducer_Panels, reducer_Status, reducer_Digests }) => ({
   // EXISTING_CODE
   caches: reducer_Status.systemData.caches,
   index_path: reducer_Status.systemData.index_path,
@@ -76,6 +76,7 @@ const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Digests }) =>
   loadingIndex: reducer_Digests.isLoading,
   statusOpen: reducer_Panels.isStatusExpanded,
   // EXISTING_CODE
+  location: router.location,
   sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
   sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Digests.isLoading,

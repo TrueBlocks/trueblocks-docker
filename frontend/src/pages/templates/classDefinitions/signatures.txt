@@ -8,5 +8,7 @@ list = [
     { page = "signatures", subpage = "dashboard" },
     { page = "signatures", subpage = "downloaded", route = "abi", options = "monitored&verbose" },
     { page = "signatures", subpage = "common", route = "abi", options = "known&verbose" },
-    { page = "signatures", subpage = "generated", route = "signatures", options = "generated" },
+    { page = "signatures", subpage = "names", route = "abi", options = "names&verbose" },
+    { page = "signatures", subpage = "params", route = "abi", options = "params&verbose" },
+    { page = "signatures", subpage = "cross", route = "signatures", options = "cross" },
 ]

@@ -12,4 +12,6 @@ export const REMOVE = 'signatu/REMOVE';
 export const DASHBOARD = 'signatures';
 export const DOWNLOADED = 'monitored&verbose';
 export const COMMON = 'known&verbose';
-export const GENERATED = 'generated';
+export const NAMES = 'names&verbose';
+export const PARAMS = 'params&verbose';
+export const CROSS = 'cross';

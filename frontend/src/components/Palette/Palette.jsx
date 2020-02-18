@@ -8,9 +8,19 @@ import futuramo from 'skins/futuramo';
 import lowflo from 'skins/lowflo';
 import armchair from 'skins/armchair';
 import fireworks from 'skins/fireworks';
+import qed from 'skins/qed';
 
 export const skinList = [
-  'fly50', 'control', 'love_apart', 'time_likes', 'fay', 'futuramo', 'lowflo', 'armchair', 'fireworks'
+  'fly50',
+  'control',
+  'love_apart',
+  'time_likes',
+  'fay',
+  'futuramo',
+  'lowflo',
+  'armchair',
+  'fireworks',
+  'qed'
 ];
 export var skins = [];
 skins['fly50'] = fly50;
@@ -22,6 +32,7 @@ skins['futuramo'] = futuramo;
 skins['lowflo'] = lowflo;
 skins['armchair'] = armchair;
 skins['fireworks'] = fireworks;
+skins['qed'] = qed;
 
 export function changeSkin(newSkin) {
   let skin = skins[newSkin];
@@ -60,46 +71,64 @@ export class Palette extends React.Component {
   render = () => {
     const { name } = this.props;
     const skin = skins[name];
-    const selected = (name === this.state.current);
-    const selBorder = (selected ? '5px blue double' : '1px solid' + skin.colorBorderPrimary);
-    const selPadding = (selected ? '4px' : '0');
+    const selected = name === this.state.current;
+    const selBorder = selected ? '5px blue double' : '1px solid' + skin.colorBorderPrimary;
+    const selPadding = selected ? '4px' : '0';
     return (
-      <div onClick={() => this.onSkinChanged(name)} style={{
-        display: 'grid', textAlign: 'center', margin: '1%', border: selBorder, padding: selPadding
-      }}>
-        <div style={{ backgroundColor: 'lightgrey', border: '1px dashed darkgrey', borderBottom: '0 !important' }}>{name}</div>
+      <div
+        onClick={() => this.onSkinChanged(name)}
+        style={{
+          display: 'grid',
+          textAlign: 'center',
+          margin: '1%',
+          border: selBorder,
+          padding: selPadding
+        }}
+      >
+        <div style={{ backgroundColor: 'lightgrey', border: '1px dashed darkgrey', borderBottom: '0 !important' }}>
+          {name}
+        </div>
         <div
           style={{
             backgroundColor: skin.colorBgPrimary,
-            color: skin.colorTextPrimary,
-          }}>
+            color: skin.colorTextPrimary
+          }}
+        >
           {skin.colorBgPrimary + ' / ' + skin.colorTextPrimary}
         </div>
-        <div style={{
-          backgroundColor: skin.colorBgSecondary,
-          color: skin.colorTextPrimary
-        }}>
+        <div
+          style={{
+            backgroundColor: skin.colorBgSecondary,
+            color: skin.colorTextPrimary
+          }}
+        >
           {skin.colorBgSecondary + ' / ' + skin.colorTextPrimary}
         </div>
-        <div style={{
-          backgroundColor: skin.colorTableBgPrimary,
-          color: skin.colorTableTextPrimary
-        }}>
+        <div
+          style={{
+            backgroundColor: skin.colorTableBgPrimary,
+            color: skin.colorTableTextPrimary
+          }}
+        >
           {skin.colorTableBgPrimary + ' / ' + skin.colorTableTextPrimary}
         </div>
-        <div style={{
-          backgroundColor: skin.colorTableBgSecondary,
-          color: skin.colorTableTextPrimary
-        }}>
+        <div
+          style={{
+            backgroundColor: skin.colorTableBgSecondary,
+            color: skin.colorTableTextPrimary
+          }}
+        >
           {skin.colorTableBgSecondary + ' / ' + skin.colorTableTextPrimary}
         </div>
-        <div style={{
-          backgroundColor: skin.colorBgHover,
-          color: skin.colorTextHover
-        }}>
+        <div
+          style={{
+            backgroundColor: skin.colorBgHover,
+            color: skin.colorTextHover
+          }}
+        >
           {skin.colorBgHover + ' / ' + skin.colorTextHover}
         </div>
-      </div >
+      </div>
     );
   };
 }
@@ -109,7 +138,11 @@ export function showSkins() {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr' }}>
       {skinList.map((name) => {
-        return <div style={{ display: 'grid', width: '80%' }}><Palette name={name} /></div>;
+        return (
+          <div style={{ display: 'grid', width: '80%' }}>
+            <Palette name={name} />
+          </div>
+        );
       })}
     </div>
   );

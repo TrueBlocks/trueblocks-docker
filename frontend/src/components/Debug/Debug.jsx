@@ -7,9 +7,6 @@ function Debug({ state, fieldList, meta }) {
       <hr />
       <div style={{ color: 'white' }}>
         <p>.</p>
-        <p>.</p>
-        <p>.</p>
-        <p>.</p>
       </div>
       <div style={{ fontWeight: '600' }}>DEBUG</div>
       <hr />

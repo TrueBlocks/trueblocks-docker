@@ -120,9 +120,10 @@ const SettingInput = ({ name, value, type, tip, onChange }) => {
 // EXISTING_CODE
 
 //----------------------------------------------------------------------
-const mapStateToProps = ({ reducer_Panels, reducer_Status, reducer_Settings }) => ({
+const mapStateToProps = ({ router, reducer_Panels, reducer_Status, reducer_Settings }) => ({
   // EXISTING_CODE
   // EXISTING_CODE
+  location: router.location,
   sysConnected: reducer_Panels.isStatusExpanded ? reducer_Status.isConnected : true,
   sysError: reducer_Panels.isStatusExpanded ? reducer_Status.error : false,
   isLoading: reducer_Settings.isLoading,

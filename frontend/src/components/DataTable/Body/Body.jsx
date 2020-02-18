@@ -14,6 +14,7 @@ import { getKeys, getBang } from 'utils';
  */
 function Body({ theData, theFields, displayMap, controls, icons, del_icons, bodyEar }) {
   const classNames = ['dt_tr', getBang(displayMap.size + 1)].join(' ');
+  const delNames = ['dt_tr', getBang(displayMap.size + 1), 'deleted'].join(' ');
   const start = (controls.cur_page - 1) * controls.per_page;
   return (
     <Fragment>
@@ -25,9 +26,9 @@ function Body({ theData, theFields, displayMap, controls, icons, del_icons, body
               displayMap={displayMap}
               theFields={theFields}
               row={row}
-              cn={classNames}
               rowEar={bodyEar}
               icon_list={row['deleted'] ? del_icons : icons}
+              cn={row['deleted'] ? delNames : classNames}
             />
           );
         else return false;

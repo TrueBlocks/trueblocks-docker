@@ -3,19 +3,6 @@ import { connect } from 'react-redux';
 import MenuItem from './MenuItem';
 import './MainMenu.css';
 
-/**
- * Check which main menu matches loaded page and returns its index
- * @param {string} pathname - current pathname
- * @param {Array} menus - array of main menus
- * @return {boolean} Index of main menu
- */
-function getInitialActiveMenuIndex(pathname, menus) {
-  // RegExp matches everything after the first '/' that is not '/'
-  // e.g. /page/subpage -> page
-  const pageToMatch = pathname.replace(/^\/([^/]+).*/, '$1');
-  return menus.findIndex((menu) => menu.page === pageToMatch);
-}
-
 class MainMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -47,11 +34,11 @@ class MainMenu extends React.Component {
             <MenuItem
               id={index}
               key={index}
-              page={menu.page}
               collapsed={!this.props.isExpanded}
+              currentPathname={this.props.location.pathname}
+              page={menu.page}
               active={menu.expanded}
               items={menu.items}
-              currentPathname={this.props.location.pathname}
               onClick={this.onMenuClick}
               toggle={this.props.toggle}
             />
@@ -60,6 +47,19 @@ class MainMenu extends React.Component {
       </div>
     );
   };
+}
+
+/**
+ * Check which main menu matches loaded page and returns its index
+ * @param {string} pathname - current pathname
+ * @param {Array} menus - array of main menus
+ * @return {boolean} Index of main menu
+ */
+function getInitialActiveMenuIndex(pathname, menus) {
+  // RegExp matches everything after the first '/' that is not '/'
+  // e.g. /page/subpage -> page
+  const pageToMatch = pathname.replace(/^\/([^/]+).*/, '$1');
+  return menus.findIndex((menu) => menu.page === pageToMatch);
 }
 
 const mapStateToProps = ({ router, reducer_MainMenu }, ownProps) => ({

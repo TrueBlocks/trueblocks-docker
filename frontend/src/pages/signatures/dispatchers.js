@@ -37,9 +37,9 @@ export const signatures_menu = {
     { subpage: 'dashboard', route: 'dashboard', query: si.DASHBOARD },
     { subpage: 'downloaded', route: 'abi', query: si.DOWNLOADED },
     { subpage: 'common', route: 'abi', query: si.COMMON },
-    { subpage: 'generated', route: 'signatures', query: si.GENERATED },
-    { subpage: 'si-0004' },
-    { subpage: 'si-0005' },
+    { subpage: 'names', route: 'abi', query: si.NAMES },
+    { subpage: 'params', route: 'abi', query: si.PARAMS },
+    { subpage: 'cross', route: 'signatures', query: si.CROSS },
     { subpage: 'si-0006' }
   ],
   expanded: false,

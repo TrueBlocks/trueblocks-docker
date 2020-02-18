@@ -21,7 +21,9 @@ export default function reducer_Signatures(state = initialState, action) {
         error: null
       };
 
-    case si.GENERATED:
+    case si.CROSS:
+    case si.PARAMS:
+    case si.NAMES:
     case si.COMMON:
     case si.DOWNLOADED:
     case si.DASHBOARD:

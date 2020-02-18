@@ -15,7 +15,7 @@
   margin: 2px 5px 1px 4px;
   border: 1px solid #6b7a89;
   background-color: #a7b7c2;
-  opacity: .75;
+  opacity: 0.75;
 }
 
 .menu-item.is-active {
@@ -31,7 +31,7 @@
   background-color: var(--color-bg-hover);
   color: var(--color-text-hover);
   font-weight: 500;
-  opacity: .75;
+  opacity: 0.75;
 }
 
 /*------------------------------------------*/
@@ -55,11 +55,9 @@
   padding-top: 0.3em;
   padding-left: 5px;
   text-align: left;
-  /* padding: 0.5em;
-  margin: 0px 4px 4px 4px; */
   border: 1px solid #6b7a89;
   background-color: #a7b7c2;
-  opacity: .75;
+  opacity: 0.75;
 }
 
 .submenu-item:hover {
@@ -67,7 +65,7 @@
   background-color: var(--color-bg-hover);
   color: var(--color-text-hover);
   font-weight: 500;
-  opacity: .75;
+  opacity: 0.75;
 }
 
 .submenu-item a {
@@ -75,6 +73,37 @@
 }
 
 .submenu-item.is-active {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
+  font-weight: 500;
+  opacity: 1;
+}
+
+.submenu-icon {
+  height: 30px;
+  width: 90%;
+  margin: 0 7%;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: capitalize;
+  text-align: center;
+  opacity: 0.75;
+  margin: 2px;
+}
+
+.submenu-icon:hover {
+  border: 1px solid #bbb;
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.submenu-icon a {
+  text-decoration: none;
+}
+
+.submenu-icon.is-active {
   background-color: var(--color-bg-hover);
   color: var(--color-text-hover);
   font-weight: 500;

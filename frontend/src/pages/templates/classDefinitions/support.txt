@@ -7,10 +7,10 @@ color = purple
 
 [[subpages]]
 list = [
-    { page = "support", subpage = "dashboard" },
-    { page = "support", subpage = "free_support", route = "", options = "free_support" },
-    { page = "support", subpage = "per_incident", route = "", options = "per_incident" },
-    { page = "support", subpage = "documentation", route = "", options = "documentation" },
-    { page = "support", subpage = "contact_us", route = "", options = "contact_us" },
-    { page = "support", subpage = "about_us", route = "", options = "about_us" },
+    { page = "support", subpage = "dashboard", icon = "contact_support" },
+    { page = "support", subpage = "free_support", route = "", options = "free_support", icon = "money_off" },
+    { page = "support", subpage = "per_incident", route = "", options = "per_incident", icon = "attach_money"  },
+    { page = "support", subpage = "documentation", route = "", options = "documentation", icon = "help" },
+    { page = "support", subpage = "contact_us", route = "", options = "contact_us", icon = "contact_mail" },
+    { page = "support", subpage = "about_us", route = "", options = "about_us", icon = "people" },
 ]
