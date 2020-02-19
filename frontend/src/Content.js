@@ -36,7 +36,15 @@ const toggleHelp = () => ({ type: HELP_TOGGLE });
 const toggleMainMenu = () => ({ type: MAIN_MENU_TOGGLE });
 
 export function Content(props) {
-  const { isStatusExpanded, isHelpExpanded, isMainMenuExpanded, toggleStatus, toggleHelp, toggleMainMenu } = props;
+  const {
+    location,
+    isStatusExpanded,
+    isHelpExpanded,
+    isMainMenuExpanded,
+    toggleStatus,
+    toggleHelp,
+    toggleMainMenu
+  } = props;
 
   const classNames = [
     'app-content',
@@ -55,13 +63,14 @@ export function Content(props) {
         ))}
       </main>
       <PanelHelp isExpanded={isHelpExpanded} toggle={toggleHelp}>
-        <PageHelp />
+        <PageHelp location={location} />
       </PanelHelp>
     </div>
   );
 }
 
-const mapStateToProps = ({ reducer_Panels, reducer_MainMenu }) => ({
+const mapStateToProps = ({ router, reducer_Panels, reducer_MainMenu }) => ({
+  location: router.location,
   isStatusExpanded: reducer_Panels.isStatusExpanded,
   isHelpExpanded: reducer_Panels.isHelpExpanded,
   isMainMenuExpanded: reducer_MainMenu.isMainMenuExpanded

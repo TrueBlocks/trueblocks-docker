@@ -1,7 +1,5 @@
 [settings]
 class = COther
-page_notes = The Other panel allows you to configure various other items related to TrueBlocks. This panel \
-                allows for many|things including some other stuff.
 color = orange
 
 [[subpages]]

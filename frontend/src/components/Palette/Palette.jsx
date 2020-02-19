@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import fly50 from 'skins/fly50';
 import control from 'skins/control';
 import love_apart from 'skins/love_apart';
@@ -9,6 +9,7 @@ import lowflo from 'skins/lowflo';
 import armchair from 'skins/armchair';
 import fireworks from 'skins/fireworks';
 import qed from 'skins/qed';
+import agency from 'skins/agency';
 
 export const skinList = [
   'fly50',
@@ -20,7 +21,8 @@ export const skinList = [
   'lowflo',
   'armchair',
   'fireworks',
-  'qed'
+  'qed',
+  'agency'
 ];
 export var skins = [];
 skins['fly50'] = fly50;
@@ -33,6 +35,7 @@ skins['lowflo'] = lowflo;
 skins['armchair'] = armchair;
 skins['fireworks'] = fireworks;
 skins['qed'] = qed;
+skins['agency'] = agency;
 
 export function changeSkin(newSkin) {
   let skin = skins[newSkin];
@@ -72,8 +75,7 @@ export class Palette extends React.Component {
     const { name } = this.props;
     const skin = skins[name];
     const selected = name === this.state.current;
-    const selBorder = selected ? '5px blue double' : '1px solid' + skin.colorBorderPrimary;
-    const selPadding = selected ? '4px' : '0';
+    const selBorder = selected ? '3px blue solid' : '3px double' + skin.colorBorderPrimary;
     return (
       <div
         onClick={() => this.onSkinChanged(name)}
@@ -82,7 +84,7 @@ export class Palette extends React.Component {
           textAlign: 'center',
           margin: '1%',
           border: selBorder,
-          padding: selPadding
+          padding: '2px'
         }}
       >
         <div style={{ backgroundColor: 'lightgrey', border: '1px dashed darkgrey', borderBottom: '0 !important' }}>
@@ -136,10 +138,10 @@ export class Palette extends React.Component {
 //----------------------------------------------------------------------
 export function showSkins() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' }}>
       {skinList.map((name) => {
         return (
-          <div style={{ display: 'grid', width: '80%' }}>
+          <div style={{ display: 'grid', width: '98%' }}>
             <Palette name={name} />
           </div>
         );

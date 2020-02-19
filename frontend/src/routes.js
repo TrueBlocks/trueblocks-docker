@@ -10,7 +10,7 @@ import Settings from './pages/settings';
 import Support from './pages/support';
 
 //------------------------------------------------------------
-export const routes = [
+const routes = [
   {
     name: 'dashboard',
     component: (routeProps) => <Dashboard {...routeProps} />,

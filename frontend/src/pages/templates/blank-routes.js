@@ -1,7 +1,7 @@
 import React from 'react';
 [{IMPORTS2}]
 //------------------------------------------------------------
-export const routes = [
+const routes = [
 [{ROUTES}]
 ];
 
