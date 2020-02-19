@@ -51,27 +51,28 @@ export const licensesText = () => {
   * preferences, improve preformance, as well as other minor changes.\n\
   *------------------------------------------------------------------------*/\n`;
 
-  const headStyle = { fontWeight: '500', marginLeft: '10px' };
+  const style1 = { marginLeft: '2%' };
+  const style2 = { backgroundColor: 'antiquewhite', color: 'darkred', width: '700px', marginLeft: '2%' };
   return (
     <Fragment>
-      <div style={headStyle}>{explain1}</div>
-      <pre style={{ backgroundColor: 'antiquewhite', color: 'darkred', width: '700px', marginLeft: '3%' }}>
+      <h4>Licensing notes</h4>
+      <p></p>
+      <h5 style={style1}>{explain1}</h5>
+      <pre style={style2}>
         <small>{lic1}</small>
       </pre>
-      <div style={headStyle}>{explain2}</div>
-      <pre style={{ backgroundColor: 'antiquewhite', color: 'darkred', width: '700px', marginLeft: '3%' }}>
+      <h5 style={style1}>{explain2}</h5>
+      <pre style={style2}>
         <small>{lic2}</small>
       </pre>
-      <div>
-        <u>Otherwise notes:</u>
-        <p></p>
-      </div>
-      <div style={headStyle}>{explain3}</div>
-      <pre style={{ backgroundColor: 'antiquewhite', color: 'darkred', width: '700px', marginLeft: '3%' }}>
+      <h4>Otherwise notes</h4>
+      <p></p>
+      <h5 style={style1}>{explain3}</h5>
+      <pre style={style2}>
         <small>{lic3}</small>
       </pre>
-      <div style={headStyle}>{explain4}</div>
-      <pre style={{ backgroundColor: 'antiquewhite', color: 'darkred', width: '700px', marginLeft: '3%' }}>
+      <h5 style={style1}>{explain4}</h5>
+      <pre style={style2}>
         <small>{lic4}</small>
       </pre>
     </Fragment>

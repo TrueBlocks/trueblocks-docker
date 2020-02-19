@@ -1,36 +1,36 @@
 import React from 'react';
 
 //---------------------------------------------------
-export function a_help() {
+export function ad_help() {
   return <span>Help for address dashboard</span>;
 }
 
 //---------------------------------------------------
-export function am_help() {
+export function ad_mo_help() {
   return <span>Help for address monitors</span>;
 }
 
 //---------------------------------------------------
-export function an_help() {
+export function ad_na_help() {
   return <span>Help for address names</span>;
 }
 
 //---------------------------------------------------
-export function aw_help() {
+export function ad_wa_help() {
   return <span>Help for address wallets</span>;
 }
 
 //---------------------------------------------------
-export function at_help() {
+export function ad_to_help() {
   return <span>Help for address tokens</span>;
 }
 
 //---------------------------------------------------
-export function ap_help() {
+export function ad_pr_help() {
   return <span>Help for address prefunds</span>;
 }
 
 //---------------------------------------------------
-export function ao_help() {
+export function ad_ot_help() {
   return <span>Help for address other</span>;
 }

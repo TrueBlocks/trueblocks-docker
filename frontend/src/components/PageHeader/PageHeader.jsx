@@ -2,8 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './PageHeader.css';
-
 /**
  * The main header of the entire app
  * @param {string} logo - url pointing to a local image file displaying the app's logo

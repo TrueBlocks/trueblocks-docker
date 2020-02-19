@@ -40,7 +40,7 @@ class App extends React.Component {
 
     return (
       <Fragment>
-        <div className="page-container">
+        <div className="whole-page">
           <PageHeader logo={logo} title={'TrueBlocks Account Explorer'} />
           <Content />
           <PageFooter />

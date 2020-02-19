@@ -1,41 +1,46 @@
-import React from 'react';
-import fly50 from 'skins/fly50';
-import control from 'skins/control';
-import love_apart from 'skins/love_apart';
-import time_likes from 'skins/time_likes';
-import fay from 'skins/fay';
-import futuramo from 'skins/futuramo';
-import lowflo from 'skins/lowflo';
-import armchair from 'skins/armchair';
-import fireworks from 'skins/fireworks';
-import qed from 'skins/qed';
+import React, { Fragment } from 'react';
+
 import agency from 'skins/agency';
+import armchair from 'skins/armchair';
+import control from 'skins/control';
+import fay from 'skins/fay';
+import fireworks from 'skins/fireworks';
+import fly50 from 'skins/fly50';
+import futuramo from 'skins/futuramo';
+import love_apart from 'skins/love_apart';
+import lowflo from 'skins/lowflo';
+import maria from 'skins/maria';
+import qed from 'skins/qed';
+import time_likes from 'skins/time_likes';
 
 export const skinList = [
-  'fly50',
-  'control',
-  'love_apart',
-  'time_likes',
-  'fay',
-  'futuramo',
-  'lowflo',
+  'agency',
   'armchair',
+  'control',
+  'fay',
   'fireworks',
+  'fly50',
+  'futuramo',
+  'love_apart',
+  'lowflo',
+  'maria',
   'qed',
-  'agency'
+  'time_likes'
 ];
+
 export var skins = [];
-skins['fly50'] = fly50;
-skins['control'] = control;
-skins['love_apart'] = love_apart;
-skins['time_likes'] = time_likes;
-skins['fay'] = fay;
-skins['futuramo'] = futuramo;
-skins['lowflo'] = lowflo;
-skins['armchair'] = armchair;
-skins['fireworks'] = fireworks;
-skins['qed'] = qed;
 skins['agency'] = agency;
+skins['armchair'] = armchair;
+skins['control'] = control;
+skins['fay'] = fay;
+skins['fireworks'] = fireworks;
+skins['fly50'] = fly50;
+skins['futuramo'] = futuramo;
+skins['love_apart'] = love_apart;
+skins['lowflo'] = lowflo;
+skins['maria'] = maria;
+skins['qed'] = qed;
+skins['time_likes'] = time_likes;
 
 export function changeSkin(newSkin) {
   let skin = skins[newSkin];
@@ -138,14 +143,17 @@ export class Palette extends React.Component {
 //----------------------------------------------------------------------
 export function showSkins() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' }}>
-      {skinList.map((name) => {
-        return (
-          <div style={{ display: 'grid', width: '98%' }}>
-            <Palette name={name} />
-          </div>
-        );
-      })}
-    </div>
+    <Fragment>
+      <h4>Choose a new skin by clicking on it</h4>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' }}>
+        {skinList.map((name) => {
+          return (
+            <div style={{ display: 'grid', width: '98%' }}>
+              <Palette name={name} />
+            </div>
+          );
+        })}
+      </div>
+    </Fragment>
   );
 }

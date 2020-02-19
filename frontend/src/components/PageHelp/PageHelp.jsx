@@ -1,68 +1,77 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Routes from 'routes';
-import { r_help } from 'help/root';
-import { a_help, am_help, an_help, aw_help, at_help, ap_help, ao_help } from 'help/addresses';
-import { e_help, ea_help, eb_help, et_help, er_help, el_help, etr_help } from 'help/explore';
-import { d_help, df_help, ds_help, du_help, dc_help, dsh_help } from 'help/digests';
-import { s_help, sd_help, sc_help, sn_help, sp_help, scr_help } from 'help/signatures';
-import { c_help, cb_help, ct_help, ctr_help, cs_help, cp_help, ca_help } from 'help/caches';
-import { o_help, oc_help, ok_help, og_help, op_help, ogr_help } from 'help/other';
-import { se_help, sec_help, ses_help, sef_help, sel_help } from 'help/settings';
-import { su_help, suf_help, sup_help, sud_help, suc_help, sua_help } from 'help/support';
+
+import { ro_help } from 'help/root';
+import { ad_help, ad_mo_help, ad_na_help, ad_wa_help, ad_to_help, ad_pr_help, ad_ot_help } from 'help/addresses';
+import { ex_help, ex_ac_help, ex_bl_help, ex_tr_help, ex_re_help, ex_lo_help, ex_tc_help } from 'help/explore';
+import { di_help, di_fi_help, di_st_help, di_un_help, di_co_help, di_sh_help } from 'help/digests';
+import { si_help, si_do_help, si_co_help, si_na_help, si_pa_help, si_cr_help } from 'help/signatures';
+import { ca_help, ca_bl_help, ca_tr_help, ca_tc_help, ca_sl_help, ca_pr_help, ca_ab_help } from 'help/caches';
+import { ot_help, ot_cu_help, ot_kn_help, ot_ge_help, ot_pr_help, ot_gr_help } from 'help/other';
+import { se_help, se_co_help, se_sk_help, se_fo_help, se_li_help } from 'help/settings';
+import { su_help, su_fr_help, su_pe_help, su_do_help, su_co_help, su_ab_help } from 'help/support';
 
 const helpMap = new Map([
-  ['root', r_help],
-  ['addresses/', a_help],
-  ['addresses/monitors', am_help],
-  ['addresses/names', an_help],
-  ['addresses/wallets', aw_help],
-  ['addresses/tokens', at_help],
-  ['addresses/prefunds', ap_help],
-  ['addresses/other', ao_help],
-  ['explore/', e_help],
-  ['explore/accounts', ea_help],
-  ['explore/blocks', eb_help],
-  ['explore/transactions', et_help],
-  ['explore/receipts', er_help],
-  ['explore/logs', el_help],
-  ['explore/traces', etr_help],
-  ['digests/', d_help],
-  ['digests/finalized', df_help],
-  ['digests/staged', ds_help],
-  ['digests/unripe', du_help],
-  ['digests/columns', dc_help],
-  ['digests/shared', dsh_help],
-  ['signatures/', s_help],
-  ['signatures/downloaded', sd_help],
-  ['signatures/common', sc_help],
-  ['signatures/names', sn_help],
-  ['signatures/params', sp_help],
-  ['signatures/cross', scr_help],
-  ['caches/', c_help],
-  ['caches/block_cache', cb_help],
-  ['caches/tx_cache', ct_help],
-  ['caches/trace_cache', ctr_help],
-  ['caches/slurps', cs_help],
-  ['caches/prices', cp_help],
-  ['caches/abi_cache', ca_help],
-  ['other/', o_help],
-  ['other/custom', oc_help],
-  ['other/known', ok_help],
-  ['other/generated', og_help],
-  ['other/prices', op_help],
-  ['other/groups', ogr_help],
+  ['root', ro_help],
+
+  ['addresses/', ad_help],
+  ['addresses/monitors', ad_mo_help],
+  ['addresses/names', ad_na_help],
+  ['addresses/wallets', ad_wa_help],
+  ['addresses/tokens', ad_to_help],
+  ['addresses/prefunds', ad_pr_help],
+  ['addresses/other', ad_ot_help],
+
+  ['explore/', ex_help],
+  ['explore/accounts', ex_ac_help],
+  ['explore/blocks', ex_bl_help],
+  ['explore/transactions', ex_tr_help],
+  ['explore/receipts', ex_re_help],
+  ['explore/logs', ex_lo_help],
+  ['explore/traces', ex_tc_help],
+
+  ['digests/', di_help],
+  ['digests/finalized', di_fi_help],
+  ['digests/staged', di_st_help],
+  ['digests/unripe', di_un_help],
+  ['digests/columns', di_co_help],
+  ['digests/shared', di_sh_help],
+
+  ['signatures/', si_help],
+  ['signatures/downloaded', si_do_help],
+  ['signatures/common', si_co_help],
+  ['signatures/names', si_na_help],
+  ['signatures/params', si_pa_help],
+  ['signatures/cross', si_cr_help],
+
+  ['caches/', ca_help],
+  ['caches/block_cache', ca_bl_help],
+  ['caches/tx_cache', ca_tr_help],
+  ['caches/trace_cache', ca_tc_help],
+  ['caches/slurps', ca_sl_help],
+  ['caches/prices', ca_pr_help],
+  ['caches/abi_cache', ca_ab_help],
+
+  ['other/', ot_help],
+  ['other/custom', ot_cu_help],
+  ['other/known', ot_kn_help],
+  ['other/generated', ot_ge_help],
+  ['other/prices', ot_pr_help],
+  ['other/groups', ot_gr_help],
+
   ['settings/', se_help],
-  ['settings/configuration', sec_help],
-  ['settings/skins', ses_help],
-  ['settings/formats', sef_help],
-  ['settings/licenses', sel_help],
+  ['settings/configuration', se_co_help],
+  ['settings/skins', se_sk_help],
+  ['settings/formats', se_fo_help],
+  ['settings/licenses', se_li_help],
+
   ['support/', su_help],
-  ['support/free_support', suf_help],
-  ['support/per_incident', sup_help],
-  ['support/documentation', sud_help],
-  ['support/contact_us', suc_help],
-  ['support/about_us', sua_help]
+  ['support/free_support', su_fr_help],
+  ['support/per_incident', su_pe_help],
+  ['support/documentation', su_do_help],
+  ['support/contact_us', su_co_help],
+  ['support/about_us', su_ab_help]
 ]);
 
 // Dashboard and root share the same help
@@ -71,7 +80,7 @@ helpMap.set('dashboard/', helpMap.get('root'));
 function getHelp(page, subpage) {
   return () => (
     <Fragment>
-      <h4 style={{ textTransform: 'capitalize' }}>{page + (subpage ? ' / ' + subpage.replace('_', ' ') : '')} Page</h4>
+      <h4>{subpage ? subpage.replace('_', ' ') : page} Page</h4>
       <span>{helpMap.get(page + '/' + subpage)()}</span>
     </Fragment>
   );

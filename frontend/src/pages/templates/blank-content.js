@@ -8,7 +8,6 @@ import { STATUS_TOGGLE, HELP_TOGGLE } from './components/PanelBase/reducers';
 import { MAIN_MENU_TOGGLE } from './components/MainMenu/reducers';
 import { MainMenu, PanelStatus, PanelHelp, PageHelp } from './components';
 import Routes from './routes';
-import './Content.css';
 
 const mainMenu = [
 [{NAVLINKS}]
@@ -22,7 +21,7 @@ export function Content(props) {
   const { isStatusExpanded, isHelpExpanded, isMainMenuExpanded, toggleStatus, toggleHelp, toggleMainMenu } = props;
 
   const classNames = [
-    'app-content',
+    'page-body',
     isMainMenuExpanded ? 'menu-expanded' : '',
     isStatusExpanded ? 'status-expanded' : '',
     isHelpExpanded ? 'help-expanded' : ''

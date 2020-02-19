@@ -152,7 +152,7 @@ const StatusInner = (props) => {
 const HeaderRow = (props) => {
   return (
     <Fragment>
-      <div className="header">{props.text}</div>
+      <h4>{props.text}</h4>
     </Fragment>
   );
 };

@@ -6,26 +6,28 @@ export function su_help() {
 }
 
 //---------------------------------------------------
-export function suf_help() {
+export function su_fr_help() {
   return <span>Help for support free support</span>;
 }
 
 //---------------------------------------------------
-export function sup_help() {
+export function su_pe_help() {
   return <span>Help for support per incident</span>;
 }
 
 //---------------------------------------------------
-export function sud_help() {
+export function su_do_help() {
   return <span>Help for support documentation</span>;
 }
 
 //---------------------------------------------------
-export function suc_help() {
-  return <span>Help for support contact us</span>;
+export function su_co_help() {
+  return <span>This page lists various ways you can get in touch with us.</span>;
 }
 
 //---------------------------------------------------
-export function sua_help() {
-  return <span>Help for support about us</span>;
+export function su_ab_help() {
+  return (
+    <span>This page describes a few things about the history of TrueBlocks, LLC, both ancient and more recent.</span>
+  );
 }

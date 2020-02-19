@@ -12,7 +12,7 @@ export function se_help() {
 }
 
 //---------------------------------------------------
-export function sec_help() {
+export function se_co_help() {
   return (
     <span>
       The configurations page allows you to set certain options in the backend such as the Ethereum provider, the
@@ -23,7 +23,7 @@ export function sec_help() {
 }
 
 //---------------------------------------------------
-export function ses_help() {
+export function se_sk_help() {
   return (
     <span>
       Changing skins allows you to modify the look and feel of the application. Try different skins until you find one
@@ -33,7 +33,7 @@ export function ses_help() {
 }
 
 //---------------------------------------------------
-export function sef_help() {
+export function se_fo_help() {
   return (
     <span>
       Many of the data and object tables can be customized by setting their format strings. This form allows you to
@@ -43,7 +43,7 @@ export function sef_help() {
 }
 
 //---------------------------------------------------
-export function sel_help() {
+export function se_li_help() {
   return (
     <span>
       This page details the licenses of the various parts of the TrueBlocks system. Please contact us if you have

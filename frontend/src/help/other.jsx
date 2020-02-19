@@ -1,31 +1,31 @@
 import React from 'react';
 
 //---------------------------------------------------
-export function o_help() {
-  return <span>Help for address dashboard</span>;
+export function ot_help() {
+  return <span>Help for other dashboard</span>;
 }
 
 //---------------------------------------------------
-export function oc_help() {
-  return <span>Help for address monitors</span>;
+export function ot_cu_help() {
+  return <span>Help for other custom</span>;
 }
 
 //---------------------------------------------------
-export function ok_help() {
-  return <span>Help for address names</span>;
+export function ot_kn_help() {
+  return <span>Help for other known</span>;
 }
 
 //---------------------------------------------------
-export function og_help() {
-  return <span>Help for address wallets</span>;
+export function ot_ge_help() {
+  return <span>Help for other generated</span>;
 }
 
 //---------------------------------------------------
-export function op_help() {
-  return <span>Help for address tokens</span>;
+export function ot_pr_help() {
+  return <span>Help for other prices</span>;
 }
 
 //---------------------------------------------------
-export function ogr_help() {
-  return <span>Help for address prefunds</span>;
+export function ot_gr_help() {
+  return <span>Help for other groups</span>;
 }

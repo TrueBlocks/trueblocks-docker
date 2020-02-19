@@ -52,7 +52,7 @@ export default function reducer_Status(state = initialState, action) {
       return {
         ...state,
         isConnected: false,
-        error: action.err + ' ', // don't remove, converts to string
+        error: action.err + '', // don't remove, converts to string
         systemData: {},
         unripe: -1,
         staging: -1,

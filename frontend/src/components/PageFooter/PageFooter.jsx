@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 //import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import discord from 'img/discord.svg';
 import github from 'img/github.svg';
@@ -8,43 +10,46 @@ import twitter from 'img/twitter.svg';
 import './PageFooter.css';
 
 //------------------------------------------------------------
-function PageFooter() {
+function PageFooter(props) {
+  const { isMainMenuExpanded } = props;
+  const classNames = ['page-footer', isMainMenuExpanded ? 'expanded' : 'not-expanded'].join(' ');
+
   return (
     <Fragment>
-      <div className="page-footer">
+      <div className={classNames}>
         <div className="footer-container">
-          <div className="left-item">
+          <div className="footer-left">
             <div>TrueBlocks, LLC • 1010 N Hancock St, Philadelpia, PA 19123</div>
             <div>
-              <a className="linker" href="http://www.quickblocks.io" target="_blank" rel="noopener noreferrer">
+              <a className="footer-links" href="http://www.quickblocks.io" target="_blank" rel="noopener noreferrer">
                 http://www.quickblocks.io
               </a>{' '}
               •{' '}
-              <a className="linker" href="mailto:info@quickblocks.io?subject=Inquiry">
+              <a className="footer-links" href="mailto:info@quickblocks.io?subject=Inquiry">
                 info@quickblocks.io
               </a>
             </div>
           </div>
-          <div className="right-item">
+          <div className="footer-right">
             <a href="http://twitter.com/@quickblocks" target="_blank" rel="noopener noreferrer">
-              <img className="social" alt={twitter} src={twitter} />
+              <img className="footer-social" alt={twitter} src={twitter} />
             </a>
             <a
               href="http://github.com/Great-Hill-Corporation/trueblocks-core"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img className="social" alt={github} src={github} />
+              <img className="footer-social" alt={github} src={github} />
             </a>
             <a href="http://medium.com/@tjayrush" target="_blank" rel="noopener noreferrer">
-              <img className="social" alt={medium} src={medium} />
+              <img className="footer-social" alt={medium} src={medium} />
             </a>
             <a
               href="https://discordapp.com/channels/570963863428661248/570963863428661250"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img className="social" alt={discord} src={discord} />
+              <img className="footer-social" alt={discord} src={discord} />
             </a>
           </div>
         </div>
@@ -53,4 +58,10 @@ function PageFooter() {
   );
 }
 
-export default PageFooter;
+const mapStateToProps = ({ reducer_MainMenu }) => ({
+  isMainMenuExpanded: reducer_MainMenu.isMainMenuExpanded
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageFooter);

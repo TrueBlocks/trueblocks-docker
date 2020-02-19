@@ -6,9 +6,7 @@ import { findMenu } from 'utils';
 
 //----------------------------------------------------------------------
 function Other({ match }) {
-  return (
-    <Page inner={<OtherInner key={Math.random()} cur_submenu={findMenu('other', other_menu, match)} />} />
-  );
+  return <Page inner={<OtherInner key={Math.random()} cur_submenu={findMenu('other', other_menu, match)} />} />;
 }
 export default Other;
 
