@@ -1,15 +1,21 @@
 {
   "name": "trueblocks-docker",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "electron/main.js",
   "repository": "https://github.com/wildmolasses/trueblocks-docker.git",
   "author": "wildmolasses <changes@gmail.com>",
   "license": "MIT",
+  "homepage": "./",
   "scripts": {
-    "start": "cd frontend && yarn build && rm -r ../api/build && cp -rv build ../api/build && cd ../api && yarn start"
+    "start": "cd frontend && yarn build && rm -r ../api/build && cp -rv build ../api/build && cd ../api && yarn start",
+    "electron-dev": "ELECTRON_UI_URL=http://localhost:3000 electron .",
+    "electron-app-dev": "nf start"
   },
   "devDependencies": {
+    "electron": "^8.0.1",
+    "electron-is-dev": "^1.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-react": "^7.17.0"
+    "eslint-plugin-react": "^7.17.0",
+    "foreman": "^3.0.1"
   }
 }
