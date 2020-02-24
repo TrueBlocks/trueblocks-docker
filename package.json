@@ -8,7 +8,7 @@
   "homepage": "./",
   "scripts": {
     "start": "cd frontend && yarn build && rm -r ../api/build && cp -rv build ../api/build && cd ../api && yarn start",
-    "electron-dev": "ELECTRON_UI_URL=http://localhost:3000 electron .",
+    "electron-dev": "ELECTRON_UI_URL=http://localhost:5000 electron .",
     "electron-app-dev": "nf start"
   },
   "devDependencies": {
