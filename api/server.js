@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
+const webSockets = require('./websockets');
 const app = express();
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
 const apiOptions = require('./apiOptions.generated.json');
@@ -85,6 +86,7 @@ app.get(`/ping`, (req, res) => {
 
 app.get(`/:routeName`, (req, res) => {
   let routeName = req.params.routeName;
+
   if (apiOptions[routeName] === undefined) {
     var msg = '{ "errors": [ "JS API: Route ';
     msg += routeName;
@@ -144,6 +146,8 @@ app.put(`/settings`, (req, res) => {
   });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log('TrueBlocks Data API (version 0.6.7) initialized on port ' + port);
 });
+
+webSockets.createServer(server);

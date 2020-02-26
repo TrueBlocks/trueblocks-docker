@@ -72,6 +72,12 @@
   overflow: hidden;
 }
 
+/* For placing e.g. Progress bar inside a Row */
+.ot_tr,
+.ot_tr_right {
+  position: relative;
+}
+
 .ot_tr:hover {
   background-color: var(--color-bg-hover);
   color: var(--color-text-hover);
