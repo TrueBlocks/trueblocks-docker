@@ -64,7 +64,11 @@ class SupportInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Support" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        {/*<Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />*/}
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

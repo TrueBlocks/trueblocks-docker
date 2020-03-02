@@ -1,4 +1,4 @@
-import * as si from './actions';
+import * as mo from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
@@ -9,24 +9,20 @@ const initialState = {
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Signatures(state = initialState, action) {
+export default function reducer_Monitors(state = initialState, action) {
   // EXISTING_CODE
   // EXISTING_CODE
 
   switch (action.type) {
-    case si.BEGIN:
+    case mo.BEGIN:
       return {
         ...state,
         isLoading: true,
         error: null
       };
 
-    case si.CROSS:
-    case si.PARAMS:
-    case si.NAMES:
-    case si.COMMON:
-    case si.DOWNLOADED:
-    case si.DASHBOARD:
+    case mo.DAEMON:
+    case mo.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,
@@ -36,10 +32,31 @@ export default function reducer_Signatures(state = initialState, action) {
         error: null
       };
 
+    case mo.SCRAPER:
+      return {
+        ...state,
+        data: action.payload.data[0].caches,
+        fieldList: action.payload.types[1].fields,
+        meta: action.payload.meta,
+        isLoading: false,
+        error: null
+      };
+
+    case mo.ADDRESSES:
+    case mo.PROJECTS:
+      return {
+        ...state,
+        data: action.payload.data[0].caches[0].items,
+        fieldList: action.payload.types[1].fields,
+        meta: action.payload.meta,
+        isLoading: false,
+        error: null
+      };
+
     // EXISTING_CODE
     // EXISTING_CODE
 
-    case si.FAILURE:
+    case mo.FAILURE:
       return {
         ...state,
         data: null,

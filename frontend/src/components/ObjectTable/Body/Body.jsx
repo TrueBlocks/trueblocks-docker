@@ -37,6 +37,8 @@ function DetailPanel({ address }) {
       <Link to="/explore/accounts">Export to Excel</Link>
       <br />
       <Link to="/explore/accounts">Export to QuickBooks</Link>
+      <br />
+      <Link to="/explore/accounts">Export to Rotki</Link>
       <hr />
       <div style={{ fontSize: '16pt', fontWeight: '600', fontVariant: 'small-caps' }}>pay features</div>
       <Link to="/explore/accounts">Analytics</Link>

@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Dashboard } from './dispatchers';
@@ -51,7 +51,11 @@ class DashboardInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Dashboard" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

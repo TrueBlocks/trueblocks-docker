@@ -12,6 +12,9 @@ import lowflo from 'skins/lowflo';
 import maria from 'skins/maria';
 import qed from 'skins/qed';
 import time_likes from 'skins/time_likes';
+import in_pieces from 'skins/in_pieces';
+import ice_cream from 'skins/ice_cream';
+import happy_socks from 'skins/happy_socks';
 
 export const skinList = [
   'agency',
@@ -25,7 +28,10 @@ export const skinList = [
   'lowflo',
   'maria',
   'qed',
-  'time_likes'
+  'time_likes',
+  'in_pieces',
+  'ice_cream',
+  'happy_socks'
 ];
 
 export var skins = [];
@@ -41,6 +47,9 @@ skins['lowflo'] = lowflo;
 skins['maria'] = maria;
 skins['qed'] = qed;
 skins['time_likes'] = time_likes;
+skins['in_pieces'] = in_pieces;
+skins['ice_cream'] = ice_cream;
+skins['happy_socks'] = happy_socks;
 
 export function changeSkin(newSkin) {
   let skin = skins[newSkin];

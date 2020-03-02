@@ -2,7 +2,7 @@ name,bgPrimary,bgSecondary,textPrimary,borderPrimary,tableBgPrimary,tableBgSecon
 control,#1f2605,#1f6521,#d6ce15,#1f2605,#53900F,#a4a71e,#1f2605,#1f2605,#d6ce15,#1f2605
 fly50,#687864,#31708e,white,#687864,#8fc1e3,#687864,#5085a5,#687864,#f7f9fb,white
 love_apart,#806543,#33266e,white,#806543,#111111,#111111,goldenrod,#806543,#a6607c,white
-time_likes,#5680e9,#84ceeb,navyblue,navyblue,#5680e9,#84ceeb,navyblue,#5680e9,#8860d0,antiquewhite
+time_likes,#5680e9,#84ceeb,navy,navy,#5680e9,#84ceeb,navy,#5680e9,#8860d0,antiquewhite
 fay,#5d5c61,#379683,orange,#5d5c61,#5d5c61,#379683,white,#379683,#5d5c61,orange
 futuramo,#501f3a,#cb2d6f,white,#501f3a,#14a098,#cccccc,#501f3a,#cccccc,#501f3a,white
 lowflo,#d79922,#efe2ba,yellow,#d79922,#4056a1,#efe2ba,yellow,#4056a1,#c5cbe3,#d79922
@@ -11,3 +11,6 @@ fireworks,#272727,#747474,#ff652f,#272727,#ffe400,#747474,#ff652f,#ffe400,#14a76
 qed,#026670,#fce181,#fef9c7,#026670,#9fedd7,#fce181,indianred,#9fedd7,#edeae5,#026670,
 agency,#19181a,#479761,#cebc81,#19181a,#a16e83,#479761,#cebc81,#a16e83,darkgrey,#19181a
 maria,#265077,#022140,lightyellow,#265077,#1e4258,#022140,lightyellow,#1e4258,#2d5f5d,lightyellow
+in_pieces,#1a1a1d,#4e4e50,#6f2232,#1a1a1d,#950740,#4e4e50,antiquewhite,#950740,#c30073f,antiquewhite
+ice_cream,#3b8beb,#c4dbf6,#e7e3d4,#3b8beb,#b23850,#c4dbf6,navy,#b23850,#8590aa,#222222
+happy_socks,#a64ac9,#fccd04,#ffb48f,#a64ac9,#f5e6cc,#fccd04,purple,#f5e6cc,#17e9e0,#a64ac9

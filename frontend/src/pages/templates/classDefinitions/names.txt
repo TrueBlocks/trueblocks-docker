@@ -1,0 +1,25 @@
+[settings]
+class = CNames
+color = pink
+polling = false
+
+[[subpages]]
+list = [
+    { page = "names", subpage = "dashboard" },
+    { page = "names", subpage = "your_names", route = "names", options = "custom" },
+    { page = "names", subpage = "wallets", route = "names", options = "owned" },
+    { page = "names", subpage = "tokens", route = "names", options = "named" },
+    { page = "names", subpage = "prefunds", route = "names", options = "prefund" },
+    { page = "names", subpage = "other_names", route = "names", options = "other" },
+    { page = "names", subpage = "groups", route = "names", options = "groups" },
+    { page = "names", subpage = "separator" },
+    { page = "names", subpage = "downloaded", route = "abi", options = "monitored&verbose" },
+    { page = "names", subpage = "common", route = "abi", options = "known&verbose" },
+    { page = "names", subpage = "names", route = "abi", options = "names&verbose" },
+    { page = "names", subpage = "params", route = "abi", options = "params&verbose" },
+    { page = "names", subpage = "cross", route = "abi", options = "cross" },
+    { page = "names", subpage = "separator" },
+    { page = "names", subpage = "your_blocks", route = "when", options = "list&verbose" },
+    { page = "names", subpage = "known_blocks", route = "when", options = "list&verbose" },
+    { page = "names", subpage = "dated_blocks", route = "when", options = "generate&verbose" },
+]

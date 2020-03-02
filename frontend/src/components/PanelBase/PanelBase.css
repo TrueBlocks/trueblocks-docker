@@ -1,25 +1,14 @@
 /*-----------------------------------------------------------------------------*/
-.side-panel {
-  flex-basis: 15%;
-  min-width: 15%;
-  padding: 0px 10px 15px 10px;
-  /* background-color: cornflowerblue; */
-}
-
-.side-panel .title {
-  color: #4c7c9c;
+.side-panel.shrinked {
+  position: relative;
+  min-width: auto;
+  flex-basis: auto;
 }
 
 .side-panel:not(.shrinked) .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.side-panel.shrinked {
-  position: relative;
-  min-width: auto;
-  flex-basis: auto;
 }
 
 .side-panel.shrinked .title {
@@ -29,10 +18,8 @@
 .side-panel.shrinked .title span {
   position: absolute;
   left: 0.7em;
-
   transform-origin: left;
   line-height: 1;
-
   word-break: normal;
 }
 

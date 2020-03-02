@@ -21,6 +21,7 @@ export default function reducer_Digests(state = initialState, action) {
         error: null
       };
 
+    case di.PRICES:
     case di.DASHBOARD:
       return {
         ...state,
@@ -31,7 +32,6 @@ export default function reducer_Digests(state = initialState, action) {
         error: null
       };
 
-    case di.SHARED:
     case di.COLUMNS:
     case di.UNRIPE:
     case di.STAGED:

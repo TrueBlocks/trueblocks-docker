@@ -23,6 +23,7 @@
   padding-left: 8px;
   padding-right: 8px;
   background-color: var(--color-table-bg-primary);
+  color: var(--color-table-text-primary);
   text-transform: capitalize;
   font-weight: 600;
   font-size: 1.3em;
@@ -42,7 +43,7 @@
   overflow: hidden;
   background-color: var(--color-bg-primary);
   text-overflow: ellipsis;
-  color: var(--color-text-primary);
+  color: var(--color-table-text-primary);
 }
 
 .ot_chart {

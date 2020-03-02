@@ -1,36 +1,50 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 //---------------------------------------------------
 export function ex_help() {
-  return <span>Help for explore dashboard</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for explore dashboard</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ex_ac_help() {
-  return <span>Help for explore accounts</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for explore accounts</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ex_bl_help() {
-  return <span>Help for explore blocks</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for explore blocks</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ex_tr_help() {
-  return <span>Help for explore transactions</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for explore transactions</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ex_re_help() {
-  return <span>Help for explore receipts</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for explore receipts</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ex_lo_help() {
-  return <span>Help for explore logs</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for explore logs</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ex_tc_help() {
-  return <span>Help for explore traces</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for explore traces</Fragment>;
+  // EXISTING_CODE
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import Dashboard from './pages/dashboard';
-import Addresses from './pages/addresses';
+import Monitors from './pages/monitors';
+import Names from './pages/names';
 import Explore from './pages/explore';
 import Digests from './pages/digests';
-import Signatures from './pages/signatures';
 import Caches from './pages/caches';
-import Other from './pages/other';
 import Settings from './pages/settings';
 import Support from './pages/support';
+import Addresses from './pages/addresses';
 
 //------------------------------------------------------------
 const routes = [
@@ -18,10 +18,16 @@ const routes = [
     path: '/'
   },
   {
-    name: 'addresses',
-    component: (routeProps) => <Addresses {...routeProps} />,
+    name: 'monitors',
+    component: (routeProps) => <Monitors {...routeProps} />,
     exact: true,
-    path: '/addresses/:subpage?/:query?'
+    path: '/monitors/:subpage?/:query?'
+  },
+  {
+    name: 'names',
+    component: (routeProps) => <Names {...routeProps} />,
+    exact: true,
+    path: '/names/:subpage?/:query?'
   },
   {
     name: 'explore',
@@ -36,22 +42,10 @@ const routes = [
     path: '/digests/:subpage?/:query?'
   },
   {
-    name: 'signatures',
-    component: (routeProps) => <Signatures {...routeProps} />,
-    exact: true,
-    path: '/signatures/:subpage?/:query?'
-  },
-  {
     name: 'caches',
     component: (routeProps) => <Caches {...routeProps} />,
     exact: true,
     path: '/caches/:subpage?/:query?'
-  },
-  {
-    name: 'other',
-    component: (routeProps) => <Other {...routeProps} />,
-    exact: true,
-    path: '/other/:subpage?/:query?'
   },
   {
     name: 'settings',
@@ -64,6 +58,12 @@ const routes = [
     component: (routeProps) => <Support {...routeProps} />,
     exact: true,
     path: '/support/:subpage?/:query?'
+  },
+  {
+    name: 'addresses',
+    component: (routeProps) => <Addresses {...routeProps} />,
+    exact: true,
+    path: '/addresses/:subpage?/:query?'
   }
 ];
 

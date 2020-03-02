@@ -1,7 +1,6 @@
 [settings]
 class = CDigests
 color = blue
-no_data = true
 
 [[subpages]]
 list = [
@@ -10,5 +9,5 @@ list = [
     { page = "digests", subpage = "staged", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
     { page = "digests", subpage = "unripe", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
     { page = "digests", subpage = "columns", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
-    { page = "digests", subpage = "shared", route = "status", options = "modes_EQ_index", extract = "_0.caches" },
+    { page = "digests", subpage = "prices", route = "quotes", options = "period_EQ_1440" },
 ]

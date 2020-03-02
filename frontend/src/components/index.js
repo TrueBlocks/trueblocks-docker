@@ -10,12 +10,11 @@ import { isReady, isError, NotReady, isEmpty, EmptyQuery } from './NotReady';
 import BreadCrumb from './BreadCrumb';
 import Debug from './Debug';
 import { DashMenu } from './DashMenu';
-import { MainMenu } from './MainMenu';
+import { MainMenu, Separator } from './MainMenu';
 import { Palette } from './Palette';
 import { PanelBase } from './PanelBase';
 import PanelStatus from './PanelStatus';
 import PanelHelp from './PanelHelp';
-import PageHelp from './PageHelp';
 import ExpandShrinkIcon from './ExpandShrinkIcon';
 import EditableCell from './EditableCell';
 
@@ -37,11 +36,11 @@ export {
   BreadCrumb,
   Debug,
   MainMenu,
+  Separator,
   DashMenu,
   Palette,
   PanelBase,
   PanelStatus,
   PanelHelp,
-  PageHelp,
   ExpandShrinkIcon
 };

@@ -1,11 +1,13 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Digests } from './dispatchers';
 
 import { BreadCrumb } from 'components';
 import { Debug } from 'components';
+import { isReady } from 'components';
+import { DataTable } from 'components';
 import { isError, NotReady, isEmpty, EmptyQuery } from 'components';
 import './digests.css';
 
@@ -41,12 +43,30 @@ class DigestsInner extends React.Component {
   getInnerPage = () => {
     if (this.state.cur_submenu.subpage === 'dashboard') return <div>The dashboard for Digests</div>;
     if (isError(this.props)) return <NotReady {...this.props} />;
+    else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    let displayMap = new Map();
     // EXISTING_CODE
     if (!this.props.statusOpen)
       return <div style={{ color: 'red', fontSize: '20px' }}>The status panel needs to be opened</div>;
-    return <DigestChart {...this.props} />;
+    if (this.state.cur_submenu.subpage === 'prices') {
+      displayMap.set('timestamp', { showing: true });
+      displayMap.set('date', { showing: true });
+      displayMap.set('close', { showing: true });
+    } else {
+      return <DigestChart {...this.props} />;
+    }
     // EXISTING_CODE
+    return (
+      <DataTable
+        displayMap={displayMap}
+        theFields={this.props.fieldList}
+        theData={this.props.data}
+        headerIcons={['add']}
+        icons={['explore', 'refresh', 'explore|remove', 'delete|undo']}
+        tableEar={this.tableEar}
+      />
+    );
   };
 
   render = () => {
@@ -54,7 +74,11 @@ class DigestsInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Digests" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

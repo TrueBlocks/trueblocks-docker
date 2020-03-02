@@ -1,31 +1,36 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 //---------------------------------------------------
 export function di_help() {
-  return <span>Help for digests dashboard</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for digests dashboard</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function di_fi_help() {
-  return <span>Help for digests finalized</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for digests finalized</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function di_st_help() {
-  return <span>Help for digests staged</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for digests staged</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function di_un_help() {
-  return <span>Help for digests unripe</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for digests unripe</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function di_co_help() {
-  return <span>Help for digests columns</span>;
-}
-
-//---------------------------------------------------
-export function di_sh_help() {
-  return <span>Help for digests shared</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for digests columns</Fragment>;
+  // EXISTING_CODE
 }

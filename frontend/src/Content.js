@@ -4,30 +4,32 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { dashboard_menu } from './pages/dashboard';
-import { addresses_menu } from './pages/addresses';
+import { monitors_menu } from './pages/monitors';
+import { names_menu } from './pages/names';
 import { explore_menu } from './pages/explore';
 import { digests_menu } from './pages/digests';
-import { signatures_menu } from './pages/signatures';
 import { caches_menu } from './pages/caches';
-import { other_menu } from './pages/other';
 import { settings_menu } from './pages/settings';
 import { support_menu } from './pages/support';
+import { addresses_menu } from './pages/addresses';
 
 import { STATUS_TOGGLE, HELP_TOGGLE } from './components/PanelBase/reducers';
 import { MAIN_MENU_TOGGLE } from './components/MainMenu/reducers';
-import { MainMenu, PanelStatus, PanelHelp, PageHelp } from './components';
+import { MainMenu, Separator, PanelStatus, PanelHelp } from './components';
+import { HelpText } from './help';
 import Routes from './routes';
 
 const mainMenu = [
   dashboard_menu,
-  addresses_menu,
+  monitors_menu,
+  names_menu,
   explore_menu,
   digests_menu,
-  signatures_menu,
   caches_menu,
-  other_menu,
   settings_menu,
-  support_menu
+  support_menu,
+  Separator,
+  addresses_menu
 ];
 
 const toggleStatus = () => ({ type: STATUS_TOGGLE });
@@ -62,7 +64,7 @@ export function Content(props) {
         ))}
       </main>
       <PanelHelp isExpanded={isHelpExpanded} toggle={toggleHelp}>
-        <PageHelp location={location} />
+        <HelpText location={location} />
       </PanelHelp>
     </div>
   );

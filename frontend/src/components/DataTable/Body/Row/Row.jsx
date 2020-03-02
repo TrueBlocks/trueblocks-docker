@@ -105,6 +105,9 @@ class Row extends React.Component {
                 const showing = this.props.displayMap.get(key) && this.props.displayMap.get(key).showing;
                 let val = row[key];
                 val = typeof val === 'object' ? JSON.stringify(val) : val;
+                if (this.props.displayMap.get(key) && this.props.displayMap.get(key).calc) {
+                  val = this.props.displayMap.get(key).calc(row);
+                }
                 return <Cell key={`${pKey}-c${index}`} showing={showing} content={val} cellEar={this.cellEar} />;
               })}
             </Fragment>

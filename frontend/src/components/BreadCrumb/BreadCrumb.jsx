@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './BreadCrumb.css';
 
 function BreadCrumb({ page, menu }) {
   var text = menu ? page + ' : ' + menu.subpage.replace('_', ' ') : page;
-  return <div className="title inner-page">{text}</div>;
+  return <div className="title">{text}</div>;
 }
 
 BreadCrumb.propTypes = {

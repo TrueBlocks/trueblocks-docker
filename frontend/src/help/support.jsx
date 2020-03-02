@@ -1,33 +1,47 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 //---------------------------------------------------
 export function su_help() {
-  return <span>Help for support dashboard</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for support dashboard</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function su_fr_help() {
-  return <span>Help for support free support</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for support free support</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function su_pe_help() {
-  return <span>Help for support per incident</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for support per incident</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function su_do_help() {
-  return <span>Help for support documentation</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for support documentation</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function su_co_help() {
-  return <span>This page lists various ways you can get in touch with us.</span>;
+  // EXISTING_CODE
+  return <Fragment>This page lists various ways you can get in touch with us.</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function su_ab_help() {
   return (
-    <span>This page describes a few things about the history of TrueBlocks, LLC, both ancient and more recent.</span>
+    // EXISTING_CODE
+    <Fragment>
+      This page describes a few things about the history of TrueBlocks, LLC, both ancient and more recent.
+    </Fragment>
+    // EXISTING_CODE
   );
 }

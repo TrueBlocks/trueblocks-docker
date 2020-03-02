@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Controls from '../Controls';
 import Header from './Header';
 import Body from './Body';
+import Footer from './Footer';
 
 import { getKeys, sortArray } from 'utils';
 import './DataTable.css';
@@ -42,14 +43,14 @@ class DataTable extends React.Component {
   }
 
   sortBy = (cmd, field, dir) => {
-    field = field.toLowerCase();
-    // console.log('cmd: ', cmd, 'field: ', field, 'predir: ', dir);
+    //field = field.toLowerCase();
+    console.log('cmd: ', cmd, 'field: ', field, 'predir: ', dir);
     // If it's the same field, switch direction, otherwise sort ascending
     var sortDir = this.state.sortCtx.sortedBy === field ? !this.state.sortCtx.sortDir : true;
-    // console.log('sortDir: ', sortDir);
+    console.log('sortDir: ', sortDir);
     localStorage.setItem('dt_sortedby', field);
     localStorage.setItem('dt_sortdir', sortDir);
-    // console.log('rows-before', this.state.rows[0]);
+    console.log('rows-before', this.state.theData[0]);
     this.setState({
       ...this.state,
       sortCtx: {
@@ -57,9 +58,10 @@ class DataTable extends React.Component {
         sortDir: sortDir,
         sortBy: this.sortBy
       },
-      theData: sortArray(this.state.theData, field, sortDir)
+      theData: sortArray(this.state.theData, field, sortDir),
+      cur_page: 1
     });
-    // console.log('rows-after', this.state.rows[0]);
+    console.log('rows-after', this.state.theData[0]);
     return;
   };
 
@@ -125,8 +127,8 @@ class DataTable extends React.Component {
             pageChange={this.pageChange}
           />
         ) : (
-            <Fragment></Fragment>
-          )}
+          <Fragment></Fragment>
+        )}
         <div className={'data_table'}>
           <Header
             {...getKeys('dth')}
@@ -146,6 +148,14 @@ class DataTable extends React.Component {
             del_icons={del_icons}
           />
         </div>
+        <Footer
+          {...getKeys('dth')}
+          theData={theData}
+          displayMap={this.props.displayMap}
+          theFields={this.props.theFields}
+          sortCtx={this.state.sortCtx}
+          headerEar={tableEar}
+        />
       </Fragment>
     );
   };

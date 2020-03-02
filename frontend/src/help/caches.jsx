@@ -1,36 +1,50 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 //---------------------------------------------------
 export function ca_help() {
-  return <span>Help for caches dashboard</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for caches dashboard</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ca_bl_help() {
-  return <span>Help for caches blocks</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for caches blocks</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ca_tr_help() {
-  return <span>Help for caches transactions</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for caches transactions</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ca_tc_help() {
-  return <span>Help for caches traces</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for caches traces</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ca_sl_help() {
-  return <span>Help for caches slurps</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for caches slurps</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ca_pr_help() {
-  return <span>Help for caches prices</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for caches prices</Fragment>;
+  // EXISTING_CODE
 }
 
 //---------------------------------------------------
 export function ca_ab_help() {
-  return <span>Help for caches abis</span>;
+  // EXISTING_CODE
+  return <Fragment>Help for caches abis</Fragment>;
+  // EXISTING_CODE
 }

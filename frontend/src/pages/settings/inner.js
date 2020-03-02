@@ -95,7 +95,11 @@ class SettingsInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Settings" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

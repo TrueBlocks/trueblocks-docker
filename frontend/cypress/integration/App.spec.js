@@ -7,8 +7,8 @@ describe('App.js', () => {
     cy.get('.page-header').should('have.text', 'TrueBlocks Account Explorer');
   });
 
-  it('should display menu', () => {
-    cy.get('.page-body .left-body-container')
+  it('should display menu panel', () => {
+    cy.get('.page-body .menu-panel')
       .find('> .menu-item')
       .should('have.length.above', 1);
   });

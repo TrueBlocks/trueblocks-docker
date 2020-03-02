@@ -1,2 +1,4 @@
 import { ConnectedMainMenu as MainMenu } from './MainMenu';
-export { MainMenu };
+import { Separator } from './MainMenu';
+
+export { MainMenu, Separator };

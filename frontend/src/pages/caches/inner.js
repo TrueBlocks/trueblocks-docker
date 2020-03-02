@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Caches } from './dispatchers';
@@ -52,6 +52,7 @@ class CachesInner extends React.Component {
         theFields={this.props.fieldList}
         object={object}
         tableEar={this.tableEar}
+        showNav={false}
       />
     );
   };
@@ -61,7 +62,11 @@ class CachesInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Caches" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

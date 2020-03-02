@@ -3,7 +3,9 @@
   "homepage": "https://trueblocks.io",
   "scripts": {
     "deploy": "now && now alias",
+    "electron": "cd .. ; env SKIP_PREFLIGHT_CHECK=true yarn electron-app-dev ",
     "start": "BROWSER=none react-scripts start",
+    "start2": "env SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "now-start": "serve -s ./build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

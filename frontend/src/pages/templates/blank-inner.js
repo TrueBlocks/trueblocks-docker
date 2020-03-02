@@ -49,6 +49,7 @@ class [{PROPER}]Inner extends React.Component {
     [{NO_ERROR}]if (isError(this.props)) return <NotReady {...this.props} />;
     [{NO_DATA}]else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     [{NO_ERROR}]else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    [{NO_DT}]let displayMap = new Map();
     // EXISTING_CODE
     // EXISTING_CODE
     [{NO_DT}]return (
@@ -67,6 +68,7 @@ class [{PROPER}]Inner extends React.Component {
     [{NO_OBJ}]    theFields={this.props.fieldList}
     [{NO_OBJ}]    object={object}
     [{NO_OBJ}]    tableEar={this.tableEar}
+    [{NO_OBJ}]    showNav={true}
     [{NO_OBJ}]  />
     [{NO_OBJ}]);
   };
@@ -76,7 +78,11 @@ class [{PROPER}]Inner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="[{PROPER}]" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

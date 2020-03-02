@@ -39,7 +39,7 @@ export const digests_menu = {
     { subpage: 'staged', route: 'status', query: di.STAGED },
     { subpage: 'unripe', route: 'status', query: di.UNRIPE },
     { subpage: 'columns', route: 'status', query: di.COLUMNS },
-    { subpage: 'shared', route: 'status', query: di.SHARED },
+    { subpage: 'prices', route: 'quotes', query: di.PRICES },
     { subpage: 'di-0006' }
   ],
   expanded: false,

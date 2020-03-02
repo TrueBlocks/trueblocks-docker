@@ -14,4 +14,4 @@ export const FINALIZED = 'modes=index&details';
 export const STAGED = 'modes=index';
 export const UNRIPE = 'modes=index';
 export const COLUMNS = 'modes=index';
-export const SHARED = 'modes=index';
+export const PRICES = 'period=1440';

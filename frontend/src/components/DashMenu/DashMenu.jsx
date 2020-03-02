@@ -5,8 +5,6 @@ import * as ad from 'pages/addresses/dispatchers';
 import * as ex from 'pages/explore/dispatchers';
 import * as di from 'pages/digests/dispatchers';
 import * as ca from 'pages/caches/dispatchers';
-import * as si from 'pages/signatures/dispatchers';
-import * as ot from 'pages/other/dispatchers';
 import * as se from 'pages/settings/dispatchers';
 import * as su from 'pages/support/dispatchers';
 
@@ -18,9 +16,7 @@ export const getDashMenu = () => {
   theMenu.push(ad.addresses_menu);
   theMenu.push(ex.explore_menu);
   theMenu.push(di.digests_menu);
-  theMenu.push(si.signatures_menu);
   theMenu.push(ca.caches_menu);
-  theMenu.push(ot.other_menu);
   theMenu.push(se.settings_menu);
   theMenu.push(su.support_menu);
   return theMenu;

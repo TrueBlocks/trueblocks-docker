@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MenuItem from './MenuItem';
-import './MainMenu.css';
 
 class MainMenu extends React.Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class MainMenu extends React.Component {
 
   render = () => {
     const { isExpanded } = this.props;
-    const className = ['left-body-container', isExpanded ? 'expanded' : ''].join(' ');
+    const className = ['menu-panel', isExpanded ? 'expanded' : ''].join(' ');
 
     return (
       <div className={className}>
@@ -47,6 +46,10 @@ class MainMenu extends React.Component {
       </div>
     );
   };
+}
+
+export function Separator() {
+  return <MenuItem separator={true} />;
 }
 
 /**

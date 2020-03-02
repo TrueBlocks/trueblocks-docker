@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Addresses } from './dispatchers';
@@ -66,17 +66,20 @@ class AddressesInner extends React.Component {
     if (isError(this.props)) return <NotReady {...this.props} />;
     else if (!isReady(this.props, this.props.data)) return <NotReady {...this.props} />;
     else if (isEmpty(this.props.data)) return <EmptyQuery query={this.state.subpage} />;
+    let displayMap = new Map();
     // EXISTING_CODE
-    const displayMap = new Map();
-    displayMap.set('group', { showing: true });
-    displayMap.set('name', { showing: true });
-    displayMap.set('address', { showing: true });
     if (this.state.cur_submenu.subpage !== 'monitors') {
+      displayMap.set('group', { showing: true });
+      displayMap.set('name', { showing: true });
+      displayMap.set('address', { showing: true });
       displayMap.set('symbol', { showing: true });
       displayMap.set('source', { showing: true });
       displayMap.set('logo', { showing: true });
       displayMap.set('description', { showing: true });
     } else {
+      displayMap.set('group', { showing: true });
+      displayMap.set('name', { showing: true });
+      displayMap.set('address', { showing: true });
       displayMap.set('nAppearances', { showing: true, name: 'Count' });
       displayMap.set('firstAppearance', { showing: true, name: 'First' });
       displayMap.set('latestAppearance', { showing: true, name: 'Latest' });
@@ -103,7 +106,11 @@ class AddressesInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Addresses" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

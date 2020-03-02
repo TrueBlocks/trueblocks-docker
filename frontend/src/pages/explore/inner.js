@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dispatcher_Explore } from './dispatchers';
@@ -88,7 +88,11 @@ class ExploreInner extends React.Component {
       <div className="inner-panel">
         <BreadCrumb page="Explore" menu={this.state.cur_submenu} />
         {this.getInnerPage()}
-        <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        {localStorage.getItem('debug') ? (
+          <Debug state={this.state} fieldList={this.props.fieldList} meta={this.props.meta} />
+        ) : (
+          <Fragment></Fragment>
+        )}
       </div>
     );
   };

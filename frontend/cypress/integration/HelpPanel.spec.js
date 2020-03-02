@@ -61,19 +61,9 @@ describe('Help panel', () => {
   //     'TrueBlocks index of appearances greatly speed up access to the Ethereum data; however, they take up a lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.'
   // ));
 
-  // it('displays context help for Signatures', createHelpContentTest(
-  //     '/signatures',
-  //     'TrueBlocks Signatures greatly speed up access to the Ethereum data; however, they take up a lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.'
-  // ));
-
   // it('displays context help for Caches', createHelpContentTest(
   //     '/caches',
   //     'TrueBlocks Caches greatly speed up access to the Ethereum data; however, they take up a lot of space on your hard drive, so you have to keep any eye on them. Clean them out periodically so they dont get too big.'
-  // ));
-
-  // it('displays context help for Other', createHelpContentTest(
-  //     '/other',
-  //     'The Other panel allows you to configure various other items related to TrueBlocks. This panel allows for many things including some other stuff.'
   // ));
 
   // it('displays context help for Settings', createHelpContentTest(

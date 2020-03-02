@@ -136,6 +136,7 @@ const IndexDetail = (props) => {
             }}
             object={item}
             theFields={fieldList}
+            showNav={false}
           />
         ))}
       </div>

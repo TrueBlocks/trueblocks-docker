@@ -1,4 +1,4 @@
-import * as ot from './actions';
+import * as na from './actions';
 
 //----------------------------------------------------------------------
 const initialState = {
@@ -9,24 +9,33 @@ const initialState = {
 };
 
 //----------------------------------------------------------------------
-export default function reducer_Other(state = initialState, action) {
+export default function reducer_Names(state = initialState, action) {
   // EXISTING_CODE
   // EXISTING_CODE
 
   switch (action.type) {
-    case ot.BEGIN:
+    case na.BEGIN:
       return {
         ...state,
         isLoading: true,
         error: null
       };
 
-    case ot.GROUPS:
-    case ot.PRICES:
-    case ot.GENERATED:
-    case ot.KNOWN:
-    case ot.CUSTOM:
-    case ot.DASHBOARD:
+    case na.DATED_BLOCKS:
+    case na.KNOWN_BLOCKS:
+    case na.YOUR_BLOCKS:
+    case na.CROSS:
+    case na.PARAMS:
+    case na.NAMES:
+    case na.COMMON:
+    case na.DOWNLOADED:
+    case na.GROUPS:
+    case na.OTHER_NAMES:
+    case na.PREFUNDS:
+    case na.TOKENS:
+    case na.WALLETS:
+    case na.YOUR_NAMES:
+    case na.DASHBOARD:
       return {
         ...state,
         data: action.payload.data,
@@ -39,7 +48,7 @@ export default function reducer_Other(state = initialState, action) {
     // EXISTING_CODE
     // EXISTING_CODE
 
-    case ot.FAILURE:
+    case na.FAILURE:
       return {
         ...state,
         data: null,

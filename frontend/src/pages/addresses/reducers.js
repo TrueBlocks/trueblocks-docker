@@ -11,6 +11,7 @@ const initialState = {
 //----------------------------------------------------------------------
 export default function reducer_Addresses(state = initialState, action) {
   // EXISTING_CODE
+  // TODO(tjayrush): ad.CREATE is not handled here
   // EXISTING_CODE
 
   switch (action.type) {
@@ -21,7 +22,6 @@ export default function reducer_Addresses(state = initialState, action) {
         error: null
       };
 
-    case ad.CREATE:
     case ad.OTHER:
     case ad.PREFUNDS:
     case ad.TOKENS:

@@ -29,6 +29,8 @@ class App extends React.Component {
   }
 
   render() {
+    localStorage.setItem('debug', true);
+    // localStorage.removeItem('debug');
     const { lastLocation, setLastLocation } = this.props;
 
     if (lastLocation && this.isShowingRootRoute()) {
