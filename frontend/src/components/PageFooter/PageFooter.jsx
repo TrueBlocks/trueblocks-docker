@@ -13,6 +13,7 @@ import './PageFooter.css';
 function PageFooter(props) {
   const { isMainMenuExpanded } = props;
   const classNames = ['page-footer', isMainMenuExpanded ? 'expanded' : 'not-expanded'].join(' ');
+  const openLink = (url) => () => window.require('electron').remote.shell.openExternal(url);
 
   return (
     <Fragment>
@@ -21,36 +22,20 @@ function PageFooter(props) {
           <div className="footer-left">
             <div>TrueBlocks, LLC • 1010 N Hancock St, Philadelpia, PA 19123</div>
             <div>
-              <a className="footer-links" href="http://www.quickblocks.io" target="_blank" rel="noopener noreferrer">
+              <span onClick={openLink('http://www.quickblocks.io')} className="footer-links">
                 http://www.quickblocks.io
-              </a>{' '}
+              </span>{' '}
               •{' '}
-              <a className="footer-links" href="mailto:info@quickblocks.io?subject=Inquiry">
+              <span onClick={openLink('mailto:info@quickblocks.io?subject=Inquiry')} className="footer-links">
                 info@quickblocks.io
-              </a>
+              </span>
             </div>
           </div>
           <div className="footer-right">
-            <a href="http://twitter.com/@quickblocks" target="_blank" rel="noopener noreferrer">
-              <img className="footer-social" alt={twitter} src={twitter} />
-            </a>
-            <a
-              href="http://github.com/Great-Hill-Corporation/trueblocks-core"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img className="footer-social" alt={github} src={github} />
-            </a>
-            <a href="http://medium.com/@tjayrush" target="_blank" rel="noopener noreferrer">
-              <img className="footer-social" alt={medium} src={medium} />
-            </a>
-            <a
-              href="https://discordapp.com/channels/570963863428661248/570963863428661250"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img className="footer-social" alt={discord} src={discord} />
-            </a>
+              <img onClick={openLink('http://twitter.com/@quickblocks')} className="footer-social" alt={twitter} src={twitter} />
+              <img onClick={openLink('http://github.com/Great-Hill-Corporation/trueblocks-core')} className="footer-social" alt={github} src={github} />
+              <img onClick={openLink('http://medium.com/@tjayrush')} className="footer-social" alt={medium} src={medium} />
+              <img onClick={openLink('https://discordapp.com/channels/570963863428661248/570963863428661250')} className="footer-social" alt={discord} src={discord} />
           </div>
         </div>
       </div>
