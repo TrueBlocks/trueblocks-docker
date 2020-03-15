@@ -34,7 +34,7 @@ class MonitorsInner extends React.Component {
   // EXISTING_CODE
   switch_page = () => {
     this.setState({ ...this.state });
-    window.open('http://localhost:3000/monitors/addresses/status+modes=monitors&details&ether', '_self');
+    window.location = 'http://localhost:3000/monitors/addresses/status+modes=monitors&details&ether';
   };
   async add(addr) {
     return await this.props.dispatcher_AddMonitor(addr);

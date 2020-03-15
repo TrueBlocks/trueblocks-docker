@@ -31,7 +31,7 @@ class DashboardInner extends React.Component {
 
   // EXISTING_CODE
   changePage = (dest) => {
-    window.open(dest, '_self');
+    window.location = dest;
   };
   // EXISTING_CODE
 
