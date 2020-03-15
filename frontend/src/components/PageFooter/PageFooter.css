@@ -44,3 +44,8 @@
   color: var(--color-text-primary);
   filter: var(--color-img-filter);
 }
+
+.footer-links,
+.footer-social {
+    cursor: pointer;
+}
