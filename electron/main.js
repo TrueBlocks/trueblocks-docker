@@ -1,24 +1,39 @@
 const { app, BrowserWindow } = require('electron');
 const developmentMode = require('electron-is-dev');
+const Store = require('electron-store');
 
 const path = require('path');
 const url = require('url');
 
 const getUiUrl = require('./get_ui_url').getUiUrl;
+const store = new Store();
+
+function onDevelopmentMode(win) {
+  win.webContents.on('devtools-closed', () => store.set('devtools', false));
+  win.webContents.on('devtools-opened', () => store.set('devtools', true));
+
+  if (store.get('devtools') !== false) {
+    win.webContents.openDevTools();
+  }
+}
 
 function createWindow () {
+  const windowConfig = store.get('window');
+
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    ...windowConfig,
     webPreferences: {
       nodeIntegration: true
     }
   });
 
   win.loadURL(getUiUrl(developmentMode));
+  win.on('close', () => store.set('window', win.getBounds()));
 
   if (developmentMode) {
-    win.webContents.openDevTools();
+    onDevelopmentMode(win);
   }
 }
 
