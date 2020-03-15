@@ -48,16 +48,16 @@ class ExploreInner extends React.Component {
     let url;
     if (cmd === 'next') {
       url = loc.replace('=' + links.current + '&', '=' + links.next + '&');
-      window.open(url, '_self');
+      window.location = url;
     } else if (cmd === 'previous') {
       url = loc.replace('=' + links.current + '&', '=' + links.prev + '&');
-      window.open(url, '_self');
+      window.location = url;
     } else if (cmd === 'first') {
       url = loc.replace('=' + links.current + '&', '=0&');
-      window.open(url, '_self');
+      window.location = url;
     } else if (cmd === 'latest') {
       url = loc.replace('=' + links.current + '&', '=latest&');
-      window.open(url, '_self');
+      window.location = url;
     }
     console.log('cmd: ', cmd);
     console.log('url: ', url);

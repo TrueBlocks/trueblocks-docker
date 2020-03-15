@@ -51,6 +51,8 @@ skins['in_pieces'] = in_pieces;
 skins['ice_cream'] = ice_cream;
 skins['happy_socks'] = happy_socks;
 
+export const defaultSkin = 'futuramo';
+
 export function changeSkin(newSkin) {
   let skin = skins[newSkin];
   let root = document.documentElement;
@@ -74,15 +76,15 @@ export class Palette extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: localStorage.getItem('skin') || 'futuramo'
+      current: localStorage.getItem('skin') || defaultSkin
     };
   }
 
-  onSkinChanged(newSkin) {
+  onSkinChanged(newSkin = defaultSkin) {
     console.log('newSkin: ', newSkin);
     localStorage.setItem('skin', newSkin);
     this.setState({ ...this.state });
-    window.open('/settings/skins/settings+skins', '_self');
+    changeSkin(newSkin);
   }
 
   render = () => {
