@@ -20,8 +20,8 @@
   --logo-height: 60px;
   --logo-width: 43px;
   /**/
-  --page-header-height: 74px;
-  --page-footer-height: 54px;
+  --header-height: 74px;
+  --footer-height: 54px;
   /**/
   --datatable-width: 98%;
 }
@@ -29,7 +29,7 @@
 /*------------------------------------------*/
 .whole-page {
   display: grid;
-  grid-template-rows: auto calc(100vh - var(--page-header-height) - var(--page-footer-height) - 15px) minmax(54px, 74px);
+  grid-template-rows: auto calc(100vh - var(--header-height) - var(--footer-height) - 15px) minmax(var(--header-height), var(--footer-height));
   grid-auto-rows: minmax(min-content, max-content);
   height: calc(100vh - 6px);
   background-color: var(--color-bg-primary);
