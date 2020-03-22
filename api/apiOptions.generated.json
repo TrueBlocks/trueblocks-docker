@@ -68,23 +68,6 @@
       "data_type": "<boolean>",
       "description": "toggle search of unripe (neither staged nor finalized) folder ([{DEF}] by default)"
     },
-    "daemon": {
-      "num": "10100",
-      "group": "apps",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "daemon",
-      "hotkey": "d",
-      "def_val": "",
-      "is_required": false,
-      "customizeable": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "header",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "we are being called in daemon mode which causes us to print results differently"
-    },
     "start": {
       "num": "10120",
       "group": "apps",
@@ -118,6 +101,23 @@
       "option_kind": "flag",
       "data_type": "<blknum>",
       "description": "last block to process (inclusive)"
+    },
+    "silent": {
+      "num": "10140",
+      "group": "apps",
+      "api_route": "list",
+      "tool": "acctScrape",
+      "command": "silent",
+      "hotkey": "i",
+      "def_val": "",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "lighten the reporting on progress (for use with --daemon switch to `chifra scrape`)"
     },
     "": {
       "num": "10160",
@@ -321,7 +321,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -546,23 +546,6 @@
       "data_type": "<boolean>",
       "description": "articulate transactions&#44; traces&#44; logs&#44; and outputs"
     },
-    "write_blocks": {
-      "num": "10340",
-      "group": "apps",
-      "api_route": "export",
-      "tool": "acctExport",
-      "command": "write_blocks",
-      "hotkey": "w",
-      "def_val": "false",
-      "is_required": false,
-      "customizeable": false,
-      "core_visible": true,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "write blocks to the binary cache ('off' by default)"
-    },
     "write_txs": {
       "num": "10360",
       "group": "apps",
@@ -698,6 +681,40 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "for --balances option only&#44; export only changes in balances"
+    },
+    "occurrence": {
+      "num": "10510",
+      "group": "apps",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "occurrence",
+      "hotkey": "o",
+      "def_val": "NOPOS",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<blknum>",
+      "description": "for each loaded list of appearances&#44; export only this occurrence"
+    },
+    "emitter": {
+      "num": "10515",
+      "group": "apps",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "emitter",
+      "hotkey": "M",
+      "def_val": "",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "available for --logs option only&#44; export will only export if the address emitted the event"
     },
     "start": {
       "num": "10520",
@@ -935,7 +952,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -1260,7 +1277,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -1721,7 +1738,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -2012,7 +2029,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -2303,7 +2320,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -2594,7 +2611,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -2868,7 +2885,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -3142,7 +3159,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -3690,6 +3707,23 @@
       "data_type": "<boolean>",
       "description": "for both code generation and options generation&#44; process but do not write changes"
     },
+    "force": {
+      "num": "11822",
+      "group": "dev_tools",
+      "api_route": "",
+      "tool": "makeClass",
+      "command": "force",
+      "hotkey": "c",
+      "def_val": "false",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "for both code generation and options generation&#44; force writing of changes"
+    },
     "ERR_CLASSDEFNOTEXIST": {
       "num": "11832",
       "group": "dev_tools",
@@ -4062,7 +4096,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -4404,7 +4438,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -4746,7 +4780,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -5207,7 +5241,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -5600,7 +5634,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -6044,7 +6078,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -6352,7 +6386,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -6677,7 +6711,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -6833,23 +6867,6 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "suppress the display of zero balance accounts"
-    },
-    "no_history": {
-      "num": "13200",
-      "group": "tools",
-      "api_route": "state",
-      "tool": "getState",
-      "command": "no_history",
-      "hotkey": "s",
-      "def_val": "",
-      "is_required": false,
-      "customizeable": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "for testing only&#44; hide the server's historical state"
     },
     "": {
       "num": "13220",
@@ -7053,7 +7070,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -7171,9 +7188,9 @@
       "customizeable": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "header",
+      "generate": "local",
       "option_kind": "flag",
-      "data_type": "enum[name|decimals|totalSupply|version|symbol|all]",
+      "data_type": "list<enum[name|symbol|decimals|totalSupply|version|none|all*]>",
       "description": "one or more parts of the token information to retreive"
     },
     "by_acct": {
@@ -7412,7 +7429,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -7771,7 +7788,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -7910,6 +7927,23 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "force the results into the tx cache"
+    },
+    "uniq": {
+      "num": "13605",
+      "group": "tools",
+      "api_route": "transactions",
+      "tool": "getTrans",
+      "command": "uniq",
+      "hotkey": "u",
+      "def_val": "",
+      "is_required": false,
+      "customizeable": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "display a list of uniq addresses found in this transaction"
     },
     "": {
       "num": "13620",
@@ -8113,7 +8147,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -8506,7 +8540,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -8624,7 +8658,7 @@
       "customizeable": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "local",
+      "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "ignore other options and generate timestamps only"
@@ -8641,7 +8675,7 @@
       "customizeable": false,
       "core_visible": true,
       "docs_visible": true,
-      "generate": "local",
+      "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
       "description": "only applicable if --timestamps is on&#44; the step between block numbers in the export"
@@ -8848,7 +8882,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -9139,7 +9173,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
@@ -9396,7 +9430,7 @@
       "generate": "--",
       "option_kind": "flag",
       "data_type": "<path>",
-      "description": "write the results to file 'fn' and return the filename"
+      "description": "write the results to file 'fn' and return the filename. (If the file exists&#44; it will be overwritten. If 'fn' ends with .gz&#44; the resulting file will be zipped )"
     },
     "file": {
       "num": "14620",
