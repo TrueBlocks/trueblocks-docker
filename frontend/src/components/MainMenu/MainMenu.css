@@ -1,0 +1,100 @@
+/*------------------------------------------*/
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  text-transform: capitalize;
+  text-align: left;
+  font-size: 1em;
+  line-height: 1.25em;
+  padding: 0.5em;
+  margin: 0px 3px 3px 0px;
+  border: 1px solid #6b7a89;
+  background-color: #a7b7c2;
+  opacity: 0.75;
+}
+
+.menu-item.is-active {
+  font-weight: 700;
+  opacity: 1;
+  color: #42505f;
+  background-color: #e2e5f0;
+  border: 1px dashed #6b7a89;
+}
+
+.menu-item:hover {
+  font-weight: 500;
+  opacity: 0.75;
+  color: var(--color-text-hover);
+  background-color: var(--color-bg-hover);
+}
+
+/*------------------------------------------*/
+.submenu-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+}
+
+.submenu-item {
+  width: 90%;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 0.95em;
+  text-align: left;
+  opacity: 0.75;
+  color: white;
+  background-color: #a7b7c2;
+  border: 1px solid #6b7a89;
+  border-left: 3px solid #444444;
+  margin: 0px 0px 3px 10px;
+  padding: 0.3em;
+}
+
+.submenu-item:hover {
+  font-weight: 500;
+  opacity: 0.75;
+  color: var(--color-text-hover);
+  background-color: var(--color-bg-hover);
+  border: 1px solid #bbb;
+  border-left: 3px solid #444444;
+}
+
+.submenu-item a {
+  text-decoration: none;
+}
+
+.submenu-item.is-active {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-hover);
+  font-weight: 500;
+  opacity: 1;
+}
+
+.submenu-icon {
+  height: 30px;
+  margin: 0 7%;
+  color: white;
+  text-decoration: none;
+  text-transform: capitalize;
+  text-align: center;
+  opacity: 0.75;
+  margin: 2px;
+}
+
+.submenu-icon:hover {
+  font-weight: 500;
+  opacity: 0.75;
+  color: var(--color-text-hover);
+  background-color: var(--color-bg-hover);
+  border: 1px solid #bbb;
+}
+
+.submenu-icon.is-active {
+  font-weight: 500;
+  opacity: 1;
+  color: var(--color-text-hover);
+  background-color: var(--color-bg-hover);
+}

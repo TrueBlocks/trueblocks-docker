@@ -16,6 +16,7 @@ a browser. When any React component is changed, the same hot replacement system 
 version of the component into the app.
 
 Normally, two commands should be called:
+
 1. Run React dev server: `yarn --cwd frontend start`
 2. Run Electron: `yarn electron-dev`
 
