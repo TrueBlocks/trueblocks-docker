@@ -1,4 +1,4 @@
-#### Contact
+#### Support : About
 
 This is the help file written in **markdown**
 
