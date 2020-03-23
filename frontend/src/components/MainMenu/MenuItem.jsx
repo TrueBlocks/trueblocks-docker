@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import SubmenuItem from './SubmenuItem';
 import Icon from 'components/Icon';
+import './MainMenu.css';
 
 function MenuItem({ id, active: mainMenuActive, collapsed, page, items, onClick, toggle, separator }) {
   const getSeparator = (width) => {

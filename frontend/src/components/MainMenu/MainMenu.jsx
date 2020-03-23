@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MenuItem from './MenuItem';
+import './MainMenu.css';
 
 class MainMenu extends React.Component {
   constructor(props) {

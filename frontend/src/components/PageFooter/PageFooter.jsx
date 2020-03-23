@@ -13,7 +13,7 @@ import './PageFooter.css';
 function PageFooter(props) {
   const { isMainMenuExpanded } = props;
   const classNames = ['page-footer', isMainMenuExpanded ? 'expanded' : 'not-expanded'].join(' ');
-  const openLink = (url) => () => window.open(url); //require('electron').remote.shell.openExternal(url);
+  const openLink = (url) => () => window.require('electron').remote.shell.openExternal(url);
 
   return (
     <Fragment>

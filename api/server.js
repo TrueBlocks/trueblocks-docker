@@ -22,9 +22,9 @@ app.use('/docs', express.static(__dirname + '/docs'));
 app.use('/', express.static(__dirname + '/build'));
 
 var debug = false;
-app.get('/', (req, res) => {
-  return res.redirect('/docs');
-});
+//app.get('/', (req, res) => {
+//  return res.redirect('/docs');
+//});
 
 let processList = [];
 let cnt = 0;

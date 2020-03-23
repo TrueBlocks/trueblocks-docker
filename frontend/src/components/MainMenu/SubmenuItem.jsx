@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icon } from 'components';
+import './MainMenu.css';
 
 function SubmenuItem({ item, page, collapsed, onClick }) {
   const get = (() => {

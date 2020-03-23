@@ -54,6 +54,9 @@ skins['happy_socks'] = happy_socks;
 export const defaultSkin = 'futuramo';
 
 export function changeSkin(newSkin) {
+  if (!newSkin)
+    return;
+  
   let skin = skins[newSkin];
   let root = document.documentElement;
   /**/
