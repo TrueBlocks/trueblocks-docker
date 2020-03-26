@@ -11,12 +11,14 @@ env.NO_COLOR = true;
 //console.log("Running in test mode");
 app.use(bodyParser.json());
 app.use(bodyParser.text());
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
 });
+
 app.use('/help', express.static(__dirname + '/help'));
 app.use('/docs', express.static(__dirname + '/docs'));
 app.use('/', express.static(__dirname + '/build'));
