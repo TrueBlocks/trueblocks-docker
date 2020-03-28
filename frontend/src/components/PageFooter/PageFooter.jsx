@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import isElectron from 'utils/electron';
 import discord from 'img/discord.svg';
 import github from 'img/github.svg';
 import medium from 'img/medium.svg';
@@ -13,7 +14,7 @@ import './PageFooter.css';
 function PageFooter(props) {
   const { isMainMenuExpanded } = props;
   const classNames = ['page-footer', isMainMenuExpanded ? 'expanded' : 'not-expanded'].join(' ');
-  const openLink = (url) => () => window.require('electron').remote.shell.openExternal(url);
+  const openLink = (url) => () => (isElectron() ? window.require('electron').remote.shell.openExternal : window.open)(url);
 
   return (
     <Fragment>
