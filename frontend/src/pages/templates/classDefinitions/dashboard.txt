@@ -1,5 +1,0 @@
-[settings]
-class = CDashboard
-menuType = DashMenu
-color = white
-no_error = true
