@@ -45,9 +45,7 @@ FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aa
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python procps
-RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
-	https://github.com/Great-Hill-Corporation/trueblocks-explorer \
-	/root/trueblocks-explorer
+COPY --from=builder /root/trueblocks-explorer /root/trueblocks-explorer
 COPY --from=templateParser /root/template-parser/output/docs.html /root/api/docs/index.html
 COPY --from=templateParser /root/template-parser/output/apiOptions.generated.json /root/api/apiOptions.generated.json
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
