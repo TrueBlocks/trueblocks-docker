@@ -2,8 +2,8 @@ FROM python@sha256:99a39f3907ab81c7800eb7f9bcfa28475d9b081133615c6fa86616a7d14bf
 
 WORKDIR /root
 
-RUN curl https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz --output go1.12.7.linux-amd64.tar.gz && \
-	tar -C /usr/local -xzf go1.12.7.linux-amd64.tar.gz && \
+RUN curl https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz --output go1.14.2.linux-amd64.tar.gz && \
+	tar -C /usr/local -xzf go1.14.2.linux-amd64.tar.gz && \
 	ln -s /usr/local/go/bin/* /usr/local/bin/
 
 RUN apt-get update && \
@@ -26,18 +26,19 @@ RUN cd /root/quickBlocks-src && \
 	cmake ../src && \
 	make
 
-RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
+RUN git clone -b 'docker-related' --single-branch --progress --depth 1 \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-explorer \
 	/root/trueblocks-explorer
 
 FROM node:8 as templateParser
 WORKDIR /root
-COPY --from=builder /root/trueblocks-explorer/template-parser /root/template-parser
-COPY --from=builder /root/trueblocks-explorer/templates /root/templates
+COPY --from=builder /root/trueblocks-explorer/api/template-parser /root/template-parser
+COPY --from=builder /root/trueblocks-explorer/api/templates /root/templates
 COPY --from=builder /root/quickBlocks-src/src/other/build_assets/option-master-list.csv /root/template-parser/option-master-list.csv
 RUN sed -i "s|HOST\: .*|HOST\: http\:\/\/my\.trueblocks\.public\.dappnode\.eth|" /root/templates/apiary.template.apib
 RUN cd /root/template-parser && \
 	npm install && \
+	mkdir output && \
 	node index.js -i option-master-list.csv && \
 	node ./node_modules/aglio/bin/aglio.js html -o ./output/docs.html -i ./output/apiary.generated.apib
 
