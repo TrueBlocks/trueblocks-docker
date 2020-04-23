@@ -1,2 +1,0 @@
-[settings]
-pages = dashboard,/,exact|monitors|names|explore|digests|caches|settings|support|separator|addresses

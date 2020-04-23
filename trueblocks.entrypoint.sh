@@ -7,4 +7,4 @@ cat /root/.quickBlocks/quickBlocks.toml
 export DOCKER_MODE=true
 rm -f /root/.quickBlocks/cache/tmp/*
 chifra scrape --sleep 14 --daemon &
-forever /root/api/server.js 80
+forever /root/trueblocks-explorer/api/server.js 80
