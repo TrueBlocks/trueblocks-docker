@@ -26,7 +26,7 @@ RUN cd /root/quickBlocks-src && \
 	cmake ../src && \
 	make
 
-RUN git clone -b 'docker-related' --single-branch --progress --depth 1 \ 
+RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-explorer \
 	/root/trueblocks-explorer
 
@@ -39,15 +39,15 @@ RUN sed -i "s|HOST\: .*|HOST\: http\:\/\/my\.trueblocks\.public\.dappnode\.eth|"
 RUN cd /root/template-parser && \
 	npm install && \
 	mkdir output && \
-	node index.js -i option-master-list.csv && \
-	node ./node_modules/aglio/bin/aglio.js html -o ./output/docs.html -i ./output/apiary.generated.apib
+	node index.js -i option-master-list.csv
+	# node ./node_modules/aglio/bin/aglio.js html -o ./output/docs.html -i ./output/apiary.generated.apib
 
 FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aab as base
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python procps
 COPY --from=builder /root/trueblocks-explorer /root/trueblocks-explorer
-COPY --from=templateParser /root/template-parser/output/docs.html /root/api/docs/index.html
+# COPY --from=templateParser /root/template-parser/output/docs.html /root/api/docs/index.html
 COPY --from=templateParser /root/template-parser/output/apiOptions.generated.json /root/api/apiOptions.generated.json
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
