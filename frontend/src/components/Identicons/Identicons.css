@@ -1,9 +1,0 @@
-.identicon {
-  border-radius: 30%;
-  border: 1px grey solid;
-  opacity: 75%;
-}
-
-.identicon:hover {
-  opacity: 100%;
-}
