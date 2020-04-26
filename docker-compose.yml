@@ -1,7 +1,7 @@
 version: "3.4"
 
 volumes:
-  trueblocksdnpdappnodeeth_data: {}
+  trueblocks_data: {}
 
 services:
   trueblocks.public.dappnode.eth:
@@ -15,8 +15,25 @@ services:
         max-size: "200k"
         max-file: "10"
     volumes:
-      - trueblocksdnpdappnodeeth_data:/root/.quickBlocks
+      - trueblocks_data:/root/.quickBlocks
     ports:
       - 80:80
     env_file:
       - trueblocks.public.dappnode.eth.env
+
+  trueblocks.local:
+    build: .
+    image: trueblocks.local
+    container_name: trueblocks-local
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    volumes:
+      - trueblocks_data:/root/.quickBlocks
+    ports:
+      - 80:80
+    env_file:
+      - trueblocks.local.env

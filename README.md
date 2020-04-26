@@ -115,6 +115,16 @@ $ docker-compose ps
 $ docker-compose logs -f
 ```
 
+### Clearing the Docker Cache
+```
+#!/usr/bin/env bash
+
+docker ps -q | xargs docker kill
+docker ps --filter=status=exited --filter=status=created -q | xargs docker rm
+docker rmi $(docker images -a -q)
+docker volume rm trueblocks-docker_trueblocks_data
+```
+
 ## Running on DappNode
 
 Building and running the TrueBlocks docker image is taken care of by the dAppNode package manager. If you are running a dAppNode, you can simply install the package from the dAppNode package manager.
