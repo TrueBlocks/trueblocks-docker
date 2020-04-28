@@ -14,8 +14,8 @@ RUN apt-get update && \
 	nano \
 	libcurl3-dev
 
-ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/master version.json
-RUN git clone -b 'master' --single-branch --progress --depth 1 \ 
+ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
+RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-core \
 	/root/quickBlocks-src && \
 	cat /root/quickBlocks-src/src/other/install/docker/post_build.sh
@@ -28,7 +28,7 @@ RUN cd /root/quickBlocks-src && \
 	make && \
 	bash ../src/other/install/docker/post_build.sh
 
-RUN git clone -b 'master' --single-branch --progress --depth 1 \ 
+RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-explorer \
 	/root/trueblocks-explorer
 
