@@ -17,14 +17,16 @@ RUN apt-get update && \
 ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/master version.json
 RUN git clone -b 'master' --single-branch --progress --depth 1 \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-core \
-	/root/quickBlocks-src
+	/root/quickBlocks-src && \
+	cat /root/quickBlocks-src/src/other/install/docker/post_build.sh
 
 RUN cd /root/quickBlocks-src && \
 	mkdir -v build /root/.quickBlocks && \
 	cd build && \
 	bash ../src/other/install/docker/clean_for_docker.sh && \
 	cmake ../src && \
-	make
+	make && \
+	bash ../src/other/install/docker/post_build.sh
 
 RUN git clone -b 'master' --single-branch --progress --depth 1 \ 
 	https://github.com/Great-Hill-Corporation/trueblocks-explorer \
@@ -51,10 +53,12 @@ COPY --from=builder /root/trueblocks-explorer /root/trueblocks-explorer
 COPY --from=templateParser /root/template-parser/output/apiOptions.generated.json /root/api/apiOptions.generated.json
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
+
 RUN cd /root/trueblocks-explorer/api && \
 	npm install && \
 	npm install -g forever && \
 	mkdir /root/.quickBlocks/monitors
+
 COPY trueblocks.entrypoint.sh /root
 
 EXPOSE 80
