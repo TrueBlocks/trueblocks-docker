@@ -12,7 +12,7 @@ RUN apt-get update && \
 	cmake \
 	git \
 	nano \
-	libcurl3-dev
+    libcurl3-dev
 
 ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
 RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
@@ -28,29 +28,15 @@ RUN cd /root/quickBlocks-src && \
 	make && \
 	bash ../src/other/install/docker/post_build.sh
 
-RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
-	https://github.com/Great-Hill-Corporation/trueblocks-explorer \
+RUN git clone -b 'master' --single-branch --progress --depth 1 \ 
+	https://github.com/TrueBlocks/trueblocks-explorer \
 	/root/trueblocks-explorer
-
-FROM node:8 as templateParser
-WORKDIR /root
-COPY --from=builder /root/trueblocks-explorer/api/template-parser /root/template-parser
-COPY --from=builder /root/trueblocks-explorer/api/templates /root/templates
-COPY --from=builder /root/quickBlocks-src/src/other/build_assets/option-master-list.csv /root/template-parser/option-master-list.csv
-RUN sed -i "s|HOST\: .*|HOST\: http\:\/\/my\.trueblocks\.public\.dappnode\.eth|" /root/templates/apiary.template.apib
-RUN cd /root/template-parser && \
-	npm install && \
-	mkdir output && \
-	node index.js -i option-master-list.csv
-	# node ./node_modules/aglio/bin/aglio.js html -o ./output/docs.html -i ./output/apiary.generated.apib
 
 FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aab as base
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y libcurl3-dev python procps
 COPY --from=builder /root/trueblocks-explorer /root/trueblocks-explorer
-# COPY --from=templateParser /root/template-parser/output/docs.html /root/api/docs/index.html
-COPY --from=templateParser /root/template-parser/output/apiOptions.generated.json /root/api/apiOptions.generated.json
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
 
