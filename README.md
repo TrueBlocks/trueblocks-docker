@@ -1,4 +1,4 @@
-# TrueBlocks on Docker
+# TrueBlocks Indexer on Docker
 
 ![Image Logo](https://avatars1.githubusercontent.com/u/19167586?s=200&v=4)
 
@@ -8,37 +8,31 @@
 [![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/quickblocks?lang=es)
 
 
-TrueBlocks extracts address appearances from an Ethereum chain and creates a lightweight index, making queries by address trustless and fast.
+The TrueBlocks indexer extracts address appearances from Ethereum chains and creates a lightweight, partitione index, which makes queries for particular addresses directly from the node trustless and fast.
 
-trueblocks-docker is a docker image containing an installation of TrueBlocks, and an http API server that delivers Ethereum data by address.
+trueblocks-docker is a docker image containing an installation of indexer and a simple API that allows you to control the indexing process.
 
-<!-- By visiting every bit of the Ethereum data including blocks, transactions, receipts, logs, traces, trace actions, and trace results for every block, TrueBlocks is able to extract every 'appearance' of an address on the blockchain.
+## Prerequisite
 
-Trueblocks finds nearly 30% more appearances than naive approaches such as EtherScan. Sorting the list and creating an index allows TrueBlocks to reconstruct historical lists of transactions per address more than 150,000 times faster than a raw scan of the chain via the RPC.
+- **You must be already running an Ethereum node with `--tracing` enabled.** (see [Running A Node](#how-do-you-recommned-I-run-a-node))
 
-The system runs on commercial hardware (laptops), and is able to keep up to the chain. This solves the problem posed by web-scale API-based data providers such as EtherScan who threaten to capture Ethereum’s blockchain data to the detriment of the entire community. -->
+## Getting started
 
-## High Level Walkthrough
-
-- **You are already running an Parity Ethereum node with `--tracing` enabled.** (see [Running A Node](#how-do-you-recommned-I-run-a-node))
 - Set the `RPC_PROVIDER` variable to your RPC endpoint (see ["Before running"](#before-running))
 - Start the TrueBlocks docker container with `docker-compose up -d`
 - Wait for TrueBlocks to build its cache. ([Why does this take so long?](#why-does-it-take-so-long-to-build-the-index))
 - [Query TrueBlocks for a list of transactions on your accounts](#using-the-api)
 
-
-
 ## Requirements
 
 - A running, syncing Parity Ethereum node with `--tracing on` enabled (see [Running A Node](#how-do-you-recommned-I-run-a-node))
-
 - Time (see [Why Does It Take So Long To Build The Index?](#why-does-it-take-so-long-to-build-the-index))
-
 - git, docker, docker-compose (see [Prerequisites](#prerequisites))
 
 ## Installation
 
-The following instructions are for building on your local machine. Running on DappNode? See our [Dappnode Instructions](#dappnode-instructions).
+The following instructions are for building on your local machine. Running on DappNode? See 
+our [Dappnode Instructions](#dappnode-instructions).
 
 ```
 git clone https://github.com/Great-Hill-Corporation/trueblocks-docker.git
