@@ -1,51 +1,46 @@
-FROM python@sha256:99a39f3907ab81c7800eb7f9bcfa28475d9b081133615c6fa86616a7d14bf2af as builder
+FROM golang:1.14-alpine3.11 as builder
+
+RUN apk add --no-cache g++ gcc make cmake git nano libcurl python3 python3-dev \
+        curl bash curl-dev linux-headers
+
+RUN apk --no-cache add ca-certificates wget
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk
+RUN apk add glibc-2.28-r0.apk
 
 WORKDIR /root
-
-RUN curl https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz --output go1.14.2.linux-amd64.tar.gz && \
-	tar -C /usr/local -xzf go1.14.2.linux-amd64.tar.gz && \
-	ln -s /usr/local/go/bin/* /usr/local/bin/
-
-RUN apt-get update && \
-	apt-get install -y \
-	build-essential \
-	cmake \
-	git \
-	nano \
-    libcurl3-dev
 
 ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
-RUN git clone -b 'develop' --single-branch --progress --depth 1 \ 
-	https://github.com/Great-Hill-Corporation/trueblocks-core \
-	/root/quickBlocks-src && \
-	cat /root/quickBlocks-src/src/other/install/docker/post_build.sh
+RUN git clone -b 'develop' --single-branch --progress --depth 1 \
+        https://github.com/Great-Hill-Corporation/trueblocks-core \
+        /root/quickBlocks-src && \
+        cat /root/quickBlocks-src/src/other/install/docker/post_build.sh
 
 RUN cd /root/quickBlocks-src && \
-	mkdir -v build /root/.quickBlocks && \
-	cd build && \
-	bash ../src/other/install/docker/clean_for_docker.sh && \
-	cmake ../src && \
-	make && \
-	bash ../src/other/install/docker/post_build.sh
+        mkdir -v build /root/.quickBlocks && \
+        cd build && \
+        bash ../src/other/install/docker/clean_for_docker.sh && \
+        cmake ../src && \
+        make && \
+        bash ../src/other/install/docker/post_build.sh
 
-RUN git clone -b 'master' --single-branch --progress --depth 1 \ 
-	https://github.com/TrueBlocks/trueblocks-explorer \
-	/root/trueblocks-explorer
+RUN git clone -b 'feature/package-lock' --single-branch --progress --depth 1 \
+        https://github.com/egroj97/trueblocks-explorer \
+        /root/trueblocks-explorer
 
-FROM node@sha256:9dfb7861b1afc4d9789e511f4202ba170ac7f4decf6a2fc47fab33a9ce8c0aab as base
+FROM node:12.18.3-alpine3.9
 WORKDIR /root
 
-RUN apt-get update && apt-get install -y libcurl3-dev python procps
+RUN apk add --no-cache libcurl python3 python3-dev procps bash
 COPY --from=builder /root/trueblocks-explorer /root/trueblocks-explorer
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.quickBlocks /root/.quickBlocks
-
-RUN cd /root/trueblocks-explorer/api && \
-	npm install && \
-	npm install -g forever && \
-	mkdir /root/.quickBlocks/monitors
+COPY --from=builder /root/trueblocks-explorer/api /root
 
 COPY trueblocks.entrypoint.sh /root
+
+RUN yarn install && \
+    mkdir /root/.quickBlocks/monitors
 
 EXPOSE 80
 
