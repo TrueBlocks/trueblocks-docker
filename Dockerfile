@@ -40,6 +40,7 @@ COPY --from=builder /root/trueblocks-explorer/api /root
 COPY trueblocks.entrypoint.sh /root
 
 RUN yarn install && \
+    npm install -g forever && \
     mkdir /root/.quickBlocks/monitors
 
 EXPOSE 80
