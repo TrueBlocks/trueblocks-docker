@@ -24,8 +24,8 @@ RUN cd /root/quickBlocks-src && \
         make && \
         bash ../src/other/install/docker/post_build.sh
 
-RUN git clone -b 'feature/package-lock' --single-branch --progress --depth 1 \
-        https://github.com/egroj97/trueblocks-explorer \
+RUN git clone -b 'master' --single-branch --progress --depth 1 \
+        https://github.com/TrueBlocks/trueblocks-explorer.git \
         /root/trueblocks-explorer
 
 FROM node:12.18.3-alpine3.9
