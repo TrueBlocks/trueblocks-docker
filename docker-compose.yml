@@ -17,6 +17,23 @@ services:
     volumes:
       - trueblocks_data:/root/.quickBlocks
     ports:
-      - 8080:80
+      - 80:80
     env_file:
-      - trueblocks.local.env # Change by trueblocks.local.env for local tests
+      - trueblocks.public.dappnode.eth.env
+
+  trueblocks.local:
+    build: .
+    image: trueblocks.local
+    container_name: trueblocks-local
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    volumes:
+      - trueblocks_data:/root/.quickBlocks
+    ports:
+      - 80:80
+    env_file:
+      - trueblocks.local.env
