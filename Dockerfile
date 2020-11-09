@@ -39,9 +39,12 @@ COPY --from=builder /root/trueblocks-explorer/api /root
 
 COPY trueblocks.entrypoint.sh /root
 
-RUN yarn install && \
-    npm install -g forever && \
-    mkdir /root/.quickBlocks/monitors
+RUN yarn install 2>/dev/null | grep -v fsevent && \
+        npm install -g forever 2>/dev/null | grep -v fsevent && \
+        mkdir -p /root/.quickBlocks/monitors /root/.quickBlocks/addr-index
+
+# To make the shell easier to use
+RUN apk add curl nano
 
 EXPOSE 80
 
