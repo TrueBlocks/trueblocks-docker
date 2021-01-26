@@ -5,3 +5,4 @@ proj.xcodeproj
 .DS_Store
 build_*
 node_modules
+trueblocks.local.env
