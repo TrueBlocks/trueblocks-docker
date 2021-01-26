@@ -6,3 +6,4 @@ proj.xcodeproj
 build_*
 node_modules
 trueblocks.local.env
+.env.local
