@@ -43,8 +43,9 @@ docker-compose build
 ## Before running
 
 Before you bring the TrueBlocks docker container up, take the time to configure the following options:
-- what port do you want to run the trueblocks api server on? Set this in docker-compose.yml. Right now, the ports line reads 80:80. If you want to change this from port 80 to, say, 8181, then change this to 8181:80.
-- What is your node's RPC endpoint? Set your RPC endpoint in the **trueblocks.public.dappnode.eth.env** file to `RPC_PROVIDER=http://your-rpc-provider:port`. Note that finding your RPC endpoint can initially be quite difficult (see [What is my RPC endpoint?](#what-is-my-rpc-endpoint)).
+- what port do you want to run the trueblocks api server on? Set this in .env file. Right now, the ports line reads 80:80. If you want to change this from port 80 to, say, 8181, then change this to 8181:80.
+- If you are running TrueBlocks on your computer, copy trueblocks.local.env.example as trueblocks.local.env.
+- What is your node's RPC endpoint? Set your RPC endpoint in the **trueblocks.local.env**, or if running on DAppNode **trueblocks.public.dappnode.eth.env**, file to `RPC_PROVIDER=http://your-rpc-provider:port`. Note that finding your RPC endpoint can initially be quite difficult (see [What is my RPC endpoint?](#what-is-my-rpc-endpoint)).
 - Now you're ready to run trueblocks!
 
 ## First run
