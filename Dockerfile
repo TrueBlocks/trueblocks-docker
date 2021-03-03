@@ -39,7 +39,10 @@ COPY trueblocks.entrypoint.sh /root
 
 RUN yarn install 2>/dev/null | grep -v fsevent && \
         npm install -g forever 2>/dev/null | grep -v fsevent && \
-        mkdir -p /root/.quickBlocks/monitors /root/.quickBlocks/addr-index
+        mkdir -p /root/.quickBlocks/monitors \
+        mkdir -p /root/.quickBlocks/addr-index \
+        mkdir -p /root/.quickBlocks/cache/addr_index/finalized \
+        mkdir -p /root/.quickBlocks/cache/addr_index/blooms
 
 # To make the shell easier to use
 RUN apk add curl nano
