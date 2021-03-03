@@ -13,16 +13,14 @@ WORKDIR /root
 ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
 RUN git clone -b 'develop' --single-branch --progress --depth 1 \
         https://github.com/Great-Hill-Corporation/trueblocks-core.git \
-        /root/quickBlocks-src && \
-        cat /root/quickBlocks-src/src/other/install/docker/post_build.sh
+        /root/quickBlocks-src
 
 RUN cd /root/quickBlocks-src && \
         mkdir -v build /root/.quickBlocks && \
         cd build && \
         bash ../src/other/install/docker/clean_for_docker.sh && \
         cmake ../src && \
-        make -j 4 && \
-        bash ../src/other/install/docker/post_build.sh
+        make -j 4
 
 RUN git clone -b 'master' --single-branch --progress --depth 1 \
         https://github.com/TrueBlocks/trueblocks-explorer.git \
