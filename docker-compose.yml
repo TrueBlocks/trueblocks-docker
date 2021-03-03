@@ -17,6 +17,6 @@ services:
     volumes:
       - trueblocks_data:/root/.quickBlocks
     ports:
-      - "${TRUEBLOCKS_PORT}:80"
+      - "${TRUEBLOCKS_PORT}:8080"
     env_file:
       - trueblocks.local.env #Change for trueblocks.public.dappnode.eth.env for dAppNodeDeployment
