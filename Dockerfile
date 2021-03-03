@@ -21,7 +21,7 @@ RUN cd /root/quickBlocks-src && \
         cd build && \
         bash ../src/other/install/docker/clean_for_docker.sh && \
         cmake ../src && \
-        make && \
+        make -j 4 && \
         bash ../src/other/install/docker/post_build.sh
 
 RUN git clone -b 'master' --single-branch --progress --depth 1 \
