@@ -22,17 +22,14 @@ RUN cd /root/quickBlocks-src && \
         cmake ../src && \
         make -j 4
 
-FROM node:12.18.4-alpine3.12
+FROM alpine:3.12
 WORKDIR /root
 
-RUN apk add --no-cache libcurl python3 python3-dev procps bash
+RUN apk add --no-cache libstdc++ libgcc libcurl python3 python3-dev procps bash
 COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
 COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 
 COPY trueblocks.entrypoint.sh /root
-
-RUN yarn install 2>/dev/null | grep -v fsevent && \
-        npm install -g forever 2>/dev/null | grep -v fsevent
 
 # To make the shell easier to use
 RUN apk add curl nano
