@@ -10,8 +10,8 @@ RUN apk add glibc-2.28-r0.apk
 
 WORKDIR /root
 
-ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/master version.json
-RUN git clone -b 'master' --single-branch --progress --depth 1 \
+ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/develop version.json
+RUN git clone -b 'develop' --single-branch --progress --depth 1 \
         https://github.com/TrueBlocks/trueblocks-core.git \
         /root/quickBlocks-src
 
