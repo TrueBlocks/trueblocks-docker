@@ -1,9 +1,4 @@
-d_clear
-d_do
-testing_file
-proj.xcodeproj
+package.json
 .DS_Store
-build_*
-node_modules
 trueblocks.local.env
 .env.local
