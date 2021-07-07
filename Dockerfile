@@ -13,9 +13,9 @@ WORKDIR /root
 ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/develop version.json
 RUN git clone -b 'develop' --single-branch --progress --depth 1 \
         https://github.com/TrueBlocks/trueblocks-core.git \
-        /root/quickBlocks-src
+        /root/src
 
-RUN cd /root/quickBlocks-src && \
+RUN cd /root/src && \
         mkdir -v build && \
         cd build && \
         bash ../src/other/install/docker/clean_for_docker.sh && \
@@ -26,9 +26,8 @@ FROM alpine:3.12
 WORKDIR /root
 
 RUN apk add --no-cache libstdc++ libgcc libcurl python3 python3-dev procps bash
-COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
+COPY --from=builder /root/src/bin /usr/local/bin
 COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
-
 COPY trueblocks.entrypoint.sh /root
 
 # To make the shell easier to use
