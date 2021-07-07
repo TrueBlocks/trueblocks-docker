@@ -1,13 +1,13 @@
 # TrueBlocks Indexer on Docker
+
 <i>last updated: 2021-02-22</i>
 
 ![Image Logo](https://avatars1.githubusercontent.com/u/19167586?s=200&v=4)
 
-[![Website trueblocks.io](https://img.shields.io/badge/Website-quickblocks.io-brightgreen.svg)](https://quickblocks.io/)
+[![Website trueblocks.io](https://img.shields.io/badge/Website-trueblocks.io-brightgreen.svg)](https://trueblocks.io/)
 [![Docker](https://img.shields.io/badge/trueblocks-docker-blue.svg)](https://github.com/Great-Hill-Corporation/trueblocks-docker)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/quickblocks?lang=es)
-
+[![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/trueblocks?lang=es)
 
 The TrueBlocks indexer extracts address appearances from Ethereum chains and creates a lightweight, partitione index, which makes queries for particular addresses directly from the node trustless and fast.
 
@@ -32,7 +32,7 @@ trueblocks-docker is a docker image containing an installation of indexer and a 
 
 ## Installation
 
-The following instructions are for building on your local machine. Running on DappNode? See 
+The following instructions are for building on your local machine. Running on DappNode? See
 our [Dappnode Instructions](#dappnode-instructions).
 
 ```
@@ -44,7 +44,8 @@ docker-compose build
 ## Before running
 
 Before you bring the TrueBlocks docker container up, take the time to configure the following options:
-- what port do you want to run the trueblocks api server on? Set this in .env file. Right now, the ports line reads 80:80. If you want to change this from port 80 to, say, 8181, then change this to 8181:80.
+
+- what port do you want to run the trueblocks api server on? Set this in .env file. Right now, the ports line reads 8080. If you want to change this from port 8080 to, say, 8181, then change this to 8181.
 - If you are running TrueBlocks on your computer, copy trueblocks.local.env.example as trueblocks.local.env.
 - What is your node's RPC endpoint? Set your RPC endpoint in the **trueblocks.local.env**, or if running on DAppNode **trueblocks.public.dappnode.eth.env**, file to `RPC_PROVIDER=http://your-rpc-provider:port`. Note that finding your RPC endpoint can initially be quite difficult (see [What is my RPC endpoint?](#what-is-my-rpc-endpoint)).
 - Now you're ready to run trueblocks!
@@ -75,9 +76,8 @@ From your host machine, you can direct curl commands to your TrueBlocks docker c
 Examples:
 
 - Get all JSON exported for specific address:
-    - `curl http://localhost/export?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
+  - `curl http://localhost/export?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
 - Get `{blockNumber, txIndex}` appearances for specific address: `curl http://localhost/list?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
-
 
 ### Prerequisites
 
@@ -92,26 +92,31 @@ Examples:
 ## Helpful commands
 
 ### Start the TrueBlocks Docker Image
+
 ```
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ### Stop
+
 ```
-$ docker-compose down
+docker-compose down
 ```
 
 ### Status
+
 ```
-$ docker-compose ps
+docker-compose ps
 ```
 
 ### Logs
+
 ```
-$ docker-compose logs -f
+docker-compose logs -f
 ```
 
 ### Clearing the Docker Cache
+
 ```
 #!/usr/bin/env bash
 
@@ -130,15 +135,17 @@ Note: your DappNode doesn't run Parity with `--tracing=on` by default. Set `EXTR
 ## FAQ
 
 ### I'm running geth, do I need to run Parity instead?
+
 Yes - Parity delivers the necessary articulated traces so that TrueBlocks can build its address index. We don't yet support Geth.
 
 ### What is my RPC endpoint?
 
-That depends on how you've configured your parity node. some endpoints that we use are http://172.17.0.1:8545 (when running node on linux host), http://docker.for.mac.localhost:8545 (when running node on mac host), and http://my.ethchain.public.dappnode.eth:8545 (when running node on dappnode). http://localhost:8545 is a common guess, but docker has its own networking paradigm; don't be surprised if this RPC endpoint choice doesn't yield results.
+That depends on how you've configured your parity node. some endpoints that we use are <http://172.17.0.1:8545> (when running node on linux host), <http://docker.for.mac.localhost:8545> (when running node on mac host), and <http://my.ethchain.public.dappnode.eth:8545> (when running node on dappnode). <http://localhost:8545> is a common guess, but docker has its own networking paradigm; don't be surprised if this RPC endpoint choice doesn't yield results.
 
 Parity's default http RPC port is 8545, but your node could be configured differently.
 
 ### Why does it take so long to build the index?
+
 TrueBlocks has to manually process every single block in the history of the Ethereum chain. Additionally, it has to descend into every transaction trace. Often, traces are deeply layered (traces of traces of traces of ... traces), and this takes time to 1) fetch from your node's RPC and 2) extract addresses.
 
 ### Why do we need tracing enabled?
@@ -152,7 +159,7 @@ You can run a node with the [DNP_ETHCHAIN](https://github.com/dappnode/DNP_ETHCH
 Otherwise, in order for TrueBlocks to work properly, you need to start parity with at least the following options:
 
 ```
-parity --tracing on --jsonrpc-cors all --jsonrpc-hosts all --db-compaction=ssd 
+parity --tracing on --jsonrpc-cors all --jsonrpc-hosts all --db-compaction=ssd
 ```
 
 `--db-compaction=ssd` is optional, but Parity recommends using an SSD drive for storing its data. Enabling `--tracing on` requires a re-sync of your node.
@@ -179,8 +186,8 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Authors
 
-* **Thomas Jay Rush** - [tjayrush](https://github.com/tjayrush)
-* **Ed Mazurek** - [wildmolasses](https://github.com/wildmolasses)
+- **Thomas Jay Rush** - [tjayrush](https://github.com/tjayrush)
+- **Ed Mazurek** - [wildmolasses](https://github.com/wildmolasses)
 
 See also the list of [contributors](https://github.com/Great-Hill-Corporation/trueblocks-docker/contributors) who participated in this project.
 
@@ -196,4 +203,4 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 [docker-compose](https://docs.docker.com/compose/)
 
-[TrueBlocks](https://www.quickblocks.io/)
+[TrueBlocks](https://www.trueblocks.io/)

@@ -10,7 +10,7 @@
     "size": 92429787,
     "restart": "always",
     "volumes": [
-      "trueblocks_data:/root/.quickBlocks"
+      "trueblocks_data:/root/.trueBlocks"
     ],
     "environment": [
       "RPC_PROVIDER=http://my.ethchain.dnp.dappnode.eth:8545"

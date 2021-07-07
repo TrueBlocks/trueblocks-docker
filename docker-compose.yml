@@ -15,8 +15,8 @@ services:
         max-size: "200k"
         max-file: "10"
     volumes:
-      - trueblocks_data:/root/.quickBlocks
+      - trueblocks_data:/root/.local/share/.trueblocks
     ports:
-      - "${TRUEBLOCKS_PORT}:80"
+      - "${TRUEBLOCKS_PORT}:8080"
     env_file:
       - trueblocks.local.env #Change for trueblocks.public.dappnode.eth.env for dAppNodeDeployment

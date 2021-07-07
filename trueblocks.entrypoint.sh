@@ -1,11 +1,35 @@
 #!/bin/bash
 
-#echo "setting rpcProvider to $RPC_PROVIDER"
-sed -i "s|rpcProvider =.*|rpcProvider = \"$RPC_PROVIDER\"|" /root/.quickBlocks/quickBlocks.toml
+echo -n "Calling which chifra: "
+which chifra
+chifra --version
 
-cat /root/.quickBlocks/quickBlocks.toml
+CONFIG_FILE=/root/.local/share/trueblocks/trueBlocks.toml
+BLOCKSCRAPE_FILE=/root/.local/share/trueblocks/blockScrape.toml
+
+# write the RPC provider to trueBlocks.toml
+if grep -q rpcProvider "$CONFIG_FILE"; then
+    sed -i "s|rpcProvider =.*|rpcProvider = \"$RPC_PROVIDER\"|" $CONFIG_FILE
+    sed -i "s|etherscan_key =.*|etherscan_key = \"$ETHERSCAN_KEY\"|" $CONFIG_FILE
+else
+    echo "Writing RPC provider for the first run"
+    echo "rpcProvider = \"$RPC_PROVIDER\"" >> $CONFIG_FILE
+    echo "etherscan_key = \"$ETHERSCAN_KEY\"" >> $CONFIG_FILE
+fi
+echo "[dev]" >>$CONFIG_FILE
+echo "debug_curl = true" >>$CONFIG_FILE
+cat $CONFIG_FILE
+
+# create blockScrape.toml as a workaround for https://github.com/TrueBlocks/trueblocks-core/issues/1577
+# (if this file is missing, RPC returns empty response)
+if [ ! -f "$BLOCKSCRAPE_FILE" ]; then
+    echo "[requires]" >> $BLOCKSCRAPE_FILE
+    echo "tracing=false" >> $BLOCKSCRAPE_FILE
+fi
 
 export DOCKER_MODE=true
-rm -f /root/.quickBlocks/cache/tmp/*
-#chifra scrape --sleep 14 --daemon &
-forever /root/trueblocks-explorer/api/server.js 80
+
+chifra init&
+
+# the host has to be set to 0.0.0.0, otherwise Docker will refuse connections
+chifra serve --port 0.0.0.0:8080 --verbose 10

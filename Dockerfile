@@ -10,43 +10,29 @@ RUN apk add glibc-2.28-r0.apk
 
 WORKDIR /root
 
-ADD https://api.github.com/repos/Great-Hill-Corporation/trueblocks-core/git/refs/heads/develop version.json
+ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/develop version.json
 RUN git clone -b 'develop' --single-branch --progress --depth 1 \
-        https://github.com/Great-Hill-Corporation/trueblocks-core.git \
-        /root/quickBlocks-src && \
-        cat /root/quickBlocks-src/src/other/install/docker/post_build.sh
+        https://github.com/TrueBlocks/trueblocks-core.git \
+        /root/src
 
-RUN cd /root/quickBlocks-src && \
-        mkdir -v build /root/.quickBlocks && \
+RUN cd /root/src && \
+        mkdir -v build && \
         cd build && \
         bash ../src/other/install/docker/clean_for_docker.sh && \
         cmake ../src && \
-        make && \
-        bash ../src/other/install/docker/post_build.sh
+        make -j 4
 
-RUN git clone -b 'master' --single-branch --progress --depth 1 \
-        https://github.com/TrueBlocks/trueblocks-explorer.git \
-        /root/trueblocks-explorer
-
-FROM node:12.18.4-alpine3.12
+FROM alpine:3.12
 WORKDIR /root
 
-RUN apk add --no-cache libcurl python3 python3-dev procps bash
-COPY --from=builder /root/trueblocks-explorer /root/trueblocks-explorer
-COPY --from=builder /root/quickBlocks-src/bin /usr/local/bin
-COPY --from=builder /root/.quickBlocks /root/.quickBlocks
-COPY --from=builder /root/trueblocks-explorer/api /root
-
+RUN apk add --no-cache libstdc++ libgcc libcurl python3 python3-dev procps bash
+COPY --from=builder /root/src/bin /usr/local/bin
+COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 COPY trueblocks.entrypoint.sh /root
-
-RUN yarn install 2>/dev/null | grep -v fsevent && \
-        npm install -g forever 2>/dev/null | grep -v fsevent && \
-        mkdir -p /root/.quickBlocks/monitors /root/.quickBlocks/addr-index
 
 # To make the shell easier to use
 RUN apk add curl nano
 
-EXPOSE 80
+EXPOSE 8080
 
 ENTRYPOINT bash /root/trueblocks.entrypoint.sh
-
