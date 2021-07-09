@@ -1,6 +1,6 @@
 # TrueBlocks Indexer on Docker
 
-<i>last updated: 2021-02-22</i>
+<i>last updated: 2021-07-03</i>
 
 ![Image Logo](https://avatars1.githubusercontent.com/u/19167586?s=200&v=4)
 
@@ -9,122 +9,45 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/trueblocks?lang=es)
 
-The TrueBlocks indexer extracts address appearances from Ethereum chains and creates a lightweight, partitione index, which makes queries for particular addresses directly from the node trustless and fast.
-
-trueblocks-docker is a docker image containing an installation of indexer and a simple API that allows you to control the indexing process.
+TrueBlocks docker allows you to run our backend in a docker container. The backend creates an index of 'every appearance of every address anywhere on the chain.' This turns your node software from a lump of coal into an Ethereum data server that can support distributed applications that are trustless and fast.
 
 ## Prerequisite
 
-- **You must be already running an Ethereum node with `--tracing` enabled.** (see [Running A Node](#how-do-you-recommned-I-run-a-node))
+- In order to work to its fullest potential, TrueBlocks requires you to have access to the RPC endpoint of an Ethereum archive/tracing node. There are various commercially available offerings, or much more to our liking, you can run [Erigon](https://github.com/ledgerwatch/erigon). Erigon is easy to install and can be run on your own machine or (more easily) on [dAppNode](https://github.com/dappnode) or [Avado](#).
+- A docker build environment is required.
+- Yarn
 
 ## Getting started
 
-- Set the `RPC_PROVIDER` variable to your RPC endpoint (see ["Before running"](#before-running))
-- Start the TrueBlocks docker container with `docker-compose up -d`
-- Wait for TrueBlocks to build its cache. ([Why does this take so long?](#why-does-it-take-so-long-to-build-the-index))
-- [Query TrueBlocks for a list of transactions on your accounts](#using-the-api)
-
-## Requirements
-
-- A running, syncing Parity Ethereum node with `--tracing on` enabled (see [Running A Node](#how-do-you-recommned-I-run-a-node))
-- Time (see [Why Does It Take So Long To Build The Index?](#why-does-it-take-so-long-to-build-the-index))
-- git, docker, docker-compose (see [Prerequisites](#prerequisites))
-
-## Installation
-
-The following instructions are for building on your local machine. Running on DappNode? See
-our [Dappnode Instructions](#dappnode-instructions).
-
-```
-git clone https://github.com/Great-Hill-Corporation/trueblocks-docker.git
+```[bash]
+git clone -b develop git@github.com:TrueBlocks/trueblocks-docker.git
 cd trueblocks-docker
-docker-compose build
+[Edit `trueblocks.local.env using the notes in that file for more information.]
+yarn start
 ```
 
-## Before running
+`yarn start` should build the docker image and start it running. If this is the first time you've used it, it will download a C++ build environment, clone the TrueBlocks backend, and build the entire project. This takes about 30 minutes. Be patient.
 
-Before you bring the TrueBlocks docker container up, take the time to configure the following options:
+The first time the TrueBlocks backend starts, it will download about 1 GB of bloom filters from IPFS. This is an optional task, but greatly speeds up your use of the software. You may disable this option by commenting out the `chifra init &` line in the Dockerfile file. If you do that, it will take about two days for TrueBlocks to build its initial version of the index.
 
-- what port do you want to run the trueblocks api server on? Set this in .env file. Right now, the ports line reads 8080. If you want to change this from port 8080 to, say, 8181, then change this to 8181.
-- If you are running TrueBlocks on your computer, copy trueblocks.local.env.example as trueblocks.local.env.
-- What is your node's RPC endpoint? Set your RPC endpoint in the **trueblocks.local.env**, or if running on DAppNode **trueblocks.public.dappnode.eth.env**, file to `RPC_PROVIDER=http://your-rpc-provider:port`. Note that finding your RPC endpoint can initially be quite difficult (see [What is my RPC endpoint?](#what-is-my-rpc-endpoint)).
-- Now you're ready to run trueblocks!
+For more information about downloading the index blooms from IPFS vs. building them yourself, please [see our docs](https://docs.trueblocks.io).
 
-## First run
+## Getting data
 
-Bring the container up:
-
-```
-docker-compose up -d
-```
-
-There are 2 modes of operation for trueblocks: scrape and leech.
-
-- **scrape**: scrape the entire Ethereum chain and build the TrueBlocks address index from scratch.
-- **leech**: instead of building the TrueBlocks address index, download it from a 3rd party.
-
-More about scraping vs leeching.
-
-## Getting your data
-
-Now we assume that you have part of the TrueBlocks address index.
-
-### Using the API
-
-From your host machine, you can direct curl commands to your TrueBlocks docker container's http server (default port 80) in order to get your data.
+The docker portion of TrueBlocks starts an API that gives you easy access to make queries against its index.
 
 Examples:
 
 - Get all JSON exported for specific address:
-  - `curl http://localhost/export?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
-- Get `{blockNumber, txIndex}` appearances for specific address: `curl http://localhost/list?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
+  - `curl http://localhost:8080/export?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
+- Get {blockNumber, txIndex} pairs for specific address:
+  - `curl http://localhost:8080/list?address=0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359`
 
-### Prerequisites
+---
 
-| component | notes |
-|-----------|-------|
-| git       | Install the command line tool. [Instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)|
-| docker    | Install *docker* ([Instructions](https://docs.docker.com/engine/installation)).<br>- The community edition of docker (`docker-ce`) works fine.<br>- On Linux, grant permission to the current user to run docker (`sudo usermod -aG docker $USER`). |
-| docker-compose | Install [docker-compose](https://docs.docker.com/compose/install) |
+## The remaining part of this doc is out of date.
 
-**Note**: Make sure that you are able to run `git`, `docker ps`, `docker-compose` without issue, and that you can do so without using the `sudo` command. (see [Troubleshooting](#troubleshooting))
-
-## Helpful commands
-
-### Start the TrueBlocks Docker Image
-
-```
-docker-compose up -d
-```
-
-### Stop
-
-```
-docker-compose down
-```
-
-### Status
-
-```
-docker-compose ps
-```
-
-### Logs
-
-```
-docker-compose logs -f
-```
-
-### Clearing the Docker Cache
-
-```
-#!/usr/bin/env bash
-
-docker ps -q | xargs docker kill
-docker ps --filter=status=exited --filter=status=created -q | xargs docker rm
-docker rmi $(docker images -a -q)
-docker volume rm trueblocks-docker_trueblocks_data
-```
+---
 
 ## Running on DappNode
 
