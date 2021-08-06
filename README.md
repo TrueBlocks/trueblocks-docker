@@ -20,7 +20,7 @@ TrueBlocks docker allows you to run our backend in a docker container. The backe
 ## Getting started
 
 ```[bash]
-git clone -b develop git@github.com:TrueBlocks/trueblocks-docker.git
+git clone -b develop https://github.com/TrueBlocks/trueblocks-docker
 cd trueblocks-docker
 [Edit `trueblocks.local.env using the notes in that file for more information.]
 yarn start
@@ -45,7 +45,11 @@ Examples:
 
 ---
 
+<<<<<<< HEAD
 ## The remaining part of this doc is out of date.
+=======
+## The remaining part of this doc is out of date but preserved for our future reference.
+>>>>>>> master
 
 ---
 
