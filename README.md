@@ -45,11 +45,7 @@ Examples:
 
 ---
 
-<<<<<<< HEAD
-## The remaining part of this doc is out of date.
-=======
 ## The remaining part of this doc is out of date but preserved for our future reference.
->>>>>>> master
 
 ---
 
