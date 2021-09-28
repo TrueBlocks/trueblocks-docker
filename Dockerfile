@@ -1,7 +1,7 @@
 FROM golang:1.14-alpine3.11 as builder
 
 RUN apk add --no-cache g++ gcc make cmake git nano libcurl python3 python3-dev \
-        curl bash curl-dev linux-headers
+        curl bash curl-dev linux-headers sqlite-dev
 
 RUN apk --no-cache add ca-certificates wget
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
