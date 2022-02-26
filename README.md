@@ -6,29 +6,36 @@
   - [Introduction](#introduction)
   - [Prerequisite](#prerequisite)
   - [Building](#building)
-  - [Contributing](#contributing-to-trueblocks)
+  - [Contributing](#contributing)
   - [List of Contributors](#contributors)
   - [Contact](#contact)
 
 ## Introduction
 
-TrueBlocks docker allows you to run our backend in a docker container. The backend creates an index of 'every appearance of every address anywhere on the chain.' This turns your node software from a lump of coal into an Ethereum data server that can support true distributed applications that are trust-less and fast.
+The TrueBlocks docker version allows you to run our backend in a docker container. This will allow you to create an index of 'every appearance of every address anywhere on the chain.'
+
+With this index, your node software (i.e., [Erigon](https://github.com/ledgerwatch/erigon)) becomes an true Ethereum data server. With such a server, you can build truely distributed applications (trueDapps). TrueDapps are completely trust-less, perfectly private, use immutably data naturally, and participate without effort (by the user) in a shared, distributed application environment.
 
 ## Prerequisite
 
-- In order to work to its fullest potential, TrueBlocks requires you to have access to the RPC endpoint of an Ethereum archive/tracing node. There are various commercially available offerings, or much more to our liking, you can run [Erigon](https://github.com/ledgerwatch/erigon). Erigon is easy to install and can be run on your own machine or (more easily) on [dAppNode](https://github.com/dappnode) or [Avado](#).
-- A docker build environment is required.
+In order to TrueBlocks Docker to work, it must have access to an RPC endpoint with Parity tracing enabled. Erigon, works this way by default.
+
+There are commercially available offerings, but we find these inadequate because of the way TrueBlocks 'hits' the server. Erigon is easy to install, very fast syncing, and blazingly fast at serving data -- if you have an index and know what to ask for. Another great solution is running both Erigon and TrueBlocks on [dAppNode](https://github.com/dappnode) or [Avado](#).
+
+The docker build environment is also required.
 
 ## Building
 
-A `Dockerfile` is included in this repo as an example for creating a Docker image.
+This repo contains a `Dockerfile` which serves as an example for you.
 
-1. Build a docker image (example tagged with `latest`)
+1. Build the docker image (example tagged with `latest`)
+
   ```bash
   docker build . --tag=trueblocks-core:latest
   ```
 
-2. Run chifra from the docker container (Examples:)
+2. Run chifra from the container
+
   ```bash
   # Running a simple chifra command
   docker run trueblocks-core:latest chifra
@@ -50,7 +57,7 @@ A `Dockerfile` is included in this repo as an example for creating a Docker imag
     trueblocks-core:latest chifra serve --port 0.0.0.0:8080
   ```
 
-## Contributing to TrueBlocks
+## Contributing
 
 ---
 We love contributors. Please see information about our [work flow](./docs/BRANCHING.md) before proceeding.
@@ -64,15 +71,14 @@ We love contributors. Please see information about our [work flow](./docs/BRANCH
 ## Contributors
 
 ---
-Thanks to the following people who have contributed to this project:
+Thanks to the following people who have contributed to this repo:
 
 * [@tjayrush](https://github.com/tjayrush)
+* [@MysticRyuujin](https://github.com/MysticRyuujin)
 * [@dszlachta](https://github.com/dszlachta)
 * [@wildmolasses](https://github.com/wildmolasses)
-* [@MysticRyuujin](https://github.com/MysticRyuujin)
 
 ## Contact
 
 ---
 If you have specific requests, contact us here <info@quickblocks.io>.
-
