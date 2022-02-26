@@ -1,4 +1,2 @@
-package.json
 .DS_Store
-trueblocks.local.env
-.env.local
+.env
