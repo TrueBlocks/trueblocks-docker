@@ -1,0 +1,28 @@
+[version]
+# Do not edit this value
+current = "0.23.7-alpha"
+
+[settings]
+cachePath = "/cache"
+indexPath = "/index"
+defaultChain = "mainnet"
+etherscan_key = ""
+
+[chains]
+
+# DO NOT EDIT [chains.mainnet]
+# It will break Docker
+
+[chains.mainnet]
+chainId = "1"
+localExplorer = "" # chains.mainnet
+pinGateway = "" # chains.mainnet
+remoteExplorer = "" # chains.mainnet
+rpcProvider = "" # chains.mainnet
+apiProvider = "" # chains.mainnet
+symbol = "ETH"
+
+# DO NOT EDIT [chains.mainnet]
+# It will break Docker
+
+# Custom Config Below:
