@@ -38,23 +38,30 @@ We try to make Docker version as easy to configure as possible. This is why it i
 ---
 Because `chifra` supports multiple configuration items, it is best to store them in a file. There is an example file, `env.example`, in this repository and if you choose to name your file `.env`, it will be ignored by Git.
 
+#### Required settings
+
 |Item|Default value|Description|
 |----|-------------|-----------|
+|TB_CACHEPATH|`/cache`|Path to TrueBlocks' cache|
+|TB_INDEXPATH|`/index`|Path to TrueBlocks' index|
+|TB_DEFAULTCHAIN|`mainnet`|Chain to use if `--chain` option is not supplied|
+|TB_CHAINS_MAINNET_CHAINID|`1`|Chain ID (for a chain called `mainnet`)|
+|TB_CHAINS_MAINNET_RPCPROVIDER|`localhost:8545`|RPC provider URL|
+|TB_CHAINS_MAINNET_SYMBOL|`ETH`|Token symbol for a chain called `mainnet`|
+|TB_CHAINS_MAINNET_PINGATEWAY|`https://ipfs.unchainedindex.io/ipfs/`|Unchained Index pin gateway|
+|TB_CHAINS_MAINNET_LOCALEXPLORER|`http://localhost:1234`|URL of the local explorer (TrueBlocks Explorer)|
+|TB_CHAINS_MAINNET_REMOTEEXPLORER|`https://etherscan.io`|Remote explorer URL|
+
+#### Optional settings
+
+|Item|Default value|Description|
+|----|-------------|-----------|
+|RUN_SCRAPER|`true`|Whether or not to run the scraper|
 |SCRAPER_ARGS|*empty*|Command line arguments passed to scraper|
 |SCRAPER_FILE|*empty*|Contents of a file with scraper arguments|
 |BOOTSTRAP_BLOOM_FILTERS|`true`|If `true`, the container will run `chifra init` downloading bloom filters|
 |BOOTSTRAP_FULL_INDEX|`true`|If `true`, `chifra init` will download full index|
-|RUN_SCRAPER|`true`|Whether or not to run the scraper|
-|TB_CACHEPATH|`/cache`|Path to TrueBlocks' cache|
-|TB_INDEXPATH|`/index`|Path to TrueBlocks' index|
-|TB_DEFAULTCHAIN|`mainnet`|Chain to use if `--chain` option is not supplied|
 |TB_ETHERSCAN_KEY|*empty*|Your Etherscan API key|
-|TB_CHAINS_MAINNET_CHAINID|`1`|Chain ID (for a chain called `mainnet`)|
-|TB_CHAINS_MAINNET_LOCALEXPLORER|`http://localhost:1234`|URL of the local explorer (TrueBlocks Explorer)|
-|TB_CHAINS_MAINNET_PINGATEWAY|`https://ipfs.unchainedindex.io/ipfs/`|Unchained Index pin gateway|
-|TB_CHAINS_MAINNET_REMOTEEXPLORER|`https://etherscan.io`|Remote explorer URL|
-|TB_CHAINS_MAINNET_RPCPROVIDER|`localhost:8545`|RPC provider URL|
-|TB_CHAINS_MAINNET_SYMBOL|`ETH`|Token symbol for a chain called `mainnet`|
 
 You can add more chains to `chifra` by specifying configuration for them in the format:
 `TB_CHAINS_[chain name]_[configuration item]`, for example `TB_CHAINS_GNOSIS_SYMBOL=xDai`.
