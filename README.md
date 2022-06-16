@@ -135,6 +135,34 @@ Both `.env` and `docker-compose.local.yml` are ignored by Git.
     trueblocks-monitor:latest
   ```
 
+## Using the container
+
+### Calling `chifra` directly
+
+You can use `scripts/exec.sh` to call `chifra` commands inside running core container:
+```bash
+# Getting the list of available commands
+scripts/exec.sh --help
+
+# To get every 100th block from the fist block up to 1000th:
+scripts/exec.sh blocks 0-1000:100
+```
+
+`exec.sh` script uses `docker compose exec` internally, so the above commands are equivalent to:
+```bash
+docker compose exec core bash -c "chifra --help"
+
+# Or:
+docker compose exec core bash -c "chifra blocks 0-1000:100"
+```
+
+### Connecting to API server
+
+By default, `core` container exposes API server on port `8080`:
+```bash
+curl "localhost:8080/when?blocks=london"
+```
+
 ## Testing
 To test the image, run `test.sh` script. This script will build a container and try to call `chifra status --terse` checking for any errors and returning the right error code (`0` when no errors, error count otherwise).
 For testing purposes a different entrypoint is used: `build/core/test/core-test.entrypoint.sh`.
