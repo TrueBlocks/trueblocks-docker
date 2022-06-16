@@ -88,7 +88,7 @@ The preferred way of building and running TrueBlocks in Docker environment is to
 1. Configure `chifra` in a file called `.env` in project's root directory (see [Configuration](#configuration))
 2. Create compose file for your environment: `cp docker-compose.local.example docker-compose.local.yml`
 3. Edit `docker-compose.local.yml` so that each volume's source points to a location on your hard drive where you would like to store TrueBlocks' index and cache data.
-4. Run the project by calling `docker compose -f docker-compose.yml -f docker-compose.local.yml up`
+4. Run the project by calling `scripts/up.sh` (which is same as `docker compose -f docker-compose.yml -f docker-compose.local.yml up`)
 
 If you do not want to store TrueBlocks's index and cache outside Docker, you only need to do step 1 and can run the project by simply calling `docker compose up`.
 

@@ -8,12 +8,12 @@ RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
 # Set workdir
 WORKDIR /root
 
-# Try to get upstream version (default master)
-ARG UPSTREAM_VER
+# Try to get upstream version (default v0.37.0-beta)
+ARG UPSTREAM_VER=v0.37.0-beta
 
 # Clone and make TrueBlocks Core
 # make -j 5 is a fairly safe number
-RUN git clone -b "${UPSTREAM_VER:-master}" --single-branch --progress --depth 1 \
+RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
         https://github.com/TrueBlocks/trueblocks-core.git  && \
         cd trueblocks-core && mkdir build && cd build && cmake ../src && make -j 5
 
