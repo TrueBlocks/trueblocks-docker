@@ -1,3 +1,4 @@
+name: TrueBlocksCore
 services:
   core:
     image: trueblocks-core
@@ -6,24 +7,22 @@ services:
       - "8080:8080"
     env_file: .env
     volumes:
-      - TrueBlocksIndex:/index
-      - TrueBlocksCache:/cache
+      - Index:/index
+      - Cache:/cache
 
   monitors_watch:
     depends_on:
       - core
+    restart: unless-stopped
     image: trueblocks-monitors
     build: ./build/monitors-watch
     env_file: .env
     volumes:
-      - TrueBlocksIndex:/index
-      - TrueBlocksCache:/cache
+      - Index:/index
+      - Cache:/cache
       - exports:/exports
 
 volumes:
-  TrueBlocksIndex:
-    external: true
-  TrueBlocksCache:
-    external: true
+  Index:
+  Cache:
   exports:
-    external: true

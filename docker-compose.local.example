@@ -1,0 +1,17 @@
+services:
+  core:
+    volumes:
+      - type: bind
+        source: ~/Library/Application Support/TrueBlocks/cache
+        target: /cache
+      - type: bind
+        source: ~/Library/Application Support/TrueBlocks/unchained
+        target: /index
+  monitors_watch:
+    volumes:
+      - type: bind
+        source: ~/Library/Application Support/TrueBlocks/cache
+        target: /cache
+      - type: bind
+        source: ~/Library/Application Support/TrueBlocks/unchained
+        target: /index
