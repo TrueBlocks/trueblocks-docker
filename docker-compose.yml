@@ -1,0 +1,28 @@
+name: TrueBlocksCore
+services:
+  core:
+    image: trueblocks-core
+    build: ./build/core
+    ports:
+      - "8080:8080"
+    env_file: .env
+    volumes:
+      - Index:/index
+      - Cache:/cache
+
+  monitors_watch:
+    depends_on:
+      - core
+    restart: unless-stopped
+    image: trueblocks-monitors
+    build: ./build/monitors-watch
+    env_file: .env
+    volumes:
+      - Index:/index
+      - Cache:/cache
+      - exports:/exports
+
+volumes:
+  Index:
+  Cache:
+  exports:
