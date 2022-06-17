@@ -8,7 +8,7 @@ then
     exit 1
 fi
 
-IMAGE=`docker build -q ./build`
+IMAGE=`docker build -q ./build/core`
 docker run -it --rm --env-file $ENV_FILE --entrypoint /root/core-test.entrypoint.sh $IMAGE
 RESULT=$?
 
