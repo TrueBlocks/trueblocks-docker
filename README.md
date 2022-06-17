@@ -44,8 +44,6 @@ Because `chifra` supports multiple configuration items, it is best to store them
 
 |Item|Default value|Description|
 |----|-------------|-----------|
-|TB_CACHEPATH|`/cache`|Path to TrueBlocks' cache|
-|TB_INDEXPATH|`/index`|Path to TrueBlocks' index|
 |TB_DEFAULTCHAIN|`mainnet`|Chain to use if `--chain` option is not supplied|
 |TB_CHAINS_MAINNET_CHAINID|`1`|Chain ID (for a chain called `mainnet`)|
 |TB_CHAINS_MAINNET_RPCPROVIDER|`localhost:8545`|RPC provider URL|
