@@ -7,6 +7,8 @@
   - [Prerequisite](#prerequisite)
   - [Configuration](#configuration)
   - [Building](#building)
+  - [Using the container](#using-the-container)
+  - [Monitoring addresses](#monitoring-addresses)
   - [Testing](#testing)
   - [Contributing](#contributing)
   - [List of Contributors](#contributors)
@@ -162,6 +164,40 @@ By default, `core` container exposes API server on port `8080`:
 ```bash
 curl "localhost:8080/when?blocks=london"
 ```
+
+## Monitoring addresses
+
+1. Create a new directory in your filesystem
+  ```bash
+  mkdir ~/Projects/monitoring_my_address
+  ```
+2. Put as many addresses as you like into a text file (one address per line) and save the file as `addresses.tsv` in the directory that you have created in step 1 (**file name matters**)
+  ```bash
+  echo 0x1db3439a222c519ab44bb1144fc28167b4fa6ee6 > ~/Projects/monitoring_my_address/addresses.tsv
+  echo 0xab5801a7d398351b8be11c439e05c5b3259aec9b >> ~/Projects/monitoring_my_address/addresses.tsv
+  ```
+3. Edit your `docker-compose.local.yml` and use path to the directory created in step 1 as source for `addresses` volume:
+  ```yaml
+    monitors_watch:
+    volumes:
+      # unchanged
+      - type: bind
+        source: ~/Library/Application Support/TrueBlocks/cache
+        target: /cache
+      # unchanged
+      - type: bind
+        source: ~/Library/Application Support/TrueBlocks/unchained
+        target: /index
+      # HERE
+      - type: bind
+        source: ~/Projects/monitoring_my_address
+        target: /addresses
+  ```
+4. Now run or restart TrueBlocks service by using `docker compose -f ... -f ... up` or `docker compose restart`. You should see this message in the logs:
+  ```
+  trueblockscore-monitors_watch-1  | Addresses file found, linking it
+  ```
+  The monitor service will now watch the addresses.
 
 ## Testing
 To test the image, run `test.sh` script. This script will build a container and try to call `chifra status --terse` checking for any errors and returning the right error code (`0` when no errors, error count otherwise).

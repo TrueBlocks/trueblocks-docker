@@ -2,6 +2,14 @@
 
 echo "${MONITORS_WATCH_FILE}" > /tmp/monitors_watch
 
-# TODO: Replace `scrape monitor` with `monitors --watch` when it's merged to core repo
+ADDRESSES_TARGET=/addresses/addresses.tsv
+ADDRESSES_LINK=/addresses.tsv
+
+# Create link to addresses file
+if [ -f "$ADDRESSES_TARGET" ]
+then
+    echo "Addresses file found, linking it"
+    ln -s "$ADDRESSES_TARGET" "$ADDRESSES_LINK"
+fi
 
 chifra monitors --watch $MONITORS_WATCH_ARGS --file /tmp/monitors_watch
