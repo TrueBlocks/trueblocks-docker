@@ -16,14 +16,12 @@
 
 ## Introduction
 
----
 The TrueBlocks docker version allows you to run our backend in a docker container. This will allow you to create an index of 'every appearance of every address anywhere on the chain.'
 
 With this index, your node software (i.e., [Erigon](https://github.com/ledgerwatch/erigon)) becomes an true Ethereum data server. With such a server, you can build truely distributed applications (trueDapps). TrueDapps are completely trust-less, perfectly private, use immutably data naturally, and participate without effort (by the user) in a shared, distributed application environment.
 
 ## Prerequisite
 
----
 In order to TrueBlocks Docker to work, it must have access to an RPC endpoint with Parity tracing enabled. Erigon, works this way by default.
 
 There are commercially available offerings, but we find these inadequate because of the way TrueBlocks 'hits' the server. Erigon is easy to install, very fast syncing, and blazingly fast at serving data -- if you have an index and know what to ask for. Another great solution is running both Erigon and TrueBlocks on [dAppNode](https://github.com/dappnode) or [Avado](#).
@@ -32,12 +30,10 @@ The docker build environment is also required.
 
 ## Configuration
 
----
 We try to make Docker version as easy to configure as possible. This is why it is possible to configure both `chifra` (running inside the container) and the build.
 
 ### Configuring `chifra`
 
----
 Because `chifra` supports multiple configuration items, it is best to store them in a file. There is an example file, `env.example`, in this repository and if you choose to name your file `.env`, it will be ignored by Git.
 
 #### Required settings
@@ -203,7 +199,6 @@ For testing purposes a different entrypoint is used: `build/core/test/core-test.
 
 ## Contributing
 
----
 We love contributors. Please see information about our [work flow](./docs/BRANCHING.md) before proceeding.
 
 1. Fork this repository into your own repo.
@@ -214,7 +209,6 @@ We love contributors. Please see information about our [work flow](./docs/BRANCH
 
 ## Contributors
 
----
 Thanks to the following people who have contributed to this repo:
 
 * [@tjayrush](https://github.com/tjayrush)
@@ -224,5 +218,4 @@ Thanks to the following people who have contributed to this repo:
 
 ## Contact
 
----
 If you have specific requests, contact us here <info@quickblocks.io>.
