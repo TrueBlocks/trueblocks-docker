@@ -14,9 +14,11 @@ fi
 
 CORE_HOST=${CORE_URL:-core}
 
+echo "Will try to reach ${CORE_HOST}:8080"
+
 while :
 do
-    STATUS=`curl --silent --show-error ${CORE_HOST}:8080/status | jq .isScraping`
+    STATUS=`curl --silent --show-error ${CORE_HOST}:8080/status | jq ".data[].isScraping"`
     if [ "$STATUS" == "true" ]
     then
         echo "Scraper is running, continuing..."
