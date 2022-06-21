@@ -12,13 +12,13 @@ then
     ln -s "$ADDRESSES_TARGET" "$ADDRESSES_LINK"
 fi
 
-CORE_HOST=${CORE_URL:-core}
+CORE_HOST="${CORE_URL:-http://core}:${CORE_PORT:-8080}"
 
-echo "Will try to reach ${CORE_HOST}:8080"
+echo "Will try to reach ${CORE_HOST}"
 
 while :
 do
-    STATUS=`curl --silent --show-error ${CORE_HOST}:8080/status | jq ".data[].isScraping"`
+    STATUS=`curl --silent --show-error ${CORE_HOST}/status | jq ".data[].isScraping"`
     if [ "$STATUS" == "true" ]
     then
         echo "Scraper is running, continuing..."
