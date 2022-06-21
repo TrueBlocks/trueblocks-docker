@@ -12,4 +12,19 @@ then
     ln -s "$ADDRESSES_TARGET" "$ADDRESSES_LINK"
 fi
 
+CORE_HOST=${CORE_URL:-core}
+
+while :
+do
+    STATUS=`curl --silent --show-error ${CORE_HOST}:8080/status | jq .isScraping`
+    if [ "$STATUS" == "true" ]
+    then
+        echo "Scraper is running, continuing..."
+        break
+    fi
+
+    echo "Scraper is not running, waiting..."
+    sleep 1 # second
+done
+
 chifra monitors --watch $MONITORS_WATCH_ARGS --file /tmp/monitors_watch

@@ -34,10 +34,10 @@ index_chain() {
 if [ "${BOOTSTRAP_BLOOM_FILTERS:-true}" = true ] ; then
     if [ "${BOOTSTRAP_FULL_INDEX:-false}" = true ] ; then
         echo "Downloading bloom filters AND full index in the background"
-        (chifra init && chifra init --all) &
+        chifra init --all
     else
         echo "Downloading bloom filters in the background"
-        chifra init &
+        chifra init
     fi
 fi
 
