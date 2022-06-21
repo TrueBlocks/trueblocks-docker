@@ -26,7 +26,7 @@ index_chain() {
     fi
 
     echo "${FILE}" > $LOCALFILE
-    chifra scrape indexer $ARGS --file $LOCALFILE &
+    chifra scrape indexer --chain $CHAIN_NAME $ARGS --file $LOCALFILE &
 }
 
 # Run `chifra init` in the background if we want to bootstrap
