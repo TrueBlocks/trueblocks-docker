@@ -14,7 +14,7 @@ services:
     depends_on:
       - core
     restart: unless-stopped
-    image: trueblocks-monitors
+    image: trueblocks-monitors-watch
     build: ./build/monitors-watch
     env_file: .env
     volumes:
