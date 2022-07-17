@@ -48,7 +48,7 @@ Because `chifra` supports multiple configuration items, it is best to store them
 |TB_CACHEPATH|`/cache`|Path to TrueBlocks' cache|
 |TB_INDEXPATH|`/index`|Path to TrueBlocks' index|
 |TB_DEFAULTCHAIN|`mainnet`|Chain to use if `--chain` option is not supplied|
-|TB_ETHERSCAN_KEY|*empty*|Your Etherscan API key|
+|TB_SETTINGS_ETHERSCANKEY|*empty*|Your Etherscan API key|
 |TB_CHAINS_MAINNET_CHAINID|`1`|Chain ID (for a chain called `mainnet`)|
 |TB_CHAINS_MAINNET_LOCALEXPLORER|`http://localhost:1234`|URL of the local explorer (TrueBlocks Explorer)|
 |TB_CHAINS_MAINNET_PINGATEWAY|`https://ipfs.unchainedindex.io/ipfs/`|Unchained Index pin gateway|
