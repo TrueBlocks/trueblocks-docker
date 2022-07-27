@@ -21,7 +21,7 @@ RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
 FROM alpine:latest
 
 # Install binary dependencies and nice to haves
-RUN apk --no-cache add gzip libstdc++ libgcc libcurl python3 python3-dev procps bash curl nano
+RUN apk --no-cache add gzip libstdc++ libgcc libcurl python3 python3-dev procps bash curl nano findutils
 
 # Copy files from builder
 COPY --from=builder /root/trueblocks-core/bin /usr/local/bin
