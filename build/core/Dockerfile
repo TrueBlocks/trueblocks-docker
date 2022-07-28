@@ -32,7 +32,7 @@ COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 COPY core.entrypoint.sh /root
 
 # Overwrite default config file
-COPY trueBlocks.toml /root/.local/share/trueblocks/
+# COPY trueBlocks.toml /root/.local/share/trueblocks/
 
 # Testing
 COPY test/core-test.entrypoint.sh /root
@@ -41,6 +41,10 @@ RUN chmod +x /root/core-test.entrypoint.sh
 # Expose ports
 ARG SERVE_PORT=8080
 EXPOSE ${SERVE_PORT}
+
+# Set correct paths
+ENV TB_SETTINGS_CACHEPATH=/cache
+ENV TB_SETTINGS_INDEXPATH=/index
 
 # Run entrypoint script
 ENTRYPOINT bash /root/core.entrypoint.sh
