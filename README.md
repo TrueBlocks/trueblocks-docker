@@ -40,7 +40,7 @@ Because `chifra` supports multiple configuration items, it is best to store them
 
 |Item|Default value|Description|
 |----|-------------|-----------|
-|TB_DEFAULTCHAIN|`mainnet`|Chain to use if `--chain` option is not supplied|
+|TB_SETTINGS_DEFAULTCHAIN|`mainnet`|Chain to use if `--chain` option is not supplied|
 |TB_CHAINS_MAINNET_CHAINID|`1`|Chain ID (for a chain called `mainnet`)|
 |TB_CHAINS_MAINNET_RPCPROVIDER|`localhost:8545`|RPC provider URL|
 |TB_CHAINS_MAINNET_SYMBOL|`ETH`|Token symbol for a chain called `mainnet`|
@@ -59,7 +59,7 @@ Because `chifra` supports multiple configuration items, it is best to store them
 |MONITORS_WATCH_FILE|*empty*|Contents of a file with `monitors --watch` arguments|
 |BOOTSTRAP_BLOOM_FILTERS|`true`|If `true`, the container will run `chifra init` downloading bloom filters|
 |BOOTSTRAP_FULL_INDEX|`true`|If `true`, `chifra init` will download full index|
-|TB_ETHERSCAN_KEY|*empty*|Your Etherscan API key|
+|TB_SETTINGS_ETHERSCANKEY|*empty*|Your Etherscan API key|
 
 You can add more chains to `chifra` by specifying configuration for them in the format:
 `TB_CHAINS_[chain name]_[configuration item]`, for example `TB_CHAINS_GNOSIS_SYMBOL=xDai`.
