@@ -2,6 +2,36 @@
 
 <img src="https://avatars1.githubusercontent.com/u/19167586?s=200&v=4" width="50px" />
 
+## Quick Start
+
+For Ethereum mainnet:
+```bash
+echo TB_CHAINS_MAINNET_RPCPROVIDER=your-RPC-url-and-port > .env
+docker compose up
+```
+
+You can replace `MAINNET` in the above example with `GOERLI, KOVAN, RINKEBY, ROPSTEN, SEPOLIA, GNOSIS, POLYGON, OPTIMISM` - these chains are preconfigured for you.
+
+For any other EVM-compatible chain:
+```bash
+cat <<- END > .env
+TB_CHAINS_MYCHAIN_CHAINID=225
+TB_CHAINS_MYCHAIN_RPCPROVIDER=this-chains-rpc-url-and-port
+TB_CHAINS_MYCHAIN_SYMBOL=MYC
+END
+docker compose up
+```
+
+Calling chifra directly from the command line:
+```bash
+scripts/exec.sh --help
+```
+
+Or through the API server:
+```bash
+curl "localhost:8080/when?blocks=london"
+```
+
 ## Table of Contents
   - [Introduction](#introduction)
   - [Prerequisite](#prerequisite)
