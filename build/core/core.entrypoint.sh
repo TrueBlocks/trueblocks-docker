@@ -40,8 +40,9 @@ read_configuration_from_tool() {
     while [ ! -f $config_file ]
     do
         echo "No configuration found. Please use TrueBlocks Configuration Tool first."
-        echo "Will try to re-read the configuration in 30 seconds"
-        sleep 30
+        echo "If you are using DAppNode, click Info tab above, then Settings link."
+        echo "Will try to re-read the configuration in a few seconds"
+        sleep 5
     done
 
     # Source env file: https://zwbetz.com/set-environment-variables-in-your-bash-shell-from-a-env-file/
