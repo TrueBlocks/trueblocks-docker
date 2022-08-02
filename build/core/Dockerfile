@@ -31,9 +31,6 @@ COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 # Copy entrypoint file
 COPY core.entrypoint.sh /root
 
-# Overwrite default config file
-# COPY trueBlocks.toml /root/.local/share/trueblocks/
-
 # Testing
 COPY test/core-test.entrypoint.sh /root
 RUN chmod +x /root/core-test.entrypoint.sh
