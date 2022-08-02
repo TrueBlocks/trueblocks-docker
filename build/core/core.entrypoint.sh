@@ -29,6 +29,36 @@ index_chain() {
     chifra scrape indexer --chain $CHAIN_NAME $ARGS --file $LOCALFILE &
 }
 
+read_configuration_from_tool() {
+    config_file=/configuration/configuration.sh
+
+    if [ "${REQUIRE_CONFIGURATION_TOOL}" != true ]
+    then
+        return
+    fi
+
+    while [ ! -f $config_file ]
+    do
+        echo "No configuration found. Please use TrueBlocks Configuration Tool first."
+        echo "If you are using DAppNode, click Info tab above, then Settings link."
+        echo "Will try to re-read the configuration in a few seconds"
+        sleep 5
+    done
+
+    # Source env file: https://zwbetz.com/set-environment-variables-in-your-bash-shell-from-a-env-file/
+    . $config_file
+    if [ $? -lt 1 ]
+    then
+        echo "Configuration has been read successfully"
+    else
+        echo "Error while reading configuration"
+    fi
+}
+
+# Read configuration from our configuration tool (only if REQUIRE_CONFIGURATION_TOOL
+# is set to true).
+read_configuration_from_tool
+
 # Run `chifra init` in the background if we want to bootstrap
 # There seems to be a bug that prevents chifra init -all from running before chifra init
 if [ "${BOOTSTRAP_BLOOM_FILTERS:-true}" = true ] ; then

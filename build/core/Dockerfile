@@ -21,7 +21,7 @@ RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
 FROM alpine:latest
 
 # Install binary dependencies and nice to haves
-RUN apk --no-cache add gzip libstdc++ libgcc libcurl python3 python3-dev procps bash curl nano
+RUN apk --no-cache add gzip libstdc++ libgcc libcurl python3 python3-dev procps bash curl nano findutils
 
 # Copy files from builder
 COPY --from=builder /root/trueblocks-core/bin /usr/local/bin
@@ -31,9 +31,6 @@ COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 # Copy entrypoint file
 COPY core.entrypoint.sh /root
 
-# Overwrite default config file
-COPY trueBlocks.toml /root/.local/share/trueblocks/
-
 # Testing
 COPY test/core-test.entrypoint.sh /root
 RUN chmod +x /root/core-test.entrypoint.sh
@@ -41,6 +38,10 @@ RUN chmod +x /root/core-test.entrypoint.sh
 # Expose ports
 ARG SERVE_PORT=8080
 EXPOSE ${SERVE_PORT}
+
+# Set correct paths
+ENV TB_SETTINGS_CACHEPATH=/cache
+ENV TB_SETTINGS_INDEXPATH=/index
 
 # Run entrypoint script
 ENTRYPOINT bash /root/core.entrypoint.sh
