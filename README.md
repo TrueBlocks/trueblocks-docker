@@ -65,7 +65,7 @@ There are two build arguments right now.
 1. `UPSTREAM_VER`: source code branch to build `chifra` from (default: `master`)
 2. `SERVE_PORT`: port that `chifra serve` should bind to (default: `8080`)
 
-Use `docker build [...] --built-arg X=Y` to change the defaults (see [Docker documentation](https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg)).
+Use `docker build [...] --build-arg X=Y` to change the defaults (see [Docker documentation](https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg)).
 
 ## Building
 
