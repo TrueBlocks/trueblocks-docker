@@ -1,30 +1,40 @@
 # TrueBlocks Docker
 
-<img src="https://avatars1.githubusercontent.com/u/19167586?s=200&v=4" width="50px" />
+## Introduction
+
+The `trueblocks-docker` version is a convienient way to build and run TrueBlocks.
+
+- builds `trublocks-core`,
+- runs `chifra scrape` to actively build the Unchained Index,
+- runs `chifra serve` to serve an API of all `chifra` commands,
+- runs `chifra monitors --watch` to extract data from a given set of addresses.
 
 ## Quick Start
 
-For Ethereum mainnet:
+Make a backup copy of your `.env` file if you wish to preserve it, then:
+
 ```bash
 echo TB_CHAINS_MAINNET_RPCPROVIDER=your-RPC-url-and-port > .env
 docker compose up
 ```
+Note that there are many other options documented below. You may replace `MAINNET` with `SEPOLIA` or `GNOSIS` in the above, as these chains are pre-configured.
 
-You can replace `MAINNET` in the above example with `GOERLI, KOVAN, RINKEBY, ROPSTEN, SEPOLIA, GNOSIS, POLYGON, OPTIMISM` - these chains are preconfigured for you.
-
-For any other EVM-compatible chain:
+For other EVM-compatible chains:
 ```bash
 cat <<- END > .env
-TB_CHAINS_MYCHAIN_CHAINID=225
-TB_CHAINS_MYCHAIN_RPCPROVIDER=this-chains-rpc-url-and-port
-TB_CHAINS_MYCHAIN_SYMBOL=MYC
+TB_CHAINS_MYCHAIN_CHAINID=<chain_id>
+TB_CHAINS_MYCHAIN_RPCPROVIDER=<rpc endpoint for the chain>
+TB_CHAINS_MYCHAIN_SYMBOL=<currency symbol for this chain>
 END
 docker compose up
 ```
 
-Calling chifra directly from the command line:
+Once the `chifra` server and API endpoints are running, you may interact with the container.
+
+To call chifra directly from the command line:
+
 ```bash
-scripts/exec.sh --help
+scripts/chifra.sh --help
 ```
 
 Or through the API server:
@@ -68,28 +78,28 @@ Because `chifra` supports multiple configuration items, it is best to store them
 
 #### Required settings
 
-|Item|Default value|Description|
-|----|-------------|-----------|
-|TB_SETTINGS_DEFAULTCHAIN|`mainnet`|Chain to use if `--chain` option is not supplied|
-|TB_CHAINS_MAINNET_CHAINID|`1`|Chain ID (for a chain called `mainnet`)|
-|TB_CHAINS_MAINNET_RPCPROVIDER|`localhost:8545`|RPC provider URL|
-|TB_CHAINS_MAINNET_SYMBOL|`ETH`|Token symbol for a chain called `mainnet`|
-|TB_CHAINS_MAINNET_PINGATEWAY|`https://ipfs.unchainedindex.io/ipfs/`|Unchained Index pin gateway|
-|TB_CHAINS_MAINNET_LOCALEXPLORER|`http://localhost:1234`|URL of the local explorer (TrueBlocks Explorer)|
-|TB_CHAINS_MAINNET_REMOTEEXPLORER|`https://etherscan.io`|Remote explorer URL|
+| Item                             | Default value                          | Description                                      |
+| -------------------------------- | -------------------------------------- | ------------------------------------------------ |
+| TB_SETTINGS_DEFAULTCHAIN         | `mainnet`                              | Chain to use if `--chain` option is not supplied |
+| TB_CHAINS_MAINNET_CHAINID        | `1`                                    | Chain ID (for a chain called `mainnet`)          |
+| TB_CHAINS_MAINNET_RPCPROVIDER    | `localhost:8545`                       | RPC provider URL                                 |
+| TB_CHAINS_MAINNET_SYMBOL         | `ETH`                                  | Token symbol for a chain called `mainnet`        |
+| TB_CHAINS_MAINNET_PINGATEWAY     | `https://ipfs.unchainedindex.io/ipfs/` | Unchained Index pin gateway                      |
+| TB_CHAINS_MAINNET_LOCALEXPLORER  | `http://localhost:1234`                | URL of the local explorer (TrueBlocks Explorer)  |
+| TB_CHAINS_MAINNET_REMOTEEXPLORER | `https://etherscan.io`                 | Remote explorer URL                              |
 
 #### Optional settings
 
-|Item|Default value|Description|
-|----|-------------|-----------|
-|RUN_SCRAPER|`true`|Whether or not to run the scraper|
-|SCRAPER_MAINNET_ARGS|*empty*|Command line arguments passed to scraper|
-|SCRAPER_MAINNET_FILE|*empty*|Contents of a file with scraper arguments|
-|MONITORS_WATCH_ARGS|*empty*|Command line arguments passed to `monitors --watch`|
-|MONITORS_WATCH_FILE|*empty*|Contents of a file with `monitors --watch` arguments|
-|BOOTSTRAP_BLOOM_FILTERS|`true`|If `true`, the container will run `chifra init` downloading bloom filters|
-|BOOTSTRAP_FULL_INDEX|`true`|If `true`, `chifra init` will download full index|
-|TB_SETTINGS_ETHERSCANKEY|*empty*|Your Etherscan API key|
+| Item                     | Default value | Description                                                               |
+| ------------------------ | ------------- | ------------------------------------------------------------------------- |
+| RUN_SCRAPER              | `true`        | Whether or not to run the scraper                                         |
+| SCRAPER_MAINNET_ARGS     | *empty*       | Command line arguments passed to scraper                                  |
+| SCRAPER_MAINNET_FILE     | *empty*       | Contents of a file with scraper arguments                                 |
+| MONITORS_WATCH_ARGS      | *empty*       | Command line arguments passed to `monitors --watch`                       |
+| MONITORS_WATCH_FILE      | *empty*       | Contents of a file with `monitors --watch` arguments                      |
+| BOOTSTRAP_BLOOM_FILTERS  | `true`        | If `true`, the container will run `chifra init` downloading bloom filters |
+| BOOTSTRAP_FULL_INDEX     | `true`        | If `true`, `chifra init` will download full index                         |
+| TB_SETTINGS_ETHERSCANKEY | *empty*       | Your Etherscan API key                                                    |
 
 You can add more chains to `chifra` by specifying configuration for them in the format:
 `TB_CHAINS_[chain name]_[configuration item]`, for example `TB_CHAINS_GNOSIS_SYMBOL=xDai`.
