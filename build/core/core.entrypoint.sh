@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Tell chifra we're running in docker
-export DOCKER_MODE=true
-
 # index_chain() starts scraper of the given chain, reading arguments and file
 # content from env variables (optional).
 index_chain() {

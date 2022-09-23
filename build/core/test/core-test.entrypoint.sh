@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Tell chifra we're running in docker
-export DOCKER_MODE=true
-
 # Locations of config files
 CONFIG_FILE=/root/.local/share/trueblocks/trueBlocks.toml
 
