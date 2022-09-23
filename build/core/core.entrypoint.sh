@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Tell chifra we're running in docker
-export DOCKER_MODE=true
-
 # index_chain() starts scraper of the given chain, reading arguments and file
 # content from env variables (optional).
 index_chain() {
@@ -26,7 +23,7 @@ index_chain() {
     fi
 
     echo "${FILE}" > $LOCALFILE
-    chifra scrape indexer --chain $CHAIN_NAME $ARGS --file $LOCALFILE &
+    chifra scrape --chain $CHAIN_NAME $ARGS --file $LOCALFILE &
 }
 
 read_configuration_from_tool() {

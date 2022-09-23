@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Tell chifra we're running in docker
-export DOCKER_MODE=true
-
 echo "Environment:"
 env
 
