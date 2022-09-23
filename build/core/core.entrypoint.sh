@@ -26,7 +26,7 @@ index_chain() {
     fi
 
     echo "${FILE}" > $LOCALFILE
-    chifra scrape indexer --chain $CHAIN_NAME $ARGS --file $LOCALFILE &
+    chifra scrape --chain $CHAIN_NAME $ARGS --file $LOCALFILE &
 }
 
 read_configuration_from_tool() {
