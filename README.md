@@ -165,7 +165,7 @@ Both `.env` and `docker-compose.local.yml` are ignored by Git.
 3. Run monitor
 
   ```bash
-  docker build ./build/monitors-watch --tag=trueblocks-monitor:latest
+  docker build ./build/monitors --tag=trueblocks-monitor:latest
 
   # Note: monitor has to use the same cache and index volumes as core
   # Export volume is optional.
@@ -220,7 +220,7 @@ curl "localhost:8080/when?blocks=london"
   ```
 3. Edit your `docker-compose.local.yml` and use path to the directory created in step 1 as source for `addresses` volume:
   ```yaml
-    monitors_watch:
+    monitors:
     volumes:
       # unchanged
       - type: bind
@@ -237,7 +237,7 @@ curl "localhost:8080/when?blocks=london"
   ```
 4. Now run or restart TrueBlocks service by using `docker compose -f ... -f ... up` or `docker compose restart`. You should see this message in the logs:
   ```
-  trueblockscore-monitors_watch-1  | Addresses file found, linking it
+  trueblockscore-monitors-1  | Addresses file found, linking it
   ```
   The monitor service will now watch the addresses.
 

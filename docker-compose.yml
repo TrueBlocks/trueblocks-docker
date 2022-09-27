@@ -10,12 +10,12 @@ services:
       - Index:/index
       - Cache:/cache
 
-  monitors_watch:
+  monitors:
     depends_on:
       - core
     restart: unless-stopped
-    image: trueblocks/monitors-watch:0.37.0-beta
-    build: ./build/monitors-watch
+    image: trueblocks/monitors:0.37.0-beta
+    build: ./build/monitors
     env_file: .env
     volumes:
       - Index:/index
