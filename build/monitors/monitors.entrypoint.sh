@@ -30,7 +30,7 @@ read_configuration_from_tool() {
 # is set to true).
 read_configuration_from_tool
 
-echo "${MONITORS_WATCH_FILE}" > /tmp/monitors_watch
+echo "${MONITORS_WATCH_FILE}" > /tmp/monitors
 
 ADDRESSES_TARGET=/addresses/addresses.tsv
 ADDRESSES_LINK=/addresses.tsv
@@ -59,4 +59,4 @@ do
     sleep 1 # second
 done
 
-chifra monitors --watch $MONITORS_WATCH_ARGS --file /tmp/monitors_watch
+chifra monitors --watch $MONITORS_WATCH_ARGS --file /tmp/monitors
