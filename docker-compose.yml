@@ -1,6 +1,8 @@
 # -------------------------------------------------------------------------------------------
 # qblocks - fast, easily-accessible, fully-decentralized data from blockchains
 # copyright (c) 2016, 2021 TrueBlocks, LLC (http://trueblocks.io)
+# -------------------------------------------------------------------------------------------
+
 #
 # This is the system-wide docker compose file. Generally speaking, you will not edit this file.
 # Instead, you may customize how this image works by copying the `docker-compose.local.example`
@@ -9,7 +11,7 @@
 #    docker compose -f docker-compose.yml -f docker-compose.local.yml up
 #
 # In this file, we create two services: core and monitors.
-# -------------------------------------------------------------------------------------------
+#
 
 name: TrueBlocksCore
 
