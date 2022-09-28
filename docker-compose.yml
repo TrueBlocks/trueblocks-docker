@@ -1,7 +1,7 @@
 name: TrueBlocksCore
 services:
   core:
-    image: trueblocks/core:0.37.0-beta
+    image: trueblocks/core:0.40.2-beta
     build: ./build/core
     ports:
       - "8080:8080"
@@ -14,7 +14,7 @@ services:
     depends_on:
       - core
     restart: unless-stopped
-    image: trueblocks/monitors:0.37.0-beta
+    image: trueblocks/monitors:0.40.2-beta
     build: ./build/monitors
     env_file: .env
     volumes:
