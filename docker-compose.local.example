@@ -16,5 +16,5 @@ services:
         source: ~/Library/Application Support/TrueBlocks/unchained
         target: /index
       - type: bind
-        source: ~/Project/addresses
+        source: ~/Projects/addresses
         target: /addresses
