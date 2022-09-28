@@ -8,8 +8,8 @@ RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
 # Set workdir
 WORKDIR /root
 
-# Try to get upstream version (default v0.40.0-beta)
-ARG UPSTREAM_VER=v0.40.0-beta
+# Try to get upstream version (default v0.40.2-beta)
+ARG UPSTREAM_VER=v0.40.2-beta
 
 # Clone and make TrueBlocks Core
 # make -j 5 is a fairly safe number
