@@ -56,7 +56,7 @@ do
     fi
 
     echo "Scraper is not running, waiting..."
-    sleep 1 # second
+    sleep 5 # second
 done
 
 chifra monitors --watch $MONITORS_WATCH_ARGS --file /tmp/monitors

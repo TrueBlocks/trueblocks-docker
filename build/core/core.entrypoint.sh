@@ -79,4 +79,4 @@ if [ "${RUN_SCRAPER:-true}" = true ] ; then
 fi
 
 # Run chifra serve
-chifra serve --port 0.0.0.0:${SERVE_PORT:-8080} --verbose ${SERVE_VERBOSITY:-10}
+chifra serve --port 0.0.0.0:${SERVE_PORT:-8080}
