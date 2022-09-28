@@ -3,12 +3,12 @@
 ## Table of Contents
   - [Introduction](#introduction)
   - [Prerequisite](#prerequisite)
-  - [Getting started](#quick-start)
+  - [Quick start](#quick-start)
+  - [Testing](#testing)
   - [Configuration](#configuration)
   - [Building](#building)
   - [Using the container](#using-the-container)
   - [Monitoring addresses](#monitoring-addresses)
-  - [Testing](#testing)
   - [Contributing](#contributing)
   - [List of Contributors](#contributors)
   - [Contact](#contact)
@@ -17,191 +17,174 @@
 
 The TrueBlocks docker version makes it easy to run the `trueblocks-core` in a docker container.
 
-TrueBlocks builds an index of 'every appearance of every address anywhere on the chain.' The index turns your node software ([Erigon](https://github.com/ledgerwatch/erigon), for example) into a true Ethereum data server. With such a server, you can build truly distributed applications (dApps) running locally on your end users' machines. dApps that are truly trustless and perfectly private. dApps that share among themselves effortlessly and whose data is uncensorable and private.
+TrueBlocks builds an index of 'every appearance of every address anywhere on the chain.' The index turns your node software ([Erigon](https://github.com/ledgerwatch/erigon), for example) into a true Ethereum data server. With such a server, you can build truly distributed applications (dApps) running locally on your end users' machines. dApps that are truly trustless and perfectly private. dApps that share among themselves effortlessly and whose data is uncensorable, naturally sharded, and private.
 
 ## Prerequisite
 
-In order for this docker version to work, it needs an RPC endpoint. Erigon, is an excellent choice and provides both the archive node functionality and the `trace_` namespace we require.
+In order for this docker version to work, it needs an RPC endpoint. Erigon, is an excellent choice for this and provides both the archive node functionality and the `trace_` namespace TrueBlocks requires.
 
-There are commercially available offerings, however, we find these inadequate due to excessive cost and much slower speeds. Erigon is easy to install, very fast syncing, and blazingly fast at serving data -- if you have an index. Another great solution is running both Erigon and TrueBlocks on a [dAppNode](https://github.com/dappnode).
+There are commercially available RPC endpoints, however, we find them inadequate due to excessive cost and significantly slower speed of access. Erigon is easy to install, syncs to the tip of the chain very quickly, and is blazingly fast at serving data -- if one has an index. A great "devops" solution to running both Erigon and TrueBlocks is the [dAppNode project](https://github.com/dappnode).
 
-A [docker build environment](https://docs.docker.com/get-docker/) is also required.
+A [docker build environment](https://docs.docker.com/get-docker/) is also required to build this package.
 
-## Quick Start
+## Quick start
 
-When properly installed, trueblocks-docker:
+When properly installed, `trueblocks-docker`:
 
 - builds `trublocks-core`,
 - runs `chifra init` to initialize the Unchained Index (this takes a while to complete),
-- runs `chifra scrape` (in the background) to actively build the index against the head of the chain,
-- runs `chifra serve` (in the background) to serve an API of all `chifra` commands,
-- optionally, runs `chifra monitors --watch` (in the background) to monitor a collection of addresses.
+- starts `chifra scrape` (in the background) to actively build the index against the head of the chain,
+- starts `chifra serve` (in the background) to serve an API of all `chifra` commands,
+- optionally, starts `chifra monitors --watch` (in the background) to monitor a collection of addresses.
 
 ### Getting started
 
-Copy the `env.example` file to `.env` and modify values, or just do:
+Copy the `env.example` file to `.env` and modify values (see the comments in the `env.example` for more details), or just do:
 
 ```bash
-echo "TB_CHAINS_MAINNET_RPCPROVIDER=your-RPC-url-and-port" >.env
+echo "TB_CHAINS_MAINNET_RPCPROVIDER=http://yourRpcEndpoint:port" >.env
 docker compose up
 ```
 
-providing a valid RPC endpoint that supports both an archive node and the `trace_` namespace.
+Make sure to provide a valid RPC endpoint that exposes both an archive node and the `trace_` namespace. If you experience problems, you 
+may find useful answers in the comments of the `docker-compose.yml` and `docker-compose.local.example` files.
 
-For other EVM-compatible chains, edit a file in the local folder called `.env` and add these items:
+### Running against other chains
+
+If you want to run against other EVM-compatible chains, edit a file in the local folder called `.env` (or copy the `env.example` file first) and add these items:
 
 ```bash
+TB_SETTINGS_DEFAULTCHAIN="<chain_name>"
 TB_CHAINS_`<CHAIN_NAME>`_CHAINID="<chain_id>"
 TB_CHAINS_`<CHAIN_NAME>`_RPCPROVIDER="<rpc endpoint>"
 TB_CHAINS_`<CHAIN_NAME>`_SYMBOL="<currency symbol>"
 ```
 
-Note: `MAINNET`, `SEPOLIA` and `GNOSIS` chains are pre-configured and you may use those without further adue.
+Of course, replace `<chain_name>` with (what else?) your chain's name.
 
+Note: `MAINNET`, `SEPOLIA` and `GNOSIS` chains are pre-configured and you may use these values and the first two settings alone without further adue.
+
+After configuring for your custom chain, run `docker compose up`.
 
 ## Interacting with the container
 
-Once the `chifra` server and API endpoints are running, you may interact with the container by calling directly into the command line with:
+Once the container is running, you may interact with `chifra` directly from the command line by calling:
 
 ```bash
-scripts/chifra.sh --help
+scripts/chifra.sh
 ```
 
-Or through the API server with:
+(This should  produce `chifra`'s help screen.)
 
-```bash
-curl "localhost:8080/when?blocks=london"
-```
+Alternatively, you may use the API server, thus:
 
-## Configuration
-
-You may configure both the way the docker image is built and the way `chifra` operates. Each is explained in its own page:
-
-- [Configuring the build](CONFIGURE.md)
-- [Configuring chifra](CONFIGURE.md)
-
-## Building
-
-### Using Docker Compose
-
-The preferred way of building and running TrueBlocks in Docker environment is to use Docker Compose. By default, this will run `chifra serve`, one `chifra scrape` instance per configured chain and `chifra monitors --watch`.
-1. Configure `chifra` in a file called `.env` in project's root directory (see [Configuration](#configuration))
-2. Create compose file for your environment: `cp docker-compose.local.example docker-compose.local.yml`
-3. Edit `docker-compose.local.yml` so that each volume's source points to a location on your hard drive where you would like to store TrueBlocks' index and cache data.
-4. Run the project by calling `scripts/up.sh` (which is same as `docker compose -f docker-compose.yml -f docker-compose.local.yml up`)
-
-If you do not want to store TrueBlocks's index and cache outside Docker, you only need to do step 1 and can run the project by simply calling `docker compose up`.
-
-Both `.env` and `docker-compose.local.yml` are ignored by Git.
-
-### Using Docker
-
-1. Build the docker image (example tagged with `latest`)
-
-  ```bash
-  docker build ./build/core --tag=trueblocks-core:latest
-  ```
-
-2. Run the core container
-
-  ```bash
-  # By default, both scraper and chifra serve (API server) are started
-  docker run \
-    --name trueblocks-core \
-    --env-file ./.env \
-    --publish 8080:8080 \
-    --mount type=bind,source=/your/location/for/cache,target=/cache \
-    --mount type=bind,source=/your/location/for/index,target=/index \
-    trueblocks-core:latest
-
-  # Try to connect to the container
-  curl localhost:8080/status
-  ```
-
-3. Run monitor
-
-  ```bash
-  docker build ./build/monitors --tag=trueblocks-monitor:latest
-
-  # Note: monitor has to use the same cache and index volumes as core
-  # Export volume is optional.
-  docker run \
-    --name trueblocks-monitor \
-    --env-file ./.env \
-    --publish 8080:8080 \
-    --mount type=bind,source=/your/location/for/cache,target=/cache \
-    --mount type=bind,source=/your/location/for/unchained,target=/index \
-    --mount type=bind,source=/your/location/for/exports,target=/exports \
-    trueblocks-monitor:latest
-  ```
-
-## Using the container
-
-### Calling `chifra` directly
-
-You can use `scripts/exec.sh` to call `chifra` commands inside running core container:
-```bash
-# Getting the list of available commands
-scripts/exec.sh --help
-
-# To get every 100th block from the fist block up to 1000th:
-scripts/exec.sh blocks 0-1000:100
-```
-
-`exec.sh` script uses `docker compose exec` internally, so the above commands are equivalent to:
-```bash
-docker compose exec core bash -c "chifra --help"
-
-# Or:
-docker compose exec core bash -c "chifra blocks 0-1000:100"
-```
-
-### Connecting to API server
-
-By default, `core` container exposes API server on port `8080`:
 ```bash
 curl "localhost:8080/when?blocks=london"
 ```
-
-## Monitoring addresses
-
-1. Create a new directory in your filesystem
-  ```bash
-  mkdir ~/Projects/monitoring_my_address
-  ```
-2. Put as many addresses as you like into a text file (one address per line) and save the file as `addresses.tsv` in the directory that you have created in step 1 (**file name matters**)
-  ```bash
-  echo 0x1db3439a222c519ab44bb1144fc28167b4fa6ee6 > ~/Projects/monitoring_my_address/addresses.tsv
-  echo 0xab5801a7d398351b8be11c439e05c5b3259aec9b >> ~/Projects/monitoring_my_address/addresses.tsv
-  ```
-3. Edit your `docker-compose.local.yml` and use path to the directory created in step 1 as source for `addresses` volume:
-  ```yaml
-    monitors:
-    volumes:
-      # unchanged
-      - type: bind
-        source: ~/Library/Application Support/TrueBlocks/cache
-        target: /cache
-      # unchanged
-      - type: bind
-        source: ~/Library/Application Support/TrueBlocks/unchained
-        target: /index
-      # HERE
-      - type: bind
-        source: ~/Projects/monitoring_my_address
-        target: /addresses
-  ```
-4. Now run or restart TrueBlocks service by using `docker compose -f ... -f ... up` or `docker compose restart`. You should see this message in the logs:
-  ```
-  trueblockscore-monitors-1  | Addresses file found, linking it
-  ```
-  The monitor service will now watch the addresses.
 
 ## Testing
 
 To test the image, run `test.sh` script. This script builds a container and tries to call `chifra status --terse` checking for any errors and returning the right error code (`0` when no errors, error count otherwise).
 
 For testing purposes a different entrypoint is used: `build/core/test/core-test.entrypoint.sh`.
+
+## Configuration
+
+You may configure both the way the docker image is built and the way `chifra` operates. Doing so is explained in its own page:
+
+- [Configuring the build and/or chifra](CONFIGURE.md)
+
+## Building
+
+There are two ways to build the docker images as described in the [Building section](BUILDING.md)
+
+## Using the container
+
+### Calling the `chifra` command line
+
+You may use `scripts/chifra.sh` to call `chifra` commands inside running core container:
+
+```bash
+# Getting the list of available chifra commands
+scripts/chifra.sh
+
+# Show the latest block
+scripts/chifra.sh when latest
+
+# Export JSON data for every 100th block between blocks 0 and 10,000
+scripts/chifra.sh blocks 0-10000:100
+
+# Show all the transactions for a given address (note: you must have initialized the Unchained Index for this work)
+scripts/chifra.sh export trueblocks.eth
+```
+
+The `scripts/chifra.sh` script calls `docker compose exec` internally, so the above commands are equivalent to:
+
+```bash
+docker compose exec core bash -c "chifra"
+docker compose exec core bash -c "chifra when latest"
+docker compose exec core bash -c "chifra blocks 0-10000:100"
+docker compose exec core bash -c "chifra export trueblocks.eth"
+```
+
+### Connecting into the chifra API server
+
+By default, the `core` container exposes an API server on port `8080` serving exactly the same routes and options as the `chifra` command line does sub-commands and options. Access the API server with:
+
+```bash
+curl -s "http://localhost:8080/when?blocks=latest"
+curl -s "http://localhost:8080/blocks?blocks=0-10000:100"
+curl -s "http://localhost:8080/export?addrs=trueblocks.eth"
+```
+
+## Monitoring addresses
+
+TrueBlocks (via `chira`) allows you to "monitor" a collection or set of addresses. This section describes how to do that:
+
+1. Create a new folder on your host machine's file system. For example,
+ 
+  ```bash
+  mkdir ~/Data/Monitors/
+  ```
+
+2. Put as many Ethereum addresses as you wish in a file called `addresses.tsv` in that folder.
+
+  ```bash
+  echo 0x846a9cb5593483b59bb386f5a878fbb2a0d1d8dc  > ~/Data/Monitors/addresses.tsv
+  echo trueblocks.eth                             >> ~/Data/Monitors/addresses.tsv
+  echo rotki.eth                                  >> ~/Data/Monitors/addresses.tsv
+  ```
+
+3. Edit `docker-compose.local.yml` (create it by copying from `docker-compose.local.example` if need be). Specify the path you created above to instruct docker where to pick up the list of monitored addresses and where to drop the results.
+
+
+```yaml
+  monitors:
+  volumes:
+    # unchanged
+    - type: bind
+      source: ~/Data/cache
+      target: /cache
+    # unchanged
+    - type: bind
+      source: ~/Data/unchained
+      target: /index
+    # HERE
+    - type: bind
+      source: ~/Data/Monitors
+      target: /addresses
+    - type: bind
+      source: ~/Data/Monitors
+      target: /export
+```
+
+4. Restart (or run for the first time) the container with `docker compose restart` or `scripts/up.sh`. You should see message in the logs, thus:
+
+  ```
+  trueblockscore-monitors-1  | Addresses file found, linking it
+  ```
+
+and also the results of the monitoring in the same folder. The monitor service is now watching your addresses.
 
 ## Contributing
 
