@@ -18,7 +18,7 @@ name: TrueBlocksCore
 services:
   core:
     # The tag (on docker-hub) of the core image we're using.
-    image: trueblocks/core:0.41.0-beta
+    image: trueblocks/core:v0.41.0-beta
 
     # The location on the local disc of the core image's Dockerfile.
     build: ./build/core
@@ -52,7 +52,7 @@ services:
     restart: unless-stopped
 
     # The tag (on docker-hub) of the monitors docker image
-    image: trueblocks/monitors:0.41.0-beta
+    image: trueblocks/monitors:v0.41.0-beta
 
     # The location of the monitors image's Dockerfile
     build: ./build/monitors
