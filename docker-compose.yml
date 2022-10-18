@@ -17,14 +17,14 @@ name: TrueBlocksCore
 
 services:
   core:
-    # The location (on docker-hub) of the core image we're using.
-    image: trueblocks/core:0.40.2-beta
+    # The tag (on docker-hub) of the core image we're using.
+    image: trueblocks/core:0.41.0-beta
 
     # The location on the local disc of the core image's Dockerfile.
     build: ./build/core
 
-    # An instruction to expose the container's internal :8080 port externally to the host machine.
-    # Note, if you get an error message such as "Ports are not available...bind: address already in use",
+    # An instruction to expose the container's internal :8080 port to the host machine. Note, if you
+    # get an error message such as "Ports are not available...bind: address already in use",
     # or similar, restate this setting in the `docker-compose.local.yml` file and change the first
     # of these two ports (i.e. the port on the host machine). It's best not to change the setting here.
     ports:
@@ -34,50 +34,50 @@ services:
     # README.md file more information.
     env_file: .env
 
-    # Defines internal docker folders where chifra's cache and the Unchained Index are stored.Note that
-    # this must be consistent with the same definition below. Expose these folders on the host machine
+    # Define the volumes where the images cache and the Unchained Index are stored. Note that this
+    # should be consistent with the definitions below. You may expose these folders to the host machine
     # by customizing the `docker-compose.local.yml` file.
     volumes:
-      # The folder (internal to docker) where chifra stores the Unchained Index.
-      - Index:/index
-      # The folder (internal to docker) where chifra stores its cached data.
-      - Cache:/cache
+      # The name:/folder (internal to docker) where chifra stores the Unchained Index.
+      - unchained:/unchained
+      # The name:/folder (internal to docker) where chifra stores its cached data.
+      - cache:/cache
 
   monitors:
-    # Tells docker that this service cannot run without the core image also running
+    # Tells docker that the monitors service cannot run without the core image
     depends_on:
       - core
 
-    # Instructs docker to restart the monitor if it falls down for some reason
+    # Instructs docker to restart the service if it stops other than if it's explicity halted
     restart: unless-stopped
 
-    # The location (on docker-hub) of the monitors image we're using
-    image: trueblocks/monitors:0.40.2-beta
+    # The tag (on docker-hub) of the monitors docker image
+    image: trueblocks/monitors:0.41.0-beta
 
-    # The location on the local disc of the core image's Dockerfile
+    # The location of the monitors image's Dockerfile
     build: ./build/monitors
 
-    # The same environment file as above providing the same configuration for TrueBlocks.
+    # The same environment file as above providing the same configuration for both services
     env_file: .env
 
-    # A list of volumes (corresponding to the above) with two additional volumes used by the monitors service.
+    # A list of volumes (corresponding to the above) with two additional volumes used
+    # exclusively by the monitors service.
     volumes:
-      # The folder (internal to docker) where chifra stores the Unchained Index (same as above).
-      - Index:/index
-      # The folder (internal to docker) where chifra stores its cached data (same as above).
-      - Cache:/cache
-      # The folder (internal to docker) where `chifra monitors --watch` exports its results. See the comments
+      # The name:/folder (internal to docker) where chifra stores the Unchained Index (same as above).
+      - unchained:/unchained
+      # The name:/folder (internal to docker) where chifra stores its cached data (same as above).
+      - cache:/cache
+      # The name:/folder (internal to docker) where `chifra monitors --watch` exports its results. See the comments
       # in docker-compose.local.example for information on exposing this folder externally to the host machine.
       - exports:/exports
-      # The folder (internal to docker) where `chifra monitors --watch` looks for its list of addresses
+      # The name:/folder (internal to docker) where `chifra monitors --watch` looks for its list of addresses
       # to monitor. See the comments in docker-compose.local.example for information on exposing this
       # folder externally to the host machine.
-      - addresses:/addresses
+      - monitors:/monitors
 
-# An instruction telling docker to persist these volumes when the container is brought down. Otherwise,
-# they will be removed.
+# Instructions telling docker to persist these volumes when the container is brought down.
 volumes:
-  Index:
-  Cache:
+  unchained:
+  cache:
   exports:
-  addresses:
+  monitors:

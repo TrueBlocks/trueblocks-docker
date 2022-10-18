@@ -34,7 +34,7 @@ Both the `.env` and `docker-compose.local.yml` are ignored by Git so as to prote
     --env-file ./.env \
     --publish 8080:8080 \
     --mount type=bind,source=~/Data/cache,target=/cache \
-    --mount type=bind,source=~/Data/index,target=/index \
+    --mount type=bind,source=~/Data/unchained,target=/unchained \
     trueblocks-core:latest
 ```
 
@@ -51,15 +51,14 @@ Now, you can try to connect to the container:
   ```bash
   docker build ./build/monitors --tag=trueblocks-monitor:latest
 
-  # Note: monitor has to use the same cache and index volumes as core as above
+  # Note: monitor has to use the same cache and unchained volumes as core as above
   docker run \
     --name trueblocks-monitor \
     --env-file ./.env \
     --publish 8080:8080 \
     --mount type=bind,source=~/Data/cache,target=/cache \
-    --mount type=bind,source=~/Data/unchained,target=/index \
-    --mount type=bind,source=~/Data/exports,target=/exports \
+    --mount type=bind,source=~/Data/unchained,target=/unchained \
+    --mount type=bind,source=~/Data/monitors/exports,target=/exports \
+    --mount type=bind,source=~/Data/monitors,target=/monitors \
     trueblocks-monitor:latest
   ```
-
-#### TODO: The above seems to ignore setting up the addresses.tsv file.

@@ -2,3 +2,4 @@
 .env
 .save_env
 docker-compose.local.yml
+trueblocks-dappnode

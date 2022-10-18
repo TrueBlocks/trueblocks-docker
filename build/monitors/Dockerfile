@@ -1,4 +1,4 @@
-FROM trueblocks/core:0.40.2-beta
+FROM trueblocks/core:0.41.0-beta
 
 RUN apk --no-cache add jq
 

@@ -62,6 +62,8 @@ TB_CHAINS_`<CHAIN_NAME>`_SYMBOL="<currency symbol>"
 
 Of course, replace `<chain_name>` with (what else?) your chain's name.
 
+TODO: This is confusing
+
 Note: `MAINNET`, `SEPOLIA` and `GNOSIS` chains are pre-configured and you may use these values and the first two settings alone without further adue.
 
 After configuring for your custom chain, run `docker compose up`.
@@ -144,15 +146,15 @@ TrueBlocks (via `chira`) allows you to "monitor" a collection or set of addresse
 1. Create a new folder on your host machine's file system. For example,
  
   ```bash
-  mkdir ~/Data/Monitors/
+  mkdir ~/Data/monitors/
   ```
 
 2. Put as many Ethereum addresses as you wish in a file called `addresses.tsv` in that folder.
 
   ```bash
-  echo 0x846a9cb5593483b59bb386f5a878fbb2a0d1d8dc  > ~/Data/Monitors/addresses.tsv
-  echo trueblocks.eth                             >> ~/Data/Monitors/addresses.tsv
-  echo rotki.eth                                  >> ~/Data/Monitors/addresses.tsv
+  echo 0x846a9cb5593483b59bb386f5a878fbb2a0d1d8dc  > ~/Data/monitors/addresses.tsv
+  echo trueblocks.eth                             >> ~/Data/monitors/addresses.tsv
+  echo rotki.eth                                  >> ~/Data/monitors/addresses.tsv
   ```
 
 3. Edit `docker-compose.local.yml` (create it by copying from `docker-compose.local.example` if need be). Specify the path you created above to instruct docker where to pick up the list of monitored addresses and where to drop the results.
@@ -168,13 +170,14 @@ TrueBlocks (via `chira`) allows you to "monitor" a collection or set of addresse
     # unchanged
     - type: bind
       source: ~/Data/unchained
-      target: /index
+      target: /unchained
     # HERE
     - type: bind
-      source: ~/Data/Monitors
-      target: /addresses
+      source: ~/Data/monitors
+      target: /monitors
+    # HERE
     - type: bind
-      source: ~/Data/Monitors
+      source: ~/Data/monitors/export
       target: /export
 ```
 
@@ -188,7 +191,7 @@ and also the results of the monitoring in the same folder. The monitor service i
 
 ## Contributing
 
-We love contributors. Please follow our [work flow](./docs/BRANCHING.md) and submit a pull request:
+We love contributors. Please see information about our [work flow](https://github.com/TrueBlocks/trueblocks-core/blob/develop/docs/BRANCHING.md) before proceeding.
 
 1. Fork this repository into your own repo.
 2. Create a branch: `git checkout -b <branch_name>`.
@@ -196,9 +199,9 @@ We love contributors. Please follow our [work flow](./docs/BRANCHING.md) and sub
 4. Push back to the original branch: `git push origin TrueBlocks/trueblocks-core`
 5. Create the pull request.
 
-## Contributors
+## List of Contributors
 
-Thanks to the following people who have contributed to this repo:
+Thanks to the following people who have contributed to this project:
 
 * [@tjayrush](https://github.com/tjayrush)
 * [@dszlachta](https://github.com/dszlachta)
