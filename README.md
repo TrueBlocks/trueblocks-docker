@@ -70,13 +70,20 @@ Use `docker build [...] --build-arg X=Y` to change the defaults (see [Docker doc
 ## Building
 
 ---
-1. Build the docker image (example tagged with `latest`)
+1. Copy the `env.example` file to `.env` and modify values (see the comments in the `env.example` for more details), or just do:
+
+```bash
+echo "TB_CHAINS_MAINNET_RPCPROVIDER=http://yourRpcEndpoint:port" > .env
+# Make sure to provide a valid RPC endpoint that exposes both an archive node and the trace_ namespace
+```
+
+2. Build the docker image (example tagged with `latest`)
 
   ```bash
   docker build ./build --tag=trueblocks-core:latest
   ```
 
-2. Run the container
+3. Run the container
 
   ```bash
   # By default, both scraper and chifra serve (API server) are started
@@ -84,8 +91,9 @@ Use `docker build [...] --build-arg X=Y` to change the defaults (see [Docker doc
     --name trueblocks-core \
     --env-file ./.env \
     --publish 8080:8080 \
-    --mount type=bind,source=/Volumes/IndexCache/trueblocks/cache,target=/cache \
-    --mount type=bind,source=/Volumes/IndexCache/trueblocks/unchained,target=/index \
+    -v ~/REPLACE/WITH/PATH/TO/CACHE:/cache \
+    -v ~/REPLACE/WITH/PATH/TO/INDEX:/index \
+    --rm \
     trueblocks-core:latest
 
   # Try to connect to the container
