@@ -1,12 +1,16 @@
-## Building the images
+# Building the images
 
-There are two ways to build the docker images in this package described below. The first (building with docker composed) is preferred.
+There are two ways to build the docker version of the TrueBlocks package. The first (building with docker compose) is preferred.
 
-### Building with docker compose
+## Building with docker compose
 
-The preferred way of building and running TrueBlocks is by using `docker compose`.
+The preferred way of building and running TrueBlocks is by running
 
-The simplest way to get started is shown above and detailed in the [Configuration section](CONFIGURE.md). However, you may wish to expose the Unchained Index on the host machine. If you wish to do that, you must customize the docker-compose build slightly.
+```
+docker compose
+```
+
+Details can be found in [Configuration section](CONFIGURE.md). However, you may wish to expose the Unchained Index on the host machine. If you wish to do that, you must customize the docker-compose build slightly.
 
 1. Create a file called `.env` in project's root directory (see [Configuration](#CONFIGURE.md)) by copying and editing `env.example`.
 2. Create a local configuration copying the example: `cp docker-compose.local.example docker-compose.local.yml`.
@@ -17,7 +21,7 @@ If you don't need the Unchained Index or the results of monitoring address on yo
 
 Both the `.env` and `docker-compose.local.yml` are ignored by Git so as to protect your privacy.
 
-### Building with docker directly
+## Building with docker directly
 
 1. Build the core docker image directly (for example, against `latest`) with:
 

@@ -1,8 +1,8 @@
-## Configuring this docker image
+# Configuring this docker image
 
 It's possible to config both the build process to create this docker image as well as how the TrueBlocks executable (called `chifra`) works internally. Both of these possibilities are described below.
 
-### Configuring the build
+## Configuring the build
 
 There are two build arguments you may configure before building the image:
 
@@ -13,13 +13,13 @@ You may invoke the build process with `docker build [...] --build-arg X=Y` to mo
 
 **A quick note on SERVE_PORT:** Distinguish the internal port used by chifra inside the running container from the port exposed to the host machine. See the comments in the `docker-compose.yml` file information on exposing an external port in the event that the port is already in use on the host machine. The setting here is for the port internal to the docker image.
 
-### Configuring `chifra`
+## Configuring `chifra`
 
 In addition to customizing the way the image is built, you may customize the way `chifra` works internally to the image.
 
 `chifra` supports multiple configuration items. Store these customizations in a local file to this folder called `.env`. Copy the example file (`env.example`) to `.env` and adjust values there. Using the name `.env` will ensure any private information in this file won't be pushed to GitHub, as the file is ignored by the `.gitignore` file.
 
-#### Primary settings
+### Primary settings
 
 Each of these values defaults to settings for mainnet, if you have a locally running RPC provider at :8545, this should just work. It's likely, though,
 that you will have to specify at least the RPC Provider setting. The other values should work without modification.
@@ -43,7 +43,7 @@ You may adjust these values for your chain. SEPOLIA and GNOSIS are being activel
 We're working on a configuration tool that will make this setup easier, but in the meantime, you will find information on running against different
 chains here: [NOT READY-Not ready yet](./).
 
-#### Optional settings
+### Optional settings
 
 Additional things you may wish to customize, along with their default values are summarize here:
 
