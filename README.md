@@ -98,7 +98,15 @@ You may configure both the way the docker image is built and the way `chifra` op
 
 ## Building
 
-There are two ways to build the docker images as described in the [Building section](BUILDING.md)
+---
+1. Copy the `env.example` file to `.env` and modify values (see the comments in the `env.example` for more details), or just do:
+
+```bash
+echo "TB_CHAINS_MAINNET_RPCPROVIDER=http://yourRpcEndpoint:port" > .env
+# Make sure to provide a valid RPC endpoint that exposes both an archive node and the trace_ namespace
+```
+
+2. Build the docker image (example tagged with `latest`)
 
 ## Using the container
 
@@ -149,12 +157,21 @@ TrueBlocks (via `chira`) allows you to "monitor" a collection or set of addresse
   mkdir ~/Data/monitors/
   ```
 
-2. Put as many Ethereum addresses as you wish in a file called `addresses.tsv` in that folder.
+3. Run the container
 
   ```bash
-  echo 0x846a9cb5593483b59bb386f5a878fbb2a0d1d8dc  > ~/Data/monitors/addresses.tsv
-  echo trueblocks.eth                             >> ~/Data/monitors/addresses.tsv
-  echo rotki.eth                                  >> ~/Data/monitors/addresses.tsv
+  # By default, both scraper and chifra serve (API server) are started
+  docker run \
+    --name trueblocks-core \
+    --env-file ./.env \
+    --publish 8080:8080 \
+    -v ~/REPLACE/WITH/PATH/TO/CACHE:/cache \
+    -v ~/REPLACE/WITH/PATH/TO/INDEX:/index \
+    --rm \
+    trueblocks-core:latest
+
+  # Try to connect to the container
+  curl localhost:8080/status
   ```
 
 3. Edit `docker-compose.local.yml` (create it by copying from `docker-compose.local.example` if need be). Specify the path you created above to instruct docker where to pick up the list of monitored addresses and where to drop the results.
