@@ -17,8 +17,8 @@ name: TrueBlocksCore
 
 services:
   core:
-    # The tag (on docker-hub) of the core image we're using.
-    image: trueblocks/core:v0.41.0-beta
+    # The tagged version (on docker-hub) of the core docker image
+    image: trueblocks/core:v0.44.0-beta
 
     # The location on the local disc of the core image's Dockerfile.
     build: ./build/core

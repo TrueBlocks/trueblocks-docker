@@ -6,7 +6,7 @@ There are two ways to build the docker version of the TrueBlocks package. The fi
 
 The preferred way of building and running TrueBlocks is by running
 
-```
+```[bash]
 docker compose
 ```
 
@@ -23,46 +23,44 @@ Both the `.env` and `docker-compose.local.yml` are ignored by Git so as to prote
 
 ## Building with docker directly
 
-1. Build the core docker image directly (for example, against `latest`) with:
+- Build the core docker image directly (for example, against `latest`) with:
 
-  ```bash
-  docker build ./build/core --tag=trueblocks-core:latest
-  ```
+```[bash]
+docker build ./build/core --tag=trueblocks-core:latest
+```
 
-2. You may run the newly built image with:
+- You may run the newly built image with:
 
-  ```bash
+```[bash]
   # By default, both scraper and chifra serve (API server) are started
   docker run \
     --name trueblocks-core \
     --env-file ./.env \
     --publish 8080:8080 \
-    --mount type=bind,source=~/Data/cache,target=/cache \
-    --mount type=bind,source=~/Data/unchained,target=/unchained \
+    --mount type=bind,source=/Data/cache,target=/cache \
+    --mount type=bind,source=/Data/unchained,target=/unchained \
     trueblocks-core:latest
 ```
 
-Note that the above assumes the existence of a folder called `~/Data/`. Create it if it doesn't exist.
+Note that the above assumes the existence of a folder called `/Data/`. Create it if it doesn't exist.
 
 Now, you can try to connect to the container:
 
+```[bash]
+curl localhost:8080/status
 ```
-  curl localhost:8080/status
-  ```
 
-3. Build and run the monitors (this is an optional step):
+- Build and run the monitors (this is an optional step):
 
-  ```bash
-  docker build ./build/monitors --tag=trueblocks-monitor:latest
-
-  # Note: monitor has to use the same cache and unchained volumes as core as above
-  docker run \
-    --name trueblocks-monitor \
-    --env-file ./.env \
-    --publish 8080:8080 \
-    --mount type=bind,source=~/Data/cache,target=/cache \
-    --mount type=bind,source=~/Data/unchained,target=/unchained \
-    --mount type=bind,source=~/Data/monitors/exports,target=/exports \
-    --mount type=bind,source=~/Data/monitors,target=/monitors \
-    trueblocks-monitor:latest
-  ```
+```[bash]
+docker build ./build/monitors --tag=trueblocks-monitor:latest
+docker run \
+  --name trueblocks-monitor \
+  --env-file ./.env \
+  --publish 8080:8080 \
+  --mount type=bind,source=/Data/cache,target=/cache \
+  --mount type=bind,source=/Data/unchained,target=/unchained \
+  --mount type=bind,source=/Data/monitors/exports,target=/exports \
+  --mount type=bind,source=/Data/monitors,target=/monitors \
+  trueblocks-monitor:latest
+```

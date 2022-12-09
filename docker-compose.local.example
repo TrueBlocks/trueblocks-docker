@@ -20,7 +20,7 @@
 #
 # Note that we customize the same services as those found in the `docker-compose.yml`. We expose the
 # container's internal folders to the host machine with the `bind` directive. The following assumes the
-# existance on your host machine of a folder called ~/Data/. You may adjust this location.
+# existance on your host machine of a folder called /Data. You may adjust this location.
 #
 # Bind the same folders for each service (/cache and /unchained). The `source` folder is the name of the
 # folder on the host machine. The `target` is the name of the folder internal to the docker image.
@@ -29,22 +29,22 @@ services:
   core:
     volumes:
       - type: bind
-        source: ~/Data/cache
+        source: /Data/cache
         target: /cache
       - type: bind
-        source: ~/Data/unchained
+        source: /Data/unchained
         target: /unchained
   monitors:
     volumes:
       - type: bind
-        source: ~/Data/cache
+        source: /Data/cache
         target: /cache
       - type: bind
-        source: ~/Data/unchained
+        source: /Data/unchained
         target: /unchained
       - type: bind
-        source: ~/Data/monitors
+        source: /Data/monitors
         target: /monitors
       - type: bind
-        source: ~/Data/monitors/export # notice difference in path
+        source: /Data/monitors/export # notice difference in path
         target: /export
