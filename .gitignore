@@ -1,6 +1,5 @@
 .DS_Store
 .env
-test.sh
 .save_env
 docker-compose.local.yml
-trueblocks-dappnode
+
