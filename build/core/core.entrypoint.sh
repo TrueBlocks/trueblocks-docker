@@ -1,3 +1,3 @@
 #!/bin/bash
 
-chifra node --api on --scrape blooms --monitor
+chifra daemon --api on --scrape blooms --monitor
