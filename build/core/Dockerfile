@@ -5,7 +5,7 @@ RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
 
 WORKDIR /root
 
-ARG UPSTREAM_VER=v0.41.0-beta
+ARG UPSTREAM_VER=v0.44.0-beta
 
 RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     https://github.com/TrueBlocks/trueblocks-core.git && \
@@ -26,12 +26,13 @@ COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 COPY core.entrypoint.sh /root
 COPY test/core-test.entrypoint.sh /root
 
+RUN chmod +x /root/core.entrypoint.sh
 RUN chmod +x /root/core-test.entrypoint.sh
 
 ARG SERVE_PORT=8080
 EXPOSE ${SERVE_PORT}
 
 ENV TB_SETTINGS_CACHEPATH=/cache
-ENV TB_SETTINGS_INDEXPATH=/index
+ENV TB_SETTINGS_INDEXPATH=/unchained
 
 ENTRYPOINT bash /root/core.entrypoint.sh
