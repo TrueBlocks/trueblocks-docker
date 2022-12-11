@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker compose exec core bash -c "chifra $@"
+ARGS="$@"
+docker compose exec core bash -c "chifra $ARGS"
