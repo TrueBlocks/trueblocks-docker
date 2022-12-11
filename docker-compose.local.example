@@ -1,30 +1,3 @@
-# -------------------------------------------------------------------------------------------
-# qblocks - fast, easily-accessible, fully-decentralized data from blockchains
-# copyright (c) 2016, 2021 TrueBlocks, LLC (http://trueblocks.io)
-# -------------------------------------------------------------------------------------------
-#
-# This file gives an example of how one might customize this docker contain to expose its
-# internal folders to the host machine. The majority of the configuration for this container
-# is found in the file `docker-compose.yml`. Do not need to edit that file. Instead, customize
-# this file after copying it to `docker-compose.local.yml`
-#
-# It is important to use the file name `docker-compose.local.yml` as it is ignored in `.gitignore`.
-#
-# Once your customization is complete, you may start the container with:
-#
-#    docker compose -f docker-compose.yml -f docker-compose.local.yml up
-#
-# The settings in this file expose the internal docker folders externally on the host machine
-# (i.e., the machine on which this docker image is running). One might want to do this in order to
-# get direct access to the Unchained Index, the cache, or -- most importantly -- the exported data.
-#
-# Note that we customize the same services as those found in the `docker-compose.yml`. We expose the
-# container's internal folders to the host machine with the `bind` directive. The following assumes the
-# existance on your host machine of a folder called ~/Data/. You may adjust this location.
-#
-# Bind the same folders for each service (/cache and /unchained). The `source` folder is the name of the
-# folder on the host machine. The `target` is the name of the folder internal to the docker image.
-#
 services:
   core:
     volumes:
