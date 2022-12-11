@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# index_chain() starts scraper of the given chain, reading arguments and file
-# content from env variables (optional).
 index_chain() {
     CHAIN_NAME=`echo $1 | tr '[:upper:]' '[:lower:]'`
     CHAIN_VAR=$1
@@ -52,12 +50,8 @@ read_configuration_from_tool() {
     fi
 }
 
-# Read configuration from our configuration tool (only if REQUIRE_CONFIGURATION_TOOL
-# is set to true).
 read_configuration_from_tool
 
-# Run `chifra init` in the background if we want to bootstrap
-# There seems to be a bug that prevents chifra init -all from running before chifra init
 if [ "${BOOTSTRAP_BLOOM_FILTERS:-true}" = true ] ; then
     if [ "${BOOTSTRAP_FULL_INDEX:-false}" = true ] ; then
         echo "Downloading bloom filters AND full index in the background"
@@ -68,9 +62,7 @@ if [ "${BOOTSTRAP_BLOOM_FILTERS:-true}" = true ] ; then
     fi
 fi
 
-# Run scraper if enabled
 if [ "${RUN_SCRAPER:-true}" = true ] ; then
-    # turn all TB_CHAINS_[CHAIN]_CHAINID into a list of space-separated [chain] chain names
     CHAINS=`env | grep TB_CHAINS_.*_CHAINID | sed -E 's/TB_CHAINS_(.*)_CHAINID.*/\1/g'`
     for CHAIN in ${CHAINS}
     do
@@ -78,5 +70,4 @@ if [ "${RUN_SCRAPER:-true}" = true ] ; then
     done
 fi
 
-# Run chifra serve
 chifra serve --port 0.0.0.0:${SERVE_PORT:-8080}
