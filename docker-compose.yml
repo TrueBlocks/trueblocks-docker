@@ -2,7 +2,7 @@ name: TrueBlocksCore
 
 services:
   core:
-    image: trueblocks/core:v0.41.0-beta
+    image: trueblocks/core:v0.44.0-beta
     build: ./build/core
     ports:
       - "8080:8080"
