@@ -2,22 +2,8 @@ services:
   core:
     volumes:
       - type: bind
-        source: ~/Data/cache
+        source: /Data/cache
         target: /cache
       - type: bind
-        source: ~/Data/unchained
+        source: /Data/unchained
         target: /unchained
-  monitors:
-    volumes:
-      - type: bind
-        source: ~/Data/cache
-        target: /cache
-      - type: bind
-        source: ~/Data/unchained
-        target: /unchained
-      - type: bind
-        source: ~/Data/monitors
-        target: /monitors
-      - type: bind
-        source: ~/Data/monitors/export # notice difference in path
-        target: /export
