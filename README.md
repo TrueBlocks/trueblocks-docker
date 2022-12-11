@@ -1,212 +1,52 @@
-# TrueBlocks Docker
+<!-- markdownlint-disable MD033 MD036 MD041 -->
+<h1>TrueBlocks / Docker Version</h1>
 
-## Table of Contents
-  - [Introduction](#introduction)
-  - [Prerequisite](#prerequisite)
-  - [Quick start](#quick-start)
-  - [Testing](#testing)
-  - [Configuration](#configuration)
-  - [Building](#building)
-  - [Using the container](#using-the-container)
-  - [Monitoring addresses](#monitoring-addresses)
-  - [Contributing](#contributing)
-  - [List of Contributors](#contributors)
-  - [Contact](#contact)
+![GitHub repo size](https://img.shields.io/github/repo-size/TrueBlocks/trueblocks-docker)
+[![GitHub contributors](https://img.shields.io/github/contributors/TrueBlocks/trueblocks-docker)](https://github.com/TrueBlocks/trueblocks-docker/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/TrueBlocks/trueblocks-docker?style%3Dsocial)](https://github.com/TrueBlocks/trueblocks-docker/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/TrueBlocks/trueblocks-docker?style=social)](https://github.com/TrueBlocks/trueblocks-docker/network/members)
+[![Twitter Follow](https://img.shields.io/twitter/follow/trueblocks?style=social)](https://twitter.com/trueblocks)
+
+**Table of Contents**
+
+- [Introduction](#introduction)
+- [Configuration](#configuration)
+- [Running the container](#running-the-container)
+- [Other](#other)
 
 ## Introduction
 
-The TrueBlocks docker version makes it easy to run the `trueblocks-core` in a docker container.
+TrueBlocks docker provides a docker version of trueblocks-core. This container is intentionally very minimal.
 
-TrueBlocks builds an index of 'every appearance of every address anywhere on the chain.' The index turns your node software ([Erigon](https://github.com/ledgerwatch/erigon), for example) into a true Ethereum data server. With such a server, you can build truly distributed applications (dApps) running locally on your end users' machines. dApps that are truly trustless and perfectly private. dApps that share among themselves effortlessly and whose data is uncensorable, naturally sharded, and private.
+Please see [the core repo for information](https://github.com/TrueBlocks/trueblocks-core) about TrueBlocks.
 
-## Prerequisite
-
-In order for this docker version to work, it needs an RPC endpoint. Erigon, is an excellent choice for this and provides both the archive node functionality and the `trace_` namespace TrueBlocks requires.
-
-There are commercially available RPC endpoints, however, we find them inadequate due to excessive cost and significantly slower speed of access. Erigon is easy to install, syncs to the tip of the chain very quickly, and is blazingly fast at serving data -- if one has an index. A great "devops" solution to running both Erigon and TrueBlocks is the [dAppNode project](https://github.com/dappnode).
-
-A [docker build environment](https://docs.docker.com/get-docker/) is also required to build this package.
-
-## Quick start
-
-When properly installed, `trueblocks-docker`:
-
-- builds `trublocks-core`,
-- runs `chifra init` to initialize the Unchained Index (this takes a while to complete),
-- starts `chifra scrape` (in the background) to actively build the index against the head of the chain,
-- starts `chifra serve` (in the background) to serve an API of all `chifra` commands,
-- optionally, starts `chifra monitors --watch` (in the background) to monitor a collection of addresses.
-
-### Getting started
-
-Copy the `env.example` file to `.env` and modify values (see the comments in the `env.example` for more details), or just do:
-
-```bash
-echo "TB_CHAINS_MAINNET_RPCPROVIDER=http://yourRpcEndpoint:port" >.env
-docker compose up
-```
-
-Make sure to provide a valid RPC endpoint that exposes both an archive node and the `trace_` namespace. If you experience problems, you 
-may find useful answers in the comments of the `docker-compose.yml` and `docker-compose.local.example` files.
-
-### Running against other chains
-
-If you want to run against other EVM-compatible chains, edit a file in the local folder called `.env` (or copy the `env.example` file first) and add these items:
-
-```bash
-TB_SETTINGS_DEFAULTCHAIN="<chain_name>"
-TB_CHAINS_`<CHAIN_NAME>`_CHAINID="<chain_id>"
-TB_CHAINS_`<CHAIN_NAME>`_RPCPROVIDER="<rpc endpoint>"
-TB_CHAINS_`<CHAIN_NAME>`_SYMBOL="<currency symbol>"
-```
-
-Of course, replace `<chain_name>` with (what else?) your chain's name.
-
-TODO: This is confusing
-
-Note: `MAINNET`, `SEPOLIA` and `GNOSIS` chains are pre-configured and you may use these values and the first two settings alone without further adue.
-
-After configuring for your custom chain, run `docker compose up`.
-
-## Interacting with the container
-
-Once the container is running, you may interact with `chifra` directly from the command line by calling:
-
-```bash
-scripts/chifra.sh
-```
-
-(This should  produce `chifra`'s help screen.)
-
-Alternatively, you may use the API server, thus:
-
-```bash
-curl "localhost:8080/when?blocks=london"
-```
-
-## Testing
-
-To test the image, run `test.sh` script. This script builds a container and tries to call `chifra status --terse` checking for any errors and returning the right error code (`0` when no errors, error count otherwise).
-
-For testing purposes a different entrypoint is used: `build/core/test/core-test.entrypoint.sh`.
+This software is pre-alpha. Use at your own risk.
 
 ## Configuration
 
-You may configure both the way the docker image is built and the way `chifra` operates. Doing so is explained in its own page:
+TODO: Edit `.env`
 
-- [Configuring the build and/or chifra](CONFIGURE.md)
+TODO: `docker-compose.local.yml`.
 
-## Building
+## Running the container
 
----
-1. Copy the `env.example` file to `.env` and modify values (see the comments in the `env.example` for more details), or just do:
+Assuming you've completed the above instructions, start the container with this command from this folder:
 
-```bash
-echo "TB_CHAINS_MAINNET_RPCPROVIDER=http://yourRpcEndpoint:port" > .env
-# Make sure to provide a valid RPC endpoint that exposes both an archive node and the trace_ namespace
+```[bash]
+docker compose -f docker.compose.yml -f docker.compose.local.yml up
 ```
 
-2. Build the docker image (example tagged with `latest`)
+## Other
 
-## Using the container
+**Documentation**
 
-### Calling the `chifra` command line
+See the TrueBlocks website for the [most recent documentation](https://trueblocks.io/docs/).
 
-You may use `scripts/chifra.sh` to call `chifra` commands inside running core container:
+**License**
 
-```bash
-# Getting the list of available chifra commands
-scripts/chifra.sh
+This software is licensed under [GNU Version 3](https://github.com/TrueBlocks/trueblocks-docker/blob/master/LICENSE).
 
-# Show the latest block
-scripts/chifra.sh when latest
-
-# Export JSON data for every 100th block between blocks 0 and 10,000
-scripts/chifra.sh blocks 0-10000:100
-
-# Show all the transactions for a given address (note: you must have initialized the Unchained Index for this work)
-scripts/chifra.sh export trueblocks.eth
-```
-
-The `scripts/chifra.sh` script calls `docker compose exec` internally, so the above commands are equivalent to:
-
-```bash
-docker compose exec core bash -c "chifra"
-docker compose exec core bash -c "chifra when latest"
-docker compose exec core bash -c "chifra blocks 0-10000:100"
-docker compose exec core bash -c "chifra export trueblocks.eth"
-```
-
-### Connecting into the chifra API server
-
-By default, the `core` container exposes an API server on port `8080` serving exactly the same routes and options as the `chifra` command line does sub-commands and options. Access the API server with:
-
-```bash
-curl -s "http://localhost:8080/when?blocks=latest"
-curl -s "http://localhost:8080/blocks?blocks=0-10000:100"
-curl -s "http://localhost:8080/export?addrs=trueblocks.eth"
-```
-
-## Monitoring addresses
-
-TrueBlocks (via `chira`) allows you to "monitor" a collection or set of addresses. This section describes how to do that:
-
-1. Create a new folder on your host machine's file system. For example,
- 
-  ```bash
-  mkdir ~/Data/monitors/
-  ```
-
-3. Run the container
-
-  ```bash
-  # By default, both scraper and chifra serve (API server) are started
-  docker run \
-    --name trueblocks-core \
-    --env-file ./.env \
-    --publish 8080:8080 \
-    -v ~/REPLACE/WITH/PATH/TO/CACHE:/cache \
-    -v ~/REPLACE/WITH/PATH/TO/INDEX:/index \
-    --rm \
-    trueblocks-core:latest
-
-  # Try to connect to the container
-  curl localhost:8080/status
-  ```
-
-3. Edit `docker-compose.local.yml` (create it by copying from `docker-compose.local.example` if need be). Specify the path you created above to instruct docker where to pick up the list of monitored addresses and where to drop the results.
-
-
-```yaml
-  monitors:
-  volumes:
-    # unchanged
-    - type: bind
-      source: ~/Data/cache
-      target: /cache
-    # unchanged
-    - type: bind
-      source: ~/Data/unchained
-      target: /unchained
-    # HERE
-    - type: bind
-      source: ~/Data/monitors
-      target: /monitors
-    # HERE
-    - type: bind
-      source: ~/Data/monitors/export
-      target: /export
-```
-
-4. Restart (or run for the first time) the container with `docker compose restart` or `scripts/up.sh`. You should see message in the logs, thus:
-
-  ```
-  trueblockscore-monitors-1  | Addresses file found, linking it
-  ```
-
-and also the results of the monitoring in the same folder. The monitor service is now watching your addresses.
-
-## Contributing
+**Contributing**
 
 We love contributors. Please see information about our [work flow](https://github.com/TrueBlocks/trueblocks-core/blob/develop/docs/BRANCHING.md) before proceeding.
 
@@ -216,15 +56,15 @@ We love contributors. Please see information about our [work flow](https://githu
 4. Push back to the original branch: `git push origin TrueBlocks/trueblocks-core`
 5. Create the pull request.
 
-## List of Contributors
+**Contact**
+
+If you have questions, comments, or complaints, please join the discussion on our discord server which is [linked from our website](https://trueblocks.io).
+
+**List of Contributors**
 
 Thanks to the following people who have contributed to this project:
 
-* [@tjayrush](https://github.com/tjayrush)
-* [@dszlachta](https://github.com/dszlachta)
-* [@MysticRyuujin](https://github.com/MysticRyuujin)
-* [@wildmolasses](https://github.com/wildmolasses)
-
-## Contact
-
-If you have questions, comments, or complaints, please join the discussion on our discord server which is [linked from our website](https://trueblocks.io).
+- [@tjayrush](https://github.com/tjayrush)
+- [@dszlachta](https://github.com/dszlachta)
+- [@wildmolasses](https://github.com/wildmolasses)
+- [@MysticRyuujin](https://github.com/MysticRyuujin)
