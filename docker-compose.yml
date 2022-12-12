@@ -4,9 +4,9 @@ services:
   core:
     image: trueblocks/core:v0.44.0-beta
     build: ./build/core
-    ports:
-      - "8080:8080"
     env_file: .env
+    ports:
+      - "8080:${SERVE_PORT-8080}"
     volumes:
       - unchained:/unchained
       - cache:/cache
