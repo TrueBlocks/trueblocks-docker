@@ -18,11 +18,15 @@
 
 ## Introduction
 
-TrueBlocks docker is intentionally minimal. See [the core repo for information](https://github.com/TrueBlocks/trueblocks-core) about TrueBlocks, the Unchained Index, chifra (our command-line tool) and the core API. This repo is pre-alpha. Use at your own risk.
+TrueBlocks is a local-first indexing / data access solution that you may use for data science or as a locally-running backend for your Web 3.0 projects.
+
+This docker repo is intentionally minimal. See [the core repo](https://github.com/TrueBlocks/trueblocks-core) for more information about the Unchained Index, chifra (our command-line tool), and the TrueBlocks data API.
+
+This repo is pre-alpha and comes with no warrenty implied or otherwise. Use at your own discretion.
 
 ## Configuration
 
-Begin by creating a file called `.env` in this folder. An [env.example](env.example) file is provided to help you. Adjust the RPC provider to point to a (preferably local) RPC endpoint. The `ETHERSCAN_APIKEY` key is optional, but useful.
+To get started, create a file called `.env` in this folder. An [env.example](env.example) file explaining each setting is provided to help you. Adjust the RPC provider to point to a (preferably local) RPC endpoint.
 
 ```[shell]
 TB_SETTINGS_DEFAULTCHAIN=mainnet
@@ -32,7 +36,9 @@ TB_SETTINGS_CACHEPATH=/cache
 TB_SETTINGS_INDEXPATH=/unchained
 ```
 
-By default, we store the Unchained Index and binary caches internally to docker. If you wish to to access this data from your host machine (you do, because you want faster access), complete these steps. (Otherwise skip to [Running the tool](https://github.com/TrueBlocks/trueblocks-docker/tree/feature/use-config-tool#running-the-tool))
+The `ETHERSCAN_APIKEY` key is optional, but useful to enable the articulation feature.
+
+By default, the system stores the Unchained Index and binary caches internally to docker. If you wish to to access this data from your host machine (you do, because you want faster access), complete these steps. (Otherwise skip to [Running the tool](https://github.com/TrueBlocks/trueblocks-docker/tree/feature/use-config-tool#running-the-tool))
 
 Create two folders on your host machine:
 
@@ -113,7 +119,7 @@ Once you've read the above, run one of the following two commands:
 
 Depending on your connection, the above will take several minutes or as much as several hours.
 
-When the initialization finishes, decide if you want to run the `scraper`. The scrape maintains the index to the front of the chain. (Note: if you're exploring older data, this step is optional.)
+When the initialization finishes, decide if you want to run the `scraper`. The scrape maintains the index to the front of the chain. (Note: if you're exploring older data, this step may be optional.)
 
 To start the scraper, do this only after the `chifra init` command finishes:
 
