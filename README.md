@@ -13,6 +13,7 @@
 - [Configuration](#configuration)
 - [Running the tool](#running-the-tool)
 - [The Unchained Index](#the-unchained-index)
+- [Data science](#data-science)
 - [Other](#other)
 
 ## Introduction
@@ -22,28 +23,20 @@ This docker version of TrueBlocks is intentionally minimal. Please see [the core
 ## Configuration
 
 ----
-TODO: COMPLETE THIS SECTION
-
-
-Add these items to `.env`. Adjust the RPC provider to point to the proper port (if you're node is running locally) or the URL if the node is remote. The EtherScan key is optional, but useful.
+You must create a file called `.env` in the local folder. An `env.example` file is provided with more information. Adjust the RPC provider to point to your RPC provider (preferably a local one). The EtherScan key is optional, but useful.
 
 ```[shell]
 TB_SETTINGS_DEFAULTCHAIN=mainnet
+TB_CHAINS_MAINNET_RPCPROVIDER=http://host.docker.internal:8545
+TB_KEYS_ETHERSCAN_APIKEY=<your-key>
 TB_SETTINGS_CACHEPATH=/cache
 TB_SETTINGS_INDEXPATH=/unchained
-TB_CHAINS_MAINNET_RPCPROVIDER=http://host.docker.internal:23456
-TB_KEYS_ETHERSCAN_APIKEY=<your_key>
 ```
 
 ----
-TODO: COMPLETE THIS SECTION
+By default, the docker stores the Unchained Index and binary cache internally. If you wish to be able to access this data on your host machine as well (you may if you want the fastest access), do this:
 
-
-By default, the docker stores the Unchained Index internally to the container. If you wish to store the Unchained Index on your host machine as well, do this:
-
-Create two folders on your host machine. We will attach these folders to the container's `CACHEPATH` and `INDEXPATH` in a moment.
-
-On our machines, we use:
+Create two folders on your host machine. We will use these folders in a moment.
 
 ```[shell]
 mkdir -p /Users/user/Data/cache
@@ -52,7 +45,7 @@ mkdir -p /Users/user/Data/unchained
 
 **Note:** Adjust these values appropriately for your machine.
 
-Next, edit a file in the current folder called `docker-compose.local.yml`. Add the following code. (Adjust the paths.)
+Next, edit a file in the current folder called `docker-compose.local.yml`. See the `docker-compose.local.example` for more information.
 
 ```[shell]
 services:
@@ -66,7 +59,10 @@ services:
         target: /unchained
 ```
 
-Notice that the above process attaches the internal-to-docker `target` folders to the external-on-the-host `source` folders. This allows the files created by the Unchained Index to be visible outside of the docker container.
+**Note:** Adjust the `source` paths appropriately for your machine.
+
+Notice that the above process attaches the *internal-to-docker* `target` folders to the *external-on-the-host* `source` folders. This allows the files created by the Unchained Index to be visible on your host machine.
+
 ## Running the tool
 
 Assuming you've completed the above instructions, open a new terminal window and start the container with this command:
@@ -93,21 +89,31 @@ See the [most recent documentation](https://trueblocks.io/docs/) here.
 
 ## The Unchained Index
 
-In the future, this docker will initialize and maintain [the Unchained Index](https://trueblocks.io/papers/2022/file-format-spec-v0.40.0-beta.pdf). Until then, you must initialize it and maintain it manually. Do this by running this command:
+In the future, this docker will initialize and maintain [the Unchained Index](https://trueblocks.io/papers/2022/file-format-spec-v0.40.0-beta.pdf). Until then, you must initialize it and maintain it manually.
+
+Please [read and understand this discussion](https://trueblocks.io/docs/install/get-the-index/) before proceeding. It will have an important impact on how `chifra` works for you.
+
+Once you've undertstood the above, run one of the following two commands:
 
 ```[shell]
-./scripts/chifra.sh init --all
+./scripts/chifra.sh init --all     # if you want to initialize the full index (recommended if you have space), or
+
+./scripts/chifra.sh init           # if you want a minimal index and don't mind slower initial access.
 ```
 
-Depending on your connection, this may take several hours. When it finishes, you may optionally choose to run the scraper which maintains the index at the front of the chain. (Note: if you're exploring older data, this step is optional.)
+Depending on your connection, this above will take either several minutes or several hours. When it finishes, you must decide if you wish to run the `scraper` which maintains the index at the front of the chain. (Note: if you're exploring older data, this step is optional.)
 
-To start the scraper, do this once the `chifra init` command finishes:
+To start the scraper, do this only after the `chifra init` command finishes:
 
 ```[shell]
 chifra scrape
 ```
 
-Allow this process to continue running in its own terminal window.
+Allow this process to continue running in its own terminal window or `tmux` session.
+
+## Data science
+
+`chifra` is a great data science tool. See a few of our articles ([here](https://trueblocks.io/tags/community/), [here](https://trueblocks.io/tags/trueblocks/), and [here](https://trueblocks.io/tags/recipes/)) for ideas on how to take advantage of this very useful tool.
 
 ## Other
 

@@ -3,7 +3,7 @@ name: TrueBlocksCore
 services:
   core:
     image: trueblocks/core:v0.44.0-beta
-    build: ./build/core
+    build: ./
     env_file: .env
     ports:
       - "8080:${SERVE_PORT-8080}"
