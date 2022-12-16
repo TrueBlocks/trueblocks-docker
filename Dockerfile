@@ -30,10 +30,7 @@ COPY --from=builder /root/trueblocks-core/bin /usr/local/bin
 COPY --from=builder /root/.local/bin/chifra /root/.local/bin/chifra
 COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 
-COPY core.entrypoint.sh /root
-RUN chmod +x /root/core.entrypoint.sh
-
 ARG SERVE_PORT=8080
 EXPOSE ${SERVE_PORT}
 
-ENTRYPOINT bash /root/core.entrypoint.sh
+CMD ["chifra", "daemon", "--api", "on", "--scrape", "blooms", "--monitor"]

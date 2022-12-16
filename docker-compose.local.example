@@ -1,9 +1,15 @@
+# There are many things you can do with a docker-compose file. Here we simple attach the internal-to-docker
+# folders to the external-to-the-host folders we've described in the .env file. This is a good way to
+# keep your data safe and persistent.
+#
+# Note that the name of the service (`core`) must match that found in `docker-compose.yml`. Also, we've
+# found that the easiest way to get this to work is to make the `source` and `target` paths absolute.
 services:
   core:
     volumes:
       - type: bind
-        source: /Data/cache
+        source: /Users/user/Data/cache
         target: /cache
       - type: bind
-        source: /Data/unchained
+        source: /Users/user/unchained
         target: /unchained
