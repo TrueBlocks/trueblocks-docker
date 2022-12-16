@@ -107,16 +107,18 @@ Once you've read the above, run one of the following two commands:
 
 # If you want a minimal index and don't mind slower initial queries
 ./scripts/chifra.sh init
+
+# Do not run both commands, chose one or the other
 ```
 
-Depending on your connection, this above will take several minutes or as much as several hours.
+Depending on your connection, the above will take several minutes or as much as several hours.
 
 When the initialization finishes, decide if you want to run the `scraper`. The scrape maintains the index to the front of the chain. (Note: if you're exploring older data, this step is optional.)
 
 To start the scraper, do this only after the `chifra init` command finishes:
 
 ```[shell]
-chifra scrape
+./scripts/chifra.sh scrape
 ```
 
 Allow this process to continue running in its own terminal window or `tmux` session. If you stop it, the next time you run `chifra`, you will have to re-run the scraper to catch up to the chain.
