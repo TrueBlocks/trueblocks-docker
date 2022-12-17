@@ -5,10 +5,10 @@ RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
 
 WORKDIR /root
 
-#ARG UPSTREAM_VER=v0.44.0-beta
-ARG UPSTREAM_VER=feature/docker-version
+# ARG UPSTREAM_VER=feature/docker-version
+# ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/$UPSTREAM_VER version.json
 
-ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/$UPSTREAM_VER version.json
+ARG UPSTREAM_VER=v0.45.0-beta
 RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     https://github.com/TrueBlocks/trueblocks-core.git && \
     cd trueblocks-core && \
