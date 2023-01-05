@@ -24,6 +24,16 @@ This docker repo is intentionally minimal. See [the core repo](https://github.co
 
 This repo is pre-alpha and comes with no warrenty implied or otherwise. Use at your own discretion.
 
+## Locally running RPC endpoints
+
+While TrueBlocks and chifra work with remote RPC endpoints, it is highly recommended that you have you own locally running endpoints. An excellent way to do that is to run Erigon on a `dAppNode`.
+
+If you use a shared, rate-limted endpoint such as the many RPC-for-a-service offerings, there is a high likelyhood that you will be rate limited.
+
+Because TrueBlocks was designed for direct-to-local-endpoint use cases, such rate limiting is not currently in the code.
+
+Be warned.
+
 ## Configuration
 
 To get started, create a file called `.env` in this folder. An [env.example](env.example) file explaining each setting is provided to help you. Adjust the RPC provider to point to a (preferably local) RPC endpoint.
