@@ -28,11 +28,9 @@ This repo is pre-alpha and comes with no warrenty implied or otherwise. Use at y
 
 While TrueBlocks and chifra work with remote RPC endpoints, it is highly recommended that you have you own locally running endpoints. An excellent way to do that is to run Erigon on a `dAppNode`.
 
-If you use a shared, rate-limted endpoint such as the many RPC-for-a-service offerings, there is a high likelyhood that you will be rate limited.
+If you use a shared, rate-limted endpoint such as the many RPC-for-a-service offerings, there is a high likelyhood that you will be rate limited. Because TrueBlocks was designed for direct-to-local-endpoint use cases, such rate limiting is not currently in the code.
 
-Because TrueBlocks was designed for direct-to-local-endpoint use cases, such rate limiting is not currently in the code.
-
-Be warned.
+Just so that you're aware.
 
 ## Configuration
 
