@@ -24,6 +24,12 @@ This docker repo is intentionally minimal. See [the core repo](https://github.co
 
 This repo is pre-alpha and comes with no warrenty implied or otherwise. Use at your own discretion.
 
+## Requirements
+
+`docker` and `docker-compose-plugin` are required.
+
+**Note:** this repo uses the Compose Plugin which uses the `docker compose` syntax NOT the Compose Standalone which uses `docker-compose`.
+
 ## Configuration
 
 To get started, create a file called `.env` in this folder. An [env.example](env.example) file explaining each setting is provided to help you. Adjust the RPC provider to point to a (preferably local) RPC endpoint.
@@ -38,8 +44,19 @@ TB_SETTINGS_INDEXPATH=/unchained
 
 The `ETHERSCAN_APIKEY` key is optional, but useful to enable the articulation feature.
 
-By default, the system stores the Unchained Index and binary caches internally to docker. If you wish to to access this data from your host machine (you do, because you want faster access), complete these steps. (Otherwise skip to [Running the tool](https://github.com/TrueBlocks/trueblocks-docker/tree/feature/use-config-tool#running-the-tool))
+## Running the tool
 
+### Method 1
+
+This method uses docker volumes to persist the Unchained Index and binary caches. If you plan to use `chifra` directly in the future, it is recommended to use method 2.
+
+```[bash]
+docker compose up
+```
+
+### Method 2
+
+This method uses folders on your host machine to persist the Unchained Index and binary caches.
 Create two folders on your host machine:
 
 ```[shell]
@@ -67,15 +84,15 @@ services:
 
 The above process attaches (binds) the *internal-to-docker* `target` folders to the *external-on-the-host* `source` folders. This allows the files created internally by the docker to be visible on your host machine.
 
-## Running the tool
-
 Assuming you've completed the above instructions, start the container by running this command:
 
 ```[bash]
-docker compose -f docker.compose.yml -f docker.compose.local.yml up
+docker compose -f docker-compose.yml -f docker-compose.local.yml up
 ```
 
-This will start the [TrueBlocks API server](https://trueblocks.io/api/). Leave this process running and open a new terminal window.
+### Using the API
+
+Both methods start the [TrueBlocks API server](https://trueblocks.io/api/). Leave this process running and open a new terminal window.
 
 Use `curl` to access the API through [http://localhost:8080](http://localhost:8080). For example, the command
 
@@ -84,6 +101,9 @@ curl "http://localhost:8080/blocks?blocks=1-1000:10"
 ```
 
 will extract every 10th block between blocks 1 and 1,000.
+
+
+### Using `chifra`
 
 You may also use the `chifra` command line tool directly. From the current folder, type:
 
