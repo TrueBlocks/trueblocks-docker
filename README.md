@@ -10,8 +10,14 @@
 **Table of Contents**
 
 - [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Locally running RPC endpoints](#locally-running-rpc-endpoints)
 - [Configuration](#configuration)
 - [Running the tool](#running-the-tool)
+  - [Method 1](#method-1)
+  - [Method 2](#method-2)
+  - [Using the API](#using-the-api)
+  - [Using `chifra`](#using-chifra)
 - [The unchained index](#the-unchained-index)
 - [Data science](#data-science)
 - [Other](#other)
@@ -29,6 +35,14 @@ This repo is pre-alpha and comes with no warrenty implied or otherwise. Use at y
 `docker` and `docker-compose-plugin` are required.
 
 **Note:** this repo uses the Compose Plugin which uses the `docker compose` syntax NOT the Compose Standalone which uses `docker-compose`.
+
+## Locally running RPC endpoints
+
+While TrueBlocks and chifra work with remote RPC endpoints, it is highly recommended that you have you own locally running endpoints. An excellent way to do that is to run Erigon on a `dAppNode`.
+
+If you use a shared, rate-limted endpoint such as the many RPC-for-a-service offerings, there is a high likelyhood that you will be rate limited. Because TrueBlocks was designed for direct-to-local-endpoint use cases, such rate limiting is not currently in the code.
+
+Just so that you're aware.
 
 ## Configuration
 
