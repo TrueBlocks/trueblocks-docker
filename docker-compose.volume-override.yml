@@ -1,0 +1,14 @@
+# There are many things you can do with a docker-compose file. Here we
+# are using docker volumes to persist data rather than mounting files from
+# your host machine into the container
+#
+# Note that the name of the service (`core`) must match that found in `docker-compose.yml`.
+services:
+  core:
+    volumes:
+    volumes:
+      - unchained:/unchained
+      - cache:/cache
+volumes:
+  unchained:
+  cache:

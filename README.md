@@ -14,12 +14,11 @@
 - [Locally running RPC endpoints](#locally-running-rpc-endpoints)
 - [Configuration](#configuration)
 - [Running the tool](#running-the-tool)
-  - [Method 1](#method-1)
-  - [Method 2](#method-2)
   - [Using the API](#using-the-api)
   - [Using `chifra`](#using-chifra)
 - [The unchained index](#the-unchained-index)
 - [Data science](#data-science)
+- [Quick Alternative Method to Start the Container](#quick-alternative-method-to-start-the-container)
 - [Other](#other)
 
 ## Introduction
@@ -28,7 +27,7 @@ TrueBlocks is a local-first indexing / data access solution that you may use for
 
 This docker repo is intentionally minimal. See [the core repo](https://github.com/TrueBlocks/trueblocks-core) for more information about the Unchained Index, chifra (our command-line tool), and the TrueBlocks data API.
 
-This repo is pre-alpha and comes with no warrenty implied or otherwise. Use at your own discretion.
+This repo is pre-alpha and comes with no warranty implied or otherwise. Use at your own discretion.
 
 ## Requirements
 
@@ -40,7 +39,7 @@ This repo is pre-alpha and comes with no warrenty implied or otherwise. Use at y
 
 While TrueBlocks and chifra work with remote RPC endpoints, it is highly recommended that you have you own locally running endpoints. An excellent way to do that is to run Erigon on a `dAppNode`.
 
-If you use a shared, rate-limted endpoint such as the many RPC-for-a-service offerings, there is a high likelyhood that you will be rate limited. Because TrueBlocks was designed for direct-to-local-endpoint use cases, such rate limiting is not currently in the code.
+If you use a shared, rate-limited endpoint such as the many RPC-for-a-service offerings, there is a high likelihood that you will be rate limited. Because TrueBlocks was designed for direct-to-local-endpoint use cases, such rate limiting is not currently in the code.
 
 Just so that you're aware.
 
@@ -60,18 +59,9 @@ The `ETHERSCAN_APIKEY` key is optional, but useful to enable the articulation fe
 
 ## Running the tool
 
-### Method 1
+1. Make sure your `.env` file is configured [Configuration](#configuration)
 
-This method uses docker volumes to persist the Unchained Index and binary caches. If you plan to use `chifra` directly in the future, it is recommended to use method 2.
-
-```[bash]
-docker compose up
-```
-
-### Method 2
-
-This method uses folders on your host machine to persist the Unchained Index and binary caches.
-Create two folders on your host machine:
+2. Create two folders on your host machine to persist the Unchained Index and binary caches:
 
 ```[shell]
 mkdir -p /Users/user/Data/cache
@@ -80,29 +70,22 @@ mkdir -p /Users/user/Data/unchained
 
 **Note:** Adjust these paths appropriately for your machine.
 
-Next, create a file called `docker-compose.local.yml` in the current folder. See the [docker-compose.local.example](docker-compose.local.example) for more information.
+3. Replace the `source` paths in `docker-compose.yml` with the paths you just made in step 2.
 
-```[shell]
-services:
-  core:
+```yml
+...
     volumes:
       - type: bind
-        source: /Users/user/Data/docker/cache
+        source: /Users/user/Data/cache       <--- REPLACE THIS WITH YOUR PATH
         target: /cache
       - type: bind
-        source: /Users/user/Data/docker/unchained
+        source: /Users/user/Data/unchained   <--- REPLACE THIS WITH YOUR PATH
         target: /unchained
+...
 ```
 
-**Note:** Adjust the `source` paths appropriately for your machine.
+3. Run `docker compose up`
 
-The above process attaches (binds) the *internal-to-docker* `target` folders to the *external-on-the-host* `source` folders. This allows the files created internally by the docker to be visible on your host machine.
-
-Assuming you've completed the above instructions, start the container by running this command:
-
-```[bash]
-docker compose -f docker-compose.yml -f docker-compose.local.yml up
-```
 
 ### Using the API
 
@@ -168,6 +151,20 @@ Allow this process to continue running in its own terminal window or `tmux` sess
 `chifra` is an excellent data science tool. See a few of our articles ([here](https://trueblocks.io/tags/community/), [here](https://trueblocks.io/tags/trueblocks/), and [here](https://trueblocks.io/tags/recipes/)) for ideas on how to take advantage of this very useful tool.
 
 TODO: Add tutorials.
+
+## Quick Alternative Method to Start the Container
+
+This alternative uses docker volumes to persist the Unchained Index and binary caches.
+This method is great if you plan to always use docker to run chifra or to quickly
+try out chifra.
+
+1. Make sure your `.env` file is configured [Configuration](#configuration)
+
+2. Run the command:
+
+```[bash]
+docker compose -f docker-compose.yml -f docker-compose.volume-override.yml up
+```
 
 ## Other
 
