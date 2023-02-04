@@ -8,8 +8,14 @@ services:
     ports:
       - "8080:${SERVE_PORT-8080}"
     volumes:
-      - unchained:/unchained
-      - cache:/cache
+      - type: bind
+        source: /Users/user/Data/cache
+        target: /cache
+      - type: bind
+        source: /Users/user/Data/unchained
+        target: /unchained
+    network_mode: "host"
 volumes:
   unchained:
   cache:
+
