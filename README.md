@@ -64,8 +64,8 @@ The `ETHERSCAN_APIKEY` key is optional, but useful to enable the articulation fe
 2. Create two folders on your host machine to persist the Unchained Index and binary caches:
 
 ```[shell]
-mkdir -p /Users/user/Data/cache
-mkdir -p /Users/user/Data/unchained
+mkdir -p /Users/user/Data/docker/cache
+mkdir -p /Users/user/Data/docker/unchained
 ```
 
 **Note:** Adjust these paths appropriately for your machine.
@@ -76,10 +76,10 @@ mkdir -p /Users/user/Data/unchained
 ...
     volumes:
       - type: bind
-        source: /Users/user/Data/cache       <--- REPLACE THIS WITH YOUR PATH
+        source: /Users/user/Data/docker/cache     # <--- REPLACE THIS WITH ANY VALID PATH
         target: /cache
       - type: bind
-        source: /Users/user/Data/unchained   <--- REPLACE THIS WITH YOUR PATH
+        source: /Users/user/Data/docker/unchained # <--- REPLACE THIS WITH ANY VALID PATH
         target: /unchained
 ...
 ```
@@ -155,8 +155,8 @@ TODO: Add tutorials.
 ## Quick Alternative Method to Start the Container
 
 This alternative uses docker volumes to persist the Unchained Index and binary caches.
-This method is great if you plan to always use docker to run chifra or to quickly
-try out chifra.
+It is a great option if you intend to always use docker, you don't need need the
+Unchained index files externally, or if you want to quickly try out chifra.
 
 1. Make sure your `.env` file is configured [Configuration](#configuration)
 
