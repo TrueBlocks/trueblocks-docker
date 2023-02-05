@@ -9,12 +9,13 @@ services:
       - "8080:${SERVE_PORT-8080}"
     volumes:
       - type: bind
-        source: /Users/user/Data/cache
+        # The source should match the folder you made to store the cache
+        source: /Users/user/Data/docker/cache
         target: /cache
       - type: bind
-        source: /Users/user/Data/unchained
+        # The source should match the folder you made to store the Unchained index
+        source: /Users/user/Data/docker/unchained
         target: /unchained
-    network_mode: "host"
 volumes:
   unchained:
   cache:
