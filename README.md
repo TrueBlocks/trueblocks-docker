@@ -19,6 +19,7 @@
 - [The unchained index](#the-unchained-index)
 - [Data science](#data-science)
 - [Quick Alternative Method to Start the Container](#quick-alternative-method-to-start-the-container)
+- [Troubleshooting](#troubleshooting)
 - [Other](#other)
 
 ## Introduction
@@ -164,6 +165,29 @@ Unchained index files externally, or if you want to quickly try out chifra.
 
 ```[bash]
 docker compose -f docker-compose.yml -f docker-compose.volume-override.yml up
+```
+
+## Troubleshooting
+
+If you are running your RPC directly on your host machine (and not within another docker container) you may get the message:
+
+```
+Could not load RPC provider: Post "http://localhost:8545": dial tcp 127.0.0.1:8545: connect: connection refused
+```
+
+Make docker use your host network by adding `network_mode: "host"` to your `docker-compose.yml`:
+
+```yml
+    volumes:
+      - type: bind
+        # The source should match the folder you made to store the cache
+        source: /Users/user/Data/docker/cache
+        target: /cache
+      - type: bind
+        # The source should match the folder you made to store the Unchained index
+        source: /Users/user/Data/docker/unchained
+        target: /unchained
+    network_mode: "host"
 ```
 
 ## Other
