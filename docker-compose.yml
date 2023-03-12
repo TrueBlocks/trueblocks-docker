@@ -2,7 +2,7 @@ name: TrueBlocksCore
 
 services:
   core:
-    image: trueblocks/core:v0.55.0-beta
+    image: trueblocks/core:v0.60.0-beta
     build: ./
     env_file: .env
     ports:
