@@ -117,6 +117,14 @@ This will produce the same results as the `curl` command.
 
 will show all available chifra tools. See the [full documentation](https://trueblocks.io/docs/) for detailed information.
 
+**Pro user tip:**
+
+If you add this to your shell's init script, you will be able to run `chifra` from any command line:
+
+```
+alias chifra="cd <path>/<to>/trueblocks-docker ; ./scripts/chifra.sh "
+```
+
 ## The unchained index
 
 In the future, this docker will initialize and maintain [the Unchained Index](https://trueblocks.io/papers/2022/file-format-spec-v0.40.0-beta.pdf). Until then, you must initialize it and maintain it yourself.
