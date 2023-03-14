@@ -192,7 +192,7 @@ To fix this, tell docker to use your host network by adding `network_mode: "host
     network_mode: "host"
 ```
 
-**additional property 'name' is not allowed**
+**Additional property 'name' is not allowed**
 
 If you get this message, upgrade to the latest version of docker.
 
