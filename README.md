@@ -32,7 +32,7 @@ This repo is pre-alpha and comes with no warranty implied or otherwise. Use at y
 
 ## Requirements
 
-`docker` and `docker-compose-plugin` are required.
+`docker` and `docker-compose-plugin` are required. Latest version is suggested.
 
 **Note:** this repo uses the Compose Plugin which uses the `docker compose` syntax NOT the Compose Standalone which uses `docker-compose`.
 
@@ -169,13 +169,15 @@ docker compose -f docker-compose.yml -f docker-compose.volume-override.yml up
 
 ## Troubleshooting
 
-If you are running your RPC directly on your host machine (and not within another docker container) you may get the message:
+**Could not load RPC**
+
+If you are running your RPC directly on your host machine (not within a docker container) you may get the message:
 
 ```
 Could not load RPC provider: Post "http://localhost:8545": dial tcp 127.0.0.1:8545: connect: connection refused
 ```
 
-Make docker use your host network by adding `network_mode: "host"` to your `docker-compose.yml`:
+To fix this, tell docker to use your host network by adding `network_mode: "host"` to the `docker-compose.yml`:
 
 ```yml
     volumes:
@@ -189,6 +191,10 @@ Make docker use your host network by adding `network_mode: "host"` to your `dock
         target: /unchained
     network_mode: "host"
 ```
+
+**additional property 'name' is not allowed**
+
+If you get this message, upgrade to the latest version of docker.
 
 ## Other
 
