@@ -19,6 +19,7 @@
 - [The unchained index](#the-unchained-index)
 - [Data science](#data-science)
 - [Quick Alternative Method to Start the Container](#quick-alternative-method-to-start-the-container)
+- [Troubleshooting](#troubleshooting)
 - [Other](#other)
 
 ## Introduction
@@ -31,7 +32,7 @@ This repo is pre-alpha and comes with no warranty implied or otherwise. Use at y
 
 ## Requirements
 
-`docker` and `docker-compose-plugin` are required.
+`docker` and `docker-compose-plugin` are required. Latest version is suggested.
 
 **Note:** this repo uses the Compose Plugin which uses the `docker compose` syntax NOT the Compose Standalone which uses `docker-compose`.
 
@@ -116,6 +117,14 @@ This will produce the same results as the `curl` command.
 
 will show all available chifra tools. See the [full documentation](https://trueblocks.io/docs/) for detailed information.
 
+**Pro user tip:**
+
+If you add this to your shell's init script, you will be able to run `chifra` from any command line:
+
+```
+alias chifra="cd <path>/<to>/trueblocks-docker ; ./scripts/chifra.sh "
+```
+
 ## The unchained index
 
 In the future, this docker will initialize and maintain [the Unchained Index](https://trueblocks.io/papers/2022/file-format-spec-v0.40.0-beta.pdf). Until then, you must initialize it and maintain it yourself.
@@ -165,6 +174,35 @@ Unchained index files externally, or if you want to quickly try out chifra.
 ```[bash]
 docker compose -f docker-compose.yml -f docker-compose.volume-override.yml up
 ```
+
+## Troubleshooting
+
+**Could not load RPC**
+
+If you are running your RPC directly on your host machine (not within a docker container) you may get the message:
+
+```
+Could not load RPC provider: Post "http://localhost:8545": dial tcp 127.0.0.1:8545: connect: connection refused
+```
+
+To fix this, tell docker to use your host network by adding `network_mode: "host"` to the `docker-compose.yml`:
+
+```yml
+    volumes:
+      - type: bind
+        # The source should match the folder you made to store the cache
+        source: /Users/user/Data/docker/cache
+        target: /cache
+      - type: bind
+        # The source should match the folder you made to store the Unchained index
+        source: /Users/user/Data/docker/unchained
+        target: /unchained
+    network_mode: "host"
+```
+
+**Additional property 'name' is not allowed**
+
+If you get this message, upgrade to the latest version of docker.
 
 ## Other
 
