@@ -6,7 +6,6 @@
 services:
   core:
     volumes:
-    volumes:
       - unchained:/unchained
       - cache:/cache
 volumes:

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-VERSION=v0.60.0-beta
+# UPDATE_VERSION_HERE
+VERSION=v0.64.0-beta
 
 docker build . --tag trueblocks/core:$VERSION
 docker push trueblocks/core:$VERSION
