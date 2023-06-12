@@ -3,7 +3,7 @@ name: trueblockscore
 # UPDATE_DOCKER_BUILD_VERSION
 services:
   core:
-    image: trueblocks/core:v0.64.0-beta
+    image: trueblocks/core:v0.70.0-beta
     build: ./
     env_file: .env
     ports:

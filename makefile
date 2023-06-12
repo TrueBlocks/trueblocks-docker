@@ -17,3 +17,6 @@ update-2:
 	@code .
 	@echo After publishing to docker, edit the value near UPDATE_DOCKER_BUILD_VERSION
 	@code docker-compose.yml
+
+up:
+	@docker compose -f docker-compose.yml -f docker-compose.local.yml up
