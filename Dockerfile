@@ -8,9 +8,9 @@ WORKDIR /root
 # ARG UPSTREAM_VER=feature/docker-version
 # ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/$UPSTREAM_VER version.json
 
-# UPDATE_VERSION_HERE
-ARG UPSTREAM_VER=v0.70.0-beta
-# ARG UPSTREAM_VER=develop
+
+ARG UPSTREAM_VER=master
+
 RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     https://github.com/TrueBlocks/trueblocks-core.git && \
     cd trueblocks-core && \
