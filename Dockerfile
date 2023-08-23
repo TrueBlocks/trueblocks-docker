@@ -14,8 +14,6 @@ ARG UPSTREAM_VER=master
 RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     https://github.com/TrueBlocks/trueblocks-core.git && \
     cd trueblocks-core && \
-    cat src/libs/CMakeLists.txt | grep -v "test-libs" >x && \
-    cat x >src/libs/CMakeLists.txt && \
     cat src/CMakeLists.txt | grep -v "examples" | grep -v dev_tools >x && \
     cat x >src/CMakeLists.txt && \
     rm -f x && \
