@@ -87,8 +87,8 @@ jobs:
         git add VERSION
         git commit -m "Version bump: ${{ inputs.tag }}"
         git tag -a ${{ inputs.tag }} -m "Version ${{ inputs.tag }}"
-        git push --tags
         git push
+        git push --tags
 
     # Finally we make the new Docker image public
     -
