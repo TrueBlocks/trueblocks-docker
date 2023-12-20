@@ -33,4 +33,4 @@ COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 ARG SERVE_PORT=8080
 EXPOSE ${SERVE_PORT}
 
-CMD ["chifra", "daemon", "--api", "on", "--scrape", "index"]
+CMD ["chifra", "daemon"]
