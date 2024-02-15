@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine as builder
+FROM golang:1.22-alpine as builder
 
 RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
     curl bash curl-dev linux-headers sqlite-dev sed
