@@ -1,0 +1,100 @@
+# This workflow is meant to be run when a new tag is pushed to trueblocks-core
+# repo. There's another workflow there that will call this one.
+#
+# The job of this workflow is to update version stored in VERSION file, build and
+# test Docker image, publish new tag and publish the image to DockerHub
+
+name: Publish to DockerHub
+
+on:
+  # Make it possible to start this workflow manually
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Version tag to use'
+        required: true
+        type: string
+  # Make it possible to start this workflow from another repo (trueblocks-core)
+  repository_dispatch:
+
+env:
+  # This is tag for the image used by Test Docker Image step
+  TEST_TAG: "trueblocks/core:test-release"
+
+jobs:
+  build-and-push:
+   runs-on: ubuntu-latest
+   steps:
+    # First we checkout the repository to the path indicated by github.workspace variable
+    -
+      name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Then we cd into the workspace
+    -
+      name: Access workspace
+      run: cd ${{ github.workspace }}
+
+    # We write tag (version) to VERSION file
+    -
+      name: Update VERSION file
+      run: echo ${{ inputs.tag }} > VERSION
+
+    # We configure Docker Hub access. We will use workspace files to build Docker image
+    -
+      # Setting up Docker Buildx with docker-container driver is required
+      # at the moment to be able to use a subdirectory with Git context
+      name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    -
+      name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    # We build docker image, so that we can run it and test
+    -
+      name: Build Docker Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        load: true
+        build-args: |
+          UPSTREAM_VER=${{ inputs.tag }}
+        tags: ${{ env.TEST_TAG }}
+
+    # Testing is pretty simple, we tell docker to run our image, but instead
+    # of using the default entrypoint (which is probably a script running chifra
+    # scrape and API server) we want to call chifra --version and store the returned
+    # version in a local file that we can compare to the tag.
+    #
+    # Tags include the leading "v" letter, but chifra --version returns version without it,
+    # so we will use sed to cut it off.
+    -
+      name: Test Docker Image
+      run: |
+        docker run --rm --entrypoint chifra ${{ env.TEST_TAG }} --version 2> /tmp/version
+        grep `echo ${{ inputs.tag }} | sed 's/v//'` /tmp/version
+
+    # Now we know it's working, so we will commit the changed VERSION file and create new tag
+    -
+      name: Push commit and tag
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add VERSION
+        git commit -m "Version bump: ${{ inputs.tag }}"
+        git tag -a ${{ inputs.tag }} -m "Version ${{ inputs.tag }}"
+        git push
+        git push --tags
+
+    # Finally we make the new Docker image public
+    -
+        name: Push to Docker Hub
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: "trueblocks/core:${{ inputs.tag  }}"

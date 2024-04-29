@@ -1,5 +1,7 @@
 #!/bin/bash
 
-# UPDATE_VERSION_HERE
-VERSION=v0.70.0-beta
-docker build . --tag trueblocks/core:$VERSION
+# Read version from a file located in the main directory
+VERSION=$(cat ${BASH_SOURCE%/*}/../VERSION)
+
+# Build setting the version that we have read
+docker build . --build-arg UPSTREAM_VER=$VERSION --tag trueblocks/core:$VERSION

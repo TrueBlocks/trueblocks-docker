@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine as builder
+FROM golang:1.22-alpine as builder
 
 RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
     curl bash curl-dev linux-headers sqlite-dev sed
@@ -8,9 +8,9 @@ WORKDIR /root
 # ARG UPSTREAM_VER=feature/docker-version
 # ADD https://api.github.com/repos/TrueBlocks/trueblocks-core/git/refs/heads/$UPSTREAM_VER version.json
 
-# UPDATE_VERSION_HERE
-ARG UPSTREAM_VER=v0.70.0-beta
-# ARG UPSTREAM_VER=develop
+
+ARG UPSTREAM_VER=master
+
 RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     https://github.com/TrueBlocks/trueblocks-core.git && \
     cd trueblocks-core && \
@@ -33,4 +33,4 @@ COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 ARG SERVE_PORT=8080
 EXPOSE ${SERVE_PORT}
 
-CMD ["chifra", "daemon", "--api", "on", "--scrape", "index"]
+CMD ["chifra", "daemon"]
