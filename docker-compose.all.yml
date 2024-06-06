@@ -1,0 +1,42 @@
+name: trueblockscore
+
+# UPDATE_DOCKER_BUILD_VERSION
+services:
+  core:
+    image: trueblocks/core:latest
+    build:
+      context: ./
+      args:
+        UPSTREAM_VER: feature/handle_sigterm
+    env_file: .env
+    environment:
+      - TB_SETTINGS_CACHEPATH=/cache
+      - TB_SETTINGS_INDEXPATH=/unchained
+    ports:
+      - "8080:${SERVE_PORT-8080}"
+    volumes:
+      - cache:/cache
+      - unchained:/unchained
+  scrape:
+    image: trueblocks/core:latest
+    restart: on-failure
+    build:
+      context: ./
+      args:
+        UPSTREAM_VER: feature/handle_sigterm
+    env_file: .env
+    environment:
+      - TB_SETTINGS_CACHEPATH=/cache
+      - TB_SETTINGS_INDEXPATH=/unchained
+    command:
+      # no chifra init!
+      - chifra
+      - scrape
+    volumes:
+      - cache:/cache
+      - unchained:/unchained
+    stop_grace_period: 1m
+    # stop_signal: SIGINT
+volumes:
+  unchained:
+  cache:
