@@ -76,13 +76,11 @@ jobs:
       name: Test Docker Image
       run: |
         docker run --rm --entrypoint chifra ${{ env.TEST_TAG }} --version 2> /tmp/version
-        if [ -z $(grep `echo ${{ inputs.tag }} | sed 's/v//'` /tmp/version) ]
-	then
-		echo "VERSION MISMATCH"
-		cat /tmp/version
-		exit 1
-	else
-		echo "PASS"
+        grep `echo ${{ inputs.tag }} | sed 's/v//'` /tmp/version
+	if [ $? != 0 ]; then 
+	echo "VERSION MISMATCH"
+	cat /tmp/version
+	exit 1
 	fi
 
     # Now we know it's working, so we will commit the changed VERSION file and create new tag
