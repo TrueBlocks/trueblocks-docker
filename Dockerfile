@@ -29,8 +29,8 @@ FROM alpine:latest
 
 RUN apk --no-cache add gzip libstdc++ libgcc libcurl python3 python3-dev procps bash curl nano findutils
 
-RUN chmod +x /usr/local/bin/chifra  # Ensure chifra is executable
 COPY --from=builder /root/trueblocks-core/bin /usr/local/bin
+RUN chmod +x /usr/local/bin/chifra  # Ensure chifra is executable
 COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 
 ARG SERVE_PORT=8080
