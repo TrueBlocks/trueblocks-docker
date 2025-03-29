@@ -13,6 +13,7 @@ ARG UPSTREAM_VER=master
 RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     https://github.com/TrueBlocks/trueblocks-core.git && \
     cd trueblocks-core && \
+    git submodule update --init --recursive && \
     mkdir -p build && \
     cd build && \
     ../scripts/go-work-sync.sh && \
