@@ -17,11 +17,10 @@ RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     git submodule update --init --recursive && \
     ../scripts/go-work-sync.sh && \
     cmake ../src && \
-    pwd && ls -l ../bin && \
     make -j 5 && \
     pwd && ls -l ../bin && \
     mkdir -p /root/trueblocks-core/bin && \
-    cp /root/trueblocks-core/build/chifra /root/trueblocks-core/bin/
+    cp ../bin/chifra /root/trueblocks-core/bin/
 
 FROM alpine:latest
 
