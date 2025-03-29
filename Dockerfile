@@ -1,7 +1,9 @@
 FROM golang:1.23-alpine as builder
 
+# Install dependencies, including golangci-lint
 RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
-    curl bash curl-dev linux-headers sqlite-dev sed
+    curl bash curl-dev linux-headers sqlite-dev sed && \
+    go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.61.0
 
 WORKDIR /root
 
@@ -17,7 +19,7 @@ RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     cmake ../src && \
     make -j 5 && \
     mkdir -p /root/trueblocks-core/bin && \
-    cp /root/trueblocks-core/bin/chifra /root/trueblocks-core/bin/ || cp ./chifra /root/trueblocks-core/bin/ || echo "chifra not found"
+    cp /root/trueblocks-core/build/chifra /root/trueblocks-core/bin/
 
 FROM alpine:latest
 
