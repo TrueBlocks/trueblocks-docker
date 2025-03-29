@@ -1,4 +1,4 @@
-FROM golang:1.23-alpine as builder
+FROM golang:1.23-alpine AS builder
 
 # Install dependencies, including golangci-lint
 RUN apk --no-cache add g++ gcc make cmake git nano libcurl python3 python3-dev \
@@ -18,16 +18,19 @@ RUN git clone -b "${UPSTREAM_VER}" --single-branch --progress --depth 1 \
     ../scripts/go-work-sync.sh && \
     cmake ../src && \
     make -j 5 && \
-    pwd && ls -l ../bin && \
-    mkdir -p /root/trueblocks-core/bin && \
-    cp ../bin/chifra /root/trueblocks-core/bin/
+    pwd && \
+    ls -l ../bin
+    
+    # && \
+    # mkdir -p /root/trueblocks-core/bin && \
+    # cp ../bin/chifra /root/trueblocks-core/bin/
 
 FROM alpine:latest
 
 RUN apk --no-cache add gzip libstdc++ libgcc libcurl python3 python3-dev procps bash curl nano findutils
 
-COPY --from=builder /root/trueblocks-core/bin /usr/local/bin
 RUN chmod +x /usr/local/bin/chifra  # Ensure chifra is executable
+COPY --from=builder /root/trueblocks-core/bin /usr/local/bin
 COPY --from=builder /root/.local/share/trueblocks /root/.local/share/trueblocks
 
 ARG SERVE_PORT=8080
